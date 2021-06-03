@@ -126,6 +126,7 @@ class SocketServer():
 
     def server_loop(self):
         while self.active:
+            print('.')
             self.listen_messages_or_connections()
         else:
             self.server_socket.close()
@@ -153,6 +154,7 @@ class Client():
         msg = pickle.dumps(data)
         msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
         self.server_socket.send(msg)
+        print(f'{self.addr} [SENDING] ...')
 
     def recv_object(self):
         # Receive our "header" containing message length, it's size is defined and constant

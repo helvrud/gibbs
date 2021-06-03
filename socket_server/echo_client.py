@@ -4,7 +4,7 @@ clientA = server_client_class.Client(IP = '127.0.0.1', PORT = 10029)
 clientA.connect()
 
 msg = server_client_class.Message()
-msg.data = 'hi'
+msg.data = 'echo test'
 msg.receiver = clientA.addr
 msg.sender = clientA.addr
 
