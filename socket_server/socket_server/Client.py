@@ -98,20 +98,46 @@ class Client():
         while True:
             print(".")
             self.listen()
-            
-            """ except IOError as e:
-                # This is normal on non blocking connections - when there are no incoming data error is going to be raised
-                # Some operating systems will indicate that using AGAIN, and some using WOULDBLOCK error code
-                # We are going to check for both - if one of them - that's expected, means no incoming data, continue as normal
-                # If we got different error code - something happened
-                if e.errno != errno.EAGAIN and e.errno != errno.EWOULDBLOCK:
-                    print('Reading error: {}'.format(str(e)))
-                    sys.exit()
 
-                # We just did not receive anything
-                continue
+    def loop_thread(self):
+        from threading import Thread
+        p = Thread(target=self.loop)
+        return p
 
-            except Exception as e:
-                # Any other exception - something happened, exit
-                print('Reading error: '.format(str(e)))
-                sys.exit() """
+
+import functools
+
+class ObjectSocketInterface(Client):
+    _object = None
+    _commands = {}
+    def __init__(self, IP, PORT, object) -> None:
+        super().__init__(IP, PORT)
+        self._object = object
+
+    def _income_host_message_handle(self, msg):
+        print (f"[INCOME MESSAGE] from {msg.sender}")
+        if isinstance(msg.data, dict):
+            _dict = msg.data
+            if "setattr" in _dict.keys():
+                _attr, _val = _dict['setattr']
+                print(f"Trying to set object.{_attr} = {_val}")
+                self._rsetattr(_attr, _val)
+            if "getattr" in _dict.keys():
+                _attr, _args, _kwargs = _dict['getattr']
+                print(f"Trying to get/call object.{_attr}({_args}, {_kwargs})")
+                ret = self._rgetattr(_attr, *_val, **_kwargs)
+                self.send_message(ret, msg.sender)
+            if "eval" in _dict.keys():
+                eval_str = 'self._object.'+_dict['eval']
+                print(f"Trying eval({eval_str})")
+                result = eval(eval_str)
+                self.send_message(result, msg.sender)
+
+    def _rsetattr(self, attr, val):
+        pre, _, post = attr.rpartition('.')
+        return setattr(self._rgetattr(pre) if pre else self._object, post, val)
+
+    def _rgetattr(self, attr, *args, **kwargs):
+        def _getattr(obj, attr):
+            return getattr(obj, attr, *args, **kwargs)
+        return functools.reduce(_getattr, [self._object] + attr.split('.'))

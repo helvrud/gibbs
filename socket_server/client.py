@@ -16,3 +16,5 @@ client.send_message('\STOP_SERVER', 'host')
 # %%
 client.echo_test()
 # %%
+client.last_message.data
+# %%

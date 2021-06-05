@@ -68,7 +68,7 @@ class SocketServer():
             return True
         else:
             #raise TypeError("The data isn't wrapped into the Message class")
-            print("The data isn't wrapped into the Message class")
+            print("HOST: The data isn't wrapped into the Message class")
             return None
 
     def send_message(self, data, client_addr):
@@ -77,7 +77,7 @@ class SocketServer():
         self._send_object(client_socket, msg)
 
     def _income_msg_handle(self, msg):
-        print (f"[INCOME MESSAGE] from {msg.sender}")
+        print (f"HOST: [INCOME MESSAGE] from {msg.sender}")
         data = msg.data
         print (data)
         if data == "\STOP_SERVER":
@@ -90,28 +90,28 @@ class SocketServer():
         client_addr = msg.receiver
         if client_addr in self.addr_list:
             client_socket = self.sockets_list[self.addr_list.index(client_addr)]
-            print (f"[FORWARDING MESSAGE] from {msg.sender} to {client_addr}")
+            print (f"HOST: [FORWARDING MESSAGE] from {msg.sender} to {client_addr}")
             self._send_object(client_socket, msg)
         else:
-            print (f"Client is not found, forwarding failed")
+            print (f"HOST: Client is not found, forwarding failed")
             self.send_message('\FORWARDING_FAILED', msg.sender)
 
     def _new_conn_handle(self):
         client_socket, client_address = self.server_socket.accept()
         self.sockets_list.append(client_socket)
         self.addr_list.append(client_address)
-        print(f'Accepted new connection from {client_address}')
+        print(f'HOST: Accepted new connection from {client_address}')
         #sending to the connected client his address on the server
         self._send_object(client_socket, client_address)
 
     def _disconn_handle(self, client_socket):
         idx = self.sockets_list.index(client_socket)
-        print(f'Connection with {self.addr_list[idx]} has been closed')
+        print(f'HOST: Connection with {self.addr_list[idx]} has been closed')
         del self.sockets_list[idx]
         del self.addr_list[idx]
 
     def _stop_server_routine(self, timeout = None):
-        print ('The server will be stopped')
+        print ('HOST: The server will be stopped')
         #broadcast the message that server is stopped
         #for client_addr in self.addr_list:
         #    self.send_message('\STOP_SERVER', client_addr)
@@ -143,7 +143,12 @@ class SocketServer():
 
     def loop(self):
         while self._active:
-            print('...')
+            #print('...')
             self.listen()
         else:
             self._stop_server_routine()
+
+    def loop_thread(self):
+        from threading import Thread
+        p = Thread(target=self.loop)
+        return p
