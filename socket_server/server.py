@@ -1,8 +1,5 @@
-import server_client_class
+from socket_server import SocketServer
 
-server = server_client_class.SocketServer(IP = '127.0.0.1', PORT = 22223)
-
+server = SocketServer('127.0.0.1', 10001)
 server.start()
-
-server.server_loop()
-
+server.loop()
