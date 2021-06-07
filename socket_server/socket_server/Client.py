@@ -5,12 +5,11 @@ import time
 from .Message import Message
 
 HEADER_LENGTH = 10
-
-HEADER_LENGTH = 10
-
+    
 class Client():
     _connected = False
-    last_message = None   
+    last_message = None
+    system = None
     def __init__(self, IP, PORT) -> None:
         self.IP = IP
         self.PORT = PORT
@@ -31,7 +30,10 @@ class Client():
         self._connected = True
 
     def _send_object(self, data):
-        msg = pickle.dumps(data)
+        try:
+            msg = pickle.dumps(data)
+        except:
+            msg = pickle.dumps('The result can not be pickled')
         msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
         self.server_socket.send(msg)
 
@@ -79,9 +81,22 @@ class Client():
         if data == '\STOP_SERVER':
             print('Server is going to be stopped.')
             self._connected = False
+        if isinstance(data, dict):
+            if "eval" in data.keys(): #this one is very insecure, and should be deprecated
+                if not isinstance(data['eval'], list): data['eval'] = [data['eval']]
+                for item in data['eval']:
+                    self.eval(item, 'host')
 
-    def _disconn_routine(self):
+            if "exec" in data.keys():
+                if not isinstance(data['exec'],list): data['exec'] = [data['exec']]
+                for item in data['exec']:
+                    self.exec(item, 'host')       
+
+    def _disconn_routine(self, sys_exit = False):
         self.server_socket.close()
+        if sys_exit:
+            import sys
+            sys.exit()
 
     def listen(self):
         #server closed a connection
@@ -95,43 +110,88 @@ class Client():
         
 
     def loop(self):
-        while True:
+        while self._connected:
             print(".")
             self.listen()
+        else:
+            self._disconn_routine()
 
-    def loop_thread(self):
-        from threading import Thread
-        p = Thread(target=self.loop)
-        return p
+    def loop_thread(self, flavor='threading'):
+        if flavor=='threading':
+            from threading import Thread
+            p = Thread(target=self.loop)
+            return p
+        elif flavor=='multiprocessing':
+            from multiprocessing import Process
+            p = Process(target=self.loop)
+            return p
+
+    def eval(self, eval_str, result_receiver = None):
+        print(f'eval({eval_str})')
+        try:
+            result = eval(eval_str)
+        except Exception as e:
+            result = e
+        if result_receiver is not None:
+            self.send_message(result, result_receiver)
+        else:
+            return result
+    
+    def exec(self, eval_str, result_receiver = None):
+        print(f'exec({eval_str})')
+        try:
+            result = exec(eval_str)
+        except Exception as e:
+            result = e
+        if result_receiver is not None:
+            self.send_message(result, result_receiver)
+        else:
+            return result
+        
+
 
 
 import functools
+import importlib
+import numpy
 
 class ObjectSocketInterface(Client):
     _object = None
     _commands = {}
-    def __init__(self, IP, PORT, object) -> None:
+    def __init__(self, IP, PORT) -> None:
         super().__init__(IP, PORT)
-        self._object = object
+
+    def create_object(self, object_class, *args, **kwargs):
+        print(f"Creating an instance {object_class}({args, kwargs})")
+        self._object = object_class(*args, **kwargs)
 
     def _income_host_message_handle(self, msg):
         print (f"[INCOME MESSAGE] from {msg.sender}")
         if isinstance(msg.data, dict):
             _dict = msg.data
-            if "setattr" in _dict.keys():
-                _attr, _val = _dict['setattr']
-                print(f"Trying to set object.{_attr} = {_val}")
-                self._rsetattr(_attr, _val)
-            if "getattr" in _dict.keys():
-                _attr, _args, _kwargs = _dict['getattr']
-                print(f"Trying to get/call object.{_attr}({_args}, {_kwargs})")
-                ret = self._rgetattr(_attr, *_val, **_kwargs)
-                self.send_message(ret, msg.sender)
-            if "eval" in _dict.keys():
-                eval_str = 'self._object.'+_dict['eval']
-                print(f"Trying eval({eval_str})")
-                result = eval(eval_str)
-                self.send_message(result, msg.sender)
+            if "eval" in _dict.keys(): #this one is very insecure, and should be deprecated
+                if not isinstance(_dict['eval'],list): _dict['eval'] = [_dict['eval'] ]
+                for item in _dict['eval']:
+                    if '*.' in item:
+                        eval_str = item.replace('*.','self._object.')
+                        """ elif 'system.' == item[0:8]:
+                            eval_str = 'self._object.'+item[0:8].replace('system.','self._object.')
+                        elif 'system.' in item:
+                            eval_str = item.replace('system.','self._object.') """
+                    else:
+                        eval_str = item
+                    print(f"Trying eval({eval_str})")
+                    try:
+                        result = eval(eval_str)
+                        print(f"eval({eval_str}) -> {result}")
+                    except Exception as e:
+                        print ('eval() failed')
+                        result = e
+                    self.send_message(result, msg.sender)
+            if "cmd" in _dict.keys():
+                if _dict['cmd'] == '\STOP':
+                    print('Client will be closed')
+                    self._connected = False
 
     def _rsetattr(self, attr, val):
         pre, _, post = attr.rpartition('.')
@@ -141,3 +201,4 @@ class ObjectSocketInterface(Client):
         def _getattr(obj, attr):
             return getattr(obj, attr, *args, **kwargs)
         return functools.reduce(_getattr, [self._object] + attr.split('.'))
+

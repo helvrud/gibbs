@@ -1,15 +1,23 @@
 #%%
+import espressomd
+import numpy as np
+box = [40, 30, 20]
+system = espressomd.System(box_l=box)
+from socket_server import Client
+client = Client('127.0.0.1', 10007)
+client.system = system
+#%%
+client.connect()
+client.loop_thread().start()
+# %%
+#client.eval("self.system.part.add(pos = [0,0,0])")
+# %%
 from socket_server import SocketServer
 
 server = SocketServer('127.0.0.1', 10007)
 server.start()
 server.loop_thread().start()
-#%%
-import subprocess
-clientA = subprocess.Popen(['python', 'espresso_client_2.py'])
-#%%
-server.addr_list
-#%%
+# %%
 server.send_message(
     {'eval':[
         "self.system.cell_system.skin",
@@ -26,22 +34,24 @@ server.send_message(
         }, 
     server.addr_list[1])
 
-#%%
+# %%
 server.send_message(
     {'eval':[
-        "self.system.part.add(pos = [0,0,0])",
+        "self.system.part.add(pos = [1,1,1])",
         ]
     },
     server.addr_list[1])
 # %%
 server.send_message(
-        {'eval':[
-            "self.system.part[:].pos",
-            ]
-        },
-        server.addr_list[1])
+    {'eval':[
+        "self.system.part[:].pos",
+        ]
+    },
+    server.addr_list[1])
+# %%
+msg= client.eval("self.system.part.add(pos = numpy.array([1,1,1]))")
+# %%
+client.send_message(msg, 'host')
 # %%
 server.last_message.data
-# %%
-clientA.poll()
 # %%

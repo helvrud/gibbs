@@ -14,6 +14,7 @@ class SocketServer():
 
     server_socket = None
     _active = True
+    last_message = None
     
     def __init__(self, IP, PORT) -> None:
         self.IP = IP
@@ -78,6 +79,7 @@ class SocketServer():
 
     def _income_msg_handle(self, msg):
         print (f"HOST: [INCOME MESSAGE] from {msg.sender}")
+        self.last_message = msg
         data = msg.data
         print (data)
         if data == "\STOP_SERVER":
@@ -148,7 +150,12 @@ class SocketServer():
         else:
             self._stop_server_routine()
 
-    def loop_thread(self):
-        from threading import Thread
-        p = Thread(target=self.loop)
-        return p
+    def loop_thread(self, flavor = 'threading'):
+        if flavor=='threading':
+            from threading import Thread
+            p = Thread(target=self.loop)
+            return p
+        elif flavor=='multiprocessing':
+            from multiprocessing import Process
+            p = Process(target=self.loop)
+            return p

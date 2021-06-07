@@ -1,37 +1,15 @@
 #%%
-from typing import Dict
 import espressomd
-import numpy as np
-
 required_features = ["LENNARD_JONES"]
 espressomd.assert_features(required_features)
-
-box = [40, 30, 20]
-system = espressomd.System(box_l=box)
-
-# %%
-from socket_server import Interface, SocketServer
-
-server = SocketServer('127.0.0.1', 10001)
-server.start()
-server.loop_thread().start()
+from socket_server import ObjectSocketInterface
+client = ObjectSocketInterface('127.0.0.1', 10007)
+client.create_object(espressomd.System, box_l=[40, 30, 20])
 #%%
-client = Interface('127.0.0.1', 10001, system)
 client.connect()
-# %%
-client.loop_thread().start()
-# %%
-server.send_message('hello', client.addr)
-# %%
-server.send_message({"SET" : ("cell_system.skin", 0.4)}, client.addr)
+client.loop()
 #%%
-server.send_message({"SET" : (
-        "non_bonded_inter[0, 0].lennard_jones.set_params",
-        dict(epsilon=100.0, sigma=1.0, cutoff=3.0, shift="auto")
-        )
-    },
-    client.addr)
+res = eval("client._object.part.add(pos = [0,0,0])")
 # %%
-client._object.non_bonded_inter[0, 0].lennard_jones.get_params()
+res
 # %%
-client._object.non_bonded_inter[0, 0].lennard_jones.set_params()
