@@ -104,7 +104,7 @@ class ClientBase():
 
     def flush_log(self):
         while self.logs:
-            print(self.logs.pop(0))
+            print(str(self.addr)+": "+str(self.logs.pop(0)))
 
     def loop(self):
         while self._connected:

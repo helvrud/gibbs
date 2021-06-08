@@ -190,6 +190,7 @@ class SocketServer(ServerBase):
 
     def wait_clients(self):
         self.logs.append("HOST: waiting for busy clients...")
+        time.sleep(1) #super dump
         while self.sending_queue:
             self._sending_from_queue()
         self.logs.append("HOST: all clients responded")
