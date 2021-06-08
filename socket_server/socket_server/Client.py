@@ -1,8 +1,8 @@
 from os import error
 import socket
 import pickle
-import time
-import numpy
+#import time
+#import numpy
 
 from .Message import Message
 
@@ -71,12 +71,12 @@ class ClientBase():
         self.logs.append(data)
 
     def _income_host_message_handle(self, msg):
-        print (f"[INCOME MESSAGE] from {msg.sender}")
+        self.logs.append(f"[INCOME MESSAGE] from {msg.sender}")
         data = msg.data
-        print (data)
+        self.logs.append(data)
         if isinstance(data,str): 
             if(data == '\STOP_SERVER'):
-                print('Server is going to be stopped.')
+                self.logs.append('Server is going to be stopped.')
                 self._connected = False
             if(data == '\ECHO'):
                 self.send_message('\ECHO_OK', 'host')
@@ -114,51 +114,22 @@ class ClientBase():
             self._disconn_routine()
 
 
+
+
+
 class Client(ClientBase):
     _connected = False
     last_message = None
-    system = None
-    busy = False 
-
-    def send_message(self, data, receiver):
-        msg = Message(data, sender = self.addr, receiver = receiver)
-        self._send_object(msg)
-
-    def recv_message(self):
-        msg = self._recv_object()
-        if msg is False: return False
-        if isinstance(msg, Message):
-            self.last_message = msg
-            if msg.sender == 'host':
-                self._income_host_message_handle(msg)
-            else:
-                self._income_client_message_handle(msg)
-            return True
-        else:
-            print("The data isn't wrapped into the Message class")
-            return None
-
-    def _income_client_message_handle(self, msg):
-        print (f"[INCOME MESSAGE] from {msg.sender}")
-        data = msg.data
-        print (data)
 
     def _income_host_message_handle(self, msg):
-        print (f"[INCOME MESSAGE] from {msg.sender}")
+        super()._income_host_message_handle(msg)
         data = msg.data
-        print (data)
-        if isinstance(data,str): 
-            if(data == '\STOP_SERVER'):
-                print('Server is going to be stopped.')
-                self._connected = False
-            if(data == '\ECHO'):
-                self.send_message('\OK', 'host')
         if isinstance(data, dict):
             if "eval" in data.keys(): #this one is very insecure, and should be deprecated
                 if not isinstance(data['eval'], list): data['eval'] = [data['eval']]
                 for item in data['eval']:
                     try:
-                        result = self.eval(item, 'host')
+                        result = self.eval(item)
                     except:
                         result = 'EVAL_FAILED'
                     try:
@@ -166,10 +137,20 @@ class Client(ClientBase):
                     except:
                         self.send_message('Result can not be serialized', 'host')
 
-            if "exec" in data.keys():
-                if not isinstance(data['exec'],list): data['exec'] = [data['exec']]
-                for item in data['exec']:
-                    self.exec(item, 'host')       
+    def _income_client_message_handle(self, msg):
+        super()._income_client_message_handle(msg)
+        data = msg.data
+        if "eval" in data.keys(): #this one is very insecure, and should be deprecated
+                if not isinstance(data['eval'], list): data['eval'] = [data['eval']]
+                for item in data['eval']:
+                    try:
+                        result = self.eval(item)
+                    except:
+                        result = 'EVAL_FAILED'
+                    try:
+                        self.send_message(result, msg.receiver)
+                    except:
+                        self.send_message('Result can not be serialized', msg.receiver)
 
     def loop_thread(self, flavor='threading'):
         if flavor=='threading':
@@ -181,75 +162,6 @@ class Client(ClientBase):
             p = Process(target=self.loop)
             return p
 
-    def eval(self, eval_str, result_receiver = None):
-        print(f'eval({eval_str})')
+    def eval(self, eval_str):
         result = eval(eval_str)
         return result
-        
-
-
-    def exec(self, eval_str, result_receiver = None):
-        print(f'exec({eval_str})')
-        try:
-            result = exec(eval_str)
-        except Exception as e:
-            result = e
-        if result_receiver is not None:
-            self.send_message(result, result_receiver)
-        else:
-            return result
-        
-
-
-
-import functools
-#import importlib
-#import numpy
-
-""" class ObjectSocketInterface(Client):
-    _object = None
-    _commands = {}
-    def __init__(self, IP, PORT) -> None:
-        super().__init__(IP, PORT)
-
-    def create_object(self, object_class, *args, **kwargs):
-        print(f"Creating an instance {object_class}({args, kwargs})")
-        self._object = object_class(*args, **kwargs)
-
-    def _income_host_message_handle(self, msg):
-        print (f"[INCOME MESSAGE] from {msg.sender}")
-        if isinstance(msg.data, dict):
-            _dict = msg.data
-            if "eval" in _dict.keys(): #this one is very insecure, and should be deprecated
-                if not isinstance(_dict['eval'],list): _dict['eval'] = [_dict['eval'] ]
-                for item in _dict['eval']:
-                    if '*.' in item:
-                        #eval_str = item.replace('*.','self._object.')
-                        #elif 'system.' == item[0:8]:
-                        #    eval_str = 'self._object.'+item[0:8].replace('system.','self._object.')
-                        #elif 'system.' in item:
-                        #    eval_str = item.replace('system.','self._object.')
-                    else:
-                        eval_str = item
-                    print(f"Trying eval({eval_str})")
-                    try:
-                        result = eval(eval_str)
-                        print(f"eval({eval_str}) -> {result}")
-                    except Exception as e:
-                        print ('eval() failed')
-                        result = e
-                    self.send_message(result, msg.sender)
-            if "cmd" in _dict.keys():
-                if _dict['cmd'] == '\STOP':
-                    print('Client will be closed')
-                    self._connected = False
-
-    def _rsetattr(self, attr, val):
-        pre, _, post = attr.rpartition('.')
-        return setattr(self._rgetattr(pre) if pre else self._object, post, val)
-
-    def _rgetattr(self, attr, *args, **kwargs):
-        def _getattr(obj, attr):
-            return getattr(obj, attr, *args, **kwargs)
-        return functools.reduce(_getattr, [self._object] + attr.split('.'))
- """

@@ -46,7 +46,7 @@ class ServerBase():
             #client or server has been closed violently
             return False
 
-    def _send_object(self, client_socket, data,):
+    def _send_object(self, client_socket, data):
         msg = pickle.dumps(data)
         msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
         client_socket.send(msg)
@@ -63,7 +63,7 @@ class ServerBase():
             return True
         else:
             #raise TypeError("The data isn't wrapped into the Message class")
-            self.log_q.append("HOST: The data isn't wrapped into the Message class")
+            self.logs.append("HOST: The data isn't wrapped into the Message class")
             return None
 
     def send_message(self, data, client_addr):
@@ -97,7 +97,10 @@ class ServerBase():
         self.addr_list.append(client_address)
         self.logs.append(f'HOST: Accepted new connection from {client_address}')
         #sending to the connected client his address on the server
-        self._send_object(client_socket, client_address)
+        #self._send_object(client_socket, client_address)
+        msg = pickle.dumps(client_address)
+        msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
+        client_socket.send(msg)
 
     def _disconn_handle(self, client_socket):
         idx = self.sockets_list.index(client_socket)
@@ -149,6 +152,9 @@ class ServerBase():
 
 
 class SocketServer(ServerBase):
+    busy_clients = []
+    sending_queue =  []
+    
     def loop_thread(self, flavor = 'threading'):
         if flavor=='threading':
             from threading import Thread
@@ -158,3 +164,49 @@ class SocketServer(ServerBase):
             from multiprocessing import Process
             p = Process(target=self.loop)
             return p
+
+    def _send_object(self, client_socket, data):
+        client_addr = self.addr_list[self.sockets_list.index(client_socket)]
+        if client_addr in self.busy_clients:
+            self.sending_queue.append((client_addr, data))
+            self.logs.append(f'HOST: Client {client_addr} is busy, message has been put to queue')
+        else:
+            super()._send_object(client_socket, data)
+            self.busy_clients.append(client_addr)
+
+    def _recv_object(self, client_socket):
+        client_addr = self.addr_list[self.sockets_list.index(client_socket)]
+        if client_addr in self.busy_clients: 
+            self.busy_clients.remove(client_addr)
+        return super()._recv_object(client_socket)
+
+    def _sending_from_queue(self):
+        sending_queue = self.sending_queue[:]
+        self.sending_queue=[]
+        for pending_message in sending_queue:
+            client_addr, data = pending_message
+            client_socket = self.sockets_list[self.addr_list.index(client_addr)]
+            self._send_object(client_socket, data)
+
+    def wait_clients(self):
+        self.logs.append("HOST: waiting for busy clients...")
+        while self.sending_queue:
+            self._sending_from_queue()
+        self.logs.append("HOST: all clients responded")
+
+    def loop(self):
+        while self._active:
+            self._sending_from_queue()
+            self.listen()
+            self.flush_log()
+        else:
+            self.wait_clients()
+            self._stop_server_routine()
+
+
+
+    
+
+        
+
+

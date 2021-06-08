@@ -16,7 +16,7 @@ class EspressoClient(Client):
         result = eval(eval_str)
         return result
 
-client = EspressoClient('127.0.0.1', 10001)
+client = EspressoClient('127.0.0.1', 10000)
 client.system = system
 client.connect()
 client.loop()
