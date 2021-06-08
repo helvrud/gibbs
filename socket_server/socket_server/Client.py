@@ -1,6 +1,7 @@
 import socket
 import pickle
 import time
+import numpy
 
 from .Message import Message
 
@@ -10,6 +11,7 @@ class Client():
     _connected = False
     last_message = None
     system = None
+    busy = False 
     def __init__(self, IP, PORT) -> None:
         self.IP = IP
         self.PORT = PORT
@@ -30,10 +32,7 @@ class Client():
         self._connected = True
 
     def _send_object(self, data):
-        try:
-            msg = pickle.dumps(data)
-        except:
-            msg = pickle.dumps('The result can not be pickled')
+        msg = pickle.dumps(data)
         msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
         self.server_socket.send(msg)
 
@@ -78,21 +77,31 @@ class Client():
         print (f"[INCOME MESSAGE] from {msg.sender}")
         data = msg.data
         print (data)
-        if data == '\STOP_SERVER':
-            print('Server is going to be stopped.')
-            self._connected = False
+        if isinstance(data,str): 
+            if(data == '\STOP_SERVER'):
+                print('Server is going to be stopped.')
+                self._connected = False
+            if(data == '\ECHO'):
+                self.send_message('\OK', 'host')
         if isinstance(data, dict):
             if "eval" in data.keys(): #this one is very insecure, and should be deprecated
                 if not isinstance(data['eval'], list): data['eval'] = [data['eval']]
                 for item in data['eval']:
-                    self.eval(item, 'host')
+                    try:
+                        result = self.eval(item, 'host')
+                    except:
+                        result = 'EVAL_FAILED'
+                    try:
+                        self.send_message(result, 'host')
+                    except:
+                        self.send_message('Result can not be serialized', 'host')
 
             if "exec" in data.keys():
                 if not isinstance(data['exec'],list): data['exec'] = [data['exec']]
                 for item in data['exec']:
                     self.exec(item, 'host')       
 
-    def _disconn_routine(self, sys_exit = False):
+    def _disconn_routine(self, sys_exit = True):
         self.server_socket.close()
         if sys_exit:
             import sys
@@ -128,15 +137,11 @@ class Client():
 
     def eval(self, eval_str, result_receiver = None):
         print(f'eval({eval_str})')
-        try:
-            result = eval(eval_str)
-        except Exception as e:
-            result = e
-        if result_receiver is not None:
-            self.send_message(result, result_receiver)
-        else:
-            return result
-    
+        result = eval(eval_str)
+        return result
+        
+
+
     def exec(self, eval_str, result_receiver = None):
         print(f'exec({eval_str})')
         try:
@@ -152,10 +157,10 @@ class Client():
 
 
 import functools
-import importlib
-import numpy
+#import importlib
+#import numpy
 
-class ObjectSocketInterface(Client):
+""" class ObjectSocketInterface(Client):
     _object = None
     _commands = {}
     def __init__(self, IP, PORT) -> None:
@@ -173,11 +178,11 @@ class ObjectSocketInterface(Client):
                 if not isinstance(_dict['eval'],list): _dict['eval'] = [_dict['eval'] ]
                 for item in _dict['eval']:
                     if '*.' in item:
-                        eval_str = item.replace('*.','self._object.')
-                        """ elif 'system.' == item[0:8]:
-                            eval_str = 'self._object.'+item[0:8].replace('system.','self._object.')
-                        elif 'system.' in item:
-                            eval_str = item.replace('system.','self._object.') """
+                        #eval_str = item.replace('*.','self._object.')
+                        #elif 'system.' == item[0:8]:
+                        #    eval_str = 'self._object.'+item[0:8].replace('system.','self._object.')
+                        #elif 'system.' in item:
+                        #    eval_str = item.replace('system.','self._object.')
                     else:
                         eval_str = item
                     print(f"Trying eval({eval_str})")
@@ -201,4 +206,4 @@ class ObjectSocketInterface(Client):
         def _getattr(obj, attr):
             return getattr(obj, attr, *args, **kwargs)
         return functools.reduce(_getattr, [self._object] + attr.split('.'))
-
+ """

@@ -1,2 +1,2 @@
 from .Server import SocketServer
-from .Client import Client, ObjectSocketInterface
+from .Client import Client

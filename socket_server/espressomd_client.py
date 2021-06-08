@@ -1,15 +1,11 @@
 #%%
 import espressomd
-required_features = ["LENNARD_JONES"]
-espressomd.assert_features(required_features)
-from socket_server import ObjectSocketInterface
-client = ObjectSocketInterface('127.0.0.1', 10007)
-client.create_object(espressomd.System, box_l=[40, 30, 20])
-#%%
+import numpy as np
+box = [40, 30, 20]
+system = espressomd.System(box_l=box)
+from socket_server import Client
+client = Client('127.0.0.1', 10000)
+client.system = system
 client.connect()
 client.loop()
-#%%
-res = eval("client._object.part.add(pos = [0,0,0])")
-# %%
-res
 # %%

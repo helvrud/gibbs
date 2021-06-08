@@ -2,31 +2,30 @@ import socket
 import select
 import pickle
 import time
+import sys
 
 from .Message import Message
 
 HEADER_LENGTH = 10
 
-class SocketServer():
-    #clients information
+class ServerBase():
     sockets_list = []
     addr_list = []
-
     server_socket = None
     _active = True
-    last_message = None
-    
+    logs = []
+
     def __init__(self, IP, PORT) -> None:
         self.IP = IP
         self.PORT = PORT
-    
+
     def start(self):
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         #reuse blocked sockets
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
         server_socket.bind((self.IP, self.PORT))
-        print(f'Listening to {self.IP} ...')
+        self.logs.append(f'HOST: Listening to {self.IP} ...')
         server_socket.listen()
 
         self.server_socket = server_socket
@@ -36,18 +35,13 @@ class SocketServer():
     def _recv_object(self, client_socket):
         try:
             message_header = client_socket.recv(HEADER_LENGTH)
-
             #no data -> client closed a connection
             if not len(message_header):
                 return False
-
             message_length = int(message_header.decode('utf-8').strip())
-
             serialized_data = client_socket.recv(message_length)
             data = pickle.loads(serialized_data)
-
             return data
-
         except:
             #client or server has been closed violently
             return False
@@ -69,7 +63,7 @@ class SocketServer():
             return True
         else:
             #raise TypeError("The data isn't wrapped into the Message class")
-            print("HOST: The data isn't wrapped into the Message class")
+            self.log_q.append("HOST: The data isn't wrapped into the Message class")
             return None
 
     def send_message(self, data, client_addr):
@@ -78,48 +72,47 @@ class SocketServer():
         self._send_object(client_socket, msg)
 
     def _income_msg_handle(self, msg):
-        print (f"HOST: [INCOME MESSAGE] from {msg.sender}")
-        self.last_message = msg
+        self.logs.append(f"HOST: [INCOME MESSAGE] from {msg.sender}")
         data = msg.data
-        print (data)
-        if data == "\STOP_SERVER":
-            #the server 
-            self._active = False
-        elif data == "\ECHO":
-            self.send_message('OK', msg.sender)
-
+        self.logs.append(str(data))
+        if isinstance(data,str):
+            if data == "\STOP_SERVER":
+                self._active = False
+            elif data == "\ECHO":
+                self.send_message('\ECHO_OK', msg.sender)
+    
     def _forwarding_msg_handle(self, msg):
         client_addr = msg.receiver
         if client_addr in self.addr_list:
             client_socket = self.sockets_list[self.addr_list.index(client_addr)]
-            print (f"HOST: [FORWARDING MESSAGE] from {msg.sender} to {client_addr}")
+            self.logs.append(f"HOST: [FORWARDING MESSAGE] from {msg.sender} to {client_addr}")
             self._send_object(client_socket, msg)
         else:
-            print (f"HOST: Client is not found, forwarding failed")
+            self.logs.append(f"HOST: Client is not found, forwarding failed")
             self.send_message('\FORWARDING_FAILED', msg.sender)
 
     def _new_conn_handle(self):
         client_socket, client_address = self.server_socket.accept()
         self.sockets_list.append(client_socket)
         self.addr_list.append(client_address)
-        print(f'HOST: Accepted new connection from {client_address}')
+        self.logs.append(f'HOST: Accepted new connection from {client_address}')
         #sending to the connected client his address on the server
         self._send_object(client_socket, client_address)
 
     def _disconn_handle(self, client_socket):
         idx = self.sockets_list.index(client_socket)
-        print(f'HOST: Connection with {self.addr_list[idx]} has been closed')
+        self.logs.append(f'HOST: Connection with {self.addr_list[idx]} has been closed')
         del self.sockets_list[idx]
         del self.addr_list[idx]
 
-    def _stop_server_routine(self, timeout = None):
-        print ('HOST: The server will be stopped')
+    def _stop_server_routine(self, timeout = 3):
+        self.logs.append('HOST: The server will be stopped')
         #broadcast the message that server is stopped
-        #for client_addr in self.addr_list:
-        #    self.send_message('\STOP_SERVER', client_addr)
-        #self._active = False
+        for client_addr in self.addr_list[1:]:
+            self.send_message('\STOP_SERVER', client_addr)
         if timeout is not None: time.sleep(timeout)
         self.server_socket.close()
+        sys.exit()
         
     def listen(self):
         #find the socket where reading is happening
@@ -138,18 +131,24 @@ class SocketServer():
                     self._disconn_handle(notified_socket)
                     continue
 
-          
         for notified_socket in exception_sockets:
             # client disconnected violently
             self._disconn_handle(notified_socket)
 
+    def flush_log(self):
+        while self.logs:
+            print(self.logs.pop(0))
+
     def loop(self):
         while self._active:
-            #print('...')
             self.listen()
+            self.flush_log()
         else:
             self._stop_server_routine()
 
+
+
+class SocketServer(ServerBase):
     def loop_thread(self, flavor = 'threading'):
         if flavor=='threading':
             from threading import Thread
