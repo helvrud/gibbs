@@ -109,6 +109,7 @@ class ServerBase():
         del self.addr_list[idx]
 
     def _stop_server_routine(self, timeout = 3):
+        self._active = False
         self.logs.append('HOST: The server will be stopped')
         #broadcast the message that server is stopped
         for client_addr in self.addr_list[1:]:
@@ -154,6 +155,7 @@ class ServerBase():
 class SocketServer(ServerBase):
     busy_clients = []
     sending_queue =  []
+    last_income = None
     
     def loop_thread(self, flavor = 'threading'):
         if flavor=='threading':
@@ -169,6 +171,7 @@ class SocketServer(ServerBase):
         client_addr = self.addr_list[self.sockets_list.index(client_socket)]
         if client_addr in self.busy_clients:
             self.sending_queue.append((client_addr, data))
+            #self.busy_clients.append(client_addr)
             self.logs.append(f'HOST: Client {client_addr} is busy, message has been put to queue')
         else:
             super()._send_object(client_socket, data)
@@ -178,7 +181,8 @@ class SocketServer(ServerBase):
         client_addr = self.addr_list[self.sockets_list.index(client_socket)]
         if client_addr in self.busy_clients: 
             self.busy_clients.remove(client_addr)
-        return super()._recv_object(client_socket)
+        self.last_income =  super()._recv_object(client_socket)
+        return self.last_income
 
     def _sending_from_queue(self):
         sending_queue = self.sending_queue[:]
@@ -188,12 +192,21 @@ class SocketServer(ServerBase):
             client_socket = self.sockets_list[self.addr_list.index(client_addr)]
             self._send_object(client_socket, data)
 
-    def wait_clients(self):
-        self.logs.append("HOST: waiting for busy clients...")
-        time.sleep(1) #super dump
-        while self.sending_queue:
-            self._sending_from_queue()
-        self.logs.append("HOST: all clients responded")
+    def wait_clients_loop(self):
+        if self.busy_clients:
+            self.logs.append("HOST: waiting for busy clients...")
+            time.sleep(0.5) #super dumb
+            while self.sending_queue:
+                self._sending_from_queue()
+            self.logs.append("HOST: all clients responded")
+    
+    def listen_loop(self):
+        while self._active:
+            super().listen()
+    
+    def flush_lo_loop(self):
+        while self._active:
+            super().flush_log()
 
     def loop(self):
         while self._active:
@@ -201,8 +214,18 @@ class SocketServer(ServerBase):
             self.listen()
             self.flush_log()
         else:
-            self.wait_clients()
+            self.wait_clients_loop()
             self._stop_server_routine()
+
+    def separate_threads(self):
+        from threading import Thread
+        listen = Thread(target=self.listen_loop).start()
+        wait_clients = Thread(target=self.wait_clients_loop).start()
+        logs = Thread(target=self.flush_log).start()
+        return listen, wait_clients, logs
+    
+
+
 
 
 
