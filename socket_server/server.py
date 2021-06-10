@@ -2,9 +2,10 @@
 import time
 from socket_server import SocketServer
 
-server = SocketServer('127.0.0.1', 10001)
-server.start()
-server.loop_thread().start()
+server = SocketServer('127.0.0.1', 10011)
+server.setup()
+p1 = server.start()
+
 #%%
 import subprocess
 clientA = subprocess.Popen(['python', 'espressomd_client.py'])
@@ -33,6 +34,7 @@ server.send_message(
         ]
     },
     server.addr_list[1])
+#%%
 server.send_message(
         {'eval':[
             "self.system.part[:].pos",
@@ -45,5 +47,5 @@ server.send_message('\ECHO', server.addr_list[1])
 # %%
 server._active=False
 # %%
-server._stop_server_routine()
+server.addr_list
 # %%

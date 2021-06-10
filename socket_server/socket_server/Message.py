@@ -3,3 +3,4 @@ class Message():
         self.data = data
         self.sender = sender
         self.receiver = receiver
+        #self.wait_responce = wait_responce

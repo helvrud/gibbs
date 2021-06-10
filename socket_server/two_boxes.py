@@ -5,57 +5,47 @@ import numpy as np
 import random
 import math
 
-server = SocketServer('127.0.0.1', 10004)
+server = SocketServer('127.0.0.1', 10011)
+server.setup()
 server.start()
-server.loop_thread().start()
-#%%
+time.sleep(0.2)
 import subprocess
 clientA = subprocess.Popen(['python', 'espressomd_client.py'])
-time.sleep(0.5)
+time.sleep(0.2)
 clientB = subprocess.Popen(['python', 'espressomd_client.py'])
-time.sleep(0.5)
+time.sleep(0.2)
 # %%
 server.send_message('\ECHO', server.addr_list[1])
+#%%
 server.send_message('\ECHO', server.addr_list[2])
 # %%
 #popululate first system with particles:
-#for i in range(100):
-#    server.send_message(
-#        {'eval':[
-#            "self.system.part.add(pos=self.system.box_l * np.random.random(3))",
-#            ]
-#        },
-#    server.addr_list[2])
-#    time.sleep(0.2)
 for i in range(100):
-    server.send_message('add_particle', server.addr_list[2])
+    server.send_message(('add_rnd_particle',), server.addr_list[2])
+    time.sleep(0.02)
 
 #%%
-server.send_message('n_particles', server.addr_list[2])
-
-#%%
-def monte_carlo_move():
-    pass
+server.send_message(('n_particles',), server.addr_list[2])
 
 # %%
 def n_particles_and_energy():
     n_part=[None]*2
     energy=[None]*2
     
-    server.send_message('n_particles', server.addr_list[1])
-    time.sleep(0.1)
+    server.send_message(('n_particles',), server.addr_list[1])
+    time.sleep(0.5)
     n_part[0] = server.last_income.data
-    server.send_message('n_particles', server.addr_list[2])
-    time.sleep(0.1)
+    server.send_message(('n_particles',), server.addr_list[2])
+    time.sleep(0.5)
     n_part[1] = server.last_income.data
-    time.sleep(0.1)
-    server.send_message('get_total_energy', server.addr_list[1])
-    time.sleep(0.1)
+    time.sleep(0.5)
+    server.send_message(('get_total_energy',), server.addr_list[1])
+    time.sleep(0.5)
     energy[0] = server.last_income.data
-    server.send_message('get_total_energy', server.addr_list[2])
-    time.sleep(0.1)
+    server.send_message(('get_total_energy',), server.addr_list[2])
+    time.sleep(0.5)
     energy[1] = server.last_income.data
-    time.sleep(0.1)
+    time.sleep(0.5)
     
     print()
     print('-'*80)
@@ -71,112 +61,6 @@ def n_particles_and_energy():
 n_particles_and_energy()
 
 #%%
-
-def monte_carlo_move():
-    n_part, energy = n_particles_and_energy()
-    rnd_part_n = random.randint(0,sum(n_part))
-    print(f'particle number:{rnd_part_n}')
-    side = 'left' if rnd_part_n < n_part[0] else 'right'
-    if side == 'left':
-        A = 1
-        B = 2 
-        print('Particle will be moved from the left box')
-        server.send_message(
-            {'eval':[
-                f"self.system.part[{rnd_part_n}].pos",
-                    ]
-                }, server.addr_list[A])
-        server.wait_clients_loop() 
-        old_coord = server.last_income.data
-        old_energy = float(sum(energy))
-        print(f'old coord: {old_coord}')
-
-        #remove from the left
-        server.send_message(
-            {'eval':[
-                f"self.system.part[{rnd_part_n}].remove()",
-                    ]
-                }, server.addr_list[A])
-
-        #put in the right
-        server.send_message(
-            {'eval':[
-                f"self.system.part.add(pos=self.system.box_l * np.random.random(3)).id",
-                    ]
-                }, server.addr_list[B])
-        server.wait_clients_loop()
-        last_added_id= server.last_income.data
-        print('The move is done')
-        n_part, energy = n_particles_and_energy()
-        if monte_carlo_accept(old_energy, float(sum(energy)), 1):
-            print ('Move accepted')
-        else:
-            print ('Move declined')
-            #remove from the right
-            server.send_message(
-                {'eval':[
-                    f"self.system.part[{last_added_id}].remove()",
-                        ]
-                    }, server.addr_list[B])
-            
-            #put back to the left
-            server.send_message(
-            {'eval':[
-                f"self.system.part.add(pos={old_coord})",
-                    ]
-                }, server.addr_list[A])
-            server.wait_clients_loop() 
-    else:
-        print('Particle will be moved from the left box')
-        rnd_part_n = rnd_part_n-n_part[0]
-        A = 2
-        B = 1 
-        server.send_message(
-            {'eval':[
-                f"self.system.part[{rnd_part_n}].pos",
-                    ]
-                }, server.addr_list[A])
-        server.wait_clients_loop() 
-        old_coord = server.last_income.data
-        old_energy = float(sum(energy))
-        print(f'old coord: {old_coord}')
-
-        #remove from the left
-        server.send_message(
-            {'eval':[
-                f"self.system.part[{rnd_part_n}].remove()",
-                    ]
-                }, server.addr_list[A])
-
-        #put in the right
-        server.send_message(
-            {'eval':[
-                f"self.system.part.add(pos=self.system.box_l * np.random.random(3))",
-                    ]
-                }, server.addr_list[B])
-        server.wait_clients_loop()
-        last_added_id= server.last_income.data
-        print('The move is done')
-        n_part, energy = n_particles_and_energy()
-        if monte_carlo_accept(old_energy, float(sum(energy)), 1):
-            print ('Move accepted')
-        else:
-            print ('Move declined')
-            #remove from the right
-            server.send_message(
-                {'eval':[
-                    f"self.system.part[{rnd_part_n}].remove()",
-                        ]
-                    }, server.addr_list[B])
-            
-            #put back to the left
-            server.send_message(
-            {'eval':[
-                f"self.system.part.add(pos={old_coord})",
-                    ]
-                }, server.addr_list[A])
-            server.wait_clients_loop() 
-
 def monte_carlo_accept(old_energy, new_energy, beta):
     delta_E = new_energy - old_energy
     if delta_E<0:
@@ -184,5 +68,46 @@ def monte_carlo_accept(old_energy, new_energy, beta):
     else:
         prob = math.exp(-beta*delta_E)
         return (prob > random.random())
+def monte_carlo_move():
+    n_part, energy = n_particles_and_energy()
+    rnd_part_n = random.randint(0,sum(n_part))
+    side = 'left' if rnd_part_n < n_part[0] else 'right'
+    def move(A,B):
+        print(f'particle number:{rnd_part_n}')
+        server.send_message(('get_particle_pos', rnd_part_n), A)
+        time.sleep(0.5)
+        posA=server.last_income
+
+        server.send_message(('remove_particle', rnd_part_n), A)
+        
+        server.send_message(('add_rnd_particle',), B)
+
+        old_energy = sum(energy)
+
+        n_part_new, energy_new = n_particles_and_energy()
+
+        if monte_carlo_accept(old_energy, sum(energy_new), 1):
+            print('Move accepted')
+        
+        else:
+            print('Move rejected')
+            server.send_message(('remove_last_added',), B)
+            server.send_message(('add_particle', posA), A)
+    if side == 'left':
+        print('Particle will be moved from A to B box')
+        A = server.addr_list[1]
+        B = server.addr_list[2]
+        move(A,B)
+    else:
+        rnd_part_n = rnd_part_n - n_part[0]
+        print('Particle will be moved from B to A box')
+        A = server.addr_list[2]
+        B = server.addr_list[1]
+        move(A,B)
 # %%
 monte_carlo_move()
+
+# %%
+server.addr_list[1]
+# %%
+# %%
