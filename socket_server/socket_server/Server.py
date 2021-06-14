@@ -145,7 +145,7 @@ class ServerBase():
 
     def flush_log(self):
         while self.logs:
-            print(self.logs.pop(0))
+            self.logs.pop(0)
 
 
 class SocketServer(ServerBase):
@@ -153,8 +153,11 @@ class SocketServer(ServerBase):
     last_income = None
     
     def _client_is_busy(self, client_addr):
-        busy_addrs = set([item[0] for  item in self.sending_queue])
-        return client_addr in busy_addrs
+        if self.sending_queue:
+            busy_addrs = set([item[0] for  item in self.sending_queue])
+            return client_addr in busy_addrs
+        else:
+            return False
 
     def _del_last_occur_client(self, client_addr):
         idx = None
@@ -163,8 +166,14 @@ class SocketServer(ServerBase):
                 break
         del self.sending_queue[idx]
     
-    #def _get_last_for_all_clients(self):
-    #    return 
+    def send_request(self, data, client_addr,):
+        self.send_message(data, client_addr)
+        while self._client_is_busy(client_addr):
+            pass
+        time.sleep(0.05)
+        result = self.last_income.data
+        self.last_income = None
+        return result
     
     def _send_object(self, client_socket, data):
         client_addr = self.addr_list[self.sockets_list.index(client_socket)]
