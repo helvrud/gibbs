@@ -49,3 +49,4 @@ server._active=False
 # %%
 server.addr_list
 # %%
+server._stop_server_routine()
