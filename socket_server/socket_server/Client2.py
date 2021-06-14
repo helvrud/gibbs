@@ -8,8 +8,6 @@ from time import monotonic as time
 
 HEADER_LENGTH = 10
 
-
-
 class ErrorRequest:
     def __init__(self, details) -> None:
         self.details = details
@@ -27,15 +25,27 @@ def recv_data(server_socket):
     data = pickle.loads(serialized_data)
     return data
 
+""" def send_data(data, server_socket):
+    msg = pickle.dumps(data)
+    msg = f"{len(msg):<{HEADER_LENGTH}}"+msg
+    server_socket.send(bytes(msg,'utf-8'))
+
+def recv_data(server_socket):
+    message_header = server_socket.recv(HEADER_LENGTH)
+    if not len(message_header): return False
+    message_length = int(message_header.decode('utf-8').strip())
+    data = server_socket.recv(message_length).decode('utf-8')
+    return data """
+
+
 class BaseClient():
-    
     request_queue=[]
     responce_queue=[]
     connected = False
     client_address = None
 
-    request_queue_thread = None
-    responce_queue_thread = None
+    #request_queue_thread = None
+    #responce_queue_thread = None
 
     
     def __init__(self, IP, PORT, connect  = True, _io = None) -> None:
@@ -60,17 +70,18 @@ class BaseClient():
         except Exception as e:
             self.logger.error(e)
 
-    def get_request(self):
-        try:
-            data = self.recv(self.server_socket)
-            self.logger.debug('Got request from server')
-            if data == False:
-                self.logger.debug('Disconnected from server')
-                self.connected = False
-            self.request_queue.append(data)
-        except Exception as e:
-            self.logger.error(e)
-            self.request_queue.append(ErrorRequest('Get request error'))
+    def get_requests(self):
+        while self.connected:
+            try:
+                data = self.recv(self.server_socket)
+                self.logger.debug('Got request from server')
+                if data == False:
+                    self.logger.debug('Disconnected from server')
+                    self.connected = False
+                self.request_queue.append(data)
+            except Exception as e:
+                self.logger.error(e)
+                self.request_queue.append(ErrorRequest('Get request error'))
 
     def verify_request(self, request):
         return True
@@ -79,28 +90,40 @@ class BaseClient():
         return request #echo
 
     def process_requests(self):
-        if self.request_queue:
-            request = self.request_queue.pop(0)
-            if self.verify_request(request):
-                try:
-                    responce = self.handle_request(request)
-                except Exception as e:
-                    responce = ErrorRequest('Handle request error')
-            else:
-                responce = ErrorRequest('Request is invalid')
-            self.responce_queue.append(responce)
-
-    def send_responces(self):
-        if self.responce_queue:
-            responce = self.responce_queue.pop(0)
-            if self.connected:
+        while self.connected:
+            if self.request_queue:
+                request = self.request_queue.pop(0)
+                if self.verify_request(request):
+                    try:
+                        responce = self.handle_request(request)
+                    except Exception as e:
+                        responce = ErrorRequest('Handle request error')
+                else:
+                    responce = ErrorRequest('Request is invalid')
+                self.logger.debug('Request processed')
                 self.send(responce, self.server_socket)
-            else:
-                raise
+                #self.responce_queue.append(responce)
+                #self.logger.debug(f'responce: {self.responce_queue}')
+                
+
+    #def send_responces(self):
+    #    while self.connected:
+    #        if self.responce_queue:
+    #            self.logger.debug('Sending processed requests...')
+    #            responce = self.responce_queue.pop(0)
+    #            if self.connected:
+    #                self.send(responce, self.server_socket)
+    #                self.logger.debug('Responce sended')
+    #            else:
+    #                raise
+    
+    
 
     def start_threads(self):
-        self.request_queue_thread = threading.Thread(target=self.process_requests, daemon=True)
-        self.responce_queue_thread = threading.Thread(target=self.send_responces, daemon=True)
+        threading.Thread(target=self.get_requests, daemon=True).start()
+        threading.Thread(target=self.process_requests, daemon=True).start()
+        #threading.Thread(target=self.send_responces, daemon=True).start()
+        
 
     def shutdown(self):
         while self.responce_queue or self.request_queue:
