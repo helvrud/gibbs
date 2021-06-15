@@ -16,6 +16,5 @@ clientB = subprocess.Popen(['python', 'esp_client.py'])
 # %%
 for i in range(100):
     server.request("self.system.part.add(pos=self.system.box_l * np.random.random(3))", 1, wait = False)
-# %%
-server.request("self.system.analysis.energy()['total']", 1)
+server.request("len(self.system.part[:])", 1)
 # %%

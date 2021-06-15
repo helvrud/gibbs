@@ -1,3 +1,4 @@
+from os import wait
 import socket
 import threading
 import logging
@@ -129,3 +130,19 @@ class BaseSocketServer():
                 pass
             else:
                 return self.responces[client_addr]
+    
+    def wait_all(self):
+        while any([self.jobs[client] for client in self.addr_list[1:]]):
+            pass
+
+    def wait_client(self, client_addr):
+        if isinstance(client_addr, int):
+            client_addr = self.addr_list[client_addr+1]
+        while self.jobs[client_addr] > 0:
+            pass
+
+    def responce(self, client_addr):
+        if isinstance(client_addr, int):
+            client_addr = self.addr_list[client_addr+1]
+        self.wait_client(client_addr)
+        return self.responces[client_addr]

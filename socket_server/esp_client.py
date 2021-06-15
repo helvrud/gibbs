@@ -5,6 +5,7 @@ import espressomd
 import numpy as np
 
 from socket_server import BaseClient
+#from socket_server.Client2 import ErrorRequest
 
 import logging
 import sys
@@ -26,8 +27,9 @@ class EspressoClient(BaseClient):
         try:
             self.logger.debug(f'eval({request})')
             result = eval(request)
-        except:
-            result = 'eval_fail'
+        except Exception as e:
+            self.logger.debug(e)
+            result = e
         return result
          
 client = EspressoClient('127.0.0.1', 10000)
