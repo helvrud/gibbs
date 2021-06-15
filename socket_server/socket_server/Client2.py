@@ -14,7 +14,10 @@ class ErrorRequest:
         self.details = details
 
 def send_data(data, server_socket):
-    msg = pickle.dumps(data)
+    try:
+        msg = pickle.dumps(data)
+    except:
+        msg = pickle.dumps('Non-pickable data')
     msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
     server_socket.send(msg)
 
@@ -26,30 +29,11 @@ def recv_data(server_socket):
     data = pickle.loads(serialized_data)
     return data
 
-""" def send_data(data, server_socket):
-    msg = pickle.dumps(data)
-    msg = f"{len(msg):<{HEADER_LENGTH}}"+msg
-    server_socket.send(bytes(msg,'utf-8'))
-
-def recv_data(server_socket):
-    message_header = server_socket.recv(HEADER_LENGTH)
-    if not len(message_header): return False
-    message_length = int(message_header.decode('utf-8').strip())
-    data = server_socket.recv(message_length).decode('utf-8')
-    return data """
-
-
 class BaseClient():
+
     request_queue=[]
-    #responce_queue=[]
     connected = False
-    client_address = None
-    block = False
 
-    #request_queue_thread = None
-    #responce_queue_thread = None
-
-    
     def __init__(self, IP, PORT, connect  = True, _io = None) -> None:
         self.IP = IP
         self.PORT = PORT
@@ -76,32 +60,30 @@ class BaseClient():
         while self.connected:
             try:
                 data = self.recv(self.server_socket)
-                self.block = True
-                self.logger.debug('Got request from server')
+                self.logger.debug('Request from server')
                 if data == False:
-                    self.logger.debug('Disconnected from server')
+                    self.logger.warning('Disconnected from server')
                     self.connected = False
                 self.request_queue.append(data)
-                self.block = False
             except Exception as e:
                 self.logger.error(e)
-                self.request_queue.append(ErrorRequest('Get request error'))
+                self.request_queue.append(ErrorRequest('Request error'))
 
     def verify_request(self, request):
-        #self.logger.debug('Verified')
         return True
 
     def handle_request(self, request):
+        self.logger.debug('Echo handle, 5s sleep')
         sleep(5)
-        self.logger.debug('Echo handle')
         responce = request
+        self.logger.debug('Echo done')
         return responce #echo
 
     def process_requests(self):
         while self.connected:
             if self.request_queue:
-                self.logger.debug(self.request_queue)
                 request = self.request_queue.pop(0)
+                self.logger.debug(f'Process request from queue\n request: {request}')
                 if self.verify_request(request):
                     try:
                         responce = self.handle_request(request)
@@ -110,19 +92,18 @@ class BaseClient():
                 else:
                     responce = ErrorRequest('Request is invalid')
                 self.send(responce, self.server_socket)
-                self.logger.debug(f'Request processed, result send to host\n {responce}')
-                #self.responce_queue.append(responce)
-                #self.logger.debug(f'responce: {self.responce_queue}')
+                self.logger.debug(f'Done, sent to the host\n result: {responce}')
 
-    
-
-    def start_threads(self):
+    def start(self):
+        self.logger.debug(f'Threads are started...')
         threading.Thread(target=self.get_requests, daemon=True).start()
         threading.Thread(target=self.process_requests, daemon=True).start()
-        #threading.Thread(target=self.send_responces, daemon=True).start()
         
 
     def shutdown(self):
+        self.logger.debug(f'Shuting down...')
         while self.request_queue:
             pass
+        self.connected = False
         self.server_socket.close()
+        self.logger.debug(f'Socket is closed')

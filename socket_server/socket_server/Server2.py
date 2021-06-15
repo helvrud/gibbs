@@ -117,6 +117,8 @@ class BaseSocketServer():
         self.responces.update({client_addr : income_data})
 
     def request(self, request_data, client_addr, wait = True):
+        if isinstance(client_addr, int):
+            client_addr = self.addr_list[client_addr+1]
         n_jobs = self.jobs[client_addr]
         self.logger.debug(f'{client_addr} has {n_jobs}')
         self.jobs[client_addr] = n_jobs+1
