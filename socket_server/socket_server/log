@@ -1,0 +1,51 @@
+DEBUG:Server:Listening to 127.0.0.1 ...
+INFO:Client:Connected to server
+INFO:Server:Accepted new connection from ('127.0.0.1', 56084)
+DEBUG:Server:('127.0.0.1', 56084) has 0
+DEBUG:Client:Got request from server
+DEBUG:Client:['foo']
+DEBUG:Client:Echo handle
+DEBUG:Server:recv from ('127.0.0.1', 56084)
+ data:foo
+DEBUG:Client:Request processed, result send to host
+ foo
+DEBUG:Server:('127.0.0.1', 56084) has 0
+DEBUG:Client:Got request from server
+DEBUG:Client:['foo2']
+DEBUG:Client:Echo handle
+DEBUG:Client:Request processed, result send to host
+ foo2
+DEBUG:Server:recv from ('127.0.0.1', 56084)
+ data:foo2
+DEBUG:Server:('127.0.0.1', 56084) has 0
+DEBUG:Client:Got request from server
+DEBUG:Server:('127.0.0.1', 56084) has 1
+DEBUG:Client:Got request from server
+DEBUG:Client:['foo', 'foo2']
+DEBUG:Client:Echo handle
+DEBUG:Client:Request processed, result send to host
+ foo
+DEBUG:Client:['foo2']
+DEBUG:Server:recv from ('127.0.0.1', 56084)
+ data:foo
+DEBUG:Client:Echo handle
+DEBUG:Client:Request processed, result send to host
+ foo2
+DEBUG:Server:recv from ('127.0.0.1', 56084)
+ data:foo2
+DEBUG:Server:('127.0.0.1', 56084) has 0
+DEBUG:Client:Got request from server
+DEBUG:Client:['foo']
+DEBUG:Server:('127.0.0.1', 56084) has 1
+DEBUG:Client:Got request from server
+DEBUG:Client:Echo handle
+DEBUG:Client:Request processed, result send to host
+ foo
+DEBUG:Client:['foo2']
+DEBUG:Server:recv from ('127.0.0.1', 56084)
+ data:foo
+DEBUG:Client:Echo handle
+DEBUG:Server:recv from ('127.0.0.1', 56084)
+ data:foo2
+DEBUG:Client:Request processed, result send to host
+ foo2

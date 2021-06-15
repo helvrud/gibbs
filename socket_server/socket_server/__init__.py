@@ -1,2 +1,2 @@
-from .Server import SocketServer
-from .Client import Client
+from .Server2 import BaseSocketServer as Server
+from .Client2 import BaseClient as BaseClient

@@ -4,7 +4,8 @@ import socket
 import logging
 import pickle
 import threading
-from time import monotonic as time
+#from time import monotonic as time
+from time import sleep
 
 HEADER_LENGTH = 10
 
@@ -40,9 +41,10 @@ def recv_data(server_socket):
 
 class BaseClient():
     request_queue=[]
-    responce_queue=[]
+    #responce_queue=[]
     connected = False
     client_address = None
+    block = False
 
     #request_queue_thread = None
     #responce_queue_thread = None
@@ -74,24 +76,31 @@ class BaseClient():
         while self.connected:
             try:
                 data = self.recv(self.server_socket)
+                self.block = True
                 self.logger.debug('Got request from server')
                 if data == False:
                     self.logger.debug('Disconnected from server')
                     self.connected = False
                 self.request_queue.append(data)
+                self.block = False
             except Exception as e:
                 self.logger.error(e)
                 self.request_queue.append(ErrorRequest('Get request error'))
 
     def verify_request(self, request):
+        #self.logger.debug('Verified')
         return True
 
     def handle_request(self, request):
-        return request #echo
+        sleep(5)
+        self.logger.debug('Echo handle')
+        responce = request
+        return responce #echo
 
     def process_requests(self):
         while self.connected:
             if self.request_queue:
+                self.logger.debug(self.request_queue)
                 request = self.request_queue.pop(0)
                 if self.verify_request(request):
                     try:
@@ -100,23 +109,11 @@ class BaseClient():
                         responce = ErrorRequest('Handle request error')
                 else:
                     responce = ErrorRequest('Request is invalid')
-                self.logger.debug('Request processed')
                 self.send(responce, self.server_socket)
+                self.logger.debug(f'Request processed, result send to host\n {responce}')
                 #self.responce_queue.append(responce)
                 #self.logger.debug(f'responce: {self.responce_queue}')
-                
 
-    #def send_responces(self):
-    #    while self.connected:
-    #        if self.responce_queue:
-    #            self.logger.debug('Sending processed requests...')
-    #            responce = self.responce_queue.pop(0)
-    #            if self.connected:
-    #                self.send(responce, self.server_socket)
-    #                self.logger.debug('Responce sended')
-    #            else:
-    #                raise
-    
     
 
     def start_threads(self):
@@ -126,6 +123,6 @@ class BaseClient():
         
 
     def shutdown(self):
-        while self.responce_queue or self.request_queue:
+        while self.request_queue:
             pass
         self.server_socket.close()
