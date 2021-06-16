@@ -7,9 +7,9 @@ import numpy as np
 from socket_server import BaseClient
 #from socket_server.Client2 import ErrorRequest
 
-import logging
-import sys
-logging.basicConfig(stream=open('log', 'w'), level=logging.DEBUG)
+#import logging
+#import sys
+#logging.basicConfig(stream=open('log', 'w'), level=logging.DEBUG)
 
 box = np.array([10, 10, 10])
 system = espressomd.System(box_l=box)
