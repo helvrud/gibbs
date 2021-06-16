@@ -40,7 +40,7 @@ def particle_pos(id, n) -> list:
     return pos
 
 def remove_particle(id, n):
-    return server.request(f"self.system.part[{id}].remove()",n)
+    server.request(f"self.system.part[{id}].remove()",n, wait=False)
 
 def add_particle(n, pos = None) -> int:
     if pos is None:
@@ -77,10 +77,10 @@ def get_ids():
 
 def rnd_particle_id():
     ids = get_ids()
-    n_part = number_of_particles()
+    n_part = [len(x) for x in ids]
     side = int(random.random() > n_part[0]/sum(n_part))
     rnd_id = random.choice(ids[side])
-    return (side, rnd_id)
+    return (side, rnd_id, n_part)
 
 def monte_carlo_accept(old_energy, new_energy, beta):
     delta_E = new_energy - old_energy
@@ -91,11 +91,13 @@ def monte_carlo_accept(old_energy, new_energy, beta):
         return (prob > random.random())
 
 #%%
-def monte_carlo_move(beta):
+def monte_carlo_move(beta, agg):
     old_energy = get_energy()
     
     #pick random box and particle
-    sideA, part_id = rnd_particle_id()
+    sideA, part_id, n_part = rnd_particle_id()
+
+    agg.append(n_part)
 
     old_pos = particle_pos(part_id, sideA)
     remove_particle(part_id, sideA)
@@ -107,10 +109,11 @@ def monte_carlo_move(beta):
     new_energy = get_energy()
 
     if monte_carlo_accept(sum(old_energy), sum(new_energy), beta):
-        print('Move accepted')
+        #print('Move accepted')
+        pass
 
     else:
-        print('Move rejected')
+        #print('Move rejected')
         #reverse the move
         remove_particle(moved_part, sideB)
         add_particle(sideA, old_pos)
@@ -118,10 +121,9 @@ def monte_carlo_move(beta):
 # %%
 plot_arr = []
 #%%
-#%%time
-for i in range(500):
-    monte_carlo_move(beta = 1)
-    plot_arr.append(number_of_particles())
+%%time
+for i in range(100):
+    monte_carlo_move(beta = 1, agg = plot_arr)
 #%%
 import matplotlib.pyplot as plt
 
