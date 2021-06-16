@@ -6,7 +6,7 @@ logging.basicConfig(stream=open('log', 'w'), level=logging.DEBUG)
 
 from socket_server import Server
 
-server = Server('127.0.0.1', 10000)
+server = Server('127.0.0.1', 10001)
 server.setup()
 server.start()
 #%%

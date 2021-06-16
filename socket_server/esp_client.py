@@ -25,7 +25,7 @@ class EspressoClient(BaseClient):
     system = None
     def handle_request(self, request):
         try:
-            self.logger.debug(f'eval({request})')
+            #self.logger.debug(f'eval({request})')
             result = eval(request)
         except Exception as e:
             self.logger.debug(e)
