@@ -4,12 +4,19 @@ import sys
 import espressomd
 import numpy as np
 
-from socket_server import BaseClient
-#from socket_server.Client2 import ErrorRequest
+REGEX_POST_PROCESS = True
+LOGGING = False
 
-#import logging
-#import sys
-#logging.basicConfig(stream=open('log', 'w'), level=logging.DEBUG)
+if REGEX_POST_PROCESS:
+    import re
+    PATTERN = re.compile(r'(?<![a-zA-Z0-9._])system(?![a-zA-Z0-9_])')
+
+from socket_server import BaseClient
+
+if  LOGGING:
+    import logging
+    import sys
+    logging.basicConfig(stream=open('log', 'w'), level=logging.DEBUG)
 
 box = np.array([10, 10, 10])
 system = espressomd.System(box_l=box)
@@ -24,13 +31,22 @@ system.non_bonded_inter[0, 0].lennard_jones.set_params(
 class EspressoClient(BaseClient):
     system = None
     def handle_request(self, request):
-        try:
-            #self.logger.debug(f'eval({request})')
-            result = eval(request)
-        except Exception as e:
-            self.logger.debug(e)
-            result = e
-        return result
+        def get_result(request_item):
+            try:
+                request_item = PATTERN.sub(r'self.system', request_item)
+                self.logger.debug(f'eval({request_item})')
+                result = eval(request_item)
+            except Exception as e:
+                self.logger.debug(e)
+                result = e
+            return result
+        if isinstance(request, str):
+            return get_result(request)
+        elif isinstance(request, list):
+            result =[]
+            for item in request:
+                result.append(get_result(item))
+            return result
          
 client = EspressoClient('127.0.0.1', 10000)
 client.system = system
