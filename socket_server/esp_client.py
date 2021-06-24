@@ -4,6 +4,16 @@ import sys
 import espressomd
 import numpy as np
 
+import argparse
+
+parser = argparse.ArgumentParser(description='box_length')
+parser.add_argument('l',
+                       metavar='l',
+                       type=float,
+                       help='box_length')
+
+args = parser.parse_args()
+
 REGEX_POST_PROCESS = True
 LOGGING = False
 
@@ -18,15 +28,15 @@ if  LOGGING:
     import sys
     logging.basicConfig(stream=open('log', 'w'), level=logging.DEBUG)
 
-box = np.array([10, 10, 10])
+box = np.array([args.l, args.l, args.l])
 system = espressomd.System(box_l=box)
 system.time_step = 0.0005
 system.cell_system.set_domain_decomposition(use_verlet_lists=True)
 system.cell_system.skin = 0.4
 
 system.non_bonded_inter[0, 0].lennard_jones.set_params(
-    epsilon=1.0, sigma=1.0,
-    cutoff=3.0, shift="auto")
+    epsilon=1, sigma=1,
+    cutoff=3, shift="auto")
 #%%
 class EspressoClient(BaseClient):
     system = None
@@ -39,6 +49,9 @@ class EspressoClient(BaseClient):
             except Exception as e:
                 self.logger.debug(e)
                 result = e
+            except:
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                self.logger.debug(exc_type, exc_value, exc_traceback)
             return result
         if isinstance(request, str):
             return get_result(request)
@@ -48,9 +61,11 @@ class EspressoClient(BaseClient):
                 result.append(get_result(item))
             return result
          
-client = EspressoClient('127.0.0.1', 10001)
+client = EspressoClient('127.0.0.1', 10004)
 client.system = system
 client.start()
 # %%
 while client.connected:
     pass
+
+client.logger.debug("An error occurred")

@@ -79,7 +79,7 @@ class BaseSocketServer():
 
     def listen(self):
         #find the socket where reading is happening
-        read_sockets, _, exception_sockets = select.select(self.sockets_list, [], self.sockets_list, 0.5)
+        read_sockets, _, exception_sockets = select.select(self.sockets_list, [], self.sockets_list)
         for notified_socket in read_sockets:
             #new connection
             if notified_socket == self.server_socket:
@@ -116,12 +116,13 @@ class BaseSocketServer():
         n_jobs = self.jobs[client_addr]
         self.jobs[client_addr] = n_jobs-1
         self.responces.update({client_addr : income_data})
+        self.logger.debug(f'{client_addr} has {n_jobs} jobs')
 
     def request(self, request_data, client_addr, wait = True):
         if isinstance(client_addr, int):
             client_addr = self.addr_list[client_addr+1]
         n_jobs = self.jobs[client_addr]
-        self.logger.debug(f'{client_addr} has {n_jobs}')
+        self.logger.debug(f'{client_addr} has {n_jobs} jobs')
         self.jobs[client_addr] = n_jobs+1
         client_socket = self.sockets_list[self.addr_list.index(client_addr)]
         self.send(client_socket, request_data)

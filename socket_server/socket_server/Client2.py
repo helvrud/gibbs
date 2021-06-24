@@ -68,6 +68,10 @@ class BaseClient():
             except Exception as e:
                 self.logger.error(e)
                 self.request_queue.append(ErrorRequest('Request error'))
+            except:
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                self.logger.debug(exc_type, exc_value, exc_traceback)
+        self.logger.debug("get_requests_exit")
 
     def verify_request(self, request):
         return True
@@ -89,10 +93,23 @@ class BaseClient():
                         responce = self.handle_request(request)
                     except Exception as e:
                         responce = ErrorRequest('Handle request error')
+                    except:
+                        exc_type, exc_value, exc_traceback = sys.exc_info()
+                        self.logger.debug(exc_type, exc_value, exc_traceback)
                 else:
                     responce = ErrorRequest('Request is invalid')
-                self.send(responce, self.server_socket)
+                try:
+                    self.send(responce, self.server_socket)
+                except Exception as e:
+                    self.logger.debug(exc_type, exc_value, exc_traceback)
+                    self.connected = False
+                except:
+                    exc_type, exc_value, exc_traceback = sys.exc_info()
+                    self.logger.debug(exc_type, exc_value, exc_traceback)
+                    self.connected = False
+
                 self.logger.debug(f'Done, sent to the host\n result: {responce}')
+        self.logger.debug("process_requests_exit")
 
     def start(self):
         self.logger.debug(f'Threads are started...')

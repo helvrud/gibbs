@@ -2,195 +2,213 @@
 import random
 import math
 import numpy as np
+import csv
 
+#import sys
 #import logging
-#logging.basicConfig(stream=open('log', 'w'), level=logging.DEBUG)
+#logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 from socket_server import Server
 
-server = Server('127.0.0.1', 10000)
+server = Server('127.0.0.1', 10004)
 server.setup()
 server.start()
 
 import subprocess
-clientA = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client.py'])
-clientB = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client.py'])
+try:
+    clientA = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client.py', '10'])
+    clientB = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client.py', '5'])
+except:
+    server.server_socket.close()
 
 #wait for clients to connect
 while len(server.addr_list)<3:
     pass
 
-#populate one of the boxes
-for i in range(100):
-    server.request("self.system.part.add(pos=self.system.box_l * np.random.random(3))", 1, wait = False)
-server.request("len(self.system.part[:])", 1)
+#server.request("system.change_volume_and_rescale_particles(10*2**(1/3), dir='xyz')", 0)
+#server.request("system.change_volume_and_rescale_particles(10, dir='xyz')", 1)
 
-server.request("self.system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)", 1)
-server.request("self.system.minimize_energy.minimize()", 1)
-server.request("system.cell_system.tune_skin(0.1, 4.0, 1e-1, 1000)", 1)
+for i in range(500):
+    server.request("system.part.add(pos=system.box_l * np.random.random(3))", 1, wait = False)
+server.request("len(system.part[:])", 0)
 
-server.request("self.system.thermostat.set_langevin(kT=1, gamma=1, seed=42)",0, wait = False)
-server.request("self.system.thermostat.set_langevin(kT=1, gamma=1, seed=42)",1, wait = False)
+for i in range(500):
+    server.request("system.part.add(pos=system.box_l * np.random.random(3))", 1, wait = False)
+server.request("len(system.part[:])", 1)
+
+server.request("system.thermostat.set_langevin(kT=1, gamma=1, seed=42)",0, wait = False)
+server.request("system.thermostat.set_langevin(kT=1, gamma=1, seed=42)",1, wait = False)
+server.request(["system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
+                "system.minimize_energy.minimize()"],0, wait = False)    
+server.request(["system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
+                "system.minimize_energy.minimize()"],1, wait = False)        
+
+server.request("float(system.analysis.energy()['total'])",0)
+server.request("float(system.analysis.energy()['total'])",1)   
 #%%
 def md(n, steps : int):
-    server.request(f"system.integrator.run({steps})", n)
+    print(server.request(f"system.integrator.run({steps})", n))
 
+#md(1,100)
+#%%
+from scipy.spatial.transform import Rotation
+def entropy_change(N1, N2, V1, V2):
+    #N1, V1 - box we removing particle from
+    #N2, V2 - box we adding to
+    return math.log((N1*V2)/((N2+1)*V1))
 
-def get_energy():
-    server.request("self.system.analysis.energy()",0, wait = False)
-    server.request("self.system.analysis.energy()",1, wait = False)
-    server.wait_all()
-    energy = [  
-        server.responce(0),
-        server.responce(1)
-        ]
-    energy = [  
-        float(energy[0]['total'] - energy[0]['kinetic']),
-        float(energy[1]['total'] - energy[1]['kinetic'])
-        ]
-    return energy
-
-def get_volume():
-    server.request("self.system.box_l",0, wait = False)
-    server.request("self.system.box_l",1, wait = False)
-    server.wait_all()
-    volumes = [
-        float(np.prod(server.responce(0))),
-        float(np.prod(server.responce(0)))
-    ]
-    return volumes
-
-def particle_pos(id, n) -> list:
-    pos = list(server.request(f"self.system.part[{id}].pos",n))
-    return pos
-
-def remove_particle(id, n):
-    server.request(f"self.system.part[{id}].remove()",n, wait=False)
-
-def add_particle(n, pos = None) -> int:
-    if pos is None:
-        id = int(server.request(
-            "self.system.part.add(pos=self.system.box_l * np.random.random(3)).id",
-            n
-            ))
-    else:
-        id = int(server.request(
-            f"self.system.part.add(pos={pos}).id",
-            n
-            ))
-    return id
-
-def number_of_particles():
-    server.request("len(self.system.part[:])", 0, wait = False)
-    server.request("len(self.system.part[:])", 1, wait = False)
-    server.wait_all()
-    n_part = [
-        int(server.responce(0)),
-        int(server.responce(1))
-    ]
-    return n_part
-
-def get_ids():
-    server.request("self.system.part[:].id", 0, wait = False)
-    server.request("self.system.part[:].id", 1, wait = False)
-    server.wait_all()
-    ids = [
-        list(server.responce(0)),
-        list(server.responce(1))
-    ]
-    return ids
-
-def rnd_particle_id():
-    ids = get_ids()
-    n_part = [len(x) for x in ids]
-    #side = int(random.random() > n_part[0]/sum(n_part))
-    side = random.randint(0,1)
-    rnd_id = random.choice(ids[side])
-    return (side, rnd_id, n_part)
-
-def monte_carlo_accept(old_energy, new_energy, entropy_change, beta):
-    delta_E = new_energy - old_energy - entropy_change
-    if delta_E<0:
+def monte_carlo_accept(delta_fenergy, beta):
+    if delta_fenergy<0:
         return True
     else:
-        prob = math.exp(-beta*delta_E)
+        prob = math.exp(-delta_fenergy)
         return (prob > random.random())
 
-def delta_S(V : float, N : float, dN : int) -> float:
-    if dN ==-1:
-        return math.log(N/V)
-    elif dN == 1:
-        return math.log(V/(N+1))
 
-#%%
-volumes = get_volume()
-def monte_carlo_move(beta, agg1, agg2, agg3):
-    old_energy = get_energy()
-    agg2.append(old_energy)
-    
-    #pick random box and particle
-    sideA, part_id, n_part = rnd_particle_id()
-    agg1.append(n_part)
+class monte_carlo:
+    def __init__(self, server, beta) -> None:
+        self.server = server
+        self.beta = beta
+        self.server.request(["float(system.analysis.energy()['total'])",
+                    "list(system.part[:].id)",
+                    "system.box_l"],0, wait = False)
+        self.server.request(["float(system.analysis.energy()['total'])",
+                        "list(system.part[:].id)",
+                        "system.box_l"],1, wait = False)
+        self.server.wait_all()
+        self.energy = [None]*2
+        self.IDs = [None]*2
+        self.box = [None]*2
+        self.energy[0], self.IDs[0], self.box[0] = self.server.responce(0)
+        self.energy[1], self.IDs[1], self.box[1] = self.server.responce(1)
+        
+        self.n_part = [len(self.IDs[0]), len(self.IDs[1])]
+        self.vol = [float(np.prod(self.box[0])), float(np.prod(self.box[1]))]
 
-    old_pos = particle_pos(part_id, sideA)
-    remove_particle(part_id, sideA)
+        #print(self.energy)
 
-    #the other box
-    sideB = int(not(sideA))
-    moved_part = add_particle(sideB)
+        f = open('result.csv', 'w')
+        writer = csv.writer(f)
+        writer.writerow(['step','ΔE','ΔS', 'left','right', 'E'])
+        f.close()
 
-    new_energy = get_energy()
+    def __call__(self, repeats = 1) -> None:
+        f = open('result.csv', 'a')
+        writer = csv.writer(f)
+        for i in range(repeats):
+            #side = int(random.random() > self.n_part[0]/sum(self.n_part))
+            
+            side = random.choice([0,1])
+            if self.n_part[side] == 0:
+                side = int(not(side))
 
-    sideA = 1
-    _dir = -1 if (sideA == 0) else +1
-    entropy_change = [
-        delta_S(volumes[0], n_part[0], _dir),
-        delta_S(volumes[1], n_part[1], -_dir)
-    ]
+            rnd_id = random.choice(self.IDs[side])
+            
+            other_side = int(not(side))
 
-    agg3.append(entropy_change)
+            print(f"{side} -> {other_side}, {rnd_id}")
+            
+            #remember removed particle position and velocity
+            #then remove it and get new energy
+            removed_part_pos, removed_part_v, _, = server.request([
+                f"list(system.part[{rnd_id}].pos)",
+                f"list(system.part[{rnd_id}].v)",
+                f"system.part[{rnd_id}].remove()",
+                ],
+                side)
+            server.request(
+                "float(system.analysis.energy()['total'] - system.analysis.energy()['kinetic'])",
+                side, wait=False) #takes longer so we collect the result later (*)
 
-    if monte_carlo_accept(sum(old_energy), sum(new_energy), sum(entropy_change), beta):
-        print('Move accepted')
-        pass
+            #before the move, randomly rotate velocity    
+            rot = Rotation.random().as_matrix()
+            add_part_v = list(rot.dot(removed_part_v))
 
-    else:
-        print('Move rejected')
-        #reverse the move
-        remove_particle(moved_part, sideB)
-        add_particle(sideA, old_pos)
-    print(n_part)
+            #add new particle to the other side, remember id, get new energy
+            self.server.request([
+                f"int(system.part.add(pos=system.box_l * np.random.random(3), v = {add_part_v}).id)",
+                "float(system.analysis.energy()['total']-system.analysis.energy()['kinetic'])",
+                ],
+                other_side, wait=False) #this will be collected later too (+)
 
+            #collect responces from clients
+            self.server.wait_all()
+            energy_after_removal = self.server.responce(side) #here we collect energy (*)
+            add_part_id, energy_after_add = self.server.responce(other_side) #collect add_part_id and energy (+)
+            #get thermodynamic potentials change
+            delta_E = energy_after_removal+energy_after_add - sum(self.energy)
+            delta_S = entropy_change(self.n_part[side], self.n_part[other_side], self.vol[side], self.vol[other_side])
+            delta_F = delta_E - delta_S
+            #delta_F = -delta_S/self.beta
+
+
+            if monte_carlo_accept(delta_F, self.beta):
+                print('Move accepted')
+                #store new state
+                self.energy[side] = energy_after_removal
+                self.energy[other_side] = energy_after_add
+                self.IDs[side].remove(rnd_id)
+                self.IDs[other_side].append(add_part_id)
+                self.n_part = [len(self.IDs[0]), len(self.IDs[1])]
+                print(f"step:{i}, ΔE: {delta_E}, ΔS: {delta_S}, particles: {self.n_part}") 
+            else:
+                print('Move rejected')
+                #undo removal and set speed
+                self.server.request(
+                    f"system.part.add(pos={removed_part_pos}, id = {rnd_id}, v = {removed_part_v}).id", 
+                    side, wait=False)
+                
+                #remove last added particle
+                self.server.request(f"system.part[{add_part_id}].remove()", other_side, wait = False)
+            writer.writerow([i, delta_E, delta_S, self.n_part[0],self.n_part[1], sum(self.energy)])
+        f.close()
 # %%
-plot_arr = []
-energy = []
-entropy = []
+mc = monte_carlo(server, 1)
 #%%
-for j in range(1):
-    for i in range(100):
-        monte_carlo_move(beta = 1, agg1 = plot_arr, agg2 = energy, agg3 = entropy)
-    #md(1, 100)
+for i in range(10):
+    print(f'round {i}')
+    mc(100)
+    md(0,1000)
+    md(1,1000)
+# %%
+import pandas as pd
+df = pd.read_csv('result.csv')
+df = df.reset_index()
 #%%
 import matplotlib.pyplot as plt
+import seaborn as sns
 
-Y = np.array(plot_arr).T
+df.left = df.left/mc.vol[0]
+df.right = df.right/mc.vol[1]
 
-plt.plot(Y[0])
-plt.plot(Y[1])
+sns.lineplot(data=df, x='index', y = 'left')
+sns.lineplot(data=df, x='index', y = 'right')
 plt.show()
-#%%
-Y = np.array(energy).T
 
-plt.plot(Y[0])
-plt.plot(Y[1])
+sns.lineplot(data = df, x='index', y = 'ΔS')
+plt.show()
+
+sns.lineplot(data = df[200:], x='index', y = 'E')
 plt.show()
 # %%
-#Y = np.cumsum(np.array(entropy).T, axis = 1)
+box = server.request("system.box_l", 0)
+vol0 = float(np.prod(box))
+box = server.request("system.box_l", 1)
+vol1 = float(np.prod(box))
+# %%
+vol1/vol0
+# %%
+pos = mc.server.request("system.part[:].pos", 1).T
 
-Y = np.array(entropy).T
+# %%
+import plotly.express as px
 
-plt.plot(Y[0])
-plt.plot(Y[1])
-plt.show()
-
+px.scatter_3d(x = pos[0], y = pos[1], z = pos[2])
+# %%
+mc(300)
+# %%
+md(0,10000)
+md(1,10000)
+# %%
+mc.beta=1
 # %%
