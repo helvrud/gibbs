@@ -16,8 +16,8 @@ server.start()
 
 import subprocess
 try:
-    clientA = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client.py', '10'])
-    clientB = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client.py', '5'])
+    clientA = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client.py', '20'])
+    clientB = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client.py', '40'])
 except:
     server.server_socket.close()
 
@@ -28,11 +28,11 @@ while len(server.addr_list)<3:
 #server.request("system.change_volume_and_rescale_particles(10*2**(1/3), dir='xyz')", 0)
 #server.request("system.change_volume_and_rescale_particles(10, dir='xyz')", 1)
 
-for i in range(500):
+for i in range(80):
     server.request("system.part.add(pos=system.box_l * np.random.random(3))", 1, wait = False)
 server.request("len(system.part[:])", 0)
 
-for i in range(500):
+for i in range(10):
     server.request("system.part.add(pos=system.box_l * np.random.random(3))", 1, wait = False)
 server.request("len(system.part[:])", 1)
 
@@ -52,16 +52,20 @@ def md(n, steps : int):
 #md(1,100)
 #%%
 from scipy.spatial.transform import Rotation
-def entropy_change(N1, N2, V1, V2):
+def entropy_change(N1, N2, V1, V2, n=1):
     #N1, V1 - box we removing particle from
     #N2, V2 - box we adding to
-    return math.log((N1*V2)/((N2+1)*V1))
+    #n - number of particles 
+    if n==1:
+        return math.log((N1*V2)/((N2+1)*V1))
+    elif n==2:
+        return math.log((V2/V1)**2*(N1*(N1-1))/((N2+2)*(N2+1)))
 
 def monte_carlo_accept(delta_fenergy, beta):
     if delta_fenergy<0:
         return True
     else:
-        prob = math.exp(-delta_fenergy)
+        prob = math.exp(-beta*delta_fenergy)
         return (prob > random.random())
 
 
@@ -163,8 +167,10 @@ class monte_carlo:
             writer.writerow([i, delta_E, delta_S, self.n_part[0],self.n_part[1], sum(self.energy)])
         f.close()
 # %%
-mc = monte_carlo(server, 1)
+mc = monte_carlo(server, beta = 1)
 #%%
+md(0,1000)
+md(1,1000)
 for i in range(10):
     print(f'round {i}')
     mc(100)
@@ -191,24 +197,6 @@ plt.show()
 sns.lineplot(data = df[200:], x='index', y = 'E')
 plt.show()
 # %%
-box = server.request("system.box_l", 0)
-vol0 = float(np.prod(box))
-box = server.request("system.box_l", 1)
-vol1 = float(np.prod(box))
-# %%
-vol1/vol0
-# %%
-pos = mc.server.request("system.part[:].pos", 1).T
-
-# %%
 import plotly.express as px
-
+pos = mc.server.request("system.part[:].pos", 1).T
 px.scatter_3d(x = pos[0], y = pos[1], z = pos[2])
-# %%
-mc(300)
-# %%
-md(0,10000)
-md(1,10000)
-# %%
-mc.beta=1
-# %%

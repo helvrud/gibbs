@@ -121,6 +121,9 @@ class BaseSocketServer():
     def request(self, request_data, client_addr, wait = True):
         if isinstance(client_addr, int):
             client_addr = self.addr_list[client_addr+1]
+        if isinstance (client_addr, list):
+            result=[self.request(request_data, addr, wait) for addr in client_addr]
+            return result
         n_jobs = self.jobs[client_addr]
         self.logger.debug(f'{client_addr} has {n_jobs} jobs')
         self.jobs[client_addr] = n_jobs+1
