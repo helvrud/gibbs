@@ -16,7 +16,7 @@ server.start()
 
 import subprocess
 try:
-    clientA = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client_charged.py', '30'])
+    clientA = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client_charged.py', '40'])
     clientB = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client_charged.py', '40'])
 except:
     server.server_socket.close()
@@ -29,6 +29,7 @@ l_bjerrum = 7.0
 temp = 1
 N1 = 50
 N2 = 50
+N_anion_fixed = 5
 
 for i in range(int(N1/2)):
     server.request(
@@ -41,8 +42,16 @@ for i in range(int(N2/2)):
     server.request(
         [
         "system.part.add(pos=system.box_l * np.random.random(3), type = 0, q = -1.0)",
-        "system.part.add(pos=system.box_l * np.random.random(3), type = 1, q = +1.0)"
+        "system.part.add(pos=system.box_l * np.random.random(3), type = 1, q = +1.0)",
         ], 1, wait = False)
+
+for i in range(N_anion_fixed):
+    server.request(
+        [
+        "system.part.add(pos=system.box_l * np.random.random(3), type = 2, q = -1.0)",
+        "system.part.add(pos=system.box_l * np.random.random(3), type = 1, q = +1.0)"
+        ],
+        1, wait = False)
 
 server.request(["system.thermostat.set_langevin(kT=1, gamma=1, seed=42)",
                 "system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
@@ -51,8 +60,6 @@ server.request(["system.thermostat.set_langevin(kT=1, gamma=1, seed=42)",
                 [0,1], 
                 wait = False)       
 
-
-
 server.request(
         [
         "system.non_bonded_inter[0, 0].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
@@ -60,6 +67,16 @@ server.request(
         "system.non_bonded_inter[1, 1].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')"
         ], 
         [0,1], 
+        wait = False
+    )
+
+server.request(
+        [
+        "system.non_bonded_inter[0, 2].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
+        "system.non_bonded_inter[1, 2].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
+        "system.non_bonded_inter[2, 2].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')"
+        ], 
+        1, 
         wait = False
     )
 
@@ -75,9 +92,14 @@ server.request(["system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=100
 server.request(f"system.integrator.run({10000})", [0,1])
 # %%
 import plotly.express as px
-pos = server.request("system.part[:].pos", 0).T
-q = server.request("system.part[:].q", 0).T
-px.scatter_3d(x = pos[0], y = pos[1], z = pos[2], color=['cation' if q_==1 else 'anion' for q_ in q])
+pos = server.request("system.part[:].pos", 1).T
+types = server.request("system.part[:].type", 1).T
+color_dict={
+    0:'anion',
+    1:'cation',
+    2:'anion_fixed'
+}
+px.scatter_3d(x = pos[0], y = pos[1], z = pos[2], color=[color_dict[type_] for type_ in types])
 
 # %%
 from scipy.spatial.transform import Rotation
@@ -102,7 +124,7 @@ class monte_carlo_charged_pairs:
         self.server = server
         self.beta = beta
         self.server.request(["float(system.analysis.energy()['total'])",
-                    "[list(system.part.select(q=-1).id), list(system.part.select(q=1).id)]",
+                    "[list(system.part.select(type=0).id), list(system.part.select(type=1).id)]",
                     "system.box_l"],[0,1], wait = False)
         self.server.wait_all()
         
@@ -119,7 +141,7 @@ class monte_carlo_charged_pairs:
         
         f = open('result.csv', 'w')
         writer = csv.writer(f)
-        writer.writerow(['step','ΔE','ΔS', 'left','right', 'E'])
+        writer.writerow(['step','ΔE','ΔS', 'left-', 'left+', 'right-', 'right+', 'E'])
         f.close()
 
     def __call__(self, repeats = 1) -> None:
@@ -210,7 +232,7 @@ class monte_carlo_charged_pairs:
                     f"system.part[{add_anion_id}].remove()",
                     f"system.part[{add_cation_id}].remove()",
                     ], other_side, wait = False)
-            writer.writerow([i, delta_E, delta_S, self.n_part[0], self.n_part[1], sum(self.energy)])
+            writer.writerow([i, delta_E, delta_S, len(self.IDs[0][0]), len(self.IDs[0][1]), len(self.IDs[1][0]), len(self.IDs[1][1]), sum(self.energy)])
         f.close()
 # %%
 mc = monte_carlo_charged_pairs(server, 1)
@@ -240,4 +262,6 @@ sns.lineplot(data = df[200:], x='index', y = 'E')
 plt.show()
 # %%
 mc.beta=0.5
+# %%
+mc(100)
 # %%
