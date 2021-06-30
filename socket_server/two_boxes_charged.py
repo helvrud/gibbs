@@ -10,7 +10,7 @@ import csv
 
 from socket_server import Server
 
-server = Server('127.0.0.1', 10004)
+server = Server('127.0.0.1', 10000)
 server.setup()
 server.start()
 

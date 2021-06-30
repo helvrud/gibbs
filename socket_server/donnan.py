@@ -10,27 +10,34 @@ import csv
 
 from socket_server import Server
 
-server = Server('127.0.0.1', 10004)
+server = Server('127.0.0.1', 10000)
 server.setup()
 server.start()
 
+#%%
+V_all = 40**3*2
+v = 0.6
+V = [V_all*(1-v),V_all*v]
+l = [V_**(1/3) for V_ in V]
+l_bjerrum = 7.0
+temp = 1
+N1 = 80
+N2 = 60
+N_anion_fixed = 10
+#%%
 import subprocess
 try:
-    clientA = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client_charged.py', '40'])
-    clientB = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client_charged.py', '40'])
+    clientA = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client_charged.py', str(l[1])])
+    clientB = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client_charged.py', str(l[0])])
 except:
     server.server_socket.close()
 
 #wait for clients to connect
 while len(server.addr_list)<3:
     pass
+#%%
 
-l_bjerrum = 7.0
-temp = 1
-N1 = 50
-N2 = 50
-N_anion_fixed = 5
-
+##populate the systems##
 for i in range(int(N1/2)):
     server.request(
         [
@@ -60,28 +67,25 @@ server.request(["system.thermostat.set_langevin(kT=1, gamma=1, seed=42)",
                 [0,1], 
                 wait = False)       
 
+
+##add LJ interactions### 
 server.request(
         [
         "system.non_bonded_inter[0, 0].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
         "system.non_bonded_inter[0, 1].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
-        "system.non_bonded_inter[1, 1].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')"
-        ], 
-        [0,1], 
-        wait = False
-    )
-
-server.request(
-        [
+        "system.non_bonded_inter[1, 1].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
         "system.non_bonded_inter[0, 2].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
         "system.non_bonded_inter[1, 2].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
         "system.non_bonded_inter[2, 2].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')"
         ], 
-        1, 
+        [0,1], 
         wait = False
     )
+##switch on electrostatics
+#server.request(f"system.actors.add(electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",[0,1])
 
-server.request(f"system.actors.add(electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",[0,1])
 
+#minimize energy and run md
 print(server.request("system.analysis.energy()",[0,1]))
 
 server.request(["system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
@@ -91,6 +95,8 @@ server.request(["system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=100
 
 server.request(f"system.integrator.run({10000})", [0,1])
 # %%
+
+## plot the particlse in box
 import plotly.express as px
 pos = server.request("system.part[:].pos", 1).T
 types = server.request("system.part[:].type", 1).T
@@ -139,13 +145,13 @@ class monte_carlo_charged_pairs:
         
         self.vol = [float(np.prod(self.box[0])), float(np.prod(self.box[1]))]
         
-        f = open('result.csv', 'w')
+        f = open(f'result_{v}.csv', 'w')
         writer = csv.writer(f)
         writer.writerow(['step','ΔE','ΔS', 'left-', 'left+', 'right-', 'right+', 'E'])
         f.close()
 
     def __call__(self, repeats = 1) -> None:
-        f = open('result.csv', 'a')
+        f = open(f'result_{v}.csv', 'a')
         writer = csv.writer(f)
         for i in range(repeats):
 
@@ -199,7 +205,7 @@ class monte_carlo_charged_pairs:
             delta_E = energy_after_removal+energy_after_add - sum(self.energy)
             delta_S = entropy_change(self.n_part[side], self.n_part[other_side], self.vol[side], self.vol[other_side], n=2)
             delta_F = delta_E - delta_S
-            #delta_F = -delta_S/self.beta
+            #delta_F = -delta_S
 
 
             if monte_carlo_accept(delta_F, self.beta):
@@ -235,33 +241,56 @@ class monte_carlo_charged_pairs:
             writer.writerow([i, delta_E, delta_S, len(self.IDs[0][0]), len(self.IDs[0][1]), len(self.IDs[1][0]), len(self.IDs[1][1]), sum(self.energy)])
         f.close()
 # %%
-mc = monte_carlo_charged_pairs(server, 1)
+mc = monte_carlo_charged_pairs(server, beta = 1)
 # %%
-for i in range(5):
-    mc(100)
+for i in range(10):
+    print(f'---------------{i}---------------')
+    mc(500)
     mc.server.request(f"system.integrator.run({10000})", [0,1])
+#%%
+mc(1000)
 # %%
+v=0.4
 import pandas as pd
-df = pd.read_csv('result.csv')
+df = pd.read_csv(f'result_{v}.csv')
 df = df.reset_index()
 #%%
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
-df.left = df.left/mc.vol[0]
-df.right = df.right/mc.vol[1]
+plot_df = df.melt('index', value_vars=['left-', 'left+', 'right-', 'right+'])
+sns.lineplot(data=plot_df, x='index', y = 'value', hue = 'variable')
+plt.show()
 
-sns.lineplot(data=df, x='index', y = 'left')
-sns.lineplot(data=df, x='index', y = 'right')
+smooth = lambda _: np.convolve(_, np.ones(100)/100, mode='valid')
+plt.plot(smooth(df['left-']+df['left+']), label = 'left')
+plt.plot(smooth(df['right-']+df['right+']), label = 'right')
+plt.legend()
 plt.show()
 
 sns.lineplot(data = df, x='index', y = 'ΔS')
 plt.show()
 
-sns.lineplot(data = df[200:], x='index', y = 'E')
+sns.lineplot(data = df[1000:], x='index', y = 'E')
 plt.show()
 # %%
-mc.beta=0.5
+n_last = 500
+dzeta = df['left-'][:n_last].mean()/df['right-'][:n_last].mean()
+dzeta
 # %%
-mc(100)
+cs = (df['left-'][:n_last].mean()*df['left+'][:n_last].mean())**(1/2)/V[0]
+cs
 # %%
+c_fix = N_anion_fixed/V[1]
+c_fix
+# %%
+dzeta_cs = (1+(c_fix/cs)**2)**(1/2) + (c_fix/cs)**2
+dzeta_cs
+# %%
+print(df['left+'][:n_last].mean()*df['left-'][:n_last].mean()/V[0]**2)
+print(df['right+'][:n_last].mean()*df['right-'][:n_last].mean()/V[1]**2)
+# %%
+with open('dzeta.csv', 'a') as f:
+    writer = csv.writer(f)
+    writer.writerow([v, dzeta_cs])
