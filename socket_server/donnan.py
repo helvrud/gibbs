@@ -3,40 +3,44 @@ import random
 import math
 import numpy as np
 import csv
+from tqdm import tqdm
 
 #import sys
 #import logging
 #logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 from socket_server import Server
-
-server = Server('127.0.0.1', 10000)
-server.setup()
-server.start()
-
 #%%
+ELECTROSTATIC =False
 V_all = 40**3*2
-v = 0.6
+v = 0.3
 V = [V_all*(1-v),V_all*v]
 l = [V_**(1/3) for V_ in V]
-l_bjerrum = 7.0
+l_bjerrum = 2.0
 temp = 1
 N1 = 80
 N2 = 60
 N_anion_fixed = 10
 #%%
+server = Server('127.0.0.1', 10002)
+server.setup()
+server.start()
+
+import os
+import sys
+os.chdir(sys.path[0])
 import subprocess
 try:
-    clientA = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client_charged.py', str(l[1])])
-    clientB = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client_charged.py', str(l[0])])
+    clientA = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client_charged.py', str(l[0])])
+    while len(server.addr_list)<2:
+        pass
+    clientB = subprocess.Popen(['/home/ml/espresso/build/pypresso', 'esp_client_charged.py', str(l[1])])
+    while len(server.addr_list)<3:
+        pass
 except:
     server.server_socket.close()
-
-#wait for clients to connect
-while len(server.addr_list)<3:
-    pass
+    sys.exit()
 #%%
-
 ##populate the systems##
 for i in range(int(N1/2)):
     server.request(
@@ -60,14 +64,6 @@ for i in range(N_anion_fixed):
         ],
         1, wait = False)
 
-server.request(["system.thermostat.set_langevin(kT=1, gamma=1, seed=42)",
-                "system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
-                "system.minimize_energy.minimize()"
-                ],
-                [0,1], 
-                wait = False)       
-
-
 ##add LJ interactions### 
 server.request(
         [
@@ -81,32 +77,38 @@ server.request(
         [0,1], 
         wait = False
     )
+server.request(["system.thermostat.set_langevin(kT=1, gamma=1, seed=42)",
+                "system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
+                "system.minimize_energy.minimize()"
+                ],
+                [0,1], 
+                wait = False)       
+
+
 ##switch on electrostatics
-#server.request(f"system.actors.add(electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",[0,1])
+if ELECTROSTATIC:
+    server.request(f"system.actors.add(electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",[0,1])
 
 
 #minimize energy and run md
-print(server.request("system.analysis.energy()",[0,1]))
-
 server.request(["system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
                 "system.minimize_energy.minimize()"],0, wait = False)    
 server.request(["system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
                 "system.minimize_energy.minimize()"],1, wait = False)
-
 server.request(f"system.integrator.run({10000})", [0,1])
 # %%
-
-## plot the particlse in box
-import plotly.express as px
-pos = server.request("system.part[:].pos", 1).T
-types = server.request("system.part[:].type", 1).T
-color_dict={
-    0:'anion',
-    1:'cation',
-    2:'anion_fixed'
-}
-px.scatter_3d(x = pos[0], y = pos[1], z = pos[2], color=[color_dict[type_] for type_ in types])
-
+## plot the particles in box
+def scatter_box(server, n):
+    import plotly.express as px
+    pos = server.request("system.part[:].pos", n).T
+    types = server.request("system.part[:].type", n).T
+    color_dict={
+        0:'anion',
+        1:'cation',
+        2:'anion_fixed'
+    }
+    px.scatter_3d(x = pos[0], y = pos[1], z = pos[2], color=[color_dict[type_] for type_ in types])
+scatter_box(server, 1)
 # %%
 from scipy.spatial.transform import Rotation
 def entropy_change(N1, N2, V1, V2, n=1):
@@ -126,17 +128,17 @@ def monte_carlo_accept(delta_fenergy, beta):
         return (prob > random.random())
 
 class monte_carlo_charged_pairs:
-    def __init__(self, server, beta) -> None:
+    def __init__(self, server, beta, log_fname) -> None:
         self.server = server
         self.beta = beta
+        self.log_fname = log_fname
         self.server.request(["float(system.analysis.energy()['total'])",
                     "[list(system.part.select(type=0).id), list(system.part.select(type=1).id)]",
                     "system.box_l"],[0,1], wait = False)
-        self.server.wait_all()
-        
         self.energy = [None]*2
         self.IDs = [None]*2
         self.box = [None]*2
+        self.server.wait_all()
         for i in range(2):
             self.energy[i], self.IDs[i], self.box[i] = self.server.responce(i)
         
@@ -145,15 +147,16 @@ class monte_carlo_charged_pairs:
         
         self.vol = [float(np.prod(self.box[0])), float(np.prod(self.box[1]))]
         
-        f = open(f'result_{v}.csv', 'w')
+        f = open(self.log_fname, 'w')
         writer = csv.writer(f)
         writer.writerow(['step','ΔE','ΔS', 'left-', 'left+', 'right-', 'right+', 'E'])
         f.close()
 
     def __call__(self, repeats = 1) -> None:
-        f = open(f'result_{v}.csv', 'a')
+        f = open(self.log_fname, 'a')
+        accepted = 0
         writer = csv.writer(f)
-        for i in range(repeats):
+        for i in tqdm(range(repeats)):
 
             side = random.choice([0,1])
             if self.n_part[side] == 0:
@@ -163,8 +166,6 @@ class monte_carlo_charged_pairs:
             rnd_id_cation = random.choice(self.IDs[side][1])
             
             other_side = int(not(side))
-
-            print(f"{side} -> {other_side}, {rnd_id_anion},{rnd_id_cation}")
             
             #remember removed pair position and velocity
             #then remove it and get new energy
@@ -209,7 +210,8 @@ class monte_carlo_charged_pairs:
 
 
             if monte_carlo_accept(delta_F, self.beta):
-                print('Move accepted')
+                accepted +=1
+                tqdm.write(f"{side} -> {other_side} accepted")
                 #store new state
                 self.energy[side] = energy_after_removal
                 self.energy[other_side] = energy_after_add
@@ -221,9 +223,9 @@ class monte_carlo_charged_pairs:
                 
                 self.n_part = [ len(self.IDs[0][0])+len(self.IDs[0][1]),
                                 len(self.IDs[1][0])+len(self.IDs[1][1])]
-                print(f"step:{i}, ΔE: {delta_E}, ΔS: {delta_S}, particles: {self.n_part}") 
+                #print(f"step:{i}, ΔE: {delta_E}, ΔS: {delta_S}, particles: {self.n_part}") 
             else:
-                print('Move rejected')
+                tqdm.write(f"{side} -> {other_side} rejected")
                 #undo removal and set speed
                 self.server.request(
                     [
@@ -240,19 +242,35 @@ class monte_carlo_charged_pairs:
                     ], other_side, wait = False)
             writer.writerow([i, delta_E, delta_S, len(self.IDs[0][0]), len(self.IDs[0][1]), len(self.IDs[1][0]), len(self.IDs[1][1]), sum(self.energy)])
         f.close()
+        return accepted
 # %%
-mc = monte_carlo_charged_pairs(server, beta = 1)
+mc = monte_carlo_charged_pairs(server, beta=1, log_fname=f'result_{v}.csv')
 # %%
-for i in range(10):
-    print(f'---------------{i}---------------')
-    mc(500)
-    mc.server.request(f"system.integrator.run({10000})", [0,1])
+##warmup
+rounds = 20
+mc_moves = 500
+at_least_accepted = 100
+md_steps = 100000
+for i in tqdm(range(rounds)):
+    accepted = mc(mc_moves)
+    while accepted<at_least_accepted:
+        tqdm.write('Not enough MC moves')
+        mc.server.request(f"system.integrator.run({100000})", [0,1])
+        accepted += mc(300) 
+    mc.server.request(f"system.integrator.run({100000})", [0,1])
+##collect_data
+n_points = 3
+sample_size = 1000
+for i in tqdm(range(n_points)):
+    mc(sample_size)
+    mc.server.request(f"system.integrator.run({100000})", [0,1])
+mc(sample_size)
+
 #%%
-mc(1000)
-# %%
-v=0.4
+#v=0.3
 import pandas as pd
-df = pd.read_csv(f'result_{v}.csv')
+#df = pd.read_csv(mc.log_fname)
+df = pd.read_csv(f'result_{0.3}.csv')
 df = df.reset_index()
 #%%
 import matplotlib.pyplot as plt
@@ -272,25 +290,38 @@ plt.show()
 sns.lineplot(data = df, x='index', y = 'ΔS')
 plt.show()
 
-sns.lineplot(data = df[1000:], x='index', y = 'E')
+plt.plot(smooth(df['E']))
 plt.show()
 # %%
-n_last = 500
-dzeta = df['left-'][:n_last].mean()/df['right-'][:n_last].mean()
-dzeta
-# %%
-cs = (df['left-'][:n_last].mean()*df['left+'][:n_last].mean())**(1/2)/V[0]
-cs
-# %%
-c_fix = N_anion_fixed/V[1]
-c_fix
-# %%
-dzeta_cs = (1+(c_fix/cs)**2)**(1/2) + (c_fix/cs)**2
-dzeta_cs
-# %%
-print(df['left+'][:n_last].mean()*df['left-'][:n_last].mean()/V[0]**2)
-print(df['right+'][:n_last].mean()*df['right-'][:n_last].mean()/V[1]**2)
-# %%
+n_points = 3
+sample_size = 500
+
+import os
+if not os.path.isfile('dzeta.csv'):
+    with open('dzeta.csv', 'w') as f:
+        writer = csv.writer(f)
+        writer.writerow(['lm','lp','rm','rp','lv','rv', 'std', 'electrostatic'])
 with open('dzeta.csv', 'a') as f:
     writer = csv.writer(f)
-    writer.writerow([v, dzeta_cs])
+    result = df[:-sample_size*i]
+    for i in range(1,n_points+1):
+
+        result = df[sample_size*(i-1):sample_size*i].mean()
+        std = df['left-'][:sample_size*i].std().squeeze()
+        writer.writerow([result['left-'], result['left+'],
+                        result['right-'],result['right+'],
+                        V[0],V[1], std, ELECTROSTATIC])
+
+server.active = False
+#%%
+import pandas as pd
+df = pd.read_csv(f'dzeta.csv')
+df = df.reset_index()
+#%%
+import seaborn as sns
+df['dzeta'] = df.lm/df.lv/(df.rm/df.rv)
+df['v'] = df.rv/(df.rv+df.lv)
+df['cs'] = (df.lm+df.lp)/2/df.lv
+sns.scatterplot(data = df, x = 'v', y = 'dzeta', hue = 'electrostatic')
+
+# %%
