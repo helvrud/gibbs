@@ -1,3 +1,4 @@
+#%%
 import os
 import sys
 import socket
@@ -6,8 +7,9 @@ import pickle
 import threading
 #from time import monotonic as time
 from time import sleep
+import asyncio
 
-#logging.basicConfig(stream=open('log', 'w'), level=logging.DEBUG)
+logging.basicConfig(stream=open('log', 'w'), level=logging.DEBUG)
 logger = logging.getLogger('Node')
 
 
@@ -145,3 +147,93 @@ class BaseNode():
         msg = pickle.dumps(data)
         msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
         self.server_socket.send(msg)
+
+
+class AsyncEchoNode:
+    request_queue = asyncio.Queue()
+    busy : bool = False
+    connected : bool = False
+    IP : str
+    PORT : int
+
+    def __init__(self, IP,PORT, connect=True) -> None:
+        self.IP =IP
+        self.PORT = PORT
+
+    async def connect(self):
+        self.sock_reader, self.sock_writer = await asyncio.open_connection(self.IP, self.PORT)
+        print('Connected')
+        self.connected = True
+        return True
+
+    async def listen(self):
+        while self.connected:
+            print('Listening...')
+            try:
+                data = await self.recv_raw()
+                if data == False:
+                    self.handle_disconnection()
+                else:
+                    await self.send_raw(data)
+            except Exception as e:
+                logger.error(e)
+            except:
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                logger.error(exc_type, exc_value, exc_traceback)
+
+    async def recv_raw(self):
+        HEADER_LENGTH = 10
+        try:
+            message_header = await self.sock_reader.read(HEADER_LENGTH)
+            #no data -> client closed a connection
+            if not len(message_header):
+                return False
+            message_length = int(message_header.decode('utf-8').strip())
+            serialized_data = await self.sock_reader.read(message_length)
+            data = pickle.loads(serialized_data)
+            return data
+        except Exception as e:
+            logger.error(e)
+            return False
+    
+    async def send_raw(self, data):
+        HEADER_LENGTH = 10
+        msg = pickle.dumps(data)
+        msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
+        self.sock_writer.write(msg)
+
+    def handle_disconnection(self):
+        print('Disconnected from server')
+        self.connected = False
+
+    async def listen_forever(self):
+        while self.connected:
+            await self.listen()
+
+
+    
+
+    
+
+
+# %%
+if __name__=='__main__':
+
+    from Terminal import BaseTerminal
+    terminal = BaseTerminal('127.0.0.1', 10001)
+    terminal.setup()
+    import threading
+    threading.Thread(target=terminal.loop_forever, daemon=True).start()
+#%%
+    node = AsyncEchoNode('127.0.0.1', 10001)
+    loop = asyncio.get_event_loop()
+#%%
+    loop.create_task(node.connect())
+#%%
+    loop.create_task(node.listen())
+# %%
+    loop.create_task(node.sock_reader.read())
+# %%
+# %%
+    terminal.request('Hi', 0)
+# %%
