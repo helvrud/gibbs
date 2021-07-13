@@ -21,8 +21,12 @@ class RequestStatus(Enum):
     #Timeout = auto()
 
 
+
+
 class NoResult:
     pass
+
+
 
 
 class BaseRequest:
@@ -62,7 +66,6 @@ class BaseRequest:
         while True:
             if self.status == RequestStatus.Done:
                 return self._result
-
 
 
 
@@ -113,8 +116,6 @@ class BaseConnectedNode:
 
 
 
-
-
 class BaseTerminal():
     """Interface to controll multiple instancess of something that has 
     python-bindings, allowing to instantiates an object multiple times 
@@ -144,7 +145,7 @@ class BaseTerminal():
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_socket.setblocking(0)
         server_socket.bind((self.IP, self.PORT))
-        server_socket.listen()
+        server_socket.listen(3)
         self.active = True
         self.socket = server_socket
 

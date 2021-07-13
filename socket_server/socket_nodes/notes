@@ -1,0 +1,10 @@
+without bypassing queue 
+    %%timeit...
+    The slowest run took 45.68 times longer than the fastest. This could mean that an intermediate result is being cached.
+    1000 loops, best of 5: 437 µs per loop
+
+    %%timeit (request(f'{i}**2', 0))x100
+    1 loop, best of 5: 6.57 s per loop
+    
+    %%timeit (request(f'{i}', 0))x100
+    1 loop, best of 5: 6.45 s per loop

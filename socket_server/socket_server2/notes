@@ -1,4 +1,0 @@
-without bypassing queue 
-    %%timeit...
-    The slowest run took 45.68 times longer than the fastest. This could mean that an intermediate result is being cached.
-    1000 loops, best of 5: 437 µs per loop
