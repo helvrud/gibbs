@@ -1,3 +1,7 @@
+"""
+Patch to use asyncio in Jupyter, import it to the script you want to run in Jupyter
+"""
+
 def isnotebook():
     try:
         shell = get_ipython().__class__.__name__

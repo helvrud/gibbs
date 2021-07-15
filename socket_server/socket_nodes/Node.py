@@ -12,7 +12,7 @@ logger = logging.getLogger('Node')
 
 class BaseNode:
     """Class implementing a node (client sid of socket) 
-    for distributed calculation messaging via sockets with a Terminal 
+    for distributed calcularesult()tion messaging via sockets with a Terminal 
     (server side of socket connection)
     """    
     connected : bool = False
@@ -71,9 +71,8 @@ class BaseNode:
         Returns:
             object: execution result
         """        
-        logger.debug('Execute...', end ='')
         result = eval(request)
-        logger.debug('Done', result)
+        logger.debug('Execution done')
         return result
 
     async def verify(self, request) -> bool:
@@ -88,7 +87,7 @@ class BaseNode:
         return True
 
     async def handle_request(self, request):
-        if self.verify(request):
+        if await self.verify(request):
             result = await self.execute(request)
         else:
             result = 'Invalid request'
@@ -110,12 +109,11 @@ class BaseNode:
             return False
     
     async def send_raw(self, data):
-        logger.debug('Sending...', end='')
         HEADER_LENGTH = 10
         msg = pickle.dumps(data)
         msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
         self.sock_writer.write(msg)
-        logger.debug('Done')
+        logger.debug("Request's result is sent")
 
     def handle_disconnection(self):
         """Can be overridden to implement extra actions on disconnection

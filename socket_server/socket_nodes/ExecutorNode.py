@@ -10,7 +10,6 @@ class BaseExecutor:
         pass
 
 class EvalExecutor(BaseExecutor):
-    logger = logging.getLogger
     def execute(self, expr):
         try:
             return eval(expr)
@@ -18,16 +17,34 @@ class EvalExecutor(BaseExecutor):
             return e
 
 class BaseExecutorNode(BaseNode):
-    def __init__(self, IP, PORT, connect = True, ExecutorClass = EvalExecutor, executor_init_args = None) -> None:
-        super().__init__(IP, PORT, connect=connect)
+    def __init__(self, IP, PORT, ExecutorClass = EvalExecutor, executor_init_args = None) -> None:
+        super().__init__(IP, PORT)
         if (executor_init_args is not None):
             self.Executor = ExecutorClass(*executor_init_args)
         else:
             self.Executor = ExecutorClass()
-    def execute(self, request):
+    async def execute(self, request):
         return self.Executor.execute(request)
-    def verify(self, request):
+    async def verify(self, request):
         return self.Executor.verify(request)
+
+if __name__=="__main__":
+    from time import sleep
+    import numpy as np
+    import argparse
+    parser = argparse.ArgumentParser(description='IP')
+    parser.add_argument('IP',
+                        metavar='IP',
+                        type=str,
+                        help='IP')
+    parser.add_argument('PORT',
+                        metavar='PORT',
+                        type=str,
+                        help='PORT')
+
+    args = parser.parse_args()
+    node = BaseExecutorNode(args.IP, args.PORT)
+    node.run()
 
 
 

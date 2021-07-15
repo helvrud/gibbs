@@ -78,6 +78,7 @@ class BaseConnectedNode:
 
     """    
     requests : List[BaseRequest] = []
+    
     def __init__(self, socket, address) -> None:
         self.socket = socket
         self.address = address
@@ -148,7 +149,9 @@ class BaseTerminal():
         server_socket.listen(3)
         self.active = True
         self.socket = server_socket
-
+        #if self.PORT==0:
+        #    #the port has been assigned by OS
+        #    self.PORT==self.socket.getsockname()[1]
         logger.debug(f'Listening to {self.IP} ...')
 
 
@@ -288,7 +291,7 @@ class BaseTerminal():
             return False
 
 
-    def loop_forever(self):
+    def run(self):
         while self.active:
             self.listen()
 

@@ -1,31 +1,32 @@
 #%%
-import asyncio
+#import asyncio
+#import patch_asyncio
 from time import sleep
 from Terminal import BaseTerminal
-#from ExecutorNode import BaseExecutorNode as Node
-from Node import BaseNodeAsync as Node
+from ExecutorNode import BaseExecutorNode as Node
+import subprocess
 #%%
-terminal = BaseTerminal('127.0.0.1', 10001)
+terminal = BaseTerminal('127.0.0.1', 0)
 terminal.setup()
+PORT = terminal.socket.getsockname()[1]
+print("PORT: ", PORT)
 import threading
-threading.Thread(target=terminal.loop_forever, daemon=True).start()
+threading.Thread(target=terminal.run, daemon=True).start()
 # %%
-node = Node('127.0.0.1', 10001) 
-asyncio.get_event_loop().create_task(node.main())
+subprocess.Popen(['python', 'ExecutorNode.py', '127.0.0.1', f'{PORT}'])
+while len(terminal.nodes)==0:
+    pass
 # %%
 request1 = terminal.request('True', 0)
-request2 = terminal.request('sleep(2)', 0)
+request2 = terminal.request('system.box_l', 0)
+request3 = terminal.request('25**5', 0).result()
 # %%
-print(request1.result())
 print(request2.result())
+print(request3)
 print(request1.result())
 # %%
-#%%
-from Node import AsyncEchoNode
-node = AsyncEchoNode('127.0.0.1', 10001)
-node.run()
-#%%
-
-request = terminal.request(f'True', 0)
-request.result()
+%%time
+for i in range(100):
+    result = terminal.request('system.box_l', 0)
+result.result()
 # %%
