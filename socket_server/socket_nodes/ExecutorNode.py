@@ -24,9 +24,9 @@ class BaseExecutorNode(BaseNode):
             self.Executor = ExecutorClass(*executor_init_args)
         else:
             self.Executor = ExecutorClass()
-    def exec_request(self, request):
+    def execute(self, request):
         return self.Executor.execute(request)
-    def verify_request(self, request):
+    def verify(self, request):
         return self.Executor.verify(request)
 
 
