@@ -6,6 +6,7 @@ import csv
 import os
 import sys
 import subprocess
+from seaborn.rcmod import reset_defaults
 from tqdm import tqdm
 os.chdir(sys.path[0])
 import threading
@@ -83,7 +84,22 @@ server([
             f"system.integrator.run({10000})"
             ],
             [0,1]
-        )    
+        )  
+
+#%%
+def get_mc_init_data():
+    request_body = [
+        "float(system.analysis.energy()['total'])",
+        "[list(system.part.select(type=0).id), list(system.part.select(type=1).id)]",
+        "system.box_l"
+        ]
+    system_state_request=server(request_body,[0,1])
+    energy, part_ids, box_l= [[result.result()[i] for result in system_state_request] for i in range(len(request_body))]
+    return energy, part_ids, box_l
+get_mc_init_data()
+
+def move_particle():
+    
 # %%
 ## plot the particles in box
 def scatter_box(server, n):
