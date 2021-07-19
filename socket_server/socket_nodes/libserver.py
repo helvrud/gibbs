@@ -141,10 +141,21 @@ class Server():
         server_socket.listen(0)
         self.active = True
         self.socket = server_socket
-        #if self.PORT==0:
-        #    #the port has been assigned by OS
-        #    self.PORT==self.socket.getsockname()[1]
+        if self.PORT==0:
+            #the port has been assigned by OS
+            self.PORT=self.socket.getsockname()[1]
+            logger.info(f'The port has been assigned by OS, PORT : {self.PORT}')
         logger.info(f'Listening to {self.IP} ...')
+
+
+    def wait_for_connections(self, n : int) -> None:
+        """Wait for n nodes to connect, should be used to assure that all 
+        clients are connected
+        Args:
+            n (int): number of nodes to wait
+        """        
+        while len(self.nodes)<n:
+            pass
 
 
     def handle_connection(self):
@@ -205,7 +216,7 @@ class Server():
             else:
                 #find the id of the Node sending the data
 
-                node_id = self.get_node_idx_by_socket(notified_socket)#cumbersome
+                node_id = self._get_node_idx_by_socket(notified_socket)#cumbersome
                 #recv data from the node socket
                 income_data = self.recv_raw(notified_socket)
                 #logger.debug(f'Notified socket: {notified_socket.getpeername()}, node_id: {node_id}, income data: {income_data}')
@@ -213,7 +224,6 @@ class Server():
                 if income_data is False:
                     self.handle_disconnection(node_id)
                     continue
-
                 #handle income data, usually by finnishing some request
                 self.handle_income(income_data, node_id)
         
@@ -249,6 +259,7 @@ class Server():
         self.send_raw(node_socket, request_data)
         return Request
 
+
     def request_to_multiple_nodes(self, request_data, node_indices : List[int]) -> List[RequestClass]:
         """Broadcast request to multiple nodes
 
@@ -260,6 +271,7 @@ class Server():
             List[RequestClass]: list of RequestClass object, get the result with _.result()
         """        
         return [self.request_to_one_node(request_data, node_id) for node_id in node_indices]
+
 
     def request(self, request_data, node_id):
         if isinstance(node_id, int):
@@ -334,12 +346,14 @@ class Server():
         while self.active:
             self.listen()
 
+
     def shutdown(self):
         """Shuts the server down, no extra actions are yet implemented
         """
         self.active == False
     
-    def get_node_idx_by_socket(self, socket_):
+    
+    def _get_node_idx_by_socket(self, socket_):
         """Returns node index (id) in the self.nodes : List[ConnectedNode]
         for a given socket object
 
@@ -352,3 +366,7 @@ class Server():
         sockets_ = [Node.socket for Node in self.nodes]
         idx = sockets_.index(socket_)
         return idx
+
+
+    def __call__(self, *args):
+        return self.request(*args)
