@@ -181,7 +181,7 @@ class Server():
         Args:
             node_id (int): node index in the list of connected nodes (self.nodes)
         """        
-        logger.warning(f'Connection with {self.nodes[node_id].address} has been closed')
+        logger.warning(f'Connection with {self.nodes[node_id].socket.getpeername()} has been closed')
         del self.nodes[node_id]
 
     

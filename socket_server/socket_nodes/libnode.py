@@ -4,6 +4,7 @@ import pickle
 import socket
 #import patch_asyncio
 import sys
+
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 logger = logging.getLogger('Node')
 
@@ -38,7 +39,7 @@ class BaseNode:
         logger.info('Connected to the server')
         return True
 
-    def event_loop(self):
+    def run(self):
         """The main loop of the node
         0)Connects to the server
         1)Listen for incoming data
@@ -96,7 +97,11 @@ class BaseNode:
         #if not send the error back
         else:
             result = 'Invalid request'
-        self.send_raw(result)
+        try:
+            self.send_raw(result)
+        #can not be send, usually non-pickable
+        except Exception as e:
+            self.send_raw(e)
 
     def recv_raw(self):
         """Receiving protocol is implemented here, allows to send any 
@@ -132,6 +137,7 @@ class BaseNode:
         msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
         self.server_socket.send(msg)
         logger.debug("Request's result is sent")
+        return True
 
     def handle_disconnection(self):
         """Can be overridden to implement extra actions on disconnection

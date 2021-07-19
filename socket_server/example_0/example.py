@@ -3,7 +3,6 @@ import threading
 import subprocess
 from socket_nodes import Server
 
-
 #%%
 server = Server('127.0.0.1', 0)
 threading.Thread(target=server.run, daemon=True).start()
