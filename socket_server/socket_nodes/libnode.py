@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import pickle
+import socket
 #import patch_asyncio
 import sys
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
@@ -25,39 +26,40 @@ class BaseNode:
         self.PORT = PORT
         logger.info(f'Initialized with {self.IP}, {self.PORT}')
 
-    async def connect(self) -> bool:
+    def connect(self) -> bool:
         """Connects to the server
 
         Returns:
             [bool]: True if success
         """        
-        self.sock_reader, self.sock_writer = await asyncio.open_connection(self.IP, self.PORT)
+        self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server_socket.connect((self.IP, self.PORT))
         self.connected = True
         logger.info('Connected to the server')
         return True
 
-    async def event_loop(self):
+    def event_loop(self):
         """The main loop of the node
         0)Connects to the server
         1)Listen for incoming data
         2)Process request
         3)Send the results back
         """        
-        await self.connect()
+        self.connect()
 
         #while the note is still connected
         while self.connected:
             logger.debug('\nListening...')
             #get the data from the socket
-            data = await self.recv_raw()
+            data = self.recv_raw()
             #if no data -> connection is lost
             if data == False:
                 self.handle_disconnection()
                 break
             else:
-                await self.handle_request(data)
+                self.handle_request(data)
 
-    async def execute(self, request):
+    def execute(self, request):
         """Trying to execute the request, the method has to be overridden 
         for child classes by default tries to eval(request)
         
@@ -71,7 +73,7 @@ class BaseNode:
         logger.debug('Request is executed')
         return result
 
-    async def verify(self, request) -> bool:
+    def verify(self, request) -> bool:
         """Verify if request is correct, 
         the method has to be overridden if some checks needed
 
@@ -83,20 +85,20 @@ class BaseNode:
         """        
         return True
 
-    async def handle_request(self, request):
+    def handle_request(self, request):
         """Handles request from server, send the result back when available
         Args:
             request (object): [description]
         """
         #if request pass sanity check        
-        if await self.verify(request):
-            result = await self.execute(request)
+        if self.verify(request):
+            result = self.execute(request)
         #if not send the error back
         else:
             result = 'Invalid request'
-        await self.send_raw(result)
+        self.send_raw(result)
 
-    async def recv_raw(self):
+    def recv_raw(self):
         """Receiving protocol is implemented here, allows to send any 
         pickable python object, can be overridden
 
@@ -105,19 +107,19 @@ class BaseNode:
         """ 
         HEADER_LENGTH = 10
         try:
-            message_header = await self.sock_reader.read(HEADER_LENGTH)
+            message_header = self.server_socket.recv(HEADER_LENGTH)
             #no data -> client closed a connection
             if not len(message_header):
                 return False
             message_length = int(message_header.decode('utf-8').strip())
-            serialized_data = await self.sock_reader.read(message_length)
+            serialized_data = self.server_socket.recv(message_length)
             data = pickle.loads(serialized_data)
             return data
         except Exception as e:
             logger.error(e)
             return False
     
-    async def send_raw(self, data):
+    def send_raw(self, data):
         """Sending protocol is implemented here, allows to send any 
         pickable python object, can be overridden
 
@@ -128,7 +130,7 @@ class BaseNode:
         HEADER_LENGTH = 10
         msg = pickle.dumps(data)
         msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
-        self.sock_writer.write(msg)
+        self.server_socket.send(msg)
         logger.debug("Request's result is sent")
 
     def handle_disconnection(self):
@@ -137,12 +139,12 @@ class BaseNode:
         logger.warning('Disconnected from server')
         self.connected = False
 
-    def run(self):
-        """Run the node by calling this method
-        Blocking call, use threading or multiproccessing, 
-        Consider using self.event_loop() for asynchronous code
-        """        
-        asyncio.run(self.event_loop())
+    #def run(self):
+    #    """Run the node by calling this method
+    #    Blocking call, use threading or multiproccessing, 
+    #    Consider using self.event_loop() for asynchronous code
+    #    """        
+    #    asyncio.run(self.event_loop())
 
 
 
@@ -168,7 +170,7 @@ class ExecutorNode(BaseNode):
         """        
         super().__init__(IP, PORT)
         self.Executor = ExecutorClass(*args, **kwargs)
-    async def execute(self, request):
+    def execute(self, request):
         return self.Executor.execute(request)
-    async def verify(self, request):
+    def verify(self, request):
         return self.Executor.verify(request)

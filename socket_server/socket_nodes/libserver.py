@@ -6,10 +6,8 @@ from enum import Enum, auto
 from typing import List
 import sys
 
-logging.basicConfig(stream=open('log_server', 'w'), level=logging.DEBUG)
+#logging.basicConfig(stream=open('log_server', 'w'), level=logging.DEBUG)
 logger = logging.getLogger('Server')
-
-
 
 class RequestStatus(Enum):
     """
@@ -22,10 +20,8 @@ class RequestStatus(Enum):
 
 
 
-
 class NoResult:
     pass
-
 
 
 
@@ -69,7 +65,6 @@ class RequestClass:
 
 
 
-
 class ConnectedNode:
     """Contains information about a connected node, keeps track of the
     assigned requests from the server, provides RequestClass object as 
@@ -78,19 +73,15 @@ class ConnectedNode:
     requests : List[RequestClass] - list of queued requests FIFO
 
     """    
-    requests : List[RequestClass] = []
-    
-    def __init__(self, socket, address) -> None:
+    def __init__(self, socket) -> None:
         self.socket = socket
-        self.address = address
-
+        self.requests : List[RequestClass] = []
 
     def is_busy(self):
         return bool(self.requests)
 
-
     def add_request(self, request_data):
-        """add request to a queue, so that server side knows about
+        """adds request to a queue, so that server side knows about
         assigned request, returns RequestClass object 
         as a placeholder for future result,
         put the request to the end of FIFO self.requests : List[RequestClass]
@@ -99,8 +90,7 @@ class ConnectedNode:
             [RequestClass]: Request object
         """     
         Request = RequestClass(request_data)
-        self.requests.append(Request)
-        logger.debug(f'CONNECTED NODE {self.address}: New request: {request_data}')   
+        self.requests.append(Request) 
         return Request
 
 
@@ -110,22 +100,19 @@ class ConnectedNode:
 
         """
         Request = self.requests.pop(0)
-        logger.debug(f'CONNECTED NODE {self.address}: Finished: {Request.request} -> {result}')
         Request._result = result
         Request.status = RequestStatus.Done
-        #logger.debug(f'{Request.request} -> {result}')
-
 
 
 
 class Server():
-    """Interface to control multiple instancess of something that has 
-    python-bindings, allowing to instantiates an object multiple times 
-    isolated, interproccess communication between nodes and terminal 
-    happens via TCP protocol
+    """
+    Multiclient TCP server, where the  
     """    
+    IP : str
+    PORT : int
     active : bool
-    nodes : List[ConnectedNode] = [] ##should refactored into collection
+    nodes : List[ConnectedNode] ##should be refactored into collection
 
     def __init__(self, IP : str = '127.0.0.1', PORT : int = 0, setup : bool =True) -> None:
         """Initialize an object, set PORT to zero to allow OS assign it
@@ -136,6 +123,8 @@ class Server():
         """    
         self.IP = IP
         self.PORT = PORT
+        self.active = False
+        self.nodes = []
         logger.info(f'Initialized with {IP}, {PORT}')
         if setup:
             self.setup()
@@ -147,9 +136,9 @@ class Server():
         """        
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        server_socket.setblocking(1)
+        server_socket.setblocking(0)
         server_socket.bind((self.IP, self.PORT))
-        server_socket.listen(100)
+        server_socket.listen(0)
         self.active = True
         self.socket = server_socket
         #if self.PORT==0:
@@ -165,7 +154,7 @@ class Server():
         to a list of connected nodes self.nodes : List[ConnectedNode]
         """        
         node_socket, node_address = self.socket.accept()
-        Node = ConnectedNode(node_socket, node_address)
+        Node = ConnectedNode(node_socket)
         self.nodes.append(Node)
         
         logger.info(f'Accepted new connection from {node_address}')
@@ -193,7 +182,7 @@ class Server():
             node_id (int): node index in the list of connected nodes (self.nodes)
         """        
         
-        #logger.debug(f'Handle income from {self.nodes[node_id].address}\n data:{income_data}')
+        logger.debug(f'Handle income from {self.nodes[node_id].socket.getpeername()}\n data:{income_data}')
         self.nodes[node_id].finish_request(income_data)
 
 
@@ -207,7 +196,6 @@ class Server():
         #find the socket where reading is happening
         read_sockets, _, exception_sockets = select.select(sockets_list, [], sockets_list)
         for notified_socket in read_sockets:
-            #logger.debug(f'Notified socket: {notified_socket}')
             
             #if server socket -> new connection
             if notified_socket == self.socket:
@@ -220,7 +208,7 @@ class Server():
                 node_id = self.get_node_idx_by_socket(notified_socket)#cumbersome
                 #recv data from the node socket
                 income_data = self.recv_raw(notified_socket)
-                logger.debug(f'Notified socket: {notified_socket.getpeername()}, node_id: {node_id}, income data: {income_data}')
+                #logger.debug(f'Notified socket: {notified_socket.getpeername()}, node_id: {node_id}, income data: {income_data}')
                 #if no data -> client disconnected
                 if income_data is False:
                     self.handle_disconnection(node_id)
@@ -241,16 +229,16 @@ class Server():
             pass
 
 
-    def request(self, request_data, node_id : int) -> RequestClass:
+    def request_to_one_node(self, request_data, node_id : int) -> RequestClass:
         """Makes a request to a node with index node_id, returns an instance of
          the Request class, which allows to collect the result later
 
         Args:
-            request_data ([type]): [description]
+            request_data (object): request body
             node_id (int): node index in the list of connected nodes (self.nodes)
 
         Returns:
-           [Request]: Request object, get the result with _.result()
+           RequestClass: Request object, get the result with _.result()
         """
         #logger.debug(f'Creating new request to {node_id}, {self.nodes[node_id].socket}')
         #adds request to the queue of the corresponding node      
@@ -260,6 +248,24 @@ class Server():
         #send the data to the node
         self.send_raw(node_socket, request_data)
         return Request
+
+    def request_to_multiple_nodes(self, request_data, node_indices : List[int]) -> List[RequestClass]:
+        """Broadcast request to multiple nodes
+
+        Args:
+            request_data ([type]): request body
+            node_indices (List[int]): node indices in the list of connected nodes (self.nodes)
+
+        Returns:
+            List[RequestClass]: list of RequestClass object, get the result with _.result()
+        """        
+        return [self.request_to_one_node(request_data, node_id) for node_id in node_indices]
+
+    def request(self, request_data, node_id):
+        if isinstance(node_id, int):
+            return self.request_to_one_node(request_data, node_id)
+        elif isinstance(node_id, list):
+            return self.request_to_multiple_nodes(request_data, node_id)
 
 
     def wait(self, node_id : int):

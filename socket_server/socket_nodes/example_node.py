@@ -13,16 +13,17 @@ class EvalExecutorClass(BaseExecutorClass):
             return e
 
 if __name__=="__main__":
-    parser = argparse.ArgumentParser(description='IP')
-    parser.add_argument('IP',
-                        metavar='IP',
-                        type=str,
-                        help='IP')
-    parser.add_argument('PORT',
-                        metavar='PORT',
-                        type=str,
-                        help='PORT')
+    #parser = argparse.ArgumentParser(description='IP')
+    #parser.add_argument('IP',
+    #                    metavar='IP',
+    #                    type=str,
+    #                    help='IP')
+    #parser.add_argument('PORT',
+    #                    metavar='PORT',
+    #                    type=str,
+    #                    help='PORT')
 
-    args = parser.parse_args()
-    node = ExecutorNode(args.IP, args.PORT, EvalExecutorClass)
-    node.run()
+    #args = parser.parse_args()
+    #node = ExecutorNode(args.IP, args.PORT, EvalExecutorClass)
+    node = ExecutorNode('127.0.0.1', 10000, EvalExecutorClass)
+    node.event_loop()

@@ -1,606 +1,1208 @@
 INFO:Server:Initialized with 127.0.0.1, 10000
 INFO:Server:Listening to 127.0.0.1 ...
-INFO:Server:Accepted new connection from ('127.0.0.1', 49548)
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=45, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000)>
+INFO:Server:Accepted new connection from ('127.0.0.1', 50258)
 DEBUG:Server:Nodes connected: 1
-INFO:Server:Accepted new connection from ('127.0.0.1', 49550)
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=45, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000)>
+INFO:Server:Accepted new connection from ('127.0.0.1', 50260)
 DEBUG:Server:Nodes connected: 2
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 0
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 0
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 0 -> 0
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 1
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 2
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 3
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 4
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 5
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 6
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 7
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 8
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 9
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 10
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 11
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 12
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 13
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 14
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 15
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 16
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 17
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 18
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 19
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 20
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 21
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 22
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 23
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 24
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 25
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 26
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 27
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 28
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 29
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 1
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 1
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 2
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 1 -> 2
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 3
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 3
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 4
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 2 -> 4
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 5
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 5
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 6
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 3 -> 6
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 7
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 7
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 8
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 4 -> 8
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 9
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 9
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 10
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 5 -> 10
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 11
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 11
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 12
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 6 -> 12
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 13
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 13
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 14
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 7 -> 14
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 15
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 15
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 16
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 8 -> 16
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 17
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 17
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 9 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 18
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 18
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 10 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 19
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 19
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 20
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 11 -> 20
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 21
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 21
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 22
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 12 -> 22
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 23
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 23
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 24
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 13 -> 24
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 25
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 25
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 26
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 14 -> 26
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 27
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 27
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 28
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 15 -> 28
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 29
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 29
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 30
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 31
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 32
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 33
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 34
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 35
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 36
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 37
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 16 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 30
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 30
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 31
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 17 -> 31
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 32
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 32
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 33
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 18 -> 33
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 34
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 34
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 35
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 19 -> 35
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 36
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 36
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 37
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 20 -> 37
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 38
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 39
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 40
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 41
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 42
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 43
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 44
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 45
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 46
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 47
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 48
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 49
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 50
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 51
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 52
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 53
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 54
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 55
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 56
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 57
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 58
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 59
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 60
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 61
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 62
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 63
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 64
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 65
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 66
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 67
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 68
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 69
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 70
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 71
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 72
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 73
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 74
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 75
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 76
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 77
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 78
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 79
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 80
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 81
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 82
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 83
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 84
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 85
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 86
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 87
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 88
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 89
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 90
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 91
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 92
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 93
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 94
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 95
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 96
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 97
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 98
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 99
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 38
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 38
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 39
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 21 -> 39
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 40
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 22 -> 40
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 41
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 41
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 42
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 23 -> 42
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 43
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 43
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 44
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 24 -> 44
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 45
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 45
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 46
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 25 -> 46
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 47
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 47
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 48
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 26 -> 48
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 49
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 49
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 50
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 27 -> 50
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 51
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 51
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 52
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 28 -> 52
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 53
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 53
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 54
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 29 -> 54
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 55
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 55
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 56
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 30 -> 56
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 57
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 57
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 58
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 31 -> 58
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 59
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 59
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 60
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 32 -> 60
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 61
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 61
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 62
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 33 -> 62
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 63
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 63
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 64
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 34 -> 64
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 65
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 65
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 66
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 35 -> 66
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 67
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 67
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 68
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 36 -> 68
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 69
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 69
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 70
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 37 -> 70
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 71
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 71
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 72
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 38 -> 72
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 73
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 73
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 74
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 39 -> 74
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 75
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 75
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 76
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 40 -> 76
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 77
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 77
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 78
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 41 -> 78
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 79
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 79
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 80
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 42 -> 80
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 81
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 81
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 82
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 43 -> 82
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 83
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 83
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 84
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 44 -> 84
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 85
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 85
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 86
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 45 -> 86
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 87
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 87
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 88
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 46 -> 88
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 89
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 89
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 90
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 47 -> 90
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 91
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 91
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 92
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 48 -> 92
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 93
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 93
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 94
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 49 -> 94
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 95
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 95
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 96
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 50 -> 96
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 97
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 97
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 98
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 51 -> 98
-DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 99
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 99
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 52 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 53 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 54 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 55 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 56 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 57 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 58 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 59 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 60 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 61 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 62 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 63 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 64 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 65 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 66 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 67 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 68 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 69 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 70 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 71 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 72 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 73 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 74 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 75 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 76 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 77 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 78 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 79 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 80 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 81 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 82 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 83 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 84 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 85 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 86 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 87 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 88 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 89 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 90 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 91 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 92 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 93 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 94 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 95 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 96 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 97 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 98 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 99 -> None
-DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
-DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 0
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 0
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:0
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 0 -> 0
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 1
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 2
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 3
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 4
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 5
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 6
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 7
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 8
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 9
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 10
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 11
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 12
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 13
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 14
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 15
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 16
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 17
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 18
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 19
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 20
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 21
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 22
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 23
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 24
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 25
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 26
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 27
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 28
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 29
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 30
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 31
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 32
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 33
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 34
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 35
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 36
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 37
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 38
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 39
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 40
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 41
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 42
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 43
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 44
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 45
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 46
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 47
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 48
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 49
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 50
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 51
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 52
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 53
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 54
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 55
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 56
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 57
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 58
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 59
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 60
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 61
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 62
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 63
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 64
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 65
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 66
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 67
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 68
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 69
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 70
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 1
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:1
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 1 -> 1
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 2
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:2
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 2 -> 2
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 3
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:3
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 3 -> 3
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 4
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:4
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 4 -> 4
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 5
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:5
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 5 -> 5
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 6
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:6
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 6 -> 6
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 7
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:7
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 7 -> 7
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 8
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:8
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 8 -> 8
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 9
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:9
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 9 -> 9
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 10
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:10
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 10 -> 10
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 11
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:11
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 11 -> 11
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 12
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:12
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 12 -> 12
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 13
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:13
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 13 -> 13
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 14
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 71
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 72
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 73
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 74
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 75
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 76
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 77
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 78
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 79
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 80
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 81
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 82
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 83
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 84
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:14
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 85
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 14 -> 14
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 86
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 15
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:15
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 15 -> 15
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 16
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 87
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:16
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 16 -> 16
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 17
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 88
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:17
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 17 -> 17
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 89
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 18
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:18
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 18 -> 18
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 19
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 90
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:19
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 19 -> 19
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 20
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:20
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 20 -> 20
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 91
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 21
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:21
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 21 -> 21
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 92
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 22
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 93
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 94
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 95
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 96
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 97
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 98
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): New request: 99
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): New request: sleep(0.1)
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:22
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 22 -> 22
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 23
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:23
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 23 -> 23
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 24
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:24
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 24 -> 24
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 25
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:25
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 25 -> 25
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 26
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:26
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 26 -> 26
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 27
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:27
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 27 -> 27
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 28
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:28
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 28 -> 28
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 29
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:29
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 29 -> 29
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 30
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:30
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 30 -> 30
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 31
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:31
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 31 -> 31
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 32
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:32
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 32 -> 32
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 33
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:33
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 33 -> 33
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 34
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:34
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 34 -> 34
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 35
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:35
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 35 -> 35
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 36
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:36
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 36 -> 36
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 37
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:37
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 37 -> 37
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 38
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:38
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 38 -> 38
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 39
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:39
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 39 -> 39
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 40
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:40
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 40 -> 40
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 41
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:41
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 41 -> 41
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 42
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:42
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 42 -> 42
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 43
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:43
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 43 -> 43
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 44
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:44
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 44 -> 44
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 45
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:45
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 45 -> 45
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 46
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:46
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 46 -> 46
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 47
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:47
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 47 -> 47
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 48
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:48
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 48 -> 48
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 49
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:49
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 49 -> 49
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 50
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:50
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 50 -> 50
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 51
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:51
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 51 -> 51
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 52
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:52
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 52 -> 52
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 53
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:53
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 53 -> 53
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 54
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:54
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 54 -> 54
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 55
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:55
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 55 -> 55
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 56
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:56
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 56 -> 56
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 57
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:57
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 57 -> 57
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 58
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:58
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 58 -> 58
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 59
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:59
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 59 -> 59
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 60
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:60
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 60 -> 60
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 61
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:61
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 61 -> 61
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 62
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:62
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 62 -> 62
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 63
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:63
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 63 -> 63
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 64
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:64
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 64 -> 64
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 65
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:65
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 65 -> 65
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 66
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:66
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 66 -> 66
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 67
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:67
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 67 -> 67
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 68
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:68
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 68 -> 68
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 69
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:69
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 69 -> 69
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 70
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:70
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 70 -> 70
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 71
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:71
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 71 -> 71
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 72
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:72
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 72 -> 72
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 73
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:73
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 73 -> 73
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 74
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:74
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 74 -> 74
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 75
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:75
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 75 -> 75
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 76
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:76
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 76 -> 76
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 77
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:77
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 77 -> 77
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 78
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:78
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 78 -> 78
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 79
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:79
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 79 -> 79
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 80
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:80
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 80 -> 80
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 81
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:81
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 81 -> 81
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 82
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:82
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 82 -> 82
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 83
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:83
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 83 -> 83
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 84
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:84
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 84 -> 84
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 85
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:85
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 85 -> 85
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 86
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:86
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 86 -> 86
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 87
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:87
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 87 -> 87
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 88
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:88
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 88 -> 88
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 89
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:89
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 89 -> 89
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 90
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:90
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 90 -> 90
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 91
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:91
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 91 -> 91
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 92
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:92
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 92 -> 92
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 93
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:93
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 93 -> 93
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 94
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:94
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 94 -> 94
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 95
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:95
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 95 -> 95
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 96
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:96
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 96 -> 96
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 97
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:97
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 97 -> 97
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 98
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:98
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 98 -> 98
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=43, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50258)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50258), node_id: 0, income data: 99
+DEBUG:Server:Handle income from ('127.0.0.1', 50258)
+ data:99
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50258): Finished: 99 -> 99
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
+DEBUG:Server:LISTEN:Notified socket: <socket.socket fd=46, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10000), raddr=('127.0.0.1', 50260)>
+DEBUG:Server:Notified socket: ('127.0.0.1', 50260), node_id: 1, income data: None
+DEBUG:Server:Handle income from ('127.0.0.1', 50260)
+ data:None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 50260): Finished: sleep(0.1) -> None
