@@ -1,0 +1,606 @@
+INFO:Server:Initialized with 127.0.0.1, 10000
+INFO:Server:Listening to 127.0.0.1 ...
+INFO:Server:Accepted new connection from ('127.0.0.1', 49548)
+DEBUG:Server:Nodes connected: 1
+INFO:Server:Accepted new connection from ('127.0.0.1', 49550)
+DEBUG:Server:Nodes connected: 2
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 0
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 0
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 0 -> 0
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 1
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 2
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 3
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 4
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 5
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 6
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 7
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 8
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 9
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 10
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 11
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 12
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 13
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 14
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 15
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 16
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 17
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 18
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 19
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 20
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 21
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 22
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 23
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 24
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 25
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 26
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 27
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 28
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 29
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 1
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 1
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 2
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 1 -> 2
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 3
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 3
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 4
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 2 -> 4
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 5
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 5
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 6
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 3 -> 6
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 7
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 7
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 8
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 4 -> 8
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 9
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 9
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 10
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 5 -> 10
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 11
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 11
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 12
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 6 -> 12
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 13
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 13
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 14
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 7 -> 14
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 15
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 15
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 16
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 8 -> 16
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 17
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 17
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 9 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 18
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 18
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 10 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 19
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 19
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 20
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 11 -> 20
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 21
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 21
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 22
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 12 -> 22
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 23
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 23
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 24
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 13 -> 24
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 25
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 25
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 26
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 14 -> 26
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 27
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 27
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 28
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 15 -> 28
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 29
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 29
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 30
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 31
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 32
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 33
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 34
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 35
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 36
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 37
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 16 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 30
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 30
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 31
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 17 -> 31
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 32
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 32
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 33
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 18 -> 33
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 34
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 34
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 35
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 19 -> 35
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 36
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 36
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 37
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 20 -> 37
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 38
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 39
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 40
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 41
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 42
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 43
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 44
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 45
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 46
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 47
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 48
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 49
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 50
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 51
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 52
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 53
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 54
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 55
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 56
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 57
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 58
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 59
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 60
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 61
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 62
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 63
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 64
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 65
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 66
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 67
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 68
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 69
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 70
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 71
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 72
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 73
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 74
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 75
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 76
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 77
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 78
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 79
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 80
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 81
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 82
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 83
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 84
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 85
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 86
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 87
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 88
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 89
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 90
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 91
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 92
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 93
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 94
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 95
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 96
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 97
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 98
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): New request: 99
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): New request: sleep(0.01)
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 38
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 38
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 39
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 21 -> 39
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 40
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 22 -> 40
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 41
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 41
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 42
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 23 -> 42
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 43
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 43
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 44
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 24 -> 44
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 45
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 45
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 46
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 25 -> 46
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 47
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 47
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 48
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 26 -> 48
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 49
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 49
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 50
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 27 -> 50
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 51
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 51
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 52
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 28 -> 52
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 53
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 53
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 54
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 29 -> 54
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 55
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 55
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 56
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 30 -> 56
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 57
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 57
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 58
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 31 -> 58
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 59
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 59
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 60
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 32 -> 60
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 61
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 61
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 62
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 33 -> 62
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 63
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 63
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 64
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 34 -> 64
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 65
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 65
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 66
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 35 -> 66
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 67
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 67
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 68
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 36 -> 68
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 69
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 69
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 70
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 37 -> 70
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 71
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 71
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 72
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 38 -> 72
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 73
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 73
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 74
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 39 -> 74
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 75
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 75
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 76
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 40 -> 76
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 77
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 77
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 78
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 41 -> 78
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 79
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 79
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 80
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 42 -> 80
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 81
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 81
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 82
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 43 -> 82
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 83
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 83
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 84
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 44 -> 84
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 85
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 85
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 86
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 45 -> 86
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 87
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 87
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 88
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 46 -> 88
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 89
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 89
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 90
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 47 -> 90
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 91
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 91
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 92
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 48 -> 92
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 93
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 93
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 94
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 49 -> 94
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 95
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 95
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 96
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 50 -> 96
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 97
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 97
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 98
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: 51 -> 98
+DEBUG:Server:Notified socket: ('127.0.0.1', 49548), node_id: 0, income data: 99
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49548): Finished: sleep(0.01) -> 99
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 52 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 53 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 54 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 55 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 56 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 57 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 58 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 59 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 60 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 61 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 62 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 63 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 64 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 65 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 66 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 67 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 68 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 69 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 70 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 71 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 72 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 73 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 74 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 75 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 76 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 77 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 78 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 79 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 80 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 81 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 82 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 83 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 84 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 85 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 86 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 87 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 88 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 89 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 90 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 91 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 92 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 93 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 94 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 95 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 96 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 97 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 98 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: 99 -> None
+DEBUG:Server:Notified socket: ('127.0.0.1', 49550), node_id: 1, income data: None
+DEBUG:Server:CONNECTED NODE ('127.0.0.1', 49550): Finished: sleep(0.01) -> None
