@@ -1,10 +1,10 @@
 from socket_nodes import Executor, Node
+##import all you might need later when requesting from server
 import espressomd
 import re
 import numpy as np
 import random
 import math
-
 
 
 class EspressoExecutor(Executor):
@@ -40,9 +40,10 @@ class EspressoExecutor(Executor):
     
 
 
-    #### additional function for frequent requests ####
+    #### additional user defined function #############
+    ## for frequent requests, aliases or shorthands####
     ## to use just request 'self.function_name(args)'##
-    ## or start command with /#########################
+    ## or start command with / ########################
     def get_part_data(self, id, attrs):
         return [getattr(self.system.part[id], attr) for attr in attrs]
 
@@ -52,6 +53,22 @@ class EspressoExecutor(Executor):
             ) for _ in range(n)
         ]
 
+    def add_particle(self, attrs_to_return : list, **kwargs):
+        part = self.system.part.add(
+            pos=self.system.box_l * np.random.random(3), **kwargs)
+        return [getattr(part[id], attr) for attr in attrs_to_return]
+
+    def add_particle(self, id, attrs_to_remember : list):
+        attrs =  [
+            getattr(self.system.part[id], attr) for attr in attrs_to_remember
+            ]
+        part = self.system.part[id].remove()
+
+    def get_potential_energy(self):
+        return float(
+            self.system.analysis.energy()['total'] \
+            - self.system.analysis.energy()['kinetic'])
+    
 
 
 
