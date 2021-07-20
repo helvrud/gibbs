@@ -7,7 +7,6 @@ from socket_nodes import Server
 server = Server('127.0.0.1', 0)
 threading.Thread(target=server.run, daemon=True).start()
 
-MC_Init_Data = namedtuple('MC_Init_Data', ['energy', 'particles', 'box_l'])
 def get_mc_init_data():
     system_state_request=server([
         "float(system.analysis.energy()['total'])",

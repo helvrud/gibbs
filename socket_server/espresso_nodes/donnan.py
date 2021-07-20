@@ -6,9 +6,8 @@ import csv
 import os
 import sys
 import subprocess
-from seaborn.rcmod import reset_defaults
 from tqdm import tqdm
-os.chdir(sys.path[0])
+#os.chdir(sys.path[0])
 import threading
 import logging
 
@@ -33,27 +32,14 @@ subprocess.Popen(['python', 'esp_node.py','127.0.0.1',f'{server.PORT}', str(l[0]
 server.wait_for_connections(2)
 #%%
 ##populate the systems##
-for i in range(int(N1/2)):
-    server(
-        [
-        "system.part.add(pos=system.box_l * np.random.random(3), type = 0, q = -1.0)",
-        "system.part.add(pos=system.box_l * np.random.random(3), type = 1, q = +1.0)"
-        ], 0).result()
-for i in range(int(N2/2)):
-    server(
-        [
-        "system.part.add(pos=system.box_l * np.random.random(3), type = 0, q = -1.0)",
-        "system.part.add(pos=system.box_l * np.random.random(3), type = 1, q = +1.0)",
-        ], 1)
+server(f"/populate({int(N1/2)}, type = 0, q = -1.0)", 0)
+server(f"/populate({int(N1/2)}, type = 0, q = +1.0)", 0)
 
-for i in range(N_anion_fixed):
-    server(
-        [
-        "system.part.add(pos=system.box_l * np.random.random(3), type = 2, q = -1.0)",
-        "system.part.add(pos=system.box_l * np.random.random(3), type = 1, q = +1.0)"
-        ],
-        1)
+server(f"/populate({int(N2/2)}, type = 2, q = -1.0)", 0)
+server(f"/populate({int(N2/2)}, type = 1, q = +1.0)", 0)
 
+server(f"/populate({int(N_anion_fixed/2)}, type = 2, q = -1.0)", 0)
+server(f"/populate({int(N_anion_fixed/2)}, type = 1, q = +1.0)", 0)
 #%%
 ##add LJ interactions and thermostats### 
 server(
@@ -71,11 +57,9 @@ server(
         [0,1]
     )
 
-
 ##switch on electrostatics
 if ELECTROSTATIC:
     server.request(f"system.actors.add(espressomd.electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",[0,1])
-
 
 #minimize energy and run md
 server([
@@ -98,8 +82,20 @@ def get_mc_init_data():
     return energy, part_ids, box_l
 get_mc_init_data()
 
-def move_particle():
-    
+def remove_particle(particle_id, side):
+    removed_anion_pos, removed_cation_pos, removed_anion_v, removed_cation_v, *_ = server(
+                [
+                f"list(system.part[{particle_id}].pos)", 
+                f"list(system.part[{particle_id}].pos)",
+                f"list(system.part[{particle_id}].v)",
+                f"list(system.part[{particle_id}].v)",
+                f"system.part[{particle_id}].remove()",
+                f"system.part[{particle_id}].remove()",
+                ],
+                side).result()
+
+
+
 # %%
 ## plot the particles in box
 def scatter_box(server, n):

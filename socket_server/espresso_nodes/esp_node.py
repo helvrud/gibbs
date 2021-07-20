@@ -6,15 +6,20 @@ import random
 import math
 
 
+
 class EspressoExecutor(Executor):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__()
         self.system = espressomd.System(*args, **kwargs)
     
     def preprocess_string(self, str_) -> str:
-        #do not need to write self.system.*, system.* is now valid
-        PATTERN = re.compile(r'(?<![a-zA-Z0-9._])system(?![a-zA-Z0-9_])')
-        result_str= PATTERN.sub(r'self.system', str_)
+        if str_[0]=='/':
+            #class defined function (aliases or shortcuts) has to be called
+            result_str = 'self.'+str_[1:]
+        else:
+            #do not need to write self.system.*, system.* is now valid
+            PATTERN = re.compile(r'(?<![a-zA-Z0-9._])system(?![a-zA-Z0-9_])')
+            result_str= PATTERN.sub(r'self.system', str_)
         return result_str
 
     def execute(self, expr_):
@@ -32,6 +37,22 @@ class EspressoExecutor(Executor):
 
     def execute_multi_line(self, expr_ : list):
         return [self.execute_one_line(expr_line) for expr_line in expr_]
+    
+
+
+    #### additional function for frequent requests ####
+    ## to use just request 'self.function_name(args)'##
+    ## or start command with /#########################
+    def get_part_data(self, id, attrs):
+        return [getattr(self.system.part[id], attr) for attr in attrs]
+
+    def populate(self, n, **kwargs):
+        [self.system.part.add(
+            pos=self.system.box_l * np.random.random(3), **kwargs
+            ) for _ in range(n)
+        ]
+
+
 
 
 if __name__=="__main__":
