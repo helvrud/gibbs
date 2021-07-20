@@ -58,16 +58,19 @@ class EspressoExecutor(Executor):
             pos=self.system.box_l * np.random.random(3), **kwargs)
         return [getattr(part[id], attr) for attr in attrs_to_return]
 
-    def add_particle(self, id, attrs_to_remember : list):
+    def remove_particle(self, id, attrs_to_remember : list):
         attrs =  [
             getattr(self.system.part[id], attr) for attr in attrs_to_remember
             ]
-        part = self.system.part[id].remove()
+        self.system.part[id].remove()
+        return attrs
 
     def get_potential_energy(self):
         return float(
             self.system.analysis.energy()['total'] \
             - self.system.analysis.energy()['kinetic'])
+
+    def run_md(self)
     
 
 
