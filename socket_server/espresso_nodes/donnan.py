@@ -6,110 +6,87 @@ import csv
 import os
 import sys
 import subprocess
+import pandas as pd
 from tqdm import tqdm
 #os.chdir(sys.path[0])
 import threading
 import logging
-
 from socket_nodes import Server
+
 #%%
+#params
 ELECTROSTATIC = False
+
 V_all = 40**3*2
-v = 0.3
-V = [V_all*(1-v),V_all*v]
-l = [V_**(1/3) for V_ in V]
+v = 0.3 #relative volume of the box with fixed anions
+
 l_bjerrum = 2.0
 temp = 1
+
 N1 = 80
 N2 = 60
 N_anion_fixed = 10
-#%%
-server = Server('127.0.0.1', 10000)
+
+#box volumes and dimmensions
+V = [V_all*(1-v),V_all*v]
+l = [V_**(1/3) for V_ in V]
+
+
+###start server and nodes
+server = Server('127.0.0.1', 0)
 threading.Thread(target=server.run, daemon=True).start()
-#%%
-subprocess.Popen(['python', 'esp_node.py','127.0.0.1',f'{server.PORT}', str(l[0])])
-subprocess.Popen(['python', 'esp_node.py','127.0.0.1',f'{server.PORT}', str(l[0])])
+subprocess.Popen(['python', 'esp_node.py','127.0.0.1',f'{server.PORT}', str(l[0])], stdout=open('log0', 'w'), stderr=open('log0err', 'w'))
+subprocess.Popen(['python', 'esp_node.py','127.0.0.1',f'{server.PORT}', str(l[1])], stdout=open('log1', 'w'))
 server.wait_for_connections(2)
+
 #%%
-##populate the systems##
-server(f"/populate({int(N1/2)}, type = 0, q = -1.0)", 0)
-server(f"/populate({int(N1/2)}, type = 0, q = +1.0)", 0)
+def populate_system(n1, n2, n_fixed):
+    ##populate the systems##
+    server(f"/populate({int(n1/2)}, type = 0, q = -1.0)", 0)
+    server(f"/populate({int(n1/2)}, type = 1, q = +1.0)", 0)
 
-server(f"/populate({int(N2/2)}, type = 2, q = -1.0)", 0)
-server(f"/populate({int(N2/2)}, type = 1, q = +1.0)", 0)
+    server(f"/populate({int(n2/2)}, type = 2, q = -1.0)", 1)
+    server(f"/populate({int(n2/2)}, type = 1, q = +1.0)", 1)
 
-server(f"/populate({int(N_anion_fixed/2)}, type = 2, q = -1.0)", 0)
-server(f"/populate({int(N_anion_fixed/2)}, type = 1, q = +1.0)", 0)
+    server(f"/populate({int(n_fixed/2)}, type = 2, q = -1.0)", 1)
+    server(f"/populate({int(n_fixed/2)}, type = 1, q = +1.0)", 1)
+
+populate_system(N1, N2, N_anion_fixed)
 #%%
-##add LJ interactions and thermostats### 
-server(
-        [
-        "system.non_bonded_inter[0, 0].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
-        "system.non_bonded_inter[0, 1].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
-        "system.non_bonded_inter[1, 1].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
-        "system.non_bonded_inter[0, 2].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
-        "system.non_bonded_inter[1, 2].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
-        "system.non_bonded_inter[2, 2].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')"
-        "system.thermostat.set_langevin(kT=1, gamma=1, seed=42)",
-        "system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
-        "system.minimize_energy.minimize()"
-        ], 
-        [0,1]
-    )
-
-##switch on electrostatics
-if ELECTROSTATIC:
-    server.request(f"system.actors.add(espressomd.electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",[0,1])
-
-#minimize energy and run md
-server([
+def setup_system():
+    ##add LJ interactions and thermostats### 
+    server(
+            [
+            "system.non_bonded_inter[0, 0].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
+            "system.non_bonded_inter[0, 1].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
+            "system.non_bonded_inter[1, 1].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
+            "system.non_bonded_inter[0, 2].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
+            "system.non_bonded_inter[1, 2].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
+            "system.non_bonded_inter[2, 2].lennard_jones.set_params(epsilon=1, sigma=1, cutoff=3, shift='auto')",
+            "system.__setattr__('time_step', 0.001)",
+            "system.cell_system.__setattr__('skin', 0.4)",
+            "system.thermostat.set_langevin(kT=1, gamma=1, seed=42)",
             "system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
-            "system.minimize_energy.minimize()",
-            f"system.integrator.run({10000})"
-            ],
+            "system.minimize_energy.minimize()"
+            ], 
             [0,1]
-        )  
+        )
 
-#%%
-def get_mc_init_data():
-    request_body = [
-        "float(system.analysis.energy()['total'])",
-        "[list(system.part.select(type=0).id), list(system.part.select(type=1).id)]",
-        "system.box_l"
-        ]
-    system_state_request=server(request_body,[0,1])
-    energy, part_ids, box_l= [[result.result()[i] for result in system_state_request] for i in range(len(request_body))]
-    return energy, part_ids, box_l
-get_mc_init_data()
+    ##switch on electrostatics
+    if ELECTROSTATIC:
+        server.request(f"system.actors.add(espressomd.electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",[0,1])
 
-def remove_particle(particle_id, side):
-    removed_anion_pos, removed_cation_pos, removed_anion_v, removed_cation_v, *_ = server(
-                [
-                f"list(system.part[{particle_id}].pos)", 
-                f"list(system.part[{particle_id}].pos)",
-                f"list(system.part[{particle_id}].v)",
-                f"list(system.part[{particle_id}].v)",
-                f"system.part[{particle_id}].remove()",
-                f"system.part[{particle_id}].remove()",
+    #minimize energy and run md
+    server([
+                "system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
+                "system.minimize_energy.minimize()",
+                f"system.integrator.run({10000})"
                 ],
-                side).result()
+                [0,1]
+            )
 
+setup_system()
 
-
-# %%
-## plot the particles in box
-def scatter_box(server, n):
-    import plotly.express as px
-    pos = server("system.part[:].pos", n).result().T
-    types = server("system.part[:].type", n).result().T
-    color_dict={
-        0:'anion',
-        1:'cation',
-        2:'anion_fixed'
-    }
-    fig = px.scatter_3d(x = pos[0], y = pos[1], z = pos[2], color=[color_dict[type_] for type_ in types])
-    fig.show()
-scatter_box(server, 1)
 # %%
 from scipy.spatial.transform import Rotation
 def entropy_change(N1, N2, V1, V2, n=1):
@@ -127,7 +104,81 @@ def monte_carlo_accept(delta_fenergy, beta):
     else:
         prob = math.exp(-beta*delta_fenergy)
         return (prob > random.random())
+#%%
+class Monte_Carlo:
+    def _get_mc_init_data():
+        request_body = [
+            "/potential_energy()",
+            "/part_data(slice(None,None), ['id', 'type'])",
+            "system.box_l"
+            ]
+        system_state_request=server(request_body,[0,1])
+        energy, part_ids, box_l= [[result.result()[i] for result in system_state_request] for i in range(len(request_body))]
+        return energy, part_ids, box_l
+    def __init__(self) -> None:
+        self.energy, particles, self.box_l = self._get_mc_init_data()
+        self.particles = pd.concat([
+            pd.DataFrame({'side':0, 'id' : particles[0][0], 'type' : particles[0][1]}),
+            pd.DataFrame({'side':1, 'id' : particles[1][0], 'type' : particles[1][1]})
+            ])
+        self.volumes = [float(np.prod(self.box_l[0])), float(np.prod(self.box_l[1]))]
+    
+    def choose_side_and_part(self):
+        side = random.choice([0,1])
+        rnd_pair_indices = [
+            random.choice(self.particles.query(f'side == {side} & type == {0}')), #anion
+            random.choice(self.particles.query(f'side == {side} & type == {1}')) #cation
+            ]
+        return side, rnd_pair_indices
 
+    def move(self, side, pair_indices):
+        other_side = int(not(side))
+        remove_part = server([
+            f"/remove_particle({pair_indices[0]},['pos', 'v'])", #anion
+            f"/remove_particle({pair_indices[1]},['pos', 'v'])", #cation
+            ],side)
+        energy_after_removal = server(
+            "/potential_energy()"
+            ,side)
+        
+        velocities = [remove_part.result()[0][1], remove_part.result()[1][1]]
+        
+        rot = Rotation.random().as_matrix
+        velocities_rotated = [list(rot().dot(velocity)) for velocity in velocities]
+
+        add_part = server([
+                f"/add_particle(attrs_to_return=['id'], v={velocities_rotated[0]}, q = -1.0, type = 0)",
+                f"/add_particle(attrs_to_return=['id'], v={velocities_rotated[1]}, q = +1.0, type = 1)",
+                "/potential_energy()"
+            ], other_side)
+        
+        
+        
+        
+#%%
+mc = Monte_Carlo()
+
+#%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#%%
 class monte_carlo_charged_pairs:
     def __init__(self, server, beta, log_fname) -> None:
         self.server = server
@@ -322,11 +373,3 @@ df['dzeta'] = df.lm/df.lv/(df.rm/df.rv)
 df['v'] = df.rv/(df.rv+df.lv)
 df['cs'] = (df.lm+df.lp)/2/df.lv
 sns.scatterplot(data = df, x = 'v', y = 'dzeta', hue = 'electrostatic')
-
-# %%
-import pickle
-
-f = lambda x: x**2
-
-pickle.dumps(f)
-# %%

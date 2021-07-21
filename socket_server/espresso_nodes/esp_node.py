@@ -7,6 +7,14 @@ import random
 import math
 
 
+def __missing_int(l) -> int:
+    #makes new IDs predictable
+    #[1,2,3,5,7] -> 4
+    #[1,2,3,4,5,7] ->6
+    for i in range(min(l), max(l)):
+        if i not in l:
+            return i
+
 class EspressoExecutor(Executor):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__()
@@ -14,7 +22,7 @@ class EspressoExecutor(Executor):
     
     def preprocess_string(self, str_) -> str:
         if str_[0]=='/':
-            #class defined function (aliases or shortcuts) has to be called
+            #user defined function (aliases or shortcuts) has to be called
             result_str = 'self.'+str_[1:]
         else:
             #do not need to write self.system.*, system.* is now valid
@@ -38,13 +46,11 @@ class EspressoExecutor(Executor):
     def execute_multi_line(self, expr_ : list):
         return [self.execute_one_line(expr_line) for expr_line in expr_]
     
-
-
-    #### additional user defined function #############
-    ## for frequent requests, aliases or shorthands####
-    ## to use just request 'self.function_name(args)'##
-    ## or start command with / ########################
-    def get_part_data(self, id, attrs):
+    ########### additional user defined function #############
+    ######### for frequent requests, aliases or shorthands####
+    ######### to use just request 'self.function_name(args)'##
+    ######### or start command with / ########################
+    def part_data(self, id, attrs):
         return [getattr(self.system.part[id], attr) for attr in attrs]
 
     def populate(self, n, **kwargs):
@@ -54,9 +60,11 @@ class EspressoExecutor(Executor):
         ]
 
     def add_particle(self, attrs_to_return : list, **kwargs):
+        ids = list(self.system.part[:].id)
+        new_id = __missing_int(ids)
         part = self.system.part.add(
             pos=self.system.box_l * np.random.random(3), **kwargs)
-        return [getattr(part[id], attr) for attr in attrs_to_return]
+        return [getattr(part, attr) for attr in attrs_to_return]
 
     def remove_particle(self, id, attrs_to_remember : list):
         attrs =  [
@@ -65,16 +73,22 @@ class EspressoExecutor(Executor):
         self.system.part[id].remove()
         return attrs
 
-    def get_potential_energy(self):
-        return float(
-            self.system.analysis.energy()['total'] \
-            - self.system.analysis.energy()['kinetic'])
+    def potential_energy(self):
+        return float(self.system.analysis.energy()['total']-self.system.analysis.energy()['kinetic'])
 
-    def run_md(self)
+    def run_md(self, steps, sample_steps=100):
+        i=0
+        energy_acc=[]
+        while i<steps:
+            self.system.integrator.run(sample_steps)
+            i+=sample_steps
+            energy_acc.append(self.potential_energy())
+        return np.array(energy_acc)
     
 
+    
 
-
+#an entry point to run the node in subprocesses
 if __name__=="__main__":
     import argparse
     parser = argparse.ArgumentParser(description='IP')
