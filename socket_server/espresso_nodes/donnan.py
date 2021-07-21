@@ -1,7 +1,8 @@
 #%%
 import random
 import math
-import matplotlib
+import matplotlib.pyplot as plt
+import seaborn
 import numpy as np
 import csv
 import os
@@ -26,9 +27,9 @@ v = 0.5 #relative volume of the box with fixed anions
 l_bjerrum = 2.0
 temp = 1
 
-N1 = 80
-N2 = 20
-N_anion_fixed = 0
+N1 = 150
+N2 = 50
+N_anion_fixed = 10
 
 #box volumes and dimmensions
 V = [V_all*(1-v),V_all*v]
@@ -92,24 +93,25 @@ def setup_system():
 
 setup_system()
 
-# %%
-def entropy_change(N1, N2, V1, V2, n=1):
-    #N1, V1 - box we removing particle from
-    #N2, V2 - box we adding to
-    #n - number of particles 
-    if n==1:
-        return math.log((N1*V2)/((N2+1)*V1))
-    elif n==2:
-        return math.log((V2/V1)**2*(N1*(N1-1))/((N2+2)*(N2+1)))
-
-def monte_carlo_accept(delta_fenergy, beta):
-    if delta_fenergy<0:
-        return True
-    else:
-        prob = math.exp(-beta*delta_fenergy)
-        return (prob > random.random())
 #%%
 class Monte_Carlo:
+    @staticmethod
+    def entropy_change(N1, N2, V1, V2, n=1):
+        #N1, V1 - box we removing particle from
+        #N2, V2 - box we adding to
+        #n - number of particles 
+        if n==1:
+            return math.log((N1*V2)/((N2+1)*V1))
+        elif n==2:
+            return math.log((V2/V1)**2*(N1*(N1-1))/((N2+2)*(N2+1)))
+
+    @staticmethod
+    def accept(delta_fenergy, beta=1):
+        if delta_fenergy<0:
+            return True
+        else:
+            prob = math.exp(-beta*delta_fenergy)
+            return (prob > random.random())
     
     def _get_mc_init_data(self): #return energy, part_ids, box_l
         request_body = [
@@ -120,22 +122,25 @@ class Monte_Carlo:
         system_state_request=server(request_body,[0,1])
         energy, part_ids, box_l= [[result.result()[i] for result in system_state_request] for i in range(len(request_body))]
         return energy, part_ids, box_l
-        
-    def __init__(self) -> None:
-        self.steps = 0
-        self.energy, particles, self.box_l = self._get_mc_init_data()
-        self.particles = pd.concat([
-            pd.DataFrame({'side':0, 'id' : particles[0][0], 'type' : particles[0][1]}),
-            pd.DataFrame({'side':1, 'id' : particles[1][0], 'type' : particles[1][1]})
-            ], ignore_index=True)
-        self.volumes = [float(np.prod(self.box_l[0])), float(np.prod(self.box_l[1]))]
 
-        print('Monte_Carlo init')
+    def _print_state(self):
         print('Energy:', self.energy)
         print('Volume:', self.volumes)
         print('Particles:')
         print(self.particles.groupby(by=['side', 'type']).size())
 
+    def __init__(self) -> None:
+        self.steps = 0
+        self.energy, particles, self.box_l = self._get_mc_init_data()
+        self.volumes = [float(np.prod(self.box_l[0])), float(np.prod(self.box_l[1]))]
+
+        #save info about particles as pandas DataFrame
+        self.particles = pd.concat([
+            pd.DataFrame({'side':0, 'id' : particles[0][0], 'type' : particles[0][1]}),
+            pd.DataFrame({'side':1, 'id' : particles[1][0], 'type' : particles[1][1]})
+            ], ignore_index=True)
+
+        self._print_state()
     
     def choose_side_and_part(self):
         side = random.choice([0,1])
@@ -145,7 +150,7 @@ class Monte_Carlo:
             ]
         return side, rnd_pair_indices
     
-    def move_pair_request_to_dict(self, remove_request, add_request):
+    def _pair_info_to_dict(self, remove_request, add_request):
         #remove_pair_dict[side][parameter] -> param_value
         #used to reversal the move
         remove_pair_dict = [{'id' : int(remove_request.result()[i][0]),
@@ -204,15 +209,16 @@ class Monte_Carlo:
         n_parts = self.particles.loc[self.particles.type!=2].groupby(by='side').size()
 
         n1 = n_parts[side]; n2 = n_parts[other_side]; v1 = self.volumes[side]; v2 = self.volumes[other_side]
-        delta_S = entropy_change(n1,n2,v1,v2,2)
+        delta_S = Monte_Carlo.entropy_change(n1,n2,v1,v2,2)
         
-        #delta_F = sum(E) - sum(self.energy) + delta_S
-        delta_F = sum(E) - sum(self.energy)-delta_S
+        #delta_F = -delta_S ##IDEAL GAS
+        delta_F = sum(E) - sum(self.energy) - delta_S 
+        
 
         ###Make the data easier to work with################################
-        removed_pair, added_pair  = self.move_pair_request_to_dict(
-            remove_part, add_part)
+        removed_pair, added_pair  = self._pair_info_to_dict(remove_part, add_part)
 
+        #return data that we can reverse or update the system state with
         return removed_pair, added_pair, E, delta_F
 
     def reverse_move(self, side, removed_pair, add_pair):
@@ -248,38 +254,42 @@ class Monte_Carlo:
         else:
             print(f"Move: <- ", end = ' ')
         print (f"delta_F: {delta_F},",end = ' ')
-        if monte_carlo_accept(delta_F,1):
-            print('accepted')
+        if Monte_Carlo.accept(delta_F,1):
+            print('accepted', end = ' ')
             self.update_state(side, removed_pair, added_pair,E)
         else:
-            print('rejected')
+            print('rejected', end = ' ')
             self.reverse_move(side, removed_pair, added_pair)
         print(*self.particles.groupby(by='side').size(), sep=' | ')
         self.steps+=1
     
-        
+def run(mc, warmup_steps):#, sample_size, n_samples):
+    res_df = pd.DataFrame()
+    n_part_acc = []
+    energy_acc = []
+    for i in range(warmup_steps):
+        mc.step()
+        part_info = pd.DataFrame(mc.particles.groupby(by=['side', 'type']).size(), columns = ['n'])
+        part_info['step'] = mc.steps
+        part_info.set_index(keys=['step'], append = 'True').reorder_levels(['step','side','type'])
+        res_df=res_df.append(part_info)
+    return res_df
+            
+
+
         
 #%%
 mc = Monte_Carlo()
 #%%
-#import matplotlib
-import matplotlib.pyplot as plt
-energy = []
-n=np.array([])
-for i in range(100):
-    mc.step()
-    energy.append(mc.energy)
-    n = np.append(n, [mc.particles.groupby(by='side').size().to_list()])
+df = pd.DataFrame()
+#%%
+%%time
+df=df.append(run(mc, 1000))
 
 #%%
-plt.plot(energy)
-plt.show()
+import seaborn as sns
 # %%
-plt.plot(n[1::2])
+sns.lineplot(data=df, x='step', y = 'n', hue = 'side', style='type')
 # %%
-r = server("/run_md(10000,100)",[0,1])
-# %%
-r[0].result()
-# %%
-mc.volumes
+df
 # %%
