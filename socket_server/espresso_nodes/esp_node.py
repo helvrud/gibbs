@@ -7,13 +7,6 @@ import random
 import math
 
 
-def __missing_int(l) -> int:
-    #makes new IDs predictable
-    #[1,2,3,5,7] -> 4
-    #[1,2,3,4,5,7] ->6
-    for i in range(min(l), max(l)):
-        if i not in l:
-            return i
 
 class EspressoExecutor(Executor):
     def __init__(self, *args, **kwargs) -> None:
@@ -60,10 +53,23 @@ class EspressoExecutor(Executor):
         ]
 
     def add_particle(self, attrs_to_return : list, **kwargs):
-        ids = list(self.system.part[:].id)
-        new_id = __missing_int(ids)
-        part = self.system.part.add(
-            pos=self.system.box_l * np.random.random(3), **kwargs)
+        def __missing_int(l) -> int:
+            #makes new IDs predictable
+            #[1,2,3,5,7] -> 4
+            #[1,2,3,4,5,7] ->6
+            for i in range(min(l), max(l)):
+                if i not in l:
+                    return i
+        if 'id' not in kwargs:
+            print('no_id')
+            ids = list(self.system.part[:].id)
+            new_id = __missing_int(ids)
+            if new_id is None: pass
+            else: kwargs.update({'id':new_id})
+        if 'pos' not in kwargs:
+            kwargs.update({'pos' : self.system.box_l * np.random.random(3)})
+        print(kwargs)
+        part = self.system.part.add(**kwargs)
         return [getattr(part, attr) for attr in attrs_to_return]
 
     def remove_particle(self, id, attrs_to_remember : list):
@@ -74,7 +80,7 @@ class EspressoExecutor(Executor):
         return attrs
 
     def potential_energy(self):
-        return float(self.system.analysis.energy()['total']-self.system.analysis.energy()['kinetic'])
+        return float(self.system.analysis.energy()['total'] - self.system.analysis.energy()['kinetic'])
 
     def run_md(self, steps, sample_steps=100):
         i=0

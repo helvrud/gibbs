@@ -6,7 +6,7 @@ from enum import Enum, auto
 from typing import List
 import sys
 
-#logging.basicConfig(stream=open('log_server', 'w'), level=logging.DEBUG)
+logging.basicConfig(stream=open('log_server', 'w'), level=logging.DEBUG)
 logger = logging.getLogger('Server')
 
 class RequestStatus(Enum):

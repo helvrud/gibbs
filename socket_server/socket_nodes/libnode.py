@@ -5,7 +5,7 @@ import socket
 #import patch_asyncio
 import sys
 
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+#logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 logger = logging.getLogger('Node')
 
 class BaseNode:
