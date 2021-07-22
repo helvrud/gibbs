@@ -43,8 +43,20 @@ class EspressoExecutor(Executor):
     ######### for frequent requests, aliases or shorthands####
     ######### to use just request 'self.function_name(args)'##
     ######### or start command with / ########################
+    @staticmethod
+    def __type_cast(type_names_dict) -> dict:
+        return {k : eval(f'{v}') for k, v in type_names_dict.items()}
+
     def part_data(self, id, attrs):
-        return [getattr(self.system.part[id], attr) for attr in attrs]
+        if isinstance(attrs, list):
+            return {attr : getattr(self.system.part[id], attr) 
+                    for attr in attrs}
+        elif isinstance(attrs, dict):
+            cast = EspressoExecutor.__type_cast(attrs)
+            return {
+                attr : type_(getattr(self.system.part[id], attr))
+                for attr, type_ in cast.items()
+                }
 
     def populate(self, n, **kwargs):
         [self.system.part.add(
@@ -52,7 +64,7 @@ class EspressoExecutor(Executor):
             ) for _ in range(n)
         ]
 
-    def add_particle(self, attrs_to_return : list, **kwargs):
+    def add_particle(self, attrs_to_return, **kwargs):
         def __missing_int(l) -> int:
             #makes new IDs predictable
             #[1,2,3,5,7] -> 4
@@ -70,12 +82,27 @@ class EspressoExecutor(Executor):
             kwargs.update({'pos' : self.system.box_l * np.random.random(3)})
         print(kwargs)
         part = self.system.part.add(**kwargs)
-        return [getattr(part, attr) for attr in attrs_to_return]
+        if isinstance(attrs_to_return, list):
+            return {attr : getattr(part, attr) for attr in attrs_to_return} 
+        elif isinstance(attrs_to_return, dict):
+            cast = EspressoExecutor.__type_cast(attrs_to_return)
+            return {
+                attr : type_(getattr(part, attr)) 
+                for attr,type_ in cast.items()
+                }
 
-    def remove_particle(self, id, attrs_to_remember : list):
-        attrs =  [
-            getattr(self.system.part[id], attr) for attr in attrs_to_remember
-            ]
+    def remove_particle(self, id, attrs_to_remember):
+        if isinstance(attrs_to_remember, list):
+            attrs =  {
+                attr :
+                getattr(self.system.part[id], attr) for attr in attrs_to_remember
+                }
+        elif isinstance(attrs_to_remember, dict):
+            cast = EspressoExecutor.__type_cast(attrs_to_remember)
+            attrs =  {
+                attr : type_(getattr(self.system.part[id], attr)) 
+                for attr, type_ in cast.items()
+                }
         self.system.part[id].remove()
         return attrs
 

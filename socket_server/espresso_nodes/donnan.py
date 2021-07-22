@@ -13,10 +13,11 @@ import tqdm
 #os.chdir(sys.path[0])
 import threading
 from socket_nodes import Server
-
 import logging
 logging.basicConfig(stream=open('log_server', 'w'), level=logging.INFO)
 
+PAIR = [0,1]
+SIDES = [0,1]
 #%%
 #params
 ELECTROSTATIC = False
@@ -40,7 +41,7 @@ l = [V_**(1/3) for V_ in V]
 server = Server('127.0.0.1', 0)
 threading.Thread(target=server.run, daemon=True).start()
 #%%
-subprocess.Popen(['python', 'esp_node.py','127.0.0.1',f'{server.PORT}', str(l[0])], stdout=open('log0', 'w'))
+subprocess.Popen(['python', 'esp_node.py','127.0.0.1',f'{server.PORT}', str(l[0])], stdout=open('log0', 'w'), stderr=open('log0err', 'w'))
 server.wait_for_connections(1)
 subprocess.Popen(['python', 'esp_node.py','127.0.0.1',f'{server.PORT}', str(l[1])], stdout=open('log1', 'w'))
 server.wait_for_connections(2)
@@ -112,35 +113,37 @@ class Monte_Carlo:
         else:
             prob = math.exp(-beta*delta_fenergy)
             return (prob > random.random())
-    
-    def _get_mc_init_data(self): #return energy, part_ids, box_l
+
+    def __init__(self) -> None:
+        self.steps = 0
         request_body = [
             "/potential_energy()",
+            "system.box_l",
             "/part_data(slice(None,None), ['id', 'type'])",
-            "system.box_l"
             ]
-        system_state_request=server(request_body,[0,1])
-        energy, part_ids, box_l= [[result.result()[i] for result in system_state_request] for i in range(len(request_body))]
-        return energy, part_ids, box_l
+        system_init_state_request=server(request_body,SIDES)
+        self.energy, self.box_l, part_dict= [
+            [result.result()[i] for result in system_init_state_request] 
+                for i in range(len(request_body))
+                ]
+
+        self.volumes = [float(np.prod(self.box_l[i])) for i in SIDES]
+        
+        for i,dict_ in enumerate(part_dict):
+            dict_['side'] = i
+
+        #save info about particles as pandas.DataFrame
+        self.particles = pd.concat([
+            pd.DataFrame(dict_) for dict_ in part_dict
+            ], ignore_index=True)
+
+        self._print_state()
 
     def _print_state(self):
         print('Energy:', self.energy)
         print('Volume:', self.volumes)
         print('Particles:')
         print(self.particles.groupby(by=['side', 'type']).size())
-
-    def __init__(self) -> None:
-        self.steps = 0
-        self.energy, particles, self.box_l = self._get_mc_init_data()
-        self.volumes = [float(np.prod(self.box_l[0])), float(np.prod(self.box_l[1]))]
-
-        #save info about particles as pandas DataFrame
-        self.particles = pd.concat([
-            pd.DataFrame({'side':0, 'id' : particles[0][0], 'type' : particles[0][1]}),
-            pd.DataFrame({'side':1, 'id' : particles[1][0], 'type' : particles[1][1]})
-            ], ignore_index=True)
-
-        self._print_state()
     
     def choose_side_and_part(self):
         side = random.choice([0,1])
@@ -149,20 +152,7 @@ class Monte_Carlo:
             random.choice(self.particles.query(f'side == {side} & type == {1}')['id'].to_list()) #cation
             ]
         return side, rnd_pair_indices
-    
-    def _pair_info_to_dict(self, remove_request, add_request):
-        #remove_pair_dict[side][parameter] -> param_value
-        #used to reversal the move
-        remove_pair_dict = [{'id' : int(remove_request.result()[i][0]),
-                            'pos' : list(remove_request.result()[i][1]),
-                            'v' : list(remove_request.result()[i][2])}
-                            for i in range(2)] #2 because cation and anion
-
-        add_pair_dict = [{'id' : int(add_request.result()[i][0])}
-                        for i in range(2)] #2 because cation and anion
-        
-        return remove_pair_dict, add_pair_dict
-        
+            
     def rotate_velocities_randomly(self,velocities):
         from scipy.spatial.transform import Rotation
         rot = Rotation.random().as_matrix
@@ -175,9 +165,10 @@ class Monte_Carlo:
         ###Pair removal:##################################################
         #request to remove pair but store their pos and v
         #request.result will return [[part.id, part.pos, part.v], [part.id, part.pos, part.v]]
+        attrs_to_return = {'id':'int', 'pos':'list', 'v':'list'}
         remove_part = server([
-            f"/remove_particle({pair_indices[0]},['id','pos', 'v'])", #anion
-            f"/remove_particle({pair_indices[1]},['id','pos', 'v'])", #cation
+            f"/remove_particle({pair_indices[0]},{attrs_to_return})", #anion
+            f"/remove_particle({pair_indices[1]},{attrs_to_return})", #cation
             ],side)
         #request to calculate energy, 
         #separated from previous one so we could do something else while executing
@@ -188,9 +179,8 @@ class Monte_Carlo:
         #rotate velocity vectors
         #can be done when remove_part request is done, 
         #note that energy_after_removal not necessarily should be done by now
-        v_index = 2 # in the remove_part request 'v' was the third
         velocities = self.rotate_velocities_randomly(
-            [remove_part.result()[i][v_index] for i in range(2)])
+            [remove_part.result()[i]['v'] for i in PAIR])
 
 
         ###Pair_addition###################################################
@@ -203,63 +193,79 @@ class Monte_Carlo:
 
         
         ###Energy change###################################################
-        E = [energy_after_removal.result(),add_part.result()[2]]#2-last result
+        E = [energy_after_removal.result(),add_part.result()[-1]]#-1-last result
 
         #number of particles excluding fixed
         n_parts = self.particles.loc[self.particles.type!=2].groupby(by='side').size()
 
-        n1 = n_parts[side]; n2 = n_parts[other_side]; v1 = self.volumes[side]; v2 = self.volumes[other_side]
+        n1 = n_parts[side]; n2 = n_parts[other_side]
+        v1 = self.volumes[side]; v2 = self.volumes[other_side]
         delta_S = Monte_Carlo.entropy_change(n1,n2,v1,v2,2)
         
         #delta_F = -delta_S ##IDEAL GAS
         delta_F = sum(E) - sum(self.energy) - delta_S 
         
 
-        ###Make the data easier to work with################################
-        removed_pair, added_pair  = self._pair_info_to_dict(remove_part, add_part)
+        ###All the data needed to reverse the move################################
+        reversal_data =  {
+            'removed': remove_part.result()[0:2],
+            'added' : add_part.result()[0:2],
+            'side' : side}
 
         #return data that we can reverse or update the system state with
-        return removed_pair, added_pair, E, delta_F
+        return reversal_data, E, delta_F
 
-    def reverse_move(self, side, removed_pair, add_pair):
+    def reverse_move(self, reversal_data):
+        side = reversal_data['side']
+        other_side = int(not(side))
         reverse_remove = server([
-            f"/add_particle(attrs_to_return=['id'], id={removed_pair[0]['id']}, v={removed_pair[0]['v']}, pos={removed_pair[0]['pos']}, q = -1.0, type = 0)",
-            f"/add_particle(attrs_to_return=['id'], id={removed_pair[1]['id']}, v={removed_pair[1]['v']}, pos={removed_pair[1]['pos']}, q = +1.0, type = 1)"
+            f"/add_particle(['id'], q = -1.0, type = 0, **{reversal_data['removed'][0]})",
+            f"/add_particle(['id'], q = +1.0, type = 1, **{reversal_data['removed'][1]})"
             ], side)
         
-        other_side = int(not(side))
         reverse_add = server([
-            f"/remove_particle({add_pair[0]['id']},['id'])", #anion
-            f"/remove_particle({add_pair[1]['id']},['id'])", #cation
-            ],other_side)
+            f"/remove_particle({reversal_data['added'][0]['id']},['id'])", #anion
+            f"/remove_particle({reversal_data['added'][1]['id']},['id'])", #cation
+            ], other_side)
 
-    def update_state(self, side, removed_pair, added_pair, E):
+    def update_state(self, reversal_data, E):
+        side = reversal_data['side']
         other_side = int(not(side))
+        
+        ###Update removed#########################################
+        #can be done much easier
         find = lambda _, side, ids: (_.side==side)&(_.id == ids)
-        idx_to_drop = [self.particles.loc[find(self.particles, side, removed_pair[i]['id'])].index[0] for i in range(2)]
+        idx_to_drop = [
+            self.particles.loc[
+                find(
+                    self.particles, side, reversal_data['removed'][i]['id']
+                    )].index[0] for i in PAIR]
         self.particles.drop(idx_to_drop, inplace=True)
-        self.particles = self.particles.append([{
-            'side' : other_side, 
-            'id' : added_pair[i]['id'],
-            'type' : i} for i in range(2)], ignore_index=True, verify_integrity=True)
-
+        ######Update added########################################
+        added = pd.DataFrame(reversal_data['added'])
+        added['side'] = other_side
+        added['type'] = [0,1]
+        self.particles = self.particles.append(
+            added,
+            ignore_index=True, verify_integrity=True
+            )
+        ######Update energy#######################################
         mc.energy = E
-        #self.particles.reset_index(drop=True)
         
     def step(self):
         side, pair_indices = self.choose_side_and_part()
-        removed_pair, added_pair, E, delta_F = self.move(side, pair_indices)
+        reversal_data, E, delta_F = self.move(side, pair_indices)
         if side:
             print(f"Move: -> ", end = ' ')
         else:
             print(f"Move: <- ", end = ' ')
         print (f"delta_F: {delta_F},",end = ' ')
         if Monte_Carlo.accept(delta_F,1):
-            print('accepted', end = ' ')
-            self.update_state(side, removed_pair, added_pair,E)
+            print('accepted')
+            self.update_state(reversal_data, E)
         else:
-            print('rejected', end = ' ')
-            self.reverse_move(side, removed_pair, added_pair)
+            print('rejected')
+            self.reverse_move(reversal_data)
         print(*self.particles.groupby(by='side').size(), sep=' | ')
         self.steps+=1
     
@@ -281,15 +287,7 @@ def run(mc, warmup_steps):#, sample_size, n_samples):
 #%%
 mc = Monte_Carlo()
 #%%
-df = pd.DataFrame()
-#%%
-%%time
-df=df.append(run(mc, 1000))
-
-#%%
-import seaborn as sns
+mc.step()
 # %%
-sns.lineplot(data=df, x='step', y = 'n', hue = 'side', style='type')
-# %%
-df
+mc._print_state()
 # %%

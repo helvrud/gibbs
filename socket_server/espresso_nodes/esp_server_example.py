@@ -19,12 +19,15 @@ subprocess.Popen(['python', 'esp_node.py', '127.0.0.1', f'{server.PORT}', '10'])
 server.wait_for_connections(2)
 # %%
 #arbitrary function
-request = server(f'system.box_l', 0)
+request = server(f'system.box_l', 1)
 print(request.result())
-
+#%%
 #user-defined function
 server(f"/populate({10}, type = 0, q = -1.0)", 0)
-
+#%%
 request = server(f'len(system.part[:])', 0)
 request.result()# has to be 10
 
+#%%
+server('len(system.part[:])', 1).result()
+# %%
