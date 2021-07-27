@@ -14,6 +14,7 @@ threading.Thread(target=server.run, daemon=True).start()
 # %%
 #start two nodes in subprocesses
 subprocess.Popen(['python', 'esp_node.py', '127.0.0.1', f'{server.PORT}', '10'])
+server.wait_connection()
 subprocess.Popen(['python', 'esp_node.py', '127.0.0.1', f'{server.PORT}', '10'])
 #wait them to connect
 server.wait_for_connections(2)

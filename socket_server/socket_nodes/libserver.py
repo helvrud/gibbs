@@ -157,6 +157,11 @@ class Server():
         while len(self.nodes)<n:
             pass
 
+    def wait_connection(self) -> None:
+        n_nodes = len(self.nodes)
+        while len(self.nodes) == n_nodes:
+            pass
+
 
     def handle_connection(self):
         """
@@ -280,7 +285,7 @@ class Server():
             return self.request_to_multiple_nodes(request_data, node_id)
 
 
-    def wait(self, node_id : int):
+    def wait_node(self, node_id : int):
         """Waits for the node to finnish all the requests, call if you want 
         to make sure that everything is done with this node
         Args:
@@ -290,7 +295,7 @@ class Server():
             pass
 
 
-    def wait_all(self):
+    def wait_all_nodes(self):
         """Waits for the all nodes to finnish all the requests, call if you want 
         to make sure that everything is done with the all connected nodes
 

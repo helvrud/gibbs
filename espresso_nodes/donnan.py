@@ -9,6 +9,7 @@ import os
 import sys
 import subprocess
 import pandas as pd
+import socket_nodes
 import tqdm
 #os.chdir(sys.path[0])
 import threading
@@ -38,8 +39,10 @@ l = [V_**(1/3) for V_ in V]
 
 
 ###start server and nodes
-server = Server('127.0.0.1', 0)
-threading.Thread(target=server.run, daemon=True).start()
+server = socket_nodes.utils.create_server_and_nodes(
+    scripts = ['esp_node.py', 'esp_node.py'], 
+    args_list=[[str(l_)] for l_ in l], 
+    python_executable = 'python')
 #%%
 subprocess.Popen(['python', 'esp_node.py','127.0.0.1',f'{server.PORT}', str(l[0])], stdout=open('log0', 'w'), stderr=open('log0err', 'w'))
 server.wait_for_connections(1)
@@ -290,4 +293,6 @@ mc = Monte_Carlo()
 mc.step()
 # %%
 mc._print_state()
+# %%
+socket_nodes.utils.__dir__()
 # %%
