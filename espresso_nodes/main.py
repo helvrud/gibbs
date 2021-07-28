@@ -13,23 +13,13 @@ import tqdm
 import threading
 PAIR = [0,1]
 SIDES = [0,1]
-#%%
-#params
-ELECTROSTATIC = False
-V_all = 40**3*2
-v = 0.5 #relative volume of the box with fixed anions
-#box volumes and dimmensions
-V = [V_all*(1-v),V_all*v]
-box_l = [V_**(1/3) for V_ in V]
-l_bjerrum = 2.0
-temp = 1
 
 ###start server and nodes
 server = socket_nodes.utils.create_server_and_nodes(
     scripts = ['espresso_node.py', 'espresso_node.py'], 
     args_list=[
         ['-l', box_l[0], '--salt'], 
-        ['-l', box_l[0], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.1]], 
+        ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.1]], 
     python_executable = 'python')
 #%%
 def populate_system(species_count):
@@ -41,7 +31,7 @@ def populate_system(species_count):
             server(f"/populate({count}, **{PARTICLE_ATTR[species]})", i)
 populate_system(MOBILE_SPECIES_COUNT)
 #%%
-server('list(system.part[:].type)',1).result()
+server('system.box_l',0).result()
 #%%
 def setup_non_bonded(non_bonded_attr):
     request_body = [

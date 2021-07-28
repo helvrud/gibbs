@@ -5,6 +5,7 @@ import re
 import numpy as np
 import random
 import math
+from collections import Collection
 
 
 class EspressoExecutor(Executor):
@@ -46,15 +47,30 @@ class EspressoExecutor(Executor):
         return {k : eval(f'{v}') for k, v in type_names_dict.items()}
 
     def part_data(self, id, attrs):
+        if not isinstance(id,slice): 
+            try:
+                id = slice(*id)
+            except:
+                try:
+                    id = slice(id, id+1)
+                except:
+                    id = slice(id)
+        particles = self.system.part[id]
+
         if isinstance(attrs, list):
-            return {attr : getattr(self.system.part[id], attr) 
+            return {attr : getattr(particles, attr) 
                     for attr in attrs}
+        
         elif isinstance(attrs, dict):
             cast = EspressoExecutor.__type_cast(attrs)
-            return {
-                attr : type_(getattr(self.system.part[id], attr))
+            result = [{
+                attr : type_(getattr(part, attr))
                 for attr, type_ in cast.items()
-                }
+                } for part in particles]
+        
+        if len(result) == 1: return result[0]
+        
+        return result
 
     def populate(self, n, **kwargs):
         [self.system.part.add(

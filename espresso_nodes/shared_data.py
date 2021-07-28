@@ -1,12 +1,23 @@
-
 ELECTROSTATIC = False
-
+V_all = 30**3*2
+v = 0.5 #relative volume of the box with fixed anions
+#box volumes and dimmensions
+V = [V_all*(1-v),V_all*v]
+box_l = [V_**(1/3) for V_ in V]
+l_bjerrum = 2.0
+temp = 1
+ELECTROSTATIC = False
 N1 = 75*2 #mobile ions on the left side
 N2 = 25*2 #mobile ions on the right side
+
+
+
 MOBILE_SPECIES_COUNT = [
         {'anion' : int(N1/2), 'cation' : int(N1/2)}, #left side
         {'anion' : int(N2/2), 'cation' : int(N2/2)}, #right side
     ]
+
+
 
 #attributes to use when creating
 PARTICLE_ATTR = dict(
