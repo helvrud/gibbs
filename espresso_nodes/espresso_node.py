@@ -7,12 +7,10 @@ import random
 import math
 
 
-
 class EspressoExecutor(Executor):
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, espresso_system_instance) -> None:
         super().__init__()
-        self.system = espressomd.System(*args, **kwargs)
-    
+        self.system = espresso_system_instance
     def preprocess_string(self, str_) -> str:
         if str_[0]=='/':
             #user defined function (aliases or shortcuts) has to be called
@@ -73,14 +71,12 @@ class EspressoExecutor(Executor):
                 if i not in l:
                     return i
         if 'id' not in kwargs:
-            print('no_id')
             ids = list(self.system.part[:].id)
             new_id = __missing_int(ids)
             if new_id is None: pass
             else: kwargs.update({'id':new_id})
         if 'pos' not in kwargs:
             kwargs.update({'pos' : self.system.box_l * np.random.random(3)})
-        print(kwargs)
         part = self.system.part.add(**kwargs)
         if isinstance(attrs_to_return, list):
             return {attr : getattr(part, attr) for attr in attrs_to_return} 
@@ -117,13 +113,13 @@ class EspressoExecutor(Executor):
             i+=sample_steps
             energy_acc.append(self.potential_energy())
         return np.array(energy_acc)
-    
 
-    
+
 
 #an entry point to run the node in subprocesses
 if __name__=="__main__":
     import argparse
+    import sys
     parser = argparse.ArgumentParser(description='IP')
     parser.add_argument('IP',
                         metavar='IP',
@@ -134,11 +130,49 @@ if __name__=="__main__":
                         type=int,
                         help='PORT')
 
-    parser.add_argument('L',
-                        metavar='L',
-                        type=float,
-                        help='system box length')
+    parser.add_argument('-l', 
+                        metavar='l',
+                        type = float,
+                        help = 'box_size',
+                        required=True)
+
+    parser.add_argument('--salt', 
+                        help = 'salt reservoir',
+                        action='store_true',
+                        required=False)
+
+    parser.add_argument('--gel', 
+                        help = 'add gel to the system',
+                        action='store_true',
+                        required=False)
+
+    parser.add_argument('-MPC', 
+                        metavar='MPC',
+                        type = int,
+                        help = 'particles between nodes',
+                        required='--gel' in sys.argv)
+
+    parser.add_argument('-bond_length', 
+                        metavar='bond_length',
+                        type = float,
+                        help = 'bond length',
+                        required='--gel' in sys.argv)
+    
+    parser.add_argument('-alpha', 
+                        metavar='alpha',
+                        type = float,
+                        help = 'charged monomer ratio',
+                        required='--gel' in sys.argv)
+   
 
     args = parser.parse_args()
-    node = Node(args.IP, args.PORT, EspressoExecutor, box_l = [args.L]*3)
+    if '--salt' in sys.argv:
+        print('Initializing salt reservoir')
+        system = espressomd.System(box_l = [args.l]*3)
+    elif '--gel' in sys.argv:
+        from init_diamond_system import init_diamond_system
+        print('Initializing reservoir with a gel')
+        system = init_diamond_system(args.MPC, args.bond_length, args.alpha) #!!
+
+    node = Node(args.IP, args.PORT, EspressoExecutor, system)
     node.run()
