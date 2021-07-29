@@ -11,6 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import tqdm
 import threading
+import sys
 PAIR = [0,1]
 SIDES = [0,1]
 
@@ -28,10 +29,8 @@ def populate_system(species_count):
             print(f'Added {count} of {species}', end = ' ')
             print(*[f'{attr}={val}' for attr, val in PARTICLE_ATTR[species].items()], end = ' ')
             print(f'to side {i} ')
-            server(f"/populate({count}, **{PARTICLE_ATTR[species]})", i)
+            server(f"populate({count}, **{PARTICLE_ATTR[species]})", i)
 populate_system(MOBILE_SPECIES_COUNT)
-#%%
-server('system.box_l',0).result()
 #%%
 def setup_non_bonded(non_bonded_attr):
     request_body = [

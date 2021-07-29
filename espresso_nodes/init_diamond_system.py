@@ -10,7 +10,7 @@ def init_diamond_system(MPC, bond_length, alpha):
     a = (MPC + 1) * bond_length / (0.25 * np.sqrt(3))
     box_l = [a]*3
     system = espressomd.System(box_l = box_l)
-    print(f"espressomd.System({box_l})")
+    print(f"gel initial volume: {box_l}")
     fene = espressomd.interactions.FeneBond(**BONDED_ATTR['FeneBond'])
     system.bonded_inter.add(fene)
     start_id = system.part.highest_particle_id

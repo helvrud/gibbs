@@ -6,7 +6,6 @@ from enum import Enum, auto
 from typing import List
 import sys
 
-logging.basicConfig(stream=open('log_server', 'w'), level=logging.DEBUG)
 logger = logging.getLogger('Server')
 
 class RequestStatus(Enum):
@@ -102,6 +101,7 @@ class ConnectedNode:
         Request = self.requests.pop(0)
         Request._result = result
         Request.status = RequestStatus.Done
+        logger.debug(f'{Request.request} -> {result}')
 
 
 
@@ -198,7 +198,7 @@ class Server():
             node_id (int): node index in the list of connected nodes (self.nodes)
         """        
         
-        logger.debug(f'Handle income from {self.nodes[node_id].socket.getpeername()}\n data:{income_data}')
+        logger.debug(f'INCOME:{self.nodes[node_id].socket.getpeername()}')
         self.nodes[node_id].finish_request(income_data)
 
 

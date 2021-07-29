@@ -83,9 +83,9 @@ class MonteCarloSocketNodes(AbstractMonteCarlo):
     def setup(self) -> StateData:
         self.steps = 0
         request_body = [
-            "/potential_energy()",
+            "potential_energy()",
             "system.box_l",
-            "/part_data(slice(None,None), ['id', 'type'])",
+            "part_data(slice(None,None), ['id', 'type'])",
             ]
         system_init_state_request=self.server(request_body,SIDES)
         energy, box_l, part_dict= [
@@ -133,13 +133,13 @@ class MonteCarloSocketNodes(AbstractMonteCarlo):
         #request.result will return [[part.id, part.pos, part.v], [part.id, part.pos, part.v]]
         attrs_to_return = {'id':'int', 'pos':'list', 'v':'list'}
         request_body = [
-            f"/remove_particle({pair_indices[i]},{attrs_to_return})" 
+            f"remove_particle({pair_indices[i]},{attrs_to_return})" 
             for i in PAIR]
         remove_part = self.server(request_body,side)
         
         #request to calculate energy after the pair removal, 
         #separated from previous one so we could do something else while executing
-        energy_after_removal = self.server("/potential_energy()", side)
+        energy_after_removal = self.server("potential_energy()", side)
         
         #rotate velocity vectors
         #can be done when remove_part request is done, 
@@ -151,11 +151,11 @@ class MonteCarloSocketNodes(AbstractMonteCarlo):
         #request to add pair and return assigned id then to calculate potential energy
         CHARGE = [-1, 1]
         request_body = [
-            f"/add_particle(attrs_to_return=['id'], v={added_pair_velocity[i]}, q = {CHARGE[i]}, type = {i})" 
+            f"add_particle(attrs_to_return=['id'], v={added_pair_velocity[i]}, q = {CHARGE[i]}, type = {i})" 
             for i in PAIR
             ]
         add_part = self.server(request_body, other_side)
-        energy_after_addition = self.server("/potential_energy()", other_side)
+        energy_after_addition = self.server("potential_energy()", other_side)
 
         ###Entropy change#######################################################
         n1 = self.current_state['n_mobile'][side]
@@ -220,11 +220,11 @@ class MonteCarloSocketNodes(AbstractMonteCarlo):
         side = reversal_data['side']
         other_side = int(not(side))
         reverse_remove = self.server([
-            f"/add_particle(['id'], q = {CHARGES[i]}, type = {i}, **{reversal_data['removed'][i]})"
+            f"add_particle(['id'], q = {CHARGES[i]}, type = {i}, **{reversal_data['removed'][i]})"
             for i in PAIR
             ], side)
         
         reverse_add = self.server([
-            f"/remove_particle({reversal_data['added'][i]['id']},['id'])" 
+            f"remove_particle({reversal_data['added'][i]['id']},['id'])" 
             for i in PAIR
             ], other_side)
