@@ -78,30 +78,14 @@ class EspressoExecutor(LocalScopeExecutor):
             else: kwargs.update({'id':new_id})
         if 'pos' not in kwargs:
             kwargs.update({'pos' : system.box_l * np.random.random(3)})
-        part = system.part.add(**kwargs)
-        if isinstance(attrs_to_return, list):
-            return {attr : getattr(part, attr) for attr in attrs_to_return} 
-        elif isinstance(attrs_to_return, dict):
-            cast = EspressoExecutor.__type_cast(attrs_to_return)
-            return {
-                attr : type_(getattr(part, attr)) 
-                for attr,type_ in cast.items()
-                }
+        added_particle_id = system.part.add(**kwargs).id
+        return self.part_data(added_particle_id, attrs_to_return)
+        
 
-    def remove_particle(self, id, attrs_to_remember):
-        if isinstance(attrs_to_remember, list):
-            attrs =  {
-                attr :
-                getattr(system.part[id], attr) for attr in attrs_to_remember
-                }
-        elif isinstance(attrs_to_remember, dict):
-            cast = EspressoExecutor.__type_cast(attrs_to_remember)
-            attrs =  {
-                attr : type_(getattr(system.part[id], attr)) 
-                for attr, type_ in cast.items()
-                }
+    def remove_particle(self, id, attrs_to_member):
+        removed_particle_attrs = self.part_data(id, attrs_to_member)
         system.part[id].remove()
-        return attrs
+        return removed_particle_attrs
 
     def potential_energy(self):
         return float(system.analysis.energy()['total'] - system.analysis.energy()['kinetic'])

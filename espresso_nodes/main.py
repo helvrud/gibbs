@@ -80,3 +80,5 @@ df[['x', 'y', 'z']] = df.pos.apply(pd.Series)
 # %%
 import plotly.express as px
 px.scatter_3d(df, 'x', 'y', 'z', 'q', 'type')
+
+# %%
