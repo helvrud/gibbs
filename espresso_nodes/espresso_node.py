@@ -7,6 +7,8 @@ import numpy as np
 import random
 import math
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
 class EspressoExecutor(LocalScopeExecutor):
     ###########overridden base class functions #############
     def __init__(self, espresso_system_instance) -> None:
@@ -145,8 +147,9 @@ if __name__=="__main__":
     args = parser.parse_args()
     
     if '--salt' in sys.argv:
+        from init_reservoir_system import init_reservoir_system
         print('Initializing salt reservoir')
-        system = espressomd.System(box_l = [args.l]*3)
+        system = init_reservoir_system(args.l)
     elif '--gel' in sys.argv:
         from init_diamond_system import init_diamond_system
         print('Initializing reservoir with a gel')
