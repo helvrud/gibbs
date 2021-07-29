@@ -1,4 +1,5 @@
 #%%
+import logging
 from shared_data import *
 from socket_nodes import Server
 import socket_nodes
@@ -16,13 +17,16 @@ import sys
 PAIR = [0,1]#for readability in list comprehensions
 SIDES = [0,1]#for readability in list comprehensions
 
+logger  = logging.getLogger('Server')
+logging.basicConfig(stream=open('server_log', 'w'), level=logging.DEBUG)
+
 ###start server and nodes
 server = socket_nodes.utils.create_server_and_nodes(
     scripts = ['espresso_node.py', 'espresso_node.py'], 
     args_list=[
         ['-l', box_l[0], '--salt'],
-        ['-l', box_l[1], '--salt'],],
-        #['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.1]], 
+        #['-l', box_l[1], '--salt'],],
+        ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.1]], 
     python_executable = 'python', stdout = open('log', 'w'))
 #%%
 def populate_system(species_count):
@@ -50,12 +54,13 @@ if ELECTROSTATIC:
     )
 #%%
 MC = MonteCarloSocketNodes(server)
+md_request = server('run_md(100000, 1000)',[0,1])
 # %%
 result=pd.DataFrame()
 #%%
-for round in tqdm.tqdm_notebook(range(10)):
+for round in tqdm.notebook.tqdm(range(10)):
     energy = []
-    for i in tqdm.tqdm_notebook(range(100)):
+    for i in tqdm.notebook.tqdm(range(100)):
         energy.append(MC.step()['energy'])
     energy_mc= np.array(energy).T
     md_request = server('run_md(100000, 1000)',[0,1])
@@ -89,8 +94,6 @@ g = sns.relplot(
     facet_kws={'sharey': False, 'sharex': True},
     kind = 'line'
     )
-
-
 # %%
 particles = server("part_data((None,None), {'type':'int','q':'int', 'pos':'list'})", 1).result()
 df = pd.DataFrame(particles)
@@ -100,4 +103,3 @@ import plotly.express as px
 fig = px.scatter_3d(df, x='x', y='y', z='z', color ='q', symbol = 'type')
 fig.show('browser')
 #%%
-MC.current_state

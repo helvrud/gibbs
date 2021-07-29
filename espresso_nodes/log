@@ -1,4 +1,15 @@
 Initializing salt reservoir
 Reservoir system initialized
-Initializing salt reservoir
-Reservoir system initialized
+Initializing reservoir with a gel
+gel initial volume: [35.694103042379425, 35.694103042379425, 35.694103042379425]
+change_volume to the size L =  29.999999999999993
+compression to box_l =  35.694103042379425
+compression to box_l =  34.980220981531836
+compression to box_l =  34.2806165619012
+compression to box_l =  33.59500423066317
+compression to box_l =  32.92310414604991
+compression to box_l =  32.26464206312891
+compression to box_l =  31.619349221866333
+compression to box_l =  30.986962237429005
+compression to box_l =  30.367222992680425
+volume change done

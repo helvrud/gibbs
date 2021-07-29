@@ -153,7 +153,7 @@ if __name__=="__main__":
     elif '--gel' in sys.argv:
         from init_diamond_system import init_diamond_system
         print('Initializing reservoir with a gel')
-        system = init_diamond_system(args.MPC, args.bond_length, args.alpha) #!!
+        system = init_diamond_system(args.MPC, args.bond_length, args.alpha, target_l=args.l)
 
     node = Node(args.IP, args.PORT, EspressoExecutor, system)
     node.run()

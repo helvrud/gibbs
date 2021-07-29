@@ -5,7 +5,7 @@ import espressomd
 import numpy as np
 import random
 
-def init_diamond_system(MPC, bond_length, alpha):
+def init_diamond_system(MPC, bond_length, alpha, target_l):
     from espressomd import diamond
     a = (MPC + 1) * bond_length / (0.25 * np.sqrt(3))
     box_l = [a]*3
@@ -29,6 +29,8 @@ def init_diamond_system(MPC, bond_length, alpha):
     system.minimize_energy.minimize()
     system.integrator.run(10000)
     
+    change_volume(system, target_l)
+
     return system
 
 def setup_non_bonded(system, non_bonded_attr):
@@ -65,5 +67,6 @@ def change_volume(system, target_l, scale_down_factor = 0.98, scale_up_factor = 
             box_l = box_l*1.05
             if box_l>target_l: box_l = target_l
         system.change_volume_and_rescale_particles(box_l)
+        system.minimize_energy.minimize()
         system.integrator.run(10000)
     print ('volume change done')
