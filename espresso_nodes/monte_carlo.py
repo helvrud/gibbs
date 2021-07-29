@@ -52,10 +52,26 @@ class AbstractMonteCarlo:
             self.on_reject()
         return self.current_state
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import numpy as np
 import pandas as pd
 import math
 import random
+from shared_data import MOBILE_SPECIES, PARTICLE_ATTR
 SIDES = [0,1]
 PAIR = [0,1]
 CHARGES=[-1,1]
@@ -73,6 +89,11 @@ def _entropy_change(N1, N2, V1, V2, n=1):
     elif n==2:
         return math.log((V2/V1)**2*(N1*(N1-1))/((N2+2)*(N2+1)))
 from typing import Tuple
+
+def _get_mobile_species_count(particles_info_df, grouper = ['side']):
+    return particles_info_df.loc[
+        particles_info_df.type.isin(MOBILE_SPECIES)
+        ].groupby(by='side').size().to_list()
 
 class MonteCarloSocketNodes(AbstractMonteCarlo):
     def __init__(self, server):
@@ -95,17 +116,14 @@ class MonteCarloSocketNodes(AbstractMonteCarlo):
 
         volume = [float(np.prod(box_l[i])) for i in SIDES]
         
-        for i,dict_ in enumerate(part_dict):
-            dict_['side'] = i
-
         #save info about particles as pandas.DataFrame
-        particles_df = pd.concat([
-            pd.DataFrame(dict_) for dict_ in part_dict
-            ], ignore_index=True)
+        for side in SIDES:
+            for item in part_dict[side]:
+                item['side'] = side
+        particles_df = pd.concat(pd.DataFrame(part_dict[side]) for side in SIDES)
 
-        #n_particles = self.particles.groupby(by=['side', 'type']).size()
-        #mobile_particles_n
-        n_mobile = particles_df.loc[particles_df.type!=2].groupby(by='side').size().to_list()
+        n_mobile = _get_mobile_species_count(particles_df)
+        
         new_state = StateData(
             energy = energy, 
             volume = volume, 
@@ -150,8 +168,9 @@ class MonteCarloSocketNodes(AbstractMonteCarlo):
         ###Pair_addition###################################################
         #request to add pair and return assigned id then to calculate potential energy
         CHARGE = [-1, 1]
+        attrs_to_return = {'id':'int'}
         request_body = [
-            f"add_particle(attrs_to_return=['id'], v={added_pair_velocity[i]}, q = {CHARGE[i]}, type = {i})" 
+            f"add_particle(attrs_to_return={attrs_to_return}, v={added_pair_velocity[i]}, q = {CHARGE[i]}, type = {i})" 
             for i in PAIR
             ]
         add_part = self.server(request_body, other_side)
@@ -212,7 +231,7 @@ class MonteCarloSocketNodes(AbstractMonteCarlo):
         update_c_state = StateData(
             energy = reversal['energy'],
             particles_info = part_info,
-            n_mobile = part_info.loc[part_info.type!=2].groupby(by='side').size().to_list()
+            n_mobile = _get_mobile_species_count(part_info)
         )
         self.current_state.update(update_c_state)
 
@@ -228,3 +247,9 @@ class MonteCarloSocketNodes(AbstractMonteCarlo):
             f"remove_particle({reversal_data['added'][i]['id']},['id'])" 
             for i in PAIR
             ], other_side)
+
+    def on_accept(self):
+        print("Accept")
+
+    def on_reject(self):
+        print("Reject")

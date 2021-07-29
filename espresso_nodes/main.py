@@ -1,4 +1,5 @@
 #%%
+from pandas.io.formats import style
 from shared_data import *
 from socket_nodes import Server
 import socket_nodes
@@ -69,16 +70,64 @@ def setup_system():
     )
 setup_system()
 #%%
-mc = MonteCarloSocketNodes(server)
+MC = MonteCarloSocketNodes(server)
 # %%
-for i in range(100):
-    print(mc.step()['n_mobile'])
+result=pd.DataFrame()
 #%%
+for round in range(10):
+    energy = []
+    for i in range(100):
+        energy.append(MC.step()['energy'])
+    energy_mc= np.array(energy).T
+    md_request = server('run_md(10000)',[0,1])
+    energy_md = np.array([r.result() for r in md_request])
+    mc = np.vstack((energy_mc, np.array(['mc']*energy_mc.shape[1])))
+    md = np.vstack((energy_md, np.array(['md']*energy_md.shape[1])))
+    mc_md = np.hstack((mc,md))
+    
+    df= pd.DataFrame(mc_md.T, columns=['left', 'right', 'simulation'])
+    df['step'] = list(range(len(df)))
+    df['round'] = round
+    step = len(df)
+    df = df.melt(
+        value_vars=['left', 'right'],
+        id_vars=['round','step','simulation']
+        ).rename(
+            columns = {'variable':'side', 'value':'energy'}
+        ).astype({'energy' : float})
+    result = result.append(df, ignore_index=True)
+for idx, group in result.groupby(by = 'round'):
+    indices = group.index
+    result.loc[indices, 'x'] = np.arange(len(group))+idx*400
+#%%
+import seaborn as sns
+g = sns.relplot(
+    data = result, 
+    x = 'x',
+    y = 'energy', 
+    hue = 'simulation',
+    col = 'side',
+    facet_kws={'sharey': False, 'sharex': True},
+    kind = 'line'
+    )
+
+
+# %%
 particles = server("part_data((None,None), {'type':'int','q':'int', 'pos':'list'})", 1).result()
 df = pd.DataFrame(particles)
+df.q = df.q.astype('category')
 df[['x', 'y', 'z']] = df.pos.apply(pd.Series)
-# %%
 import plotly.express as px
-px.scatter_3d(df, 'x', 'y', 'z', 'q', 'type')
-
+fig = px.scatter_3d(df, x='x', y='y', z='z', color ='q', symbol = 'type')
+fig.show('browser')
+#%%
+MC.current_state
+# %%
+df.loc[df['type'] == 1]
+# %%
+MC.step()
+# %%
+particles = server("part_data((None,None), {'type':'int','q':'int', 'pos':'list'})", 1).result()
+# %%
+df
 # %%

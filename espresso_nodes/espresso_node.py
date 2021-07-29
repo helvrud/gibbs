@@ -36,8 +36,10 @@ class EspressoExecutor(LocalScopeExecutor):
     
     def __get_and_cast_attributes(self, iterable, attrs):
         if isinstance(attrs, list):
-            result = {attr : getattr(iterable, attr) 
-                    for attr in attrs}
+            result = [{
+                attr : getattr(item, attr)
+                for attr in attrs
+                } for item in iterable]
         elif isinstance(attrs, dict):
             cast = EspressoExecutor.__type_cast(attrs)
             result = [{
