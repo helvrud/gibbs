@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-*.pyc
-=======
 *log
 __pycache__/
  *.pyc
 .vscode/
 log_*
->>>>>>> 109f8b0fe88ca43b7e47e429004b872ca167fcac
