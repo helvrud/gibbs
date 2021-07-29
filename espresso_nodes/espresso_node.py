@@ -8,45 +8,55 @@ import random
 import math
 
 class EspressoExecutor(LocalScopeExecutor):
+    ###########overridden base class functions #############
     def __init__(self, espresso_system_instance) -> None:
         super().__init__()
         if 'system' not in globals():
             raise(RuntimeError('espressomd.System is not initialized'))
         else:
             self.system = espresso_system_instance
-    ########### additional user defined function #############
-    ######### for frequent requests, aliases or shorthands####
-    ######### to use just request 'self.function_name(args)'##
-    ######### or start command with / ########################
+            
+    ###########'private' user defined function #############
     @staticmethod
     def __type_cast(type_names_dict) -> dict:
         return {k : eval(f'{v}') for k, v in type_names_dict.items()}
 
-    def part_data(self, id, attrs):
-        if not isinstance(id,slice): 
-            try:
-                id = slice(*id)
-            except:
-                try:
-                    id = slice(id, id+1)
-                except:
-                    id = slice(id)
-        particles = system.part[id]
-
+    def __get_particles(self, indices):
+        if isinstance(indices, int):
+            particles = [self.system.part[indices]]
+        elif isinstance(indices, slice):
+            particles = self.system.part[indices]
+        elif isinstance(indices, tuple):
+            particles = self.system.part[slice(*indices)]
+        elif isinstance(indices, list):
+            particles = [self.system.part[id] for id in indices]
+        else:
+            raise TypeError('system.part[indices] indices type error')
+        return particles
+    
+    def __get_and_cast_attributes(self, iterable, attrs):
         if isinstance(attrs, list):
-            return {attr : getattr(particles, attr) 
+            result = {attr : getattr(iterable, attr) 
                     for attr in attrs}
-        
         elif isinstance(attrs, dict):
             cast = EspressoExecutor.__type_cast(attrs)
             result = [{
-                attr : type_(getattr(part, attr))
+                attr : type_(getattr(item, attr))
                 for attr, type_ in cast.items()
-                } for part in particles]
-        
-        if len(result) == 1: return result[0]
-        
+                } for item in iterable]
+        else:
+            raise TypeError(
+                'Attribute collection type error, use list or dict')
         return result
+
+    ###########'public' user defined function #############
+    def part_data(self, indices, attrs):
+        particles = self.__get_particles(indices)
+        print(particles)
+        attributes = self.__get_and_cast_attributes(particles, attrs)
+        
+        if len(attributes) == 1: return attributes[0]
+        return attributes
 
     def populate(self, n, **kwargs):
         [system.part.add(
@@ -105,8 +115,6 @@ class EspressoExecutor(LocalScopeExecutor):
             i+=sample_steps
             energy_acc.append(self.potential_energy())
         return np.array(energy_acc)
-#%%
-
 
 #an entry point to run the node in subprocesses
 if __name__=="__main__":
@@ -121,43 +129,36 @@ if __name__=="__main__":
                         metavar='PORT',
                         type=int,
                         help='PORT')
-
     parser.add_argument('-l', 
                         metavar='l',
                         type = float,
                         help = 'box_size',
                         required=True)
-
     parser.add_argument('--salt', 
                         help = 'salt reservoir',
                         action='store_true',
                         required=False)
-
     parser.add_argument('--gel', 
                         help = 'add gel to the system',
                         action='store_true',
                         required=False)
-
     parser.add_argument('-MPC', 
                         metavar='MPC',
                         type = int,
                         help = 'particles between nodes',
                         required='--gel' in sys.argv)
-
     parser.add_argument('-bond_length', 
                         metavar='bond_length',
                         type = float,
                         help = 'bond length',
                         required='--gel' in sys.argv)
-    
     parser.add_argument('-alpha', 
                         metavar='alpha',
                         type = float,
                         help = 'charged monomer ratio',
                         required='--gel' in sys.argv)
-   
-
     args = parser.parse_args()
+    
     if '--salt' in sys.argv:
         print('Initializing salt reservoir')
         system = espressomd.System(box_l = [args.l]*3)

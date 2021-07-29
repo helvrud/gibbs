@@ -21,7 +21,7 @@ server = socket_nodes.utils.create_server_and_nodes(
     args_list=[
         ['-l', box_l[0], '--salt'], 
         ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.1]], 
-    python_executable = 'python')
+    python_executable = 'python', stdout = open('log', 'w'))
 #%%
 def populate_system(species_count):
     for i,side in enumerate(species_count):
@@ -72,7 +72,7 @@ mc = MonteCarloSocketNodes(server)
 # %%
 for i in range(1000):
     print(mc.step()['n_mobile'])
+
 # %%
-mc.current_state['particles_info'].groupby(by = ['side', 'type']).size()
+server("part_data([4,5,6], {'id':'int'})", 0).result()
 # %%
-mc.step()
