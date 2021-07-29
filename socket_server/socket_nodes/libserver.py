@@ -6,7 +6,6 @@ from enum import Enum, auto
 from typing import List
 import sys
 
-logging.basicConfig(stream=open('log_server', 'w'), level=logging.DEBUG)
 logger = logging.getLogger('Server')
 
 class RequestStatus(Enum):
@@ -102,6 +101,7 @@ class ConnectedNode:
         Request = self.requests.pop(0)
         Request._result = result
         Request.status = RequestStatus.Done
+        logger.debug(f'{Request.request} -> {result}')
 
 
 
@@ -157,6 +157,11 @@ class Server():
         while len(self.nodes)<n:
             pass
 
+    def wait_connection(self) -> None:
+        n_nodes = len(self.nodes)
+        while len(self.nodes) == n_nodes:
+            pass
+
 
     def handle_connection(self):
         """
@@ -193,7 +198,7 @@ class Server():
             node_id (int): node index in the list of connected nodes (self.nodes)
         """        
         
-        logger.debug(f'Handle income from {self.nodes[node_id].socket.getpeername()}\n data:{income_data}')
+        logger.debug(f'INCOME:{self.nodes[node_id].socket.getpeername()}')
         self.nodes[node_id].finish_request(income_data)
 
 
@@ -280,7 +285,7 @@ class Server():
             return self.request_to_multiple_nodes(request_data, node_id)
 
 
-    def wait(self, node_id : int):
+    def wait_node(self, node_id : int):
         """Waits for the node to finnish all the requests, call if you want 
         to make sure that everything is done with this node
         Args:
@@ -290,7 +295,7 @@ class Server():
             pass
 
 
-    def wait_all(self):
+    def wait_all_nodes(self):
         """Waits for the all nodes to finnish all the requests, call if you want 
         to make sure that everything is done with the all connected nodes
 

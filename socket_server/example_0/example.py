@@ -2,18 +2,13 @@
 import threading
 import subprocess
 from socket_nodes import Server
+import socket_nodes.utils
 
-#%%
-#init server, PORT assigned by OS
-server = Server('127.0.0.1', 0)
-#non-blocking server loop
-threading.Thread(target=server.run, daemon=True).start()
-# %%
-#start two nodes in subprocesses
-subprocess.Popen(['python', 'example_node.py', '127.0.0.1', f'{server.PORT}'])
-subprocess.Popen(['python', 'example_node.py', '127.0.0.1', f'{server.PORT}'])
-#wait them to connect
-server.wait_for_connections(2)
+
+server = socket_nodes.utils.create_server_and_nodes(
+    scripts = ['example_node.py', 'example_node.py'], 
+    args_list=[[],[]], 
+    python_executable = 'python')
 
 # %%
 request = []
@@ -22,4 +17,6 @@ for i in range(100):
     request.append(server(f'{i}**2', 1))
 # %%
 print ([request_.result() for request_ in request])
+# %%
+server.nodes
 # %%
