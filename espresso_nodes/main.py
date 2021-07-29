@@ -101,5 +101,9 @@ df.q = df.q.astype('category')
 df[['x', 'y', 'z']] = df.pos.apply(pd.Series)
 import plotly.express as px
 fig = px.scatter_3d(df, x='x', y='y', z='z', color ='q', symbol = 'type')
-fig.show('browser')
+fig.show()
 #%%
+server('system.box_l', 1).result()
+# %%
+df
+# %%
