@@ -52,7 +52,6 @@ class EspressoExecutor(LocalScopeExecutor):
     ###########'public' user defined function #############
     def part_data(self, indices, attrs):
         particles = self.__get_particles(indices)
-        print(particles)
         attributes = self.__get_and_cast_attributes(particles, attrs)
         
         if len(attributes) == 1: return attributes[0]

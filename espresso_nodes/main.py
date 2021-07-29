@@ -12,8 +12,9 @@ import matplotlib.pyplot as plt
 import tqdm
 import threading
 import sys
-PAIR = [0,1]
-SIDES = [0,1]
+
+PAIR = [0,1]#for readability in list comprehensions
+SIDES = [0,1]#for readability in list comprehensions
 
 ###start server and nodes
 server = socket_nodes.utils.create_server_and_nodes(
@@ -70,9 +71,12 @@ setup_system()
 #%%
 mc = MonteCarloSocketNodes(server)
 # %%
-for i in range(1000):
+for i in range(100):
     print(mc.step()['n_mobile'])
-
+#%%
+particles = server("part_data((None,None), {'type':'int','q':'int', 'pos':'list'})", 1).result()
+df = pd.DataFrame(particles)
+df[['x', 'y', 'z']] = df.pos.apply(pd.Series)
 # %%
-server("part_data([4,5,6], {'id':'int'})", 0).result()
-# %%
+import plotly.express as px
+px.scatter_3d(df, 'x', 'y', 'z', 'q', 'type')
