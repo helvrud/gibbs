@@ -1,4 +1,4 @@
-#%%
+
 import sys
 from shared_data import *
 import espressomd
@@ -13,10 +13,8 @@ def init_diamond_system(MPC, bond_length, alpha, target_l):
     system.time_step = 0.001
     system.cell_system.skin = 0.4
     system.thermostat.set_langevin(kT=1, gamma=1, seed=42)
-    system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)
-    system.minimize_energy.minimize()
-    system.integrator.run(10000)
-    
+    system.minimize_energy.init(f_max=50, gamma=60.0, max_steps=10000, max_displacement=0.001)
+
     print(f"gel initial volume: {box_l}")
     fene = espressomd.interactions.FeneBond(**BONDED_ATTR['FeneBond'])
     system.bonded_inter.add(fene)
@@ -25,47 +23,53 @@ def init_diamond_system(MPC, bond_length, alpha, target_l):
     start_id = system.part.highest_particle_id
     diamond.Diamond(a=a, bond_length=bond_length, MPC=MPC)
     gel_indices  = (start_id+1, system.part.highest_particle_id+1)
+    
+    re_type_nodes(system, gel_indices)
     charge_gel(system, gel_indices, alpha)
+    print('Minimizing energy before volume change')
+    system.minimize_energy.minimize()
     change_volume(system, target_l)
-
     return system
 
 def setup_non_bonded(system, non_bonded_attr):
     [system.non_bonded_inter[particle_types].lennard_jones.set_params(**lj_kwargs)
             for particle_types, lj_kwargs in non_bonded_attr.items()]
 
-def charge_gel(system, gel_indices, alpha, add_counterions = True):
-    #discharge the gel
+
+def re_type_nodes(system, gel_indices):
     particles = list(system.part[slice(*gel_indices)])
     for part in particles:
         for attr_name, attr_val in PARTICLE_ATTR['gel_neutral'].items():
             setattr(part, attr_name, attr_val)
-    #charge n_charged random particles
+
+def charge_gel(system, gel_indices, alpha, add_counterions = True):
+    particles = list(system.part[slice(*gel_indices)])
     n_charged = int(len(particles)*alpha)
-    for part in random.sample(particles, n_charged):
+    for i, part in enumerate(random.sample(particles, n_charged)):
         for attr_name, attr_val in PARTICLE_ATTR['gel_anion'].items():
             setattr(part, attr_name, attr_val)
-    if add_counterions:
-        for _ in range(n_charged):
-            system.part.add(pos = system.box_l * np.random.random(3), **PARTICLE_ATTR['cation'])
-    system.minimize_energy.minimize()
-    system.integrator.run(10000)
+        if add_counterions:
+            system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['cation'])
+        print(f'{i}/{n_charged} charged')
 
-def change_volume(system, target_l, scale_down_factor = 0.98, scale_up_factor = 1.05, integrator_steps = 10000):
+def change_volume(system, target_l, scale_down_factor = 0.99, scale_up_factor = 1.05, integrator_steps = 10000):
     print ('change_volume to the size L = ', target_l)
-    #~ target_l = self.box_l
-    box_l = system.box_l[0]
-    
-    while box_l != target_l:
-        if target_l < box_l:    
-            print ('compression to box_l = ', box_l)
-            box_l = box_l*scale_down_factor
-            if box_l<target_l: box_l = target_l
-        else:
-            print ('blowing up to box_l = ', box_l)
-            box_l = box_l*scale_down_factor
-            if box_l>target_l: box_l = target_l
-        system.change_volume_and_rescale_particles(d_new = box_l)
-        system.minimize_energy.minimize()
-        system.integrator.run(10000)
+    while system.box_l[0] != target_l:
+        factor = target_l/system.box_l[0]
+        if factor<scale_down_factor: 
+            factor = scale_down_factor 
+        elif factor>scale_up_factor:
+            factor = scale_up_factor
+        d_new = system.box_l[0]*factor
+        system.change_volume_and_rescale_particles(d_new)
+        system.integrator.run(integrator_steps)
+        print(f'gel box_size: {system.box_l[0]}')
     print ('volume change done')
+
+
+if __name__=='__main__':
+    system = init_diamond_system(15,0.966,0.2,30)
+    from espressomd.visualization_opengl import  openGLLive
+    visualizer = openGLLive(system)
+    visualizer.run()
+

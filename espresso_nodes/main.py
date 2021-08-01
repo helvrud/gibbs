@@ -26,7 +26,7 @@ server = socket_nodes.utils.create_server_and_nodes(
     args_list=[
         ['-l', box_l[0], '--salt'],
         #['-l', box_l[1], '--salt'],],
-        ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.1]], 
+        ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.05]], 
     python_executable = 'python', stdout = open('log', 'w'))
 #%%
 def populate_system(species_count):
@@ -102,8 +102,9 @@ df[['x', 'y', 'z']] = df.pos.apply(pd.Series)
 import plotly.express as px
 fig = px.scatter_3d(df, x='x', y='y', z='z', color ='q', symbol = 'type')
 fig.show()
-#%%
-server('system.box_l', 1).result()
+
 # %%
-df
+md_request = server('run_md(100000, 1000)',1).result()
+# %%
+md_request
 # %%
