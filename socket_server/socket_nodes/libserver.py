@@ -145,7 +145,7 @@ class Server():
             #the port has been assigned by OS
             self.PORT=self.socket.getsockname()[1]
             logger.info(f'The port has been assigned by OS, PORT : {self.PORT}')
-        logger.info(f'Listening to {self.IP} ...')
+        logger.info(f'Started.')
 
 
     def wait_for_connections(self, n : int) -> None:

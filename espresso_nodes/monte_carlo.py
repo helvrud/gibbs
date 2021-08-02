@@ -1,76 +1,12 @@
 from typing import Tuple
-class ReversalData(dict):
-    pass
-
-class StateData(dict):
-    pass
-
-class AcceptCriterion(dict):
-    pass
-
-class AbstractMonteCarlo:
-    current_state : StateData
-    def __init__(self):
-        pass
-    
-    def setup(self) -> StateData:
-        pass
-
-    def move(self) -> Tuple[ReversalData, AcceptCriterion]:
-        pass
-
-    def reverse(self, reverse_data : ReversalData):
-        pass
-
-    def accept(self, criterion: AcceptCriterion) -> bool:
-        dE = criterion['dE']
-        dS = criterion['dS']
-        beta = criterion['beta']
-        dF = dE-dS
-        if dF<0:
-            return True
-        else:
-            prob = math.exp(-beta*dF)
-            return (prob > random.random())
-
-    def on_accept(self):
-        pass
-
-    def on_reject(self):
-        pass
-
-    def update_state(self, reversal : ReversalData):
-        pass
-
-    def step(self):
-        reversal, accept_criterion = self.move()
-        if self.accept(accept_criterion):
-            self.update_state(reversal)
-            self.on_accept()
-        else:
-            self.reverse(reversal)
-            self.on_reject()
-        return self.current_state
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import numpy as np
 import pandas as pd
 import math
 import random
+
+import sys 
+sys.path.append('..') #to import libmontecarlo
+from libmontecarlo import *
 from shared_data import MOBILE_SPECIES, PARTICLE_ATTR
 SIDES = [0,1]
 PAIR = [0,1]
@@ -95,14 +31,13 @@ def _get_mobile_species_count(particles_info_df, grouper = ['side']):
         particles_info_df.type.isin(MOBILE_SPECIES)
         ].groupby(by='side').size().to_list()
 
-class MonteCarloSocketNodes(AbstractMonteCarlo):
+class MonteCarloPairs(AbstractMonteCarlo):
     def __init__(self, server):
         super().__init__()
         self.server = server
         self.current_state = self.setup()
 
     def setup(self) -> StateData:
-        self.steps = 0
         request_body = [
             "potential_energy()",
             "system.box_l",
@@ -253,3 +188,26 @@ class MonteCarloSocketNodes(AbstractMonteCarlo):
 
     def on_reject(self):
         print("Reject")
+
+def scatter3d(server, client):
+    box_l = server("system.box_l[0]", client).result()
+    particles = server("part_data((None,None), {'type':'int','q':'int', 'pos':'list'})", client).result()
+    df = pd.DataFrame(particles)
+    df.q = df.q.astype('category')
+    df[['x', 'y', 'z']] = df.pos.apply(pd.Series).apply(lambda x: x%box_l)
+    import plotly.express as px
+    fig = px.scatter_3d(df, x='x', y='y', z='z', color ='q', symbol = 'type')
+    fig.show()
+
+def current_state_to_record(state : StateData, step = None) -> pd.DataFrame:
+    df = state['particles_info']\
+    .groupby(by = ['side', 'type'])\
+    .size().unstack(fill_value=0)
+    df.columns.name = None
+    df.columns = PARTICLE_ATTR.keys()
+    df['energy'] = state['energy']
+    df['volume'] = state['volume']
+    if step is not None:
+        df['step'] = step
+    df = df.reset_index()
+    return df

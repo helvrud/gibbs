@@ -85,7 +85,6 @@ class EspressoExecutor(LocalScopeExecutor):
         added_particle_id = system.part.add(**kwargs).id
         return self.part_data(added_particle_id, attrs_to_return)
         
-
     def remove_particle(self, id, attrs_to_member):
         removed_particle_attrs = self.part_data(id, attrs_to_member)
         system.part[id].remove()

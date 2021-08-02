@@ -3,7 +3,7 @@ import logging
 from shared_data import *
 from socket_nodes import Server
 import socket_nodes
-from monte_carlo import MonteCarloSocketNodes
+from monte_carlo import MonteCarloPairs, current_state_to_record, scatter3d
 
 import random
 import math
@@ -11,7 +11,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import tqdm
-import threading
 import sys
 
 PAIR = [0,1]#for readability in list comprehensions
@@ -28,7 +27,6 @@ server = socket_nodes.utils.create_server_and_nodes(
         #['-l', box_l[1], '--salt'],],
         ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.05]], 
     python_executable = 'python', stdout = open('log', 'w'))
-#%%
 def populate_system(species_count):
     for i,side in enumerate(species_count):
         for species, count in side.items():
@@ -37,7 +35,6 @@ def populate_system(species_count):
             print(f'to side {i} ')
             server(f"populate({count}, **{PARTICLE_ATTR[species]})", i)
 populate_system(MOBILE_SPECIES_COUNT)
-#%%
 ##switch on electrostatics
 if ELECTROSTATIC:
     server.request(
@@ -52,59 +49,17 @@ if ELECTROSTATIC:
         ],
         [0,1]
     )
-#%%
-MC = MonteCarloSocketNodes(server)
-md_request = server('run_md(100000, 1000)',[0,1])
-# %%
-result=pd.DataFrame()
-#%%
-for round in tqdm.notebook.tqdm(range(10)):
-    energy = []
-    for i in tqdm.notebook.tqdm(range(100)):
-        energy.append(MC.step()['energy'])
-    energy_mc= np.array(energy).T
-    md_request = server('run_md(100000, 1000)',[0,1])
-    energy_md = np.array([r.result() for r in md_request])
-    mc = np.vstack((energy_mc, np.array(['mc']*energy_mc.shape[1])))
-    md = np.vstack((energy_md, np.array(['md']*energy_md.shape[1])))
-    mc_md = np.hstack((mc,md))
-    
-    df= pd.DataFrame(mc_md.T, columns=['left', 'right', 'simulation'])
-    df['step'] = list(range(len(df)))
-    df['round'] = round
-    step = len(df)
-    df = df.melt(
-        value_vars=['left', 'right'],
-        id_vars=['round','step','simulation']
-        ).rename(
-            columns = {'variable':'side', 'value':'energy'}
-        ).astype({'energy' : float})
-    result = result.append(df, ignore_index=True)
-for idx, group in result.groupby(by = 'round'):
-    indices = group.index
-    result.loc[indices, 'x'] = np.arange(len(group))+idx*400
-#%%
-import seaborn as sns
-g = sns.relplot(
-    data = result, 
-    x = 'x',
-    y = 'energy', 
-    hue = 'simulation',
-    col = 'side',
-    facet_kws={'sharey': False, 'sharex': True},
-    kind = 'line'
-    )
-# %%
-particles = server("part_data((None,None), {'type':'int','q':'int', 'pos':'list'})", 1).result()
-df = pd.DataFrame(particles)
-df.q = df.q.astype('category')
-df[['x', 'y', 'z']] = df.pos.apply(pd.Series)
-import plotly.express as px
-fig = px.scatter_3d(df, x='x', y='y', z='z', color ='q', symbol = 'type')
-fig.show()
+MC = MonteCarloPairs(server)
 
 # %%
-md_request = server('run_md(100000, 1000)',1).result()
+df = pd.DataFrame()
+step = 0
+for k in range(10):
+    for i in range(100):
+        df = df.append(current_state_to_record(MC.step(), step), ignore_index=True)
+        df['note'] = 'equilibration'
+        server('run_md(10000)')
+        step+=1
 # %%
-md_request
+df.reset_index(drop = True)
 # %%
