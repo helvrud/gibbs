@@ -53,13 +53,26 @@ MC = MonteCarloPairs(server)
 
 # %%
 df = pd.DataFrame()
-step = 0
+step = 4000
 for k in range(10):
     for i in range(100):
-        df = df.append(current_state_to_record(MC.step(), step), ignore_index=True)
+        df = df.append(
+            current_state_to_record(
+                MC.step(), step
+            ), 
+            ignore_index=True
+        )
         df['note'] = 'equilibration'
-        server('run_md(10000)')
         step+=1
+    print('MD')
+    r = server('run_md(10000)',[0,1])
+    MC.current_state=MC.setup()
 # %%
-df.reset_index(drop = True)
+res = res.append(df)
 # %%
+import seaborn as sns
+
+g = sns.relplot(data=res, col = 'side', x='step', y = 'energy', facet_kws={'sharey':False}, kind='line')
+
+# %%
+scatter3d(server, 1)
