@@ -1,4 +1,5 @@
 from sys import executable
+from pandas.io.parsers import read_csv
 from socket_nodes import LocalScopeExecutor, Node
 ##import all you might need later when requesting from server
 import espressomd
@@ -7,9 +8,8 @@ import numpy as np
 import random
 import math
 
-import logging
-logging.basicConfig(level=logging.DEBUG)
-class EspressoExecutor(LocalScopeExecutor):
+
+class EspressoExecutorSalt(LocalScopeExecutor):
     ###########overridden base class functions #############
     def __init__(self, espresso_system_instance) -> None:
         super().__init__()
@@ -43,7 +43,7 @@ class EspressoExecutor(LocalScopeExecutor):
                 for attr in attrs
                 } for item in iterable]
         elif isinstance(attrs, dict):
-            cast = EspressoExecutor.__type_cast(attrs)
+            cast = EspressoExecutorSalt.__type_cast(attrs)
             result = [{
                 attr : type_(getattr(item, attr))
                 for attr, type_ in cast.items()
@@ -62,8 +62,8 @@ class EspressoExecutor(LocalScopeExecutor):
         return attributes
 
     def populate(self, n, **kwargs):
-        [system.part.add(
-            pos=system.box_l * np.random.random(3), **kwargs
+        [self.system.part.add(
+            pos=self.system.box_l * np.random.random(3), **kwargs
             ) for _ in range(n)
         ]
 
@@ -76,31 +76,56 @@ class EspressoExecutor(LocalScopeExecutor):
                 if i not in l:
                     return i
         if 'id' not in kwargs:
-            ids = list(system.part[:].id)
+            ids = list(self.system.part[:].id)
             new_id = __missing_int(ids)
             if new_id is None: pass
             else: kwargs.update({'id':new_id})
         if 'pos' not in kwargs:
-            kwargs.update({'pos' : system.box_l * np.random.random(3)})
-        added_particle_id = system.part.add(**kwargs).id
+            kwargs.update({'pos' : self.system.box_l * np.random.random(3)})
+        added_particle_id = self.system.part.add(**kwargs).id
         return self.part_data(added_particle_id, attrs_to_return)
         
     def remove_particle(self, id, attrs_to_member):
         removed_particle_attrs = self.part_data(id, attrs_to_member)
-        system.part[id].remove()
+        self.system.part[id].remove()
         return removed_particle_attrs
 
     def potential_energy(self):
-        return float(system.analysis.energy()['total'] - system.analysis.energy()['kinetic'])
+        return float(self.system.analysis.energy()['total'] - self.system.analysis.energy()['kinetic'])
+
+    def pressure(self):
+        return float(self.system.analysis.pressure()['total']) 
 
     def run_md(self, steps, sample_steps=100):
         i=0
-        energy_acc=[]
+        pressure_acc=[]
         while i<steps:
-            system.integrator.run(sample_steps)
+            self.system.integrator.run(sample_steps)
             i+=sample_steps
-            energy_acc.append(self.potential_energy())
-        return np.array(energy_acc)
+            pressure_acc.append(self.pressure())
+        return pressure_acc
+
+
+class EspressoExecutorGel(EspressoExecutorSalt):
+    def Re(self):
+        from init_diamond_system import calc_Re, _get_pairs
+        pairs = _get_pairs(self.system,0)
+        Re = calc_Re(self.system, pairs)
+        return Re
+
+    def run_md(self, steps, sample_steps=100):
+        i=0
+        acc=[]
+        while i<steps:
+            self.system.integrator.run(sample_steps)
+            i+=sample_steps
+            acc.append(self.Re())
+        return acc
+
+
+
+
+
 
 #an entry point to run the node in subprocesses
 if __name__=="__main__":
@@ -146,13 +171,18 @@ if __name__=="__main__":
     args = parser.parse_args()
     
     if '--salt' in sys.argv:
+        import logging
+        logging.basicConfig(level=logging.DEBUG, stream=open('salt_log', 'w'))
         from init_reservoir_system import init_reservoir_system
         print('Initializing salt reservoir')
         system = init_reservoir_system(args.l)
+        node = Node(args.IP, args.PORT, EspressoExecutorSalt, system)
+        node.run()
     elif '--gel' in sys.argv:
+        import logging
+        logging.basicConfig(level=logging.DEBUG, stream=open('gel_log', 'w'))
         from init_diamond_system import init_diamond_system
         print('Initializing reservoir with a gel')
         system = init_diamond_system(args.MPC, args.bond_length, args.alpha, target_l=args.l)
-
-    node = Node(args.IP, args.PORT, EspressoExecutor, system)
-    node.run()
+        node = Node(args.IP, args.PORT, EspressoExecutorGel, system)
+        node.run()

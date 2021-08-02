@@ -10,7 +10,7 @@ import math
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import tqdm
+from tqdm import tqdm
 import sys
 
 PAIR = [0,1]#for readability in list comprehensions
@@ -25,7 +25,7 @@ server = socket_nodes.utils.create_server_and_nodes(
     args_list=[
         ['-l', box_l[0], '--salt'],
         #['-l', box_l[1], '--salt'],],
-        ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.05]], 
+        ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.00]], 
     python_executable = 'python', stdout = open('log', 'w'))
 def populate_system(species_count):
     for i,side in enumerate(species_count):
@@ -49,30 +49,28 @@ if ELECTROSTATIC:
         ],
         [0,1]
     )
+server('system.minimize_energy.minimize()', [0,1])
 MC = MonteCarloPairs(server)
-
 # %%
-df = pd.DataFrame()
-step = 4000
-for k in range(10):
-    for i in range(100):
-        df = df.append(
+mc_df = pd.DataFrame()
+md_df = pd.DataFrame()
+step = 0
+#%%
+for k in tqdm(range(10)):
+    for i in tqdm(range(1000)):
+        mc_df = mc_df.append(
             current_state_to_record(
                 MC.step(), step
             ), 
             ignore_index=True
         )
-        df['note'] = 'equilibration'
+        mc_df['note'] = 'equilibration'
         step+=1
-    print('MD')
-    r = server('run_md(10000)',[0,1])
+    r = server('run_md(10000,1000)',[0,1])
+    P_Re = pd.DataFrame(r[1].result()).add_prefix('Re_')
+    P_Re['Pressure'] = r[0].result()
+    md_df=md_df.append(P_Re, ignore_index=True)
     MC.current_state=MC.setup()
 # %%
-res = res.append(df)
-# %%
-import seaborn as sns
-
-g = sns.relplot(data=res, col = 'side', x='step', y = 'energy', facet_kws={'sharey':False}, kind='line')
-
-# %%
-scatter3d(server, 1)
+mc_df.to_csv('mc_20_alpha_0_2.csv')
+md_df.to_csv('md_20_alpha_0_2.csv')

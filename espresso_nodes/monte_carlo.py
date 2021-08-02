@@ -199,12 +199,20 @@ def scatter3d(server, client):
     fig = px.scatter_3d(df, x='x', y='y', z='z', color ='q', symbol = 'type')
     fig.show()
 
-def current_state_to_record(state : StateData, step = None) -> pd.DataFrame:
+def current_state_to_record(state, step = None) -> pd.DataFrame:
     df = state['particles_info']\
     .groupby(by = ['side', 'type'])\
     .size().unstack(fill_value=0)
     df.columns.name = None
-    df.columns = PARTICLE_ATTR.keys()
+    d = {
+        type_:key for key, type_ 
+        in zip(PARTICLE_ATTR.keys(),
+        [
+            ATTR['type'] for ATTR in PARTICLE_ATTR.values()
+            ]
+        )
+    }
+    df.rename(columns = d, inplace = True)
     df['energy'] = state['energy']
     df['volume'] = state['volume']
     if step is not None:

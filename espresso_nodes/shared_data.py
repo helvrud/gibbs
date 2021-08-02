@@ -1,5 +1,5 @@
 ELECTROSTATIC = False
-V_all = 30**3*2
+V_all = 20**3*2
 v = 0.5 #relative volume of the box with fixed anions
 #box volumes and dimmensions
 V = [V_all*(1-v),V_all*v]
@@ -7,8 +7,8 @@ box_l = [V_**(1/3) for V_ in V]
 l_bjerrum = 2.0
 temp = 1
 ELECTROSTATIC = False
-N1 = 75*2 #mobile ions on the left side
-N2 = 25*2 #mobile ions on the right side
+N1 = 30 #mobile ions on the left side
+N2 = 170 #mobile ions on the right side
 
 
 
@@ -25,6 +25,8 @@ PARTICLE_ATTR = dict(
     cation = {'type' : 1, 'q':1},
     gel_neutral = {'type' : 2, 'q':0},
     gel_anion = {'type' : 3, 'q':-1},
+    gel_node_neutral = {'type' : 4, 'q':0},
+    gel_node_anion = {'type' : 5, 'q':-1},
 )
 #types of the particles that are mobile
 MOBILE_SPECIES = [0,1]
