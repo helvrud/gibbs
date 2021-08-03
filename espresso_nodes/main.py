@@ -1,9 +1,7 @@
 #%%
-import logging
-from shared_data import *
 from socket_nodes import Server
 import socket_nodes
-from monte_carlo import MonteCarloPairs, current_state_to_record, scatter3d
+from monte_carlo import MonteCarloPairs, current_state_to_record
 
 import random
 import math
@@ -13,20 +11,26 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 import sys
 
-PAIR = [0,1]#for readability in list comprehensions
-SIDES = [0,1]#for readability in list comprehensions
-
-logger  = logging.getLogger('Server')
+import logging
+logger = logging.getLogger(__name__)
 logging.basicConfig(stream=open('server_log', 'w'), level=logging.DEBUG)
+
+
+from shared_data import V_all, PARTICLE_ATTR, MOBILE_SPECIES_COUNT
+
+#box volumes and dimmensions
+v = 0.5 #relative volume of the gel box
+V = [V_all*(1-v),V_all*v]
+box_l = [V_**(1/3) for V_ in V]
 
 ###start server and nodes
 server = socket_nodes.utils.create_server_and_nodes(
     scripts = ['espresso_node.py', 'espresso_node.py'], 
     args_list=[
         ['-l', box_l[0], '--salt'],
-        #['-l', box_l[1], '--salt'],],
         ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.00]], 
     python_executable = 'python', stdout = open('log', 'w'))
+
 def populate_system(species_count):
     for i,side in enumerate(species_count):
         for species, count in side.items():
@@ -35,7 +39,9 @@ def populate_system(species_count):
             print(f'to side {i} ')
             server(f"populate({count}, **{PARTICLE_ATTR[species]})", i)
 populate_system(MOBILE_SPECIES_COUNT)
+
 ##switch on electrostatics
+from shared_data import ELECTROSTATIC, l_bjerrum, temp
 if ELECTROSTATIC:
     server.request(
         f"system.actors.add(espressomd.electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",
@@ -75,6 +81,3 @@ for k in range(10):
 # %%
 mc_df.to_csv('mc_20_alpha_0.csv')
 md_df.to_csv('md_20_alpha_0.csv')
-#%%
-from monte_carlo import scatter3d
-scatter3d(server,1)

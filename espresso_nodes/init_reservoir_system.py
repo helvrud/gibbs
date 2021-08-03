@@ -1,5 +1,8 @@
-from shared_data import *
 import espressomd
+import logging
+logger = logging.getLogger(__name__)
+
+from shared_data import NON_BONDED_ATTR
 
 def init_reservoir_system(box_l):
     system = espressomd.System(box_l = [box_l]*3)
@@ -12,9 +15,10 @@ def init_reservoir_system(box_l):
     system.minimize_energy.minimize()
     system.integrator.run(10000)
     
-    print("Reservoir system initialized")
+    logger.info("Reservoir initialized")
     return system
 
 def setup_non_bonded(system, non_bonded_attr):
     [system.non_bonded_inter[particle_types].lennard_jones.set_params(**lj_kwargs)
             for particle_types, lj_kwargs in non_bonded_attr.items()]
+    logger.debug('Non-bonded interaction is set')

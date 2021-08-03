@@ -1,3 +1,4 @@
+from os import SF_MNOWAIT
 from socket_nodes import LocalScopeExecutor, Node
 
 
@@ -96,14 +97,13 @@ class EspressoExecutorSalt(LocalScopeExecutor):
     def pressure(self):
         return float(self.system.analysis.pressure()['total']) 
 
-    def run_md(self, steps, sample_steps=100):
-        i=0
-        pressure_acc=[]
-        while i<steps:
-            self.system.integrator.run(sample_steps)
-            i+=sample_steps
-            pressure_acc.append(self.pressure())
-        return pressure_acc
+    def run_md(self, n_samples : int, integration_steps : int =1000):
+        _acc=[]
+        collect = self.pressure
+        for i in range(n_samples):
+            self.system.integrator.run(integration_steps=1000)
+            _acc.append(collect())
+        return _acc
 
 
 class EspressoExecutorGel(EspressoExecutorSalt):
@@ -113,14 +113,14 @@ class EspressoExecutorGel(EspressoExecutorSalt):
         Re = calc_Re(self.system, pairs)
         return Re
 
-    def run_md(self, steps, sample_steps=100):
-        i=0
-        acc=[]
-        while i<steps:
-            self.system.integrator.run(sample_steps)
-            i+=sample_steps
-            acc.append(self.Re())
-        return acc
+    def run_md(self, n_samples : int, integration_steps : int =1000):
+        _acc=[]
+        collect = self.Re
+        for i in range(n_samples):
+            self.system.integrator.run(integration_steps=1000)
+            _acc.append(collect())
+        return _acc
+
 
 
 

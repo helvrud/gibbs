@@ -1,9 +1,12 @@
 #%%
-import sys
-from shared_data import *
 import espressomd
 import numpy as np
 import random
+import logging
+logger = logging.getLogger(__name__)
+
+from shared_data import BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR
+
 
 def init_diamond_system(MPC, bond_length, alpha, target_l):
     from espressomd import diamond
@@ -15,7 +18,7 @@ def init_diamond_system(MPC, bond_length, alpha, target_l):
     system.thermostat.set_langevin(kT=1, gamma=1, seed=42)
     system.minimize_energy.init(f_max=50, gamma=60.0, max_steps=10000, max_displacement=0.001)
 
-    print(f"gel initial volume: {box_l}")
+    logger.info(f"gel initial volume: {box_l}")
     fene = espressomd.interactions.FeneBond(**BONDED_ATTR['FeneBond'])
     system.bonded_inter.add(fene)
     setup_non_bonded(system, NON_BONDED_ATTR)
@@ -26,7 +29,6 @@ def init_diamond_system(MPC, bond_length, alpha, target_l):
     
     re_type_nodes(system, gel_indices)
     charge_gel(system, gel_indices, alpha)
-    print('Minimizing energy before volume change')
     system.minimize_energy.minimize()
     change_volume(system, target_l)
     return system
@@ -34,6 +36,7 @@ def init_diamond_system(MPC, bond_length, alpha, target_l):
 def setup_non_bonded(system, non_bonded_attr):
     [system.non_bonded_inter[particle_types].lennard_jones.set_params(**lj_kwargs)
             for particle_types, lj_kwargs in non_bonded_attr.items()]
+    logger.debug('Non-bonded interaction is set')
 
 
 def re_type_nodes(system, gel_indices):
@@ -45,9 +48,7 @@ def re_type_nodes(system, gel_indices):
     int const type_nM = 1;
     int const type_CI = 2;
     """ 
-    #
     N_NODES = 8
-    
     particles = list(system.part[slice(*gel_indices)])
     for i, part in enumerate(particles):
         if i<8:
@@ -56,10 +57,12 @@ def re_type_nodes(system, gel_indices):
         else:
             for attr_name, attr_val in PARTICLE_ATTR['gel_neutral'].items():
                 setattr(part, attr_name, attr_val)
+    logger.debug('Gel particles types is set')
 
 def charge_gel(system, gel_indices, alpha, add_counterions = True):
     particles = list(system.part[slice(*gel_indices)])
     n_charged = int(len(particles)*alpha)
+    logger.info(f'Charging the gel...')
     for i, part in enumerate(random.sample(particles, n_charged)):
         if part.type == PARTICLE_ATTR['gel_neutral']['type']:
             for attr_name, attr_val in PARTICLE_ATTR['gel_anion'].items():
@@ -69,10 +72,10 @@ def charge_gel(system, gel_indices, alpha, add_counterions = True):
                 setattr(part, attr_name, attr_val)
         if add_counterions:
             system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['cation'])
-        print(f'{i}/{n_charged} charged')
+        logger.debug(f'{i}/{n_charged} charged')
 
 def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05, integrator_steps = 10000):
-    print ('change_volume to the size L = ', target_l)
+    logger.info(f'Changing the box_l to target value: {target_l}')
     while system.box_l[0] != target_l:
         factor = target_l/system.box_l[0]
         if factor<scale_down_factor: 
@@ -82,12 +85,11 @@ def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 
         d_new = system.box_l[0]*factor
         system.change_volume_and_rescale_particles(d_new)
         system.integrator.run(integrator_steps)
-        print(f'gel box_size: {system.box_l[0]}')
+        logger.info(f'Current box_size: {system.box_l[0]}')
     print ('volume change done')
 
 def zero_pressure_volume(system, scale_down_factor = 0.97, scale_up_factor = 1.05, integrator_steps = 10000, eps = 0.001):
     pass
-
 
 def _get_pairs(system, gel_start_id):
     pairs = [  (0, 1), (1, 2), (1, 3), (1, 4),
@@ -112,9 +114,16 @@ def calc_Re(system, pairs):
     return D
 #%%
 if __name__=='__main__':
-    system = init_diamond_system(15,0.966,0.1,30)
+    system = init_diamond_system(15,0.966,0.1,20)
+#%%    
     system.analysis.pressure()['total']
-# %%
     from espressomd.visualization_opengl import  openGLLive
     visualizer = openGLLive(system)
     visualizer.run()
+#%%
+    import espressomd.observables
+    pressure = espressomd.observables.Observable.Pressure()# %%
+
+# %%
+    espressomd.observables.Observable.__dir__
+# %%
