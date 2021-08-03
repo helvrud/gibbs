@@ -1,3 +1,4 @@
+#%%
 ELECTROSTATIC = False
 V_all = 20**3*2
 v = 0.5 #relative volume of the box with fixed anions
@@ -7,8 +8,8 @@ box_l = [V_**(1/3) for V_ in V]
 l_bjerrum = 2.0
 temp = 1
 ELECTROSTATIC = False
-N1 = 30 #mobile ions on the left side
-N2 = 170 #mobile ions on the right side
+N1 = 100 #mobile ions on the left side
+N2 = 100 #mobile ions on the right side
 
 
 
@@ -32,17 +33,11 @@ PARTICLE_ATTR = dict(
 MOBILE_SPECIES = [0,1]
 
 #LJ
+from itertools import combinations
+lj_sigma=1
 NON_BONDED_ATTR = {
-    (0,0) : dict(epsilon=1, sigma=1, cutoff=3, shift='auto'),
-    (0,1) : dict(epsilon=1, sigma=1, cutoff=3, shift='auto'),
-    (0,2) : dict(epsilon=1, sigma=1, cutoff=3, shift='auto'),
-    (0,3) : dict(epsilon=1, sigma=1, cutoff=3, shift='auto'),
-    (1,1) : dict(epsilon=1, sigma=1, cutoff=3, shift='auto'),
-    (1,2) : dict(epsilon=1, sigma=1, cutoff=3, shift='auto'),
-    (1,3) : dict(epsilon=1, sigma=1, cutoff=3, shift='auto'),
-    (2,2) : dict(epsilon=1, sigma=1, cutoff=3, shift='auto'),
-    (2,3) : dict(epsilon=1, sigma=1, cutoff=3, shift='auto'),
-    (3,3) : dict(epsilon=1, sigma=1, cutoff=3, shift='auto'),
+    pair : dict(epsilon=1, sigma=lj_sigma, cutoff=lj_sigma*2**(1./6), shift='auto')
+    for pair in (combinations([ATTR['type'] for ATTR in PARTICLE_ATTR.values()], 2))
 }
 
 #FENE

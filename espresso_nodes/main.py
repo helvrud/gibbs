@@ -56,8 +56,8 @@ mc_df = pd.DataFrame()
 md_df = pd.DataFrame()
 step = 0
 #%%
-for k in tqdm(range(10)):
-    for i in tqdm(range(1000)):
+for k in range(10):
+    for i in range(1000):
         mc_df = mc_df.append(
             current_state_to_record(
                 MC.step(), step
@@ -66,11 +66,15 @@ for k in tqdm(range(10)):
         )
         mc_df['note'] = 'equilibration'
         step+=1
-    r = server('run_md(10000,1000)',[0,1])
+    r = server('run_md(200000,20000)',[0,1])
     P_Re = pd.DataFrame(r[1].result()).add_prefix('Re_')
     P_Re['Pressure'] = r[0].result()
     md_df=md_df.append(P_Re, ignore_index=True)
     MC.current_state=MC.setup()
+    print(k,i)
 # %%
-mc_df.to_csv('mc_20_alpha_0_2.csv')
-md_df.to_csv('md_20_alpha_0_2.csv')
+mc_df.to_csv('mc_20_alpha_0.csv')
+md_df.to_csv('md_20_alpha_0.csv')
+#%%
+from monte_carlo import scatter3d
+scatter3d(server,1)

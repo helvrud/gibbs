@@ -1,6 +1,6 @@
-from sys import executable
-from pandas.io.parsers import read_csv
 from socket_nodes import LocalScopeExecutor, Node
+
+
 ##import all you might need later when requesting from server
 import espressomd
 import re
@@ -121,9 +121,6 @@ class EspressoExecutorGel(EspressoExecutorSalt):
             i+=sample_steps
             acc.append(self.Re())
         return acc
-
-
-
 
 
 
