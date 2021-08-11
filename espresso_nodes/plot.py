@@ -44,12 +44,3 @@ px.scatter(y = acf)
 # %%
 acf
 # %%
-def scatter3d(server, client):
-    box_l = server("system.box_l[0]", client).result()
-    particles = server("part_data((None,None), {'type':'int','q':'int', 'pos':'list'})", client).result()
-    df = pd.DataFrame(particles)
-    df.q = df.q.astype('category')
-    df[['x', 'y', 'z']] = df.pos.apply(pd.Series).apply(lambda x: x%box_l)
-    import plotly.express as px
-    fig = px.scatter_3d(df, x='x', y='y', z='z', color ='q', symbol = 'type')
-    fig.show()

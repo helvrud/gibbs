@@ -11,13 +11,11 @@ from shared_data import MOBILE_SPECIES, PARTICLE_ATTR
 SIDES = [0,1]
 PAIR = [0,1]
 CHARGES=[-1,1]
-
 def _rotate_velocities_randomly(velocities):
     from scipy.spatial.transform import Rotation
     rot = Rotation.random().as_matrix
     velocities_rotated = [list(rot().dot(velocity)) for velocity in velocities]
     return velocities_rotated
-
 def _entropy_change(N1, N2, V1, V2, n=1):
     #N1, V1 - box we removing particle from
     #N2, V2 - box we adding to
@@ -184,6 +182,22 @@ class MonteCarloPairs(AbstractMonteCarlo):
             f"remove_particle({reversal_data['added'][i]['id']},['id'])" 
             for i in PAIR
             ], other_side)
+
+    def on_accept(self):
+        print("Accept")
+
+    def on_reject(self):
+        print("Reject")
+
+def scatter3d(server, client):
+    box_l = server("system.box_l[0]", client).result()
+    particles = server("part_data((None,None), {'type':'int','q':'int', 'pos':'list'})", client).result()
+    df = pd.DataFrame(particles)
+    df.q = df.q.astype('category')
+    df[['x', 'y', 'z']] = df.pos.apply(pd.Series).apply(lambda x: x%box_l)
+    import plotly.express as px
+    fig = px.scatter_3d(df, x='x', y='y', z='z', color ='q', symbol = 'type')
+    fig.show()
 
 def current_state_to_record(state, step = None) -> pd.DataFrame:
     df = state['particles_info']\
