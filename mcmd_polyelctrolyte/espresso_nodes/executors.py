@@ -1,4 +1,4 @@
-from socket_nodes import LocalScopeExecutor, Node
+from socket_nodes import LocalScopeExecutor
 
 
 ##import all you might need later when requesting from server
@@ -13,10 +13,11 @@ class EspressoExecutorSalt(LocalScopeExecutor):
     ###########overridden base class functions #############
     def __init__(self, espresso_system_instance) -> None:
         super().__init__()
-        if 'system' not in globals():
-            raise(RuntimeError('espressomd.System is not initialized'))
-        else:
-            self.system = espresso_system_instance
+        #if 'system' not in globals():
+        #    raise(RuntimeError('espressomd.System is not initialized'))
+        #else:
+        #    self.system = espresso_system_instance
+        self.system = espresso_system_instance
             
     ###########'private' user defined function #############
     @staticmethod
@@ -121,65 +122,3 @@ class EspressoExecutorGel(EspressoExecutorSalt):
             i+=sample_steps
             acc.append(self.Re())
         return acc
-
-
-
-#an entry point to run the node in subprocesses
-if __name__=="__main__":
-    import argparse
-    import sys
-    parser = argparse.ArgumentParser(description='IP')
-    parser.add_argument('IP',
-                        metavar='IP',
-                        type=str,
-                        help='IP')
-    parser.add_argument('PORT',
-                        metavar='PORT',
-                        type=int,
-                        help='PORT')
-    parser.add_argument('-l', 
-                        metavar='l',
-                        type = float,
-                        help = 'box_size',
-                        required=True)
-    parser.add_argument('--salt', 
-                        help = 'salt reservoir',
-                        action='store_true',
-                        required=False)
-    parser.add_argument('--gel', 
-                        help = 'add gel to the system',
-                        action='store_true',
-                        required=False)
-    parser.add_argument('-MPC', 
-                        metavar='MPC',
-                        type = int,
-                        help = 'particles between nodes',
-                        required='--gel' in sys.argv)
-    parser.add_argument('-bond_length', 
-                        metavar='bond_length',
-                        type = float,
-                        help = 'bond length',
-                        required='--gel' in sys.argv)
-    parser.add_argument('-alpha', 
-                        metavar='alpha',
-                        type = float,
-                        help = 'charged monomer ratio',
-                        required='--gel' in sys.argv)
-    args = parser.parse_args()
-    
-    if '--salt' in sys.argv:
-        import logging
-        logging.basicConfig(level=logging.DEBUG, stream=open('salt_log', 'w'))
-        from init_reservoir_system import init_reservoir_system
-        print('Initializing salt reservoir')
-        system = init_reservoir_system(args.l)
-        node = Node(args.IP, args.PORT, EspressoExecutorSalt, system)
-        node.run()
-    elif '--gel' in sys.argv:
-        import logging
-        logging.basicConfig(level=logging.DEBUG, stream=open('gel_log', 'w'))
-        from init_diamond_system import init_diamond_system
-        print('Initializing reservoir with a gel')
-        system = init_diamond_system(args.MPC, args.bond_length, args.alpha, target_l=args.l)
-        node = Node(args.IP, args.PORT, EspressoExecutorGel, system)
-        node.run()

@@ -17,16 +17,20 @@ PAIR = [0,1]#for readability in list comprehensions
 SIDES = [0,1]#for readability in list comprehensions
 
 logger  = logging.getLogger('Server')
-logging.basicConfig(stream=open('server_log', 'w'), level=logging.DEBUG)
+logging.basicConfig(stream=open('server.log', 'w'), level=logging.DEBUG)
 
 ###start server and nodes
 server = socket_nodes.utils.create_server_and_nodes(
-    scripts = ['espresso_node.py', 'espresso_node.py'], 
+    scripts = ['espresso_nodes/node.py']*2, 
     args_list=[
         ['-l', box_l[0], '--salt'],
-        #['-l', box_l[1], '--salt'],],
-        ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.00]], 
-    python_executable = 'python', stdout = open('log', 'w'))
+        ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.00]
+        ], 
+    python_executable = 'python')
+#server = Server()
+#import threading
+#threading.Thread(target=server.run, daemon=True).start()
+#%%
 def populate_system(species_count):
     for i,side in enumerate(species_count):
         for species, count in side.items():
