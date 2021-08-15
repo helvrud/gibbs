@@ -1,3 +1,4 @@
+from typing import Callable
 from socket_nodes import LocalScopeExecutor
 
 
@@ -18,7 +19,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         #else:
         #    self.system = espresso_system_instance
         self.system = espresso_system_instance
-            
+                    
     ###########'private' user defined function #############
     @staticmethod
     def __type_cast(type_names_dict) -> dict:
@@ -97,14 +98,15 @@ class EspressoExecutorSalt(LocalScopeExecutor):
     def pressure(self):
         return float(self.system.analysis.pressure()['total']) 
 
-    def run_md(self, steps, sample_steps=100):
-        i=0
-        pressure_acc=[]
-        while i<steps:
-            self.system.integrator.run(sample_steps)
-            i+=sample_steps
-            pressure_acc.append(self.pressure())
-        return pressure_acc
+    def _integrate_observable_callback(self):
+        return self.pressure()
+
+    def integrate(self, sample_size : int = 100, int_steps : int = 1000):
+        acc = []
+        for i in range(sample_size):
+            self.system.integrator.run(int_steps)
+            acc.append(self._integrate_observable_callback())
+        return np.mean(acc), np.std(acc)
 
 
 class EspressoExecutorGel(EspressoExecutorSalt):
@@ -114,11 +116,5 @@ class EspressoExecutorGel(EspressoExecutorSalt):
         Re = calc_Re(self.system, pairs)
         return Re
 
-    def run_md(self, steps, sample_steps=100):
-        i=0
-        acc=[]
-        while i<steps:
-            self.system.integrator.run(sample_steps)
-            i+=sample_steps
-            acc.append(self.Re())
-        return acc
+    def _integrate_observable_callback(self):
+        return self.Re()
