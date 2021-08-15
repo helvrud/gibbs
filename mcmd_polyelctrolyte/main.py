@@ -1,23 +1,26 @@
 #%%
 import logging
-from shared_data import *
-from socket_nodes import Server
-import socket_nodes
-from monte_carlo import MonteCarloPairs, current_state_to_record, scatter3d
-
-import random
-import math
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from tqdm import tqdm
+import tqdm
 import sys
+
+import socket_nodes
+from monte_carlo import MonteCarloPairs, scatter3d, current_state_to_record
 
 PAIR = [0,1]#for readability in list comprehensions
 SIDES = [0,1]#for readability in list comprehensions
-
 logger  = logging.getLogger('Server')
 logging.basicConfig(stream=open('server.log', 'w'), level=logging.DEBUG)
+
+###Control parameters
+ELECTROSTATIC = False
+system_volume = 20**3*2 #two boxes volume
+v_gel = 0.5 #relative volume of the box with fixed anions
+#box volumes and dimmensions
+V = [system_volume*(1-v_gel),system_volume*v_gel]
+box_l = [V_**(1/3) for V_ in V]
+N1 = 100 #mobile ions on the left side
+N2 = 100 #mobile ions on the right side
 
 ###start server and nodes
 server = socket_nodes.utils.create_server_and_nodes(
@@ -27,11 +30,14 @@ server = socket_nodes.utils.create_server_and_nodes(
         ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.00]
         ], 
     python_executable = 'python')
-#server = Server()
-#import threading
-#threading.Thread(target=server.run, daemon=True).start()
+
 #%%
+MOBILE_SPECIES_COUNT = [
+        {'anion' : int(N1/2), 'cation' : int(N1/2)}, #left side
+        {'anion' : int(N2/2), 'cation' : int(N2/2)}, #right side
+    ]
 def populate_system(species_count):
+    from espresso_nodes.shared import PARTICLE_ATTR
     for i,side in enumerate(species_count):
         for species, count in side.items():
             print(f'Added {count} of {species}', end = ' ')
@@ -41,6 +47,8 @@ def populate_system(species_count):
 populate_system(MOBILE_SPECIES_COUNT)
 ##switch on electrostatics
 if ELECTROSTATIC:
+    l_bjerrum = 2.0
+    temp = 1
     server.request(
         f"system.actors.add(espressomd.electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",
         [0,1]
@@ -53,9 +61,11 @@ if ELECTROSTATIC:
         ],
         [0,1]
     )
+
 server('system.minimize_energy.minimize()', [0,1])
 MC = MonteCarloPairs(server)
 # %%
+import pandas as pd
 mc_df = pd.DataFrame()
 md_df = pd.DataFrame()
 step = 0
@@ -80,5 +90,6 @@ for k in range(10):
 mc_df.to_csv('mc_20_alpha_0.csv')
 md_df.to_csv('md_20_alpha_0.csv')
 #%%
-from monte_carlo import scatter3d
 scatter3d(server,1)
+
+# %%

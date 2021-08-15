@@ -3,11 +3,12 @@ import numpy as np
 import pandas as pd
 import math
 import random
-
 import sys 
 sys.path.append('..') #to import libmontecarlo
-from libmontecarlo import *
-from shared_data import MOBILE_SPECIES, PARTICLE_ATTR
+from libmontecarlo import AbstractMonteCarlo
+from libmontecarlo import StateData, ReversalData, AcceptCriterion
+from espresso_nodes.shared import MOBILE_SPECIES, PARTICLE_ATTR
+
 SIDES = [0,1]
 PAIR = [0,1]
 CHARGES=[-1,1]
