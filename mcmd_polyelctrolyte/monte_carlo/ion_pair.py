@@ -3,15 +3,15 @@ import numpy as np
 import pandas as pd
 import math
 import random
-import sys 
-sys.path.append('..') #to import libmontecarlo
-from libmontecarlo import AbstractMonteCarlo
-from libmontecarlo import StateData, ReversalData, AcceptCriterion
-from espresso_nodes.shared import MOBILE_SPECIES, PARTICLE_ATTR
+from .libmontecarlo import AbstractMonteCarlo
+from .libmontecarlo import StateData, ReversalData, AcceptCriterion
 
 SIDES = [0,1]
 PAIR = [0,1]
 CHARGES=[-1,1]
+MOBILE_SPECIES = [0,1]
+
+
 def _rotate_velocities_randomly(velocities):
     from scipy.spatial.transform import Rotation
     rot = Rotation.random().as_matrix
@@ -36,7 +36,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
     def __init__(self, server):
         super().__init__()
         self.server = server
-        self.current_state = self.setup()
+        self.setup()
 
     def setup(self) -> StateData:
         request_body = [
@@ -65,7 +65,8 @@ class MonteCarloPairs(AbstractMonteCarlo):
             volume = volume, 
             particles_info = particles_df,
             n_mobile = n_mobile)
-
+        
+        self.current_state = new_state
         return new_state
         
     def _choose_random_side_and_part(self):
@@ -183,30 +184,3 @@ class MonteCarloPairs(AbstractMonteCarlo):
             f"remove_particle({reversal_data['added'][i]['id']},['id'])" 
             for i in PAIR
             ], other_side)
-
-    def on_accept(self):
-        print("Accept")
-
-    def on_reject(self):
-        print("Reject")
-
-def current_state_to_record(state, step = None) -> pd.DataFrame:
-    df = state['particles_info']\
-    .groupby(by = ['side', 'type'])\
-    .size().unstack(fill_value=0)
-    df.columns.name = None
-    d = {
-        type_:key for key, type_ 
-        in zip(PARTICLE_ATTR.keys(),
-        [
-            ATTR['type'] for ATTR in PARTICLE_ATTR.values()
-            ]
-        )
-    }
-    df.rename(columns = d, inplace = True)
-    df['energy'] = state['energy']
-    df['volume'] = state['volume']
-    if step is not None:
-        df['step'] = step
-    df = df.reset_index()
-    return df

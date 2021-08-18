@@ -1,14 +1,14 @@
 #%%
 import logging
-from mcmd_polyelctrolyte.utils import int_steps_recommended
+from utils import get_min_int_step_recommendation
 import numpy as np
 import tqdm
 import sys
 
 import socket_nodes
-from monte_carlo import MonteCarloPairs, current_state_to_record
-
-SIDES = [0,1]#for readability e.g. in list comprehensions
+#import monte_carlo.libmontecarlo
+from monte_carlo.ion_pair import MonteCarloPairs
+#%%
 logger  = logging.getLogger('Server')
 logging.basicConfig(stream=open('server.log', 'w'), level=logging.DEBUG)
 
@@ -32,38 +32,43 @@ server = socket_nodes.utils.create_server_and_nodes(
     python_executable = 'python')
 
 #%%
-MOBILE_SPECIES_COUNT = [
-        {'anion' : int(N1/2), 'cation' : int(N1/2)}, #left side
-        {'anion' : int(N2/2), 'cation' : int(N2/2)}, #right side
-    ]
-def populate_system(species_count):
-    from espresso_nodes.shared import PARTICLE_ATTR
-    for i,side in enumerate(species_count):
-        for species, count in side.items():
-            print(f'Added {count} of {species}', end = ' ')
-            print(*[f'{attr}={val}' for attr, val in PARTICLE_ATTR[species].items()], end = ' ')
-            print(f'to side {i} ')
-            server(f"populate({count}, **{PARTICLE_ATTR[species]})", i)
-populate_system(MOBILE_SPECIES_COUNT)
-##switch on electrostatics
-if ELECTROSTATIC:
-    l_bjerrum = 2.0
-    temp = 1
-    server.request(
-        f"system.actors.add(espressomd.electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",
-        SIDES
-    )
-    #minimize energy and run md
-    server([
-        "system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
-        "system.minimize_energy.minimize()",
-        f"system.integrator.run({10000})"
-        ],
-        SIDES
-    )
+def setup_two_box_system():
+    SIDES = [0,1]#for readability e.g. in list comprehensions
+    MOBILE_SPECIES_COUNT = [
+            {'anion' : int(N1/2), 'cation' : int(N1/2)}, #left side
+            {'anion' : int(N2/2), 'cation' : int(N2/2)}, #right side
+        ]
+    def populate_system(species_count):
+        from espresso_nodes.shared import PARTICLE_ATTR
+        for i,side in enumerate(species_count):
+            for species, count in side.items():
+                print(f'Added {count} of {species}', end = ' ')
+                print(*[f'{attr}={val}' for attr, val in PARTICLE_ATTR[species].items()], end = ' ')
+                print(f'to side {i} ')
+                server(f"populate({count}, **{PARTICLE_ATTR[species]})", i)
+    populate_system(MOBILE_SPECIES_COUNT)
+    ##switch on electrostatics
+    if ELECTROSTATIC:
+        l_bjerrum = 2.0
+        temp = 1
+        server.request(
+            f"system.actors.add(espressomd.electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",
+            SIDES
+        )
+        #minimize energy and run md
+        server([
+            "system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
+            "system.minimize_energy.minimize()",
+            f"system.integrator.run({10000})"
+            ],
+            SIDES
+        )
 
-server('system.minimize_energy.minimize()', [0,1])
+    server('system.minimize_energy.minimize()', [0,1])
+    print('two box system with polyelectolyte (client 1) initialized')
+setup_two_box_system()
+#%%
 MC = MonteCarloPairs(server)
 # %%
-from utils import get_min_int_step_recommendation
 get_min_int_step_recommendation(server,0)
+# %%
