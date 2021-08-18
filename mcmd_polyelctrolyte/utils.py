@@ -10,14 +10,13 @@ def scatter3d(server, client):
     fig.show()
 
 def MCMD(server, MC, step = 0):
-    from monte_carlo import current_state_to_record
     import pandas as pd
     mc_df = pd.DataFrame()
     md_df = pd.DataFrame()
     for k in range(10):
         for i in range(1000):
             mc_df = mc_df.append(
-                current_state_to_record(
+                mc_state_to_df(
                     MC.step(), step
                 ), 
                 ignore_index=True
@@ -32,16 +31,67 @@ def MCMD(server, MC, step = 0):
         print(k,i)
         return mc_df, md_df
 
+def mc_state_to_df(state):
+    import pandas as pd
+    from espresso_nodes.shared import PARTICLE_ATTR
+    df = state['particles_info']\
+        .groupby(by = ['side', 'type'])\
+        .size().unstack(fill_value=0)
+    df.columns.name = None
+    d = {
+        type_:key for key, type_ 
+        in zip(PARTICLE_ATTR.keys(),
+        [
+            ATTR['type'] for ATTR in PARTICLE_ATTR.values()
+            ]
+        )
+    }
+    df.rename(columns = d, inplace = True)
+    df['energy'] = state['energy']
+    df['volume'] = state['volume']
+    df = df.reset_index()
+    return df
+
+def get_tau(x, acf_n_lags : int = 200):
+    from statsmodels.tsa.stattools import acf
+    import numpy as np
+    acf = acf(x, nlags = acf_n_lags)
+    tau_int =1/2+max(np.cumsum(acf))    
+    return tau_int
+
+def ljung_box_white_noise(x):
+    from statsmodels.tsa.stattools import acf
+    from statsmodels.stats.diagnostic import acorr_ljungbox
+    from scipy.stats import chi2
+    p= acorr_ljungbox(acf(x), lags=[40])[1][0]
+    passed = p>0.05
+    if passed:
+        print('Test passed')
+    else:
+        print('Test failed')
+    print(p)
+    return passed
+
+def check_if_resampling_required(x, acf_n_lags = 200):
+    import numpy as np
+    uncorr = ljung_box_white_noise(x)
+    if uncorr:
+        print('Already not oversampled')
+        return 1
+    else:
+        tau_int =get_tau(x, acf_n_lags)
+        if tau_int > 40:
+            print(f'Heavily oversampled! Check after resampling')
+        print(f'Sample at least {tau_int*2} less often')
+        return tau_int*2
+
 def get_min_int_step_recommendation(server, client, proposed_int = 100, sample_size = 5000, acf_n_lags = 200):
-    import statsmodels.tsa.stattools as st
     import numpy as np
     observable = server([f'integrate(sample_size = 1, int_steps = {proposed_int})']*sample_size, client).result()
     x = np.array(observable)[:, 0] 
     x = x - np.mean(x)
-    acf = st.acf(x, nlags = acf_n_lags)
-    tau_int =1/2+max(np.cumsum(acf))
+    tau_int =get_tau(x, acf_n_lags)
     int_recommend = proposed_int*2*tau_int
-
     #####to be removed##########
     from statsmodels.graphics.tsaplots import plot_acf
     import matplotlib.pyplot as plt
@@ -49,5 +99,5 @@ def get_min_int_step_recommendation(server, client, proposed_int = 100, sample_s
     plt.vlines(x = tau_int*2, ymin = -0.2, ymax = 1)
     plt.show()
     ############################
-    
     return int_recommend
+

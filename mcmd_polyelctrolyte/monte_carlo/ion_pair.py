@@ -175,12 +175,12 @@ class MonteCarloPairs(AbstractMonteCarlo):
     def reverse(self, reversal_data: ReversalData):
         side = reversal_data['side']
         other_side = int(not(side))
-        reverse_remove = self.server([
+        self.server([
             f"add_particle(['id'], q = {CHARGES[i]}, type = {i}, **{reversal_data['removed'][i]})"
             for i in PAIR
             ], side)
         
-        reverse_add = self.server([
+        self.server([
             f"remove_particle({reversal_data['added'][i]['id']},['id'])" 
             for i in PAIR
             ], other_side)

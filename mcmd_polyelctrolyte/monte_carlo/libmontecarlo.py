@@ -53,7 +53,3 @@ class AbstractMonteCarlo:
             self.reverse(reversal)
             self.on_reject()
         return self.current_state
-
-
-
-

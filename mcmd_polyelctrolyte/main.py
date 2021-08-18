@@ -1,6 +1,10 @@
 #%%
 import logging
-from utils import get_min_int_step_recommendation
+from os import stat
+from matplotlib import markers
+
+from numpy.lib.function_base import place
+from utils import get_min_int_step_recommendation, mc_state_to_df
 import numpy as np
 import tqdm
 import sys
@@ -10,8 +14,8 @@ import socket_nodes
 from monte_carlo.ion_pair import MonteCarloPairs
 #%%
 logger  = logging.getLogger('Server')
-logging.basicConfig(stream=open('server.log', 'w'), level=logging.DEBUG)
-
+logging.basicConfig(stream=open('server.log', 'w'), level=logging.WARNING)
+#%%
 ###Control parameters
 ELECTROSTATIC = False
 system_volume = 20**3*2 #two boxes volume
@@ -67,8 +71,16 @@ def setup_two_box_system():
     server('system.minimize_energy.minimize()', [0,1])
     print('two box system with polyelectolyte (client 1) initialized')
 setup_two_box_system()
-#%%
+#%%    
 MC = MonteCarloPairs(server)
 # %%
-get_min_int_step_recommendation(server,0)
+import pandas as pd
+mc_data = pd.DataFrame()
+for i in tqdm(range(5000)):
+    state = MC.step()
+    df = mc_state_to_df(state)
+    df['step'] = i
+    mc_data = mc_data.append(df, ignore_index = True)
 # %%
+anion_n = np.array(mc_data.loc[mc_data['side'] == 1, 'anion'])
+anion_n
