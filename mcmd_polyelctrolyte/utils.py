@@ -101,3 +101,8 @@ def get_min_int_step_recommendation(server, client, proposed_int = 100, sample_s
     ############################
     return int_recommend
 
+def downsample(x, dist):
+    import random
+    import numpy as np
+    n_chunks = int(len(x)/dist)
+    return [random.choice(chunk) for chunk in np.array_split(x,n_chunks)]
