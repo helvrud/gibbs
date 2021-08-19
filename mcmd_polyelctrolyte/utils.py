@@ -1,3 +1,6 @@
+from pandas.core import series
+
+
 def scatter3d(server, client):
     import plotly.express as px
     import pandas as pd
@@ -85,24 +88,29 @@ def check_if_resampling_required(x, acf_n_lags = 200):
         print(f'Sample at least {tau_int*2} less often')
         return tau_int*2
 
-def get_min_int_step_recommendation(server, client, proposed_int = 100, sample_size = 5000, acf_n_lags = 200):
-    import numpy as np
-    observable = server([f'integrate(sample_size = 1, int_steps = {proposed_int})']*sample_size, client).result()
-    x = np.array(observable)[:, 0] 
-    x = x - np.mean(x)
-    tau_int =get_tau(x, acf_n_lags)
-    int_recommend = proposed_int*2*tau_int
-    #####to be removed##########
-    from statsmodels.graphics.tsaplots import plot_acf
-    import matplotlib.pyplot as plt
-    plot_acf(x, lags = acf_n_lags)
-    plt.vlines(x = tau_int*2, ymin = -0.2, ymax = 1)
-    plt.show()
-    ############################
-    return int_recommend
-
 def downsample(x, dist):
     import random
     import numpy as np
     n_chunks = int(len(x)/dist)
     return [random.choice(chunk) for chunk in np.array_split(x,n_chunks)]
+
+def check_stationarity(x, p_crit =0.05):
+    from statsmodels.tsa.stattools import adfuller
+    p = adfuller(x)[1]
+    passed = p<p_crit
+    if passed:
+        print('Reject H0, the data is stationary.')
+    else:
+        print('Failed to reject H0, the data is not stationary.')
+    return passed
+
+def correlated_data_mean_err(x, tau, ci = 0.95):
+    import scipy.stats
+    import numpy as np
+    x_mean = np.mean(x)
+    n_eff = np.size(x)/(2*tau)
+    print(f"Effective sample size: {n_eff}")
+    t_value=scipy.stats.t.ppf(1-(1-ci)/2, n_eff)
+    print(f"t-value: {t_value}")
+    err = np.std(x)/np.sqrt(n_eff) * t_value
+    return x_mean, err
