@@ -101,12 +101,15 @@ class EspressoExecutorSalt(LocalScopeExecutor):
     def _integrate_observable_callback(self):
         return self.pressure()
 
-    def integrate(self, sample_size : int = 100, int_steps : int = 1000):
+    def integrate(self, int_steps : int = 1000, n_samples : int = 100, return_only_mean = False):
         acc = []
-        for i in range(sample_size):
+        for i in range(n_samples):
             self.system.integrator.run(int_steps)
             acc.append(self._integrate_observable_callback())
-        return np.mean(acc), np.std(acc)
+        if return_only_mean:
+            return np.mean(acc), np.std(acc)
+        else:
+            return acc
 
 
 class EspressoExecutorGel(EspressoExecutorSalt):

@@ -1,16 +1,9 @@
 #%%
 import logging
-from os import stat
-from matplotlib import markers
-
-from numpy.lib.function_base import place
-from utils import get_min_int_step_recommendation, mc_state_to_df
 import numpy as np
-import tqdm
-import sys
+from pandas.core import series
 
 import socket_nodes
-#import monte_carlo.libmontecarlo
 from monte_carlo.ion_pair import MonteCarloPairs
 #%%
 logger  = logging.getLogger('Server')
@@ -74,13 +67,7 @@ setup_two_box_system()
 #%%    
 MC = MonteCarloPairs(server)
 # %%
-import pandas as pd
-mc_data = pd.DataFrame()
-for i in tqdm(range(5000)):
-    state = MC.step()
-    df = mc_state_to_df(state)
-    df['step'] = i
-    mc_data = mc_data.append(df, ignore_index = True)
+Re = [server('integrate(int_steps = 100, n_samples =100)',1).result() for _ in range(50)]
 # %%
-anion_n = np.array(mc_data.loc[mc_data['side'] == 1, 'anion'])
-anion_n
+np.savetxt('Re_sample(int_steps_100).csv', np.vstack(Re),  delimiter = ',')
+# %%
