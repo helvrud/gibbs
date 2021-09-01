@@ -184,3 +184,31 @@ class MonteCarloPairs(AbstractMonteCarlo):
             f"remove_particle({reversal_data['added'][i]['id']},['id'])" 
             for i in PAIR
             ], other_side)
+
+def MC_step_n_mobile_left(MC, n_steps):
+    mobile_count = []
+    for i in range(n_steps):
+        MC.step()
+        mobile_count.append(MC.current_state['n_mobile'][0])
+    return mobile_count
+        
+def auto_MC_collect(MC, target_error, initial_sample_size, ci = 0.95, tau = None, timeout = 30):
+    from .stat_utils import get_tau, correlated_data_mean_err
+    import time
+    start_time = time.time()
+    n_samples = initial_sample_size
+    x = MC_step_n_mobile_left(MC, n_samples)
+    if tau is None: tau = get_tau(x)
+    x_mean, x_err = correlated_data_mean_err(x, tau, ci)
+    while x_err>target_error:
+        elapsed_time = time.time() - start_time
+        if elapsed_time > timeout:
+            print('Timeout')
+            return x_mean, x_err, n_samples
+        print(f'Error {x_err} is bigger than target')
+        print('More data will be collected')
+        x=x+MC_step_n_mobile_left(MC, n_samples)
+        n_samples = n_samples*2
+        x_mean, x_err = correlated_data_mean_err(x, tau, ci)
+    else:
+        return x_mean, x_err, n_samples

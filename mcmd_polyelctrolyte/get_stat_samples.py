@@ -67,29 +67,20 @@ setup_two_box_system()
 #%%    
 MC = MonteCarloPairs(server)
 # %%
-def equilibration(gel_md_steps, salt_md_steps, mc_steps, rounds):
-    from tqdm import trange
-    for ROUND in trange(rounds):
-        for MC_STEP in trange(mc_steps):
-            MC.step()
-        server(f'integrate(int_steps = {salt_md_steps}, n_samples =1)',0)
-        server(f'integrate(int_steps = {gel_md_steps}, n_samples =1)',1)
-#%%
-tau_gel = 40
-tau_salt = 7
-eff_sample_size = 1000
-md_steps = (N1+N2)*3
-rounds=10
-equilibration(eff_sample_size*tau_gel*2, eff_sample_size*tau_salt*2, md_steps, rounds)
+Re = [server('integrate_Re(int_steps = 100, n_samples =100)',1).result() for _ in range(50)]
 # %%
-def collect_data(gel_md_steps, salt_md_steps, mc_steps, rounds):
-    n_mobile = []
-    pressure_salt = []
-    pressure_gel = []
-    from tqdm import trange
-    for ROUND in trange(rounds):
-        for MC_STEP in trange(mc_steps):
-            MC.step()
-            n_mobile.append(MC.current_state['n_mobile'])
-        server(f'integrate(int_steps = {salt_md_steps}, n_samples =1)',0)
-        server(f'integrate(int_steps = {gel_md_steps}, n_samples =1)',1)
+np.savetxt('Re_sample(int_steps_100).csv', np.vstack(Re),  delimiter = ',')
+# %%
+pressure = [server('integrate_pressure(int_steps = 100, n_samples =100)',0).result() for _ in range(50)]
+pressure = np.concatenate(pressure)
+# %%
+np.savetxt('pressure_sample(int_steps_100).csv', pressure,  delimiter = ',')
+# %%
+# %%
+server('auto_integrate_pressure(target_error = 0.00002, initial_sample_size = 1000)', 0).result()
+# %%
+from monte_carlo.ion_pair import auto_MC_collect
+#%%
+auto_MC_collect(MC, 1, 100, timeout = 100)
+# %%
+

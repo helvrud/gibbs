@@ -1,3 +1,4 @@
+#%%
 from typing import Callable
 from socket_nodes import LocalScopeExecutor
 
@@ -8,6 +9,8 @@ import re
 import numpy as np
 import random
 import math
+
+from stat_utils import get_tau, correlated_data_mean_err
 
 
 class EspressoExecutorSalt(LocalScopeExecutor):
@@ -98,18 +101,35 @@ class EspressoExecutorSalt(LocalScopeExecutor):
     def pressure(self):
         return float(self.system.analysis.pressure()['total']) 
 
-    def _integrate_observable_callback(self):
-        return self.pressure()
-
-    def integrate(self, int_steps : int = 1000, n_samples : int = 100, return_only_mean = False):
+    def integrate_pressure(self, int_steps : int = 1000, n_samples : int = 100, return_only_mean = False):
         acc = []
         for i in range(n_samples):
             self.system.integrator.run(int_steps)
-            acc.append(self._integrate_observable_callback())
+            acc.append(self.pressure())
         if return_only_mean:
             return np.mean(acc), np.std(acc)
         else:
             return acc
+
+    def auto_integrate_pressure(self, target_error, initial_sample_size, ci = 0.95, tau = None, int_steps = 100, timeout = 30):
+        import time
+        start_time = time.time()
+        n_samples = initial_sample_size
+        x = self.integrate_pressure(n_samples = n_samples, int_steps=int_steps)
+        if tau is None: tau = get_tau(x)
+        x_mean, x_err = correlated_data_mean_err(x, tau, ci)
+        while x_err>target_error:
+            elapsed_time = time.time() - start_time
+            if elapsed_time > timeout:
+                print('Timeout')
+                return x_mean, x_err, n_samples
+            print(f'Error {x_err} is bigger than target')
+            print('More data will be collected')
+            x=x+self.integrate_pressure(n_samples = n_samples, int_steps=int_steps)
+            n_samples = n_samples*2
+            x_mean, x_err = correlated_data_mean_err(x, tau, ci)
+        else:
+            return x_mean, x_err, n_samples
 
 
 class EspressoExecutorGel(EspressoExecutorSalt):
@@ -119,5 +139,27 @@ class EspressoExecutorGel(EspressoExecutorSalt):
         Re = calc_Re(self.system, pairs)
         return Re
 
-    def _integrate_observable_callback(self):
-        return self.Re()
+    def integrate_Re(self, int_steps : int = 1000, n_samples : int = 100, return_only_mean = False):
+        acc = []
+        for i in range(n_samples):
+            self.system.integrator.run(int_steps)
+            acc.append(self.Re())
+        if return_only_mean:
+            return np.mean(acc), np.std(acc)
+        else:
+            return acc
+
+#%%
+if __name__ == "__main__": ##for debugging
+    system = espressomd.System(box_l = [10, 10, 10])
+    system.time_step = 0.001
+    system.cell_system.skin = 0.4
+    system.thermostat.set_langevin(kT=1, gamma=1, seed=42)
+    system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)
+    lj_sigma=1
+    system.non_bonded_inter[0,0].lennard_jones.set_params(epsilon=1, sigma=lj_sigma, cutoff=lj_sigma*2**(1./6), shift='auto')
+    executor = EspressoExecutorSalt(system)
+    executor.populate(50)
+# %%
+    executor.auto_integrate_pressure(0.00005, 1000)
+# %%
