@@ -111,7 +111,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         else:
             return acc
 
-    def auto_integrate_pressure(self, target_error, initial_sample_size, ci = 0.95, tau = None, int_steps = 100, timeout = 30):
+    def auto_integrate_pressure(self, target_error, initial_sample_size, ci = 0.95, tau = None, int_steps = 1000, timeout = 30):
         import time
         start_time = time.time()
         n_samples = initial_sample_size
@@ -126,10 +126,12 @@ class EspressoExecutorSalt(LocalScopeExecutor):
             print(f'Error {x_err} is bigger than target')
             print('More data will be collected')
             x=x+self.integrate_pressure(n_samples = n_samples, int_steps=int_steps)
-            n_samples = n_samples*2
+            if tau is None: tau = get_tau(x)
             x_mean, x_err = correlated_data_mean_err(x, tau, ci)
+            n_samples = n_samples*2
         else:
-            return x_mean, x_err, n_samples
+            print(f'Mean: {x_mean}, err: {x_err}, eff_sample_size: {n_samples/(2*tau)}')
+            return x_mean, x_err, n_samples/(2*tau)
 
 
 class EspressoExecutorGel(EspressoExecutorSalt):

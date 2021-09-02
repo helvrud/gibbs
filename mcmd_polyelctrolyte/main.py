@@ -1,13 +1,13 @@
 #%%
-import logging
 import numpy as np
-from pandas.core import series
+import json
 
 import socket_nodes
 from monte_carlo.ion_pair import MonteCarloPairs
+from monte_carlo.ion_pair import auto_MC_collect
 #%%
-logger  = logging.getLogger('Server')
-logging.basicConfig(stream=open('server.log', 'w'), level=logging.WARNING)
+#logger  = logging.getLogger('Server')
+#logging.basicConfig(stream=open('server.log', 'w'), level=logging.WARNING)
 #%%
 ###Control parameters
 ELECTROSTATIC = False
@@ -18,13 +18,20 @@ N2 = 100 #mobile ions on the right side
 #box volumes and dimmensions
 V = [system_volume*(1-v_gel),system_volume*v_gel]
 box_l = [V_**(1/3) for V_ in V]
+alpha =0.05
+diamond_particles = 248
+
+charged_gel_particles = int(diamond_particles*alpha)
+alpha = charged_gel_particles/diamond_particles
+
+N2 = N2 - charged_gel_particles
 
 ###start server and nodes
 server = socket_nodes.utils.create_server_and_nodes(
     scripts = ['espresso_nodes/node.py']*2, 
     args_list=[
         ['-l', box_l[0], '--salt'],
-        ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.00]
+        ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.05]
         ], 
     python_executable = 'python')
 
@@ -67,7 +74,7 @@ setup_two_box_system()
 #%%    
 MC = MonteCarloPairs(server)
 # %%
-def equilibration(gel_md_steps, salt_md_steps, mc_steps, rounds):
+def equilibration(gel_md_steps : int, salt_md_steps : int, mc_steps : int, rounds : int):
     from tqdm import trange
     for ROUND in trange(rounds):
         for MC_STEP in trange(mc_steps):
@@ -75,21 +82,37 @@ def equilibration(gel_md_steps, salt_md_steps, mc_steps, rounds):
         server(f'integrate(int_steps = {salt_md_steps}, n_samples =1)',0)
         server(f'integrate(int_steps = {gel_md_steps}, n_samples =1)',1)
 #%%
-tau_gel = 40
-tau_salt = 7
+tau_gel = 4
+tau_salt = 4
 eff_sample_size = 1000
-md_steps = (N1+N2)*3
-rounds=10
-equilibration(eff_sample_size*tau_gel*2, eff_sample_size*tau_salt*2, md_steps, rounds)
-# %%
-def collect_data(gel_md_steps, salt_md_steps, mc_steps, rounds):
+mc_steps = (N1+N2)*3
+rounds=2
+equilibration(int(eff_sample_size*tau_gel*2), int(eff_sample_size*tau_salt*2), int(mc_steps), rounds)
+
+#%%
+def collect_data(pressure_target_error, mc_target_error, rounds : int, timeout = 90):
     n_mobile = []
     pressure_salt = []
     pressure_gel = []
     from tqdm import trange
     for ROUND in trange(rounds):
-        for MC_STEP in trange(mc_steps):
-            MC.step()
-            n_mobile.append(MC.current_state['n_mobile'])
-        server(f'integrate(int_steps = {salt_md_steps}, n_samples =1)',0)
-        server(f'integrate(int_steps = {gel_md_steps}, n_samples =1)',1)
+        n_mobile.append(auto_MC_collect(MC, mc_target_error, 100, timeout = timeout))
+        request = MC.server(f'auto_integrate_pressure({pressure_target_error}, initial_sample_size = 1000, timeout = {timeout})', [0,1])
+        pressure_salt.append(request[0].result())
+        pressure_gel.append(request[1].result())
+        MC.setup()
+    keys = ['mean', 'err', 'eff_sample_size']
+    return_dict =  {
+        'alpha' : alpha,
+        'v' : v_gel,
+        'system_volume' : system_volume,
+        'n_mobile' : N1+N2,
+        'n_mobile_salt': {k:v.tolist() for k,v in zip(keys,np.array(n_mobile).T)}, 
+        'pressure_salt' : {k:v.tolist() for k,v in zip(keys,np.array(pressure_salt).T)}, 
+        'pressure_gel' : {k:v.tolist() for k,v in zip(keys,np.array(pressure_gel).T)}}
+    return return_dict
+#%%
+collected_data = collect_data(pressure_target_error=0.001, mc_target_error=2, rounds=2)
+savefname= f'../data/alpha_{alpha}_v_{v_gel}_N_{N1+N2}_volume_{system_volume}.json'
+with open(savefname, 'w') as outfile:
+    json.dump(collected_data, outfile)
