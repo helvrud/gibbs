@@ -10,9 +10,9 @@ from monte_carlo.ion_pair import auto_MC_collect
 #logging.basicConfig(stream=open('server.log', 'w'), level=logging.WARNING)
 #%%
 ###Control parameters
-ELECTROSTATIC = False
+ELECTROSTATIC = True
 system_volume = 20**3*2 #two boxes volume
-v_gel = 0.5 #relative volume of the box with fixed anions
+v_gel = 0.25 #relative volume of the box with fixed anions
 N1 = 100 #mobile ions on the left side
 N2 = 100 #mobile ions on the right side
 #box volumes and dimmensions
@@ -71,7 +71,7 @@ def setup_two_box_system():
     server('system.minimize_energy.minimize()', [0,1])
     print('two box system with polyelectolyte (client 1) initialized')
 setup_two_box_system()
-#%%    
+#%%
 MC = MonteCarloPairs(server)
 # %%
 def equilibration(gel_md_steps : int, salt_md_steps : int, mc_steps : int, rounds : int):
@@ -86,11 +86,11 @@ tau_gel = 4
 tau_salt = 4
 eff_sample_size = 1000
 mc_steps = (N1+N2)*3
-rounds=2
+rounds=10
 equilibration(int(eff_sample_size*tau_gel*2), int(eff_sample_size*tau_salt*2), int(mc_steps), rounds)
 
 #%%
-def collect_data(pressure_target_error, mc_target_error, rounds : int, timeout = 90):
+def collect_data(pressure_target_error, mc_target_error, rounds : int, timeout = 180):
     n_mobile = []
     pressure_salt = []
     pressure_gel = []
@@ -100,19 +100,21 @@ def collect_data(pressure_target_error, mc_target_error, rounds : int, timeout =
         request = MC.server(f'auto_integrate_pressure({pressure_target_error}, initial_sample_size = 1000, timeout = {timeout})', [0,1])
         pressure_salt.append(request[0].result())
         pressure_gel.append(request[1].result())
-        MC.setup()
+        print(MC.setup())
     keys = ['mean', 'err', 'eff_sample_size']
     return_dict =  {
         'alpha' : alpha,
         'v' : v_gel,
         'system_volume' : system_volume,
-        'n_mobile' : N1+N2,
+        'n_mobile' : N1+N2+charged_gel_particles,
         'n_mobile_salt': {k:v.tolist() for k,v in zip(keys,np.array(n_mobile).T)}, 
         'pressure_salt' : {k:v.tolist() for k,v in zip(keys,np.array(pressure_salt).T)}, 
         'pressure_gel' : {k:v.tolist() for k,v in zip(keys,np.array(pressure_gel).T)}}
     return return_dict
 #%%
-collected_data = collect_data(pressure_target_error=0.001, mc_target_error=2, rounds=2)
-savefname= f'../data/alpha_{alpha}_v_{v_gel}_N_{N1+N2}_volume_{system_volume}.json'
+collected_data = collect_data(pressure_target_error=0.001, mc_target_error=2, rounds=5)
+savefname= f'../data/alpha_{alpha}_v_{v_gel}_N_{N1+N2}_volume_{system_volume}_electrostatic_{ELECTROSTATIC}.json'
 with open(savefname, 'w') as outfile:
     json.dump(collected_data, outfile)
+
+print (collected_data)
