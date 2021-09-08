@@ -102,7 +102,7 @@ def main(electrostatic, system_volume, N_particles, v_gel, n_gel, alpha):
         scripts = ['espresso_nodes/node.py']*2, 
         args_list=[
             ['-l', box_l[0], '--salt'],
-            ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.05]
+            ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', alpha]
             ], 
         python_executable = PYTHON_EXECUTABLE)
     
@@ -129,6 +129,7 @@ def main(electrostatic, system_volume, N_particles, v_gel, n_gel, alpha):
             'v' : v_gel,
             'system_volume' : system_volume,
             'n_mobile' : N_particles,
+            'electrostatic' : electrostatic,
         })
     save_fname= f'../data/alpha_{alpha}_v_{v_gel}_N_{N_particles}_volume_{system_volume}_electrostatic_{electrostatic}.json'
     
@@ -143,10 +144,11 @@ if __name__=="__main__":
     electrostatic = False
     system_vol = 20**3*2
     N=200
-    v_gel = [0.3, 0.4, 0.6, 0.7]
-    n_gel = 0.5
-    alpha = 0.05
+    v_gel = [0.3, 0.4, 0.5, 0.6, 0.7]
+    #n_gel = v_gel
+    alpha = 0.1
     def worker(v_gel):
+        n_gel = v_gel
         return main(electrostatic=electrostatic, system_volume=system_vol, N_particles=N, n_gel = n_gel, alpha=alpha, v_gel = v_gel)
     with Pool(5) as p:
         r = p.map(worker, v_gel)
