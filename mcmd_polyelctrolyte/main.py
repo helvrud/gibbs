@@ -146,7 +146,7 @@ if __name__=="__main__":
     N=200
     v_gel = [0.3, 0.4, 0.5, 0.6, 0.7]
     #n_gel = v_gel
-    alpha = 0.1
+    alpha = 1
     def worker(v_gel):
         n_gel = v_gel
         return main(electrostatic=electrostatic, system_volume=system_vol, N_particles=N, n_gel = n_gel, alpha=alpha, v_gel = v_gel)

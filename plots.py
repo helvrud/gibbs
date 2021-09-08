@@ -50,7 +50,14 @@ sns.relplot(data = df, x = 'v', y='r', hue = 'alpha', style = 'electrostatic')
 import numpy as np
 for alpha, a_fix in zip(df['alpha'].unique(), fixed_anions.unique()):
     vv = np.linspace(0.2, 0.8)
-    zeta_ = [zeta(200, 12, v_) for v_ in vv]
-    plt.plot(vv, zeta_)
+    zeta_ = [zeta(200, a_fix, v_) for v_ in vv]
+    plt.plot(vv, zeta_, label = alpha)
+# %%
+import seaborn as sns
+import matplotlib.pyplot as plt
+df['delta_P']=df['pressure_gel_mean']-df['pressure_salt_mean']
+sns.relplot(data = df, x = 'v', y='delta_P', hue = 'alpha', style = 'electrostatic')
 
+# %%
+df
 # %%
