@@ -3,40 +3,21 @@ import numpy as np
 import json
 
 import socket_nodes
+
 from monte_carlo.ion_pair import MonteCarloPairs
 from monte_carlo.ion_pair import auto_MC_collect
-#%%
-#logger  = logging.getLogger('Server')
-#logging.basicConfig(stream=open('server.log', 'w'), level=logging.WARNING)
-#%%
-###Control parameters
-ELECTROSTATIC = True
-system_volume = 20**3*2 #two boxes volume
-v_gel = 0.25 #relative volume of the box with fixed anions
-N1 = 100 #mobile ions on the left side
-N2 = 100 #mobile ions on the right side
-#box volumes and dimmensions
-V = [system_volume*(1-v_gel),system_volume*v_gel]
-box_l = [V_**(1/3) for V_ in V]
-alpha =0.05
-diamond_particles = 248
 
-charged_gel_particles = int(diamond_particles*alpha)
-alpha = charged_gel_particles/diamond_particles
+#change cwd to file location
+import os
+import sys
+os.chdir(os.path.dirname(sys.argv[0]))
 
-N2 = N2 - charged_gel_particles
+DIAMOND_PARTICLES = 248
 
-###start server and nodes
-server = socket_nodes.utils.create_server_and_nodes(
-    scripts = ['espresso_nodes/node.py']*2, 
-    args_list=[
-        ['-l', box_l[0], '--salt'],
-        ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.05]
-        ], 
-    python_executable = 'python')
+PYTHON_EXECUTABLE = 'python'
 
-#%%
-def setup_two_box_system():
+
+def populate_boxes(server, N1, N2, electrostatic):
     SIDES = [0,1]#for readability e.g. in list comprehensions
     MOBILE_SPECIES_COUNT = [
             {'anion' : int(N1/2), 'cation' : int(N1/2)}, #left side
@@ -52,7 +33,7 @@ def setup_two_box_system():
                 server(f"populate({count}, **{PARTICLE_ATTR[species]})", i)
     populate_system(MOBILE_SPECIES_COUNT)
     ##switch on electrostatics
-    if ELECTROSTATIC:
+    if electrostatic:
         l_bjerrum = 2.0
         temp = 1
         server.request(
@@ -70,27 +51,18 @@ def setup_two_box_system():
 
     server('system.minimize_energy.minimize()', [0,1])
     print('two box system with polyelectolyte (client 1) initialized')
-setup_two_box_system()
-#%%
-MC = MonteCarloPairs(server)
-# %%
-def equilibration(gel_md_steps : int, salt_md_steps : int, mc_steps : int, rounds : int):
+
+
+def equilibration(MC, gel_md_steps : int, salt_md_steps : int, mc_steps : int, rounds : int = 10):
     from tqdm import trange
     for ROUND in trange(rounds):
         for MC_STEP in trange(mc_steps):
             MC.step()
-        server(f'integrate(int_steps = {salt_md_steps}, n_samples =1)',0)
-        server(f'integrate(int_steps = {gel_md_steps}, n_samples =1)',1)
-#%%
-tau_gel = 4
-tau_salt = 4
-eff_sample_size = 1000
-mc_steps = (N1+N2)*3
-rounds=10
-equilibration(int(eff_sample_size*tau_gel*2), int(eff_sample_size*tau_salt*2), int(mc_steps), rounds)
+        MC.server(f'integrate(int_steps = {salt_md_steps}, n_samples =1)',0)
+        MC.server(f'integrate(int_steps = {gel_md_steps}, n_samples =1)',1)
 
-#%%
-def collect_data(pressure_target_error, mc_target_error, rounds : int, timeout = 180):
+
+def collect_data(MC, pressure_target_error=2, mc_target_error=0.001, rounds : int = 5, timeout = 180):
     n_mobile = []
     pressure_salt = []
     pressure_gel = []
@@ -103,18 +75,79 @@ def collect_data(pressure_target_error, mc_target_error, rounds : int, timeout =
         print(MC.setup())
     keys = ['mean', 'err', 'eff_sample_size']
     return_dict =  {
-        'alpha' : alpha,
-        'v' : v_gel,
-        'system_volume' : system_volume,
-        'n_mobile' : N1+N2+charged_gel_particles,
         'n_mobile_salt': {k:v.tolist() for k,v in zip(keys,np.array(n_mobile).T)}, 
         'pressure_salt' : {k:v.tolist() for k,v in zip(keys,np.array(pressure_salt).T)}, 
         'pressure_gel' : {k:v.tolist() for k,v in zip(keys,np.array(pressure_gel).T)}}
     return return_dict
-#%%
-collected_data = collect_data(pressure_target_error=0.001, mc_target_error=2, rounds=5)
-savefname= f'../data/alpha_{alpha}_v_{v_gel}_N_{N1+N2}_volume_{system_volume}_electrostatic_{ELECTROSTATIC}.json'
-with open(savefname, 'w') as outfile:
-    json.dump(collected_data, outfile)
 
-print (collected_data)
+
+def main(electrostatic, system_volume, N_particles, v_gel, n_gel, alpha):
+    #box volumes and dimmensions
+    V = [system_volume*(1-v_gel),system_volume*v_gel]
+    box_l = [V_**(1/3) for V_ in V]
+
+    #real alpha and counterions amount
+    charged_gel_particles = int(DIAMOND_PARTICLES*alpha)
+    alpha = charged_gel_particles/DIAMOND_PARTICLES
+
+    #mobile ions on both sides, 
+    #note we have some counterions already in the gel
+    N = [
+        int(np.round(N_particles*n_gel)),
+        int(np.round(N_particles*(1-n_gel)))
+        ]
+
+    ###start server and nodes
+    server = socket_nodes.utils.create_server_and_nodes(
+        scripts = ['espresso_nodes/node.py']*2, 
+        args_list=[
+            ['-l', box_l[0], '--salt'],
+            ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', 0.05]
+            ], 
+        python_executable = PYTHON_EXECUTABLE)
+    
+    populate_boxes(server, N[0], N[1] - charged_gel_particles, electrostatic)
+    MC = MonteCarloPairs(server)
+    
+    ###This values are from the experience of previous runs
+    #autocorrelation times
+    tau_gel = 4
+    tau_salt = 4
+    #at least this amount of independent steps needed for MD
+    eff_sample_size = 1000
+    #minimal steps of MD required
+    md_gel = int(eff_sample_size*tau_gel*2)
+    md_salt =int(eff_sample_size*tau_salt*2)
+    #minimal steps of MC
+    mc_steps = sum(N)*3
+
+    equilibration(MC, md_gel, md_salt, int(mc_steps))
+    
+    collected_data = collect_data(MC)
+    collected_data.update({
+            'alpha' : alpha,
+            'v' : v_gel,
+            'system_volume' : system_volume,
+            'n_mobile' : N_particles,
+        })
+    save_fname= f'../data/alpha_{alpha}_v_{v_gel}_N_{N_particles}_volume_{system_volume}_electrostatic_{electrostatic}.json'
+    
+    with open(save_fname, 'w') as outfile:
+        json.dump(collected_data, outfile)
+
+    return collected_data
+
+if __name__=="__main__":
+    from functools import partial
+    from multiprocessing import Pool
+    electrostatic = False
+    system_vol = 20**3*2
+    N=200
+    v_gel = [0.3, 0.4, 0.6, 0.7]
+    n_gel = 0.5
+    alpha = 0.05
+    def worker(v_gel):
+        return main(electrostatic=electrostatic, system_volume=system_vol, N_particles=N, n_gel = n_gel, alpha=alpha, v_gel = v_gel)
+    with Pool(5) as p:
+        r = p.map(worker, v_gel)
+    print(r)

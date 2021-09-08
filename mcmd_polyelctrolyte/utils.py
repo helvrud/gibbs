@@ -1,6 +1,3 @@
-from pandas.core import series
-
-
 def scatter3d(server, client):
     import plotly.express as px
     import pandas as pd
