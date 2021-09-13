@@ -144,6 +144,15 @@ class EspressoExecutorSalt(LocalScopeExecutor):
             print(f'Mean: {x_mean}, err: {x_err}, eff_sample_size: {n_samples/(2*tau)}')
             return x_mean, x_err, n_samples/(2*tau)
 
+    def increment_volume(self, incr_vol, int_steps = 10000):
+        system = self.system
+        old_vol = system.box_l[0]**3
+        new_vol = old_vol + incr_vol
+        d_new = new_vol**(1/3) 
+        system.change_volume_and_rescale_particles(d_new)
+        system.integrator.run(int_steps)
+        print(f"Volume changed {old_vol} -> {new_vol}")
+        return self.potential_energy()
 
 class EspressoExecutorGel(EspressoExecutorSalt):
     def Re(self):

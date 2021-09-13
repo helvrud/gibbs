@@ -1,3 +1,4 @@
+#%%
 def A_gel_func(N, A_fix, v):
     import numpy as np
     sqrt = np.sqrt
@@ -9,4 +10,5 @@ def A_gel_func(N, A_fix, v):
 def zeta(N, A_fix, v):
     import numpy as np
     a_gel = A_gel_func(N, A_fix, v)
-    return np.sqrt(a_gel**2-a_gel*A_fix)/a_gel
+    print(a_gel, A_fix, v)
+    return np.sqrt(a_gel**2+a_gel*A_fix)/a_gel

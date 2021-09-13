@@ -1,3 +1,4 @@
+#%%
 import numpy as np
 import json
 
@@ -6,14 +7,12 @@ import socket_nodes
 from monte_carlo.ion_pair import MonteCarloPairs
 from monte_carlo.ion_pair import auto_MC_collect
 
-#change cwd to file location
-import os
-import sys
-os.chdir(os.path.dirname(sys.argv[0]))
-
 DIAMOND_PARTICLES = 248
 
 PYTHON_EXECUTABLE = 'python'
+
+import logging
+logging.basicConfig(level=logging.DEBUG, stream=open('server.log', 'w'))
 
 
 def populate_boxes(server, N1, N2, electrostatic):
@@ -53,8 +52,6 @@ def populate_boxes(server, N1, N2, electrostatic):
 
 
 def equilibration(MC, gel_md_steps : int, salt_md_steps : int, mc_steps : int, rounds : int = 10):
-    MC.server(f'integrate(int_steps = {salt_md_steps}, n_samples =1)',0)
-    MC.server(f'integrate(int_steps = {gel_md_steps}, n_samples =1)',1)
     from tqdm import trange
     for ROUND in trange(rounds):
         for MC_STEP in trange(mc_steps):
@@ -67,7 +64,6 @@ def collect_data(MC, pressure_target_error=2, mc_target_error=0.001, rounds : in
     n_mobile = []
     pressure_salt = []
     pressure_gel = []
-    MC.setup()
     from tqdm import trange
     for ROUND in trange(rounds):
         n_mobile.append(auto_MC_collect(MC, mc_target_error, 100, timeout = timeout))
@@ -108,55 +104,23 @@ def main(electrostatic, system_volume, N_particles, v_gel, n_gel, alpha):
             ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', alpha]
             ], 
         python_executable = PYTHON_EXECUTABLE, 
-        stdout = open('server.log', 'w'),
-        stderr = open('server.log', 'w'),
+        stdout = subprocess.PIPE,
+        stderr = subprocess.PIPE,
         )
     
     #populate_boxes(server, N[0], N[1] - charged_gel_particles, electrostatic)
     populate_boxes(server, N[0], N[1], electrostatic)
     MC = MonteCarloPairs(server)
     
-    ###This values are from the experience of previous runs
-    #autocorrelation times
-    tau_gel = 4
-    tau_salt = 4
-    #at least this amount of independent steps needed for MD
-    eff_sample_size = 1000
-    #minimal steps of MD required
-    md_gel = int(eff_sample_size*tau_gel*2)
-    md_salt =int(eff_sample_size*tau_salt*2)
-    #minimal steps of MC
-    mc_steps = sum(N)*5
+    return server, MC
+#%%
+electrostatic = False
+system_vol = 20**3*2
+N=200
+v_gel = 0.4
+n_gel = v_gel
+alpha = 0.25
+server, MC = main(electrostatic, system_vol, N, v_gel, v_gel, alpha)
 
-    equilibration(MC, md_gel, md_salt, int(mc_steps))
-    
-    collected_data = collect_data(MC)
-    collected_data.update({
-            'alpha' : alpha,
-            'v' : v_gel,
-            'system_volume' : system_volume,
-            'n_mobile' : N_particles+charged_gel_particles,
-            'electrostatic' : electrostatic,
-        })
-    save_fname= f'../data/alpha_{alpha}_v_{v_gel}_N_{N_particles}_volume_{system_volume}_electrostatic_{electrostatic}.json'
-    
-    with open(save_fname, 'w') as outfile:
-        json.dump(collected_data, outfile)
-
-    return collected_data
-
-if __name__=="__main__":
-    from functools import partial
-    from multiprocessing import Pool
-    electrostatic = False
-    system_vol = 20**3*2
-    N=100
-    v_gel = [0.2]
-    #n_gel = v_gel
-    alpha = 0.5
-    def worker(v_gel):
-        n_gel = v_gel
-        return main(electrostatic=electrostatic, system_volume=system_vol, N_particles=N, n_gel = n_gel, alpha=alpha, v_gel = v_gel)
-    with Pool(5) as p:
-        r = p.map(worker, v_gel)
-    print(r)
+# %%
+server("increment_volume(1000)", 1).result()

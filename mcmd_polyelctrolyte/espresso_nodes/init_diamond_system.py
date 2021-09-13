@@ -68,10 +68,10 @@ def charge_gel(system, gel_indices, alpha, particle_attr, add_counterions = True
                 setattr(part, attr_name, attr_val)
         if add_counterions:
             system.part.add(pos = system.box_l*np.random.random(3), **particle_attr['cation'])
-        logging.debug(f'{i}/{n_charged} charged')
+        logging.debug(f'{i+1}/{n_charged} charged')
 
 def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05, integrator_steps = 10000):
-    logging.debug ('change_volume to the size L = ', target_l)
+    logging.debug (f'change_volume to the size L = {target_l}')
     while system.box_l[0] != target_l:
         factor = target_l/system.box_l[0]
         if factor<scale_down_factor: 
@@ -82,6 +82,7 @@ def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 
         system.change_volume_and_rescale_particles(d_new)
         system.integrator.run(integrator_steps)
         logging.debug(f'gel box_size: {system.box_l[0]}')
+        logging.debug(f"pressure: {system.analysis.pressure()['total']}")
     logging.debug ('volume change done')
 
 def _get_pairs(system, gel_start_id):

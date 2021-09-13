@@ -50,7 +50,7 @@ class BaseNode:
 
         #while the note is still connected
         while self.connected:
-            logger.debug('\nListening...')
+            #logger.debug('\nListening...')
             #get the data from the socket
             data = self.recv_raw()
             #if no data -> connection is lost
@@ -72,6 +72,7 @@ class BaseNode:
         """        
         result = eval(request)
         logger.debug('Request is executed')
+        logger.debug(f'Result: {result}')
         return result
 
     def verify(self, request) -> bool:
@@ -110,6 +111,7 @@ class BaseNode:
         Args:
             node_socket (socket): node's socket
         """ 
+        logger.debug("Receiving request from server")
         HEADER_LENGTH = 10
         try:
             message_header = self.server_socket.recv(HEADER_LENGTH)
@@ -119,6 +121,10 @@ class BaseNode:
             message_length = int(message_header.decode('utf-8').strip())
             serialized_data = self.server_socket.recv(message_length)
             data = pickle.loads(serialized_data)
+            trim_length = 400
+            str_data = str(data)
+            str_data = (str_data[:trim_length] + '...') if len(str_data) > 75 else str_data
+            logger.debug(str_data)
             return data
         except Exception as e:
             logger.error(e)
@@ -136,7 +142,11 @@ class BaseNode:
         msg = pickle.dumps(data)
         msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
         self.server_socket.send(msg)
-        logger.debug("Request's result is sent")
+        logger.debug("Sending result to the server")
+        trim_length = 400
+        str_data = str(data)
+        str_data = (str_data[:trim_length] + '...') if len(str_data) > 75 else str_data
+        logger.debug(str_data)
         return True
 
     def handle_disconnection(self):

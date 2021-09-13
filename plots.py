@@ -29,11 +29,11 @@ for file in json_files:
 # %%
 df = pd.DataFrame(dicts)
 # %%
-arr_columns = ['n_mobile_salt_mean', 'n_mobile_salt_err',
-       'n_mobile_salt_eff_sample_size', 'pressure_salt_mean',
-       'pressure_salt_err', 'pressure_salt_eff_sample_size',
-       'pressure_gel_mean', 'pressure_gel_err',
-       'pressure_gel_eff_sample_size']
+arr_columns = ['n_mobile_salt_eff_sample_size',
+       'n_mobile_salt_err', 'n_mobile_salt_mean',
+       'pressure_gel_eff_sample_size', 'pressure_gel_err', 'pressure_gel_mean',
+       'pressure_salt_eff_sample_size', 'pressure_salt_err',
+       'pressure_salt_mean']
 #%%
 df = df.apply(lambda x: x.explode() if x.name in arr_columns else x)
 # %%
@@ -43,21 +43,23 @@ mobile_cation_gel = (df['n_mobile'] - df['n_mobile_salt_mean'] - fixed_anions)/2
 mobile_cation_salt =  df['n_mobile_salt_mean']/2
 df['r'] = mobile_cation_gel/mobile_cation_salt*(1-df['v'])/df['v']
 df['r']
-# %%
+# %% 
 import seaborn as sns
 import matplotlib.pyplot as plt
-sns.relplot(data = df, x = 'v', y='r', hue = 'alpha', style = 'electrostatic')
+sns.relplot(data = df, x = 'v', y='r', hue = 'alpha', style = 'n_mobile')
+vv = np.linspace(0.2, 0.8)
 import numpy as np
-for alpha, a_fix in zip(df['alpha'].unique(), fixed_anions.unique()):
-    vv = np.linspace(0.2, 0.8)
-    zeta_ = [zeta(200, a_fix, v_) for v_ in vv]
-    plt.plot(vv, zeta_, label = alpha)
+for idx, grouped in df.groupby(by=['alpha', 'n_mobile']):
+    alpha = grouped['alpha'].squeeze()
+    n_mobile = grouped['n_mobile'].squeeze()
+    a_fix = alpha*DIAMOND_PARTICLES
+    zeta_ = [1/zeta(n_mobile, a_fix, v_) for v_ in vv]
+    plt.plot(vv, zeta_, label = f'{alpha}_{n_mobile}')
+plt.show()
 # %%
 import seaborn as sns
 import matplotlib.pyplot as plt
 df['delta_P']=df['pressure_gel_mean']-df['pressure_salt_mean']
 sns.relplot(data = df, x = 'v', y='delta_P', hue = 'alpha', style = 'electrostatic')
-
-# %%
-df
+plt.show()
 # %%
