@@ -43,12 +43,13 @@ mobile_cation_gel = (df['n_mobile'] - df['n_mobile_salt_mean'] - fixed_anions)/2
 mobile_cation_salt =  df['n_mobile_salt_mean']/2
 df['r'] = mobile_cation_gel/mobile_cation_salt*(1-df['v'])/df['v']
 df['r']
+df = df.loc[df['alpha']==0.5]
 # %% 
+import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 sns.relplot(data = df, x = 'v', y='r', hue = 'alpha', style = 'n_mobile')
 vv = np.linspace(0.2, 0.8)
-import numpy as np
 for idx, grouped in df.groupby(by=['alpha', 'n_mobile']):
     alpha = grouped['alpha'].squeeze()
     n_mobile = grouped['n_mobile'].squeeze()
