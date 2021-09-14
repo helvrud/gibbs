@@ -95,8 +95,8 @@ def main(electrostatic, system_volume, N_particles, v_gel, n_gel, alpha):
     #mobile ions on both sides, 
     #note we have some counterions already in the gel
     N = [
-        int(np.round(N_particles*n_gel)),
-        int(np.round(N_particles*(1-n_gel)))
+        int(np.round(N_particles*(1-n_gel))),
+        int(np.round(N_particles*n_gel))
         ]
 
     ###start server and nodes
@@ -150,10 +150,10 @@ if __name__=="__main__":
     from multiprocessing import Pool
     electrostatic = False
     system_vol = 20**3*2
-    N=100
-    v_gel = [0.2]
+    N=200
+    v_gel = [0.3, 0.4, 0.5, 0.6]
     #n_gel = v_gel
-    alpha = 0.5
+    alpha = 0.0
     def worker(v_gel):
         n_gel = v_gel
         return main(electrostatic=electrostatic, system_volume=system_vol, N_particles=N, n_gel = n_gel, alpha=alpha, v_gel = v_gel)
