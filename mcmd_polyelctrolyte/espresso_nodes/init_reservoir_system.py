@@ -3,7 +3,7 @@ import logging
 
 def init_reservoir_system(box_l, non_bonded_attr):
     system = espressomd.System(box_l = [box_l]*3)
-    setup_non_bonded(system, non_bonded_attr)
+    #setup_non_bonded(system, non_bonded_attr)
         
     system.time_step = 0.001
     system.cell_system.skin = 0.4

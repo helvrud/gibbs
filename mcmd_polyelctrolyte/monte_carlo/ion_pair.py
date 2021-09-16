@@ -45,7 +45,6 @@ def _entropy_change(N1, N2, V1, V2, n=1):
         return math.log((N1*V2)/((N2+1)*V1))
     elif n==2:
         return math.log((V2/V1)**2*(N1*(N1-1))/((N2+2)*(N2+1)))
-from typing import Tuple
 
 def _get_mobile_species_count(particles_info_df, grouper = ['side']):
     return particles_info_df.loc[

@@ -105,14 +105,19 @@ def main(electrostatic, system_volume, N_particles, v_gel, n_gel, alpha):
         scripts = ['espresso_nodes/node.py']*2, 
         args_list=[
             ['-l', box_l[0], '--salt'],
-            ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', alpha]
+            ['-l', box_l[1], '--salt'],
+            #['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', alpha]
             ], 
         python_executable = PYTHON_EXECUTABLE, 
         stdout = open('server.log', 'w'),
         stderr = open('server.log', 'w'),
         )
+    from espresso_nodes.shared import PARTICLE_ATTR
     
-    #populate_boxes(server, N[0], N[1] - charged_gel_particles, electrostatic)
+    #simulate gel
+    server(f"populate({charged_gel_particles}, **{PARTICLE_ATTR['gel_anion']})", 1)
+    server(f"populate({charged_gel_particles}, **{PARTICLE_ATTR['cation']})", 1)
+
     populate_boxes(server, N[0], N[1], electrostatic)
     MC = MonteCarloPairs(server)
     
@@ -137,8 +142,10 @@ def main(electrostatic, system_volume, N_particles, v_gel, n_gel, alpha):
             'system_volume' : system_volume,
             'n_mobile' : N_particles+charged_gel_particles,
             'electrostatic' : electrostatic,
+            'no_gel' : True,
+            'no_LJ' : True
         })
-    save_fname= f'../data/alpha_{alpha}_v_{v_gel}_N_{N_particles}_volume_{system_volume}_electrostatic_{electrostatic}.json'
+    save_fname= f'../data/no_gel_no_LJ_alpha_{alpha}_v_{v_gel}_N_{N_particles}_volume_{system_volume}_electrostatic_{electrostatic}.json'
     
     with open(save_fname, 'w') as outfile:
         json.dump(collected_data, outfile)
@@ -151,9 +158,9 @@ if __name__=="__main__":
     electrostatic = False
     system_vol = 20**3*2
     N=200
-    v_gel = [0.3, 0.4, 0.5, 0.6]
+    v_gel = [0.4, 0.5, 0.6]
     #n_gel = v_gel
-    alpha = 0.5
+    alpha = 0.25
     def worker(v_gel):
         n_gel = v_gel
         return main(electrostatic=electrostatic, system_volume=system_vol, N_particles=N, n_gel = n_gel, alpha=alpha, v_gel = v_gel)

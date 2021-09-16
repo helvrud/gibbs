@@ -20,7 +20,7 @@ NON_BONDED_ATTR = {
 
 #FENE
 BONDED_ATTR = {
-    'FeneBond' : dict(k=30, d_r_max=2.0, r_0 = 0.0)
+    'FeneBond' : dict(k=10, d_r_max=2.0, r_0 = 0.0)
 }
 
 #DIAMOND_GEL ATTRS

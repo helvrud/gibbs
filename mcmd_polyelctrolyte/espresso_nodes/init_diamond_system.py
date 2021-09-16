@@ -111,7 +111,7 @@ def calc_Re(system, pairs):
 
 if __name__=='__main__':
     from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
-    system = init_diamond_system(15,0.966,0.5,18, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR)
+    system = init_diamond_system(15,0.966,0.5,30, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR)
     N = 40
     for i in range(N):
         system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['cation'])
