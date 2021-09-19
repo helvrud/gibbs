@@ -19,10 +19,10 @@ TCP/IP sockets are two ways data channels that allows to exchange bytes over the
 ┌───────────────────┐                  two instances
 │Server side        │             ┌────────────────────────┐
 ├───────────────────┤             │Node (Client) side      ├─┐
-│ Monte-Carlo       │   Request   ├────────────────────────┤ │
+│ Monte-Carlo       │  Requests   ├────────────────────────┤ │
 │   -swap particles ├────────────►│ Molecular Dynamics     │ │
 │   -change volume  │             │ (espressomd)           │ │
-│                   │   Response  │   -integration         │ │
+│                   │  Responses  │   -integration         │ │
 │ Major statistic   │◄────────────┤   -potential, kinetic  │ │
 │                   │             │   energies             │ │
 │ Manage results    │             │   -particle attributes │ │
