@@ -11,46 +11,49 @@ import os
 import sys
 os.chdir(os.path.dirname(sys.argv[0]))
 
-DIAMOND_PARTICLES = 248
+#particles between the nodes
+MPC = 15
+#all gel particles
+DIAMOND_PARTICLES = MPC*16+8
 
+#path to python executable, can be pypresso
 PYTHON_EXECUTABLE = 'python'
 
 
-def populate_boxes(server, N1, N2, electrostatic):
-    SIDES = [0,1]#for readability e.g. in list comprehensions
+def populate_boxes(server, N0_pairs, N1_pairs):
+    #import particles attributes consistent with other parts of the program
+    from espresso_nodes.shared import PARTICLE_ATTR
     MOBILE_SPECIES_COUNT = [
-            {'anion' : int(N1/2), 'cation' : int(N1/2)}, #left side
-            {'anion' : int(N2/2), 'cation' : int(N2/2)}, #right side
+            {'anion' : int(N0_pairs), 'cation' : int(N0_pairs)}, #left side
+            {'anion' : int(N1_pairs), 'cation' : int(N1_pairs)}, #right side
         ]
-    def populate_system(species_count):
-        from espresso_nodes.shared import PARTICLE_ATTR
-        for i,side in enumerate(species_count):
-            for species, count in side.items():
-                print(f'Added {count} of {species}', end = ' ')
-                print(*[f'{attr}={val}' for attr, val in PARTICLE_ATTR[species].items()], end = ' ')
-                print(f'to side {i} ')
-                server(f"populate({count}, **{PARTICLE_ATTR[species]})", i)
-    populate_system(MOBILE_SPECIES_COUNT)
-    ##switch on electrostatics
-    if electrostatic:
-        l_bjerrum = 2.0
-        temp = 1
-        server.request(
-            f"system.actors.add(espressomd.electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",
-            SIDES
-        )
-        #minimize energy and run md
-        server([
-            "system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
-            "system.minimize_energy.minimize()",
-            f"system.integrator.run({10000})"
-            ],
-            SIDES
-        )
-
+    for i,side in enumerate(MOBILE_SPECIES_COUNT):
+        for species, count in side.items():
+            print(f'Added {count} of {species}', end = ' ')
+            print(*[f'{attr}={val}' for attr, val in PARTICLE_ATTR[species].items()], end = ' ')
+            print(f'to side {i} ')
+            server(f"populate({count}, **{PARTICLE_ATTR[species]})", i)
     server('system.minimize_energy.minimize()', [0,1])
-    print('two box system with polyelectolyte (client 1) initialized')
-
+    print('two box system with polyelectrolite (client 1) is initialized')
+    
+def enable_electrostatic(server):
+    SIDES = [0,1]#for readability e.g. in list comprehensions
+    l_bjerrum = 2.0
+    temp = 1
+    server.request(
+        f"system.actors.add(espressomd.electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",
+        SIDES
+    )
+    #minimize energy and run md
+    server([
+        "system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)",
+        "system.minimize_energy.minimize()",
+        f"system.integrator.run({10000})"
+        ],
+        SIDES
+    )
+    server('system.minimize_energy.minimize()', [0,1])
+    print("Electrostatic is enabled")
 
 def equilibration(MC, gel_md_steps : int, salt_md_steps : int, mc_steps : int, rounds : int = 10):
     MC.server(f'integrate(int_steps = {salt_md_steps}, n_samples =1)',0)
@@ -61,7 +64,6 @@ def equilibration(MC, gel_md_steps : int, salt_md_steps : int, mc_steps : int, r
             MC.step()
         MC.server(f'integrate(int_steps = {salt_md_steps}, n_samples =1)',0)
         MC.server(f'integrate(int_steps = {gel_md_steps}, n_samples =1)',1)
-
 
 def collect_data(MC, pressure_target_error=2, mc_target_error=0.001, rounds : int = 5, timeout = 180):
     n_mobile = []
@@ -83,26 +85,27 @@ def collect_data(MC, pressure_target_error=2, mc_target_error=0.001, rounds : in
     return return_dict
 
 
-def main(electrostatic, system_volume, N_particles, v_gel, n_gel, alpha):
-    #box volumes and dimmensions
+def main(electrostatic, system_volume, N_pairs, v_gel, n_gel, alpha):
+    # box volumes and dimmensions
     V = [system_volume*(1-v_gel),system_volume*v_gel]
     box_l = [V_**(1/3) for V_ in V]
 
-    #real alpha and counterions amount
+    # real alpha and counterions amount
     charged_gel_particles = int(DIAMOND_PARTICLES*alpha)
     alpha = charged_gel_particles/DIAMOND_PARTICLES
 
-    #mobile ions on both sides, 
-    #note we have some counterions already in the gel
+    # mobile ions on both sides, 
+    # note we have some counterions already in the gel, 
+    # that is not accounted here
     N = [
-        int(np.round(N_particles*(1-n_gel))),
-        int(np.round(N_particles*n_gel))
+        int(np.round(N_pairs*(1-n_gel))),
+        int(np.round(N_pairs*n_gel))
         ]
 
     ###start server and nodes
-    import subprocess
     server = socket_nodes.utils.create_server_and_nodes(
-        scripts = ['espresso_nodes/node.py']*2, 
+        #paths to entry point scripts
+        scripts = ['espresso_nodes/node.py']*2,
         args_list=[
             ['-l', box_l[0], '--salt'],
             ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', alpha]
@@ -112,12 +115,12 @@ def main(electrostatic, system_volume, N_particles, v_gel, n_gel, alpha):
         stderr = open('server.log', 'w'),
         )
     
-    #populate_boxes(server, N[0], N[1] - charged_gel_particles, electrostatic)
-    populate_boxes(server, N[0], N[1], electrostatic)
+    populate_boxes(server, N[0], N[1])
+    if electrostatic: enable_electrostatic(server)
     MC = MonteCarloPairs(server)
     
     ###This values are from the experience of previous runs
-    #autocorrelation times
+    #autocorrelation times, will be rewritten to calculate anew
     tau_gel = 4
     tau_salt = 4
     #at least this amount of independent steps needed for MD
@@ -132,14 +135,20 @@ def main(electrostatic, system_volume, N_particles, v_gel, n_gel, alpha):
     
     collected_data = collect_data(MC)
     collected_data.update({
-            'alpha' : alpha,
-            'v' : v_gel,
-            'system_volume' : system_volume,
-            'n_mobile' : N_particles+charged_gel_particles,
-            'electrostatic' : electrostatic,
+            'alpha' : alpha, #charged gel monomers fraction
+            'v' : v_gel, #relative gel volume
+            'system_volume' : system_volume, #system volume
+            'n_pairs' : N_pairs, #Number of added ion pairs, excl. counterions
+            'electrostatic' : electrostatic, #is electrostatic enabled
+            'n_gel' : DIAMOND_PARTICLES, #number of all gel particles
+            'anion_fixed' : charged_gel_particles, #number of charged gel particles
+            'box_l' : box_l,
+            'volume' : V
         })
-    save_fname= f'../data/alpha_{alpha}_v_{v_gel}_N_{N_particles}_volume_{system_volume}_electrostatic_{electrostatic}.json'
+    str_alpha = "{:.3f}".format(alpha)
+    import uuid
     
+    save_fname= f'../data/{str_alpha}_{v_gel}_{N_pairs}_{system_volume}_{electrostatic}'+str(uuid.uuid4())[:8]+'.json'
     with open(save_fname, 'w') as outfile:
         json.dump(collected_data, outfile)
 
@@ -150,13 +159,12 @@ if __name__=="__main__":
     from multiprocessing import Pool
     electrostatic = False
     system_vol = 20**3*2
-    N=200
-    v_gel = [0.3, 0.4, 0.5, 0.6]
-    #n_gel = v_gel
+    N_pairs=200
+    v_gel = [0.5, 0.6, 0.7]
     alpha = 0.5
     def worker(v_gel):
         n_gel = v_gel
-        return main(electrostatic=electrostatic, system_volume=system_vol, N_particles=N, n_gel = n_gel, alpha=alpha, v_gel = v_gel)
+        return main(electrostatic=electrostatic, system_volume=system_vol, N_pairs=N_pairs, n_gel = n_gel, alpha=alpha, v_gel = v_gel)
     with Pool(5) as p:
         r = p.map(worker, v_gel)
     print(r)

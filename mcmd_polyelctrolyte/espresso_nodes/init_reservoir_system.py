@@ -3,14 +3,18 @@ import logging
 
 def init_reservoir_system(box_l, non_bonded_attr):
     system = espressomd.System(box_l = [box_l]*3)
-    #setup_non_bonded(system, non_bonded_attr)
         
     system.time_step = 0.001
     system.cell_system.skin = 0.4
     system.thermostat.set_langevin(kT=1, gamma=1, seed=42)
     system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)
 
+    if non_bonded_attr is not None:
+        setup_non_bonded(system, non_bonded_attr)
+        logging.debug(f"non-bonded interaction is setup")
+
     logging.debug("Reservoir system initialized")
+    system.minimize_energy.minimize()
     return system
 
 def setup_non_bonded(system, non_bonded_attr):

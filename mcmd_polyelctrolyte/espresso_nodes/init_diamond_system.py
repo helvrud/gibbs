@@ -15,14 +15,28 @@ def init_diamond_system(MPC, bond_length, alpha, target_l, bonded_attr, non_bond
     system.minimize_energy.init(f_max=50, gamma=60.0, max_steps=10000, max_displacement=0.001)
 
     logging.debug(f"gel initial volume: {box_l}")
-    fene = espressomd.interactions.FeneBond(**bonded_attr['FeneBond'])
-    system.bonded_inter.add(fene)
-    setup_non_bonded(system, non_bonded_attr)
+    
+    if non_bonded_attr is not None:
+        setup_non_bonded(system, non_bonded_attr)
+        logging.debug(f"non-bonded interaction is setup")
+
+    if bonded_attr is not None:
+        if non_bonded_attr is None:
+            logging.debug(
+                f"non-bonded interaction is not setup, bonded ignored")
+        else:
+            fene = espressomd.interactions.FeneBond(**bonded_attr['FeneBond'])
+            system.bonded_inter.add(fene)
+            logging.debug(f"bonded interaction is setup")
     
     start_id = system.part.highest_particle_id
-    diamond.Diamond(a=a, bond_length=bond_length, MPC=MPC)
+    if bonded_attr is not None:
+        diamond.Diamond(a=a, bond_length=bond_length, MPC=MPC)
+    else:
+        for i in range(MPC*16+8):
+            system.part.add(pos = system.box_l*np.random.random(3), **particle_attr['gel_neutral'])
     gel_indices  = (start_id+1, system.part.highest_particle_id+1)
-    
+
     re_type_nodes(system, gel_indices, particle_attr)
     charge_gel(system, gel_indices, alpha, particle_attr)
     logging.debug('Minimizing energy before volume change')
@@ -111,6 +125,8 @@ def calc_Re(system, pairs):
 
 if __name__=='__main__':
     from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
+    BONDED_ATTR = None
+    NON_BONDED_ATTR = None
     system = init_diamond_system(15,0.966,0.5,30, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR)
     N = 40
     for i in range(N):

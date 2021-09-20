@@ -42,6 +42,10 @@ if __name__=="__main__":
                         type = float,
                         help = 'charged monomer ratio',
                         required='--gel' in sys.argv)
+    parser.add_argument('--no_interaction', 
+                        help = 'switch all interaction off',
+                        action='store_true',
+                        required=False)               
     args = parser.parse_args()
     
     if '--salt' in sys.argv:
@@ -49,7 +53,10 @@ if __name__=="__main__":
         logging.basicConfig(level=logging.DEBUG, stream=open('salt.log', 'w'))
         from init_reservoir_system import init_reservoir_system
         logging.info('Initializing salt reservoir')
-        from shared import NON_BONDED_ATTR
+        if '--no_interaction' in sys.argv:
+            from shared import NON_BONDED_ATTR
+        else:
+            NON_BONDED_ATTR = None
         system = init_reservoir_system(args.l, NON_BONDED_ATTR)
         node = Node(args.IP, args.PORT, EspressoExecutorSalt, system)
         node.run()
@@ -57,8 +64,13 @@ if __name__=="__main__":
         import logging
         logging.basicConfig(level=logging.DEBUG, stream=open('gel.log', 'w'))
         from init_diamond_system import init_diamond_system
-        from shared import PARTICLE_ATTR, NON_BONDED_ATTR, BONDED_ATTR
+        from shared import PARTICLE_ATTR
         logging.info('Initializing reservoir with a gel')
+        if '--no_interaction' in sys.argv:
+            from shared import NON_BONDED_ATTR, BONDED_ATTR
+        else:
+            NON_BONDED_ATTR = None
+            BONDED_ATTR = None
         system = init_diamond_system(
             args.MPC, args.bond_length, args.alpha, args.l,
             BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR

@@ -31,7 +31,7 @@ One can not create more than one instance of espressomd.System in one process py
   │    init_reservoir_system.py
   │    init_diamond_system.py
   │   ┌────────────────────────────┐
-  └──►│instanciated and initialized│
+  └──►│instantiated and initialized│
       │     espressomd.System      │
       └────────────────────────────┘
 

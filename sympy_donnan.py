@@ -21,6 +21,8 @@ possible_zeta = [(result_[1]/result_[0]/(v/(1-v))).simplify() for result_ in res
 #%%
 possible_zeta[0]
 #%%
+print(possible_zeta[0])
+#%%
 def zeta(N,v,A_fix):
     return (-2*A_fix*v + A_fix + N*v**2 + v*sqrt(-2*A_fix**2*v + A_fix**2 + N**2*v**2) - sqrt(-2*A_fix**2*v + A_fix**2 + N**2*v**2))/(v*(N*v - N + sqrt(-2*A_fix**2*v + A_fix**2 + N**2*v**2)))
 #%%
