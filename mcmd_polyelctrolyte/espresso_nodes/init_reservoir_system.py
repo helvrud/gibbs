@@ -24,6 +24,7 @@ def setup_non_bonded(system, non_bonded_attr):
 if __name__=='__main__':
     from shared import NON_BONDED_ATTR
     import numpy as np
+    NON_BONDED_ATTR = None
     system = init_reservoir_system(30, NON_BONDED_ATTR)
     n=100
     [system.part.add(

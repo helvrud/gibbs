@@ -19,6 +19,8 @@ DIAMOND_PARTICLES = MPC*16+8
 #path to python executable, can be pypresso
 PYTHON_EXECUTABLE = 'python'
 
+#set True to check pure Donnan
+NO_INTERACTION = True
 
 def populate_boxes(server, N0_pairs, N1_pairs):
     #import particles attributes consistent with other parts of the program
@@ -84,7 +86,6 @@ def collect_data(MC, pressure_target_error=2, mc_target_error=0.001, rounds : in
         'pressure_gel' : {k:v.tolist() for k,v in zip(keys,np.array(pressure_gel).T)}}
     return return_dict
 
-
 def main(electrostatic, system_volume, N_pairs, v_gel, n_gel, alpha):
     # box volumes and dimmensions
     V = [system_volume*(1-v_gel),system_volume*v_gel]
@@ -107,8 +108,8 @@ def main(electrostatic, system_volume, N_pairs, v_gel, n_gel, alpha):
         #paths to entry point scripts
         scripts = ['espresso_nodes/node.py']*2,
         args_list=[
-            ['-l', box_l[0], '--salt'],
-            ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', alpha]
+            ['-l', box_l[0], '--salt', '--no_interaction'],
+            ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', alpha, '--no_interaction']
             ], 
         python_executable = PYTHON_EXECUTABLE, 
         stdout = open('server.log', 'w'),
@@ -142,13 +143,15 @@ def main(electrostatic, system_volume, N_pairs, v_gel, n_gel, alpha):
             'electrostatic' : electrostatic, #is electrostatic enabled
             'n_gel' : DIAMOND_PARTICLES, #number of all gel particles
             'anion_fixed' : charged_gel_particles, #number of charged gel particles
-            'box_l' : box_l,
-            'volume' : V
+            'box_l' : box_l, #box_lengths
+            'volume' : V, #volumes
+            'no_interaction' : NO_INTERACTION, #no interaction flag, True if no LJ and FENE
+            'MC_end_state': MC.setup() #for debug store last state
         })
     str_alpha = "{:.3f}".format(alpha)
     import uuid
     
-    save_fname= f'../data/{str_alpha}_{v_gel}_{N_pairs}_{system_volume}_{electrostatic}'+str(uuid.uuid4())[:8]+'.json'
+    save_fname = f'../data/{str_alpha}_{v_gel}_{N_pairs}_{system_volume}_{int(electrostatic)}_{int(NO_INTERACTION)}'+str(uuid.uuid4())[:8]+'.json'
     with open(save_fname, 'w') as outfile:
         json.dump(collected_data, outfile)
 
