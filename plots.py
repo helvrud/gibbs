@@ -46,7 +46,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 fig, ax = plt.subplots()
 vv = np.linspace(0.2, 0.8)
-lvl0 = ['alpha', 'n_pairs', 'n_gel', 'system_volume']
+lvl0 = ['alpha', 'n_pairs', 'n_gel', 'system_volume', 'no_interaction']
 for idx, grouped in df.groupby(by = lvl0):
     print(idx)
     alpha = idx[0]
@@ -64,5 +64,4 @@ plt.xlabel('v')
 plt.ylabel('$\zeta$')
 plt.show()
 
-#%%
-
+# %%
