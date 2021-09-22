@@ -38,7 +38,7 @@ df = df.apply(lambda x: x.explode() if x.name in arr_columns else x)
 df['anion_salt'] = df.n_mobile_salt_mean/2
 df['anion_gel'] = df.n_pairs - df.anion_salt 
 df['zeta'] = df.anion_gel/df.anion_salt*(1-df.v)/df.v
-#df = df.loc[df['alpha'].isin([0, 0.25])]
+df = df.loc[df['alpha'].isin([0.5])]
 #df = df.loc[df['no_gel'] == True]
 # %% 
 import numpy as np
@@ -50,13 +50,13 @@ lvl0 = ['alpha', 'n_pairs', 'n_gel', 'system_volume', 'no_interaction']
 for idx, grouped in df.groupby(by = lvl0):
     print(idx)
     alpha = idx[0]
-    n_mobile = np.mean(idx[1]*2)
+    n_pair = np.mean(idx[1])*2
     a_fix = np.mean(grouped.anion_fixed)
     v_ = grouped.v
     plt.scatter(v_, grouped.zeta)
-    zeta_theory = [zeta(n_mobile, v, a_fix) for v in vv]
+    zeta_theory = [zeta(n_pair, v, a_fix) for v in vv]
     plt.plot(vv, zeta_theory, label = idx)
-plt.legend(title=lvl0)
+plt.legend(title=lvl0, bbox_to_anchor=(1.1, 1.05))
 plt.arrow(0.3, 0.05, 0.3, 0.0, head_width = 0.02,  transform=ax.transAxes)
 plt.text(0.35,0.07, "compression",  transform=ax.transAxes, va='bottom')
 plt.text(0.65,0.3, r"$\zeta = \frac{A^{-}_{gel}}{A^{-}_{salt}}$",fontsize=22)

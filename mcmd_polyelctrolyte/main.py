@@ -20,7 +20,7 @@ DIAMOND_PARTICLES = MPC*16+8
 PYTHON_EXECUTABLE = 'python'
 
 #set True to check pure Donnan
-NO_INTERACTION = False
+NO_INTERACTION = True
 
 def populate_boxes(server, N0_pairs, N1_pairs):
     #import particles attributes consistent with other parts of the program
@@ -108,8 +108,8 @@ def main(electrostatic, system_volume, N_pairs, v_gel, n_gel, alpha):
         #paths to entry point scripts
         scripts = ['espresso_nodes/node.py']*2,
         args_list=[
-            ['-l', box_l[0], '--salt'],#, '--no_interaction'],
-            ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', alpha]#, '--no_interaction']
+            ['-l', box_l[0], '--salt', '-no_interaction', NO_INTERACTION],
+            ['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', alpha, '-no_interaction', NO_INTERACTION]
             ], 
         python_executable = PYTHON_EXECUTABLE, 
         stdout = open('server.log', 'w'),
@@ -150,7 +150,7 @@ def main(electrostatic, system_volume, N_pairs, v_gel, n_gel, alpha):
     str_alpha = "{:.3f}".format(alpha)
     import uuid
     
-    save_fname = f'../data/{str_alpha}_{v_gel}_{N_pairs}_{system_volume}_{int(electrostatic)}_{int(NO_INTERACTION)}'+str(uuid.uuid4())[:8]+'.json'
+    save_fname = f'../data/{str_alpha}_{v_gel}_{N_pairs}_{system_volume}_{int(electrostatic)}_{int(NO_INTERACTION)}_'+str(uuid.uuid4())[:8]+'.json'
     with open(save_fname, 'w') as outfile:
         json.dump(collected_data, outfile)
 
@@ -161,9 +161,9 @@ if __name__=="__main__":
     from multiprocessing import Pool
     electrostatic = False
     system_vol = 25**3*2
-    N_pairs=200
-    v_gel = [0.4, 0.45, 0.5, 0.5]
-    alpha = 0.5
+    N_pairs=100
+    v_gel = [0.4, 0.45, 0.5, 0.55, 0.6]
+    alpha = 0
     def worker(v_gel):
         n_gel = v_gel
         return main(electrostatic=electrostatic, system_volume=system_vol, N_pairs=N_pairs, n_gel = n_gel, alpha=alpha, v_gel = v_gel)

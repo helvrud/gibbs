@@ -34,6 +34,8 @@ def init_diamond_system(MPC, bond_length, alpha, target_l, bonded_attr, non_bond
         diamond.Diamond(a=a, bond_length=bond_length, MPC=MPC)
     else:
         for i in range(MPC*16+8):
+            logging.debug(
+                f"bonded interaction is not setup, no net created")
             system.part.add(pos = system.box_l*np.random.random(3), **particle_attr['gel_neutral'])
     gel_indices  = (start_id+1, system.part.highest_particle_id+1)
 
