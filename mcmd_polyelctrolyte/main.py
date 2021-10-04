@@ -160,13 +160,17 @@ if __name__=="__main__":
     from functools import partial
     from multiprocessing import Pool
     electrostatic = False
-    system_vol = 25**3*2
-    N_pairs=100
-    v_gel = [0.4, 0.45, 0.5, 0.55, 0.6]
-    alpha = 0
+    system_vol = 25**3*2 #two boxes 25^3
+    N_pairs=100 #number of ion pairs to add in both systems
+    v_gel = [0.4, 0.45, 0.5, 0.55, 0.6] #relative volume of the gel box
+    alpha = 0 #charged monomers ratio in the gel
+    #define one-variable func for multiprocessing pool
     def worker(v_gel):
+        #relative amount of the pairs in the gel box is approximately its relative volume
+        #here donnan predictions can be used
         n_gel = v_gel
         return main(electrostatic=electrostatic, system_volume=system_vol, N_pairs=N_pairs, n_gel = n_gel, alpha=alpha, v_gel = v_gel)
+    
     with Pool(5) as p:
         r = p.map(worker, v_gel)
     print(r)

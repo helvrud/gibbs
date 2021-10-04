@@ -1,5 +1,6 @@
 #%%
 import json
+from json.encoder import JSONEncoder
 import pandas as pd
 import pathlib
 
@@ -53,15 +54,29 @@ for idx, grouped in df.groupby(by = lvl0):
     n_pair = np.mean(idx[1])*2
     a_fix = np.mean(grouped.anion_fixed)
     v_ = grouped.v
-    plt.scatter(v_, grouped.zeta)
-    zeta_theory = [zeta(n_pair, v, a_fix) for v in vv]
-    plt.plot(vv, zeta_theory, label = idx)
+    plt.scatter(v_, grouped.zeta, label = idx)
+    #zeta_theory = [zeta(n_pair, v, a_fix) for v in vv]
+    #plt.plot(vv, zeta_theory, label = idx)
 plt.legend(title=lvl0, bbox_to_anchor=(1.1, 1.05))
 plt.arrow(0.3, 0.05, 0.3, 0.0, head_width = 0.02,  transform=ax.transAxes)
 plt.text(0.35,0.07, "compression",  transform=ax.transAxes, va='bottom')
 plt.text(0.65,0.3, r"$\zeta = \frac{A^{-}_{gel}}{A^{-}_{salt}}$",fontsize=22)
 plt.xlabel('v')
 plt.ylabel('$\zeta$')
+plt.plot(pure_Donnan['v'], pure_Donnan['zeta'])
 plt.show()
 
+# %%
+path = pathlib.Path('mcmd_polyelctrolyte/monte_carlo/data/')
+json_files = path.glob('*.json')
+
+dicts= []
+for file in json_files:
+    print(file.name)
+    with open(file, 'r') as f:
+        dicts.append(flatten_dict(json.loads(f.read())))
+# %%
+pure_Donnan = dicts[0]
+# %%
+plt.plot(pure_Donnan['v'], pure_Donnan['zeta'])
 # %%

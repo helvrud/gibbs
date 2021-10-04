@@ -82,10 +82,11 @@ class MonteCarloDonnan(AbstractMonteCarlo):
             zeta = (self.anion[1]/self.volume[1])/(self.anion[0]/self.volume[0])
         )
 #%%
+alpha = 0.5
 N_pairs = (100,100)
-A_fix = 248*0.5
-v = 0.5
-Volume = (200*(1-v), 200*(v))
+diamond_particles = 248
+A_fix = diamond_particles*alpha
+Volume = (10000, 10000)
 mc = MonteCarloDonnan(N_pairs, A_fix, Volume)
 # %%
 def get_zeta(v):
@@ -102,5 +103,21 @@ def get_zeta(v):
 #%%
 vv = np.linspace(0.2, 0.8, 9)
 zetas = [get_zeta(v_)[0] for v_ in vv]
+#%%
+ans = {
+    'pure_donnan' : True,
+    'alpha' :  alpha, 
+    'anion_fixed' : A_fix,
+    'N_pairs' : sum(N_pairs),
+    "volume" : sum(Volume),
+    "v": list(vv), 
+    "zeta" : list(zetas)}
 # %%
-plt.plot(vv, zetas)
+plt.plot(vv, zetas, label = f'{alpha}, {A_fix}, {sum(Volume)}, {sum(N_pairs)}')
+plt.legend(title = 'alpha, anion_fixed, volumes, N_pairs')
+# %%
+fname = f'data/pure_donan_{alpha}_{A_fix}_{sum(Volume)}_{sum(N_pairs)}.json'
+import json
+with open(fname, 'w') as f:
+    json.dump(ans, f, indent=4)
+# %%
