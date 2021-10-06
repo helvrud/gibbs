@@ -3,14 +3,35 @@ import numpy as np
 import pandas as pd
 import math
 import random
+import time
 
-import sys 
-sys.path.append('..') #to import libmontecarlo
-from libmontecarlo import *
-from shared_data import MOBILE_SPECIES, PARTICLE_ATTR
+from .libmontecarlo import AbstractMonteCarlo
+from .libmontecarlo import StateData, ReversalData, AcceptCriterion
+
+
+def get_tau(x, acf_n_lags : int = 200):
+    from statsmodels.tsa.stattools import acf
+    import numpy as np
+    acf = acf(x, nlags = acf_n_lags)
+    tau_int =1/2+max(np.cumsum(acf))    
+    return tau_int
+
+def correlated_data_mean_err(x, tau, ci = 0.95):
+    import scipy.stats
+    import numpy as np
+    x_mean = np.mean(x)
+    n_eff = np.size(x)/(2*tau)
+    print(f"Effective sample size: {n_eff}")
+    t_value=scipy.stats.t.ppf(1-(1-ci)/2, n_eff)
+    print(f"t-value: {t_value}")
+    err = np.std(x)/np.sqrt(n_eff) * t_value
+    return x_mean, err
+
 SIDES = [0,1]
 PAIR = [0,1]
 CHARGES=[-1,1]
+MOBILE_SPECIES = [0,1]
+
 def _rotate_velocities_randomly(velocities):
     from scipy.spatial.transform import Rotation
     rot = Rotation.random().as_matrix
@@ -24,7 +45,6 @@ def _entropy_change(N1, N2, V1, V2, n=1):
         return math.log((N1*V2)/((N2+1)*V1))
     elif n==2:
         return math.log((V2/V1)**2*(N1*(N1-1))/((N2+2)*(N2+1)))
-from typing import Tuple
 
 def _get_mobile_species_count(particles_info_df, grouper = ['side']):
     return particles_info_df.loc[
@@ -35,7 +55,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
     def __init__(self, server):
         super().__init__()
         self.server = server
-        self.current_state = self.setup()
+        self.setup()
 
     def setup(self) -> StateData:
         request_body = [
@@ -64,7 +84,8 @@ class MonteCarloPairs(AbstractMonteCarlo):
             volume = volume, 
             particles_info = particles_df,
             n_mobile = n_mobile)
-
+        
+        self.current_state = new_state
         return new_state
         
     def _choose_random_side_and_part(self):
@@ -173,41 +194,40 @@ class MonteCarloPairs(AbstractMonteCarlo):
     def reverse(self, reversal_data: ReversalData):
         side = reversal_data['side']
         other_side = int(not(side))
-        reverse_remove = self.server([
+        self.server([
             f"add_particle(['id'], q = {CHARGES[i]}, type = {i}, **{reversal_data['removed'][i]})"
             for i in PAIR
             ], side)
         
-        reverse_add = self.server([
+        self.server([
             f"remove_particle({reversal_data['added'][i]['id']},['id'])" 
             for i in PAIR
             ], other_side)
 
-    def on_accept(self):
-        print("Accept")
-
-    def on_reject(self):
-        print("Reject")
-
-def scatter3d(server, client):
-    box_l = server("system.box_l[0]", client).result()
-    particles = server("part_data((None,None), {'type':'int','q':'int', 'pos':'list'})", client).result()
-    df = pd.DataFrame(particles)
-    df.q = df.q.astype('category')
-    df[['x', 'y', 'z']] = df.pos.apply(pd.Series).apply(lambda x: x%box_l)
-    import plotly.express as px
-    fig = px.scatter_3d(df, x='x', y='y', z='z', color ='q', symbol = 'type')
-    fig.show()
-
-def current_state_to_record(state : StateData, step = None) -> pd.DataFrame:
-    df = state['particles_info']\
-    .groupby(by = ['side', 'type'])\
-    .size().unstack(fill_value=0)
-    df.columns.name = None
-    df.columns = PARTICLE_ATTR.keys()
-    df['energy'] = state['energy']
-    df['volume'] = state['volume']
-    if step is not None:
-        df['step'] = step
-    df = df.reset_index()
-    return df
+def MC_step_n_mobile_left(MC, n_steps):
+    mobile_count = []
+    for i in range(n_steps):
+        MC.step()
+        mobile_count.append(MC.current_state['n_mobile'][0])
+    return mobile_count
+        
+def auto_MC_collect(MC, target_error, initial_sample_size, ci = 0.95, tau = None, timeout = 30):
+    start_time = time.time()
+    n_samples = initial_sample_size
+    x = MC_step_n_mobile_left(MC, n_samples)
+    if tau is None: tau = get_tau(x)
+    x_mean, x_err = correlated_data_mean_err(x, tau, ci)
+    while x_err>target_error:
+        elapsed_time = time.time() - start_time
+        if elapsed_time > timeout:
+            print('Timeout')
+            return x_mean, x_err, n_samples
+        print(f'Error {x_err} is bigger than target {target_error}')
+        print('More data will be collected')
+        x=x+MC_step_n_mobile_left(MC, n_samples)
+        if tau is None: tau = get_tau(x)
+        n_samples = n_samples*2
+        x_mean, x_err = correlated_data_mean_err(x, tau, ci)
+    else:
+        print(f'Mean: {x_mean}, err: {x_err}, eff_sample_size: {n_samples/(2*tau)}')
+        return x_mean, x_err, n_samples/(2*tau)
