@@ -77,4 +77,7 @@ plt.xlabel('v')
 plt.ylabel('$\zeta$')
 plt.plot(pure_Donnan['v'], pure_Donnan['zeta'])
 plt.show()
+
+# %%
+
 # %%

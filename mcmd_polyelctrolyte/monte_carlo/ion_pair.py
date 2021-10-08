@@ -219,8 +219,8 @@ def MC_step_n_mobile_left(MC, n_steps):
     mobile_count = []
     for i in range(n_steps):
         MC.step()
-        particle_data = MC.current_state['particles_info'].groupby(by = ['type', 'side']).size()
-        mobile_count.append(particle_data[0][0])
+        particle_data = MC.current_state['particles_info'].groupby(by = ['side']).size()
+        mobile_count.append(particle_data[0])
     return mobile_count
         
 def auto_MC_collect(MC, target_error, initial_sample_size, ci = 0.95, tau = None, timeout = 30):
