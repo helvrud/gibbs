@@ -1,4 +1,5 @@
 #%%
+from itertools import product
 from typing import Tuple
 import numpy as np
 import pandas as pd
@@ -12,14 +13,21 @@ from libmontecarlo import StateData, ReversalData, AcceptCriterion
 
 SIDES = [0,1]
 
-def _entropy_change(N1, N2, V1, V2, n=1):
-    #N1, V1 - box we removing particle from
-    #N2, V2 - box we adding to
-    #n - number of particles 
-    if n==1:
-        return math.log((N1*V2)/((N2+1)*V1))
-    elif n==2:
-        return math.log((V2/V1)**2*(N1*(N1-1))/((N2+2)*(N2+1)))
+#def _entropy_change(N1, N2, V1, V2, n=1):
+#    #N1, V1 - box we removing particle from
+#    #N2, V2 - box we adding to
+#    #n - number of particles 
+#    if n==1:
+#        return math.log((N1*V2)/((N2+1)*V1))
+#    elif n==2:
+#        return math.log((V2/V1)**2*(N1*(N1-1))/((N2+2)*(N2+1)))
+
+def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, removed_from = 0):
+    if removed_from == 0:
+        return math.log((volume_1/volume_0)**2   *   (anion_0*cation_0)/((anion_1+1)*(cation_1+1)))
+    elif removed_from == 1:
+        return _entropy_change(anion_1, anion_0, cation_1, cation_0, volume_1, volume_0, 0)
+
 
 class MonteCarloDonnan(AbstractMonteCarlo):
 
@@ -31,18 +39,22 @@ class MonteCarloDonnan(AbstractMonteCarlo):
         self.v = Volumes[1]/sum(Volumes)
         self.current_state = dict(
             v = self.v,
-            zeta = (self.anion[0]/self.volume[0])/(self.anion[0]/self.volume[1])
+            zeta = (self.anion[0]/self.volume[0])/(self.anion[0]/self.volume[1]),
+            product = [anion*cation/volume**2 for anion, cation, volume in zip(self.anion, self.cation, self.volume)]
         )
 
     def move(self) -> Tuple[ReversalData, AcceptCriterion]:
+        #side = int(random.random()>(self.anion[0]+self.cation[0])/(sum(self.anion)+sum(self.cation)))
         side = random.choice(SIDES)
         other_side = int(not(side))
+        print(*self.anion)
 
-        n1=self.anion[side] + self.cation[side]
-        n2=self.anion[other_side] + self.cation[other_side]
-        v1 = self.volume[side]
-        v2 = self.volume[other_side]
-        delta_S = _entropy_change(n1,n2,v1,v2,2)
+
+        #n1=self.anion[side] + self.cation[side]
+        #n2=self.anion[other_side] + self.cation[other_side]
+        #v1 = self.volume[side]
+        #v2 = self.volume[other_side]
+        delta_S = _entropy_change(*self.anion, *self.cation, *self.volume, side)
         #print(f'Entropy change: {delta_S}')
 
         ##move pair
@@ -62,6 +74,7 @@ class MonteCarloDonnan(AbstractMonteCarlo):
         reversal_data =  ReversalData(
             side = side)
         
+        #print(f'[{side}]->[{other_side}, {delta_S}]')
         return reversal_data, accept_criterion
 
     def reverse(self, reversal_data: ReversalData):
@@ -79,30 +92,35 @@ class MonteCarloDonnan(AbstractMonteCarlo):
     def update_state(self, reversal: ReversalData):
         self.current_state = dict(
             v = self.v,
-            zeta = (self.anion[1]/self.volume[1])/(self.anion[0]/self.volume[0])
+            zeta = (self.anion[1]/self.volume[1])/(self.anion[0]/self.volume[0]),
+            product = [anion*cation/volume**2 for anion, cation, volume in zip(self.anion, self.cation, self.volume)]
         )
 #%%
 alpha = 0.5
-N_pairs = (100,100)
+N_pairs = (100,00)
 diamond_particles = 248
 A_fix = diamond_particles*alpha
-Volume = (10000, 10000)
+Volume = (1, 1)
 mc = MonteCarloDonnan(N_pairs, A_fix, Volume)
 # %%
 def get_zeta(v):
     vol = sum(mc.volume)
     mc.volume = [vol*(1-v), vol*v]
     zeta = []
+    prod=[]
     for i in range(100000):
         mc.step()
     for k in range(500):
         for i in range(1000):
             mc.step()
         zeta.append(mc.current_state['zeta'])
-    return np.mean(zeta), np.std(zeta)
+        prod.append(mc.current_state['product'])
+    return np.mean(zeta), np.std(zeta), np.mean(prod,axis=0), np.std(prod, axis=0)
 #%%
 vv = np.linspace(0.2, 0.8, 9)
-zetas = [get_zeta(v_)[0] for v_ in vv]
+mc_result = [get_zeta(v_) for v_ in vv]
+zetas = [res[0] for res in mc_result]
+products = [list(res[2]) for res in mc_result]
 #%%
 ans = {
     'pure_donnan' : True,
@@ -111,7 +129,8 @@ ans = {
     'N_pairs' : sum(N_pairs),
     "volume" : sum(Volume),
     "v": list(vv), 
-    "zeta" : list(zetas)}
+    "zeta" : list(zetas),
+    'product':list(products)}
 # %%
 plt.plot(vv, zetas, label = f'{alpha}, {A_fix}, {sum(Volume)}, {sum(N_pairs)}')
 plt.legend(title = 'alpha, anion_fixed, volumes, N_pairs')
@@ -120,4 +139,10 @@ fname = f'data/pure_donan_{alpha}_{A_fix}_{sum(Volume)}_{sum(N_pairs)}.json'
 import json
 with open(fname, 'w') as f:
     json.dump(ans, f, indent=4)
+#%%
+ans['product']
+# %%
+plt.plot(vv, products, label = f'{alpha}, {A_fix}, {sum(Volume)}, {sum(N_pairs)}')
+plt.legend(title = 'alpha, anion_fixed, volumes, N_pairs')
+
 # %%

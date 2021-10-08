@@ -20,7 +20,7 @@ DIAMOND_PARTICLES = MPC*16+8
 PYTHON_EXECUTABLE = 'python'
 
 #set True to check pure Donnan
-NO_INTERACTION = True
+NO_INTERACTION = False
 
 def populate_boxes(server, N0_pairs, N1_pairs):
     #import particles attributes consistent with other parts of the program
@@ -152,7 +152,7 @@ def main(electrostatic, system_volume, N_pairs, v_gel, n_gel, alpha):
     
     save_fname = f'../data/{str_alpha}_{v_gel}_{N_pairs}_{system_volume}_{int(electrostatic)}_{int(NO_INTERACTION)}_'+str(uuid.uuid4())[:8]+'.json'
     with open(save_fname, 'w') as outfile:
-        json.dump(collected_data, outfile)
+        json.dump(collected_data, outfile, indent=4)
 
     return collected_data
 
@@ -160,10 +160,10 @@ if __name__=="__main__":
     from functools import partial
     from multiprocessing import Pool
     electrostatic = False
-    system_vol = 25**3*2 #two boxes 25^3
-    N_pairs=100 #number of ion pairs to add in both systems
+    system_vol = 20**3*2 #two boxes 25^3
+    N_pairs=200 #number of ion pairs to add in both systems
     v_gel = [0.4, 0.45, 0.5, 0.55, 0.6] #relative volume of the gel box
-    alpha = 0 #charged monomers ratio in the gel
+    alpha = 0.5 #charged monomers ratio in the gel
     #define one-variable func for multiprocessing pool
     def worker(v_gel):
         #relative amount of the pairs in the gel box is approximately its relative volume

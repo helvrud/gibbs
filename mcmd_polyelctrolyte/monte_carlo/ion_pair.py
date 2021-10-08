@@ -1,3 +1,4 @@
+#%%
 from typing import Tuple
 import numpy as np
 import pandas as pd
@@ -37,19 +38,25 @@ def _rotate_velocities_randomly(velocities):
     rot = Rotation.random().as_matrix
     velocities_rotated = [list(rot().dot(velocity)) for velocity in velocities]
     return velocities_rotated
-def _entropy_change(N1, N2, V1, V2, n=1):
+#def _entropy_change(N1, N2, V1, V2, n=1):
     #N1, V1 - box we removing particle from
     #N2, V2 - box we adding to
     #n - number of particles 
-    if n==1:
-        return math.log((N1*V2)/((N2+1)*V1))
-    elif n==2:
-        return math.log((V2/V1)**2*(N1*(N1-1))/((N2+2)*(N2+1)))
+#    if n==1:
+#        return math.log((N1*V2)/((N2+1)*V1))
+#    elif n==2:
+#        return math.log((V2/V1)**2*(N1*(N1-1))/((N2+2)*(N2+1)))
 
-def _get_mobile_species_count(particles_info_df, grouper = ['side']):
-    return particles_info_df.loc[
-        particles_info_df.type.isin(MOBILE_SPECIES)
-        ].groupby(by='side').size().to_list()
+def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, removed_from = 0):
+    if removed_from == 0:
+        return math.log((volume_1/volume_0)**2   *   (anion_0*cation_0)/((anion_1+1)*(cation_1+1)))
+    elif removed_from == 1:
+        return _entropy_change(anion_1, anion_0, cation_1, cation_0, volume_1, volume_0, 0)
+
+#def _get_mobile_species_count(particles_info_df, grouper = ['type','side']):
+#    return particles_info_df.loc[
+#        particles_info_df.type.isin(MOBILE_SPECIES)
+#        ].groupby(by=grouper).size()
 
 class MonteCarloPairs(AbstractMonteCarlo):
     def __init__(self, server):
@@ -77,13 +84,14 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 item['side'] = side
         particles_df = pd.concat(pd.DataFrame(part_dict[side]) for side in SIDES)
 
-        n_mobile = _get_mobile_species_count(particles_df)
+        #n_mobile = _get_mobile_species_count(particles_df)
         
         new_state = StateData(
             energy = energy, 
             volume = volume, 
             particles_info = particles_df,
-            n_mobile = n_mobile)
+        #    n_mobile = n_mobile
+            )
         
         self.current_state = new_state
         return new_state
@@ -133,11 +141,14 @@ class MonteCarloPairs(AbstractMonteCarlo):
         energy_after_addition = self.server("potential_energy()", other_side)
 
         ###Entropy change#######################################################
-        n1 = self.current_state['n_mobile'][side]
-        n2 = self.current_state['n_mobile'][other_side]
-        v1 = self.current_state['volume'][side]
-        v2 = self.current_state['volume'][other_side]
-        delta_S = _entropy_change(n1,n2,v1,v2,2)
+        #n1 = self.current_state['n_mobile'][side]
+        #n2 = self.current_state['n_mobile'][other_side]
+        v0 = self.current_state['volume'][side]
+        v1 = self.current_state['volume'][other_side]
+        particles_info = self.current_state['particles_info'].groupby(by = ['type', 'side']).size()
+        anion0, anion1 = particles_info[0]
+        cation0, cation1 = particles_info[1]
+        delta_S = _entropy_change(anion0,anion1,cation0,cation1,v0,v1,side)
 
         ###Energy change###################################################
         #note that 'energy_after_removal' is required only now, 
@@ -187,7 +198,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         update_c_state = StateData(
             energy = reversal['energy'],
             particles_info = part_info,
-            n_mobile = _get_mobile_species_count(part_info)
+            #n_mobile = _get_mobile_species_count(part_info)
         )
         self.current_state.update(update_c_state)
 
@@ -208,7 +219,8 @@ def MC_step_n_mobile_left(MC, n_steps):
     mobile_count = []
     for i in range(n_steps):
         MC.step()
-        mobile_count.append(MC.current_state['n_mobile'][0])
+        particle_data = MC.current_state['particles_info'].groupby(by = ['type', 'side']).size()
+        mobile_count.append(particle_data[0][0])
     return mobile_count
         
 def auto_MC_collect(MC, target_error, initial_sample_size, ci = 0.95, tau = None, timeout = 30):

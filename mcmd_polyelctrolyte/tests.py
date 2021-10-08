@@ -78,7 +78,7 @@ def collect_data(MC, pressure_target_error=2, mc_target_error=0.001, rounds : in
         'pressure_gel' : {k:v.tolist() for k,v in zip(keys,np.array(pressure_gel).T)}}
     return return_dict
 
-
+#%%
 def main(electrostatic, system_volume, N_particles, v_gel, n_gel, alpha):
     #box volumes and dimmensions
     V = [system_volume*(1-v_gel),system_volume*v_gel]
