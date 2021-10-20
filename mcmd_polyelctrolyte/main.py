@@ -20,7 +20,7 @@ DIAMOND_PARTICLES = MPC*16+8
 PYTHON_EXECUTABLE = 'python'
 
 #set True to check pure Donnan
-NO_INTERACTION = False
+NO_INTERACTION = True
 
 def populate_boxes(server, N0_pairs, N1_pairs):
     #import particles attributes consistent with other parts of the program

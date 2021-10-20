@@ -36,3 +36,5 @@ plt.plot(vv, zetas)
 # %%
 print(zeta)
 # %%
+print(zeta)
+# %%

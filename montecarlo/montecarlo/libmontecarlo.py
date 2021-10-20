@@ -192,7 +192,7 @@ def correlated_data_mean_err(x, tau, ci = 0.95):
     x_mean = np.mean(x)
     #the sample is correlated so the effective size is smaller
     n_eff = np.size(x)/(2*tau)
-    print(f"Effective sample size: {n_eff}")
+    #print(f"Effective sample size: {n_eff}")
     if n_eff>30 and ci == 0.95:
         # the most common case when the sample size is big enough
         # we use normal distribution 
@@ -208,7 +208,7 @@ def correlated_data_mean_err(x, tau, ci = 0.95):
         z=scipy.stats.t.ppf(1-(1-ci)/2, n_eff)
     #print(f"z: {z}")
     err = np.std(x)/np.sqrt(n_eff) * z
-    print(f"mean: {x_mean};  error: {err}")
+    #print(f"mean: {x_mean};  error: {err}")
     return x_mean, err
 
 def sample_to_target_error(

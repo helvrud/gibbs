@@ -1,33 +1,19 @@
 #%%
-from itertools import product
 from typing import Tuple
 import numpy as np
-import pandas as pd
-import math
 import random
-import time
 import matplotlib.pyplot as plt
-
-from libmontecarlo import AbstractMonteCarlo
-from libmontecarlo import StateData, ReversalData, AcceptCriterion
-
+from montecarlo import AbstractMonteCarlo
+from montecarlo import StateData, ReversalData, AcceptCriterion
+from montecarlo import get_tau, sample_to_target_error
+#%%
 SIDES = [0,1]
-
-#def _entropy_change(N1, N2, V1, V2, n=1):
-#    #N1, V1 - box we removing particle from
-#    #N2, V2 - box we adding to
-#    #n - number of particles 
-#    if n==1:
-#        return math.log((N1*V2)/((N2+1)*V1))
-#    elif n==2:
-#        return math.log((V2/V1)**2*(N1*(N1-1))/((N2+2)*(N2+1)))
 
 def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, removed_from = 0):
     if removed_from == 0:
-        return math.log((volume_1/volume_0)**2   *   (anion_0*cation_0)/((anion_1+1)*(cation_1+1)))
+        return np.log((volume_1/volume_0)**2   *   (anion_0*cation_0)/((anion_1+1)*(cation_1+1)))
     elif removed_from == 1:
         return _entropy_change(anion_1, anion_0, cation_1, cation_0, volume_1, volume_0, 0)
-
 
 class MonteCarloDonnan(AbstractMonteCarlo):
 
@@ -47,7 +33,7 @@ class MonteCarloDonnan(AbstractMonteCarlo):
         #side = int(random.random()>(self.anion[0]+self.cation[0])/(sum(self.anion)+sum(self.cation)))
         side = random.choice(SIDES)
         other_side = int(not(side))
-        print(*self.anion)
+        #print(*self.anion)
 
 
         #n1=self.anion[side] + self.cation[side]
@@ -95,54 +81,42 @@ class MonteCarloDonnan(AbstractMonteCarlo):
             zeta = (self.anion[1]/self.volume[1])/(self.anion[0]/self.volume[0]),
             product = [anion*cation/volume**2 for anion, cation, volume in zip(self.anion, self.cation, self.volume)]
         )
-#%%
-alpha = 0.5
-N_pairs = (100,00)
-diamond_particles = 248
-A_fix = diamond_particles*alpha
-Volume = (1, 1)
-mc = MonteCarloDonnan(N_pairs, A_fix, Volume)
+    
+    def sample_zeta(self, sample_size : int):
+        zetas = []
+        for i in range(sample_size):
+            zetas.append(self.step()['zeta'])
+        return zetas
+            
 # %%
-def get_zeta(v):
-    vol = sum(mc.volume)
-    mc.volume = [vol*(1-v), vol*v]
-    zeta = []
-    prod=[]
-    for i in range(100000):
-        mc.step()
-    for k in range(500):
-        for i in range(1000):
-            mc.step()
-        zeta.append(mc.current_state['zeta'])
-        prod.append(mc.current_state['product'])
-    return np.mean(zeta), np.std(zeta), np.mean(prod,axis=0), np.std(prod, axis=0)
-#%%
-vv = np.linspace(0.2, 0.8, 9)
-mc_result = [get_zeta(v_) for v_ in vv]
-zetas = [res[0] for res in mc_result]
-products = [list(res[2]) for res in mc_result]
-#%%
-ans = {
-    'pure_donnan' : True,
-    'alpha' :  alpha, 
-    'anion_fixed' : A_fix,
-    'N_pairs' : sum(N_pairs),
-    "volume" : sum(Volume),
-    "v": list(vv), 
-    "zeta" : list(zetas),
-    'product':list(products)}
-# %%
-plt.plot(vv, zetas, label = f'{alpha}, {A_fix}, {sum(Volume)}, {sum(N_pairs)}')
-plt.legend(title = 'alpha, anion_fixed, volumes, N_pairs')
-# %%
-fname = f'data/pure_donan_{alpha}_{A_fix}_{sum(Volume)}_{sum(N_pairs)}.json'
-import json
-with open(fname, 'w') as f:
-    json.dump(ans, f, indent=4)
-#%%
-ans['product']
-# %%
-plt.plot(vv, products, label = f'{alpha}, {A_fix}, {sum(Volume)}, {sum(N_pairs)}')
-plt.legend(title = 'alpha, anion_fixed, volumes, N_pairs')
+def zeta_from_monte_carlo(N_pairs, fixed_anions, v): 
+    mc = MonteCarloDonnan(
+        (N_pairs*(1-v), N_pairs*v),
+        fixed_anions,
+        (1-v, v))
+    #equilibration steps
+    [mc.step() for i in range(N_pairs*4)]
+    zeta = sample_to_target_error(mc.sample_zeta, 0.002)
+    return zeta[0]
 
-# %%
+def zeta_from_analytic(N_pairs, fixed_anions, v):
+    import numpy as np
+    if v == 0.5: v=0.49999999 #dirty
+    sqrt = np.sqrt
+    return v*(N_pairs - (fixed_anions*(1 - v)**2/2 + N_pairs*v**2 - (1 - v)*sqrt(fixed_anions**2*(1 - v)**2 + 4*fixed_anions*N_pairs*v**2 + 4*N_pairs**2*v**2)/2)/(v**2 - (1 - v)**2))/((1 - v)*(fixed_anions + (fixed_anions*(1 - v)**2/2 + N_pairs*v**2 - (1 - v)*sqrt(fixed_anions**2*(1 - v)**2 + 4*fixed_anions*N_pairs*v**2 + 4*N_pairs**2*v**2)/2)/(v**2 - (1 - v)**2)))
+
+if __name__=="__main__":
+    N_pairs = 200
+    fixed_anion = 100
+    v = np.linspace(0.2, 0.8, 11)
+    zeta_an = [zeta_from_analytic(N_pairs, fixed_anion, v_) for v_ in v]
+    from multiprocessing import Pool
+    def worker(v):
+        return zeta_from_monte_carlo(N_pairs, fixed_anion, v)
+    with Pool(5) as p:
+        zeta = p.map(worker, v)
+    plt.scatter(v, zeta, marker = 's')
+    plt.plot(v, zeta_an)
+    plt.xlabel("v")
+    plt.ylabel("\zeta")
+    plt.show()
