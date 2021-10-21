@@ -1,3 +1,13 @@
+"""
+Espresso node - espresso instance ready to reply to a request if one received with TCP socket, 
+the node is listening to the socket it connected to and send back replies. It is situated on the client side of the socket.
+
+The node will delegate the execution to the the instance of the socket_nodes.Executor class. 
+So to create a node one has to instantiate an executor object of the Executor class. 
+
+Here we inherit socket_nodes.LocalScopeExecutor to create EspressoExecutorSalt and EspressoExecutorGel classes. 
+In the child classes we define functions that will be exposed to the server (monte carlo script).
+"""
 #%%
 from typing import Callable
 from socket_nodes import LocalScopeExecutor
@@ -6,23 +16,7 @@ from socket_nodes import LocalScopeExecutor
 import espressomd
 import numpy as np
 
-def get_tau(x, acf_n_lags : int = 200):
-    from statsmodels.tsa.stattools import acf
-    import numpy as np
-    acf = acf(x, nlags = acf_n_lags)
-    tau_int =1/2+max(np.cumsum(acf))    
-    return tau_int
-
-def correlated_data_mean_err(x, tau, ci = 0.95):
-    import scipy.stats
-    import numpy as np
-    x_mean = np.mean(x)
-    n_eff = np.size(x)/(2*tau)
-    print(f"Effective sample size: {n_eff}")
-    t_value=scipy.stats.t.ppf(1-(1-ci)/2, n_eff)
-    print(f"t-value: {t_value}")
-    err = np.std(x)/np.sqrt(n_eff) * t_value
-    return x_mean, err
+from montecarlo import get_tau, sample_to_target_error
     
 class EspressoExecutorSalt(LocalScopeExecutor):
     ###########overridden base class functions #############
@@ -35,17 +29,38 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         self.system = espresso_system_instance
                     
     ###########'private' user defined function #############
+    #the next functions will not be exposed to eval() and thus can be requested to evaluate
+    #they are used only within the class
+    
     @staticmethod
     def __type_cast(type_names_dict) -> dict:
+        """
+        the function converts dictionary like 
+        {'a' : 'int', 'b' : 'float'} to {'a' : int, 'b' : float}
+        note that here 'int' from string is converted to a function
+
+        motivation:
+        we can not send the function over the socket, so we send a string
+        sometimes we want to cast the result to some type, 
+        the type we want to cast the result to has to be defined as a string
+        """        
         return {k : eval(f'{v}') for k, v in type_names_dict.items()}
 
     def __get_particles(self, indices):
+        """
+        selects some particles based on the type of indices
+        """
+        # one particle selection
         if isinstance(indices, int):
             particles = [self.system.part[indices]]
+        # selection by slice object
         elif isinstance(indices, slice):
             particles = self.system.part[indices]
+        # (a,b) -> slice(a,b)
         elif isinstance(indices, tuple):
             particles = self.system.part[slice(*indices)]
+        # select by the indices provided in list, 
+        # note that [5,10] select only 5th and 10th particle, not the range
         elif isinstance(indices, list):
             particles = [self.system.part[id] for id in indices]
         else:
@@ -53,6 +68,14 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         return particles
     
     def __get_and_cast_attributes(self, iterable, attrs):
+        """
+        Providing some iterable (particles in the most cases), 
+        the method collect and cast the attributes values into a list or a dictionary
+
+        example:
+        particles = system.part[0:3]
+        __get_and_cast_attributes(self, particles, ['id', 'type']) -> [[0, 0], [1,0], [2,0]]
+        """        
         if isinstance(attrs, list):
             result = [{
                 attr : getattr(item, attr)
@@ -71,6 +94,16 @@ class EspressoExecutorSalt(LocalScopeExecutor):
 
     ###########'public' user defined function #############
     def part_data(self, indices, attrs):
+        """Retrieves attributes values from espressomd.system on the particles of given indices
+        Cast the result to provided in attrs types (if attrs is dict).
+
+        Args:
+            indices (int, tuple, slice, list): indices to access the particles
+            attrs (list, dict): attributes to access, you can provide type as a values of the dict to cast it before return
+
+        Returns:
+            list[dict]: list of attributes values of the respective particles
+        """        
         particles = self.__get_particles(indices)
         attributes = self.__get_and_cast_attributes(particles, attrs)
         
@@ -78,12 +111,26 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         return attributes
 
     def populate(self, n, **kwargs):
+        """Populate the espressomd.System with n particles
+
+        Args:
+            n (int): Number of particles to add
+        """        
         [self.system.part.add(
             pos=self.system.box_l * np.random.random(3), **kwargs
             ) for _ in range(n)
         ]
+        return True
 
     def add_particle(self, attrs_to_return, **kwargs):
+        """Add a particle with **kwargs to the espressomd.System and returns its attributes 
+
+        Args:
+            attrs_to_return (list, dict): [attribute_names] or {attribute_name : type_to_cast}
+        
+        Returns:
+            list[dict]: list of attributes values of the added particle
+        """        
         def __missing_int(l) -> int:
             #makes new IDs predictable
             #[1,2,3,5,7] -> 4
@@ -101,18 +148,50 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         added_particle_id = self.system.part.add(**kwargs).id
         return self.part_data(added_particle_id, attrs_to_return)
         
-    def remove_particle(self, id, attrs_to_member):
-        removed_particle_attrs = self.part_data(id, attrs_to_member)
+    def remove_particle(self, id, attrs_to_return):
+        """Remove the particle with a given id and returns its attributes
+
+        Args:
+            id (int): particle's id
+            attrs_to_return (list, dict): [attribute_names] or {attribute_name : type_to_cast}
+
+        Returns:
+            list[dict]: list of attributes values of the removed particle
+        """        
+        removed_particle_attrs = self.part_data(id, attrs_to_return)
         self.system.part[id].remove()
         return removed_particle_attrs
 
     def potential_energy(self):
+        """Access potential energy of the espressomd.System
+
+        Returns:
+            float: potential energy
+        """        
         return float(self.system.analysis.energy()['total'] - self.system.analysis.energy()['kinetic'])
 
     def pressure(self):
+        """Access the pressure of the espressomd.System
+
+        Returns:
+            float: pressure
+        """  
         return float(self.system.analysis.pressure()['total']) 
 
-    def integrate_pressure(self, int_steps : int = 1000, n_samples : int = 100, return_only_mean = False):
+    def sample_pressure(self, int_steps : int = 1000, n_samples : int = 100, return_only_mean = False):
+        """Sample system pressure every int_steps for n_samples times.
+        Note that the method do not ensure that the measurements are uncorrelated.
+        Make sure the result is not to big to send via sockets
+
+        Args:
+            int_steps (int, optional): Integration steps in between. Defaults to 1000.
+            n_samples (int, optional): Sample size. Defaults to 100.
+            return_only_mean (bool, optional): True if only mean and std has to be returned. 
+                Defaults to False.
+
+        Returns:
+            list, tuple: sample values list or sample mean and std
+        """        
         acc = []
         for i in range(n_samples):
             self.system.integrator.run(int_steps)
@@ -122,27 +201,13 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         else:
             return acc
 
-    def auto_integrate_pressure(self, target_error, initial_sample_size, ci = 0.95, tau = None, int_steps = 1000, timeout = 30):
-        import time
-        start_time = time.time()
-        n_samples = initial_sample_size
-        x = self.integrate_pressure(n_samples = n_samples, int_steps=int_steps)
-        if tau is None: tau = get_tau(x)
-        x_mean, x_err = correlated_data_mean_err(x, tau, ci)
-        while x_err>target_error:
-            elapsed_time = time.time() - start_time
-            if elapsed_time > timeout:
-                print('Timeout')
-                return x_mean, x_err, n_samples
-            print(f'Error {x_err} is bigger than target')
-            print('More data will be collected')
-            x=x+self.integrate_pressure(n_samples = n_samples, int_steps=int_steps)
-            if tau is None: tau = get_tau(x)
-            x_mean, x_err = correlated_data_mean_err(x, tau, ci)
-            n_samples = n_samples*2
-        else:
-            print(f'Mean: {x_mean}, err: {x_err}, eff_sample_size: {n_samples/(2*tau)}')
-            return x_mean, x_err, n_samples/(2*tau)
+    def sample_pressure_to_target_error(
+            self, target_error, initial_sample_size, 
+            tau = None, int_steps = 1000, 
+            timeout = 30, ci = 0.95):
+        def get_data_callback(n):
+            return self.sample_pressure(int_steps=int_steps, n_samples = n)
+        return sample_to_target_error(get_data_callback, target_error, initial_sample_size, tau, timeout, ci)
 
     def increment_volume(self, incr_vol, int_steps = 10000):
         system = self.system
@@ -191,5 +256,5 @@ if __name__ == "__main__": ##for debugging
     executor = EspressoExecutorSalt(system)
     executor.populate(50)
 # %%
-    executor.auto_integrate_pressure(0.00005, 1000)
+    executor.sample_pressure_to_target_error(0.00005, 1000)
 # %%

@@ -228,13 +228,13 @@ def sample_to_target_error(
         elapsed_time = time.time() - start_time
         if elapsed_time > timeout:
             print('Timeout')
-            return x_mean, x_err, n_samples
+            break
+            #return x_mean, x_err, n_samples
         print(f'Error {x_err} is bigger than target {target_error}')
         print('More data will be collected')
         x=x+get_data_callback(n_samples)
         if tau is None: tau = get_tau(x)
         n_samples = n_samples*2
         x_mean, x_err = correlated_data_mean_err(x, tau, ci)
-    else:
-        print(f'Mean: {x_mean}, err: {x_err}, eff_sample_size: {n_samples/(2*tau)}')
-        return x_mean, x_err, n_samples/(2*tau)
+    print(f'Mean: {x_mean}, err: {x_err}, eff_sample_size: {n_samples/(2*tau)}')
+    return x_mean, x_err, n_samples/(2*tau)

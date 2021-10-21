@@ -41,7 +41,7 @@ df = df.apply(lambda x: x.explode() if x.name in arr_columns else x)
 df['anion_salt'] = df.n_mobile_salt_mean/2
 df['anion_gel'] = df.n_pairs - df.anion_salt 
 df['zeta'] = df.anion_gel/df.anion_salt*(1-df.v)/df.v
-df = df.loc[df['alpha'].isin([0.5, 0.1])]
+#df = df.loc[df['alpha'].isin([0.5, 0.1])]
 #df = df.loc[df['no_gel'] == True]
 #%%
 path = pathlib.Path('mcmd_polyelctrolyte/monte_carlo/data/')
@@ -75,7 +75,7 @@ plt.text(0.35,0.07, "compression",  transform=ax.transAxes, va='bottom')
 plt.text(0.65,0.3, r"$\zeta = \frac{A^{-}_{gel}}{A^{-}_{salt}}$",fontsize=22)
 plt.xlabel('v')
 plt.ylabel('$\zeta$')
-plt.plot(pure_Donnan['v'], pure_Donnan['zeta'])
+#plt.plot(pure_Donnan['v'], pure_Donnan['zeta'])
 plt.show()
 
 # %%

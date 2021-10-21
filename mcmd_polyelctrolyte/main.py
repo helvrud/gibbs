@@ -67,7 +67,7 @@ def equilibration(MC, gel_md_steps : int, salt_md_steps : int, mc_steps : int, r
         MC.server(f'integrate(int_steps = {salt_md_steps}, n_samples =1)',0)
         MC.server(f'integrate(int_steps = {gel_md_steps}, n_samples =1)',1)
 
-def collect_data(MC, pressure_target_error=2, mc_target_error=0.001, rounds : int = 5, timeout = 60):
+def collect_data(MC, pressure_target_error=2, mc_target_error=0.01, rounds : int = 5, timeout = 60):
     n_mobile = []
     pressure_salt = []
     pressure_gel = []
@@ -162,7 +162,7 @@ if __name__=="__main__":
     electrostatic = False
     system_vol = 20**3*2 #two boxes 25^3
     N_pairs=200 #number of ion pairs to add in both systems
-    v_gel = [0.4, 0.5, 0.6] #relative volume of the gel box
+    v_gel = [0.5] #relative volume of the gel box
     alpha = 0.5 #charged monomers ratio in the gel
     #define one-variable func for multiprocessing pool
     def worker(v_gel):

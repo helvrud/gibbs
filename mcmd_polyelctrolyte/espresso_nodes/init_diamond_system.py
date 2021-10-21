@@ -1,3 +1,10 @@
+"""
+The script here is used to espressomd.System with a cross-linked polymer chain (gel).
+The gel has some of the monomers ionized, ionized monomers position are random. 
+The number of ionized monomers is defined by alpha = N_ion/N_all.
+During the generation process counter-ions for the ionized monomers will be created. 
+"""
+
 import sys
 import espressomd
 import numpy as np
