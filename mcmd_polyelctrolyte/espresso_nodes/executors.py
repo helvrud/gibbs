@@ -9,14 +9,14 @@ Here we inherit socket_nodes.LocalScopeExecutor to create EspressoExecutorSalt a
 In the child classes we define functions that will be exposed to the server (monte carlo script).
 """
 #%%
-from typing import Callable
 from socket_nodes import LocalScopeExecutor
 
 ##import all you might need later when requesting from server
 import espressomd
 import numpy as np
 
-from montecarlo import get_tau, sample_to_target_error
+#auto sampling routine are the same as in montecarlo one
+from montecarlo import sample_to_target_error
     
 class EspressoExecutorSalt(LocalScopeExecutor):
     ###########overridden base class functions #############
