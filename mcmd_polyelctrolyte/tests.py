@@ -4,8 +4,8 @@ import json
 
 import socket_nodes
 
-from monte_carlo.ion_pair import MonteCarloPairs
-from monte_carlo.ion_pair import auto_MC_collect
+from ion_pair_monte_carlo import MonteCarloPairs
+from ion_pair_monte_carlo import auto_MC_collect
 
 DIAMOND_PARTICLES = 248
 

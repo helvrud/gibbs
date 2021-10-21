@@ -6,27 +6,9 @@ import math
 import random
 import time
 
-from .libmontecarlo import AbstractMonteCarlo
-from .libmontecarlo import StateData, ReversalData, AcceptCriterion
-
-
-def get_tau(x, acf_n_lags : int = 200):
-    from statsmodels.tsa.stattools import acf
-    import numpy as np
-    acf = acf(x, nlags = acf_n_lags)
-    tau_int =1/2+max(np.cumsum(acf))    
-    return tau_int
-
-def correlated_data_mean_err(x, tau, ci = 0.95):
-    import scipy.stats
-    import numpy as np
-    x_mean = np.mean(x)
-    n_eff = np.size(x)/(2*tau)
-    print(f"Effective sample size: {n_eff}")
-    t_value=scipy.stats.t.ppf(1-(1-ci)/2, n_eff)
-    print(f"t-value: {t_value}")
-    err = np.std(x)/np.sqrt(n_eff) * t_value
-    return x_mean, err
+from montecarlo import AbstractMonteCarlo
+from montecarlo import StateData, ReversalData, AcceptCriterion
+from montecarlo import get_tau, correlated_data_mean_err
 
 SIDES = [0,1]
 PAIR = [0,1]
@@ -38,25 +20,13 @@ def _rotate_velocities_randomly(velocities):
     rot = Rotation.random().as_matrix
     velocities_rotated = [list(rot().dot(velocity)) for velocity in velocities]
     return velocities_rotated
-#def _entropy_change(N1, N2, V1, V2, n=1):
-    #N1, V1 - box we removing particle from
-    #N2, V2 - box we adding to
-    #n - number of particles 
-#    if n==1:
-#        return math.log((N1*V2)/((N2+1)*V1))
-#    elif n==2:
-#        return math.log((V2/V1)**2*(N1*(N1-1))/((N2+2)*(N2+1)))
 
 def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, removed_from = 0):
     if removed_from == 0:
-        return math.log((volume_1/volume_0)**2   *   (anion_0*cation_0)/((anion_1+1)*(cation_1+1)))
+        return np.log((volume_1/volume_0)**2   *   (anion_0*cation_0)/((anion_1+1)*(cation_1+1)))
     elif removed_from == 1:
         return _entropy_change(anion_1, anion_0, cation_1, cation_0, volume_1, volume_0, 0)
 
-#def _get_mobile_species_count(particles_info_df, grouper = ['type','side']):
-#    return particles_info_df.loc[
-#        particles_info_df.type.isin(MOBILE_SPECIES)
-#        ].groupby(by=grouper).size()
 
 class MonteCarloPairs(AbstractMonteCarlo):
     def __init__(self, server):
@@ -146,8 +116,10 @@ class MonteCarloPairs(AbstractMonteCarlo):
         v0 = self.current_state['volume'][side]
         v1 = self.current_state['volume'][other_side]
         particles_info = self.current_state['particles_info'].groupby(by = ['type', 'side']).size()
-        anion0, anion1 = particles_info[0]
-        cation0, cation1 = particles_info[1]
+        anion0= particles_info[0][side]
+        anion1= particles_info[0][other_side]
+        cation0= particles_info[1][side]
+        cation1= particles_info[1][other_side]
         delta_S = _entropy_change(anion0,anion1,cation0,cation1,v0,v1,side)
 
         ###Energy change###################################################
@@ -215,6 +187,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
             for i in PAIR
             ], other_side)
 
+###Will be deprecated soon
 def MC_step_n_mobile_left(MC, n_steps):
     mobile_count = []
     for i in range(n_steps):
