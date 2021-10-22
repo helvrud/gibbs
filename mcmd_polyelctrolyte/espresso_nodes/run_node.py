@@ -48,7 +48,13 @@ if __name__=="__main__":
                         help = 'switch off bonded and non bonded interaction',
                         type = bool,
                         required=False,
-                        default = 1.0)              
+                        default = 1.0)
+    #parser.add_argument('-log_name', 
+    #                    metavar='log_name',
+    #                    help = 'name of log file',
+    #                    type = str,
+    #                    required=False,
+    #                    default = "")              
     args = parser.parse_args()
     
     if '--salt' in sys.argv:

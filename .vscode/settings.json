@@ -1,6 +1,7 @@
 {
     "python.pythonPath": "/home/ml/miniconda3/envs/idp_espresso/bin/python",
     "cSpell.words": [
-        "groupby"
+        "groupby",
+        "polyelectolyte"
     ]
 }

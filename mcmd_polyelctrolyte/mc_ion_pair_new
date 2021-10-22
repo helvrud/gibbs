@@ -1,0 +1,100 @@
+#%%
+from typing import Tuple
+import numpy as np
+import pandas as pd
+import random
+
+from montecarlo import AbstractMonteCarlo
+from montecarlo import StateData, ReversalData, AcceptCriterion
+from montecarlo import sample_to_target_error
+
+PAIR =[0,1]
+
+def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, removed_from = 0):
+    if removed_from == 0:
+        return np.log((volume_1/volume_0)**2   *   (anion_0*cation_0)/((anion_1+1)*(cation_1+1)))
+    elif removed_from == 1:
+        return _entropy_change(anion_1, anion_0, cation_1, cation_0, volume_1, volume_0, 0)
+    
+def _rotate_velocities_randomly(velocities):
+    from scipy.spatial.transform import Rotation
+    rot = Rotation.random().as_matrix
+    velocities_rotated = [list(rot().dot(velocity)) for velocity in velocities]
+    return velocities_rotated
+
+class MonteCarloPairs(AbstractMonteCarlo):
+    def __init__(self, server):
+        self.server = server
+        self.setup()
+    def setup(self) -> StateData:
+        request_body = [
+            "potential_energy()", #potential energy
+            "system.box_l[0]**3", #volume
+            "system.part.select(type = 0)['id']", #mobile anions
+            "len(system.part.select(type = 1)['id']" #mobile cations
+            ]
+        system_init_state_request=self.server(request_body,[0,1])
+        energy, volume, anion_ids, cation_ids= [
+            [result.result()[i] for result in system_init_state_request] 
+                for i in range(len(request_body))
+                ]
+        state = StateData(
+            energy = energy, 
+            volume = volume, 
+            anion_ids = anion_ids,
+            cation_ids = cation_ids
+            )
+        self.state = state
+        return state
+    
+    def _choose_random_side_and_part(self):
+        side = random.choice([0,1])
+        anion_ids = self.state['anion_ids'][side]
+        cation_ids = self.state['cation_ids'][side]
+        rnd_pair_indices = (random.choice(anion_ids), random.choice(cation_ids))
+        return side, rnd_pair_indices
+    
+    def move(self) -> Tuple[ReversalData, AcceptCriterion]:
+        side, pair_indices = self._choose_random_side_and_part()
+        other_side = int(not(side))
+        
+        ###Pair removal:##################################################
+        #request to remove pair but store their pos and v
+        #request.result will return [[part.id, part.pos, part.v], [part.id, part.pos, part.v]]
+        attrs_to_return = {'id':'int', 'pos':'list', 'v':'list'}
+        request_body = [
+            f"remove_particle({pair_indices[i]},{attrs_to_return})" 
+            for i in PAIR]
+        remove_request= self.server(request_body,side)
+        
+        #request to calculate energy after the pair removal, 
+        #separated from previous one so we could do something else while executing
+        energy_after_removal = self.server("potential_energy()", side)
+        
+        #rotate velocity vectors
+        #can be done when remove_part request is done, 
+        removed_pair_velocities = [remove_request.result()[i]['v'] for i in PAIR]
+        added_pair_velocities = _rotate_velocities_randomly(removed_pair_velocities)
+        
+        ###Pair_addition###################################################
+        #request to add pair and return assigned id then to calculate potential energy
+        CHARGE = [-1, 1]
+        attrs_to_return = {'id':'int'}
+        request_body = [
+            f"add_particle(attrs_to_return={attrs_to_return}, v={added_pair_velocities[i]}, q = {CHARGE[i]}, type = {i})" 
+            for i in PAIR
+            ]
+        add_part = self.server(request_body, other_side)
+        energy_after_addition = self.server("potential_energy()", other_side)
+        
+                ###Entropy change#######################################################
+        #n1 = self.current_state['n_mobile'][side]
+        #n2 = self.current_state['n_mobile'][other_side]
+        v0 = self.state['volume'][side]
+        v1 = self.state['volume'][other_side]
+        particles_info = self.current_state['particles_info'].groupby(by = ['type', 'side']).size()
+        anion0= particles_info[0][side]
+        anion1= particles_info[0][other_side]
+        cation0= particles_info[1][side]
+        cation1= particles_info[1][other_side]
+        delta_S = _entropy_change(anion0,anion1,cation0,cation1,v0,v1,side)

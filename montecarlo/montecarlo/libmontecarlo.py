@@ -232,7 +232,7 @@ def sample_to_target_error(
             #return x_mean, x_err, n_samples
         print(f'Error {x_err} is bigger than target {target_error}')
         print('More data will be collected')
-        x=x+get_data_callback(n_samples)
+        x=x.append(get_data_callback(n_samples))
         if tau is None: tau = get_tau(x)
         n_samples = n_samples*2
         x_mean, x_err = correlated_data_mean_err(x, tau, ci)

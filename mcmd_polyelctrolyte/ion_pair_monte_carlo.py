@@ -2,13 +2,11 @@
 from typing import Tuple
 import numpy as np
 import pandas as pd
-import math
 import random
-import time
 
 from montecarlo import AbstractMonteCarlo
 from montecarlo import StateData, ReversalData, AcceptCriterion
-from montecarlo import get_tau, correlated_data_mean_err
+from montecarlo import sample_to_target_error
 
 SIDES = [0,1]
 PAIR = [0,1]
@@ -26,7 +24,6 @@ def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, re
         return np.log((volume_1/volume_0)**2   *   (anion_0*cation_0)/((anion_1+1)*(cation_1+1)))
     elif removed_from == 1:
         return _entropy_change(anion_1, anion_0, cation_1, cation_0, volume_1, volume_0, 0)
-
 
 class MonteCarloPairs(AbstractMonteCarlo):
     def __init__(self, server):
@@ -52,10 +49,10 @@ class MonteCarloPairs(AbstractMonteCarlo):
         for side in SIDES:
             for item in part_dict[side]:
                 item['side'] = side
-        particles_df = pd.concat(pd.DataFrame(part_dict[side]) for side in SIDES)
+        particles_df = pd.concat([pd.DataFrame(part_dict[side]) for side in SIDES], ignore_index=True)
 
         #n_mobile = _get_mobile_species_count(particles_df)
-        
+                
         new_state = StateData(
             energy = energy, 
             volume = volume, 
@@ -113,14 +110,11 @@ class MonteCarloPairs(AbstractMonteCarlo):
         ###Entropy change#######################################################
         #n1 = self.current_state['n_mobile'][side]
         #n2 = self.current_state['n_mobile'][other_side]
-        v0 = self.current_state['volume'][side]
-        v1 = self.current_state['volume'][other_side]
+        volumes = self.current_state['volume']
         particles_info = self.current_state['particles_info'].groupby(by = ['type', 'side']).size()
-        anion0= particles_info[0][side]
-        anion1= particles_info[0][other_side]
-        cation0= particles_info[1][side]
-        cation1= particles_info[1][other_side]
-        delta_S = _entropy_change(anion0,anion1,cation0,cation1,v0,v1,side)
+        anions= particles_info[0]
+        cations= particles_info[1]
+        delta_S = _entropy_change(*anions,*cations,*volumes, side)
 
         ###Energy change###################################################
         #note that 'energy_after_removal' is required only now, 
@@ -170,7 +164,6 @@ class MonteCarloPairs(AbstractMonteCarlo):
         update_c_state = StateData(
             energy = reversal['energy'],
             particles_info = part_info,
-            #n_mobile = _get_mobile_species_count(part_info)
         )
         self.current_state.update(update_c_state)
 
@@ -186,33 +179,30 @@ class MonteCarloPairs(AbstractMonteCarlo):
             f"remove_particle({reversal_data['added'][i]['id']},['id'])" 
             for i in PAIR
             ], other_side)
-
-###Will be deprecated soon
-def MC_step_n_mobile_left(MC, n_steps):
-    mobile_count = []
-    for i in range(n_steps):
-        MC.step()
-        particle_data = MC.current_state['particles_info'].groupby(by = ['side']).size()
-        mobile_count.append(particle_data[0])
-    return mobile_count
         
-def auto_MC_collect(MC, target_error, initial_sample_size, ci = 0.95, tau = None, timeout = 30):
-    start_time = time.time()
-    n_samples = initial_sample_size
-    x = MC_step_n_mobile_left(MC, n_samples)
-    if tau is None: tau = get_tau(x)
-    x_mean, x_err = correlated_data_mean_err(x, tau, ci)
-    while x_err>target_error:
-        elapsed_time = time.time() - start_time
-        if elapsed_time > timeout:
-            print('Timeout')
-            return x_mean, x_err, n_samples
-        print(f'Error {x_err} is bigger than target {target_error}')
-        print('More data will be collected')
-        x=x+MC_step_n_mobile_left(MC, n_samples)
-        if tau is None: tau = get_tau(x)
-        n_samples = n_samples*2
-        x_mean, x_err = correlated_data_mean_err(x, tau, ci)
-    else:
-        print(f'Mean: {x_mean}, err: {x_err}, eff_sample_size: {n_samples/(2*tau)}')
-        return x_mean, x_err, n_samples/(2*tau)
+    def sample_zeta_to_target_error(self, **kwargs):
+        def get_zeta_callback(sample_size):
+            zetas = []
+            for i in range(sample_size):
+                zeta = zeta_on_system_state(self.current_state)
+                zetas.append(zeta)
+                self.step()
+            return zetas
+        if "initial_sample_size" not in kwargs:
+            kwargs["initial_sample_size"] = len(self.current_state['particles_info'])
+        if "target_error" not in kwargs:
+            kwargs["target_error"] = 0.01
+        return sample_to_target_error(get_zeta_callback, **kwargs)
+
+################################################################################
+def _zeta(anion_salt, anion_gel, volume_salt, volume_gel):
+    return (anion_gel*volume_salt)/(anion_salt*volume_gel)
+
+def zeta_on_system_state(system_state):
+    volume_salt, volume_gel = system_state['volume']
+    particle_df = system_state['particles_info']
+    anion_salt = len(particle_df.loc[(particle_df['type'] == 0)&(particle_df['side'] == 0)])
+    anion_gel = len(particle_df.loc[(particle_df['type'] == 0)&(particle_df['side'] == 1)])
+    zeta = (anion_gel*volume_salt)/(anion_salt*volume_gel)
+    return zeta
+        

@@ -106,8 +106,8 @@ def zeta_from_analytic(N_pairs, fixed_anions, v):
     return v*(N_pairs - (fixed_anions*(1 - v)**2/2 + N_pairs*v**2 - (1 - v)*sqrt(fixed_anions**2*(1 - v)**2 + 4*fixed_anions*N_pairs*v**2 + 4*N_pairs**2*v**2)/2)/(v**2 - (1 - v)**2))/((1 - v)*(fixed_anions + (fixed_anions*(1 - v)**2/2 + N_pairs*v**2 - (1 - v)*sqrt(fixed_anions**2*(1 - v)**2 + 4*fixed_anions*N_pairs*v**2 + 4*N_pairs**2*v**2)/2)/(v**2 - (1 - v)**2)))
 
 if __name__=="__main__":
-    N_pairs = 200
-    fixed_anion = 100
+    N_pairs = 100
+    fixed_anion = 50
     v = np.linspace(0.2, 0.8, 11)
     zeta_an = [zeta_from_analytic(N_pairs, fixed_anion, v_) for v_ in v]
     from multiprocessing import Pool
