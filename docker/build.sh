@@ -22,15 +22,22 @@
 #name="es-ubu_cupy3_"${date}
 #echo "Container name: "${name}
 #docker build -t ${name} .
-docker build --no-cache -t helvrud/ubuntu .
+cp -r ../montecarlo/ .
+cp -r ../socket_server/ .
+cp -r ../mcmd_polyelctrolyte/ .
+docker build --no-cache -t helvrud/ubuntu-gibbs .
+
+docker run -it helvrud/ubuntu-gibbs /bin/bash
 
 #docker tag espresso_latest kvint/espresso_latest
-docker push helvrud/ubuntu
+docker push helvrud/ubuntu-gibbs
+
+
 
 ########################################################
 # then on metacentrum run
-singularity build ubuntu.img docker://helvrud/ubuntu
-singularity shell -B /storage/brno2/home/kvint:/home/kvint ubuntu.img
+singularity build ubuntu-gibbs.img docker://helvrud/ubuntu-gibbs
+singularity shell -B /storage/brno2/home/kvint:/home/kvint ubuntu-gibbs.img
 	> cd /home/kvint/espresso/espresso/es-build
 	> cmake ..
 	> make -j4
