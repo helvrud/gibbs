@@ -1,3 +1,26 @@
+"""
+This script is used to run espresso on the client side of a socket (Node)
+The script should be run with subprocess.Popen method,
+or one can use socket_nodes.utils.create_server_and_nodes method.
+
+The code goes through the next steps:
+
+- create parser with salt, gel specific arguments
+- parse arguments
+- initialize system <- espresso.System (see: init_reservoir_system.py, init_diamond_system.py)
+- initialize node <- socket_nodes.Node(args.IP, args.PORT, ExecutorClass, system) where
+    ExecutorClass is EspressoExecutorSalt for salt or EspressoExecutorGel for gel
+    system passed as *arg to ExecutorClass.init()
+- run an infinite loop node.run()
+    the method loops through: 
+        0)Connects to the server
+        1)Listen for incoming data
+        2)Process request
+        3)Send the results back
+
+@author: Laktionov Mikhail
+"""
+
 from logging import Logger
 from executors import EspressoExecutorSalt, EspressoExecutorGel
 from socket_nodes import Node

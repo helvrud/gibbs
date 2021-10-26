@@ -6,7 +6,7 @@ import pathlib
 
 from donnan_analytic import zeta
 
-path = pathlib.Path('data')
+path = pathlib.Path('data/tests_no_diamond')
 json_files = path.glob('*.json')
 
 def flatten_dict(d, prefix='_'):
@@ -32,41 +32,41 @@ for file in json_files:
 # %%
 df = pd.DataFrame(dicts)
 df=df.fillna(False)
-arr_columns = ['n_mobile_salt_eff_sample_size',
-       'n_mobile_salt_err', 'n_mobile_salt_mean',
-       'pressure_gel_eff_sample_size', 'pressure_gel_err', 'pressure_gel_mean',
-       'pressure_salt_eff_sample_size', 'pressure_salt_err',
-       'pressure_salt_mean']
-df = df.apply(lambda x: x.explode() if x.name in arr_columns else x)
-df['anion_salt'] = df.n_mobile_salt_mean/2
-df['anion_gel'] = df.n_pairs - df.anion_salt 
-df['zeta'] = df.anion_gel/df.anion_salt*(1-df.v)/df.v
+#arr_columns = ['zeta']
+#df = df.apply(lambda x: x.explode() if x.name in arr_columns else x)
+mean_columns = ['zeta']
+df['zeta_mean'] = df['zeta'].apply(np.mean)
+#df['anion_salt'] = df.n_mobile_salt_mean/2
+#df['anion_gel'] = df.n_pairs - df.anion_salt 
+#df['zeta'] = df.anion_gel/df.anion_salt*(1-df.v)/df.v
 #df = df.loc[df['alpha'].isin([0.5, 0.1])]
 #df = df.loc[df['no_gel'] == True]
 #%%
-path = pathlib.Path('mcmd_polyelctrolyte/monte_carlo/data/')
-json_files = path.glob('*.json')
-
-dicts= []
-for file in json_files:
-    print(file.name)
-    with open(file, 'r') as f:
-        dicts.append(flatten_dict(json.loads(f.read())))
-pure_Donnan = dicts[0]
+#path = pathlib.Path('mcmd_polyelctrolyte/monte_carlo/data/')
+#json_files = path.glob('*.json')
+#
+#dicts= []
+#for file in json_files:
+#    print(file.name)
+#    with open(file, 'r') as f:
+#        dicts.append(flatten_dict(json.loads(f.read())))
+#pure_Donnan = dicts[0]
 # %% 
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+n_pairs =100
+df = df.loc[df.n_pairs == n_pairs]
 fig, ax = plt.subplots()
 vv = np.linspace(0.2, 0.8)
 lvl0 = ['alpha', 'n_pairs', 'n_gel', 'system_volume', 'no_interaction']
 for idx, grouped in df.groupby(by = lvl0):
     print(idx)
     alpha = idx[0]
-    n_pair = 200
-    a_fix = 248*0.5
+    n_pair = n_pairs
+    a_fix = 25
     v_ = grouped.v
-    plt.scatter(v_, grouped.zeta)
+    plt.scatter(v_, grouped.zeta_mean)
     zeta_theory = [zeta(n_pair, v, a_fix) for v in vv]
     plt.plot(vv, zeta_theory, label = idx)
 plt.legend(title=lvl0, bbox_to_anchor=(1.1, 1.05))

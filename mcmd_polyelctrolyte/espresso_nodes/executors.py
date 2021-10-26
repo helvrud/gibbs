@@ -37,7 +37,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         """
         the function converts dictionary like 
         {'a' : 'int', 'b' : 'float'} to {'a' : int, 'b' : float}
-        note that here 'int' from string is converted to a function
+        note that here 'int' from string is converted to a function int
 
         motivation:
         we can not send the function over the socket, so we send a string
@@ -75,6 +75,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         example:
         particles = system.part[0:3]
         __get_and_cast_attributes(self, particles, ['id', 'type']) -> [[0, 0], [1,0], [2,0]]
+        __get_and_cast_attributes(self, particles, {'id':'int', 'pos':'list'}) -> [[0, [0.25,0.53,0.23]], [1,[0.67,0.4,0.01]], [2,[0.45,0.33,0.765]]]
         """        
         if isinstance(attrs, list):
             result = [{

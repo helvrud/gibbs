@@ -191,7 +191,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         if "initial_sample_size" not in kwargs:
             kwargs["initial_sample_size"] = len(self.current_state['particles_info'])
         if "target_error" not in kwargs:
-            kwargs["target_error"] = 0.01
+            kwargs["target_error"] = 0.1
         return sample_to_target_error(get_zeta_callback, **kwargs)
 
 ################################################################################
