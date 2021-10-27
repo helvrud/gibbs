@@ -76,11 +76,12 @@ for idx, grouped in df.groupby(by = lvl0):
 plt.legend(title=lvl0, bbox_to_anchor=(1.1, 1.05))
 plt.arrow(0.3, 0.05, 0.3, 0.0, head_width = 0.02,  transform=ax.transAxes)
 plt.text(0.35,0.07, "compression",  transform=ax.transAxes, va='bottom')
-plt.text(0.65,0.3, r"$\zeta = \frac{A^{-}_{gel}}{A^{-}_{salt}}$",fontsize=22)
+plt.text(0.65,0.6, r"$\zeta = \frac{A^{-}_{gel}}{A^{-}_{salt}}$",fontsize=22)
 plt.xlabel('v')
 plt.ylabel('$\zeta$')
 #plt.plot(pure_Donnan['v'], pure_Donnan['zeta'])
 plt.show()
+
 
 # %%
 

@@ -36,26 +36,7 @@ def populate_boxes(server, N_pairs_salt, N_pairs_gel):
     
     print('two box system initialized')
 
-def enable_electrostatic(server):
-    SIDES = [0,1]#for readability e.g. in list comprehensions
-    l_bjerrum = 2.0
-    temp = 1
-    server.request(
-        f"system.actors.add(espressomd.electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",
-        SIDES
-    )
-    #minimize energy and run md
-    server([
-        "system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.01)",
-        "system.minimize_energy.minimize()",
-        f"system.integrator.run({10000})"
-        ],
-        SIDES
-    )
-    server('system.minimize_energy.minimize()', [0,1])
-    print("Electrostatic is enabled")
-
-def build_MC(system_volume, N_pairs_all, v_gel, n_gel, alpha, gel_particles, log_names):
+def build_MC(system_volume, N_pairs_all, v_gel, n_gel, alpha, gel_particles, log_names, electrostatic=False,  no_interaction=False):
     #box volumes and dimmensions
     V = [system_volume*(1-v_gel),system_volume*v_gel]
     box_l = [V_**(1/3) for V_ in V]
@@ -76,8 +57,8 @@ def build_MC(system_volume, N_pairs_all, v_gel, n_gel, alpha, gel_particles, log
     server = socket_nodes.utils.create_server_and_nodes(
         scripts = ['espresso_nodes/run_node.py']*2, 
         args_list=[
-            ['-l', box_l[0], '--salt', '-no_interaction', NO_INTERACTION, "-log_name", log_names[0]],
-            ['-l', box_l[1], '--salt', '-no_interaction', NO_INTERACTION, "-log_name", log_names[1]],
+            ['-l', box_l[0], '--salt', '-no_interaction', no_interaction, "-log_name", log_names[0]],
+            ['-l', box_l[1], '--salt', '-no_interaction', no_interaction, "-log_name", log_names[1]],
             #['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', alpha]
             ], 
         python_executable = PYTHON_EXECUTABLE, 
@@ -92,7 +73,9 @@ def build_MC(system_volume, N_pairs_all, v_gel, n_gel, alpha, gel_particles, log
     server(f"populate({charged_gel_particles}, **{PARTICLE_ATTR['cation']})", 1)
     server(f"populate({charged_gel_particles}, **{PARTICLE_ATTR['gel_anion']})", 1)
 
-    if ELECTROSTATIC: enable_electrostatic(server)
+    if electrostatic: 
+        server('enable_electrostatic()', [0,1])
+        print("Electrostatic is enabled")
     MC = MonteCarloPairs(server)
     
     return MC
@@ -117,7 +100,7 @@ def zeta_from_analytic(N_pairs, fixed_anions, v):
 def save_results(save_data, v_gel):
     import os
     script_name = os.path.basename(__file__).split('.')[0]
-    save_fname = '../data/'+script_name+f'/{alpha}_{v_gel}_{N_pairs}_{system_vol}_{int(ELECTROSTATIC)}_{int(NO_INTERACTION)}_'+str(uuid.uuid4())[:8]+'.json'
+    save_fname = '../data/'+script_name+f'/{alpha}_{v_gel}_{N_pairs}_{system_vol}_{int(electrostatic)}_{int(no_interaction)}_'+str(uuid.uuid4())[:8]+'.json'
     from pathlib import Path
     Path('../data/'+script_name).mkdir(parents=True, exist_ok=True)
     with open(save_fname, 'w') as outfile:
@@ -130,8 +113,8 @@ system_vol = N_pairs*2/mol_to_n(conc)
 v_gel = [0.3, 0.4, 0.5, 0.6, 0.7]
 alpha = 25/248
 gel_particles = 248
-NO_INTERACTION = False
-ELECTROSTATIC = True
+no_interaction = False
+electrostatic = True
 #%%
 #one call test
 #v_gel_once = 0.5
@@ -151,7 +134,9 @@ def worker(v):
         alpha=alpha, 
         v_gel = v, 
         gel_particles=gel_particles,
-        log_names=[f'salt_{round(v, 3)}_0.log', f'salt_{round(v, 3)}_1.log'])
+        log_names=[f'salt_{round(v, 3)}_0.log', f'salt_{round(v, 3)}_1.log'],
+        no_interaction=no_interaction,
+        electrostatic=electrostatic)
     equilibrate_MC(MC)
     zetas = []
     md_steps = 10000
@@ -168,10 +153,10 @@ def worker(v):
             'v' : v, #relative gel volume
             'system_volume' : system_vol, #system volume
             'n_pairs' : N_pairs, #Number of added ion pairs, excl. counterions
-            'electrostatic' : ELECTROSTATIC, #is electrostatic enabled
+            'electrostatic' : electrostatic, #is electrostatic enabled
             'n_gel' : gel_particles, #number of all gel particles
             'anion_fixed' : int(alpha*gel_particles), #number of charged gel particles
-            'no_interaction' : NO_INTERACTION, #no interaction flag, True if no LJ and FENE
+            'no_interaction' : no_interaction, #no interaction flag, True if no LJ and FENE
             'zeta' : zetas,
              #'zeta_err' : zeta_err,
             'zeta_donnan' : zeta_donnan,

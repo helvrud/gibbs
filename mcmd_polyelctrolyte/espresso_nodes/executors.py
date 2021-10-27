@@ -13,6 +13,7 @@ from socket_nodes import LocalScopeExecutor
 
 ##import all you might need later when requesting from server
 import espressomd
+from espressomd import electrostatics
 import numpy as np
 
 #auto sampling routine are the same as in montecarlo one
@@ -228,6 +229,17 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         print(f"Volume changed to {new_vol}")
         return self.potential_energy()
 
+    def enable_electrostatic(self, l_bjerrum=2, int_steps = 10000):
+        from espressomd import electrostatics
+        l_bjerrum = 2
+        p3m = electrostatics.P3M(prefactor=l_bjerrum, accuracy=1e-3)
+        self.system.actors.add(p3m)
+        p3m_params = p3m.get_params()
+        print(p3m_params)
+        self.system.minimize_energy.minimize()
+        self.system.integrator.run(int_steps)
+        return True
+
 class EspressoExecutorGel(EspressoExecutorSalt):
     def Re(self):
         from init_diamond_system import calc_Re, _get_pairs
@@ -247,7 +259,7 @@ class EspressoExecutorGel(EspressoExecutorSalt):
 
 #%%
 if __name__ == "__main__": ##for debugging
-    system = espressomd.System(box_l = [10, 10, 10])
+    system = espressomd.System(box_l = [20, 20, 20])
     system.time_step = 0.001
     system.cell_system.skin = 0.4
     system.thermostat.set_langevin(kT=1, gamma=1, seed=42)
@@ -255,7 +267,9 @@ if __name__ == "__main__": ##for debugging
     lj_sigma=1
     system.non_bonded_inter[0,0].lennard_jones.set_params(epsilon=1, sigma=lj_sigma, cutoff=lj_sigma*2**(1./6), shift='auto')
     executor = EspressoExecutorSalt(system)
-    executor.populate(50)
+    executor.populate(50, q=-1)
+    executor.populate(50, q=+1)
+    executor.enable_electrostatic(int_steps=1000)
 # %%
     executor.sample_pressure_to_target_error(0.00005, 1000)
 # %%

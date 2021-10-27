@@ -51,6 +51,7 @@ def init_diamond_system(MPC, bond_length, alpha, target_l, bonded_attr, non_bond
     logging.debug('Minimizing energy before volume change')
     system.minimize_energy.minimize()
     change_volume(system, target_l)
+    
     return system
 
 def setup_non_bonded(system, non_bonded_attr):
