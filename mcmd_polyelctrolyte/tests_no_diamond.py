@@ -4,7 +4,7 @@ import json
 import uuid
 
 import socket_nodes
-from tqdm.std import trange
+from tqdm import trange
 
 from ion_pair_monte_carlo import MonteCarloPairs
 
@@ -131,7 +131,7 @@ v_gel = [0.3, 0.4, 0.5, 0.6, 0.7]
 alpha = 25/248
 gel_particles = 248
 NO_INTERACTION = False
-ELECTROSTATIC = False
+ELECTROSTATIC = True
 #%%
 #one call test
 #v_gel_once = 0.5

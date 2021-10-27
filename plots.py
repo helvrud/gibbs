@@ -8,7 +8,7 @@ import numpy as np
 from donnan_analytic import zeta
 LAST_USED_COLOR = lambda: plt.gca().lines[-1].get_color()
 
-path = pathlib.Path('/data/tests_no_diamond')
+path = pathlib.Path('data/tests_no_diamond')
 json_files = path.glob('*.json')
 
 def flatten_dict(d, prefix='_'):
