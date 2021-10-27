@@ -13,6 +13,13 @@ PYTHON_EXECUTABLE = 'python'
 import logging
 logging.basicConfig(level=logging.DEBUG, stream=open('server.log', 'w'))
 
+def mol_to_n(mol_conc, unit_length_nm=0.35):
+    #Navogadro = 6.02214e23
+    #1e-9**3 * 10**3 = 10e-24
+    #6.022e23*10e-24 = 6.022e-1 
+    n = unit_length_nm**3*6.02214e-1*mol_conc
+    return n
+
 
 def populate_boxes(server, N_pairs_salt, N_pairs_gel):
     MOBILE_SPECIES_COUNT = [
@@ -29,7 +36,26 @@ def populate_boxes(server, N_pairs_salt, N_pairs_gel):
     
     print('two box system initialized')
 
-def build_MC(system_volume, N_pairs_all, v_gel, n_gel, alpha, gel_particles):
+def enable_electrostatic(server):
+    SIDES = [0,1]#for readability e.g. in list comprehensions
+    l_bjerrum = 2.0
+    temp = 1
+    server.request(
+        f"system.actors.add(espressomd.electrostatics.P3M(prefactor={l_bjerrum * temp},accuracy=1e-3))",
+        SIDES
+    )
+    #minimize energy and run md
+    server([
+        "system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.01)",
+        "system.minimize_energy.minimize()",
+        f"system.integrator.run({10000})"
+        ],
+        SIDES
+    )
+    server('system.minimize_energy.minimize()', [0,1])
+    print("Electrostatic is enabled")
+
+def build_MC(system_volume, N_pairs_all, v_gel, n_gel, alpha, gel_particles, log_names):
     #box volumes and dimmensions
     V = [system_volume*(1-v_gel),system_volume*v_gel]
     box_l = [V_**(1/3) for V_ in V]
@@ -50,8 +76,8 @@ def build_MC(system_volume, N_pairs_all, v_gel, n_gel, alpha, gel_particles):
     server = socket_nodes.utils.create_server_and_nodes(
         scripts = ['espresso_nodes/run_node.py']*2, 
         args_list=[
-            ['-l', box_l[0], '--salt'],
-            ['-l', box_l[1], '--salt'],
+            ['-l', box_l[0], '--salt', '-no_interaction', NO_INTERACTION, "-log_name", log_names[0]],
+            ['-l', box_l[1], '--salt', '-no_interaction', NO_INTERACTION, "-log_name", log_names[1]],
             #['-l', box_l[1], '--gel', '-MPC', 15, '-bond_length', 0.966, '-alpha', alpha]
             ], 
         python_executable = PYTHON_EXECUTABLE, 
@@ -65,15 +91,15 @@ def build_MC(system_volume, N_pairs_all, v_gel, n_gel, alpha, gel_particles):
     from espresso_nodes.shared import PARTICLE_ATTR
     server(f"populate({charged_gel_particles}, **{PARTICLE_ATTR['cation']})", 1)
     server(f"populate({charged_gel_particles}, **{PARTICLE_ATTR['gel_anion']})", 1)
+
+    if ELECTROSTATIC: enable_electrostatic(server)
     MC = MonteCarloPairs(server)
     
     return MC
 
-def equilibrate_MC(MC):
-    md_steps = 10000
-    mc_steps = 200
+def equilibrate_MC(MC, md_steps = 100000, mc_steps = 200):
     MC.server(f'system.integrator.run({md_steps})',[0,1])
-    rounds = 10
+    rounds = 25
     from tqdm import trange
     for ROUND in trange(rounds):
         MC.setup()
@@ -98,9 +124,10 @@ def save_results(save_data, v_gel):
         json.dump(save_data, outfile, indent=4)
 
 #%%
-system_vol = 10**3*2
 N_pairs=100
-v_gel = [0.3, 0.6, 0.7]
+conc = 0.1 #mol/L
+system_vol = N_pairs*2/mol_to_n(conc)
+v_gel = [0.3, 0.4, 0.5, 0.6, 0.7]
 alpha = 25/248
 gel_particles = 248
 NO_INTERACTION = False
@@ -116,8 +143,15 @@ ELECTROSTATIC = False
 #%%
 def worker(v):
     n_gel = v
-    sample_size=5
-    MC = build_MC(system_volume=system_vol, N_pairs_all=N_pairs, n_gel = n_gel, alpha=alpha, v_gel = v, gel_particles=gel_particles)
+    sample_size=10
+    MC = build_MC(
+        system_volume=system_vol, 
+        N_pairs_all=N_pairs, 
+        n_gel = n_gel, 
+        alpha=alpha, 
+        v_gel = v, 
+        gel_particles=gel_particles,
+        log_names=[f'salt_{round(v, 3)}_0.log', f'salt_{round(v, 3)}_1.log'])
     equilibrate_MC(MC)
     zetas = []
     md_steps = 10000

@@ -21,7 +21,6 @@ The code goes through the next steps:
 @author: Laktionov Mikhail
 """
 
-from logging import Logger
 from executors import EspressoExecutorSalt, EspressoExecutorGel
 from socket_nodes import Node
 
@@ -70,19 +69,21 @@ if __name__=="__main__":
                         metavar='no_interaction',
                         help = 'switch off bonded and non bonded interaction',
                         type = bool,
+                        required= False,
+                        default = False)
+    parser.add_argument('-log_name', 
+                        metavar='log_name',
+                        help = 'name of log file',
+                        type = str,
                         required=False,
-                        default = 1.0)
-    #parser.add_argument('-log_name', 
-    #                    metavar='log_name',
-    #                    help = 'name of log file',
-    #                    type = str,
-    #                    required=False,
-    #                    default = "")              
+                        default = "")
+           
     args = parser.parse_args()
     
     if '--salt' in sys.argv:
-        import logging
-        logging.basicConfig(level=logging.DEBUG, stream=open('salt.log', 'w'))
+        if args.log_name != "":
+            import logging
+            logging.basicConfig(level=logging.DEBUG, stream=open(args.log_name, 'w'))
         from init_reservoir_system import init_reservoir_system
         logging.info('Initializing salt reservoir')
         if not args.no_interaction:
@@ -94,8 +95,9 @@ if __name__=="__main__":
         node = Node(args.IP, args.PORT, EspressoExecutorSalt, system)
         node.run()
     elif '--gel' in sys.argv:
-        import logging
-        logging.basicConfig(level=logging.DEBUG, stream=open('gel.log', 'w'))
+        if args.log_name != "":
+            import logging
+            logging.basicConfig(level=logging.DEBUG, stream=open(args.log_name, 'w'))
         from init_diamond_system import init_diamond_system
         from shared import PARTICLE_ATTR
         logging.info('Initializing reservoir with a gel')

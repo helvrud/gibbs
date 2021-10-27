@@ -3,10 +3,12 @@ import json
 from json.encoder import JSONEncoder
 import pandas as pd
 import pathlib
+import numpy as np
 
 from donnan_analytic import zeta
+LAST_USED_COLOR = lambda: plt.gca().lines[-1].get_color()
 
-path = pathlib.Path('data/tests_no_diamond')
+path = pathlib.Path('/data/tests_no_diamond')
 json_files = path.glob('*.json')
 
 def flatten_dict(d, prefix='_'):
@@ -36,6 +38,7 @@ df=df.fillna(False)
 #df = df.apply(lambda x: x.explode() if x.name in arr_columns else x)
 mean_columns = ['zeta']
 df['zeta_mean'] = df['zeta'].apply(np.mean)
+df['zeta_err'] = df['zeta'].apply(lambda x: np.std(x)/np.sqrt(len(x)))
 #df['anion_salt'] = df.n_mobile_salt_mean/2
 #df['anion_gel'] = df.n_pairs - df.anion_salt 
 #df['zeta'] = df.anion_gel/df.anion_salt*(1-df.v)/df.v
@@ -59,7 +62,7 @@ n_pairs =100
 df = df.loc[df.n_pairs == n_pairs]
 fig, ax = plt.subplots()
 vv = np.linspace(0.2, 0.8)
-lvl0 = ['alpha', 'n_pairs', 'n_gel', 'system_volume', 'no_interaction']
+lvl0 = ['alpha', 'n_pairs', 'system_volume', 'electrostatic']
 for idx, grouped in df.groupby(by = lvl0):
     print(idx)
     alpha = idx[0]
@@ -69,6 +72,7 @@ for idx, grouped in df.groupby(by = lvl0):
     plt.scatter(v_, grouped.zeta_mean)
     zeta_theory = [zeta(n_pair, v, a_fix) for v in vv]
     plt.plot(vv, zeta_theory, label = idx)
+    plt.errorbar(v_, grouped.zeta_mean, yerr=grouped.zeta_err, linewidth=0, elinewidth=1, color = LAST_USED_COLOR())
 plt.legend(title=lvl0, bbox_to_anchor=(1.1, 1.05))
 plt.arrow(0.3, 0.05, 0.3, 0.0, head_width = 0.02,  transform=ax.transAxes)
 plt.text(0.35,0.07, "compression",  transform=ax.transAxes, va='bottom')
