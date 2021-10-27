@@ -1,6 +1,6 @@
 # Dockerfile for espresso 4.1
 
-FROM ubuntu:bionic
+FROM ubuntu:focal
 MAINTAINER Oleg Rud <oleg.rud@natur.cuni.cz>
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -55,6 +55,10 @@ RUN apt-get update && apt-get install -y \
     ccache \
     python3-scipy \
     python3-numpy \
+    python3-virtualenv \
+    python3-pandas \
+    python3-ipython \
+    python3-pip \
 && pip3 install --upgrade sphinx sphinxcontrib-bibtex multipletau \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/*
@@ -65,11 +69,25 @@ RUN ln -sfn /usr/bin/python3.6 /usr/bin/python
 #
 RUN useradd -ms /bin/bash kvint
 RUN useradd -ms /bin/bash kazakov
-#USER kvint
-#WORKDIR /home/kvint
-#ENV USERNAME kvint
+USER kvint
+WORKDIR /home/kvint
+ENV USERNAME kvint
 
-# PULL ESPRESSO
-#RUN cd \
-#    && cd /home/kvint/
+RUN git clone https://github.com/espressomd/espresso.git
+RUN cd espresso
+RUN mkdir -p espresso/es-build
+WORKDIR /home/kvint/espresso/es-build
+RUN cmake ..
+RUN make -j 4
+
+#COPY socket_server /home/kvint/socket_server
+#COPY montecarlo /home/kvint/montecarlo
+#COPY mcmd_polyelctrolyte /home/kvint/mcmd_polyelctrolyte
+#RUN cd /home/kvint/socket_server/
+#RUN pip3 install /home/kvint/socket_server
+#RUN pip3 install /home/kvint/montecarlo
+RUN pip3 install tqdm
+RUN pip3 install ipython
+
+
 
