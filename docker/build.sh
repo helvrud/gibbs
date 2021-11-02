@@ -32,7 +32,8 @@ docker run -it helvrud/ubuntu-gibbs /bin/bash
 #docker tag espresso_latest kvint/espresso_latest
 docker push helvrud/ubuntu-gibbs
 
-
+# In order to run the docker 
+docker run -it --mount type=bind,source=/home/kvint/gibbs,target=//home/kvint/gibbs helvrud/ubuntu-gibbs /bin/bash
 
 ########################################################
 # then on metacentrum run
