@@ -77,36 +77,33 @@ if __name__=="__main__":
                         type = str,
                         required=False,
                         default = "")
-           
+
     args = parser.parse_args()
     
-    if '--salt' in sys.argv:
-        if args.log_name != "":
-            import logging
-            logging.basicConfig(level=logging.DEBUG, stream=open(args.log_name, 'w'))
-        from init_reservoir_system import init_reservoir_system
-        logging.info('Initializing salt reservoir')
-        if not args.no_interaction:
+    #logging
+    if args.log_name != "":
+        import logging
+        logging.basicConfig(level=logging.DEBUG, stream=open(args.log_name, 'w'))
+    
+    #set or disable interaction
+    if not args.no_interaction:
             from shared import NON_BONDED_ATTR
-        else:
+    else:
             logging.info('No interactions between particles')
             NON_BONDED_ATTR = None
+            BONDED_ATTR = None
+            
+    #init salt or gel
+    if '--salt' in sys.argv:
+        from init_reservoir_system import init_reservoir_system
+        logging.info('Initializing salt reservoir')
         system = init_reservoir_system(args.l, NON_BONDED_ATTR)
         node = Node(args.IP, args.PORT, EspressoExecutorSalt, system)
         node.run()
     elif '--gel' in sys.argv:
-        if args.log_name != "":
-            import logging
-            logging.basicConfig(level=logging.DEBUG, stream=open(args.log_name, 'w'))
         from init_diamond_system import init_diamond_system
-        from shared import PARTICLE_ATTR
         logging.info('Initializing reservoir with a gel')
-        if not args.no_interaction:
-            from shared import NON_BONDED_ATTR, BONDED_ATTR
-        else:
-            logging.info('No interactions between particles')
-            NON_BONDED_ATTR = None
-            BONDED_ATTR = None
+        from shared import PARTICLE_ATTR
         system = init_diamond_system(
             args.MPC, args.bond_length, args.alpha, args.l,
             BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR

@@ -25,7 +25,43 @@ def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, re
     elif removed_from == 1:
         return _entropy_change(anion_1, anion_0, cation_1, cation_0, volume_1, volume_0, 0)
 
+def zeta_on_system_state(system_state):
+    volume_salt, volume_gel = system_state['volume']
+    particle_df = system_state['particles_info']
+    anion_salt = len(particle_df.loc[(particle_df['type'] == 0)&(particle_df['side'] == 0)])
+    anion_gel = len(particle_df.loc[(particle_df['type'] == 0)&(particle_df['side'] == 1)])
+    zeta = (anion_gel*volume_salt)/(anion_salt*volume_gel)
+    return zeta
+
 class MonteCarloPairs(AbstractMonteCarlo):
+    def _choose_random_side_and_part(self):
+        side = random.choice(SIDES)
+        particles = self.current_state['particles_info']
+        rnd_pair_indices = [
+            random.choice(particles.query(f'side == {side} & type == {i}')['id'].to_list())
+            for i in PAIR
+            ]
+        return side, rnd_pair_indices
+    
+    def _particle_info_df_update(self, reversal: ReversalData):
+        side = reversal['side']
+        other_side = int(not(side))
+
+        
+        df = self.current_state['particles_info']
+        for i in PAIR:
+            _id = reversal['removed'][i]['id']
+            df = df.loc[((df['id'] != _id)|(df['side'] != side))]
+        
+        added = pd.DataFrame(reversal['added'])
+        added['side'] = other_side
+        added['type'] = [0,1]
+        df = df.append(
+            added,
+            ignore_index=True, verify_integrity=True
+            )
+        return df
+    
     def __init__(self, server):
         super().__init__()
         self.server = server
@@ -62,15 +98,6 @@ class MonteCarloPairs(AbstractMonteCarlo):
         
         self.current_state = new_state
         return new_state
-        
-    def _choose_random_side_and_part(self):
-        side = random.choice(SIDES)
-        particles = self.current_state['particles_info']
-        rnd_pair_indices = [
-            random.choice(particles.query(f'side == {side} & type == {i}')['id'].to_list())
-            for i in PAIR
-            ]
-        return side, rnd_pair_indices
 
     def move(self) -> Tuple[ReversalData, AcceptCriterion]:
         
@@ -140,25 +167,6 @@ class MonteCarloPairs(AbstractMonteCarlo):
         #return data that we can reverse or update the system state with
         return reversal_data, accept_criterion
     
-    def _particle_info_df_update(self, reversal: ReversalData):
-        side = reversal['side']
-        other_side = int(not(side))
-
-        
-        df = self.current_state['particles_info']
-        for i in PAIR:
-            _id = reversal['removed'][i]['id']
-            df = df.loc[((df['id'] != _id)|(df['side'] != side))]
-        
-        added = pd.DataFrame(reversal['added'])
-        added['side'] = other_side
-        added['type'] = [0,1]
-        df = df.append(
-            added,
-            ignore_index=True, verify_integrity=True
-            )
-        return df
-
     def update_state(self, reversal: ReversalData):
         part_info = self._particle_info_df_update(reversal)
         update_c_state = StateData(
@@ -193,16 +201,21 @@ class MonteCarloPairs(AbstractMonteCarlo):
         if "target_error" not in kwargs:
             kwargs["target_error"] = 0.1
         return sample_to_target_error(get_zeta_callback, **kwargs)
-
+    
+    def run_md(self, md_steps):
+        self.server(f"system.integrator.run({md_steps})", [0, 1])
+        self.setup()
+    
+    def equilibrate(self, md_steps = 100000, mc_steps = 200, rounds=25):
+        self.run_md(md_steps)
+        from tqdm import trange, tqdm
+        for ROUND in trange(rounds):
+            tqdm.write('MC steps')
+            [self.step() for i in range(mc_steps)]
+            tqdm.write('MD steps')
+            self.run_md(md_steps)
+        return True
+    
 ################################################################################
 def _zeta(anion_salt, anion_gel, volume_salt, volume_gel):
     return (anion_gel*volume_salt)/(anion_salt*volume_gel)
-
-def zeta_on_system_state(system_state):
-    volume_salt, volume_gel = system_state['volume']
-    particle_df = system_state['particles_info']
-    anion_salt = len(particle_df.loc[(particle_df['type'] == 0)&(particle_df['side'] == 0)])
-    anion_gel = len(particle_df.loc[(particle_df['type'] == 0)&(particle_df['side'] == 1)])
-    zeta = (anion_gel*volume_salt)/(anion_salt*volume_gel)
-    return zeta
-        

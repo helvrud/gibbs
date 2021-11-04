@@ -80,17 +80,6 @@ def build_MC(system_volume, N_pairs_all, v_gel, n_gel, alpha, gel_particles, log
     
     return MC
 
-def equilibrate_MC(MC, md_steps = 100000, mc_steps = 200):
-    MC.server(f'system.integrator.run({md_steps})',[0,1])
-    rounds = 25
-    from tqdm import trange
-    for ROUND in trange(rounds):
-        MC.setup()
-        [MC.step() for i in range(mc_steps)]
-        MC.server(f'system.integrator.run({md_steps})',[0,1])
-    MC.setup()
-    return True
-
 def zeta_from_analytic(N_pairs, fixed_anions, v):
     import numpy as np
     if v == 0.5: v=0.49999999 #dirty
@@ -117,9 +106,17 @@ no_interaction = False
 electrostatic = True
 #%%
 #one call test
-#v_gel_once = 0.5
-#MC = build_MC(system_volume=system_vol, N_pairs_all=N_pairs, n_gel = v_gel_once, alpha=alpha, v_gel = v_gel_once, gel_particles=gel_particles)
-#equilibrate_MC(MC)
+v_gel_once = 0.5
+MC = build_MC(
+    system_volume=system_vol, 
+    N_pairs_all=N_pairs, 
+    n_gel = v_gel_once, 
+    alpha=alpha, 
+    v_gel = v_gel_once, 
+    gel_particles=gel_particles,
+    log_names=['logs/test_0.log', 'logs/test_1.log'])
+MC.equilibrate()
+#%%
 #zeta, zeta_err, sample_size = MC.sample_zeta_to_target_error()
 #zeta_an = zeta_from_analytic(N_pairs, gel_particles*alpha, v_gel_once)
 #print(zeta, zeta_an)
@@ -137,14 +134,13 @@ def worker(v):
         log_names=[f'salt_{round(v, 3)}_0.log', f'salt_{round(v, 3)}_1.log'],
         no_interaction=no_interaction,
         electrostatic=electrostatic)
-    equilibrate_MC(MC)
+    MC.equilibrate()
     zetas = []
     md_steps = 10000
     for i in trange(sample_size):
         zeta, *_ = MC.sample_zeta_to_target_error()
         #in between mc
-        MC.server(f'system.integrator.run({md_steps})',[0,1])
-        MC.setup()
+        MC.run_md(md_steps)
         print(zeta)
         zetas.append(zeta)
     zeta_donnan = zeta_from_analytic(N_pairs, gel_particles*alpha, v)
@@ -158,7 +154,7 @@ def worker(v):
             'anion_fixed' : int(alpha*gel_particles), #number of charged gel particles
             'no_interaction' : no_interaction, #no interaction flag, True if no LJ and FENE
             'zeta' : zetas,
-             #'zeta_err' : zeta_err,
+            #'zeta_err' : zeta_err,
             'zeta_donnan' : zeta_donnan,
         }
     save_results(save_data, v)
