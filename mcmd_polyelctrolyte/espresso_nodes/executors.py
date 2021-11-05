@@ -236,9 +236,29 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         self.system.actors.add(p3m)
         p3m_params = p3m.get_params()
         print(p3m_params)
-        self.system.minimize_energy.minimize()
-        self.system.integrator.run(int_steps)
+        self.minimize_energy()
         return True
+
+    def minimize_energy(self, dist=1, timeout = 60):
+        system = self.system
+        import time
+        start_time = time.time()
+        system.thermostat.suspend()
+        system.integrator.set_steepest_descent(f_max=0, gamma=0.1, max_displacement=0.1)
+        min_d = system.analysis.min_dist()
+        print(f"Minimal distance: {min_d}")
+        while (min_d < dist) or (min_d==np.inf):
+            elapsed_time = time.time() - start_time
+            if elapsed_time > timeout:
+                print('Timeout')
+                break
+            system.integrator.run(100)
+            min_d = system.analysis.min_dist()
+            print(f"Minimal distance: {min_d}")
+        system.integrator.set_vv()
+        system.thermostat.recover()
+        self.system.integrator.run(10000)
+        return min_d
 
 class EspressoExecutorGel(EspressoExecutorSalt):
     def Re(self):
@@ -263,13 +283,15 @@ if __name__ == "__main__": ##for debugging
     system.time_step = 0.001
     system.cell_system.skin = 0.4
     system.thermostat.set_langevin(kT=1, gamma=1, seed=42)
-    system.minimize_energy.init(f_max=50, gamma=30.0, max_steps=10000, max_displacement=0.001)
     lj_sigma=1
     system.non_bonded_inter[0,0].lennard_jones.set_params(epsilon=1, sigma=lj_sigma, cutoff=lj_sigma*2**(1./6), shift='auto')
     executor = EspressoExecutorSalt(system)
     executor.populate(50, q=-1)
     executor.populate(50, q=+1)
-    executor.enable_electrostatic(int_steps=1000)
+#%%
+    executor.minimize_energy(dist=1)
+#%%
+    executor.enable_electrostatic()
 # %%
-    executor.sample_pressure_to_target_error(0.00005, 1000)
+    executor.potential_energy()
 # %%

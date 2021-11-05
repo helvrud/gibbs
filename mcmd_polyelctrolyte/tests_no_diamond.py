@@ -104,9 +104,10 @@ system_vol = min_N_pairs*2/mol_to_n(min_conc)
 ## INPUT ARGS
 conc = 0.01 #mol/L
 v_gel = [0.3, 0.4, 0.5, 0.6, 0.7]
+v_gel = [0.4]
 alpha = 124/248
 no_interaction = False
-electrostatic = True
+electrostatic = False
 cpu_count = 5
 
 N_pairs=int(round(system_vol*mol_to_n(conc)/2))
