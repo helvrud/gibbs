@@ -26,3 +26,22 @@ def check_stationarity(x, p_crit=0.05):
     else:
         print('Failed to reject H0, the data is not stationary.')
     return passed
+
+def donnan_analytic(N_pairs, A_fix, v):
+    """Returns zeta = anion_gel/anion_salt
+
+    Args:
+        N_pairs (float): total number of mobile ion pairs
+        A_fix (float): number of fixed anions
+        v (float): gel relative volume
+
+    Returns:
+        [float]: relative anion_gel/anion_salt
+    """    
+    if v == 0.5:
+        zeta = (A_fix + N_pairs**2/(A_fix + 2*N_pairs))/(-N_pairs**2/(A_fix + 2*N_pairs) + N_pairs)
+    else:
+        import numpy as np
+        sqrt = np.sqrt
+        zeta = (1 - v)*(A_fix + (A_fix*(1 - v)**2/2 + N_pairs*v**2 - (1 - v)*sqrt(A_fix**2*(1 - v)**2 + 4*A_fix*N_pairs*v**2 + 4*N_pairs**2*v**2)/2)/(v**2 - (1 - v)**2))/(v*(N_pairs - (A_fix*(1 - v)**2/2 + N_pairs*v**2 - (1 - v)*sqrt(A_fix**2*(1 - v)**2 + 4*A_fix*N_pairs*v**2 + 4*N_pairs**2*v**2)/2)/(v**2 - (1 - v)**2)))
+    return zeta

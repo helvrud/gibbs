@@ -96,7 +96,7 @@ def save_results(save_data, v_gel):
         json.dump(save_data, outfile, indent=4)
 
 #%%
-#make sure we have enough particles ans system volume
+#make sure we have enough particles and system volume
 min_conc = 0.01
 min_N_pairs = 100
 system_vol = min_N_pairs*2/mol_to_n(min_conc)
@@ -104,14 +104,14 @@ system_vol = min_N_pairs*2/mol_to_n(min_conc)
 ## INPUT ARGS
 conc = 0.01 #mol/L
 v_gel = [0.3, 0.4, 0.5, 0.6, 0.7]
-v_gel = [0.4]
-alpha = 124/248
+gel_particles = 248
+alpha = 1.0
 no_interaction = False
-electrostatic = False
+electrostatic = True
 cpu_count = 5
 
 N_pairs=int(round(system_vol*mol_to_n(conc)/2))
-gel_particles = 248
+
 #%%
 def worker(v):
     n_gel = v

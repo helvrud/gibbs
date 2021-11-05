@@ -12,9 +12,11 @@ A_gel = Symbol("A_gel", positive = True) #gel anions conc
 # %%
 x = Symbol('x')
 mass_law = Eq(((N_pairs-x)/V_salt)**2, x*(A_fixed+x)/V_gel**2)
+#mass_law = mass_law.subs(V_gel, V_salt).simplify()
 mass_law
 #%%
 x_solved = solve(mass_law, x)[0]
+x_solved
 #%%
 A_salt_conc = (N_pairs-x_solved)/V_salt
 A_gel_conc = (A_fixed+x_solved)/V_gel
@@ -22,6 +24,11 @@ zeta = A_gel_conc/A_salt_conc
 #%%
 v = Symbol('v')
 zeta = zeta.subs(V_salt, 1-v).subs(V_gel,v)
+#%%
+zeta
+#%%
+from sympy import limit
+limit(zeta, v, 0.5)
 #%%
 from sympy import lambdify
 f = lambdify([N_pairs, A_fixed, v], zeta, "numpy")
