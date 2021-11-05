@@ -1,0 +1,9 @@
+#!/bin/bash
+#PBS -N gel_MPC30_box_l15.0_pH7.00_pCl0.82_pCa1.77_N200
+#PBS -l mem=500mb
+#PBS -l ncpus=1
+#PBS -l walltime=336:0:0
+#PBS -m ae
+#PBS -e /storage/brno2/home/kvint/mv/data/gel_MPC30_box_l15.0_pH7.00_pCl0.82_pCa1.77_N200.qsuberr
+#PBS -o /storage/brno2/home/kvint/mv/data/gel_MPC30_box_l15.0_pH7.00_pCl0.82_pCa1.77_N200.qsubout
+singularity exec -B /storage/brno2/home/kvint:/home/kvint /storage/brno2/home/kvint/ubuntu.img /home/kvint/espresso/espresso/es-build/pypresso  /home/kvint/mv/data/gel_MPC30_box_l15.0_pH7.00_pCl0.82_pCa1.77_N200.py
