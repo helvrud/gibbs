@@ -20,7 +20,6 @@ To construct a concrete realization one has to provide the next definition:
 
 @author Mikhail Laktionov
 """
-
 from typing import Tuple
 class ReversalData(dict):
     """
@@ -190,6 +189,7 @@ def correlated_data_mean_err(x, tau, ci = 0.95):
     import scipy.stats
     import numpy as np
     x_mean = np.mean(x)
+
     #the sample is correlated so the effective size is smaller
     n_eff = np.size(x)/(2*tau)
     #print(f"Effective sample size: {n_eff}")
@@ -219,6 +219,7 @@ def sample_to_target_error(
         timeout = 30, 
         ci = 0.95):
     import time
+    import numpy as np
     start_time = time.time()
     n_samples = initial_sample_size
     x = get_data_callback(n_samples)
@@ -232,9 +233,12 @@ def sample_to_target_error(
             #return x_mean, x_err, n_samples
         print(f'Error {x_err} is bigger than target {target_error}')
         print('More data will be collected')
-        x=x.append(get_data_callback(n_samples))
+        new_sample = get_data_callback(n_samples)
+        x=np.append(x, new_sample)
         if tau is None: tau = get_tau(x)
         n_samples = n_samples*2
         x_mean, x_err = correlated_data_mean_err(x, tau, ci)
     print(f'Mean: {x_mean}, err: {x_err}, eff_sample_size: {n_samples/(2*tau)}')
     return x_mean, x_err, n_samples/(2*tau)
+
+# %%

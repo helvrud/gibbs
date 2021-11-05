@@ -267,7 +267,7 @@ class EspressoExecutorGel(EspressoExecutorSalt):
         Re = calc_Re(self.system, pairs)
         return Re
 
-    def integrate_Re(self, int_steps : int = 1000, n_samples : int = 100, return_only_mean = False):
+    def sample_Re(self, int_steps : int = 1000, n_samples : int = 100, return_only_mean = False):     
         acc = []
         for i in range(n_samples):
             self.system.integrator.run(int_steps)
@@ -276,6 +276,14 @@ class EspressoExecutorGel(EspressoExecutorSalt):
             return np.mean(acc), np.std(acc)
         else:
             return acc
+
+    def sample_Re_to_target_error(
+            self, target_error, initial_sample_size, 
+            tau = None, int_steps = 1000, 
+            timeout = 30, ci = 0.95):
+        def get_data_callback(n):
+            return self.sample_Re(int_steps=int_steps, n_samples = n)
+        return sample_to_target_error(get_data_callback, target_error, initial_sample_size, tau, timeout, ci)
 
 #%%
 if __name__ == "__main__": ##for debugging

@@ -30,7 +30,7 @@ def zeta_on_system_state(system_state):
     particle_df = system_state['particles_info']
     anion_salt = len(particle_df.loc[(particle_df['type'] == 0)&(particle_df['side'] == 0)])
     anion_gel = len(particle_df.loc[(particle_df['type'] == 0)&(particle_df['side'] == 1)])
-    zeta = (anion_gel*volume_salt)/(anion_salt*volume_gel)
+    zeta = float((anion_gel*volume_salt)/(anion_salt*volume_gel))
     return zeta
 
 class MonteCarloPairs(AbstractMonteCarlo):
@@ -187,7 +187,9 @@ class MonteCarloPairs(AbstractMonteCarlo):
             f"remove_particle({reversal_data['added'][i]['id']},['id'])" 
             for i in PAIR
             ], other_side)
-        
+
+
+    ####SAMPLING FUNCTIONS    
     def sample_zeta_to_target_error(self, **kwargs):
         def get_zeta_callback(sample_size):
             zetas = []
@@ -195,13 +197,56 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 zeta = zeta_on_system_state(self.current_state)
                 zetas.append(zeta)
                 self.step()
-            return zetas
+            return np.array(zetas)
         if "initial_sample_size" not in kwargs:
             kwargs["initial_sample_size"] = len(self.current_state['particles_info'])
         if "target_error" not in kwargs:
             kwargs["target_error"] = 0.1
         return sample_to_target_error(get_zeta_callback, **kwargs)
-    
+
+    def sample_particle_count_to_target_error(self, **kwargs):
+        def get_particle_count_callback(sample_size):
+            anions = []
+            for i in range(sample_size):
+                particles_info = self.current_state['particles_info'].groupby(by = ['type', 'side']).size()
+                a = int(particles_info[0][0])
+                anions.append(a)
+                self.step()
+            return np.array(anions)
+        if "initial_sample_size" not in kwargs:
+            kwargs["initial_sample_size"] = len(self.current_state['particles_info'])
+        if "target_error" not in kwargs:
+            kwargs["target_error"] = 1
+        
+        anion_salt, eff_err, eff_sample_size = sample_to_target_error(get_particle_count_callback, **kwargs)
+        
+        cation_salt = anion_salt
+        particles_info = self.current_state['particles_info'].groupby(by = ['type', 'side']).size()
+        anion_gel = particles_info[0][0]+particles_info[0][1]-anion_salt
+        cation_gel = particles_info[1][0]+particles_info[1][1]-cation_salt
+
+        return {
+            'anion': (anion_salt, anion_gel), 
+            'cation':(cation_salt, cation_gel), 
+            'err' : eff_err, 
+            'sample_size' : eff_sample_size
+            }
+
+    def sample_pressures_to_target_error(self, **kwargs):
+        if "initial_sample_size" not in kwargs:
+            kwargs["initial_sample_size"] = 1000
+        if "target_error" not in kwargs:
+            kwargs["target_error"] = 0.1
+        request = self.server(f'sample_pressure_to_target_error(**{kwargs})', [0,1])
+        pressure_0, err_0, sample_size_0 = request[0].result()
+        pressure_1, err_1, sample_size_1 = request[1].result()
+        return {
+                'pressure':(pressure_0, pressure_1), 
+                'err' : (err_0, err_1), 
+                'sample_size' : (sample_size_0, sample_size_1)
+                }    
+
+    ####MD functions
     def run_md(self, md_steps):
         self.server(f"system.integrator.run({md_steps})", [0, 1])
         self.setup()
@@ -214,6 +259,23 @@ class MonteCarloPairs(AbstractMonteCarlo):
             [self.step() for i in range(mc_steps)]
             tqdm.write('MD steps')
             self.run_md(md_steps)
+        return True
+
+    def populate(self, N_pairs):
+        """Populates boxes with ion pairs excl. counterion
+        """        
+        MOBILE_SPECIES_COUNT = [
+            {'anion' : int(N_pairs[0]), 'cation' : int(N_pairs[0])}, #left side
+            {'anion' : int(N_pairs[1]), 'cation' : int(N_pairs[1])}, #right side
+        ]
+        from espresso_nodes.shared import PARTICLE_ATTR
+        for i,side in enumerate(MOBILE_SPECIES_COUNT):
+            for species, count in side.items():
+                print(f'Added {count} of {species}', end = ' ')
+                print(*[f'{attr}={val}' for attr, val in PARTICLE_ATTR[species].items()], end = ' ')
+                print(f'to side {i} ')
+                self.server(f"populate({count}, **{PARTICLE_ATTR[species]})", i)
+        self.setup()
         return True
     
 ################################################################################

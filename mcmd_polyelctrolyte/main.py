@@ -1,10 +1,10 @@
+#%%
 import numpy as np
 import json
 
 import socket_nodes
 
 from ion_pair_monte_carlo import MonteCarloPairs
-from ion_pair_monte_carlo import auto_MC_collect
 
 #change cwd to file location
 import os
@@ -85,6 +85,9 @@ def collect_data(MC, pressure_target_error=2, mc_target_error=0.01, rounds : int
         'pressure_salt' : {k:v.tolist() for k,v in zip(keys,np.array(pressure_salt).T)}, 
         'pressure_gel' : {k:v.tolist() for k,v in zip(keys,np.array(pressure_gel).T)}}
     return return_dict
+#%%
+
+#%%
 
 def main(electrostatic, system_volume, N_pairs, v_gel, n_gel, alpha):
     # box volumes and dimmensions
