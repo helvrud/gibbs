@@ -19,7 +19,7 @@ def init_diamond_system(MPC, bond_length, alpha, target_l, bonded_attr, non_bond
     system.time_step = 0.001
     system.cell_system.skin = 0.4
     system.thermostat.set_langevin(kT=1, gamma=1, seed=42)
-    system.minimize_energy.init(f_max=50, gamma=60.0, max_steps=10000, max_displacement=0.001)
+    #system.minimize_energy.init(f_max=50, gamma=60.0, max_steps=10000, max_displacement=0.001)
 
     logging.debug(f"gel initial volume: {box_l}")
     
@@ -48,8 +48,8 @@ def init_diamond_system(MPC, bond_length, alpha, target_l, bonded_attr, non_bond
 
     re_type_nodes(system, gel_indices, particle_attr)
     charge_gel(system, gel_indices, alpha, particle_attr)
-    logging.debug('Minimizing energy before volume change')
-    system.minimize_energy.minimize()
+    #logging.debug('Minimizing energy before volume change')
+    #system.minimize_energy.minimize()
     change_volume(system, target_l)
     
     return system

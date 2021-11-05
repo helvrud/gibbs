@@ -80,17 +80,6 @@ def build_MC(system_volume, N_pairs_all, v_gel, n_gel, alpha, gel_particles, log
     
     return MC
 
-def equilibrate_MC(MC, md_steps = 100000, mc_steps = 200):
-    MC.server(f'system.integrator.run({md_steps})',[0,1])
-    rounds = 25
-    from tqdm import trange
-    for ROUND in trange(rounds):
-        MC.setup()
-        [MC.step() for i in range(mc_steps)]
-        MC.server(f'system.integrator.run({md_steps})',[0,1])
-    MC.setup()
-    return True
-
 def zeta_from_analytic(N_pairs, fixed_anions, v):
     import numpy as np
     if v == 0.5: v=0.49999999 #dirty
@@ -107,22 +96,22 @@ def save_results(save_data, v_gel):
         json.dump(save_data, outfile, indent=4)
 
 #%%
-N_pairs=100
-conc = 0.1 #mol/L
-system_vol = N_pairs*2/mol_to_n(conc)
+#make sure we have enough particles and system volume
+min_conc = 0.01
+min_N_pairs = 100
+system_vol = min_N_pairs*2/mol_to_n(min_conc)
+
+## INPUT ARGS
+conc = 0.01 #mol/L
 v_gel = [0.3, 0.4, 0.5, 0.6, 0.7]
-alpha = 124/248
 gel_particles = 248
+alpha = 1.0
 no_interaction = False
 electrostatic = True
-#%%
-#one call test
-#v_gel_once = 0.5
-#MC = build_MC(system_volume=system_vol, N_pairs_all=N_pairs, n_gel = v_gel_once, alpha=alpha, v_gel = v_gel_once, gel_particles=gel_particles)
-#equilibrate_MC(MC)
-#zeta, zeta_err, sample_size = MC.sample_zeta_to_target_error()
-#zeta_an = zeta_from_analytic(N_pairs, gel_particles*alpha, v_gel_once)
-#print(zeta, zeta_an)
+cpu_count = 5
+
+N_pairs=int(round(system_vol*mol_to_n(conc)/2))
+
 #%%
 def worker(v):
     n_gel = v
@@ -137,14 +126,13 @@ def worker(v):
         log_names=[f'salt_{round(v, 3)}_0.log', f'salt_{round(v, 3)}_1.log'],
         no_interaction=no_interaction,
         electrostatic=electrostatic)
-    equilibrate_MC(MC)
+    MC.equilibrate()
     zetas = []
     md_steps = 10000
     for i in trange(sample_size):
         zeta, *_ = MC.sample_zeta_to_target_error()
         #in between mc
-        MC.server(f'system.integrator.run({md_steps})',[0,1])
-        MC.setup()
+        MC.run_md(md_steps)
         print(zeta)
         zetas.append(zeta)
     zeta_donnan = zeta_from_analytic(N_pairs, gel_particles*alpha, v)
@@ -158,19 +146,15 @@ def worker(v):
             'anion_fixed' : int(alpha*gel_particles), #number of charged gel particles
             'no_interaction' : no_interaction, #no interaction flag, True if no LJ and FENE
             'zeta' : zetas,
-             #'zeta_err' : zeta_err,
+            #'zeta_err' : zeta_err,
             'zeta_donnan' : zeta_donnan,
         }
     save_results(save_data, v)
     return zeta
 #%%
-from multiprocessing import Pool
-with Pool(5) as p:
-    zeta = p.map(worker, v_gel)
-print(zeta)
-#%%
-import matplotlib.pyplot as plt
-zeta_an = [zeta_from_analytic(N_pairs, gel_particles*alpha, v_) for v_ in v_gel]
-plt.scatter(v_gel, zeta, marker = 's')
-plt.plot(v_gel, zeta_an)
+if __name__ == "__main__":
+    from multiprocessing import Pool
+    with Pool(cpu_count) as p:
+        zeta = p.map(worker, v_gel)
+    print(zeta)
 # %%

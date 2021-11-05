@@ -5,7 +5,7 @@ import pandas as pd
 import pathlib
 import numpy as np
 
-from donnan_analytic import zeta
+from mcmd_polyelctrolyte.utils import donnan_analytic
 LAST_USED_COLOR = lambda: plt.gca().lines[-1].get_color()
 
 path = pathlib.Path('data/tests_no_diamond')
@@ -56,7 +56,6 @@ df['zeta_err'] = df['zeta'].apply(lambda x: np.std(x)/np.sqrt(len(x)))
 #pure_Donnan = dicts[0]
 # %% 
 import numpy as np
-import seaborn as sns
 import matplotlib.pyplot as plt
 n_pairs =100
 df = df.loc[df.n_pairs == n_pairs]
@@ -69,7 +68,7 @@ for idx, grouped in df.groupby(by = lvl0):
     a_fix = int(grouped.anion_fixed.head(1))
     v_ = grouped.v
     plt.scatter(v_, grouped.zeta_mean)
-    zeta_theory = [zeta(n_pair, v, a_fix) for v in vv]
+    zeta_theory = [1/donnan_analytic(n_pair, a_fix, v) for v in vv]
     plt.plot(vv, zeta_theory, label = idx)
     plt.errorbar(v_, grouped.zeta_mean, yerr=grouped.zeta_err, linewidth=0, elinewidth=1, color = LAST_USED_COLOR())
 plt.legend(title=lvl0, bbox_to_anchor=(1.1, 1.05))

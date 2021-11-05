@@ -1,23 +1,32 @@
 import espressomd
 import logging
 
+def _minimize_energy(system):
+    system.thermostat.suspend()
+    system.integrator.set_steepest_descent(
+    f_max=0, gamma=0.1, max_displacement=0.1)
+    min_d = system.analysis.min_dist()
+    print(f"Minimal distance: {min_d}")
+    while (min_d) < 0.5 or (min_d==np.inf):
+        system.integrator.run(100)
+        min_d = system.analysis.min_dist()
+        print(f"Minimal distance: {min_d}")
+    system.integrator.set_vv()
+    system.thermostat.recover()
+    system.integrator.run(10000)
+
 def init_reservoir_system(box_l, non_bonded_attr):
     system = espressomd.System(box_l = [box_l]*3)
         
     system.time_step = 0.001
     system.cell_system.skin = 0.4
     system.thermostat.set_langevin(kT=1, gamma=1, seed=42)
-    system.minimize_energy.init(f_max = 10, gamma = 10, max_steps = 2000, max_displacement= 0.1)
 
     if non_bonded_attr is not None:
         setup_non_bonded(system, non_bonded_attr)
         logging.debug(f"non-bonded interaction is setup")
 
     logging.debug("Reservoir system initialized")
-    system.minimize_energy.minimize()
-
-    integrator_steps = 100000
-    system.integrator.run(integrator_steps)
 
     return system
 
@@ -37,8 +46,10 @@ if __name__=='__main__':
     [system.part.add(
             pos=system.box_l * np.random.random(3), q=+1, type=1) for _ in range(n)
         ]
-    system.minimize_energy.minimize()
-    system.integrator.run(10000)
+
+    _minimize_energy(system)
+    integrator_steps = 100000
+    system.integrator.run(integrator_steps)
 
     from espressomd import electrostatics
     l_bjerrum = 2
@@ -46,7 +57,7 @@ if __name__=='__main__':
     system.actors.add(p3m)
     p3m_params = p3m.get_params()
     logging.debug(p3m_params)
-    system.minimize_energy.minimize()
+    _minimize_energy(system)
     integrator_steps = 100000
     system.integrator.run(integrator_steps)
     

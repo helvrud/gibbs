@@ -38,7 +38,7 @@ docker run -it --mount type=bind,source=/home/kvint/gibbs,target=//home/kvint/gi
 ########################################################
 # then on metacentrum run
 singularity build ubuntu-gibbs.img docker://helvrud/ubuntu-gibbs
-singularity shell -B /storage/brno2/home/kvint:/home/kvint ubuntu-gibbs.img
+singularity shell ubuntu-gibbs.img
 	> cd /home/kvint/espresso/espresso/es-build
 	> cmake ..
 	> make -j4
