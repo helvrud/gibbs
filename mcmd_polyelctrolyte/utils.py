@@ -52,3 +52,36 @@ def mol_to_n(mol_conc, unit_length_nm=0.35):
     #6.022e23*10e-24 = 6.022e-1 
     n = unit_length_nm**3*6.02214e-1*mol_conc
     return n
+
+
+def sample_all(MC, sample_size):
+    try:
+        from tqdm import trange
+    except:
+        trange = range
+    results_ld = [] #list of dicts
+    for i in trange(sample_size):
+        n_particles_sample = MC.sample_particle_count_to_target_error(
+            target_error = 1, timeout = 10,
+            initial_sample_size = 10 #uncomment for debug
+            )
+        
+        #probably we can dry run some MD without collecting any data
+        
+        pressures_sample = MC.sample_pressures_to_target_error(
+            target_error = 0.01, timeout = 10,
+            initial_sample_size = 10 #uncomment for debug
+            )
+        
+        #discard info about errors
+        del n_particles_sample['err']
+        del n_particles_sample['sample_size']
+        del pressures_sample['err']
+        del pressures_sample['sample_size']
+        
+        res_dict = {**n_particles_sample, **pressures_sample}
+        results_ld.append(res_dict)
+    
+    #convert list of dicts to dict of lists
+    results_dl = {k: [dic[k] for dic in results_ld] for k in results_ld[0]}
+    return results_dl

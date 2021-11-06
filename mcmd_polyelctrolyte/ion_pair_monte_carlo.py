@@ -253,11 +253,8 @@ class MonteCarloPairs(AbstractMonteCarlo):
     
     def equilibrate(self, md_steps = 100000, mc_steps = 200, rounds=25):
         self.run_md(md_steps)
-        from tqdm import trange, tqdm
-        for ROUND in trange(rounds):
-            tqdm.write('MC steps')
+        for ROUND in range(rounds):
             [self.step() for i in range(mc_steps)]
-            tqdm.write('MD steps')
             self.run_md(md_steps)
         return True
 
