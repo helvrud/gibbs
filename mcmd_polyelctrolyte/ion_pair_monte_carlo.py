@@ -1,7 +1,6 @@
 #%%
 from typing import Tuple
 import numpy as np
-import pandas as pd
 import random
 
 from montecarlo import AbstractMonteCarlo
@@ -25,42 +24,21 @@ def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, re
     elif removed_from == 1:
         return _entropy_change(anion_1, anion_0, cation_1, cation_0, volume_1, volume_0, 0)
 
-def zeta_on_system_state(system_state):
-    volume_salt, volume_gel = system_state['volume']
-    particle_df = system_state['particles_info']
-    anion_salt = len(particle_df.loc[(particle_df['type'] == 0)&(particle_df['side'] == 0)])
-    anion_gel = len(particle_df.loc[(particle_df['type'] == 0)&(particle_df['side'] == 1)])
-    zeta = float((anion_gel*volume_salt)/(anion_salt*volume_gel))
-    return zeta
+
 
 class MonteCarloPairs(AbstractMonteCarlo):
-    def _choose_random_side_and_part(self):
-        side = random.choice(SIDES)
-        particles = self.current_state['particles_info']
-        rnd_pair_indices = [
-            random.choice(particles.query(f'side == {side} & type == {i}')['id'].to_list())
-            for i in PAIR
-            ]
-        return side, rnd_pair_indices
+    def entropy_change(self, side):
+        volume = self.current_state.volume
+        anion = self.current_state.anions
+        cation = self.current_state.cations
+        return _entropy_change(*anion, *cation, *volume, side)
     
-    def _particle_info_df_update(self, reversal: ReversalData):
-        side = reversal['side']
-        other_side = int(not(side))
-
-        
-        df = self.current_state['particles_info']
-        for i in PAIR:
-            _id = reversal['removed'][i]['id']
-            df = df.loc[((df['id'] != _id)|(df['side'] != side))]
-        
-        added = pd.DataFrame(reversal['added'])
-        added['side'] = other_side
-        added['type'] = [0,1]
-        df = df.append(
-            added,
-            ignore_index=True, verify_integrity=True
-            )
-        return df
+    def zeta(self):
+        state = self.current_state
+        volume_salt, volume_gel = state.volume
+        anion_salt, anion_gel = state.anions
+        zeta = float((anion_gel*volume_salt)/(anion_salt*volume_gel))
+        return zeta
     
     def __init__(self, server):
         super().__init__()
@@ -68,48 +46,52 @@ class MonteCarloPairs(AbstractMonteCarlo):
         self.setup()
 
     def setup(self) -> StateData:
+        #request for energy, volume, mobile ions,
+        #here we stay agnostic of immobile species
         request_body = [
             "potential_energy()",
             "system.box_l",
-            "part_data(slice(None,None), ['id', 'type'])",
+            "set(system.part.select(type=0).id)", #mobile anions type 0
+            "set(system.part.select(type=1).id)", #mobile cations type 1
             ]
         system_init_state_request=self.server(request_body,SIDES)
-        energy, box_l, part_dict= [
+        energy, box_l, anion_ids, cation_ids= [
             [result.result()[i] for result in system_init_state_request] 
                 for i in range(len(request_body))
                 ]
 
         volume = [float(np.prod(box_l[i])) for i in SIDES]
-        
-        #save info about particles as pandas.DataFrame
-        for side in SIDES:
-            for item in part_dict[side]:
-                item['side'] = side
-        particles_df = pd.concat([pd.DataFrame(part_dict[side]) for side in SIDES], ignore_index=True)
-
-        #n_mobile = _get_mobile_species_count(particles_df)
+        n_anions = list(map(len, anion_ids)) #anions count
+        n_cations = list(map(len, cation_ids)) #cations count
                 
         new_state = StateData(
             energy = energy, 
             volume = volume, 
-            particles_info = particles_df,
-        #    n_mobile = n_mobile
+            anion_ids = anion_ids, #anion indices
+            cation_ids = cation_ids, #cation indices
+            anions = n_anions, #anions count
+            cations = n_cations #cations count
             )
         
         self.current_state = new_state
         return new_state
 
     def move(self) -> Tuple[ReversalData, AcceptCriterion]:
-        
-        side, pair_indices = self._choose_random_side_and_part()
+        #select random side
+        side = random.choice([0,1])
         other_side = int(not(side))
+        pair_ids = [
+            random.choice(tuple(self.current_state.anion_ids[side])),
+            random.choice(tuple(self.current_state.cation_ids[side])),
+        ]
+            
         
         ###Pair removal:##################################################
         #request to remove pair but store their pos and v
         #request.result will return [[part.id, part.pos, part.v], [part.id, part.pos, part.v]]
         attrs_to_return = {'id':'int', 'pos':'list', 'v':'list'}
         request_body = [
-            f"remove_particle({pair_indices[i]},{attrs_to_return})" 
+            f"remove_particle({pair_ids[i]},{attrs_to_return})" 
             for i in PAIR]
         remove_part = self.server(request_body,side)
         
@@ -135,13 +117,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         energy_after_addition = self.server("potential_energy()", other_side)
 
         ###Entropy change#######################################################
-        #n1 = self.current_state['n_mobile'][side]
-        #n2 = self.current_state['n_mobile'][other_side]
-        volumes = self.current_state['volume']
-        particles_info = self.current_state['particles_info'].groupby(by = ['type', 'side']).size()
-        anions= particles_info[0]
-        cations= particles_info[1]
-        delta_S = _entropy_change(*anions,*cations,*volumes, side)
+        delta_S = self.entropy_change(side)
 
         ###Energy change###################################################
         #note that 'energy_after_removal' is required only now, 
@@ -153,8 +129,8 @@ class MonteCarloPairs(AbstractMonteCarlo):
 
         ###All the data needed to reverse the move or update state##############
         reversal_data =  ReversalData(
-            removed = remove_part.result()[0:2],
-            added  = add_part.result()[0:2],
+            removed = remove_part.result()[0:2], #ids is the first two values in the request result
+            added  = add_part.result()[0:2], #ids is the first two values in the request result
             side = side,
             energy = new_energy)
         
@@ -168,21 +144,32 @@ class MonteCarloPairs(AbstractMonteCarlo):
         return reversal_data, accept_criterion
     
     def update_state(self, reversal: ReversalData):
-        part_info = self._particle_info_df_update(reversal)
-        update_c_state = StateData(
-            energy = reversal['energy'],
-            particles_info = part_info,
-        )
-        self.current_state.update(update_c_state)
+        state = self.current_state
+        side = reversal.side
+        other_side = int(not(side))
+        removed = reversal.removed
+        added = reversal.added
+        
+        state.anion_ids[side].remove(removed[0]['id'])
+        state.cation_ids[side].remove(removed[1]['id'])
+        state.anion_ids[other_side].add(added[0]['id'])
+        state.cation_ids[other_side].add(added[1]['id'])
+        
+        state.anions[side] -= 1
+        state.cations[side] -= 1
+        state.anions[other_side] += 1
+        state.cations[other_side] += 1
+        
+        state.energy = reversal.energy
 
     def reverse(self, reversal_data: ReversalData):
-        side = reversal_data['side']
+        side = reversal_data.side
         other_side = int(not(side))
+        
         self.server([
             f"add_particle(['id'], q = {CHARGES[i]}, type = {i}, **{reversal_data['removed'][i]})"
             for i in PAIR
             ], side)
-        
         self.server([
             f"remove_particle({reversal_data['added'][i]['id']},['id'])" 
             for i in PAIR
@@ -194,7 +181,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         def get_zeta_callback(sample_size):
             zetas = []
             for i in range(sample_size):
-                zeta = zeta_on_system_state(self.current_state)
+                zeta = self.zeta(self.current_state)
                 zetas.append(zeta)
                 self.step()
             return np.array(zetas)
@@ -208,22 +195,20 @@ class MonteCarloPairs(AbstractMonteCarlo):
         def get_particle_count_callback(sample_size):
             anions = []
             for i in range(sample_size):
-                particles_info = self.current_state['particles_info'].groupby(by = ['type', 'side']).size()
-                a = int(particles_info[0][0])
+                a = self.current_state.anions[0]
                 anions.append(a)
                 self.step()
             return np.array(anions)
         if "initial_sample_size" not in kwargs:
-            kwargs["initial_sample_size"] = len(self.current_state['particles_info'])
+            kwargs["initial_sample_size"] = sum(self.current_state.anions)+sum(self.current_state.cations)
         if "target_error" not in kwargs:
             kwargs["target_error"] = 1
         
         anion_salt, eff_err, eff_sample_size = sample_to_target_error(get_particle_count_callback, **kwargs)
         
         cation_salt = anion_salt
-        particles_info = self.current_state['particles_info'].groupby(by = ['type', 'side']).size()
-        anion_gel = particles_info[0][0]+particles_info[0][1]-anion_salt
-        cation_gel = particles_info[1][0]+particles_info[1][1]-cation_salt
+        anion_gel = sum(self.current_state.anions) - anion_salt
+        cation_gel = sum(self.current_state.cations) - cation_salt
 
         return {
             'anion': (anion_salt, anion_gel), 
@@ -279,5 +264,3 @@ class MonteCarloPairs(AbstractMonteCarlo):
         return True
     
 ################################################################################
-def _zeta(anion_salt, anion_gel, volume_salt, volume_gel):
-    return (anion_gel*volume_salt)/(anion_salt*volume_gel)

@@ -24,21 +24,27 @@ from typing import Tuple
 class ReversalData(dict):
     """
     A dict-like object holds the data for reversing Monte-Carlo move
-    """    
-    pass
+    """
+    __getattr__ = dict.get
+    __setattr__ = dict.__setitem__
+    __delattr__ = dict.__delitem__
 
 class StateData(dict):
     """
     A dict-like object holds the data to track system parameters
     """    
-    pass
+    __getattr__ = dict.get
+    __setattr__ = dict.__setitem__
+    __delattr__ = dict.__delitem__ 
 
 class AcceptCriterion(dict):
     """
     A dict-like object holds the data to decide whether to accept or reject the 
     move
     """    
-    pass
+    __getattr__ = dict.get
+    __setattr__ = dict.__setitem__
+    __delattr__ = dict.__delitem__ 
 
 class AbstractMonteCarlo:
     """

@@ -21,7 +21,11 @@ def mol_to_n(mol_conc, unit_length_nm=0.35):
     return n
 
 
-def build_MC(Volume, N_pairs, A_fixed, log_names, electrostatic=False,  no_interaction=False):
+def build_MC(
+    Volume, N_pairs, A_fixed, 
+    log_names, electrostatic=False, 
+    no_interaction=False, 
+    python_executable = 'python'):
     
     #box volumes and dimmensions
     box_l = [V_**(1/3) for V_ in Volume]
@@ -34,7 +38,7 @@ def build_MC(Volume, N_pairs, A_fixed, log_names, electrostatic=False,  no_inter
             ['-l', box_l[0], '--salt', '-no_interaction', no_interaction, "-log_name", log_names[0]],
             ['-l', box_l[1], '--salt', '-no_interaction', no_interaction, "-log_name", log_names[1]],
             ], 
-        python_executable = PYTHON_EXECUTABLE, 
+        python_executable = python_executable, 
         stdout = subprocess.PIPE,
         stderr = subprocess.PIPE,
         )
@@ -57,7 +61,9 @@ def build_MC(Volume, N_pairs, A_fixed, log_names, electrostatic=False,  no_inter
 
 #%%
 MC = build_MC([20000,20000], [100,100], 50, ['box_0.log', 'box_1.log'])
-MC.equilibrate()
+#MC.equilibrate()
 # %%
-MC.sample_particle_count_to_target_error()
+server = MC.server
+# %%
+server("system.part.select(q=0)", 0).result()
 # %%
