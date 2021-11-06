@@ -18,7 +18,10 @@ MOBILE_SPECIES = [0,1]
 
 def _rotate_velocities_randomly(velocities):
     from scipy.spatial.transform import Rotation
-    rot = Rotation.random().as_matrix
+    try:
+        rot = Rotation.random().as_matrix
+    except:#old numpy method
+        rot = Rotation.random().as_dcm
     velocities_rotated = [list(rot().dot(velocity)) for velocity in velocities]
     return velocities_rotated
 
