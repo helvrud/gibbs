@@ -24,22 +24,8 @@ def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, re
     elif removed_from == 1:
         return _entropy_change(anion_1, anion_0, cation_1, cation_0, volume_1, volume_0, 0)
 
-
-
 class MonteCarloPairs(AbstractMonteCarlo):
-    def entropy_change(self, side):
-        volume = self.current_state.volume
-        anion = self.current_state.anions
-        cation = self.current_state.cations
-        return _entropy_change(*anion, *cation, *volume, side)
-    
-    def zeta(self):
-        state = self.current_state
-        volume_salt, volume_gel = state.volume
-        anion_salt, anion_gel = state.anions
-        zeta = float((anion_gel*volume_salt)/(anion_salt*volume_gel))
-        return zeta
-    
+
     def __init__(self, server):
         super().__init__()
         self.server = server
@@ -80,6 +66,10 @@ class MonteCarloPairs(AbstractMonteCarlo):
         #select random side
         side = random.choice([0,1])
         other_side = int(not(side))
+        #if there is no particles to be removed - switch sides
+        if self.current_state.anions[side]==0:
+            side, other_side = other_side, side
+        #get random indices for cation and anion
         pair_ids = [
             random.choice(tuple(self.current_state.anion_ids[side])),
             random.choice(tuple(self.current_state.cation_ids[side])),
@@ -175,6 +165,19 @@ class MonteCarloPairs(AbstractMonteCarlo):
             for i in PAIR
             ], other_side)
 
+    ####AUXILIARY
+    def entropy_change(self, side):
+        volume = self.current_state.volume
+        anion = self.current_state.anions
+        cation = self.current_state.cations
+        return _entropy_change(*anion, *cation, *volume, side)
+    
+    def zeta(self):
+        state = self.current_state
+        volume_salt, volume_gel = state.volume
+        anion_salt, anion_gel = state.anions
+        zeta = float((anion_gel*volume_salt)/(anion_salt*volume_gel))
+        return zeta
 
     ####SAMPLING FUNCTIONS    
     def sample_zeta_to_target_error(self, **kwargs):
@@ -231,6 +234,18 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 'sample_size' : (sample_size_0, sample_size_1)
                 }    
 
+    def sample_Re_to_target_error(self, **kwargs):
+        if "initial_sample_size" not in kwargs:
+            kwargs["initial_sample_size"] = 1000
+        if "target_error" not in kwargs:
+            kwargs["target_error"] = 0.1
+        request = self.server(f'sample_Re_to_target_error(**{kwargs})', 1) #gel box only
+        Re, err, sample_size = request.result()
+        return {
+                'Re': Re, 
+                'err' : err, 
+                'sample_size' : sample_size
+                }    
     ####MD functions
     def run_md(self, md_steps):
         self.server(f"system.integrator.run({md_steps})", [0, 1])
@@ -262,5 +277,45 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 self.server(f"populate({count}, **{PARTICLE_ATTR[species]})", i)
         self.setup()
         return True
-    
+
 ################################################################################
+
+def build_no_gel(
+    Volume, N_pairs, A_fixed, 
+    log_names, electrostatic=False, 
+    no_interaction=False, 
+    python_executable = 'python'
+    ):
+    import subprocess
+    import socket_nodes
+    
+    #box volumes and dimmensions
+    box_l = [V_**(1/3) for V_ in Volume]
+
+    ###start server and nodes
+    server = socket_nodes.utils.create_server_and_nodes(
+        scripts = ['espresso_nodes/run_node.py']*2, 
+        args_list=[
+            ['-l', box_l[0], '--salt', '-no_interaction', no_interaction, "-log_name", log_names[0]],
+            ['-l', box_l[1], '--salt', '-no_interaction', no_interaction, "-log_name", log_names[1]],
+            ], 
+        python_executable = python_executable, 
+        stdout = subprocess.PIPE,
+        stderr = subprocess.PIPE,
+        )
+    ###simulate polyelectrolyte without diamond structure
+    from espresso_nodes.shared import PARTICLE_ATTR
+    ##add counterions
+    server(f"populate({A_fixed}, **{PARTICLE_ATTR['cation']})", 1)
+    ##add fixed anions
+    server(f"populate({A_fixed}, **{PARTICLE_ATTR['gel_anion']})", 1)
+
+    MC = MonteCarloPairs(server)
+    
+    MC.populate(N_pairs)
+
+    if electrostatic: 
+        server('enable_electrostatic()', [0,1])
+        print("Electrostatic is enabled")
+    
+    return MC
