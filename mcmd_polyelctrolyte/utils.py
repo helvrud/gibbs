@@ -59,6 +59,7 @@ def sample_all(MC, sample_size):
         from tqdm import trange
     except:
         trange = range
+    import numpy as np
     results_ld = [] #list of dicts
     for i in trange(sample_size):
         n_particles_sample = MC.sample_particle_count_to_target_error(
@@ -84,4 +85,5 @@ def sample_all(MC, sample_size):
     
     #convert list of dicts to dict of lists
     results_dl = {k: [dic[k] for dic in results_ld] for k in results_ld[0]}
+    results_dl = {k: np.array(v) for k,v in results_dl.items()}
     return results_dl
