@@ -54,24 +54,43 @@ def mol_to_n(mol_conc, unit_length_nm=0.35):
     return n
 
 
-def sample_all(MC, sample_size):
+def sample_all(
+        MC, sample_size, 
+        n_particle_sampling_kwargs = None, pressure_sampling_kwargs = None):
     try:
         from tqdm import trange
     except:
         trange = range
     import numpy as np
+    
+    ###defaults
+    n_particle_sampling_kwargs_defaults = dict(
+            target_error = 1, 
+            #timeout = 10,
+            #initial_sample_size = 10
+            )
+    pressure_sampling_kwargs_defaults = dict(
+            target_error = 0.01, 
+            #timeout = 10,
+            #initial_sample_size = 10
+            )
+    
+    if n_particle_sampling_kwargs:
+        n_particle_sampling_kwargs_defaults.update(n_particle_sampling_kwargs)
+    if pressure_sampling_kwargs:
+        pressure_sampling_kwargs_defaults.update(pressure_sampling_kwargs)
+    
+    
     results_ld = [] #list of dicts
     for i in trange(sample_size):
         n_particles_sample = MC.sample_particle_count_to_target_error(
-            target_error = 1, timeout = 10,
-            initial_sample_size = 10 #uncomment for debug
-            )
+            **n_particle_sampling_kwargs_defaults
+        )
         
         #probably we can dry run some MD without collecting any data
         
         pressures_sample = MC.sample_pressures_to_target_error(
-            target_error = 0.01, timeout = 10,
-            initial_sample_size = 10 #uncomment for debug
+            **pressure_sampling_kwargs_defaults
             )
         
         #discard info about errors

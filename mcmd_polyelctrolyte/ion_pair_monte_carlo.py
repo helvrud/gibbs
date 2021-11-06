@@ -2,6 +2,10 @@
 from typing import Tuple
 import numpy as np
 import random
+try:
+    from tqdm import trange
+except:
+    trange = range
 
 from montecarlo import AbstractMonteCarlo
 from montecarlo import StateData, ReversalData, AcceptCriterion
@@ -253,7 +257,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
     
     def equilibrate(self, md_steps = 100000, mc_steps = 200, rounds=25):
         self.run_md(md_steps)
-        for ROUND in range(rounds):
+        for ROUND in trange(rounds):
             [self.step() for i in range(mc_steps)]
             self.run_md(md_steps)
         return True
