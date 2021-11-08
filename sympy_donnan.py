@@ -15,33 +15,18 @@ mass_law = Eq(((N_pairs-x)/V_salt)**2, x*(A_fixed+x)/V_gel**2)
 #mass_law = mass_law.subs(V_gel, V_salt).simplify()
 mass_law
 #%%
-x_solved = solve(mass_law, x)[0]
-x_solved
+B_gel= solve(mass_law, x)[0]
+B_gel
+B_gel_05 = solve(mass_law.subs(V_salt, V_gel), x)[0]
+B_gel_05
 #%%
-A_salt_conc = (N_pairs-x_solved)/V_salt
-A_gel_conc = (A_fixed+x_solved)/V_gel
-zeta = A_gel_conc/A_salt_conc
-#%%
-v = Symbol('v')
-zeta = zeta.subs(V_salt, 1-v).subs(V_gel,v)
-#%%
-zeta
-#%%
-from sympy import limit
-limit(zeta, v, 0.5)
-#%%
-from sympy import lambdify
-f = lambdify([N_pairs, A_fixed, v], zeta, "numpy")
+B_gel
 # %%
-import sympy
-import matplotlib.pyplot as plt
-import numpy as np
-vv = np.linspace(0.01,0.99)
-V=1000
-zetas = [1/f(200, 124, v_) for v_ in vv]
-plt.plot(vv, zetas)
-# %%
-print(zeta)
-# %%
-print(zeta)
+c_s = Symbol("C_s", positive = True)
+#%%
+mass_law = Eq((c_s)**2, x*(A_fixed+x)/V_gel**2)
+mass_law
+#%%
+B_gel= solve(mass_law, x)[1]
+B_gel
 # %%

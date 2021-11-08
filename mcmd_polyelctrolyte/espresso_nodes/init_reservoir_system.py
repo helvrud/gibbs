@@ -51,15 +51,15 @@ if __name__=='__main__':
     integrator_steps = 100000
     system.integrator.run(integrator_steps)
 
-    from espressomd import electrostatics
-    l_bjerrum = 2
-    p3m = electrostatics.P3M(prefactor=l_bjerrum, accuracy=1e-3)
-    system.actors.add(p3m)
-    p3m_params = p3m.get_params()
-    logging.debug(p3m_params)
-    _minimize_energy(system)
-    integrator_steps = 100000
-    system.integrator.run(integrator_steps)
+    #from espressomd import electrostatics
+    #l_bjerrum = 2
+    #p3m = electrostatics.P3M(prefactor=l_bjerrum, accuracy=1e-3)
+    #system.actors.add(p3m)
+    #p3m_params = p3m.get_params()
+    #logging.debug(p3m_params)
+    #_minimize_energy(system)
+    #integrator_steps = 100000
+    #system.integrator.run(integrator_steps)
     
     from espressomd.visualization_opengl import  openGLLive
     visualizer = openGLLive(system)
