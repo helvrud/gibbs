@@ -1,3 +1,4 @@
+#%%
 def ljung_box_white_noise(x):
     from statsmodels.tsa.stattools import acf
     from statsmodels.stats.diagnostic import acorr_ljungbox
@@ -27,7 +28,7 @@ def check_stationarity(x, p_crit=0.05):
         print('Failed to reject H0, the data is not stationary.')
     return passed
 
-def donnan_analytic(N_pairs, A_fix, v):
+def zeta_analytic(N_pairs, A_fix, v):
     """Returns zeta = anion_gel/anion_salt
 
     Args:
@@ -52,6 +53,13 @@ def mol_to_n(mol_conc, unit_length_nm=0.35):
     #6.022e23*10e-24 = 6.022e-1 
     n = unit_length_nm**3*6.02214e-1*mol_conc
     return n
+
+def n_to_mol(n, unit_length_nm=0.35):
+    #Navogadro = 6.02214e23
+    #1e-9**3 * 10**3 = 10e-24
+    #6.022e23*10e-24 = 6.022e-1 
+    mol_conc = n/(unit_length_nm**3*6.02214e-1)
+    return mol_conc
 
 
 def sample_all(
