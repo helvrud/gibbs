@@ -1,17 +1,31 @@
 # Dockerfile for espresso 4.1
 
 FROM ubuntu:focal   
-MAINTAINER Oleg Rud <oleg.rud@natur.cuni.cz>
+LABEL Oleg Rud <oleg.rud@natur.cuni.cz>
 ENV DEBIAN_FRONTEND noninteractive
 
 
 RUN useradd -ms /bin/bash kvint
 RUN useradd -ms /bin/bash kazakov
 RUN useradd -ms /bin/bash ml
+RUN apt-get update
+RUN apt-get install -y python3-pip
 WORKDIR /home/kvint
+
+
+
+
 ENV USERNAME kvint
 COPY .bashrc /home/kvint
-COPY env.rc .
+COPY env.rc /home/kvint
+
+COPY packages/ /home/kvint/
+
+RUN ls /home/kvint
+RUN ls .
+RUN ls ~
+CMD pip3 install /home/kvint/socket_server/
+CMD pip3 install /home/kvint/montecarlo/
 
 
 
@@ -41,7 +55,7 @@ COPY env.rc .
 #    ### 5_Simulations/nbody_screen \
 #    ln -s /usr/local/nvidia/lib64/libGLESv2_nvidia.so.2 /usr/lib/nvidia/libGLESv2.so
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get install -y \
     apt-utils \
     cmake \
     build-essential \
@@ -69,7 +83,6 @@ RUN apt-get update && apt-get install -y \
     python3-virtualenv \
     python3-pandas \
     python3-ipython \
-    python3-pip \
     python3-tqdm \
 #& pip3 install --upgrade sphinx sphinxcontrib-bibtex multipletau \
 && apt-get clean \
@@ -79,8 +92,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN ln -sfn /usr/bin/python3 /usr/bin/python
 #
-
-
 
 
 RUN git clone https://github.com/espressomd/espresso.git
@@ -94,13 +105,10 @@ USER kvint
 ENV USERNAME kvint
 CMD /bin/bash -c "source $HOME/.bashrc"
 
-WORKDIR /home/kvint/
-#COPY socket_server .
-#COPY montecarlo .
+
 #COPY mcmd_polyelctrolyte .
 #RUN cd /home/kvint/socket_server/
-#RUN pip3 install socket_server
-#RUN pip3 install montecarlo
+
 #RUN pip3 install tqdm
 #RUN pip3 install ipython
 
