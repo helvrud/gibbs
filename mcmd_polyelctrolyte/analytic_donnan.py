@@ -33,4 +33,9 @@ def speciation_inf_reservoir(c_s, fixed_anions, v_gel):
     cation_gel = gel_anions_inf_reservoir(c_s, fixed_anions, v_gel)
     anion_gel = cation_gel+fixed_anions
     return anion_gel, cation_gel
+
+def zeta(n_pairs, fixed_anions, v_salt, v_gel):
+    anion_salt, anion_gel, cation_salt, cation_gel = speciation(n_pairs, fixed_anions, v_salt, v_gel)
+    zeta = anion_gel*v_salt/(anion_salt*v_gel)
+    return zeta
 # %%

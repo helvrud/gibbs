@@ -230,6 +230,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         return {
             'anion': (anion_salt, anion_gel),
             'cation': (cation_salt, cation_gel),
+            'zeta' : self.zeta(),
             'err': eff_err,
             'sample_size': eff_sample_size
         }
