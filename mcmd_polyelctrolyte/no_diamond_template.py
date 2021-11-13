@@ -21,7 +21,7 @@ input_args = dict(
     
     Volume=[20000,20000], 
     N_pairs=[100,100], 
-    A_fixed = 50, 
+    fixed_anions = 50, 
     log_names=['box_0.log', 'box_1.log'],
     python_executable='pypresso',
     
