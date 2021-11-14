@@ -33,7 +33,7 @@ except:
         fixed_anions = 50,
         log_names=['box_0.log', 'box_1.log'],
         python_executable='pypresso',
-        v = 0.3
+        v = 0.8
         )
 
 MC = build_no_gel_salinity(**input_args)
@@ -46,16 +46,16 @@ MC.equilibrate(
 # by alternating number of particles sampling and pressure sampling routines
 result = sample_all(
     MC,
-    sample_size=10,  # number of samples # |--------------------------------------
+    sample_size=20,  # number of samples # |--------------------------------------
     n_particle_sampling_kwargs=dict(    # | n_particle sampling routine settings
-        timeout=30,
+        timeout=30,                     # |
         target_error = 0.1,             # | omit or comment out to use defaults
         initial_sample_size=100         # | set target_error, timeout,
     ),                                  # | initial_sample_size kwarg here
                                         # |--------------------------------------
     pressure_sampling_kwargs=dict(      # | pressures sampling routine settings
-        timeout=30,
-        target_error = 0.01,             # | see comment above
+        timeout=30,                     # |
+        target_error = 0.01,            # | see comment above
         initial_sample_size=100         # | set short timeout and
     )                                   # | small initial_sample_size for debug
 )                                       # |--------------------------------------
