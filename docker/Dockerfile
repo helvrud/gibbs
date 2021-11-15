@@ -24,8 +24,8 @@ COPY packages/ /home/kvint/
 RUN ls /home/kvint
 RUN ls .
 RUN ls ~
-CMD pip3 install /home/kvint/socket_server/
-CMD pip3 install /home/kvint/montecarlo/
+RUN pip3 install /home/kvint/socket_server/
+RUN pip3 install /home/kvint/montecarlo/
 
 
 
@@ -94,7 +94,8 @@ RUN ln -sfn /usr/bin/python3 /usr/bin/python
 #
 
 
-RUN git clone https://github.com/espressomd/espresso.git
+#RUN git clone https://github.com/espressomd/espresso.git
+COPY espresso/ /home/kvint/
 RUN cd espresso
 RUN mkdir -p espresso/es-build
 WORKDIR /home/kvint/espresso/es-build
