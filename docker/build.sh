@@ -26,6 +26,7 @@ cp -r ../montecarlo/ .
 cp -r ../socket_server/ .
 cp -r ../mcmd_polyelctrolyte/ .
 docker build --no-cache -t helvrud/ubuntu-gibbs .
+docker build  -t helvrud/ubuntu-gibbs .
 
 docker run -it helvrud/ubuntu-gibbs /bin/bash
 

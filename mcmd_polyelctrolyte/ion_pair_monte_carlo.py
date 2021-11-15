@@ -47,7 +47,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
             "set(system.part.select(type=0).id)", #mobile anions type 0
             "set(system.part.select(type=1).id)", #mobile cations type 1
             ]
-        system_init_state_request=self.server(request_body,SIDES)
+        system_init_state_request = self.server(request_body,SIDES)
         energy, box_l, anion_ids, cation_ids= [
             [result.result()[i] for result in system_init_state_request] 
                 for i in range(len(request_body))
