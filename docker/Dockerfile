@@ -82,6 +82,7 @@ RUN apt-get install -y \
     python3-virtualenv \
     python3-pandas \
     python3-ipython \
+    python3-statsmodels \
     python3-tqdm \
 #& pip3 install --upgrade sphinx sphinxcontrib-bibtex multipletau \
 && apt-get clean \
@@ -97,7 +98,7 @@ RUN ln -sfn /usr/bin/python3 /usr/bin/python
 COPY espresso/ /home/kvint/espresso/
 RUN cd espresso
 RUN mkdir -p espresso/es-build
-WORKDIR /home/kvint/espresso/es-build
+WORKDIR /home/kvint/espresso/espresso/es-build
 RUN cmake ..
 RUN make -j 8
 RUN make install 
