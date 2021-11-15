@@ -23,7 +23,7 @@ input_args = dict(
     N_pairs=[100,100], 
     fixed_anions = 50, 
     log_names=['box_0.log', 'box_1.log'],
-    python_executable='/home/kvint/espresso/espresso/es-build/pypresso',
+    python_executable='/home/kvint/espresso/es-build/pypresso',
     
     )
 
