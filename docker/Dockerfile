@@ -23,9 +23,6 @@ COPY packages/ /home/kvint/
 #RUN git clone https://github.com/espressomd/espresso.git
 COPY espresso/ /home/kvint/espresso/
 
-RUN ls /home/kvint
-RUN ls .
-RUN ls ~
 RUN pip3 install /home/kvint/socket_server/
 RUN pip3 install /home/kvint/montecarlo/
 
