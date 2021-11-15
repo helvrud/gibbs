@@ -321,8 +321,8 @@ def build_no_gel(
                 no_interaction, "-log_name", log_names[1]],
         ],
         python_executable=python_executable,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        #stdout=subprocess.PIPE,
+        #stderr=subprocess.PIPE,
     )
     # simulate polyelectrolyte without diamond structure
     from espresso_nodes.shared import PARTICLE_ATTR
