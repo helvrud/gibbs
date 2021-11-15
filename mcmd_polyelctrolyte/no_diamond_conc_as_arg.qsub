@@ -1,0 +1,7 @@
+#!/bin/bash
+#PBS -N gel_MPC30_box_l15.0_pH7.00_pCl0.82_pCa1.77_N200
+#PBS -l mem=1500mb
+#PBS -l ncpus=3
+#PBS -l walltime=0:15:0
+#PBS -m ae
+singularity exec /storage/brno2/home/laktionm/ubuntu.img /home/laktionm/espresso/build/pypresso

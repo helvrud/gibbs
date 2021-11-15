@@ -14,16 +14,16 @@ import pathlib
 
 import os
 import sys
-os.chdir(os.path.dirname(sys.argv[0]))
-
+#os.chdir(os.path.dirname(sys.argv[0]))
+#print(pwd())
 ##INPUT##
 input_args = dict(
     
     Volume=[20000,20000], 
     N_pairs=[100,100], 
-    A_fixed = 50, 
+    fixed_anions = 50, 
     log_names=['box_0.log', 'box_1.log'],
-    python_executable='pypresso',
+    python_executable='/home/kvint/espresso/espresso/es-build/pypresso',
     
     )
 

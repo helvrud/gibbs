@@ -22,10 +22,13 @@
 #name="es-ubu_cupy3_"${date}
 #echo "Container name: "${name}
 #docker build -t ${name} .
-cp -r ../montecarlo/ .
-cp -r ../socket_server/ .
-cp -r ../mcmd_polyelctrolyte/ .
+
+rm -r packages/*
+cp -r ../montecarlo/ packages/
+cp -r ../socket_server/ packages/
+#cp -r ../mcmd_polyelctrolyte/ .
 docker build --no-cache -t helvrud/ubuntu-gibbs .
+docker build  -t helvrud/ubuntu-gibbs .
 
 docker run -it helvrud/ubuntu-gibbs /bin/bash
 
