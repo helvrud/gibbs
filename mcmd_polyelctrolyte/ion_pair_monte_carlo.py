@@ -313,7 +313,7 @@ def build_no_gel(
 
     # start server and nodes
     server = socket_nodes.utils.create_server_and_nodes(
-        scripts=['espresso_nodes/run_node.py']*2,
+        scripts=['$HOME/gibbs/mcmd_polyelctrolyte/espresso_nodes/run_node.py']*2,
         args_list=[
             ['-l', box_l[0], '--salt', '-no_interaction',
                 no_interaction, "-log_name", log_names[0]],
