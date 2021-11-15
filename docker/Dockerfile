@@ -20,6 +20,8 @@ COPY .bashrc /home/kvint
 COPY env.rc /home/kvint
 
 COPY packages/ /home/kvint/
+#RUN git clone https://github.com/espressomd/espresso.git
+COPY espresso/ /home/kvint/espresso/
 
 RUN ls /home/kvint
 RUN ls .
@@ -95,7 +97,7 @@ RUN ln -sfn /usr/bin/python3 /usr/bin/python
 
 
 #RUN git clone https://github.com/espressomd/espresso.git
-COPY espresso/ /home/kvint/
+COPY espresso/ /home/kvint/espresso/
 RUN cd espresso
 RUN mkdir -p espresso/es-build
 WORKDIR /home/kvint/espresso/es-build
