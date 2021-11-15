@@ -1,7 +1,7 @@
 # %%
 from typing import Tuple
 import numpy as np
-import random
+import random, os
 try:
     from tqdm import trange
 except:

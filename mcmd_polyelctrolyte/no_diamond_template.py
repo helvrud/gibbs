@@ -12,7 +12,7 @@ from utils import sample_all
 import pickle
 import pathlib
 
-import os
+
 import sys
 #os.chdir(os.path.dirname(sys.argv[0]))
 #print(pwd())
