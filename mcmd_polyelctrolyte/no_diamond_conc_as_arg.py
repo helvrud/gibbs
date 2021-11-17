@@ -46,15 +46,15 @@ MC.equilibrate(
 # by alternating number of particles sampling and pressure sampling routines
 result = sample_all(
     MC,
-    sample_size=20,  # number of samples # |--------------------------------------
+    sample_size=20, # number of samples # |--------------------------------------
     n_particle_sampling_kwargs=dict(    # | n_particle sampling routine settings
-        timeout=30,                     # |
+        timeout=60,                     # |
         target_error = 0.1,             # | omit or comment out to use defaults
         initial_sample_size=100         # | set target_error, timeout,
     ),                                  # | initial_sample_size kwarg here
                                         # |--------------------------------------
     pressure_sampling_kwargs=dict(      # | pressures sampling routine settings
-        timeout=30,                     # |
+        timeout=60,                     # |
         target_error = 0.01,            # | see comment above
         initial_sample_size=100         # | set short timeout and
     )                                   # | small initial_sample_size for debug
