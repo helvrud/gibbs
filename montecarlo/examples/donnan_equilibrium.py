@@ -102,7 +102,7 @@ def zeta_from_monte_carlo(N_pairs, fixed_anions, v):
         (1-v, v))
     # equilibration steps
     [mc.step() for i in range(N_pairs*4)]
-    zeta = sample_to_target_error(mc.sample_zeta, 0.002)
+    zeta = sample_to_target_error(mc.sample_zeta, target_eff_sample_size = 30)
     return zeta[0]
 
 
@@ -126,8 +126,7 @@ if __name__ == "__main__":
     N_pairs = 100
     fixed_anion = 50
     v = np.linspace(0.2, 0.8, 11)
-    zeta_an = [zeta_from_analytic(N_pairs, fixed_anion, v_) for v_ in v]
-    zeta_an2 = [zeta_analytic(N_pairs, fixed_anion, 1-v_, v_) for v_ in v]
+    zeta_an = [zeta_analytic(N_pairs, fixed_anion, 1-v_, v_) for v_ in v]
     from multiprocessing import Pool
 
     def worker(v):
@@ -135,8 +134,8 @@ if __name__ == "__main__":
     with Pool(5) as p:
         zeta = p.map(worker, v)
     plt.scatter(v, zeta, marker='s')
+    
     plt.plot(v, zeta_an)
-    plt.plot(v, zeta_an2)
     plt.xlabel("v")
     plt.ylabel("zeta")
     plt.show()

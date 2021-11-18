@@ -219,32 +219,59 @@ def correlated_data_mean_err(x, tau, ci = 0.95):
 
 def sample_to_target_error(
         get_data_callback, 
-        target_error, 
-        initial_sample_size = 1000, 
+        target_error = None,
+        target_eff_sample_size = None,
+        timeout = 30,  
+        initial_sample_size = 100, 
         tau = None, 
-        timeout = 30, 
         ci = 0.95):
     import time
     import numpy as np
+    #stop sampling criteria
+    def end_loop(elapsed_time, current_error, eff_sample_size):
+        if elapsed_time > timeout:
+            print('Reached timeout')
+            return True
+        #check if kwarg provided
+        elif target_error is not None:
+            if current_error <= target_error:
+                print("Reached target error")
+                return True
+        elif target_eff_sample_size is not None:
+            if eff_sample_size >= target_eff_sample_size:
+                print("Reached effective sample size")
+                return True
+        else:
+            return False
+    #init timer
     start_time = time.time()
     n_samples = initial_sample_size
+    #first sample
     x = get_data_callback(n_samples)
+    #if non autocorr time provided
     if tau is None: tau = get_tau(x)
+    #correlated data mean and err margin
     x_mean, x_err = correlated_data_mean_err(x, tau, ci)
-    while x_err>target_error:
-        elapsed_time = time.time() - start_time
-        if elapsed_time > timeout:
-            print('Timeout')
-            break
-            #return x_mean, x_err, n_samples
-        print(f'Error {x_err} is bigger than target {target_error}')
+    #sampling loop
+    while True:
+        #time passed
+        print(f'Criteria is not reached')
         print('More data will be collected')
+        #append new sample (correlated)
         new_sample = get_data_callback(n_samples)
         x=np.append(x, new_sample)
+        #if non autocorr time provided
         if tau is None: tau = get_tau(x)
+        #next time take twice the amount of data points
         n_samples = n_samples*2
+        #err, sample size, time passed
         x_mean, x_err = correlated_data_mean_err(x, tau, ci)
+        n_samples_eff = n_samples/(2*tau)
+        elapsed_time = time.time() - start_time
+        print(x_err, n_samples_eff, elapsed_time)
+        #stop sampling?
+        if end_loop(elapsed_time, x_err, n_samples_eff):
+            break
+    #Done
     print(f'Mean: {x_mean}, err: {x_err}, eff_sample_size: {n_samples/(2*tau)}')
     return x_mean, x_err, n_samples/(2*tau)
-
-# %%

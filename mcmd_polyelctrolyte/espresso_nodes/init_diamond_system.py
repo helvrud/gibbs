@@ -7,6 +7,7 @@ During the generation process counter-ions for the ionized monomers will be crea
 #%%
 import sys
 import espressomd
+from montecarlo.libmontecarlo import sample_to_target_error
 import numpy as np
 import random
 import logging
@@ -127,44 +128,38 @@ def get_pressure(system, **kwargs):
             return acc
     return sample_to_target_error(get_data_callback, **kwargs)
 
-def change_volume_to_target_pressure(
-        system,
-        target_pressure,
-        scale_down_factor = 0.97,
-        scale_up_factor = 1.05,
-        int_steps = 10000,
-        max_iter = 100,
-        eps = 0.00001,
-        sampling_routine_kwargs=None):
-    default_sampling_routine_kwargs = {
-        "initial_sample_size" : 50,
-        "target_error" : 0.0001,
-        "timeout" : 30
-        }
-    if sampling_routine_kwargs is None:
-        sampling_routine_kwargs=default_sampling_routine_kwargs
-    print(f"Target pressure: {target_pressure}")
-    current_pressure=get_pressure(system, **sampling_routine_kwargs)[0]
-    print(f"Current pressure: {current_pressure}")
-    i=0
-    while abs(current_pressure-target_pressure)>eps:
-        if target_pressure<current_pressure: #to expand
-            print("Expanding")
-            d_new = system.box_l[0]*scale_up_factor
-        elif target_pressure>current_pressure: #to compress
-            print("Compressing")
-            d_new = system.box_l[0]*scale_down_factor
-        system.change_volume_and_rescale_particles(d_new)
-        system.integrator.run(int_steps)
-        current_pressure = get_pressure(system, **sampling_routine_kwargs)[0]
-        logging.debug(f'gel box_size: {system.box_l[0]}')
-        logging.debug(f"pressure: {current_pressure}")
-        i=i+1
-        if i> max_iter:
-            print("Exceed max_iter")
-            break
 
-
+def get_VP(system, V_min, V_max, V_step, direction = 'any', **sampling_kwargs):
+    current_volume = system.box_l[0]**3
+    l_min = V_min**(1/3)
+    l_max = V_max**(1/3)
+    V = np.arange(V_min, V_max+V_step, V_step)
+    L = V**(1/3)
+    if direction == 'any':
+        if abs(V_min - current_volume) <= abs(V_max-current_volume):
+            change_volume(system, l_min)
+        else:
+            change_volume(system, l_max)
+            V = V[::-1] 
+    elif direction == 'compress':
+        change_volume(system, l_max)
+        V=V[::-1]
+    elif direction == 'expand':
+        change_volume(system, l_min)
+    else:
+        raise AttributeError("Invalid direction")
+    
+    P=[]
+    P_err = []
+    print(V)
+    for v,l in zip(V,L):
+        change_volume(system, target_l=l)
+        pressure, pressure_err, eff_sample = get_pressure(system, **sampling_kwargs)
+        P.append(pressure)
+        P_err.append(pressure_err)
+        print(f"V:{v}, l:{l}, P:{pressure}")
+    return V, P, P_err
+        
 
 def _get_pairs(system, gel_start_id):
     pairs = [  (0, 1), (1, 2), (1, 3), (1, 4),
@@ -210,7 +205,7 @@ def  minimize_energy(system, timeout=60):
 
     # activate thermostat
     system.thermostat.set_langevin(kT=1.0, gamma=1.0)
-
+#%%
 
 
 if __name__=='__main__':
@@ -218,7 +213,7 @@ if __name__=='__main__':
     #BONDED_ATTR = None
     #NON_BONDED_ATTR = None
     #system = init_diamond_system(15,0.966,0.5, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
-    system = init_diamond_system(15,0.966,0.5, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_pressure=0)
+    system = init_diamond_system(15,0.966,0.5, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
     #N = 10
     #for i in range(N):
     #    system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['cation'])
@@ -226,6 +221,8 @@ if __name__=='__main__':
     #    minimize_energy(system, timeout=5)
     #system.analysis.pressure()['total']
     #print(system.box_l)
-    #from espressomd.visualization_opengl import  openGLLive
-    #visualizer = openGLLive(system)
-    #visualizer.run()
+#%%
+    from espressomd.visualization_opengl import  openGLLive
+    visualizer = openGLLive(system)
+    visualizer.run()
+# %%
