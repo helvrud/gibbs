@@ -1,7 +1,9 @@
+import logging
+logger = logging.getLogger(__name__)
 class BaseExecutorClass:
     """
     Class to be inherited to construct user ExecutorNode
-    """    
+    """
     def __init__(self) -> None:
         pass
     def verify(self, expr):
@@ -15,7 +17,7 @@ class BaseExecutorClass:
 class ExecutorLocalScopeOnly(BaseExecutorClass):
     def __init__(self) -> None:
         super().__init__()
-    
+
     def execute(self, expr):
         super().execute(expr)
         if isinstance(expr, list):

@@ -3,7 +3,7 @@ import threading
 import subprocess
 
 def create_server_and_nodes(scripts: list,
-        args_list = None, python_executable = 'python', 
+        args_list = None, python_executable = 'python',
         **popen_kwargs
         ):
     server = Server()
@@ -14,7 +14,7 @@ def create_server_and_nodes(scripts: list,
     for script, args in zip(scripts, args_list):
         popen_list = [
             python_executable, script,
-            server.IP, server.PORT, 
+            server.IP, server.PORT,
             *args
             ]
         popen_list = [str(item) for item in popen_list]

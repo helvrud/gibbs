@@ -1,11 +1,9 @@
-import numpy as np
 import argparse
-from time import sleep
-from socket_nodes import Executor
+from logging import log
+from socket_nodes import BaseExecutor
 from socket_nodes import Node
 
-
-class EvalExecutorClass(Executor):
+class EvalExecutorClass(BaseExecutor):
     #example of an ExecutorClass implementation, tries to eval(expression)
     #returns the result if success or an error
     #only execute method has been overridden
@@ -28,9 +26,24 @@ if __name__=="__main__":
                         metavar='PORT',
                         type=int,
                         help='PORT')
+
+    parser.add_argument('--log_name',
+                        metavar='log_name',
+                        help = 'name of log file',
+                        type = str,
+                        required=False)
     args = parser.parse_args()
+
+    if args.log_name:
+        import logging
+        logging.basicConfig(filename=args.log_name,
+                            level = logging.DEBUG)
+        logging.info(__name__ + ' started')
 
     #instantiates the node
     node = Node(args.IP, args.PORT, EvalExecutorClass)
     #node's forever loop
     node.run()
+
+    #The node had closed
+    print("Closed")

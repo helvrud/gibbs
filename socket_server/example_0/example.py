@@ -1,13 +1,14 @@
 #%%
 import threading
 import subprocess
-from socket_nodes import Server
 import socket_nodes.utils
 
+import logging
+logging.basicConfig(filename='log', level = logging.DEBUG)
 
 server = socket_nodes.utils.create_server_and_nodes(
-    scripts = ['example_node.py', 'example_node.py'], 
-    args_list=[[],[]], 
+    scripts = ['example_node.py', 'example_node.py'],
+    args_list=[['--log_name', 'node_0_log'],['--log_name', 'node_1_log']],
     python_executable = 'python')
 
 # %%

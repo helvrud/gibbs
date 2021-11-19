@@ -6,7 +6,7 @@ from enum import Enum, auto
 from typing import List
 import sys
 
-logger = logging.getLogger('Server')
+logger = logging.getLogger(__name__)
 
 class RequestStatus(Enum):
     """
@@ -361,7 +361,9 @@ class Server():
     def shutdown(self):
         """Shuts the server down, no extra actions are yet implemented
         """
-        self.active == False
+        self.active = False
+        self.socket.close()
+        logger.info("The server is shutted down")
 
 
     def _get_node_idx_by_socket(self, socket_):

@@ -307,8 +307,9 @@ def build_no_gel(
 ):
     import subprocess
     import socket_nodes
-    
+
     HD = os.environ['HOME'] # homedirectory
+    #HD = HD+'/Studium'
     # box volumes and dimmensions
     box_l = [V_**(1/3) for V_ in Volume]
 
