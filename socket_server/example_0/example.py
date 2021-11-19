@@ -13,7 +13,7 @@ server = socket_nodes.utils.create_server_and_nodes(
 
 # %%
 request = []
-for i in range(100):
+for i in range(10):
     request.append(server(f'{i}', 0))
     request.append(server(f'{i}**2', 1))
 # %%
