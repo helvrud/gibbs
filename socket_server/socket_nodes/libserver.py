@@ -11,7 +11,7 @@ logger = logging.getLogger('Server')
 class RequestStatus(Enum):
     """
     Possible request status
-    """    
+    """
     InProgress = auto()
     Done = auto()
     #ErrorOccurred = auto()
@@ -32,32 +32,32 @@ class RequestClass:
     from the node
 
     Use self.result() to wait for result, if not threaded can block the program
-    """    
+    """
 
     def __init__(self, request) -> None:
         """Initializes request
 
         Args:
             request (pickleable object): request data
-        """        
+        """
         self.request = request
         self.status = RequestStatus.InProgress
         self._result = NoResult
-    
+
     def __bool__(self):
         """Check if request is done
 
         Returns:
             [bool]: True if request status is done
-        """        
+        """
         return self.status == RequestStatus.Done
-    
+
     def result(self):
         """Waits for the result of the request and returns it
 
         Returns:
             [pickleable object]: request's result
-        """        
+        """
         while True:
             if self.status == RequestStatus.Done:
                 return self._result
@@ -66,12 +66,12 @@ class RequestClass:
 
 class ConnectedNode:
     """Contains information about a connected node, keeps track of the
-    assigned requests from the server, provides RequestClass object as 
+    assigned requests from the server, provides RequestClass object as
     a placeholder for future result
 
     requests : List[RequestClass] - list of queued requests FIFO
 
-    """    
+    """
     def __init__(self, socket) -> None:
         self.socket = socket
         self.requests : List[RequestClass] = []
@@ -81,20 +81,20 @@ class ConnectedNode:
 
     def add_request(self, request_data):
         """adds request to a queue, so that server side knows about
-        assigned request, returns RequestClass object 
+        assigned request, returns RequestClass object
         as a placeholder for future result,
         put the request to the end of FIFO self.requests : List[RequestClass]
 
         Returns:
             [RequestClass]: Request object
-        """     
+        """
         Request = RequestClass(request_data)
-        self.requests.append(Request) 
+        self.requests.append(Request)
         return Request
 
 
     def finish_request(self, result):
-        """Set result to the fist request object in the queue and pop it, 
+        """Set result to the fist request object in the queue and pop it,
         now the result can be accessed with Request.result()
 
         """
@@ -107,8 +107,8 @@ class ConnectedNode:
 
 class Server():
     """
-    Multiclient TCP server, where the  
-    """    
+    Multiclient TCP server, where the
+    """
     IP : str
     PORT : int
     active : bool
@@ -120,7 +120,7 @@ class Server():
         Args:
             IP ([str]): host ip
             PORT ([int]): port to open
-        """    
+        """
         self.IP = IP
         self.PORT = PORT
         self.active = False
@@ -133,7 +133,7 @@ class Server():
     def setup(self):
         """setup the TCP socket server that gather info from the nodes,
         make server available for nodes to connect
-        """        
+        """
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_socket.setblocking(0)
@@ -145,15 +145,15 @@ class Server():
             #the port has been assigned by OS
             self.PORT=self.socket.getsockname()[1]
             logger.info(f'The port has been assigned by OS, PORT : {self.PORT}')
-        logger.info(f'Started.')
+        logger.info(f'Started')
 
 
     def wait_for_connections(self, n : int) -> None:
-        """Wait for n nodes to connect, should be used to assure that all 
+        """Wait for n nodes to connect, should be used to assure that all
         clients are connected
         Args:
             n (int): number of nodes to wait
-        """        
+        """
         while len(self.nodes)<n:
             pass
 
@@ -166,38 +166,38 @@ class Server():
     def handle_connection(self):
         """
         Handles connection of a new node,
-        creates an instance of ConnectedNode class then append it to 
+        creates an instance of ConnectedNode class then append it to
         to a list of connected nodes self.nodes : List[ConnectedNode]
-        """        
+        """
         node_socket, node_address = self.socket.accept()
         Node = ConnectedNode(node_socket)
         self.nodes.append(Node)
-        
+
         logger.info(f'Accepted new connection from {node_address}')
         logger.debug(f'Nodes connected: {len(self.nodes)}')
 
 
     def handle_disconnection(self, node_id : int):
-        """Disconnection of the node, deletes it from the list of connected 
+        """Disconnection of the node, deletes it from the list of connected
         nodes self.nodes : List[ConnectedNode]
 
-        TODO : there could be unfinished request to deal with 
+        TODO : there could be unfinished request to deal with
 
         Args:
             node_id (int): node index in the list of connected nodes (self.nodes)
-        """        
+        """
         logger.warning(f'Connection with {self.nodes[node_id].socket.getpeername()} has been closed')
         del self.nodes[node_id]
 
-    
+
     def handle_income(self, income_data, node_id : int):
         """Handle an income, by finnishing FIFO request of the node
 
         Args:
             income_data ([type]): responce from the node
             node_id (int): node index in the list of connected nodes (self.nodes)
-        """        
-        
+        """
+
         logger.debug(f'INCOME:{self.nodes[node_id].socket.getpeername()}')
         self.nodes[node_id].finish_request(income_data)
 
@@ -207,16 +207,16 @@ class Server():
         TCP server listens to several nodes (TCP Clients) and new connections
         invokes handlers depending on the event
         """
-        #list of the sockets including connected nodes sockets and the server one        
+        #list of the sockets including connected nodes sockets and the server one
         sockets_list = [node.socket for node in self.nodes]+[self.socket]
         #find the socket where reading is happening
         read_sockets, _, exception_sockets = select.select(sockets_list, [], sockets_list)
         for notified_socket in read_sockets:
-            
+
             #if server socket -> new connection
             if notified_socket == self.socket:
                 self.handle_connection()
-            
+
             #if node socket notified -> new income from the node
             else:
                 #find the id of the Node sending the data
@@ -231,12 +231,12 @@ class Server():
                     continue
                 #handle income data, usually by finnishing some request
                 self.handle_income(income_data, node_id)
-        
+
         #error
         for notified_socket in exception_sockets:
             # client disconnected violently
             self.handle_disconnection(notified_socket)
-        
+
         #timeout
         if not (read_sockets, _, exception_sockets):
             #not yet implemented
@@ -256,7 +256,7 @@ class Server():
            RequestClass: Request object, get the result with _.result()
         """
         #logger.debug(f'Creating new request to {node_id}, {self.nodes[node_id].socket}')
-        #adds request to the queue of the corresponding node      
+        #adds request to the queue of the corresponding node
         Request =  self.nodes[node_id].add_request(request_data)
         #gets the node id
         node_socket = self.nodes[node_id].socket
@@ -274,7 +274,7 @@ class Server():
 
         Returns:
             List[RequestClass]: list of RequestClass object, get the result with _.result()
-        """        
+        """
         return [self.request_to_one_node(request_data, node_id) for node_id in node_indices]
 
 
@@ -286,48 +286,54 @@ class Server():
 
 
     def wait_node(self, node_id : int):
-        """Waits for the node to finnish all the requests, call if you want 
+        """Waits for the node to finnish all the requests, call if you want
         to make sure that everything is done with this node
         Args:
             node_id (int): node index in the list of connected nodes (self.nodes)
-        """        
+        """
+        logging.debug(f'Waiting node {node_id} to finnish...')
         while self.nodes[node_id].is_busy()==False:
             pass
+        logging.debug(f'Node {node_id} has finished all requests')
 
 
     def wait_all_nodes(self):
-        """Waits for the all nodes to finnish all the requests, call if you want 
+        """Waits for the all nodes to finnish all the requests, call if you want
         to make sure that everything is done with the all connected nodes
 
         Args:
             node_id (int): node index in the list of connected nodes (self.nodes)
         """
-        someone_is_busy = any([node.is_busy() for node in self.nodes])
-        while someone_is_busy:
+        logging.debug(f'Waiting nodes to finnish...')
+        while any([node.is_busy() for node in self.nodes]):
             pass
-
+        logging.debug(f'All nodes have finished all requests')
 
     def send_raw(self, node_socket, data):
-        """Sending protocol is implemented here, allows to send any 
+        """Sending protocol is implemented here, allows to send any
         pickable python object, can be overridden
 
         Args:
             node_socket (socket): node's socket
             data (object): data to send
-        """        
-        HEADER_LENGTH = 10
-        msg = pickle.dumps(data)
-        msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
-        node_socket.send(msg)
-    
+        """
+        try:
+            HEADER_LENGTH = 10
+            msg = pickle.dumps(data)
+            msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
+            node_socket.send(msg)
+        except Exception as e:
+            logger.exception(e)
+            raise e
+
 
     def recv_raw(self, node_socket):
-        """Receiving protocol is implemented here, allows to send any 
+        """Receiving protocol is implemented here, allows to send any
         pickable python object, can be overridden
 
         Args:
             node_socket (socket): node's socket
-        """  
+        """
         HEADER_LENGTH = 10
         try:
             message_header = node_socket.recv(HEADER_LENGTH)
@@ -339,15 +345,15 @@ class Server():
             data = pickle.loads(serialized_data)
             return data
         except Exception as e:
-            logger.error(e)
+            logger.exception(e)
             return False
 
 
     def run(self):
-        """The main loop of the server, listens for new connection or income 
+        """The main loop of the server, listens for new connection or income
         data, while the server is active.
         Blocking call, use threading or multiproccessing
-        """        
+        """
         while self.active:
             self.listen()
 
@@ -356,8 +362,8 @@ class Server():
         """Shuts the server down, no extra actions are yet implemented
         """
         self.active == False
-    
-    
+
+
     def _get_node_idx_by_socket(self, socket_):
         """Returns node index (id) in the self.nodes : List[ConnectedNode]
         for a given socket object
@@ -367,7 +373,7 @@ class Server():
 
         Returns:
             [type]: [description]
-        """        
+        """
         sockets_ = [Node.socket for Node in self.nodes]
         idx = sockets_.index(socket_)
         return idx
