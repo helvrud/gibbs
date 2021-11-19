@@ -14,19 +14,21 @@ import pathlib
 
 
 import sys
+import os
 #os.chdir(os.path.dirname(sys.argv[0]))
 #print(pwd())
+HD = os.environ['HOME'] # homedirectory
+script_name = HD+'/gibbs/mcmd_polyelctrolyte/espresso_nodes/run_node.py'
 ##INPUT##
 
 
 input_args = dict(
-    
-    Volume=[20000,20000], 
-    N_pairs=[100,100], 
-    fixed_anions = 50, 
+    Volume=[20000,20000],
+    N_pairs=[100,100],
+    fixed_anions = 50,
     log_names=['box_0.log', 'box_1.log'],
     python_executable='/home/kvint/espresso/espresso/es-build/pypresso',
-    
+    script_name = script_name
     )
 
 #build monte carlo class instance, with no gel created, only salt reservoirs
@@ -46,12 +48,12 @@ result = sample_all(
     sample_size=5, #number of samples   #|--------------------------------------
     n_particle_sampling_kwargs = dict(  #| n_particle sampling routine settings
         timeout = 10,                   #| omit or comment out to use defaults
-        initial_sample_size = 10        #| set target_error, timeout, 
+        initial_sample_size = 10        #| set target_error, timeout,
         ),                              #| initial_sample_size kwarg here
                                         #|--------------------------------------
     pressure_sampling_kwargs=dict(      #| pressures sampling routine settings
         timeout = 10,                   #| see comment above
-        initial_sample_size = 10        #| set short timeout and  
+        initial_sample_size = 10        #| set short timeout and
         )                               #| small initial_sample_size for debug
     )                                   #|--------------------------------------
 

@@ -303,19 +303,20 @@ def build_no_gel(
     Volume, N_pairs, fixed_anions,
     log_names, electrostatic=False,
     no_interaction=False,
-    python_executable='python'
+    python_executable='python',
+    script_name = 'espresso_nodes/run_node.py'
 ):
     import subprocess
     import socket_nodes
 
-    HD = os.environ['HOME'] # homedirectory
+
     #HD = HD+'/Studium'
     # box volumes and dimmensions
     box_l = [V_**(1/3) for V_ in Volume]
 
     # start server and nodes
     server = socket_nodes.utils.create_server_and_nodes(
-        scripts=[HD+'/gibbs/mcmd_polyelctrolyte/espresso_nodes/run_node.py']*2,
+        scripts=[script_name]*2,
         args_list=[
             ['-l', box_l[0], '--salt', '-no_interaction',
                 no_interaction, "-log_name", log_names[0]],

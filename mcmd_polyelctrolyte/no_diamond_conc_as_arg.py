@@ -8,6 +8,10 @@ import os
 import sys
 os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
 
+HD = os.environ['HOME'] # homedirectory
+script_name = HD+'/gibbs/mcmd_polyelctrolyte/espresso_nodes/run_node.py'
+#script_name = HD+'/Studium/gibbs/mcmd_polyelctrolyte/espresso_nodes/run_node.py'
+
 ##CLI INPUT##
 import argparse
 parser = argparse.ArgumentParser(description="...")
@@ -21,8 +25,9 @@ try:
         gel_initial_volume = parser.gel_init_vol,
         c_s_mol = parser.c_s,
         fixed_anions = parser.fixed_anions,
-        log_names=['', ''],
+        log_names=['salt.log', 'gel.log'],
         python_executable='pypresso',
+        script_name = script_name,
         v = parser.v
         )
 except:
@@ -33,6 +38,7 @@ except:
         fixed_anions = 50,
         log_names=['box_0.log', 'box_1.log'],
         python_executable='pypresso',
+        script_name = script_name,
         v = 0.8
         )
 
