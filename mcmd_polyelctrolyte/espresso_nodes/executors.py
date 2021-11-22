@@ -172,44 +172,14 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         """
         return float(self.system.analysis.energy()['total'] - self.system.analysis.energy()['kinetic'])
 
-    def pressure(self):
-        """Access the pressure of the espressomd.System
-
-        Returns:
-            float: pressure
-        """
-        return float(self.system.analysis.pressure()['total'])
-
-    def sample_pressure(self, int_steps : int = 1000, n_samples : int = 100, return_only_mean = False):
-        """Sample system pressure every int_steps for n_samples times.
-        Note that the method do not ensure that the measurements are uncorrelated.
-        Make sure the result is not to big to send via sockets
-
-        Args:
-            int_steps (int, optional): Integration steps in between. Defaults to 1000.
-            n_samples (int, optional): Sample size. Defaults to 100.
-            return_only_mean (bool, optional): True if only mean and std has to be returned.
-                Defaults to False.
-
-        Returns:
-            list, tuple: sample values list or sample mean and std
-        """
-        acc = []
-        for i in range(n_samples):
-            self.system.integrator.run(int_steps)
-            acc.append(self.pressure())
-        if return_only_mean:
-            return np.mean(acc), np.std(acc)
-        else:
-            return acc
-
-    def sample_pressure_to_target_error(
-            self, target_error, initial_sample_size,
-            tau = None, int_steps = 1000,
-            timeout = 30, ci = 0.95):
+    def sample_pressure_to_target(system, int_steps=1000, **kwargs):
         def get_data_callback(n):
-            return self.sample_pressure(int_steps=int_steps, n_samples = n)
-        return sample_to_target_error(get_data_callback, target_error, initial_sample_size, tau, timeout, ci)
+                acc = []
+                for i in range(n):
+                    system.integrator.run(int_steps)
+                    acc.append(float(system.analysis.pressure()['total']))
+                return acc
+        return sample_to_target_error(get_data_callback, **kwargs)
 
     def increment_volume(self, incr_vol, int_steps = 10000):
         system = self.system
