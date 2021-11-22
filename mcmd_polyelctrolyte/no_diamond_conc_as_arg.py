@@ -10,7 +10,7 @@ os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 HD = os.environ['HOME'] # homedirectory
 script_name = HD+'/gibbs/mcmd_polyelctrolyte/espresso_nodes/run_node.py'
-#script_name = HD+'/Studium/gibbs/mcmd_polyelctrolyte/espresso_nodes/run_node.py'
+script_name = HD+'/Studium/gibbs/mcmd_polyelctrolyte/espresso_nodes/run_node.py'
 
 ##CLI INPUT##
 import argparse
