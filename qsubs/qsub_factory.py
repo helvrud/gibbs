@@ -19,7 +19,7 @@ def singularity_exec(prefix, pypresso_docker, args):
 
 def generate(prefix, pypresso_docker, args, N=None, mem=500, ncpus=3, walltime="1:0:0"):
     if N is None:
-        N = '_'.join([str(v) for v in args])
+        N = '_'.join([str(v) for v in args]).replace('-','')
     with open(f"{N}.qsub", 'w') as f:
         f.write("#!/bin/bash")
         f.write(pbs_part(N, mem, ncpus, walltime, prefix))
