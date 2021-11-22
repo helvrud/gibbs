@@ -172,7 +172,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         """
         return float(self.system.analysis.energy()['total'] - self.system.analysis.energy()['kinetic'])
 
-    def sample_pressure_to_target(system, int_steps=1000, **kwargs):
+    def sample_pressure_to_target_error(system, int_steps=1000, **kwargs):
         def get_data_callback(n):
                 acc = []
                 for i in range(n):
