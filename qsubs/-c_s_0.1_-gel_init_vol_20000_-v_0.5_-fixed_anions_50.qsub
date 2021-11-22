@@ -1,0 +1,8 @@
+#!/bin/bash#PBS -N -c_s_0.1_-gel_init_vol_20000_-v_0.5_-fixed_anions_50
+#PBS -l mem=500mb
+#PBS -l ncpus=3
+#PBS -l walltime=1:0:0
+#PBS -m ae
+#PBS -e /storage/praha1/home/laktionm/gibbs/data/-c_s_0.1_-gel_init_vol_20000_-v_0.5_-fixed_anions_50.qsuberr
+#PBS -o /storage/praha1/home/laktionm/gibbs/data/-c_s_0.1_-gel_init_vol_20000_-v_0.5_-fixed_anions_50.qsubout
+singularity exec /storage/praha1/home/laktionm/ubuntu-gibbs.img /home/ml/espresso/espresso/es-build/pypresso -c_s/storage/praha1/home/laktionm/gibbs/mcmd_polyelctrolyte/no_diamond_template.py  0.1/storage/praha1/home/laktionm/gibbs/mcmd_polyelctrolyte/no_diamond_template.py  -gel_init_vol/storage/praha1/home/laktionm/gibbs/mcmd_polyelctrolyte/no_diamond_template.py  20000/storage/praha1/home/laktionm/gibbs/mcmd_polyelctrolyte/no_diamond_template.py  -v/storage/praha1/home/laktionm/gibbs/mcmd_polyelctrolyte/no_diamond_template.py  0.5/storage/praha1/home/laktionm/gibbs/mcmd_polyelctrolyte/no_diamond_template.py  -fixed_anions/storage/praha1/home/laktionm/gibbs/mcmd_polyelctrolyte/no_diamond_template.py  50

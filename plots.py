@@ -80,8 +80,4 @@ ax2.set_ylabel('$pressure$')
 #plt.plot(pure_Donnan['v'], pure_Donnan['zeta'])
 fig.set_size_inches(7,9)
 plt.show()
-
-
-# %%
-
 # %%

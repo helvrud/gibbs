@@ -20,9 +20,9 @@ The code goes through the next steps:
 
 @author: Laktionov Mikhail
 """
-
 from executors import EspressoExecutorSalt, EspressoExecutorGel
 from socket_nodes import Node
+import logging
 
 #an entry point to run the node in subprocesses
 if __name__=="__main__":
@@ -65,12 +65,11 @@ if __name__=="__main__":
                         type = float,
                         help = 'charged monomer ratio',
                         required='--gel' in sys.argv)
-    parser.add_argument('-no_interaction', 
-                        metavar='no_interaction',
+    parser.add_argument('--no_interaction',
+                        action='store_true',
                         help = 'switch off bonded and non bonded interaction',
-                        type = bool,
                         required= False,
-                        default = False)
+                        )
     parser.add_argument('-log_name', 
                         metavar='log_name',
                         help = 'name of log file',
@@ -79,34 +78,42 @@ if __name__=="__main__":
                         default = "")
 
     args = parser.parse_args()
-    
+    logger = logging.getLogger(__name__)
     #logging
     if args.log_name != "":
         import logging
         logging.basicConfig(level=logging.DEBUG, stream=open(args.log_name, 'w'))
-    
+        logger.debug("node_run.py DEBUG")
+    logger.info("node_run.py started with args:")
+    logger.info(' '.join(f'{k}={v}' for k, v in vars(args).items()))
     #set or disable interaction
-    if not args.no_interaction:
-            from shared import NON_BONDED_ATTR
+    if '--no_interaction' in sys.argv:
+        logger.warning('No interactions between particles')
+        NON_BONDED_ATTR = None
+        BONDED_ATTR = None
     else:
-            logging.info('No interactions between particles')
-            NON_BONDED_ATTR = None
-            BONDED_ATTR = None
-            
+        from shared import NON_BONDED_ATTR
+        logger.debug("loading non_bonded_interaction params from shared.py")
+
+    logger.info(f'non_bonded interaction params: {NON_BONDED_ATTR}')
     #init salt or gel
     if '--salt' in sys.argv:
         from init_reservoir_system import init_reservoir_system
-        logging.info('Initializing salt reservoir')
+        logger.info('Initializing salt reservoir')
         system = init_reservoir_system(args.l, NON_BONDED_ATTR)
         node = Node(args.IP, args.PORT, EspressoExecutorSalt, system)
-        node.run()
     elif '--gel' in sys.argv:
         from init_diamond_system import init_diamond_system
-        logging.info('Initializing reservoir with a gel')
+        logger.info('Initializing reservoir with a gel')
         from shared import PARTICLE_ATTR
         system = init_diamond_system(
             args.MPC, args.bond_length, args.alpha, args.l,
             BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR
             )
         node = Node(args.IP, args.PORT, EspressoExecutorGel, system)
+    logger.info("Starting the node...")
+    try:
         node.run()
+    except Exception as e:
+        logger.exception(e)
+    logger.warning("Node is closed")

@@ -318,10 +318,12 @@ def build_no_gel(
     server = socket_nodes.utils.create_server_and_nodes(
         scripts=[script_name]*2,
         args_list=[
-            ['-l', box_l[0], '--salt', '-no_interaction',
-                no_interaction, "-log_name", log_names[0]],
-            ['-l', box_l[1], '--salt', '-no_interaction',
-                no_interaction, "-log_name", log_names[1]],
+            [
+                '-l', box_l[0], '--salt', "-log_name", log_names[0]
+            ]+(['--no_interaction'] if no_interaction else []),
+            [
+                '-l', box_l[1], '--salt', "-log_name", log_names[1]
+            ]+(['--no_interaction'] if no_interaction else []),
         ],
         python_executable=python_executable,
         #stdout=subprocess.PIPE,

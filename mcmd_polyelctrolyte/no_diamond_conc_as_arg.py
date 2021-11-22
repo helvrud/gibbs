@@ -26,6 +26,7 @@ try:
         c_s_mol = parser.c_s,
         fixed_anions = parser.fixed_anions,
         log_names=['salt.log', 'gel.log'],
+        no_interaction=False,
         python_executable='pypresso',
         script_name = script_name,
         v = parser.v
@@ -36,13 +37,15 @@ except:
         gel_initial_volume = 20000,
         c_s_mol = 0.1,
         fixed_anions = 50,
-        log_names=['box_0.log', 'box_1.log'],
+        log_names=['salt.log', 'gel.log'],
+        no_interaction=False,
         python_executable='pypresso',
         script_name = script_name,
-        v = 0.9
+        v = 0.7
         )
 
 MC = build_no_gel_salinity(**input_args)
+#%%
 # equilibration steps
 MC.equilibrate(
     rounds=10,  # repeats mc and md steps, 10 rounds seems to be enough,

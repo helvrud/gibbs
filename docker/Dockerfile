@@ -10,21 +10,21 @@ RUN useradd -ms /bin/bash kazakov
 RUN useradd -ms /bin/bash ml
 RUN apt-get update
 RUN apt-get install -y python3-pip
-WORKDIR /home/kvint
+WORKDIR /home/ml
 
 
 
 
-ENV USERNAME kvint
-COPY .bashrc /home/kvint
-COPY env.rc /home/kvint
+ENV USERNAME ml
+COPY .bashrc /home/ml
+COPY env.rc /home/ml
 
-COPY packages/ /home/kvint/
+COPY packages/ /home/ml/
 #RUN git clone https://github.com/espressomd/espresso.git
-COPY espresso/ /home/kvint/espresso/
+COPY espresso/ /home/ml/espresso/
 
-RUN pip3 install /home/kvint/socket_server/
-RUN pip3 install /home/kvint/montecarlo/
+RUN pip3 install /home/ml/socket_server/
+RUN pip3 install /home/ml/montecarlo/
 
 
 
@@ -95,15 +95,15 @@ RUN ln -sfn /usr/bin/python3 /usr/bin/python
 
 
 #RUN git clone https://github.com/espressomd/espresso.git
-COPY espresso/ /home/kvint/espresso/
+COPY espresso/ /home/ml/espresso/
 RUN cd espresso
 RUN mkdir -p espresso/es-build
-WORKDIR /home/kvint/espresso/espresso/es-build
+WORKDIR /home/ml/espresso/espresso/es-build
 RUN cmake ..
 RUN make -j 8
 RUN make install 
-USER kvint
-ENV USERNAME kvint
+USER ml
+ENV USERNAME ml
 CMD /bin/bash -c "source $HOME/.bashrc"
 
 
