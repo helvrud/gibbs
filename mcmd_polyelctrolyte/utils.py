@@ -61,6 +61,12 @@ def n_to_mol(n, unit_length_nm=0.35):
     mol_conc = n/(unit_length_nm**3*6.02214e-1)
     return mol_conc
 
+def pressure_to_Pa(pressure_kT, unit_length_nm=0.35):
+    #kT = 1.38064852*300*e-23
+    #vol_unit = sigma^3 *1e-27
+    pressure = pressure_kT*(300*1.38064852/unit_length_nm**3)*10**4
+    return pressure
+
 
 def sample_all(
         MC, sample_size, 

@@ -1,3 +1,4 @@
+#%%
 from ion_pair_monte_carlo import build_no_gel, build_no_gel_salinity
 from utils import sample_all
 from analytic_donnan import speciation_inf_reservoir, speciation
@@ -10,7 +11,6 @@ os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 HD = os.environ['HOME'] # homedirectory
 script_name = HD+'/gibbs/mcmd_polyelctrolyte/espresso_nodes/run_node.py'
-script_name = HD+'/Studium/gibbs/mcmd_polyelctrolyte/espresso_nodes/run_node.py'
 
 ##CLI INPUT##
 import argparse
@@ -39,7 +39,7 @@ except:
         log_names=['box_0.log', 'box_1.log'],
         python_executable='pypresso',
         script_name = script_name,
-        v = 0.8
+        v = 0.9
         )
 
 MC = build_no_gel_salinity(**input_args)
@@ -48,6 +48,7 @@ MC.equilibrate(
     rounds=10,  # repeats mc and md steps, 10 rounds seems to be enough,
     md_steps=100000,  # call integrator.run(md_steps)
 )
+#%%
 # sample number of particles of each mobile species and pressures in the boxes
 # by alternating number of particles sampling and pressure sampling routines
 result = sample_all(
