@@ -1,4 +1,5 @@
-#!/bin/bash#PBS -N c_s_0.1_gel_init_vol_20000_v_0.5_fixed_anions_50
+#!/bin/bash
+#PBS -N c_s_0.1_gel_init_vol_20000_v_0.5_fixed_anions_50
 #PBS -l mem=500mb
 #PBS -l ncpus=3
 #PBS -l walltime=1:0:0

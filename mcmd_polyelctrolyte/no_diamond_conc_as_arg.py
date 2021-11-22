@@ -83,3 +83,5 @@ output_fname = uuid.uuid4().hex[:8]+'.pkl'
 
 with open(output_dir/output_fname, 'wb') as f:
     pickle.dump(result, f)
+
+print ("DONE")
