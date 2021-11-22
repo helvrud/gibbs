@@ -17,7 +17,7 @@ def singularity_exec(prefix, pypresso_docker, script_name, args):
         f"{prefix}/{script_name} ",
         ))+' '.join([str(v) for v in args])
 
-def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=3, walltime="1:0:0"):
+def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=1, walltime="2:0:0"):
     if N is None:
         N = '_'.join([str(v) for v in args]).replace('-','')
     with open(f"{N}.qsub", 'w') as f:
@@ -26,6 +26,15 @@ def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=
         f.write(singularity_exec(prefix, pypresso_docker, script_name, args))
 
 # %%
-args = ['-c_s', 0.1, '-gel_init_vol', 20000, '-v', 0.5, '-fixed_anions', 50]
+args = ['-c_s', 0.1, '-gel_init_vol', 20000, '-v', 0.3, '-fixed_anions', 50]
 generate("/storage/praha1/home/laktionm", "/home/ml/espresso/espresso/es-build/pypresso", "gibbs/mcmd_polyelctrolyte/no_diamond_conc_as_arg.py", args)
+# %%
+import numpy as np
+
+v = np.linspace(0.3, 0.8, 101)
+
+# %%
+for vv in v:
+    args = ['-c_s', 0.1, '-gel_init_vol', 20000, '-v', vv, '-fixed_anions', 50]
+    generate("/storage/praha1/home/laktionm", "/home/ml/espresso/espresso/es-build/pypresso", "gibbs/mcmd_polyelctrolyte/no_diamond_conc_as_arg.py", args)
 # %%

@@ -1,8 +1,8 @@
 #!/bin/bash
 #PBS -N c_s_0.1_gel_init_vol_20000_v_0.5_fixed_anions_50
 #PBS -l mem=500mb
-#PBS -l ncpus=3
-#PBS -l walltime=1:0:0
+#PBS -l ncpus=1
+#PBS -l walltime=2:0:0
 #PBS -m ae
 #PBS -e /storage/praha1/home/laktionm/gibbs/data/c_s_0.1_gel_init_vol_20000_v_0.5_fixed_anions_50.qsuberr
 #PBS -o /storage/praha1/home/laktionm/gibbs/data/c_s_0.1_gel_init_vol_20000_v_0.5_fixed_anions_50.qsubout

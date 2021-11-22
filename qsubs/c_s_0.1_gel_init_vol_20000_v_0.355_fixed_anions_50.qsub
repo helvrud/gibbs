@@ -1,0 +1,9 @@
+#!/bin/bash
+#PBS -N c_s_0.1_gel_init_vol_20000_v_0.355_fixed_anions_50
+#PBS -l mem=500mb
+#PBS -l ncpus=1
+#PBS -l walltime=2:0:0
+#PBS -m ae
+#PBS -e /storage/praha1/home/laktionm/gibbs/data/c_s_0.1_gel_init_vol_20000_v_0.355_fixed_anions_50.qsuberr
+#PBS -o /storage/praha1/home/laktionm/gibbs/data/c_s_0.1_gel_init_vol_20000_v_0.355_fixed_anions_50.qsubout
+singularity exec /storage/praha1/home/laktionm/ubuntu-gibbs.img /home/ml/espresso/espresso/es-build/pypresso /storage/praha1/home/laktionm/gibbs/mcmd_polyelctrolyte/no_diamond_conc_as_arg.py -c_s 0.1 -gel_init_vol 20000 -v 0.355 -fixed_anions 50
