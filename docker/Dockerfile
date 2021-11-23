@@ -10,6 +10,7 @@ RUN useradd -ms /bin/bash kazakov
 RUN useradd -ms /bin/bash ml
 RUN apt-get update
 RUN apt-get install -y python3-pip
+RUN apt-get install -y git
 WORKDIR /home/ml
 
 
