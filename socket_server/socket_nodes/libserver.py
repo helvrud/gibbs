@@ -5,6 +5,7 @@ import select
 from enum import Enum, auto
 from typing import List
 import sys
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -157,10 +158,18 @@ class Server():
         while len(self.nodes)<n:
             pass
 
-    def wait_connection(self) -> None:
+    def wait_connection(self, timeout = 10) -> None:
+        """Wait for new connection
+        Args:
+            timeout (int, optional): Timeout in seconds. Defaults to 10.
+        """
         n_nodes = len(self.nodes)
+        start_time = time.time()
         while len(self.nodes) == n_nodes:
-            pass
+            if time.time() - start_time > timeout:
+                raise TimeoutError
+            else:
+                pass
 
 
     def handle_connection(self):
