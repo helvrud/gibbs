@@ -1,6 +1,6 @@
 # Dockerfile for espresso 4.1
 
-FROM ubuntu:focal   
+FROM ubuntu:focal
 LABEL Oleg Rud <oleg.rud@natur.cuni.cz>
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -29,7 +29,7 @@ RUN pip3 install /home/ml/montecarlo/
 
 
 # RUN apt update && apt-get install -y \
-#    libgl1-mesa-dev \ 
+#    libgl1-mesa-dev \
 #    libglu1-mesa-dev \
 #    freeglut3-dev \
 #    libgles2-mesa-dev
@@ -101,7 +101,7 @@ RUN mkdir -p espresso/es-build
 WORKDIR /home/ml/espresso/espresso/es-build
 RUN cmake ..
 RUN make -j 8
-RUN make install 
+RUN make install
 USER ml
 ENV USERNAME ml
 CMD /bin/bash -c "source $HOME/.bashrc"
@@ -112,6 +112,3 @@ CMD /bin/bash -c "source $HOME/.bashrc"
 
 #RUN pip3 install tqdm
 #RUN pip3 install ipython
-
-
-

@@ -6,3 +6,7 @@ log_*
 *.csv
 docker/espresso/**
 docker/packages/**
+*.pkl
+*.qsub
+qsubs/**
+*.log

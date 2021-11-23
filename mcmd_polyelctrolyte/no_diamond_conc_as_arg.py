@@ -7,10 +7,33 @@ import pathlib
 
 import os
 import sys
-os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
 
-HD = os.environ['HOME'] # homedirectory
-script_name = HD+'/gibbs/mcmd_polyelctrolyte/espresso_nodes/run_node.py'
+file_dir =  pathlib.Path(__file__).parent
+print('file_dir:', file_dir)
+
+output_dir = file_dir.parent / 'data' / pathlib.Path(__file__).stem
+output_dir.mkdir(parents=True, exist_ok=True)
+
+run_node_path = file_dir / 'espresso_nodes'/ 'run_node.py'
+print('node script path:', run_node_path)
+
+python_executable = 'pypresso'
+print('python executable path', python_executable)
+
+logs_dir = file_dir / 'logs'
+logs_dir.mkdir(parents=True, exist_ok=True)
+print('path to logs', logs_dir)
+
+#random file name
+import uuid
+base_name = uuid.uuid4().hex[:8]
+output_fname =base_name+'.pkl'
+print('output filename', output_fname)
+log_names = [
+    logs_dir / (base_name+'_salt.log'),
+    logs_dir / (base_name+'_gel.log')
+    ]
+
 
 ##CLI INPUT##
 import argparse
@@ -25,10 +48,10 @@ try:
         gel_initial_volume = parser.gel_init_vol,
         c_s_mol = parser.c_s,
         fixed_anions = parser.fixed_anions,
-        log_names=['salt.log', 'gel.log'],
+        log_names=log_names,
         no_interaction=False,
-        python_executable='pypresso',
-        script_name = script_name,
+        python_executable=python_executable,
+        script_name = run_node_path,
         v = parser.v
         )
 except:
@@ -37,11 +60,11 @@ except:
         gel_initial_volume = 20000,
         c_s_mol = 0.1,
         fixed_anions = 50,
-        log_names=['salt.log', 'gel.log'],
+        log_names=log_names,
         no_interaction=False,
-        python_executable='pypresso',
-        script_name = script_name,
-        v = 0.7
+        python_executable=python_executable,
+        script_name = run_node_path,
+        v = 0.6
         )
 
 MC = build_no_gel_salinity(**input_args)
@@ -74,12 +97,7 @@ result = sample_all(
 result.update({'input':input_args})
 print(result)
 
-output_dir = pathlib.Path(__file__).parent.parent / 'data' / pathlib.Path(__file__).stem
-output_dir.mkdir(parents=True, exist_ok=True)
 
-#random file name
-import uuid
-output_fname = uuid.uuid4().hex[:8]+'.pkl'
 
 with open(output_dir/output_fname, 'wb') as f:
     pickle.dump(result, f)

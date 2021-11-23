@@ -12,7 +12,7 @@ The code goes through the next steps:
     ExecutorClass is EspressoExecutorSalt for salt or EspressoExecutorGel for gel
     system passed as *arg to ExecutorClass.init()
 - run an infinite loop node.run()
-    the method loops through: 
+    the method loops through:
         0)Connects to the server
         1)Listen for incoming data
         2)Process request
@@ -37,30 +37,30 @@ if __name__=="__main__":
                         metavar='PORT',
                         type=int,
                         help='PORT')
-    parser.add_argument('-l', 
+    parser.add_argument('-l',
                         metavar='l',
                         type = float,
                         help = 'box_size',
                         required=True)
-    parser.add_argument('--salt', 
+    parser.add_argument('--salt',
                         help = 'salt reservoir',
                         action='store_true',
                         required=False)
-    parser.add_argument('--gel', 
+    parser.add_argument('--gel',
                         help = 'add gel to the system',
                         action='store_true',
                         required=False)
-    parser.add_argument('-MPC', 
+    parser.add_argument('-MPC',
                         metavar='MPC',
                         type = int,
                         help = 'particles between nodes',
                         required='--gel' in sys.argv)
-    parser.add_argument('-bond_length', 
+    parser.add_argument('-bond_length',
                         metavar='bond_length',
                         type = float,
                         help = 'bond length',
                         required='--gel' in sys.argv)
-    parser.add_argument('-alpha', 
+    parser.add_argument('-alpha',
                         metavar='alpha',
                         type = float,
                         help = 'charged monomer ratio',
@@ -70,7 +70,7 @@ if __name__=="__main__":
                         help = 'switch off bonded and non bonded interaction',
                         required= False,
                         )
-    parser.add_argument('-log_name', 
+    parser.add_argument('-log_name',
                         metavar='log_name',
                         help = 'name of log file',
                         type = str,

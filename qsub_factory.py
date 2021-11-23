@@ -18,21 +18,19 @@ def singularity_exec(prefix, pypresso_docker, script_name, args):
         ))+' '.join([str(v) for v in args])
 
 def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=1, walltime="2:0:0"):
+    import pathlib
     if N is None:
         N = '_'.join([str(v) for v in args]).replace('-','')
-    with open(f"{N}.qsub", 'w') as f:
+    output_dir = pathlib.Path(__file__).parent/ 'qsubs'
+    output_dir.mkdir(parents=True, exist_ok=True)
+    with open(output_dir/f"{N}.qsub", 'w') as f:
         f.write("#!/bin/bash\n")
         f.write(pbs_part(N, mem, ncpus, walltime, prefix))
+        f.write("\n")
         f.write(singularity_exec(prefix, pypresso_docker, script_name, args))
-
-# %%
-args = ['-c_s', 0.1, '-gel_init_vol', 20000, '-v', 0.3, '-fixed_anions', 50]
-generate("/storage/praha1/home/laktionm", "/home/ml/espresso/espresso/es-build/pypresso", "gibbs/mcmd_polyelctrolyte/no_diamond_conc_as_arg.py", args)
 # %%
 import numpy as np
-
-v = np.linspace(0.3, 0.8, 101)
-
+v = np.round(np.linspace(0.3, 0.8, 101), 2)
 # %%
 for vv in v:
     args = ['-c_s', 0.1, '-gel_init_vol', 20000, '-v', vv, '-fixed_anions', 50]

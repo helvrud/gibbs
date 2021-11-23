@@ -1,5 +1,0 @@
-*.log
-log
-*_log
-__pycache__/
-*/__pycache__/
