@@ -34,5 +34,5 @@ v = np.round(np.linspace(0.3, 0.8, 101), 2)
 # %%
 for vv in v:
     args = ['-c_s', 0.1, '-gel_init_vol', 20000, '-v', vv, '-fixed_anions', 50]
-    generate("/storage/praha1/home/laktionm", "/home/ml/espresso/espresso/es-build/pypresso", "gibbs/mcmd_polyelctrolyte/no_diamond_conc_as_arg.py", args)
+    generate("/storage/brno2/home/laktionm", "/home/ml/espresso/espresso/es-build/pypresso", "gibbs/mcmd_polyelctrolyte/no_diamond_conc_as_arg.py", args, ncpus=3)
 # %%

@@ -38,34 +38,34 @@ log_names = [
 ##CLI INPUT##
 import argparse
 parser = argparse.ArgumentParser(description="...")
-parser.add_argument('-c_s', action='store')
-parser.add_argument('-gel_init_vol', action='store')
-parser.add_argument('-v', action='store')
-parser.add_argument('-fixed_anions', action='store')
-try:
-    args = parser.parse_args()
-    input_args = dict(
-        gel_initial_volume = parser.gel_init_vol,
-        c_s_mol = parser.c_s,
-        fixed_anions = parser.fixed_anions,
-        log_names=log_names,
-        no_interaction=False,
-        python_executable=python_executable,
-        script_name = run_node_path,
-        v = parser.v
-        )
-except:
-    ##NON-CLI INPUT##
-    input_args = dict(
-        gel_initial_volume = 20000,
-        c_s_mol = 0.1,
-        fixed_anions = 50,
-        log_names=log_names,
-        no_interaction=False,
-        python_executable=python_executable,
-        script_name = run_node_path,
-        v = 0.6
-        )
+parser.add_argument('-c_s', action='store', type = float)
+parser.add_argument('-gel_init_vol', action='store', type = float)
+parser.add_argument('-v', action='store', type = float)
+parser.add_argument('-fixed_anions', action='store', type = int)
+#try:
+args = parser.parse_args()
+input_args = dict(
+    gel_initial_volume = args.gel_init_vol,
+    c_s_mol = args.c_s,
+    fixed_anions = args.fixed_anions,
+    log_names=log_names,
+    no_interaction=False,
+    python_executable=python_executable,
+    script_name = run_node_path,
+    v = args.v
+    )
+#except:
+#    ##NON-CLI INPUT##
+#    input_args = dict(
+#        gel_initial_volume = 20000,
+#        c_s_mol = 0.1,
+#        fixed_anions = 50,
+#        log_names=log_names,
+#        no_interaction=False,
+#        python_executable=python_executable,
+#        script_name = run_node_path,
+#        v = 0.6
+#        )
 
 MC = build_no_gel_salinity(**input_args)
 #%%
