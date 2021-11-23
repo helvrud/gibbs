@@ -41,7 +41,8 @@ parser = argparse.ArgumentParser(description="...")
 parser.add_argument('-c_s', action='store', type = float)
 parser.add_argument('-gel_init_vol', action='store', type = float)
 parser.add_argument('-v', action='store', type = float)
-parser.add_argument('-fixed_anions', action='store', type = int)
+parser.add_argument('-fixed_anions', action='store', type = int),
+parser.add_argument('-electrostatic', action = 'store', type = bool, required=False, default=False)
 #try:
 args = parser.parse_args()
 input_args = dict(
@@ -52,7 +53,8 @@ input_args = dict(
     no_interaction=False,
     python_executable=python_executable,
     script_name = run_node_path,
-    v = args.v
+    v = args.v,
+    electrostatic = args.electrostatic
     )
 #except:
 #    ##NON-CLI INPUT##
