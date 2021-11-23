@@ -97,8 +97,6 @@ result = sample_all(
 result.update({'input':input_args})
 print(result)
 
-
-
 with open(output_dir/output_fname, 'wb') as f:
     pickle.dump(result, f)
 
