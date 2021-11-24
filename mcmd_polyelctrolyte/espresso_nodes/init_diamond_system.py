@@ -206,15 +206,13 @@ def  minimize_energy(system, timeout=60):
     # activate thermostat
     system.thermostat.set_langevin(kT=1.0, gamma=1.0)
 #%%
-
-
 if __name__=='__main__':
     from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
     #BONDED_ATTR = None
     #NON_BONDED_ATTR = None
     #system = init_diamond_system(15,0.966,0.5, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
     system = init_diamond_system(15,0.966,0.5, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
-    #N = 10
+    N = 20
     #for i in range(N):
     #    system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['cation'])
     #    system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['anion'])

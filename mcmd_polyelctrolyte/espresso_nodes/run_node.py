@@ -92,7 +92,7 @@ if __name__=="__main__":
         NON_BONDED_ATTR = None
         BONDED_ATTR = None
     else:
-        from shared import NON_BONDED_ATTR
+        from shared import NON_BONDED_ATTR, BONDED_ATTR
         logger.debug("loading non_bonded_interaction params from shared.py")
 
     logger.info(f'non_bonded interaction params: {NON_BONDED_ATTR}')
@@ -107,8 +107,8 @@ if __name__=="__main__":
         logger.info('Initializing reservoir with a gel')
         from shared import PARTICLE_ATTR
         system = init_diamond_system(
-            args.MPC, args.bond_length, args.alpha, args.l,
-            BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR
+            MPC = args.MPC, bond_length = args.bond_length, alpha = args.alpha, target_l = args.l,
+            bonded_attr = BONDED_ATTR, non_bonded_attr = NON_BONDED_ATTR, particle_attr =PARTICLE_ATTR
             )
         node = Node(args.IP, args.PORT, EspressoExecutorGel, system)
     logger.info("Starting the node...")

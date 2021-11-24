@@ -16,7 +16,7 @@ def singularity_exec(prefix, pypresso_docker, script_name, args):
         f"{prefix}/{script_name} ",
         ))+' '.join([str(v) for v in args])
 
-def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=1, walltime="2:0:0"):
+def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=1, walltime="10:0:0"):
     import pathlib
     if N is None:
         N = '_'.join([str(v) for v in args]).replace('-','')
@@ -46,3 +46,5 @@ for vv in v:
         args = args,
         ncpus=3
         )
+
+#scp -r qsubs/ laktionm@skirit.metacentrum.cz:gibbs/

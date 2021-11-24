@@ -84,12 +84,12 @@ MC.equilibrate(
 subsampling_params = dict(
     sample_size=200,# number of samples 
     n_particle_sampling_kwargs=dict(    
-        timeout=60,                     
+        timeout=120,                     
         target_eff_sample_size = 50,         
         initial_sample_size=100         
     ),
     pressure_sampling_kwargs=dict(      
-        timeout=60,                            
+        timeout=120,                            
         target_eff_sample_size = 50,         
         initial_sample_size=100         
     )

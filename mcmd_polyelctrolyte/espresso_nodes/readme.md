@@ -9,7 +9,7 @@ An instance of socket_nodes.ExecutorNode accepts class inherited from socket_nod
 One can not create more than one instance of espressomd.System in one process python interpreter. Separate python interpreter processes has to be spawn and communicate with each other.
 
 ## Structure
-   node.py
+   run_node.py
   ┌──────────────────────────────────────────────┐
   │Node(IP, PORT, ExecutorClass, *args, **kwargs)│
   ├──────────────────────────────────────────────┤
@@ -21,7 +21,7 @@ One can not create more than one instance of espressomd.System in one process py
 │ └──────────────────────────────────────────────┘
 │    executors.py
 │   ┌────────────────────────────────────┐
-└──►│Executor(system : espressomd.System)│
+└─►│Executor(system : espressomd.System)│
     ├────────────────────────────────────┤
     │ execute(request)                   │
     │   {eval(request, scope)}           │
@@ -31,7 +31,7 @@ One can not create more than one instance of espressomd.System in one process py
   │    init_reservoir_system.py
   │    init_diamond_system.py
   │   ┌────────────────────────────┐
-  └──►│instantiated and initialized│
+  └─►│instantiated and initialized│
       │     espressomd.System      │
       └────────────────────────────┘
 
