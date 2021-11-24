@@ -77,34 +77,16 @@ def sample_all(
         trange = range
     import numpy as np
     
-    ###defaults
-    n_particle_sampling_kwargs_defaults = dict(
-            target_error = 1, 
-            #timeout = 10,
-            #initial_sample_size = 10
-            )
-    pressure_sampling_kwargs_defaults = dict(
-            target_error = 0.01, 
-            #timeout = 10,
-            #initial_sample_size = 10
-            )
-    
-    if n_particle_sampling_kwargs:
-        n_particle_sampling_kwargs_defaults.update(n_particle_sampling_kwargs)
-    if pressure_sampling_kwargs:
-        pressure_sampling_kwargs_defaults.update(pressure_sampling_kwargs)
-    
-    
     results_ld = [] #list of dicts
     for i in trange(sample_size):
         n_particles_sample = MC.sample_particle_count_to_target_error(
-            **n_particle_sampling_kwargs_defaults
+            **n_particle_sampling_kwargs
         )
         
         #probably we can dry run some MD without collecting any data
         
         pressures_sample = MC.sample_pressures_to_target_error(
-            **pressure_sampling_kwargs_defaults
+            **pressure_sampling_kwargs
             )
         
         #discard info about errors

@@ -209,11 +209,6 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 anions.append(a)
                 self.step()
             return np.array(anions)
-        if "initial_sample_size" not in kwargs:
-            kwargs["initial_sample_size"] = sum(
-                self.current_state.anions)+sum(self.current_state.cations)
-        if "target_error" not in kwargs:
-            kwargs["target_error"] = 1
 
         anion_salt, eff_err, eff_sample_size = sample_to_target_error(
             get_particle_count_callback, **kwargs)
