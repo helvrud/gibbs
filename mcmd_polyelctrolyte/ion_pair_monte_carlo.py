@@ -199,11 +199,6 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 zetas.append(zeta)
                 self.step()
             return np.array(zetas)
-        if "initial_sample_size" not in kwargs:
-            kwargs["initial_sample_size"] = len(
-                self.current_state['particles_info'])
-        if "target_error" not in kwargs:
-            kwargs["target_error"] = 0.1
         return sample_to_target_error(get_zeta_callback, **kwargs)
 
     def sample_particle_count_to_target_error(self, **kwargs):
@@ -236,10 +231,6 @@ class MonteCarloPairs(AbstractMonteCarlo):
         }
 
     def sample_pressures_to_target_error(self, **kwargs):
-        if "initial_sample_size" not in kwargs:
-            kwargs["initial_sample_size"] = 1000
-        if "target_error" not in kwargs:
-            kwargs["target_error"] = 0.1
         request = self.server(
             f'sample_pressure_to_target_error(**{kwargs})', [0, 1])
         pressure_0, err_0, sample_size_0 = request[0].result()

@@ -71,30 +71,35 @@ MC = build_no_gel_salinity(**input_args)
 #%%
 # equilibration steps
 MC.equilibrate(
-    rounds=10,  # repeats mc and md steps, 10 rounds seems to be enough,
+    rounds=1,  # repeats mc and md steps, 10 rounds seems to be enough,
     md_steps=100000,  # call integrator.run(md_steps)
 )
 #%%
 # sample number of particles of each mobile species and pressures in the boxes
 # by alternating number of particles sampling and pressure sampling routines
+
+subsampling_params = dict(
+    sample_size=100,# number of samples 
+    n_particle_sampling_kwargs=dict(    
+        timeout=60,                     
+        target_eff_sample_size = 50,         
+        initial_sample_size=100         
+    ),
+    pressure_sampling_kwargs=dict(      
+        timeout=60,                            
+        target_eff_sample_size = 50,         
+        initial_sample_size=100         
+    )
+)
+
 result = sample_all(
     MC,
-    sample_size=20, # number of samples # |--------------------------------------
-    n_particle_sampling_kwargs=dict(    # | n_particle sampling routine settings
-        timeout=60,                     # |
-        target_error = 0.1,             # | omit or comment out to use defaults
-        initial_sample_size=100         # | set target_error, timeout,
-    ),                                  # | initial_sample_size kwarg here
-                                        # |--------------------------------------
-    pressure_sampling_kwargs=dict(      # | pressures sampling routine settings
-        timeout=60,                     # |
-        target_error = 0.01,            # | see comment above
-        initial_sample_size=100         # | set short timeout and
-    )                                   # | small initial_sample_size for debug
-)                                       # |--------------------------------------
+    **subsampling_params                                   
+)                                       
 
 # add inputs to output file and save the pickle to ../data/script_name.pkl
 result.update({'input':input_args})
+result.update(subsampling_params)
 print(result)
 
 with open(output_dir/output_fname, 'wb') as f:
