@@ -63,6 +63,12 @@ class RequestClass:
             if self.status == RequestStatus.Done:
                 return self._result
 
+    def __repr__(self) -> str:
+        if self.status == RequestStatus.Done:
+            return f"Request is done"
+        else:
+            return self.status
+
 
 
 class ConnectedNode:
@@ -149,25 +155,33 @@ class Server():
         logger.info(f'Started')
 
 
-    def wait_for_connections(self, n : int) -> None:
+    def wait_for_connections(self, n : int, timeout : int = 60) -> None:
         """Wait for n nodes to connect, should be used to assure that all
         clients are connected
         Args:
             n (int): number of nodes to wait
         """
+        logger.info(f"Server is expecting to connect {n} nodes")
+        start_time = time.time()
         while len(self.nodes)<n:
-            pass
+            if time.time() - start_time > timeout:
+                logger.error("Waiting time exceeds timeout")
+                raise TimeoutError("Waiting time exceeds timeout")
+            else:
+                pass
 
-    def wait_connection(self, timeout = 10) -> None:
+    def wait_connection(self, timeout : int = 60) -> None:
         """Wait for new connection
         Args:
             timeout (int, optional): Timeout in seconds. Defaults to 10.
         """
+        logger.info(f"Server is expecting to connect one more node")
         n_nodes = len(self.nodes)
         start_time = time.time()
         while len(self.nodes) == n_nodes:
             if time.time() - start_time > timeout:
-                raise TimeoutError
+                logger.error("Waiting time exceeds timeout")
+                raise TimeoutError("Waiting time exceeds timeout")
             else:
                 pass
 
@@ -207,7 +221,7 @@ class Server():
             node_id (int): node index in the list of connected nodes (self.nodes)
         """
 
-        logger.debug(f'INCOME:{self.nodes[node_id].socket.getpeername()}')
+        logger.debug(f'income from {self.nodes[node_id].socket.getpeername()}')
         self.nodes[node_id].finish_request(income_data)
 
 
@@ -249,7 +263,7 @@ class Server():
         #timeout
         if not (read_sockets, _, exception_sockets):
             #not yet implemented
-            logging.debug('Timeout')
+            logger.warning('listen loop timeout')
             pass
 
 
@@ -300,10 +314,10 @@ class Server():
         Args:
             node_id (int): node index in the list of connected nodes (self.nodes)
         """
-        logging.debug(f'Waiting node {node_id} to finnish...')
+        logger.info(f'Waiting node {node_id} to finnish...')
         while self.nodes[node_id].is_busy()==False:
             pass
-        logging.debug(f'Node {node_id} has finished all requests')
+        logger.info(f'Node {node_id} has finished all requests')
 
 
     def wait_all_nodes(self):
@@ -313,10 +327,10 @@ class Server():
         Args:
             node_id (int): node index in the list of connected nodes (self.nodes)
         """
-        logging.debug(f'Waiting nodes to finnish...')
+        logger.info(f'Waiting all nodes to finnish...')
         while any([node.is_busy() for node in self.nodes]):
             pass
-        logging.debug(f'All nodes have finished all requests')
+        logger.info(f'All nodes have finished all requests')
 
     def send_raw(self, node_socket, data):
         """Sending protocol is implemented here, allows to send any
@@ -327,6 +341,7 @@ class Server():
             data (object): data to send
         """
         try:
+            logger.debug(">>>")
             HEADER_LENGTH = 10
             msg = pickle.dumps(data)
             msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
@@ -345,6 +360,7 @@ class Server():
         """
         HEADER_LENGTH = 10
         try:
+            logger.debug("<<<")
             message_header = node_socket.recv(HEADER_LENGTH)
             #no data -> client closed a connection
             if not len(message_header):
@@ -363,8 +379,10 @@ class Server():
         data, while the server is active.
         Blocking call, use threading or multiproccessing
         """
+        logger.info("server main loop has started")
         while self.active:
             self.listen()
+        logger.info("server main loop done")
 
 
     def shutdown(self):
@@ -372,7 +390,7 @@ class Server():
         """
         self.active = False
         self.socket.close()
-        logger.info("The server is shutted down")
+        logger.info("the server is shutted down")
 
 
     def _get_node_idx_by_socket(self, socket_):

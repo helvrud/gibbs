@@ -1,4 +1,3 @@
-#%%
 def pbs_part(N, mem, ncpus, walltime, prefix):
     return ''.join((
         f'#PBS -N {N}\n',
@@ -28,11 +27,22 @@ def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=
         f.write(pbs_part(N, mem, ncpus, walltime, prefix))
         f.write("\n")
         f.write(singularity_exec(prefix, pypresso_docker, script_name, args))
-# %%
+
 import numpy as np
 v = np.round(np.linspace(0.3, 0.8, 101), 2)
-# %%
+
 for vv in v:
-    args = ['-c_s', 0.1, '-gel_init_vol', 20000, '-v', vv, '-fixed_anions', 50]
-    generate("/storage/brno2/home/laktionm", "/home/ml/espresso/espresso/es-build/pypresso", "gibbs/mcmd_polyelctrolyte/no_diamond_conc_as_arg.py", args, ncpus=3)
-# %%
+    args = [
+        '-v', vv,
+        '-c_s', 0.1,
+        '-gel_init_vol', 20000,
+        '-fixed_anions', 50,
+        '-electrostatic', True
+        ]
+    generate(
+        prefix = "/storage/brno2/home/laktionm",
+        pypresso_docker="/home/ml/espresso/espresso/es-build/pypresso",
+        script_name="gibbs/mcmd_polyelctrolyte/no_diamond_conc_as_arg.py",
+        args = args,
+        ncpus=3
+        )
