@@ -110,7 +110,7 @@ class BaseNode:
         Args:
             node_socket (socket): node's socket
         """
-        logger.debug("Receiving <<<")
+        logger.debug("<<<")
         HEADER_LENGTH = 10
         try:
             message_header = self.server_socket.recv(HEADER_LENGTH)
@@ -125,7 +125,7 @@ class BaseNode:
                 str_data = str(data)
                 str_data = (str_data[:trim_length] + '...') if len(str_data) > 75 else str_data
                 logger.debug(str_data)
-                return data
+            return data
         except Exception as e:
             logger.exception(e)
             return False
@@ -142,7 +142,7 @@ class BaseNode:
         msg = pickle.dumps(data)
         msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
         self.server_socket.send(msg)
-        logger.debug("Sending >>>")
+        logger.debug(">>>")
         if logger.isEnabledFor(logging.DEBUG):
             trim_length = 100
             str_data = str(data)
