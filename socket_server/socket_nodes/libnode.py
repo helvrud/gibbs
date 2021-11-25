@@ -111,7 +111,6 @@ class BaseNode:
         Args:
             node_socket (socket): node's socket
         """
-        logger.debug("<<<")
         HEADER_LENGTH = 10
         try:
             message_header = self.server_socket.recv(HEADER_LENGTH)
@@ -124,8 +123,8 @@ class BaseNode:
             if logger.isEnabledFor(logging.DEBUG):
                 trim_length = 100
                 str_data = str(data)
-                str_data = (str_data[:trim_length] + '...') if len(str_data) > 75 else str_data
-                logger.debug(str_data)
+                str_data = (str_data[:trim_length] + '...') if len(str_data) > trim_length else str_data
+                logger.debug('<<< '+str_data)
             return data
         except Exception as e:
             logger.exception(e)
@@ -143,12 +142,11 @@ class BaseNode:
         msg = pickle.dumps(data)
         msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
         self.server_socket.send(msg)
-        logger.debug(">>>")
         if logger.isEnabledFor(logging.DEBUG):
             trim_length = 100
             str_data = str(data)
-            str_data = (str_data[:trim_length] + '...') if len(str_data) > 75 else str_data
-            logger.debug(str_data)
+            str_data = (str_data[:trim_length] + '...') if len(str_data) > trim_length else str_data
+            logger.debug('>>> '+str_data)
         return True
 
     def handle_disconnection(self):
@@ -158,6 +156,7 @@ class BaseNode:
         logger.warning('Disconnected from server')
         self.connected = False
         self.server_socket.close()
+        logger.warning('Socket is closed')
 
 
 
@@ -183,9 +182,9 @@ class ExecutorNode(BaseNode):
             ExecutorClass ([type]): [description]
         """
         super().__init__(IP, PORT)
-        logger.debug(f'Instantiate ExecutorClass...')
+        logger.info(f'Instantiate ExecutorClass...')
         self.Executor = ExecutorClass(*args, **kwargs)
-        logger.info(f'ExecutorClass created')
+        logger.info(f'Executor created, requests will be delegated')
 
     def execute(self, request):
         return self.Executor.execute(request)

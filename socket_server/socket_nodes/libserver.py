@@ -229,7 +229,7 @@ class Server():
             node_id (int): node index in the list of connected nodes (self.nodes)
         """
 
-        logger.debug(f'income from {self.nodes[node_id].socket.getpeername()}')
+        #logger.debug(f'income from {self.nodes[node_id].socket.getpeername()}')
         self.nodes[node_id].finish_request(income_data)
 
 
@@ -349,11 +349,16 @@ class Server():
             data (object): data to send
         """
         try:
-            logger.debug(">>>")
             HEADER_LENGTH = 10
             msg = pickle.dumps(data)
             msg = bytes(f"{len(msg):<{HEADER_LENGTH}}", 'utf-8')+msg
             node_socket.send(msg)
+            if logger.isEnabledFor(logging.DEBUG):
+                node_idx = str(self._get_node_idx_by_socket(node_socket))
+                trim_length = 100
+                str_data = str(data)
+                str_data = (str_data[:trim_length] + '...') if len(str_data) > trim_length else str_data
+                logger.debug('>>> '+node_idx+" : " + str_data)
         except Exception as e:
             logger.exception(e)
             raise e
@@ -368,7 +373,6 @@ class Server():
         """
         HEADER_LENGTH = 10
         try:
-            logger.debug("<<<")
             message_header = node_socket.recv(HEADER_LENGTH)
             #no data -> client closed a connection
             if not len(message_header):
@@ -376,10 +380,13 @@ class Server():
             message_length = int(message_header.decode('utf-8').strip())
             serialized_data = node_socket.recv(message_length)
             data = pickle.loads(serialized_data)
+            if logger.isEnabledFor(logging.DEBUG):
+                node_idx = str(self._get_node_idx_by_socket(node_socket))
+                trim_length = 100
+                str_data = str(data)
+                str_data = (str_data[:trim_length] + '...') if len(str_data) > trim_length else str_data
+                logger.debug('<<< '+node_idx+" : " + str_data)
             return data
-        except socket.error as e:
-            logger.exception(e)
-            return False
         except Exception as e:
             logger.exception(e)
             return False
