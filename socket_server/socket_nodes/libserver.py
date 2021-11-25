@@ -15,13 +15,15 @@ class RequestStatus(Enum):
     """
     InProgress = auto()
     Done = auto()
+    Disconnected = auto()
     #ErrorOccurred = auto()
     #Timeout = auto()
 
 
 
 class NoResult:
-    pass
+    def __repr__(self) -> str:
+        return "NoResult"
 
 
 
@@ -62,12 +64,11 @@ class RequestClass:
         while True:
             if self.status == RequestStatus.Done:
                 return self._result
+            if self.status == RequestStatus.Disconnected:
+                return self._result
 
     def __repr__(self) -> str:
-        if self.status == RequestStatus.Done:
-            return f"Request is done"
-        else:
-            return self.status
+        return f"Status: {self.status}\n>>> {self.request}\n<<< {self._result}"
 
 
 
@@ -99,7 +100,6 @@ class ConnectedNode:
         self.requests.append(Request)
         return Request
 
-
     def finish_request(self, result):
         """Set result to the fist request object in the queue and pop it,
         now the result can be accessed with Request.result()
@@ -109,6 +109,14 @@ class ConnectedNode:
         Request._result = result
         Request.status = RequestStatus.Done
         logger.debug(f'{Request.request} -> {result}')
+
+    def __del__(self):
+        logger.warning('Node is disconnected')
+        while self.requests:
+            Request = self.requests.pop(0)
+            Request.status = RequestStatus.Disconnected
+            logger.error(f'{Request.request} can not be executed, the node is disconnected')
+            Request._result = NoResult
 
 
 
@@ -369,6 +377,9 @@ class Server():
             serialized_data = node_socket.recv(message_length)
             data = pickle.loads(serialized_data)
             return data
+        except socket.error as e:
+            logger.exception(e)
+            return False
         except Exception as e:
             logger.exception(e)
             return False
@@ -389,8 +400,9 @@ class Server():
         """Shuts the server down, no extra actions are yet implemented
         """
         self.active = False
+        self.nodes = []
         self.socket.close()
-        logger.info("the server is shutted down")
+        logger.info("The server is shutted down")
 
 
     def _get_node_idx_by_socket(self, socket_):

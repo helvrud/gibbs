@@ -29,6 +29,7 @@ class BaseNode:
         Returns:
             [bool]: True if success
         """
+        logger.debug('Connecting...')
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server_socket.connect((self.IP, self.PORT))
         self.connected = True
@@ -67,8 +68,8 @@ class BaseNode:
         Returns:
             object: execution result
         """
+        logger.debug('Trying to execute with eval()')
         result = eval(request)
-        logger.debug('Request is executed')
         logger.debug(f'Result: {result}')
         return result
 
@@ -151,10 +152,12 @@ class BaseNode:
         return True
 
     def handle_disconnection(self):
-        """Can be overridden to implement extra actions on disconnection
+        """
+        Can be overridden to implement extra actions on disconnection
         """
         logger.warning('Disconnected from server')
         self.connected = False
+        self.server_socket.close()
 
 
 
