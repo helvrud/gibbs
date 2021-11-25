@@ -287,16 +287,14 @@ class MonteCarloPairs(AbstractMonteCarlo):
 
 def build_no_gel(
     Volume, N_pairs, fixed_anions,
-    log_names, electrostatic=False,
+    electrostatic=False,
     no_interaction=False,
     python_executable='python',
-    script_name = 'espresso_nodes/run_node.py'
+    script_name = 'espresso_nodes/run_node.py',
+    args=[[],[]]
 ):
-    import subprocess
     import socket_nodes
 
-
-    #HD = HD+'/Studium'
     # box volumes and dimmensions
     box_l = [V_**(1/3) for V_ in Volume]
 
@@ -305,11 +303,11 @@ def build_no_gel(
         scripts=[script_name]*2,
         args_list=[
             [
-                '-l', box_l[0], '--salt', "-log_name", log_names[0]
-            ]+(['--no_interaction'] if no_interaction else []),
+                '-l', box_l[0], '--salt',
+            ]+(['--no_interaction'] if no_interaction else []) + args[0],
             [
-                '-l', box_l[1], '--salt', "-log_name", log_names[1]
-            ]+(['--no_interaction'] if no_interaction else []),
+                '-l', box_l[1], '--salt',
+            ]+(['--no_interaction'] if no_interaction else []) + args[1],
         ],
         python_executable=python_executable,
         #stdout=subprocess.PIPE,

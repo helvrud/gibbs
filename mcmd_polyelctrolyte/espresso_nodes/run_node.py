@@ -74,14 +74,13 @@ if __name__=="__main__":
                         metavar='log_name',
                         help = 'name of log file',
                         type = str,
-                        required=False,
-                        default = "")
+                        required=False)
 
     args = parser.parse_args()
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger("run_node.py")
     #logging
-    if args.log_name != "":
-        import logging
+    import logging
+    if '-log_name' in sys.argv:
         logging.basicConfig(level=logging.DEBUG, stream=open(args.log_name, 'w'))
         logger.debug("node_run.py DEBUG")
     logger.info("node_run.py started with args:")
