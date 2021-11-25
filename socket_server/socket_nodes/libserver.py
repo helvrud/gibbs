@@ -80,9 +80,19 @@ class ConnectedNode:
     requests : List[RequestClass] - list of queued requests FIFO
 
     """
+    ###! ids is not the same as node_idx in Server class
+    # this will increment every class instantiation
+    # and will not change on node disconnection
+    # while in the Server instance node_idx is just an index in the
+    # List[ConnectedNode]
+    # it is not critical since used for logging only
+    # TO DO: make indexing consistent
+    ids = int(0)
     def __init__(self, socket) -> None:
         self.socket = socket
         self.requests : List[RequestClass] = []
+        self.ids = ConnectedNode.ids
+        ConnectedNode.ids+=1
 
     def is_busy(self):
         return bool(self.requests)
@@ -108,14 +118,16 @@ class ConnectedNode:
         Request = self.requests.pop(0)
         Request._result = result
         Request.status = RequestStatus.Done
-        logger.debug(f'{Request.request} -> {result}')
+        #if debug, we are already getting all the info needed
+        if not logger.isEnabledFor(logging.DEBUG):
+            logger.info(f'node_{self.ids} : {Request.request} -> {result}')
 
     def __del__(self):
         logger.warning('Node is disconnected')
         while self.requests:
             Request = self.requests.pop(0)
             Request.status = RequestStatus.Disconnected
-            logger.error(f'{Request.request} can not be executed, the node is disconnected')
+            logger.error(f'{self.ids} : {Request.request} can not be executed, the node is disconnected')
             Request._result = NoResult
 
 
