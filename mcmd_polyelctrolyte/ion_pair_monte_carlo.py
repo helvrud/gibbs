@@ -230,6 +230,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
             f'sample_pressure_to_target_error(**{kwargs})', [0, 1])
         pressure_0, err_0, sample_size_0 = request[0].result()
         pressure_1, err_1, sample_size_1 = request[1].result()
+        self.setup()
         return {
             'pressure': (pressure_0, pressure_1),
             'err': (err_0, err_1),
@@ -244,6 +245,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         request = self.server(
             f'sample_Re_to_target_error(**{kwargs})', 1)  # gel box only
         Re, err, sample_size = request.result()
+        self.setup()
         return {
             'Re': Re,
             'err': err,
