@@ -82,8 +82,8 @@ if __name__=="__main__":
     import logging
     if '-log_name' in sys.argv:
         logging.basicConfig(level=logging.DEBUG, stream=open(args.log_name, 'w'))
-        logger.debug("node_run.py DEBUG")
-    logger.info("node_run.py started with args:")
+        logger.debug("run_node.py DEBUG")
+    logger.info("run_node.py started with args:")
     logger.info(' '.join(f'{k}={v}' for k, v in vars(args).items()))
     #set or disable interaction
     if '--no_interaction' in sys.argv:
@@ -99,7 +99,7 @@ if __name__=="__main__":
     if '--salt' in sys.argv:
         from init_reservoir_system import init_reservoir_system
         logger.info('Initializing salt reservoir')
-        system = init_reservoir_system(args.l, NON_BONDED_ATTR)
+        system = init_reservoir_system(box_l = args.l, non_bonded_attr = NON_BONDED_ATTR)
         node = Node(args.IP, args.PORT, EspressoExecutorSalt, system)
     elif '--gel' in sys.argv:
         from init_diamond_system import init_diamond_system
