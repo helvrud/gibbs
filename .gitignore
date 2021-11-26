@@ -10,3 +10,5 @@ docker/packages/**
 *.qsub
 qsubs/**
 *.log
+**/build/**
+**/*.egg-info/**
