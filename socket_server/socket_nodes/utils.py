@@ -1,12 +1,14 @@
-from .libserver import Server
+import logging
+from .libserver import Server, ServerNoDisconnectionAllowed
 import threading
 import subprocess
 
 def create_server_and_nodes(scripts: list,
         args_list = None, python_executable = 'python',
+        ServerClass = ServerNoDisconnectionAllowed,
         **popen_kwargs
         ):
-    server = Server()
+    server = ServerClass()
     threading.Thread(target=server.run, daemon=True).start()
     print('Server started')
     if args_list is None:

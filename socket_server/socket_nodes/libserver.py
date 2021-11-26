@@ -140,6 +140,7 @@ class Server():
     PORT : int
     active : bool
     nodes : List[ConnectedNode] ##should be refactored into collection
+    stop_if_no_one_connected : bool = True #if last node disconnected, stop the server
 
     def __init__(self, IP : str = '127.0.0.1', PORT : int = 0, setup : bool =True) -> None:
         """Initialize an object, set PORT to zero to allow OS assign it
@@ -229,8 +230,12 @@ class Server():
         Args:
             node_id (int): node index in the list of connected nodes (self.nodes)
         """
-        logger.warning(f'Connection with {self.nodes[node_id].socket.getpeername()} has been closed')
+        logger.warning(f'Connection with {node_id} has been closed')
         del self.nodes[node_id]
+        if len(self.nodes) == 0:
+            logger.warning("No nodes connected")
+            if self.stop_if_no_one_connected:
+                self.shutdown()
 
 
     def handle_income(self, income_data, node_id : int):
@@ -441,3 +446,10 @@ class Server():
 
     def __call__(self, *args):
         return self.request(*args)
+
+
+class ServerNoDisconnectionAllowed(Server):
+    def handle_disconnection(self, node_id: int):
+        super().handle_disconnection(node_id)
+        logging.error("Node is disconnected, not expected for libserver.ServerNoDisconnectionAllowed")
+        self.shutdown()
