@@ -8,6 +8,11 @@ import logging
 
 import os
 import sys
+import time
+#time we can spend, we save whatever we have if we are reaching it
+
+TIMEOUT_H = 10
+start_time = time.time()
 
 file_dir =  pathlib.Path(__file__).parent
 print('file_dir:', file_dir)
@@ -46,13 +51,14 @@ logging.basicConfig(
 ##CLI INPUT##
 import argparse
 parser = argparse.ArgumentParser(description="...")
-parser.add_argument('-c_s', action='store', type = float)
-parser.add_argument('-gel_init_vol', action='store', type = float)
-parser.add_argument('-v', action='store', type = float)
-parser.add_argument('-fixed_anions', action='store', type = int),
-parser.add_argument('-electrostatic', action = 'store', type = bool, required=False, default=False)
-parser.add_argument('-debug_node', action = 'store', type = bool, required=False, default=False)
+parser.add_argument('-c_s', metavar = 'c_s', type = float)
+parser.add_argument('-gel_init_vol', metavar = 'gel_init_vol', type = float)
+parser.add_argument('-v', metavar = 'v', type = float)
+parser.add_argument('-fixed_anions', metavar='fixed_anions', type = int),
+parser.add_argument('-electrostatic', action = 'store_true', required=False, default=False)
+parser.add_argument('-debug_node', action = 'store_true', required=False, default=False)
 args = parser.parse_args()
+print(args)
 if args.debug_node:
     print('set not to log the nodes')
     other_args =  [
@@ -73,33 +79,22 @@ input_args = dict(
     electrostatic = args.electrostatic,
     args = other_args
     )
-#except:
-#    ##NON-CLI INPUT##
-#    input_args = dict(
-#        gel_initial_volume = 20000,
-#        c_s_mol = 0.1,
-#        fixed_anions = 50,
-#        log_names=log_names,
-#        no_interaction=False,
-#        python_executable=python_executable,
-#        script_name = run_node_path,
-#        v = 0.6
-#        )
 
 MC = build_no_gel_salinity(**input_args)
-#%%
+
 # equilibration steps
 MC.equilibrate(
-    rounds=25,  # repeats mc and md steps, 10 rounds seems to be enough,
+    rounds=3,  # repeats mc and md steps, 10 rounds seems to be enough,
     md_steps=100000,  # call integrator.run(md_steps)
     mc_steps=200
 )
-#%%
+
 # sample number of particles of each mobile species and pressures in the boxes
 # by alternating number of particles sampling and pressure sampling routines
-
+print("Hours left for sampling", (time.time() - start_time)/3600)
 subsampling_params = dict(
-    sample_size=200,# number of samples
+    sample_size=200,# number of samples,
+    timeout = TIMEOUT_H*3600 - (time.time() - start_time),
     n_particle_sampling_kwargs=dict(
         timeout=120,
         target_eff_sample_size = 50,

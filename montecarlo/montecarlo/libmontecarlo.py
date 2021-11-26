@@ -271,7 +271,7 @@ def sample_to_target_error(
         x_mean, x_err = correlated_data_mean_err(x, tau, ci)
         n_samples_eff = n_samples/(2*tau)
         elapsed_time = time.time() - start_time
-        logger.info(x_err, n_samples_eff, elapsed_time)
+        logger.info(f"{x_err}, {n_samples_eff}, {elapsed_time}")
         #stop sampling?
         if end_loop(elapsed_time, x_err, n_samples_eff):
             break
