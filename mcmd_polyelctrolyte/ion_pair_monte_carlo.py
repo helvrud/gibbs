@@ -327,6 +327,7 @@ def build_no_gel(
     MC.populate(N_pairs)
 
     if electrostatic:
+        print("Electrostatic is set on")
         server('enable_electrostatic()', [0, 1])
         print("Electrostatic is enabled")
 
