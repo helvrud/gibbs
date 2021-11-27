@@ -359,3 +359,70 @@ def build_no_gel_salinity(
         N_pairs=[anion_salt, anion_gel],
         **kwargs)
     return MC
+
+################################################################################
+def build_gel(
+    Volume, N_pairs, fixed_anions, MPC, bond_length,
+    electrostatic=False,
+    no_interaction=False,
+    python_executable='python',
+    script_name = 'espresso_nodes/run_node.py',
+    args=[[],[]]
+):
+    import socket_nodes
+
+    # box volumes and dimmensions
+    box_l = [V_**(1/3) for V_ in Volume]
+
+    # start server and nodes
+    server = socket_nodes.utils.create_server_and_nodes(
+        scripts=[script_name]*2,
+        args_list=[
+            [
+                '-l', box_l[0], '--salt',
+            ]+(['--no_interaction'] if no_interaction else []) + args[0],
+            [
+                '-l', box_l[1], '--gel', '-MPC', MPC, '-bond_length', bond_length,
+            ]+(['--no_interaction'] if no_interaction else []) + args[1],
+        ],
+        python_executable=python_executable,
+        #stdout=subprocess.PIPE,
+        #stderr=subprocess.PIPE,
+    )
+
+    MC = MonteCarloPairs(server)
+
+    MC.populate(N_pairs)
+
+    if electrostatic:
+        print("Electrostatic is set on")
+        server('enable_electrostatic()', [0, 1])
+        print("Electrostatic is enabled")
+
+    return MC
+
+def build_gel_salinity(
+    c_s_mol, gel_initial_volume, v, **kwargs
+):
+    from utils import mol_to_n
+    from analytic_donnan import speciation, speciation_inf_reservoir
+    c_s = mol_to_n(c_s_mol, unit_length_nm=0.35)
+    fixed_anions = kwargs["fixed_anions"]
+    anions_inf_res, cations_inf_res = speciation_inf_reservoir(
+        c_s, fixed_anions, gel_initial_volume)
+    gel_volume = gel_initial_volume*v
+    salt_volume = gel_initial_volume*(1-v)
+    anion_salt, anion_gel, cation_salt, cation_gel = map(
+        round,
+        speciation(cations_inf_res, fixed_anions, salt_volume, gel_volume)
+    )
+    print('Whithin donnan theory:\t',
+        f"anion_salt: {anion_salt}",
+        f"anion_gel: {anion_gel}",
+        f"cation_salt: {cation_salt}",
+        f"cation_gel: {cation_gel}")
+    MC = build_gel(
+        Volume=[salt_volume, gel_volume],
+        N_pairs=[anion_salt, anion_gel],
+        **kwargs)
+    return MC

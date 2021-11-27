@@ -51,9 +51,13 @@ RUN cd espresso
 RUN mkdir -p espresso/es-build
 WORKDIR /home/ml/espresso/espresso/es-build
 RUN cmake ..
-RUN make -j 8
+RUN make -j 4
 RUN make install
 
 FROM build_espresso as build_MCMD
+COPY packages/ /home/ml/
 RUN pip3 install /home/ml/socket_server/
 RUN pip3 install /home/ml/montecarlo/
+WORKDIR /home/ml
+ENV USERNAME ml
+#ENV PYTHONPATH "/usr/local/lib/python3/dist-packages/:$PYTHONPATH"

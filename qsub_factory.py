@@ -5,8 +5,8 @@ def pbs_part(N, mem, ncpus, walltime, prefix):
         f'#PBS -l ncpus={ncpus}\n',
         f'#PBS -l walltime={walltime}\n',
         f'#PBS -m ae\n',
-        f'#PBS -e {prefix}/gibbs/data/{N}.qsuberr\n',
-        f'#PBS -o {prefix}/gibbs/data/{N}.qsubout\n',
+        f'#PBS -e {prefix}/gibbs/qsuberr/{N}.qsuberr\n',
+        f'#PBS -o {prefix}/gibbs/qsubout/{N}.qsubout\n',
     ))
 
 def singularity_exec(prefix, pypresso_docker, script_name, args):
@@ -16,7 +16,7 @@ def singularity_exec(prefix, pypresso_docker, script_name, args):
         f"{prefix}/{script_name} ",
         ))+' '.join([str(v) for v in args])
 
-def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=1, walltime="10:0:0"):
+def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=1, walltime="10:30:0"):
     import pathlib
     if N is None:
         N = '_'.join([str(v) for v in args]).replace('-','')
@@ -41,7 +41,8 @@ for vv in v:
         ]
     generate(
         prefix = "/storage/brno2/home/laktionm",
-        pypresso_docker="/home/ml/espresso/espresso/es-build/pypresso",
+        #pypresso_docker="/home/ml/espresso/espresso/es-build/pypresso",
+        pypresso_docker="pypresso",
         script_name="gibbs/mcmd_polyelctrolyte/no_diamond_conc_as_arg.py",
         args = args,
         ncpus=3

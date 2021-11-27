@@ -58,8 +58,6 @@ def init_diamond_system(MPC, bond_length, alpha, bonded_attr, non_bonded_attr, p
         raise ArithmeticError("Can not pass both target_pressure and target_l")
     if target_l is not None:
         change_volume(system, target_l)
-    if target_pressure is not None:
-        change_volume_to_target_pressure(system, target_pressure)
 
     return system
 
@@ -140,7 +138,7 @@ def get_VP(system, V_min, V_max, V_step, direction = 'any', **sampling_kwargs):
             change_volume(system, l_min)
         else:
             change_volume(system, l_max)
-            V = V[::-1] 
+            V = V[::-1]
     elif direction == 'compress':
         change_volume(system, l_max)
         V=V[::-1]
@@ -148,7 +146,7 @@ def get_VP(system, V_min, V_max, V_step, direction = 'any', **sampling_kwargs):
         change_volume(system, l_min)
     else:
         raise AttributeError("Invalid direction")
-    
+
     P=[]
     P_err = []
     print(V)
@@ -159,7 +157,7 @@ def get_VP(system, V_min, V_max, V_step, direction = 'any', **sampling_kwargs):
         P_err.append(pressure_err)
         print(f"V:{v}, l:{l}, P:{pressure}")
     return V, P, P_err
-        
+
 
 def _get_pairs(system, gel_start_id):
     pairs = [  (0, 1), (1, 2), (1, 3), (1, 4),

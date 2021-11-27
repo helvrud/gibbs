@@ -84,7 +84,7 @@ MC = build_no_gel_salinity(**input_args)
 
 # equilibration steps
 MC.equilibrate(
-    rounds=3,  # repeats mc and md steps, 10 rounds seems to be enough,
+    rounds=25,  # repeats mc and md steps, 10 rounds seems to be enough,
     md_steps=100000,  # call integrator.run(md_steps)
     mc_steps=200
 )
