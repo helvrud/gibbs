@@ -37,7 +37,7 @@ for vv in v:
         '-c_s', 0.1,
         '-gel_init_vol', 20000,
         '-fixed_anions', 50,
-        '-electrostatic', True
+        #'-electrostatic'
         ]
     generate(
         prefix = "/storage/brno2/home/laktionm",
