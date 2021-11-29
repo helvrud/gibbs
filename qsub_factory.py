@@ -16,7 +16,7 @@ def singularity_exec(prefix, pypresso_docker, script_name, args):
         f"{prefix}/{script_name} ",
         ))+' '.join([str(v) for v in args])
 
-def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=1, walltime="10:30:0"):
+def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=1, walltime="11:00:0"):
     import pathlib
     if N is None:
         N = '_'.join([str(v) for v in args]).replace('-','')
@@ -33,17 +33,19 @@ v = np.round(np.linspace(0.3, 0.8, 101), 2)
 
 for vv in v:
     args = [
+        '-electrostatic',
         '-v', vv,
         '-c_s', 0.1,
         '-gel_init_vol', 20000,
         '-fixed_anions', 50,
-        #'-electrostatic'
+        '-MPC', 15,
+        '-bl', 1,
         ]
     generate(
         prefix = "/storage/brno2/home/laktionm",
         #pypresso_docker="/home/ml/espresso/espresso/es-build/pypresso",
         pypresso_docker="pypresso",
-        script_name="gibbs/mcmd_polyelctrolyte/no_diamond_conc_as_arg.py",
+        script_name="gibbs/mcmd_polyelctrolyte/diamond_conc_as_arg.py",
         args = args,
         ncpus=3
         )
