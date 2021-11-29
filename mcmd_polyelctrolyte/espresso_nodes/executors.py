@@ -258,19 +258,31 @@ class EspressoExecutorGel(EspressoExecutorSalt):
 
 #%%
 if __name__ == "__main__": ##for debugging
-    system = espressomd.System(box_l = [20, 20, 20])
-    system.time_step = 0.001
-    system.cell_system.skin = 0.4
-    system.thermostat.set_langevin(kT=1, gamma=1, seed=42)
-    lj_sigma=1
-    system.non_bonded_inter[0,0].lennard_jones.set_params(epsilon=1, sigma=lj_sigma, cutoff=lj_sigma*2**(1./6), shift='auto')
+    from init_diamond_system import init_diamond_system
+    print('Initializing reservoir with a gel')
+    from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
+    MPC =15
+    bond_length =1
+    alpha = 1
+    target_l = 20000**(1/3)
+    system = init_diamond_system(
+        MPC = MPC, bond_length = bond_length, alpha = alpha, target_l = target_l,
+        bonded_attr = BONDED_ATTR, non_bonded_attr = NON_BONDED_ATTR, particle_attr =PARTICLE_ATTR
+        )
     executor = EspressoExecutorSalt(system)
-    executor.populate(50, q=-1)
-    executor.populate(50, q=+1)
 #%%
-    executor.minimize_energy(dist=1)
-#%%
-    executor.enable_electrostatic()
+    executor.add_particle({'id':'int'}, type = 0, q=-1)
+    executor.add_particle({'id':'int'}, type = 1, q=1)
 # %%
-    executor.potential_energy()
-# %%
+    def plotly_scatter3d(executor):
+        import plotly.express as px
+        import pandas as pd
+        system = executor.system
+        box_l = system.box_l[0]
+        particles = executor.part_data((None,None), {'type':'int','q':'int', 'pos':'list'})
+        df = pd.DataFrame(particles)
+        df.q = df.q.astype('category')
+        df.type = df.type.astype('category')
+        df[['x', 'y', 'z']] = df.pos.apply(pd.Series).apply(lambda x: x%box_l)
+        fig = px.scatter_3d(df, x='x', y='y', z='z', color ='type', size_max=18)
+        return fig

@@ -118,3 +118,15 @@ def sample_all(
     results_dl = {k: np.array(v) for k,v in results_dl.items()}
     print('Sampling done, returning the data')
     return results_dl
+
+
+def plotly_scatter3d(server, client):
+    import plotly.express as px
+    import pandas as pd
+    box_l = server("system.box_l[0]", client).result()
+    particles = server("part_data((None,None), {'type':'int','q':'int', 'pos':'list'})", client).result()
+    df = pd.DataFrame(particles)
+    df.q = df.q.astype('category')
+    df[['x', 'y', 'z']] = df.pos.apply(pd.Series).apply(lambda x: x%box_l)
+    fig = px.scatter_3d(df, x='x', y='y', z='z', color ='q', symbol = 'type')
+    fig.show()

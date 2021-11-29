@@ -182,14 +182,14 @@ def calc_Re(system, pairs):
         D = np.append(D, Re)
     return D
 
-def  minimize_energy(system, timeout=60):
+def  minimize_energy(system, timeout=600):
     import time
     system.thermostat.suspend()
     # minimize energy using min_dist as the convergence criterion
     system.integrator.set_steepest_descent(f_max=0, gamma=1e-3,
                                         max_displacement=0.01)
     start_time = time.time()
-    while system.analysis.min_dist() < 0.5: #?
+    while system.analysis.min_dist() < 0.9: #?
         elapsed_time = time.time() - start_time
         #print(f"minimization: {system.analysis.energy()['total']:+.2e}")
         #print(f"min_dist: {system.analysis.min_dist():+.2e}")

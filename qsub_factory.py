@@ -29,7 +29,7 @@ def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=
         f.write(singularity_exec(prefix, pypresso_docker, script_name, args))
 
 import numpy as np
-v = np.round(np.linspace(0.3, 0.8, 101), 2)
+v = np.round(np.linspace(0.3, 0.8, 101), 4)
 
 for vv in v:
     args = [
@@ -37,7 +37,7 @@ for vv in v:
         '-v', vv,
         '-c_s', 0.1,
         '-gel_init_vol', 20000,
-        '-fixed_anions', 50,
+        '-fixed_anions', 248,
         '-MPC', 15,
         '-bl', 1,
         ]
