@@ -8,7 +8,7 @@ from mcmd_polyelctrolyte import utils
 
 LAST_USED_COLOR = lambda: plt.gca().lines[-1].get_color()
 
-path = pathlib.Path('data/no_diamond_conc_as_arg')
+path = pathlib.Path('data/diamond_conc_as_arg')
 json_files = path.glob('*.pkl')
 
 def flatten_dict(d, prefix='_'):

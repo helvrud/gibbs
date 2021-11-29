@@ -11,6 +11,7 @@ from montecarlo.libmontecarlo import sample_to_target_error
 import numpy as np
 import random
 import logging
+logging.getLogger("init_diamond_system.py")
 
 def init_diamond_system(MPC, bond_length, alpha, bonded_attr, non_bonded_attr, particle_attr, target_l=None, target_pressure=None):
     import espressomd.interactions
@@ -209,8 +210,9 @@ if __name__=='__main__':
     #BONDED_ATTR = None
     #NON_BONDED_ATTR = None
     #system = init_diamond_system(15,0.966,0.5, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
-    system = init_diamond_system(15,0.966,0.5, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
+    system = init_diamond_system(15, 0.966, 1, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
     N = 20
+    
     #for i in range(N):
     #    system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['cation'])
     #    system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['anion'])

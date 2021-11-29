@@ -1,7 +1,7 @@
 #%%
 import espressomd
 import logging
-logging.getLogger(__name__)
+logging.getLogger("init_reservoir_system.py")
 
 def _minimize_energy(system):
     system.thermostat.suspend()

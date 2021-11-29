@@ -15,26 +15,26 @@ TIMEOUT_H = 10
 start_time = time.time()
 
 file_dir =  pathlib.Path(__file__).parent
-logging.info('file_dir:', file_dir)
+print('file_dir:', file_dir)
 
 output_dir = file_dir.parent / 'data' / pathlib.Path(__file__).stem
 output_dir.mkdir(parents=True, exist_ok=True)
 
 run_node_path = file_dir / 'espresso_nodes'/ 'run_node.py'
-logging.info('node script path:', run_node_path)
+print('node script path:', run_node_path)
 
 python_executable = 'pypresso'
-logging.info('python executable path', python_executable)
+print('python executable path', python_executable)
 
 logs_dir = file_dir.parent / 'logs' / pathlib.Path(__file__).stem
 logs_dir.mkdir(parents=True, exist_ok=True)
-logging.info('path to logs', logs_dir)
+print('path to logs', logs_dir)
 
 #random file name
 import uuid
 base_name = uuid.uuid4().hex[:8]
 output_fname =base_name+'.pkl'
-logging.info('output filename', output_fname)
+print('output filename', output_fname)
 log_names = [
     logs_dir / (base_name+'_salt.log'),
     logs_dir / (base_name+'_gel.log')
@@ -46,7 +46,7 @@ logging.basicConfig(
     level=logging.INFO,
     stream=open(server_log, 'w'),
     format = '%(asctime)s - %(message)s')
-
+#%%
 #%%
 ##CLI INPUT##
 import argparse
@@ -61,15 +61,15 @@ parser.add_argument('-electrostatic', action = 'store_true', required=False, def
 parser.add_argument('-debug_node', action = 'store_true', required=False, default=False)
 #%%
 args = parser.parse_args()
-logging.info(args)
+print(args)
 if args.debug_node:
-    logging.info('set not to log the nodes')
+    print('set not to log the nodes')
     other_args =  [
         ['-log_name' , log_names[0]],
         ['-log_name' , log_names[1]]
     ]
 else:
-    logging.info('set to log the nodes for DEBUG')
+    print('set to log the nodes for DEBUG')
     other_args = [[],[]]
 input_args = dict(
     gel_initial_volume = args.gel_init_vol,
@@ -96,7 +96,7 @@ MC.equilibrate(
 
 # sample number of particles of each mobile species and pressures in the boxes
 # by alternating number of particles sampling and pressure sampling routines
-logging.info("Hours left for sampling", TIMEOUT_H-(time.time() - start_time)/3600)
+print("Hours left for sampling", TIMEOUT_H-(time.time() - start_time)/3600)
 subsampling_params = dict(
     sample_size=200,# number of samples,
     timeout = TIMEOUT_H*3600 - (time.time() - start_time),
@@ -125,4 +125,4 @@ print(result)
 with open(output_dir/output_fname, 'wb') as f:
     pickle.dump(result, f)
 
-logging.info("DONE")
+print("DONE")
