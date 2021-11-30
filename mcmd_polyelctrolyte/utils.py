@@ -69,7 +69,7 @@ def pressure_to_Pa(pressure_kT, unit_length_nm=0.35):
 
 
 def sample_all(
-        MC, sample_size, timeout,
+        MC, target_sample_size, timeout,
         n_particle_sampling_kwargs = None, pressure_sampling_kwargs = None):
     try:
         from tqdm import trange
@@ -81,7 +81,7 @@ def sample_all(
 
     results_ld = [] #list of dicts
 
-    for i in trange(sample_size):
+    for i in trange(target_sample_size):
         if time.time()-start_time > timeout:
             print("Timeout is reached, return already calculated data")
             break
@@ -116,5 +116,6 @@ def sample_all(
     #convert list of dicts to dict of lists
     results_dl = {k: [dic[k] for dic in results_ld] for k in results_ld[0]}
     results_dl = {k: np.array(v) for k,v in results_dl.items()}
+    results_dl.update({"reached_sample_size"})
     print('Sampling done, returning the data')
     return results_dl
