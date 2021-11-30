@@ -5,8 +5,8 @@ def pbs_part(N, mem, ncpus, walltime, prefix):
         f'#PBS -l ncpus={ncpus}\n',
         f'#PBS -l walltime={walltime}\n',
         f'#PBS -m ae\n',
-        f'#PBS -e {prefix}/gibbs/qsuberr/{N}.qsuberr\n',
-        f'#PBS -o {prefix}/gibbs/qsubout/{N}.qsubout\n',
+        f'#PBS -e {prefix}/gibbs/qsub/{N}.qsuberr\n',
+        f'#PBS -o {prefix}/gibbs/qsub/{N}.qsubout\n',
     ))
 
 def singularity_exec(prefix, pypresso_docker, script_name, args):
