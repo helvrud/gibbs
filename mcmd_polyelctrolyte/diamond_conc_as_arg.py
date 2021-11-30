@@ -9,9 +9,6 @@ import logging
 import os
 import sys
 import time
-
-#time we can spend, we save whatever we have if we are reaching it
-TIMEOUT_H = 10
 start_time = time.time()
 
 file_dir =  pathlib.Path(__file__).parent
@@ -59,6 +56,7 @@ parser.add_argument('-MPC', metavar='MPC', type = int),
 parser.add_argument('-bl', metavar='bl', type = int),
 parser.add_argument('-electrostatic', action = 'store_true', required=False, default=False)
 parser.add_argument('-debug_node', action = 'store_true', required=False, default=False)
+parser.add_argument('-timeout_h', metavar='timeout_h', type = float, required=False, default=10.0)
 #%%
 args = parser.parse_args()
 print(args)
@@ -71,6 +69,9 @@ if args.debug_node:
 else:
     print('set to log the nodes for DEBUG')
     other_args = [[],[]]
+
+TIMEOUT_H = args.timeout_h
+
 input_args = dict(
     gel_initial_volume = args.gel_init_vol,
     c_s_mol = args.c_s,
@@ -89,7 +90,7 @@ MC = build_gel_salinity(**input_args)
 #%%
 # equilibration steps
 MC.equilibrate(
-    rounds=25,  # repeats mc and md steps, 10 rounds seems to be enough,
+    rounds=2,  # repeats mc and md steps, 10 rounds seems to be enough,
     md_steps=100000,  # call integrator.run(md_steps)
     mc_steps=200
 )
@@ -98,7 +99,7 @@ MC.equilibrate(
 # by alternating number of particles sampling and pressure sampling routines
 print("Hours left for sampling", TIMEOUT_H-(time.time() - start_time)/3600)
 subsampling_params = dict(
-    sample_size=200,# number of samples,
+    target_sample_size=200,# number of samples,
     timeout = TIMEOUT_H*3600 - (time.time() - start_time),
     n_particle_sampling_kwargs=dict(
         timeout=120,
@@ -120,9 +121,11 @@ result = sample_all(
 # add inputs to output file and save the pickle to ../data/script_name.pkl
 result.update({'input':input_args})
 result.update(subsampling_params)
+result.update({"timeout_h" : TIMEOUT_H})
 print(result)
 
 with open(output_dir/output_fname, 'wb') as f:
     pickle.dump(result, f)
 
 print("DONE")
+#%%
