@@ -52,7 +52,7 @@ def init_diamond_system(MPC, bond_length, alpha, bonded_attr, non_bonded_attr, p
 
     re_type_nodes(system, gel_indices, particle_attr)
     charge_gel(system, gel_indices, alpha, particle_attr)
-    minimize_energy(system, timeout=20)
+    minimize_energy(system, timeout=60)
     #logging.debug('Minimizing energy before volume change')
     #system.minimize_energy.minimize()
     if (target_pressure is not None) and (target_l is not None):
@@ -104,6 +104,7 @@ def charge_gel(system, gel_indices, alpha, particle_attr, add_counterions = True
 
 def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05, int_steps = 10000):
     logging.debug (f'change_volume to the size L = {target_l}')
+    system.integrator.run(int_steps)
     while system.box_l[0] != target_l:
         factor = target_l/system.box_l[0]
         if factor<scale_down_factor:
@@ -212,7 +213,7 @@ if __name__=='__main__':
     #system = init_diamond_system(15,0.966,0.5, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
     system = init_diamond_system(15, 0.966, 1, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
     N = 20
-    
+
     #for i in range(N):
     #    system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['cation'])
     #    system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['anion'])
