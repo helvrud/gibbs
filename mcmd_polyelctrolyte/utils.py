@@ -113,11 +113,12 @@ def sample_all(
         res_dict = {**n_particles_sample, **pressures_sample}
         results_ld.append(res_dict)
         print(f"{i}/{target_sample_size}")
+        print(res_dict)
 
     #convert list of dicts to dict of lists
     results_dl = {k: [dic[k] for dic in results_ld] for k in results_ld[0]}
     results_dl = {k: np.array(v) for k,v in results_dl.items()}
-    results_dl.update({"reached_sample_size"})
+    results_dl.update({ "reached_sample_size": i})
     print('Sampling done, returning the data')
     return results_dl
 
