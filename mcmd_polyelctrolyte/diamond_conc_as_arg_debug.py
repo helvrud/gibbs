@@ -83,9 +83,9 @@ input_args = dict(
 MC = build_gel_salinity(**input_args)
 # equilibration steps
 MC.equilibrate(
-    rounds=25,  # repeats mc and md steps, 10 rounds seems to be enough,
-    md_steps=100000,  # call integrator.run(md_steps)
-    mc_steps=200
+    rounds=2,  # repeats mc and md steps, 10 rounds seems to be enough,
+    md_steps=1000,  # call integrator.run(md_steps)
+    mc_steps=20
 )
 
 # sample number of particles of each mobile species and pressures in the boxes
@@ -95,12 +95,12 @@ subsampling_params = dict(
     target_sample_size=200,# number of samples,
     timeout = TIMEOUT_H*3600 - (time.time() - start_time),
     n_particle_sampling_kwargs=dict(
-        timeout=120,
+        timeout=20,
         target_eff_sample_size = 50,
         initial_sample_size=100
     ),
     pressure_sampling_kwargs=dict(
-        timeout=120,
+        timeout=20,
         target_eff_sample_size = 50,
         initial_sample_size=100
     )
