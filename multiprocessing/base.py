@@ -655,6 +655,7 @@ class base():
         return pressure_tensor
 
 
+
     def coords(self):
 
 
@@ -755,87 +756,115 @@ class base():
             output.write(string)
         output.close()
 
-    def vtf(self):
-        from espressomd.io.writer import vtf
+    def writevtf(self):
 
-        fp = open(self.name+'.vtf', mode='w+t')
-        vtf.writevsf(self.system, fp)
-        vtf.writevcf(self.system, fp)
+
+        fp = open(self.fname+'.vtf', mode='w+t')
+        fp.write("unitcell {} {} {}\n".format(self.box_l,self.box_l,self.box_l))
+        coords = np.random.choice(self.Samples['coords'])
+        
+        for i in range(len(coords['id'])):
+            idx = coords['id'][i]
+            typ = coords['type'][i]
+            #print("atom {} radius 1 name {} type {}\n".format(idx, typ, typ))
+            #radius = 0.5
+            #if typ in [self.TYPES['nodes'],self.TYPES['PA'],self.TYPES['PHA']]: radius = 1
+            radius = 1.0
+            fp.write("atom {} radius {} name {} type {}\n".format(idx, radius, typ, typ))
+
+        for b in coords['bonds']:
+            if len(b) > 0:
+                for i in b[1:]:
+                    #print("bond {}:{}\n".format(b[0], i))
+                    fp.write("bond {}:{}\n".format(b[0], i))
+
+        fp.write("timestep indexed\n")
+        for i in range(len(coords['id'])):
+            pos = coords['pos'][i]  # % self.box_l is needed to wrap coordinates to simulation box
+            idx = coords['id'][i]
+            #print("{} {} {} {}\n".format(idx, pos[0], pos[1], pos[2]))
+            fp.write("{} {} {} {}\n".format(idx, pos[0], pos[1], pos[2]))
+        
         fp.close()
-        print (self.name+'.vtf')
+        self.fnamevtf = self.fname+'.vtf'
+        #print (self.fnamevtf)
+        return
+    def writemol2(self):
+        coords = np.random.choice(self.Samples['coords'])
+        # For reference of mol2 file format see the link https://chemicbook.com/2021/02/20/mol2-file-format-explained-for-beginners-part-2.html
+        strings = []
 
-    @staticmethod
-    def VMD(gel_class, where:str) -> None:
-        if where[-1] != '/': where += "/"
-        os.makedirs(os.path.expanduser(where), exist_ok=True)
+        strings.append("# Name: combgel\n")
+        strings.append("@<TRIPOS>MOLECULE\n")
+        strings.append(self.name.replace('/','_')+"\n")
+        strings.append(str(len(coords['id']))+' '+str(len(coords['bonds'])+7)+'\n')
+        strings.append("SMALL\n")
+        strings.append("USER_CHARGES\n")
+        strings.append("@<TRIPOS>ATOM\n")
+        
+        coords_pos = coords['pos'] % self.box_l
+        for i in range(len(coords['id'])):
+            idx = coords['id'][i]
+            name = self.NAMES[coords['type'][i]][0].upper()
+            coord = coords_pos[i]
+            #print("atom {} radius 1 name {} type {}\n".format(idx, typ, typ))
+            #radius = 0.5
+            #if typ in [self.TYPES['nodes'],self.TYPES['PA'],self.TYPES['PHA']]: radius = 1
+            strings.append("{} {} {:3.3f} {:3.3f} {:3.3f} {}\n".format(idx, name, coord[0], coord[1], coord[2], name))
+        strings.append("@<TRIPOS>BOND\n")
+        
+        i = 0
+        for b in coords['bonds']:
+            if len(b) > 0:
+                for j in b[1:]:
+                    if np.linalg.norm(coords_pos[b[0]] - coords_pos[j])<2.1:
+                        strings.append("{} {} {} 1\n".format(i, b[0], j))
+                        i+=1
+            #print(i)
+        strings[3] = str(len(coords['id']))+' '+str(i)+'\n'
+        fp = open(self.fname+'.mol', mode='w+t')
+        for s in strings:
+            fp.write(s)
+        fp.close()
+        self.fnamemol = self.fname+'.mol'
+        print ('structure saved in '+self.fnamemol)
+        return
 
-        def save_xyz(where_what:str, pos: np.array) -> None:
-            number_of_atoms = len(pos)
-            #
-            bb = np.empty([number_of_atoms, 4], dtype=object)
-            bb[:, 0] = "node"
-            bb[:, 1] = pos[:,0]
-            bb[:, 2] = pos[:,1]
-            bb[:, 3] = pos[:,2]
-            np.savetxt(os.path.expanduser(where_what), X=bb, fmt="%s", header=f"{number_of_atoms}\n", comments="")
-
-        def save_vmd(where_what:str, box_l1:float, types, bonds) -> None:
-
-            with open(os.path.expanduser(where_what), 'w') as fvmd:
-                fvmd.write("mol new {" + os.path.expanduser(where_what[:-4]) + ".xyz" + "}\n")
-                fvmd.write("mol modstyle 0 0 CPK 1.000000 0.300000 12.000000 12.000000\n")
-
-                fvmd.write("pbc set {" + str(box_l1) + " " + str(box_l1) + " " + str(box_l1) + "    " + "90.0 90.0 90.0} -all\n")
-                fvmd.write("pbc box_draw\n"
-                           "set box_length [lindex [lindex [pbc get] 0] 0]\n")
-                for part_id, part_type in types:
-                    fvmd.write('set atom' + str(part_id) + ' [atomselect top "index ' + str(part_id) + '"] \n')
-                    fvmd.write('$atom' + str(part_id) + ' set type ' + str(part_type) + '\n')
-                for bond in bonds:
-                        fvmd.write("topo addbond " + str(bond[0]) + " " + str(bond[1]) + '\n')  # bond[0] => part_id
-                fvmd.write(
-                    '''
-            proc remove_long_bonds { max_length } {
-                for { set i 0 } { $i < [ molinfo top get numatoms ] } { incr i } {
-                    set bead [ atomselect top "index $i" ]
-                    set bonds [ lindex [$bead getbonds] 0 ]
-
-                    if { [ llength bonds ] > 0 } {
-                        set bonds_new {}
-                        set xyz [ lindex [$bead get {x y z}] 0 ]
-
-                        foreach j $bonds {
-                            set bead_to [ atomselect top "index $j" ]
-                            set xyz_to [ lindex [$bead_to get {x y z}] 0 ]
-                            if { [ vecdist $xyz $xyz_to ] < $max_length } {
-                                lappend bonds_new $j
-                            }
-                        }
-                        $bead setbonds [ list $bonds_new ]
-                    }
-                }
-            }
-                    '''
-                )
-                fvmd.write("remove_long_bonds { 5 }")
-
-
-        for step in range(len(gel_class.Samples['coords'])):
-            print(f"Working on {step} step...")
-            unifined_bonds = []
-
-            save_xyz(where+str(gel_class)+str(step)+".xyz", gel_class.Samples['coords'][step]['pos'])
-            id_type_array = list(zip(gel_class.Samples['coords'][step]['id'], gel_class.Samples['coords'][step]['type']))
-
-            for connection in gel_class.Samples['coords'][step]['bonds']:
-                if len(connection) > 1:
-                    if len(connection) == 2: unifined_bonds.append(connection)
-                    if len(connection) >  2:
-                        for idx in range(len(connection)-1): unifined_bonds.append( [connection[idx], connection[idx+1]] )
-
-            save_vmd(where+str(gel_class)+str(step)+".vmd", box_l1 = gel_class.box_l, types=id_type_array, bonds=unifined_bonds)
-
-
+    def VMD(self, run=False):
+        self.writevtf()
+        #input file
+        vmd_title = open('vmd_title.tcl', "rt")
+        types_text = 'set type_na {}\n'.format(self.TYPES['Na'])
+        types_text += 'set type_cl {}\n'.format(self.TYPES['Cl'])
+        types_text += 'set type_ca {}\n'.format(self.TYPES['Ca'])
+        types_text += 'set type_pa {}\n'.format(self.TYPES['PA'])
+        types_text += 'set type_pha {}\n'.format(self.TYPES['PHA'])
+        types_text += 'set type_nodes {}\n\n'.format(self.TYPES['nodes'])
+        
+        
+        vmd_title_txt = vmd_title.read()
+        vmd_title.close()
+        vmd_title_txt = types_text + vmd_title_txt.replace("Put a name of VFT file here", self.fnamevtf)
+        vmd_title_txt += 'scale to 0.05\n'
+        vmd_title_txt += 'render snapshot '+self.fname+'.tga\n'
+        self.fnamevmd = self.fname+'.vmd'
+        #output file to write the result to
+        fout = open(self.fnamevmd, "wt")
+        fout.write(vmd_title_txt)
+        fout.close()
+        print ('VMD vile saved: '+self.fnamevmd)
+        if run:
+            os.popen('vmd -e '+self.fnamevmd)
+        else: 
+            # this commands would render the vmd file            
+            os.popen('echo exit >> '+self.fnamevmd)
+            os.popen('vmd -dispdev text -e '+self.filename.vmd)
+            os.popen('convert '+self.filename+'.tga '+self.filename+'.jpg')
+            
+        return        
+        
+        
+   
 
 def plotLJ(sigma = 1):
         r = np.linspace(0,10)
