@@ -177,7 +177,7 @@ class Server():
         logger.info(f'Setup is done')
 
 
-    def wait_for_connections(self, n : int, timeout : int = 60) -> None:
+    def wait_for_connections(self, n : int, timeout : int = 600) -> None:
         """Wait for n nodes to connect, should be used to assure that all
         clients are connected
         Args:
@@ -192,7 +192,7 @@ class Server():
             else:
                 pass
 
-    def wait_connection(self, timeout : int = 60) -> None:
+    def wait_connection(self, timeout : int = 600) -> None:
         """Wait for new connection
         Args:
             timeout (int, optional): Timeout in seconds. Defaults to 10.
