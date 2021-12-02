@@ -37,9 +37,9 @@ for vv in v:
         '-electrostatic',
         '-v', vv,
         '-c_s', 0.1,
-        '-gel_init_vol', 20000,
-        '-fixed_anions', 248,
-        '-MPC', 15,
+        '-gel_init_vol', 40000,
+        '-fixed_anions', 448,
+        '-MPC', 30,
         '-bl', 1,
         '-timeout_h', 23
         ]

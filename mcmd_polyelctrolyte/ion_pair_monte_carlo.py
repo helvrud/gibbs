@@ -1,4 +1,5 @@
 # %%
+import time
 from typing import Tuple
 import numpy as np
 import random, os
@@ -257,11 +258,13 @@ class MonteCarloPairs(AbstractMonteCarlo):
         self.server(f"system.integrator.run({md_steps})", [0, 1])
         self.setup()
 
-    def equilibrate(self, md_steps=100000, mc_steps=200, rounds=25):
+    def equilibrate(self, md_steps=10000, mc_steps=200, rounds=25, timeout_h=1):
         self.run_md(md_steps)
+        start_time = time.time()
         for ROUND in trange(rounds):
             [self.step() for i in range(mc_steps)]
             self.run_md(md_steps)
+            if (time.time() - start_time())/3600 >= timeout_h: return True
         return True
 
     def populate(self, N_pairs):

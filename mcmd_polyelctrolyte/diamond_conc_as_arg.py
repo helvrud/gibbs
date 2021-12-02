@@ -85,7 +85,8 @@ MC = build_gel_salinity(**input_args)
 MC.equilibrate(
     rounds=25,  # repeats mc and md steps, 10 rounds seems to be enough,
     md_steps=100000,  # call integrator.run(md_steps)
-    mc_steps=200
+    mc_steps=200,
+    timeout_h=1 #let's not spend to much time on it :)
 )
 
 # sample number of particles of each mobile species and pressures in the boxes
