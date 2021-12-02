@@ -29,8 +29,8 @@ def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=
         f.write(singularity_exec(prefix, pypresso_docker, script_name, args))
 
 import numpy as np
-v = np.round(np.linspace(0.3, 0.8, 101), 4)
-#v = np.round(np.arange(0.35, 0.55, 0.005), 4)
+#v = np.round(np.linspace(0.3, 0.8, 101), 4)
+v = np.round(np.arange(0.25, 0.5, 0.01), 4)
 
 for vv in v:
     args = [

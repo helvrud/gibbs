@@ -57,13 +57,13 @@ args = parser.parse_args()
 print(args)
 TIMEOUT_H = args.timeout_h
 if args.debug_node:
-    print('set not to log the nodes')
+    print('set to log the nodes for DEBUG')
     other_args =  [
         ['-log_name' , log_names[0]],
         ['-log_name' , log_names[1]]
     ]
 else:
-    print('set to log the nodes for DEBUG')
+    print('set not to log the nodes')
     other_args = [[],[]]
 
 input_args = dict(
