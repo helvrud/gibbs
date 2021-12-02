@@ -16,7 +16,7 @@ def singularity_exec(prefix, pypresso_docker, script_name, args):
         f"{prefix}/{script_name} ",
         ))+' '.join([str(v) for v in args])
 
-def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=1, walltime="16:00:0"):
+def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=1, walltime="24:00:0"):
     import pathlib
     if N is None:
         N = '_'.join([str(v) for v in args]).replace('-','')
@@ -29,8 +29,8 @@ def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=
         f.write(singularity_exec(prefix, pypresso_docker, script_name, args))
 
 import numpy as np
-#v = np.round(np.linspace(0.3, 0.8, 101), 4)
-v = np.round(np.arange(0.35, 0.55, 0.005), 4)
+v = np.round(np.linspace(0.3, 0.8, 101), 4)
+#v = np.round(np.arange(0.35, 0.55, 0.005), 4)
 
 for vv in v:
     args = [
@@ -41,7 +41,7 @@ for vv in v:
         '-fixed_anions', 248,
         '-MPC', 15,
         '-bl', 1,
-        '-timeout_h', 15
+        '-timeout_h', 23
         ]
     generate(
         prefix = "/storage/brno2/home/laktionm",

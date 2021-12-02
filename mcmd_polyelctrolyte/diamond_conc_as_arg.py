@@ -96,7 +96,7 @@ subsampling_params = dict(
     timeout = TIMEOUT_H*3600 - (time.time() - start_time),
     n_particle_sampling_kwargs=dict(
         timeout=120,
-        target_eff_sample_size = 50,
+        target_eff_sample_size = 100,
         initial_sample_size=100
     ),
     pressure_sampling_kwargs=dict(

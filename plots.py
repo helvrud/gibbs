@@ -43,7 +43,7 @@ df['pressure_1_mean']=df['pressure'].apply(lambda _: np.mean(_, axis=0)[1])
 
 df['pressure_0_err']=df['pressure'].apply(lambda _: np.std(_, axis=0)[0]/np.sqrt(len(_)))
 df['pressure_1_err']=df['pressure'].apply(lambda _: np.std(_, axis=0)[1]/np.sqrt(len(_)))
-df = df.loc[df['sample_size']==200]
+#df = df.loc[df['sample_size']==200]
 
 n_particles = df['anion'].apply(lambda _: np.mean(_, axis =0)).apply(sum) +\
     df['cation'].apply(lambda _: np.mean(_, axis =0)).apply(sum)
@@ -63,10 +63,15 @@ for idx, grouped in df.groupby(by = lvl0):
     v_ = grouped.input_v
     #ax.scatter(v_, grouped.zeta_mean)
     zeta_theory = [analytic_donnan.zeta(n_pairs, a_fix, volume_all*(1-v), volume_all*v) for v in vv]
-    ax.errorbar(v_, grouped.zeta_mean, yerr=grouped.zeta_err, linewidth=0, elinewidth=3, marker = 'o', ms=1, label = (idx[0], idx[1], idx[3]))
+    ax.errorbar(v_, grouped.zeta_mean, yerr=grouped.zeta_err, linewidth=0, elinewidth=1, marker = 'o', ms=2, label = (idx[0], idx[1], idx[3]))
     ax.plot(vv, zeta_theory, color = 'black')
     p = utils.pressure_to_Pa(grouped.pressure_1_mean-grouped.pressure_0_mean)
-    ax2.scatter(v_, p*1e-5, color = ax.lines[-2].get_color())
+    p_err = utils.pressure_to_Pa(grouped.pressure_1_err-grouped.pressure_0_err)
+    ax2.errorbar(
+        v_, p*1e-5, yerr = p_err*1e-5,
+        color = ax.lines[-2].get_color(),
+        linewidth=0, elinewidth=1, marker = 'o', ms=2,
+        )
 
     #ax2.errorbar(v_, grouped.pressure_0_mean, yerr = grouped.pressure_0_err, linewidth=0, elinewidth=1, marker = 's', color = 'red')
     #ax2.errorbar(v_, grouped.pressure_1_mean, yerr = grouped.pressure_1_err, linewidth=0, elinewidth=1, color = 'green')
