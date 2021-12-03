@@ -12,3 +12,7 @@ qsubs/**
 *.log
 **/build/**
 **/*.egg-info/**
+qsub_factory.py
+plots.py
+*.html
+*.ipynb

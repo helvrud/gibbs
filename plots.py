@@ -64,7 +64,7 @@ for idx, grouped in df.groupby(by = lvl0):
     #ax.scatter(v_, grouped.zeta_mean)
     zeta_theory = [analytic_donnan.zeta(n_pairs, a_fix, volume_all*(1-v), volume_all*v) for v in vv]
     ax.errorbar(v_, grouped.zeta_mean, yerr=grouped.zeta_err, linewidth=0, elinewidth=1, marker = 'o', ms=2, label = (idx[0], idx[1], idx[3]))
-    ax.plot(vv, zeta_theory, color = 'black')
+    ax.plot(vv, zeta_theory, color = ax.lines[-1].get_color())
     p = utils.pressure_to_Pa(grouped.pressure_1_mean-grouped.pressure_0_mean)
     p_err = utils.pressure_to_Pa(grouped.pressure_1_err-grouped.pressure_0_err)
     ax2.errorbar(

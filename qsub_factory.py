@@ -5,8 +5,8 @@ def pbs_part(N, mem, ncpus, walltime, prefix):
         f'#PBS -l ncpus={ncpus}\n',
         f'#PBS -l walltime={walltime}\n',
         f'#PBS -m ae\n',
-        f'#PBS -e {prefix}/gibbs/qsub/{N}.qsuberr\n',
-        f'#PBS -o {prefix}/gibbs/qsub/{N}.qsubout\n',
+        f'#PBS -e {prefix}/gibbs/qsuberr/{N}.qsuberr\n',
+        f'#PBS -o {prefix}/gibbs/qsubout/{N}.qsubout\n',
     ))
 
 def singularity_exec(prefix, pypresso_docker, script_name, args):
@@ -16,7 +16,7 @@ def singularity_exec(prefix, pypresso_docker, script_name, args):
         f"{prefix}/{script_name} ",
         ))+' '.join([str(v) for v in args])
 
-def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=1, walltime="24:00:0"):
+def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=1, walltime="11:00:0"):
     import pathlib
     if N is None:
         N = '_'.join([str(v) for v in args]).replace('-','')
@@ -30,18 +30,18 @@ def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=
 
 import numpy as np
 #v = np.round(np.linspace(0.3, 0.8, 101), 4)
-v = np.round(np.arange(0.25, 0.5, 0.01), 4)
+v = np.round(np.arange(0.2, 0.8, 0.01), 4)
 
 for vv in v:
     args = [
         '-electrostatic',
         '-v', vv,
-        '-c_s', 0.1,
+        '-c_s', 0.05,
         '-gel_init_vol', 40000,
         '-fixed_anions', 448,
         '-MPC', 30,
         '-bl', 1,
-        '-timeout_h', 23
+        '-timeout_h', 10
         ]
     generate(
         prefix = "/storage/brno2/home/laktionm",
