@@ -16,3 +16,4 @@ qsub_factory.py
 plots.py
 *.html
 *.ipynb
+gibbs.bib
