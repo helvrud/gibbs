@@ -78,7 +78,7 @@ for idx, grouped in df.groupby(by = lvl0):
 
 
 ax.legend(title="c_s, anion_fixed, electrostatic")
-plt.text(0.35,0.93, "← compression",  transform=ax.transAxes, va='bottom')
+plt.text(0.5,0.93, "← compression",  transform=ax.transAxes, va='bottom')
 plt.text(0.7,0.1, r"$\zeta = \frac{A^{-}_{gel}}{A^{-}_{salt}}$",fontsize=22, transform=ax.transAxes)
 plt.xlabel('v')
 ax.set_ylabel('$\zeta$')

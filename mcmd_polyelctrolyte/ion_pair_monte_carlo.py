@@ -10,7 +10,7 @@ except:
 
 from montecarlo import AbstractMonteCarlo
 from montecarlo import StateData, ReversalData, AcceptCriterion
-from montecarlo import sample_to_target_error
+from sample_to_target import sample_to_target_error
 
 SIDES = [0, 1]
 PAIR = [0, 1]
@@ -329,6 +329,8 @@ def build_no_gel(
 
     MC.populate(N_pairs)
 
+    server("minimize_energy()", [0,1])
+
     if electrostatic:
         print("Electrostatic is set on")
         server('enable_electrostatic()', [0, 1])
@@ -398,6 +400,8 @@ def build_gel(
     MC = MonteCarloPairs(server)
 
     MC.populate(N_pairs)
+
+    server("minimize_energy()", [0,1])
 
     if electrostatic:
         print("Electrostatic is set on")

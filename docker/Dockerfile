@@ -56,8 +56,9 @@ RUN make install
 
 FROM build_espresso as build_MCMD
 COPY packages/ /home/ml/
-RUN pip3 install /home/ml/socket_server/
+RUN pip3 install /home/ml/socket_nodes/
 RUN pip3 install /home/ml/montecarlo/
+RUN pip3 install /home/ml/sample_to_target/
 WORKDIR /home/ml
 ENV USERNAME ml
 #ENV PYTHONPATH "/usr/local/lib/python3/dist-packages/:$PYTHONPATH"

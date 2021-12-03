@@ -7,7 +7,7 @@ During the generation process counter-ions for the ionized monomers will be crea
 #%%
 import sys
 import espressomd
-from montecarlo.libmontecarlo import sample_to_target_error
+from sample_to_target import sample_to_target_error
 import numpy as np
 import random
 import logging

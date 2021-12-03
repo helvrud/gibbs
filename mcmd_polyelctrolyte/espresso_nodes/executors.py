@@ -17,7 +17,7 @@ from espressomd import electrostatics
 import numpy as np
 
 #auto sampling routine are the same as in montecarlo one
-from montecarlo import sample_to_target_error
+from sample_to_target import sample_to_target_error
 
 class EspressoExecutorSalt(LocalScopeExecutor):
     ###########overridden base class functions #############
