@@ -352,7 +352,7 @@ def build_no_gel_salinity(
     salt_volume = gel_initial_volume*(1-v)
     anion_salt, anion_gel, cation_salt, cation_gel = map(
         round,
-        speciation(cations_inf_res, fixed_anions, salt_volume, gel_volume)
+        speciation(anions_inf_res, fixed_anions, salt_volume, gel_volume)
     )
     print('Whithin donnan theory:\t',
         f"anion_salt: {anion_salt}",
@@ -415,16 +415,43 @@ def build_gel_salinity(
 ):
     from utils import mol_to_n
     from analytic_donnan import speciation, speciation_inf_reservoir
+    #particles per sigma^3
     c_s = mol_to_n(c_s_mol, unit_length_nm=0.35)
     fixed_anions = kwargs["fixed_anions"]
-    anions_inf_res, cations_inf_res = speciation_inf_reservoir(
-        c_s, fixed_anions, gel_initial_volume)
+    #'soak' gel in inf reservoir
+    anions_inf_res = round(speciation_inf_reservoir(
+        c_s, fixed_anions, gel_initial_volume))
+
+    gel_volume = gel_initial_volume*v
+    salt_volume = gel_initial_volume*(1-v)
+
+    anion_salt, anion_gel, cation_salt, cation_gel = map(
+        round,
+        speciation(anions_inf_res, fixed_anions, salt_volume, gel_volume)
+    )
+    print('Whithin donnan theory:\t',
+        f"anion_salt: {anion_salt}",
+        f"anion_gel: {anion_gel}",
+        f"cation_salt: {cation_salt}",
+        f"cation_gel: {cation_gel}")
+    MC = build_gel(
+        Volume=[salt_volume, gel_volume],
+        N_pairs=[anion_salt, anion_gel],
+        **kwargs)
+    return MC
+
+def build_gel_n_pairs(
+    n_pairs_all, gel_initial_volume, v, **kwargs
+    ):
+    from analytic_donnan import speciation
+    fixed_anions = kwargs["fixed_anions"]
     gel_volume = gel_initial_volume*v
     salt_volume = gel_initial_volume*(1-v)
     anion_salt, anion_gel, cation_salt, cation_gel = map(
         round,
-        speciation(cations_inf_res, fixed_anions, salt_volume, gel_volume)
+        speciation(n_pairs_all, fixed_anions, salt_volume, gel_volume)
     )
+    print('Started with {n_pairs} pairs')
     print('Whithin donnan theory:\t',
         f"anion_salt: {anion_salt}",
         f"anion_gel: {anion_gel}",
