@@ -17,7 +17,7 @@ from espressomd import electrostatics
 import numpy as np
 
 #auto sampling routine are the same as in montecarlo one
-from sample_to_target import sample_to_target_error
+from sample_to_target import sample_to_target
 
 class EspressoExecutorSalt(LocalScopeExecutor):
     ###########overridden base class functions #############
@@ -180,7 +180,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
                     system.integrator.run(int_steps)
                     acc.append(float(system.analysis.pressure()['total']))
                 return acc
-        return sample_to_target_error(get_data_callback, **kwargs)
+        return sample_to_target(get_data_callback, **kwargs)
 
     def increment_volume(self, incr_vol, int_steps = 10000):
         system = self.system
@@ -254,7 +254,7 @@ class EspressoExecutorGel(EspressoExecutorSalt):
             timeout = 30, ci = 0.95):
         def get_data_callback(n):
             return self.sample_Re(int_steps=int_steps, n_samples = n)
-        return sample_to_target_error(get_data_callback, target_error, initial_sample_size, tau, timeout, ci)
+        return sample_to_target(get_data_callback, target_error, initial_sample_size, tau, timeout, ci)
 
 #%%
 if __name__ == "__main__": ##for debugging

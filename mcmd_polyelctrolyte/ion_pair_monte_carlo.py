@@ -12,7 +12,7 @@ except:
 
 from montecarlo import AbstractMonteCarlo
 from montecarlo import StateData, ReversalData, AcceptCriterion
-from sample_to_target import sample_to_target_error
+from sample_to_target import sample_to_target
 
 SIDES = [0, 1]
 PAIR = [0, 1]
@@ -207,7 +207,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 zetas.append(zeta)
                 self.step()
             return np.array(zetas)
-        return sample_to_target_error(get_zeta_callback, **kwargs)
+        return sample_to_target(get_zeta_callback, **kwargs)
 
     def sample_particle_count_to_target_error(self, **kwargs):
         def get_particle_count_callback(sample_size):
@@ -218,7 +218,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 self.step()
             return np.array(anions)
 
-        anion_salt, eff_err, eff_sample_size = sample_to_target_error(
+        anion_salt, eff_err, eff_sample_size = sample_to_target(
             get_particle_count_callback, **kwargs)
 
         cation_salt = anion_salt
@@ -403,6 +403,7 @@ def build_gel(
             ]+(['--no_interaction'] if no_interaction else []) + args[1],
         ],
         python_executable=python_executable,
+        connection_timeout_s = 1200
         #stdout=subprocess.PIPE,
         #stderr=subprocess.PIPE,
     )

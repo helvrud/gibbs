@@ -88,7 +88,7 @@ MC = build_gel_n_pairs(**input_args)
 MC.equilibrate(
     rounds=25,  # repeats mc and md steps, 10 rounds seems to be enough,
     md_steps=10000,  # call integrator.run(md_steps)
-    mc_steps=200,
+    mc_steps=args.n_pairs+args.MPC*16,
     timeout_h=1 #let's not spend to much time on it :)
 )
 

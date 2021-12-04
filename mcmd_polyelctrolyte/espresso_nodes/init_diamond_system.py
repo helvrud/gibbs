@@ -7,7 +7,7 @@ During the generation process counter-ions for the ionized monomers will be crea
 #%%
 import sys
 import espressomd
-from sample_to_target import sample_to_target_error
+from sample_to_target import sample_to_target
 import numpy as np
 import random
 import logging
@@ -119,14 +119,14 @@ def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 
     logging.debug ('volume change done')
 
 def get_pressure(system, **kwargs):
-    from montecarlo import sample_to_target_error
+    from montecarlo import sample_to_target
     def get_data_callback(n):
             acc = []
             for i in range(n):
                 system.integrator.run(1000)
                 acc.append(float(system.analysis.pressure()['total']))
             return acc
-    return sample_to_target_error(get_data_callback, **kwargs)
+    return sample_to_target(get_data_callback, **kwargs)
 
 
 def get_VP(system, V_min, V_max, V_step, direction = 'any', **sampling_kwargs):
