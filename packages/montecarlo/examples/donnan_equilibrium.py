@@ -5,7 +5,9 @@ import random
 import matplotlib.pyplot as plt
 from montecarlo import AbstractMonteCarlo
 from montecarlo import StateData, ReversalData, AcceptCriterion
-from montecarlo import get_tau, sample_to_target_error
+from sample_to_target import sample_to_target_error
+
+from analytic_donnan import speciation_inf_reservoir, zeta_compressed
 # %%
 SIDES = [0, 1]
 
@@ -92,9 +94,6 @@ class MonteCarloDonnan(AbstractMonteCarlo):
             zetas.append(self.step()['zeta'])
         return zetas
 
-# %%
-
-
 def zeta_from_monte_carlo(N_pairs, fixed_anions, v):
     mc = MonteCarloDonnan(
         (N_pairs*(1-v), N_pairs*v),
@@ -104,37 +103,23 @@ def zeta_from_monte_carlo(N_pairs, fixed_anions, v):
     [mc.step() for i in range(N_pairs*4)]
     zeta = sample_to_target_error(mc.sample_zeta, target_eff_sample_size = 30)
     return zeta[0]
-
-
-def zeta_from_analytic(N_pairs, fixed_anions, v):
-    import numpy as np
-    if v == 0.5:
-        v = 0.49999999  # dirty
-    sqrt = np.sqrt
-    return v*(N_pairs - (fixed_anions*(1 - v)**2/2 + N_pairs*v**2 - (1 - v)*sqrt(fixed_anions**2*(1 - v)**2 + 4*fixed_anions*N_pairs*v**2 + 4*N_pairs**2*v**2)/2)/(v**2 - (1 - v)**2))/((1 - v)*(fixed_anions + (fixed_anions*(1 - v)**2/2 + N_pairs*v**2 - (1 - v)*sqrt(fixed_anions**2*(1 - v)**2 + 4*fixed_anions*N_pairs*v**2 + 4*N_pairs**2*v**2)/2)/(v**2 - (1 - v)**2)))
-
-
-def zeta_analytic(N_pairs, fixed_anions, v_salt, v_gel):
-    from analytic_donnan import speciation
-    anions_salt, anions_gel, * \
-        r = speciation(N_pairs, fixed_anions, v_salt, v_gel)
-    zeta = anions_gel*v_salt/(anions_salt*v_gel)
-    return zeta
-
-
+# %%
 if __name__ == "__main__":
-    N_pairs = 100
-    fixed_anion = 50
+    c_s = 0.005 #part per sigma^3
+    fixed_anion = 488
+    gel_init_vol = 39**3
     v = np.linspace(0.2, 0.8, 11)
-    zeta_an = [zeta_analytic(N_pairs, fixed_anion, 1-v_, v_) for v_ in v]
-    from multiprocessing import Pool
+    zeta_an = [zeta_compressed(c_s,fixed_anion, gel_init_vol, v_) for v_ in v]
+    N_pairs = round(speciation_inf_reservoir(c_s, fixed_anion, gel_init_vol)[0])
+#%%
 
-    def worker(v):
-        return zeta_from_monte_carlo(N_pairs, fixed_anion, v)
+    from multiprocessing import Pool
+    def worker(vol):
+        return zeta_from_monte_carlo(N_pairs, fixed_anion, vol)
     with Pool(5) as p:
         zeta = p.map(worker, v)
     plt.scatter(v, zeta, marker='s')
-    
+
     plt.plot(v, zeta_an)
     plt.xlabel("v")
     plt.ylabel("zeta")
