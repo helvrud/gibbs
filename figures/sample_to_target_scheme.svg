@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="151.16528mm"
+   height="140.53784mm"
+   viewBox="0 0 151.16528 140.53784"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="sample_to_target_scheme.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="false"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:snap-grids="true"
+     inkscape:snap-page="false"
+     inkscape:snap-object-midpoints="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="1.0104048"
+     inkscape:cx="180.62068"
+     inkscape:cy="373.61264"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path288885" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path288885-0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path288885-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-29"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path288885-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path288885-35" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(164.21806,10.759722)">
+    <g
+       id="g130738"
+       transform="translate(-127,41.010416)">
+      <text
+         xml:space="preserve"
+         style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.264583"
+         x="-35.189583"
+         y="-13.229166"
+         id="text18105"><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-35.189583"
+           y="-13.229166"
+           id="tspan18107">get initial sample</tspan></text>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.352778;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect20059"
+         width="58.208336"
+         height="7.9375"
+         x="-37.041668"
+         y="9.260416"
+         transform="scale(1,-1)" />
+    </g>
+    <g
+       id="g31536"
+       style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="translate(-127,56.885416)">
+      <g
+         id="g264310"
+         transform="translate(0,-2.6458334)">
+        <text
+           xml:space="preserve"
+           style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+           x="-35.71875"
+           y="-13.229166"
+           id="text18105-1"><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+             x="-35.71875"
+             y="-13.229166"
+             id="tspan27598">get tau</tspan><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+             x="-35.71875"
+             y="-8.8194532"
+             id="tspan18107-7">    effective sample size</tspan><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+             x="-35.71875"
+             y="-4.4097409"
+             id="tspan24874">    margins of error</tspan><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+             x="-35.71875"
+             y="-2.8371811e-05"
+             id="tspan24876">    </tspan></text>
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.352778;stroke-miterlimit:4;stroke-dasharray:none"
+           id="rect20059-3"
+           width="58.208336"
+           height="15.875"
+           x="-37.041668"
+           y="-17.197916" />
+      </g>
+    </g>
+    <g
+       id="g258408"
+       transform="translate(-136.26042,46.302084)">
+      <text
+         xml:space="preserve"
+         style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.264583"
+         x="-19.083067"
+         y="26.086262"
+         id="text35126"><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-19.083067"
+           y="26.086262"
+           id="tspan42120">any target reached?  </tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-19.083067"
+           y="30.495974"
+           id="tspan40978" /></text>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.352778;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect57971"
+         width="50.270828"
+         height="10.583331"
+         x="-19.843746"
+         y="22.489582" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.52777px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="22.989658"
+         y="31.961941"
+         id="text3992-1"><tspan
+           sodipodi:role="line"
+           id="tspan3990-4"
+           style="stroke-width:0.264583"
+           x="22.989658"
+           y="31.961941">YES</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.52777px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="-16.959183"
+         y="32.09354"
+         id="text3992"><tspan
+           sodipodi:role="line"
+           id="tspan3990"
+           style="stroke-width:0.264583"
+           x="-16.959183"
+           y="32.09354">NO</tspan></text>
+    </g>
+    <g
+       id="g19226"
+       transform="translate(8.2020733)">
+      <text
+         xml:space="preserve"
+         style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.264583"
+         x="-99.942215"
+         y="73.029137"
+         id="text47299"><tspan
+           sodipodi:role="line"
+           id="tspan47297"
+           style="stroke-width:0.264583"
+           x="-99.942215"
+           y="73.029137">end_loop(execution_time,</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-99.942215"
+           y="77.43885"
+           id="tspan47301">   effective sample size,</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-99.942215"
+           y="81.848564"
+           id="tspan47303">   margins of error) -&gt; bool</tspan></text>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.352778;stroke-miterlimit:4;stroke-dasharray:0.352778, 0.352778;stroke-dashoffset:0"
+         id="rect57971-1"
+         width="51.59375"
+         height="14.552083"
+         x="-100.54166"
+         y="68.791664" />
+    </g>
+    <path
+       style="mix-blend-mode:difference;fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m -134.9375,7.9375 v 15.875"
+       id="path288880" />
+    <g
+       id="g130733"
+       transform="translate(-116.41667,7.9374987)">
+      <text
+         xml:space="preserve"
+         style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.264583"
+         x="16.788633"
+         y="-15.048178"
+         id="text65418"><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="16.788633"
+           y="-15.048178"
+           id="tspan182647">Callback to sample next </tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="16.788633"
+           y="-10.638465"
+           id="tspan182651"><tspan
+   style="font-style:italic"
+   id="tspan207219">n</tspan> datum points signature</tspan><tspan
+           sodipodi:role="line"
+           style="font-style:italic;stroke-width:0.264583"
+           x="16.788633"
+           y="-6.2287526"
+           id="tspan137270">sample_cb(n) -&gt; List[float]</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="16.788633"
+           y="-1.8190401"
+           id="tspan182653">Posible targets:</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="16.788633"
+           y="2.5906725"
+           id="tspan186051">  -desired margins of error</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="16.788633"
+           y="7.0003853"
+           id="tspan186053">  -desired effective sample size</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="16.788633"
+           y="11.410097"
+           id="tspan186055">  -timeout </tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="16.788633"
+           y="15.81981"
+           id="tspan182655" /></text>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.352778;stroke-miterlimit:4;stroke-dasharray:0.352778, 0.352778;stroke-dashoffset:0"
+         id="rect57971-1-3"
+         width="58.208332"
+         height="31.75"
+         x="15.875002"
+         y="-18.520832" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.264583"
+         x="43.656254"
+         y="-11.906248"
+         id="text183451"><tspan
+           sodipodi:role="line"
+           id="tspan183449"
+           style="stroke-width:0.264583"
+           x="43.656254"
+           y="-11.906248"> </tspan></text>
+    </g>
+    <g
+       id="g130726"
+       transform="translate(-74.083333,2.6458321)">
+      <g
+         id="g263792"
+         transform="translate(3.0244956e-7,-2.6458334)">
+        <text
+           xml:space="preserve"
+           style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.264583"
+           x="-25.280111"
+           y="41.609863"
+           id="text89741"><tspan
+             sodipodi:role="line"
+             id="tspan89739"
+             style="stroke-width:0.264583"
+             x="-25.280111"
+             y="41.609863">#integrating autocorrelation function</tspan><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.264583"
+             x="-25.280111"
+             y="46.019577"
+             id="tspan97461">tau &lt;- 1/2 + sum(acf_arr)</tspan><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.264583"
+             x="-25.280111"
+             y="50.429287"
+             id="tspan97463">#effective sample size</tspan><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.264583"
+             x="-25.280111"
+             y="54.839001"
+             id="tspan91027">eff_size &lt;- n/(2*tau)</tspan><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.264583"
+             x="-25.280111"
+             y="59.248714"
+             id="tspan103933">#margins of error for the given confidence level </tspan><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.264583"
+             x="-25.280111"
+             y="63.658424"
+             id="tspan95551">err &lt;- std*z_score</tspan><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.264583"
+             x="-25.280111"
+             y="68.068138"
+             id="tspan94007" /><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.264583"
+             x="-25.280111"
+             y="72.477852"
+             id="tspan91029" /></text>
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.352778;stroke-miterlimit:4;stroke-dasharray:0.352778, 0.352778;stroke-dashoffset:0"
+           id="rect57971-1-0"
+           width="87.3125"
+           height="29.104166"
+           x="-26.458334"
+           y="37.041668" />
+      </g>
+    </g>
+    <g
+       id="g31536-8"
+       style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="translate(-118.00412,107.15627)">
+      <text
+         xml:space="preserve"
+         style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+         x="-35.71875"
+         y="-13.229166"
+         id="text18105-1-1"><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+           x="-35.71875"
+           y="-13.229166"
+           id="tspan131178">get next n datum</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+           x="-35.71875"
+           y="-8.8194532"
+           id="tspan131182">double sample size counter</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+           x="-35.71875"
+           y="-4.4097409"
+           id="tspan24876-6">   </tspan></text>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.352778;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect20059-3-0"
+         width="50.006256"
+         height="10.583355"
+         x="-38.100006"
+         y="-17.197937" />
+    </g>
+    <g
+       id="g260876"
+       transform="translate(-112.44792,51.593751)">
+      <text
+         xml:space="preserve"
+         style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.264583"
+         x="20.443197"
+         y="42.602047"
+         id="text47299-2"><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="20.443197"
+           y="42.602047"
+           id="tspan47303-9">sample_arr &lt;- sample_arr+sample_cb(n)</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="20.443197"
+           y="47.011761"
+           id="tspan134232">n &lt;- n*2</tspan></text>
+      <g
+         id="g258528">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.352778;stroke-miterlimit:4;stroke-dasharray:0.352778, 0.352778;stroke-dashoffset:0"
+           id="rect57971-1-1"
+           width="67.46875"
+           height="10.583335"
+           x="19.84375"
+           y="38.364582" />
+      </g>
+    </g>
+    <g
+       id="g130733-8"
+       transform="translate(-134.67292,42.333332)">
+      <g
+         id="g259145"
+         transform="translate(18.785416)">
+        <text
+           xml:space="preserve"
+           style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.264583"
+           x="16.788633"
+           y="-15.048178"
+           id="text65418-2"><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.264583"
+             x="16.788633"
+             y="-15.048178"
+             id="tspan137270-5">#first n datum points</tspan><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.264583"
+             x="16.788633"
+             y="-10.638465"
+             id="tspan259595">sample_arr = sample_cb(n)</tspan></text>
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.352778;stroke-miterlimit:4;stroke-dasharray:0.352778, 0.352778;stroke-dashoffset:0"
+           id="rect57971-1-3-7"
+           width="50.006248"
+           height="10.583334"
+           x="15.610417"
+           y="-18.520832" />
+      </g>
+    </g>
+    <g
+       id="g31536-5"
+       style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="translate(-125.67705,125.67698)">
+      <text
+         xml:space="preserve"
+         style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+         x="-27.657227"
+         y="-13.02246"
+         id="text18105-1-6"><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+           x="-27.657227"
+           y="-13.02246"
+           id="tspan27598-4">get tau</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+           x="-27.657227"
+           y="-8.6127472"
+           id="tspan18107-7-3">    effective sample size</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+           x="-27.657227"
+           y="-4.2030349"
+           id="tspan24874-1">    margins of error</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.964847;stroke-miterlimit:4;stroke-dasharray:none"
+           x="-27.657227"
+           y="0.20667768"
+           id="tspan24876-0">    </tspan></text>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.352778;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect20059-3-5"
+         width="50.270683"
+         height="15.875"
+         x="-30.426966"
+         y="-17.197813" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-5)"
+         d="M -25.135448,-1.3228149 V 3.9688517 H -35.718781 V -64.822814 h 26.4583327"
+         id="path22867" />
+    </g>
+    <g
+       id="g258416"
+       transform="translate(-63.499999,30.427081)">
+      <text
+         xml:space="preserve"
+         style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.264583"
+         x="-27.78125"
+         y="82.020836"
+         id="text165140"><tspan
+           sodipodi:role="line"
+           id="tspan165138"
+           style="stroke-width:0.264583"
+           x="-27.78125"
+           y="82.020836">RETURN:</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-27.78125"
+           y="86.43055"
+           id="tspan165142">  sample mean</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-27.78125"
+           y="90.840263"
+           id="tspan165144">  margins of error</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-27.78125"
+           y="95.249977"
+           id="tspan165146">  effective sample size</tspan></text>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.352778;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect57971-4"
+         width="44.979168"
+         height="18.52083"
+         x="-29.104168"
+         y="78.052086" />
+    </g>
+    <g
+       id="g258401"
+       transform="translate(-79.375005,38.364585)">
+      <text
+         xml:space="preserve"
+         style="font-size:3.52777px;line-height:1.25;font-family:'Iosevka Term';-inkscape-font-specification:'Iosevka Term';stroke-width:0.264583"
+         x="-83.608353"
+         y="-44.979168"
+         id="text165140-0"><tspan
+           sodipodi:role="line"
+           id="tspan165138-6"
+           style="stroke-width:0.264583"
+           x="-83.608353"
+           y="-44.979168">INPUT:</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-83.608353"
+           y="-40.569454"
+           id="tspan165142-0">  sample routine callback</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-83.608353"
+           y="-36.159744"
+           id="tspan165144-8">  targets</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-83.608353"
+           y="-31.750031"
+           id="tspan165146-6">  confidence level</tspan></text>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.352778;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect57971-4-4"
+         width="58.208328"
+         height="18.520834"
+         x="-84.666656"
+         y="-48.947918" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-5)"
+       d="m -134.9375,31.75 v 5.291667"
+       id="path288880-2"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-2)"
+       d="m -134.9375,52.916667 v 15.875"
+       id="path288880-7"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-29)"
+       d="M -150.81243,79.375 V 89.958333"
+       id="path288880-3"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-6)"
+       d="m -150.81243,100.54167 v 7.9375"
+       id="path288880-4"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-5)"
+       d="m -105.83333,76.729166 h 5.29166 v 39.687504 h 7.937504"
+       id="path19376" />
+  </g>
+</svg>
