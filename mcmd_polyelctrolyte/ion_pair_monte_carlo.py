@@ -2,7 +2,9 @@
 import time
 from typing import Tuple
 import numpy as np
-import random, os
+import random
+import logging
+logger = logging.getLogger(__name__)
 try:
     from tqdm import trange
 except:
@@ -38,13 +40,17 @@ def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, re
 class MonteCarloPairs(AbstractMonteCarlo):
 
     def __init__(self, server):
+        logger.info("Initializing...")
         super().__init__()
         self.server = server
         self.setup()
+        logger.info("Initialization OK")
+
 
     def setup(self) -> StateData:
         # request for energy, volume, mobile ions,
         # here we stay agnostic of immobile species
+        logger.debug("Retrieving data from tne nodes")
         request_body = [
             "potential_energy()",
             "system.box_l",
@@ -71,6 +77,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         )
 
         self.current_state = new_state
+        logger.debug("Node states are updated")
         return new_state
 
     def move(self) -> Tuple[ReversalData, AcceptCriterion]:
@@ -259,12 +266,15 @@ class MonteCarloPairs(AbstractMonteCarlo):
         self.setup()
 
     def equilibrate(self, timeout_h, rounds, mc_steps, md_steps=10000):
+        logger.info("Equilibrating...")
         self.run_md(md_steps)
         start_time = time.time()
         for ROUND in trange(rounds):
             [self.step() for i in range(mc_steps)]
             self.run_md(md_steps)
+            logger.info(f"Equilibrating {ROUND}/{rounds}")
             if (time.time() - start_time)/3600 >= timeout_h: return True
+        logger.info("Equilibrated")
         return True
 
     def populate(self, N_pairs):
