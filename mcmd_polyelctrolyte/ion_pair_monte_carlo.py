@@ -420,7 +420,7 @@ def build_gel_salinity(
     fixed_anions = kwargs["fixed_anions"]
     #'soak' gel in inf reservoir
     anions_inf_res = round(speciation_inf_reservoir(
-        c_s, fixed_anions, gel_initial_volume))
+        c_s, fixed_anions, gel_initial_volume)[0])
 
     gel_volume = gel_initial_volume*v
     salt_volume = gel_initial_volume*(1-v)
