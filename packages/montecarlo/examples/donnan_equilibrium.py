@@ -5,7 +5,7 @@ import random
 import matplotlib.pyplot as plt
 from montecarlo import AbstractMonteCarlo
 from montecarlo import StateData, ReversalData, AcceptCriterion
-from sample_to_target import sample_to_target_error
+from sample_to_target import sample_to_target
 
 from analytic_donnan import speciation_inf_reservoir, zeta_compressed
 # %%
@@ -101,7 +101,7 @@ def zeta_from_monte_carlo(N_pairs, fixed_anions, v):
         (1-v, v))
     # equilibration steps
     [mc.step() for i in range(N_pairs*4)]
-    zeta = sample_to_target_error(mc.sample_zeta, target_eff_sample_size = 30)
+    zeta = sample_to_target(mc.sample_zeta, target_eff_sample_size = 30)
     return zeta[0]
 # %%
 if __name__ == "__main__":
