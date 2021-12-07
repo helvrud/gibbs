@@ -11,11 +11,11 @@ PARTICLE_ATTR = dict(
 MOBILE_SPECIES = [0,1]
 
 #LJ
-from itertools import combinations
+from itertools import combinations_with_replacement
 lj_sigma=1
 NON_BONDED_ATTR = {
     pair : dict(epsilon=1, sigma=lj_sigma, cutoff=lj_sigma*2**(1./6), shift='auto')
-    for pair in (combinations([ATTR['type'] for ATTR in PARTICLE_ATTR.values()], 2))
+    for pair in (combinations_with_replacement([ATTR['type'] for ATTR in PARTICLE_ATTR.values()], 2))
 }
 
 #FENE
@@ -25,6 +25,6 @@ BONDED_ATTR = {
 
 #DIAMOND_GEL ATTRS
 DIAMOND_ATTR = dict(
-    bond_length=0.966, 
+    bond_length=0.966,
     MPC=15,
     )

@@ -7,10 +7,11 @@ During the generation process counter-ions for the ionized monomers will be crea
 #%%
 import sys
 import espressomd
-from montecarlo.libmontecarlo import sample_to_target_error
+from sample_to_target import sample_to_target
 import numpy as np
 import random
 import logging
+logging.getLogger("init_diamond_system.py")
 
 def init_diamond_system(MPC, bond_length, alpha, bonded_attr, non_bonded_attr, particle_attr, target_l=None, target_pressure=None):
     import espressomd.interactions
@@ -51,15 +52,13 @@ def init_diamond_system(MPC, bond_length, alpha, bonded_attr, non_bonded_attr, p
 
     re_type_nodes(system, gel_indices, particle_attr)
     charge_gel(system, gel_indices, alpha, particle_attr)
-    minimize_energy(system, timeout=20)
+    minimize_energy(system, timeout=60)
     #logging.debug('Minimizing energy before volume change')
     #system.minimize_energy.minimize()
     if (target_pressure is not None) and (target_l is not None):
         raise ArithmeticError("Can not pass both target_pressure and target_l")
     if target_l is not None:
         change_volume(system, target_l)
-    if target_pressure is not None:
-        change_volume_to_target_pressure(system, target_pressure)
 
     return system
 
@@ -105,6 +104,7 @@ def charge_gel(system, gel_indices, alpha, particle_attr, add_counterions = True
 
 def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05, int_steps = 10000):
     logging.debug (f'change_volume to the size L = {target_l}')
+    system.integrator.run(int_steps)
     while system.box_l[0] != target_l:
         factor = target_l/system.box_l[0]
         if factor<scale_down_factor:
@@ -119,14 +119,14 @@ def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 
     logging.debug ('volume change done')
 
 def get_pressure(system, **kwargs):
-    from montecarlo import sample_to_target_error
+    from montecarlo import sample_to_target
     def get_data_callback(n):
             acc = []
             for i in range(n):
                 system.integrator.run(1000)
                 acc.append(float(system.analysis.pressure()['total']))
             return acc
-    return sample_to_target_error(get_data_callback, **kwargs)
+    return sample_to_target(get_data_callback, **kwargs)
 
 
 def get_VP(system, V_min, V_max, V_step, direction = 'any', **sampling_kwargs):
@@ -140,7 +140,7 @@ def get_VP(system, V_min, V_max, V_step, direction = 'any', **sampling_kwargs):
             change_volume(system, l_min)
         else:
             change_volume(system, l_max)
-            V = V[::-1] 
+            V = V[::-1]
     elif direction == 'compress':
         change_volume(system, l_max)
         V=V[::-1]
@@ -148,7 +148,7 @@ def get_VP(system, V_min, V_max, V_step, direction = 'any', **sampling_kwargs):
         change_volume(system, l_min)
     else:
         raise AttributeError("Invalid direction")
-    
+
     P=[]
     P_err = []
     print(V)
@@ -159,7 +159,7 @@ def get_VP(system, V_min, V_max, V_step, direction = 'any', **sampling_kwargs):
         P_err.append(pressure_err)
         print(f"V:{v}, l:{l}, P:{pressure}")
     return V, P, P_err
-        
+
 
 def _get_pairs(system, gel_start_id):
     pairs = [  (0, 1), (1, 2), (1, 3), (1, 4),
@@ -183,14 +183,14 @@ def calc_Re(system, pairs):
         D = np.append(D, Re)
     return D
 
-def  minimize_energy(system, timeout=60):
+def  minimize_energy(system, timeout=600):
     import time
     system.thermostat.suspend()
     # minimize energy using min_dist as the convergence criterion
     system.integrator.set_steepest_descent(f_max=0, gamma=1e-3,
                                         max_displacement=0.01)
     start_time = time.time()
-    while system.analysis.min_dist() < 0.5: #?
+    while system.analysis.min_dist() < 0.9: #?
         elapsed_time = time.time() - start_time
         #print(f"minimization: {system.analysis.energy()['total']:+.2e}")
         #print(f"min_dist: {system.analysis.min_dist():+.2e}")
@@ -206,15 +206,14 @@ def  minimize_energy(system, timeout=60):
     # activate thermostat
     system.thermostat.set_langevin(kT=1.0, gamma=1.0)
 #%%
-
-
 if __name__=='__main__':
     from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
     #BONDED_ATTR = None
     #NON_BONDED_ATTR = None
     #system = init_diamond_system(15,0.966,0.5, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
-    system = init_diamond_system(15,0.966,0.5, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
-    #N = 10
+    system = init_diamond_system(15, 0.966, 1, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
+    N = 20
+
     #for i in range(N):
     #    system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['cation'])
     #    system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['anion'])

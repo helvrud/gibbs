@@ -17,7 +17,7 @@ from espressomd import electrostatics
 import numpy as np
 
 #auto sampling routine are the same as in montecarlo one
-from montecarlo import sample_to_target_error
+from sample_to_target import sample_to_target
 
 class EspressoExecutorSalt(LocalScopeExecutor):
     ###########overridden base class functions #############
@@ -135,16 +135,17 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         """
         def __missing_int(l) -> int:
             #makes new IDs predictable
-            #[1,2,3,5,7] -> 4
-            #[1,2,3,4,5,7] ->6
-            for i in range(min(l), max(l)):
+            #[0,1,2,3,5,7] -> 4
+            #[0,1,2,3,4,5,7] ->6
+            for i in range(max(l)):
                 if i not in l:
                     return i
         if 'id' not in kwargs:
             ids = list(self.system.part[:].id)
-            new_id = __missing_int(ids)
-            if new_id is None: pass
-            else: kwargs.update({'id':new_id})
+            if ids:
+                new_id = __missing_int(ids)
+                if new_id is None: pass
+                else: kwargs.update({'id':new_id})
         if 'pos' not in kwargs:
             kwargs.update({'pos' : self.system.box_l * np.random.random(3)})
         added_particle_id = self.system.part.add(**kwargs).id
@@ -180,7 +181,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
                     system.integrator.run(int_steps)
                     acc.append(float(system.analysis.pressure()['total']))
                 return acc
-        return sample_to_target_error(get_data_callback, **kwargs)
+        return sample_to_target(get_data_callback, **kwargs)
 
     def increment_volume(self, incr_vol, int_steps = 10000):
         system = self.system
@@ -254,23 +255,35 @@ class EspressoExecutorGel(EspressoExecutorSalt):
             timeout = 30, ci = 0.95):
         def get_data_callback(n):
             return self.sample_Re(int_steps=int_steps, n_samples = n)
-        return sample_to_target_error(get_data_callback, target_error, initial_sample_size, tau, timeout, ci)
+        return sample_to_target(get_data_callback, target_error, initial_sample_size, tau, timeout, ci)
 
 #%%
 if __name__ == "__main__": ##for debugging
-    system = espressomd.System(box_l = [20, 20, 20])
-    system.time_step = 0.001
-    system.cell_system.skin = 0.4
-    system.thermostat.set_langevin(kT=1, gamma=1, seed=42)
-    lj_sigma=1
-    system.non_bonded_inter[0,0].lennard_jones.set_params(epsilon=1, sigma=lj_sigma, cutoff=lj_sigma*2**(1./6), shift='auto')
+    from init_diamond_system import init_diamond_system
+    print('Initializing reservoir with a gel')
+    from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
+    MPC =30
+    bond_length =1
+    alpha = 1
+    target_l = 50
+    system = init_diamond_system(
+        MPC = MPC, bond_length = bond_length, alpha = alpha, target_l = target_l,
+        bonded_attr = BONDED_ATTR, non_bonded_attr = NON_BONDED_ATTR, particle_attr =PARTICLE_ATTR
+        )
     executor = EspressoExecutorSalt(system)
-    executor.populate(50, q=-1)
-    executor.populate(50, q=+1)
 #%%
-    executor.minimize_energy(dist=1)
-#%%
-    executor.enable_electrostatic()
+    executor.add_particle({'id':'int'}, type = 0, q=-1)
+    executor.add_particle({'id':'int'}, type = 1, q=1)
 # %%
-    executor.potential_energy()
-# %%
+    def plotly_scatter3d(executor):
+        import plotly.express as px
+        import pandas as pd
+        system = executor.system
+        box_l = system.box_l[0]
+        particles = executor.part_data((None,None), {'type':'int','q':'int', 'pos':'list'})
+        df = pd.DataFrame(particles)
+        df.q = df.q.astype('category')
+        df.type = df.type.astype('category')
+        df[['x', 'y', 'z']] = df.pos.apply(pd.Series).apply(lambda x: x%box_l)
+        fig = px.scatter_3d(df, x='x', y='y', z='z', color ='type', size_max=18)
+        return fig

@@ -10,3 +10,11 @@ docker/packages/**
 *.qsub
 qsubs/**
 *.log
+**/build/**
+**/*.egg-info/**
+qsub_factory.py
+plots.py
+*.html
+*.ipynb
+gibbs.bib
+snippets.txt
