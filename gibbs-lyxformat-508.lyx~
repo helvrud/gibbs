@@ -1,0 +1,1764 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass elsarticle
+\begin_preamble
+\input{definitions.tex}
+% by courtesy of Mico
+% Added by lyx2lyx
+\renewcommand{\textendash}{--}
+\renewcommand{\textemdash}{---}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Gibbs ensemble for polyelectrolyte hydrogel
+\end_layout
+
+\begin_layout Author
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+cuni,imc
+\end_layout
+
+\end_inset
+
+Michail Laktionov
+\end_layout
+
+\begin_layout Email
+michail.laktionov@natur.cuni.cz
+\end_layout
+
+\begin_layout Email
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+url
+\end_layout
+
+\end_inset
+
+http://www.physchem.cz/
+\end_layout
+
+\begin_layout Author
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+cuni
+\end_layout
+
+\end_inset
+
+Oleg V.
+ Rud
+\end_layout
+
+\begin_layout Author
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+cuni
+\end_layout
+
+\end_inset
+
+Lucie
+\begin_inset space ~
+\end_inset
+
+Nova
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+author[cuni]{Peter~Kosovan}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Author
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+cuni
+\end_layout
+
+\end_inset
+
+Filip
+\begin_inset space ~
+\end_inset
+
+Uhlik
+\end_layout
+
+\begin_layout Address
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+cuni
+\end_layout
+
+\end_inset
+
+Department of Physical and Macromolecular Chemistry, Faculty of Science,
+ Charles University in Prague, Hlavova 8, Praha 2 128 00, Czech Republic
+\end_layout
+
+\begin_layout Address
+\begin_inset Argument 1
+status collapsed
+
+\begin_layout Plain Layout
+imc
+\end_layout
+
+\end_inset
+
+Institute of Macromolecular Compounds of Russian Academy of Sciences, 199004,
+ Bolshoy pr.
+ 31, Saint-Petersburg, Russia
+\end_layout
+
+\begin_layout Abstract
+By this article we model compression of 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+PE
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{}
+\end_layout
+
+\end_inset
+
+ hydrogel in equilibrium with small volume of salty aqueous solution.
+ We show that the the change of the hydrogel volume affects the salinity
+ of the solution.
+ The decrease of the gel volume decreases the solution and vice versa the
+ swelling of the gel increases the surrounding solution.
+ This effect can be employed for water desalination ...
+ 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\begin_inset CommandInset label
+LatexCommand label
+name "sec: theory"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Recently the new alternative to conventional desalination methods was proposed
+ by prof.
+ Manfred Wilhelm 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Arens2019"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+The key feature of the gel employed in this study was the ability of the
+ gel gel to absorb a huge amount of water.
+ At the same time if the gel is made of polyelectrolyte it is able to reject
+ ions.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Roughly speaking the maximum entropy principle requires the density of charges
+ to be moreless the same throughout the system medium.
+ Therefore since the gel has its own charges and its own counterions neutralizin
+g the gel charges, the density of mobile ions in the gel appear to be smaller
+ than the density of ions outside the gel.
+ Thus, providing that the gel counterions are kept in the gel squeezing
+ the gel may release the solution of lower salinity then the gel was initially
+ equilibrated with.
+\end_layout
+
+\begin_layout Enumerate
+The motivation of this study was to simulate the process of desalination
+ using polyelectrolyte hydrogel.
+\end_layout
+
+\begin_layout Enumerate
+
+\end_layout
+
+\begin_layout Section
+Theory behind the simulation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec: theory-1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+reffig
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+fig:diamond
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ presents a diamond-like polymer network inserted in a simple cubic simulation
+ box of volume 
+\begin_inset Formula $V_{\mathrm{box}}$
+\end_inset
+
+ with periodic boundaries.
+ The network consists of 
+\begin_inset Formula $16$
+\end_inset
+
+ linear 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+PE
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{}
+\end_layout
+
+\end_inset
+
+ chains, each chain comprising 
+\begin_inset Formula $30$
+\end_inset
+
+ monomer units.
+ Each unit is able to change its ionization state from charged to neutral
+ and vice versa according to the ionization equilibrium.
+ The mobile ions (
+\begin_inset Formula $\na$
+\end_inset
+
+, 
+\begin_inset Formula $\cl$
+\end_inset
+
+ and 
+\begin_inset Formula $\ca$
+\end_inset
+
+) are present in certain amount such that they fulfill the electroneutrality
+ condition.
+\end_layout
+
+\begin_layout Standard
+We model the network in equilibrium with the bulk of aqueous solution.
+ In order to keep the equilibrium conditions we consider three processes
+ to occur:
+\end_layout
+
+\begin_layout Enumerate
+the thermal movement of all segments in simulation box (Langevin dynamics);
+ 
+\end_layout
+
+\begin_layout Enumerate
+the transfer of ions between two vessels: 
+\end_layout
+
+\begin_layout Enumerate
+the change of ratio between volumes of the two vessels emulationg the piston
+ applying certain pressure to one of the vessels: 
+\end_layout
+
+\begin_layout Standard
+All three processes occur simultaneously in real systems, however, we simulate
+ them alternating each other in stop-run mode in a random order.
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename figures/vmdscene.pdf
+	lyxscale 20
+	width 50col%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diamond-like network in the simulation box.
+ Color code represents the individual ion types (red: 
+\begin_inset Formula $\na$
+\end_inset
+
+, blue: 
+\begin_inset Formula $\cl$
+\end_inset
+
+, yellow: 
+\begin_inset Formula $\ca$
+\end_inset
+
+) and the hydrogel (gray: neutral segment (
+\begin_inset Formula $\AH$
+\end_inset
+
+), cyan: charged segment (
+\begin_inset Formula $\A$
+\end_inset
+
+)).
+ 
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:diamond"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+todo
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+remove 
+\begin_inset Formula $\ca$
+\end_inset
+
+ ions from snapshot
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+Langevin dynamics
+\begin_inset CommandInset label
+LatexCommand label
+name "MD"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We use three types of interactions, 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ bonded interactions, short-range non-bonded interactions and electrostatic
+ interactions.
+\end_layout
+
+\begin_layout Standard
+We use Finite extension nonlinear elastic (FENE) potential
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+refeq
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+eq:fene
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ to account for the bonding interactions.
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%The potential accounts for nonlinear elastic extensions and as a consequence,
+ the simulation is not constrained too much.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+V_{\mathrm{FENE}}(r)=-\frac{1}{2}K\Delta r_{\mathrm{max}}^{2}\ln\left[1-\left(\frac{r-r_{0}}{\Delta r_{\mathrm{max}}}\right)^{2}\right],\label{eq:fene}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $K$
+\end_inset
+
+ is the magnitude of symmetric interaction between two segments, 
+\begin_inset Formula $\Delta r_{\mathrm{max}}$
+\end_inset
+
+ is the maximal stretching length of the bond and 
+\begin_inset Formula $r_{0}$
+\end_inset
+
+ is the equilibrium bond length.
+ In our simulations we set 
+\begin_inset Formula $K=10\kT/\sigma^{2}$
+\end_inset
+
+, 
+\begin_inset Formula $\Delta r_{\mathrm{max}}=2\sigma$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{0}=1.0\sigma$
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Jin2007"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We model the non-bonded interactions using truncated Lennard-Jones interaction
+ potential.
+ This potential imposes strong repulsion between all particles at short
+ distances: 
+\begin_inset Formula 
+\begin{equation}
+\begin{split}\label{eq:LJ}V_{\mathrm{LJ}}(r)=\begin{cases}
+4\varepsilon\left(\left(\cfrac{\sigma}{r}\right)^{12}-\left(\cfrac{\sigma}{r}\right)^{6}\right) & \mathrm{if~}r<r_{\mathrm{cut}}\\
+0 & \mathrm{elsewhere}
+\end{cases},\end{split}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $r$
+\end_inset
+
+ is the interparticle distance, 
+\begin_inset Formula $\sigma=0.35\mathrm{nm}$
+\end_inset
+
+ is the characteristic size of the particles, 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ is the depth of the potential well in 
+\begin_inset Formula $\kT$
+\end_inset
+
+ units and 
+\begin_inset Formula $r_{\mathrm{cut}}$
+\end_inset
+
+ is the cut-off distance beyond which the potential is set zero.
+\end_layout
+
+\begin_layout Standard
+We model the long range electrostatic interactions by the Coulomb potential:
+ 
+\begin_inset Formula 
+\begin{equation}
+V_{\mathrm{EL}}=\lb\kT\cfrac{q_{1}q_{2}}{r},
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\lb$
+\end_inset
+
+ is Bjerrum length.
+ We set 
+\begin_inset Formula $\lb=2\sigma=0.7\mathrm{nm}$
+\end_inset
+
+ which corresponds to water at 
+\begin_inset Formula $T=300\mathrm{K}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We use Langevin thermostat, 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ we add two additional terms to force in equation of motion 
+\begin_inset Formula 
+\begin{equation}
+f_{i}=-\gamma v_{i}(t)+\sqrt{2\gamma\kT}\eta_{i}(t),
+\end{equation}
+
+\end_inset
+
+where the first term correspond to constant friction with 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ being a friction coefficient, and the second one corresponds to random
+ thermal force with 
+\begin_inset Formula $\eta_{i}$
+\end_inset
+
+ being a normally distributed random number (see for details 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Grest1986"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Section
+Sampling in the Gibbs ensemble
+\begin_inset CommandInset label
+LatexCommand label
+name "sec: sampling the gibbs ensemble"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+All thermal moves are frozen during the sampling of the ion pairs exchange.
+ The system represents the ensemble with constant number of particles distribute
+d between two vessels (I) and (II).
+\end_layout
+
+\begin_layout Standard
+In the following paragraph we derive the criteria for sampling of the ion
+ exchange equilibrium.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Gibbs canonical ensemble
+\end_layout
+
+\begin_layout Standard
+Let us first consider the total free energy of both vesselsassuming that
+ we have only particles of a single type: 
+\begin_inset Formula 
+\begin{equation}
+F=\left(E_{I}-TS_{I}\right)+\left(E_{II}-TS_{II}\right)\label{eq:F-gibbs}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $E$
+\end_inset
+
+ is internal energy, 
+\begin_inset Formula $T$
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+— temperature, 
+\begin_inset Formula $S$
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+— entropy.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%Our model system represents a finite volume $V$ which exchanges particles
+ with the bath of infinite volume.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%The infinity of the volume means, that the particle exchange between the
+ system and the bath does not influence on the chemical potentials in the
+ bath.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%Such ensemble is called grand canonical ensemble; the free energy in this
+ ensemble, the Landau potential, is
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+The entropy 
+\begin_inset Formula $S$
+\end_inset
+
+ is given by the Boltzmann formula
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Nagle2004"
+
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+S=\kB\ln\frac{V^{N}}{N!}\label{eq:entropy}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+todo{for partiles without interactions}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset Formula $N$
+\end_inset
+
+ is a number of particles in corresponding vessel.
+ This formula accounts for two contributions: 
+\end_layout
+
+\begin_layout Enumerate
+the combinatorial entropy 
+\begin_inset Formula $S_{c}=-\kB\ln N!$
+\end_inset
+
+ which reflects the freedom of choice among 
+\begin_inset Formula $N$
+\end_inset
+
+ particles 
+\end_layout
+
+\begin_layout Enumerate
+the mixing entropy 
+\begin_inset Formula $S_{m}=\kB N\ln V$
+\end_inset
+
+ which reflects the freedom to place the chosen particle randomly within
+ the simulation box.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $V$
+\end_inset
+
+ is the unitless volume, 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ the volume measured in units of 
+\begin_inset Formula $\sigma^{3}$
+\end_inset
+
+.
+ Thus 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+refeq
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+eq:F-gibbs
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ turns to 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+todo{this is not reason, moreover A.10 is already wrong as for units}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+F=\EI-\kT\ln\frac{\VI^{\NI}}{\NI!}\ +\ \EII-\kT\ln\frac{\VII^{\NII}}{{\NII}!}\label{eq: F_gibbs}
+\end{equation}
+
+\end_inset
+
+When a single particle transferred from the vessel (I) to the vessel (II)
+ the free energy in vessel (I) changes 
+\begin_inset Formula 
+\begin{equation}
+\Delta\FI=\Delta\EI+\kT\ln\frac{\VI^{\NI}}{\NI!}-\kT\ln\frac{\VI^{\NI-1}}{(\NI-1)!}=\Delta\EI+\kT\ln\frac{\VI}{\NI}
+\end{equation}
+
+\end_inset
+
+whwereas the free energy change in (II) vessel is 
+\begin_inset Formula 
+\begin{equation}
+\Delta\FII=\Delta\EII+\kT\ln\frac{\VII^{\NII}}{\NII!}-\kT\ln\frac{\VII^{\NII+1}}{(\NII+1)!}=\Delta\EII+\kT\ln\frac{\NII+1}{\VII}
+\end{equation}
+
+\end_inset
+
+Thus the total change of free energy will be 
+\begin_inset Formula 
+\begin{equation}
+\Delta F=\Delta\EI+\Delta\EII+\kT\ln\frac{\VI}{\VII}\frac{\NII+1}{\NI}
+\end{equation}
+
+\end_inset
+
+Introducing 
+\begin_inset Formula $\xi=\pm1$
+\end_inset
+
+, which reflects the direction of movement of particle, 
+\begin_inset Formula $\xi$
+\end_inset
+
+= +1 if the particles moves from vessel (I) to vessel (II), and 
+\begin_inset Formula $\xi=-1$
+\end_inset
+
+ if the particles moves backwards, then the previous formula transfers to
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\Delta F=\Delta E_{tot}+\kT\xi\ln\frac{\VI}{\VII}\frac{\NII+\theta(\xi)}{\NI+\theta(-\xi)}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\theta(x)$
+\end_inset
+
+ is the Heaviside function.
+\end_layout
+
+\begin_layout Standard
+In order to keep electroneutrality of the system we transfer particles by
+ elctroneutral pairs.
+ Accounting for two types of particles which are moved all the time together
+ the previous formula translates to the following 
+\begin_inset Formula 
+\begin{equation}
+\Delta F=\Delta E_{tot}+\kT\xi\left(\ln\frac{\VI}{\VII}\frac{\nnaII+\theta(\xi)}{\nnaI+\theta(-\xi)}+\ln\frac{\VI}{\VII}\frac{\nclII+\theta(\xi)}{\nclI+\theta(-\xi)}\right)
+\end{equation}
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\begin{equation}
+\Delta F=\Delta E_{tot}+\kT\xi\ln\left(\left(\frac{\VI}{\VII}\right)^{2}\prod_{i}\frac{\NII^{i}+\theta(\xi)}{\NI^{i}+\theta(-\xi)}\right)
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $i$
+\end_inset
+
+ runs over the ion types 
+\begin_inset Formula $i\in\{\na,\ \cl\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In order to simulate an ensemble composed of two vessels exchanging particles
+ with each other we need to perform the following Monte Carlo procedure
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Panagiotopoulos1988,SilvaFernandes2015,Frenkel2002"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+we propose the new configuration of the system by removing ion pair from
+ one vessel and inserting it to another 
+\end_layout
+
+\begin_layout Enumerate
+we accept the new configuration if 
+\begin_inset Formula 
+\begin{equation}
+\mathcal{R}^{\xi}<e^{\Delta F/\kT}\label{eq: GC acceptance}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathcal{R}$
+\end_inset
+
+ is uniformly distributed random number in range between 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Model parameters
+\end_layout
+
+\begin_layout Standard
+In order to find the initial state of the gel we performed the preliminary
+ calculations for the gel in equilibrium with infinite bath of aqueous solution.
+ That is we perform a simultaion in grand cannonical ensemble where the
+ simulation box with the gel is freely exchanges with a bath of sertain
+ constant salinity, which is defined by setting up chemical potential of
+ ion pair in bath.
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="6">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pCl
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cs$
+\end_inset
+
+, mol/l
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+V, l/mol
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+box_l, 
+\begin_inset Formula $\sigma$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nna^{gel}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\ncl^{gel}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.40
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.70
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.82
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2083
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.1385
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+39.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+709.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+229.1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.22
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0065
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.8768
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+53.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+484.7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.68
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The results of simulation of gel (MPC = 30) in grand cannonical ensemble
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Acknowledgments
+\end_layout
+
+\begin_layout Standard
+This research was supported by the Czech Science Foundation (grant 19-17847Y)
+ (OR, LN, AK), Government of Russian Federation, grant number 14.W03.31.0022.
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% is it really necessary to add this aknowledgement? Who is paid from this
+ project?
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+AK thanks the Grant Agency of Charles University for support (project 318120).
+ Computational resources were supplied by the project 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+"
+\end_layout
+
+\end_inset
+
+e-Infrastruktura CZ
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+"
+\end_layout
+
+\end_inset
+
+ (e-INFRA LM2018140) provided within the program Projects of Large Research,
+ Development and Innovations Infrastructures.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "gibbs"
+options "unsrtnat"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
