@@ -135,16 +135,17 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         """
         def __missing_int(l) -> int:
             #makes new IDs predictable
-            #[1,2,3,5,7] -> 4
-            #[1,2,3,4,5,7] ->6
-            for i in range(min(l), max(l)):
+            #[0,1,2,3,5,7] -> 4
+            #[0,1,2,3,4,5,7] ->6
+            for i in range(max(l)):
                 if i not in l:
                     return i
         if 'id' not in kwargs:
             ids = list(self.system.part[:].id)
-            new_id = __missing_int(ids)
-            if new_id is None: pass
-            else: kwargs.update({'id':new_id})
+            if ids:
+                new_id = __missing_int(ids)
+                if new_id is None: pass
+                else: kwargs.update({'id':new_id})
         if 'pos' not in kwargs:
             kwargs.update({'pos' : self.system.box_l * np.random.random(3)})
         added_particle_id = self.system.part.add(**kwargs).id
@@ -261,10 +262,10 @@ if __name__ == "__main__": ##for debugging
     from init_diamond_system import init_diamond_system
     print('Initializing reservoir with a gel')
     from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
-    MPC =15
+    MPC =30
     bond_length =1
     alpha = 1
-    target_l = 20000**(1/3)
+    target_l = 50
     system = init_diamond_system(
         MPC = MPC, bond_length = bond_length, alpha = alpha, target_l = target_l,
         bonded_attr = BONDED_ATTR, non_bonded_attr = NON_BONDED_ATTR, particle_attr =PARTICLE_ATTR
