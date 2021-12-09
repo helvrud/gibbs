@@ -1,5 +1,5 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -8,9 +8,6 @@
 \begin_preamble
 \input{definitions.tex}
 % by courtesy of Mico
-% Added by lyx2lyx
-\renewcommand{\textendash}{--}
-\renewcommand{\textemdash}{---}
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children false
@@ -28,6 +25,8 @@
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -57,6 +56,7 @@
 \suppress_date false
 \justification true
 \use_refstyle 0
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -65,7 +65,10 @@
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -265,6 +268,7 @@ Recently the new alternative to conventional desalination methods was proposed
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Arens2019"
+literal "true"
 
 \end_inset
 
@@ -293,10 +297,6 @@ g the gel charges, the density of mobile ions in the gel appear to be smaller
 \begin_layout Enumerate
 The motivation of this study was to simulate the process of desalination
  using polyelectrolyte hydrogel.
-\end_layout
-
-\begin_layout Enumerate
-
 \end_layout
 
 \begin_layout Section
@@ -668,6 +668,7 @@ where
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Jin2007"
+literal "true"
 
 \end_inset
 
@@ -773,6 +774,7 @@ where the first term correspond to constant friction with
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Grest1986"
+literal "true"
 
 \end_inset
 
@@ -900,6 +902,7 @@ The entropy
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Nagle2004"
+literal "true"
 
 \end_inset
 
@@ -1133,6 +1136,7 @@ In order to simulate an ensemble composed of two vessels exchanging particles
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Panagiotopoulos1988,SilvaFernandes2015,Frenkel2002"
+literal "true"
 
 \end_inset
 
@@ -1337,7 +1341,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.2762
 \end_layout
 
 \end_inset
@@ -1346,7 +1350,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+4.9838
 \end_layout
 
 \end_inset
@@ -1355,7 +1359,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+45.5
 \end_layout
 
 \end_inset
@@ -1364,7 +1368,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+1058.2
 \end_layout
 
 \end_inset
@@ -1373,7 +1377,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+578.1
 \end_layout
 
 \end_inset
@@ -1449,7 +1453,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.1308
 \end_layout
 
 \end_inset
@@ -1458,7 +1462,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+3.2607
 \end_layout
 
 \end_inset
@@ -1467,7 +1471,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+39.5
 \end_layout
 
 \end_inset
@@ -1476,7 +1480,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+617.7
 \end_layout
 
 \end_inset
@@ -1485,7 +1489,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+137.8
 \end_layout
 
 \end_inset
@@ -1505,7 +1509,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.0617
 \end_layout
 
 \end_inset
@@ -1514,7 +1518,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+4.2066
 \end_layout
 
 \end_inset
@@ -1523,7 +1527,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+43.0
 \end_layout
 
 \end_inset
@@ -1532,7 +1536,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+550.9
 \end_layout
 
 \end_inset
@@ -1542,6 +1546,19 @@ box_l,
 
 \begin_layout Plain Layout
 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+70.9
 \end_layout
 
 \end_inset
@@ -1561,7 +1578,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.0111
 \end_layout
 
 \end_inset
@@ -1570,7 +1587,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+7.2268
 \end_layout
 
 \end_inset
@@ -1579,7 +1596,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+51.5
 \end_layout
 
 \end_inset
@@ -1588,7 +1605,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+490.8
 \end_layout
 
 \end_inset
@@ -1597,7 +1614,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+10.8
 \end_layout
 
 \end_inset
@@ -1675,10 +1692,6 @@ The results of simulation of gel (MPC = 30) in grand cannonical ensemble
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
