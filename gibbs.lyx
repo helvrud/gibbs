@@ -311,37 +311,17 @@ name "sec: theory-1"
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-reffig
-\end_layout
-
+Figure
+\begin_inset space ~
 \end_inset
 
 
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\end_inset
-
-fig:diamond
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-}
-\end_layout
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:diamond"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
@@ -480,11 +460,6 @@ Diamond-like network in the simulation box.
 
 )).
  
-\end_layout
-
-\end_inset
-
-
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:diamond"
@@ -492,6 +467,11 @@ name "fig:diamond"
 \end_inset
 
  
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1774,7 +1754,9 @@ Sampling routine
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename figures/sample_to_target_scheme.svg
+	filename figures/sample_to_target_scheme.png
+	lyxscale 50
+	width 70col%
 
 \end_inset
 
@@ -1816,7 +1798,9 @@ Suppose we need two processes working separately that are able to execute
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename figures/mcmd_responsible.svg
+	filename figures/mcmd_responsible.png
+	lyxscale 50
+	width 70text%
 
 \end_inset
 
@@ -1835,7 +1819,9 @@ Sockets allow sending and receiving data with TCP/IP protocol and can be
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename figures/server_node_connection.svg
+	filename figures/server_node_connection.png
+	lyxscale 50
+	width 70text%
 
 \end_inset
 
