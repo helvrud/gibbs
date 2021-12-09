@@ -18,3 +18,4 @@ gibbs.bib
 #snippets.txt
 #qsub_factory.py
 #plots.py
+*.lyx~
