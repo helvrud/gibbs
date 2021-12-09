@@ -1786,18 +1786,53 @@ Code organization
 \end_layout
 
 \begin_layout Subsection*
-Parallelisation
+Calculation order and parallelism
 \end_layout
 
 \begin_layout Standard
-Molecular dynamic integration in the gel and the salt reservoir are independent
- of each other, thus can be parallelized to significantly reduce computational
+Molecular dynamic integration of the gel and of the salt reservoir are independe
+nt of each other, thus can be parallelized to significantly reduce computational
  time using multiple CPU's.
- Moreover, for the sequential calculation we need to makes snapshots of
- the system each time we are done with Monte Carlo steps, the latter not
- only increase disk memory usage but also loads the disk system as the data
+ Moreover, for the sequential calculation we need to make snapshots of the
+ systems each time we are done with Monte Carlo steps, the latter not only
+ increases disk memory usage but also loads the disk system as the data
  data has to be rewritten constantly.
- 
+\end_layout
+
+\begin_layout Standard
+Take a look at the scheme on figure 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/program_scheme.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Program flow chart
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1815,12 +1850,30 @@ Suppose we need two processes working separately that are able to execute
 \end_layout
 
 \begin_layout Standard
+Summarizing, parallelization achieved on MD steps when presssure and potential
+ enegy are sampled and as a part of equilibration process.
+ On the other hand MC steps are synchronous and use only one thread.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename figures/mcmd_responsible.svg
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection*
+System creation
+\end_layout
+
+\begin_layout Standard
+To create MC-MD hybrid system we folow the next steps:
+\end_layout
+
+\begin_layout Enumerate
+Instantiate g
 \end_layout
 
 \begin_layout Subsubsection*
