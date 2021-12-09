@@ -299,6 +299,10 @@ The motivation of this study was to simulate the process of desalination
  using polyelectrolyte hydrogel.
 \end_layout
 
+\begin_layout Enumerate
+
+\end_layout
+
 \begin_layout Section
 Theory behind the simulation
 \begin_inset CommandInset label
@@ -1340,7 +1344,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.2762
+
 \end_layout
 
 \end_inset
@@ -1349,7 +1353,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-4.9838
+
 \end_layout
 
 \end_inset
@@ -1358,7 +1362,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-45.5
+
 \end_layout
 
 \end_inset
@@ -1367,7 +1371,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-1058.2
+
 \end_layout
 
 \end_inset
@@ -1376,7 +1380,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-578.1
+
 \end_layout
 
 \end_inset
@@ -1452,7 +1456,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.1308
+
 \end_layout
 
 \end_inset
@@ -1461,7 +1465,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.2607
+
 \end_layout
 
 \end_inset
@@ -1470,7 +1474,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-39.5
+
 \end_layout
 
 \end_inset
@@ -1479,7 +1483,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-617.7
+
 \end_layout
 
 \end_inset
@@ -1488,7 +1492,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-137.8
+
 \end_layout
 
 \end_inset
@@ -1508,7 +1512,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0617
+
 \end_layout
 
 \end_inset
@@ -1517,7 +1521,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-4.2066
+
 \end_layout
 
 \end_inset
@@ -1526,7 +1530,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-43.0
+
 \end_layout
 
 \end_inset
@@ -1535,7 +1539,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-550.9
+
 \end_layout
 
 \end_inset
@@ -1545,19 +1549,6 @@ box_l,
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-70.9
 \end_layout
 
 \end_inset
@@ -1577,7 +1568,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0111
+
 \end_layout
 
 \end_inset
@@ -1586,7 +1577,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-7.2268
+
 \end_layout
 
 \end_inset
@@ -1595,7 +1586,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-51.5
+
 \end_layout
 
 \end_inset
@@ -1604,7 +1595,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-490.8
+
 \end_layout
 
 \end_inset
@@ -1613,7 +1604,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-10.8
+
 \end_layout
 
 \end_inset
@@ -1691,6 +1682,10 @@ The results of simulation of gel (MPC = 30) in grand canonical ensemble
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -1782,7 +1777,7 @@ Sampling routine
 \end_layout
 
 \begin_layout Subsection*
-Code organization
+Code organi
 \end_layout
 
 \begin_layout Subsection*

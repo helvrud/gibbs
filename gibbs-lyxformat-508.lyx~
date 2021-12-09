@@ -1,5 +1,5 @@
-#LyX 2.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 544
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -8,6 +8,9 @@
 \begin_preamble
 \input{definitions.tex}
 % by courtesy of Mico
+% Added by lyx2lyx
+\renewcommand{\textendash}{--}
+\renewcommand{\textemdash}{---}
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children false
@@ -25,8 +28,6 @@
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
-\use_microtype false
-\use_dash_ligatures true
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -56,7 +57,6 @@
 \suppress_date false
 \justification true
 \use_refstyle 0
-\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -65,10 +65,7 @@
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\is_math_indent 0
-\math_numbering_side default
-\quotes_style english
-\dynamic_quotes 0
+\quotes_language english
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -268,7 +265,6 @@ Recently the new alternative to conventional desalination methods was proposed
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Arens2019"
-literal "true"
 
 \end_inset
 
@@ -297,6 +293,10 @@ g the gel charges, the density of mobile ions in the gel appear to be smaller
 \begin_layout Enumerate
 The motivation of this study was to simulate the process of desalination
  using polyelectrolyte hydrogel.
+\end_layout
+
+\begin_layout Enumerate
+
 \end_layout
 
 \begin_layout Section
@@ -668,7 +668,6 @@ where
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Jin2007"
-literal "true"
 
 \end_inset
 
@@ -774,7 +773,6 @@ where the first term correspond to constant friction with
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Grest1986"
-literal "true"
 
 \end_inset
 
@@ -809,7 +807,7 @@ Gibbs canonical ensemble
 \end_layout
 
 \begin_layout Standard
-Let us first consider the total free energy of both vessels assuming that
+Let us first consider the total free energy of both vesselsassuming that
  we have only particles of a single type: 
 \begin_inset Formula 
 \begin{equation}
@@ -902,7 +900,6 @@ The entropy
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Nagle2004"
-literal "true"
 
 \end_inset
 
@@ -1052,7 +1049,7 @@ When a single particle transferred from the vessel (I) to the vessel (II)
 
 \end_inset
 
-whereas the free energy change in (II) vessel is 
+whwereas the free energy change in (II) vessel is 
 \begin_inset Formula 
 \begin{equation}
 \Delta\FII=\Delta\EII+\kT\ln\frac{\VII^{\NII}}{\NII!}-\kT\ln\frac{\VII^{\NII+1}}{(\NII+1)!}=\Delta\EII+\kT\ln\frac{\NII+1}{\VII}
@@ -1100,7 +1097,7 @@ where
 
 \begin_layout Standard
 In order to keep electroneutrality of the system we transfer particles by
- electroneutral pairs.
+ elctroneutral pairs.
  Accounting for two types of particles which are moved all the time together
  the previous formula translates to the following 
 \begin_inset Formula 
@@ -1136,7 +1133,6 @@ In order to simulate an ensemble composed of two vessels exchanging particles
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Panagiotopoulos1988,SilvaFernandes2015,Frenkel2002"
-literal "true"
 
 \end_inset
 
@@ -1183,9 +1179,10 @@ Model parameters
 \begin_layout Standard
 In order to find the initial state of the gel we performed the preliminary
  calculations for the gel in equilibrium with infinite bath of aqueous solution.
- That is we perform a simulation in grand canonical ensemble where the simulatio
-n box with the gel is freely exchanges with a bath of certain constant salinity,
- which is defined by setting up chemical potential of ion pair in bath.
+ That is we perform a simultaion in grand cannonical ensemble where the
+ simulation box with the gel is freely exchanges with a bath of sertain
+ constant salinity, which is defined by setting up chemical potential of
+ ion pair in bath.
 \begin_inset Float table
 wide false
 sideways false
@@ -1340,7 +1337,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.2762
+
 \end_layout
 
 \end_inset
@@ -1349,7 +1346,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-4.9838
+
 \end_layout
 
 \end_inset
@@ -1358,7 +1355,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-45.5
+
 \end_layout
 
 \end_inset
@@ -1367,7 +1364,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-1058.2
+
 \end_layout
 
 \end_inset
@@ -1376,7 +1373,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-578.1
+
 \end_layout
 
 \end_inset
@@ -1452,7 +1449,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.1308
+
 \end_layout
 
 \end_inset
@@ -1461,7 +1458,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.2607
+
 \end_layout
 
 \end_inset
@@ -1470,7 +1467,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-39.5
+
 \end_layout
 
 \end_inset
@@ -1479,7 +1476,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-617.7
+
 \end_layout
 
 \end_inset
@@ -1488,7 +1485,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-137.8
+
 \end_layout
 
 \end_inset
@@ -1508,7 +1505,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0617
+
 \end_layout
 
 \end_inset
@@ -1517,7 +1514,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-4.2066
+
 \end_layout
 
 \end_inset
@@ -1526,7 +1523,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-43.0
+
 \end_layout
 
 \end_inset
@@ -1535,7 +1532,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-550.9
+
 \end_layout
 
 \end_inset
@@ -1545,19 +1542,6 @@ box_l,
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-70.9
 \end_layout
 
 \end_inset
@@ -1577,7 +1561,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0111
+
 \end_layout
 
 \end_inset
@@ -1586,7 +1570,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-7.2268
+
 \end_layout
 
 \end_inset
@@ -1595,7 +1579,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-51.5
+
 \end_layout
 
 \end_inset
@@ -1604,7 +1588,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-490.8
+
 \end_layout
 
 \end_inset
@@ -1613,7 +1597,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-10.8
+
 \end_layout
 
 \end_inset
@@ -1686,11 +1670,15 @@ box_l,
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-The results of simulation of gel (MPC = 30) in grand canonical ensemble
+The results of simulation of gel (MPC = 30) in grand cannonical ensemble
 \end_layout
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -1761,82 +1749,12 @@ options "unsrtnat"
 
 \end_layout
 
-\begin_layout Section*
+\begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
 
-Supporting Information
-\end_layout
 
-\begin_layout Subsection*
-Sampling routine
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename figures/sample_to_target_scheme.svg
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Code organization
-\end_layout
-
-\begin_layout Subsection*
-Parallelisation
-\end_layout
-
-\begin_layout Standard
-Molecular dynamic integration in the gel and the salt reservoir are independent
- of each other, thus can be parallelized to significantly reduce computational
- time using multiple CPU's.
- Moreover, for the sequential calculation we need to makes snapshots of
- the system each time we are done with Monte Carlo steps, the latter not
- only increase disk memory usage but also loads the disk system as the data
- data has to be rewritten constantly.
- 
-\end_layout
-
-\begin_layout Standard
-Suppose we need two processes working separately that are able to execute
- requests and send the results back to the main program running on server.
- In our case we will run two processes that integrate molecular dynamic
- equations in parallel between Monte Carlo steps.
- When molecular dynamic is running we can sample systems energy, pressure,
- end-to-end distances.
- Another goal of molecular dynamics integration is to reach new uncorrelated
- state of the system.
- We can not equillibrate ion pairs distribution without exchange of pairs
- between two systems, which is achieved by Monte Carlo routine, where the
- step is moving random ion pair from one system to the other.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename figures/mcmd_responsible.svg
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
-Interprocess communications via TCP sockets
-\end_layout
-
-\begin_layout Standard
-Sockets allow sending and receiving data with TCP/IP protocol and can be
- utilized as relatively fast interprocess communication (ICP) if used within
- local machine (loopback network interface).
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename figures/server_node_connection.svg
-
+\begin_inset Newpage pagebreak
 \end_inset
 
 

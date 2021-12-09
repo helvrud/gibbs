@@ -1,0 +1,4 @@
+---send qsubs to metacentrum---
+scp -r qsubs/ laktionm@skirit.metacentrum.cz:gibbs/
+
+scp -r laktionm@skirit.metacentrum.cz:gibbs/data/diamond_n_pairs data/
