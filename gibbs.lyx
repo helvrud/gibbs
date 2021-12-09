@@ -337,24 +337,13 @@ noprefix "false"
 
  linear 
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
 
 \backslash
-PE
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-{}
+PE{}
 \end_layout
 
 \end_inset
@@ -364,28 +353,51 @@ status collapsed
 \end_inset
 
  monomer units.
- Each unit is able to change its ionization state from charged to neutral
- and vice versa according to the ionization equilibrium.
- The mobile ions (
+ Each unit carries an electric charge equal to the charge of electron, 
+\begin_inset Formula $-e$
+\end_inset
+
+.
+ The mobile ions 
 \begin_inset Formula $\na$
 \end_inset
 
-, 
+ and 
 \begin_inset Formula $\cl$
 \end_inset
 
- and 
-\begin_inset Formula $\ca$
-\end_inset
-
-) are present in certain amount such that they fulfill the electroneutrality
- condition.
+ are present in certain amount such that they fulfill the electroneutrality
+ of the simulation box condition.
 \end_layout
 
 \begin_layout Standard
-We model the network in equilibrium with the bulk of aqueous solution.
- In order to keep the equilibrium conditions we consider three processes
- to occur:
+Our target is to model the thermodynamic equilibrium of the gel with a finite
+ volume of an aqueous solution.
+ In order to do it we simultaneously simulate a box containing only 
+\begin_inset Formula $\na$
+\end_inset
+
+ and 
+\begin_inset Formula $\cl$
+\end_inset
+
+ ions.
+ The two simulation boxes are exchanging ion pairs until the thermodynamic
+ equilibrium is reached.
+\end_layout
+
+\begin_layout Standard
+In order to find the thermodynamic equilibrium properties of the two interacting
+ systems we perform a Monte-Carlo procedure 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Panagiotopoulos1988"
+literal "false"
+
+\end_inset
+
+.
+ :
 \end_layout
 
 \begin_layout Enumerate
