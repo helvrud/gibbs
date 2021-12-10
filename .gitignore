@@ -19,3 +19,4 @@ gibbs.bib
 #qsub_factory.py
 #plots.py
 *.lyx~
+*.bak

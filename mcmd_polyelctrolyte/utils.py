@@ -12,12 +12,6 @@ def ljung_box_white_noise(x):
     print(p)
     return passed
 
-def downsample(x, dist):
-    import random
-    import numpy as np
-    n_chunks = int(len(x)/dist)
-    return [random.choice(chunk) for chunk in np.array_split(x,n_chunks)]
-
 def check_stationarity(x, p_crit=0.05):
     from statsmodels.tsa.stattools import adfuller
     p = adfuller(x)[1]
@@ -66,62 +60,6 @@ def pressure_to_Pa(pressure_kT, unit_length_nm=0.35):
     #vol_unit = sigma^3 *1e-27
     pressure = pressure_kT*(300*1.38064852/unit_length_nm**3)*10**4
     return pressure
-
-
-def sample_all(
-        MC, target_sample_size, timeout,
-        n_particle_sampling_kwargs = None, pressure_sampling_kwargs = None):
-    try:
-        from tqdm import trange
-    except:
-        trange = range
-    import numpy as np
-    import time
-    start_time = time.time()
-
-    results_ld = [] #list of dicts
-
-    for i in trange(target_sample_size):
-        if time.time()-start_time > timeout:
-            print("Timeout is reached, return already calculated data")
-            break
-        try:
-            n_particles_sample = MC.sample_particle_count_to_target_error(
-                **n_particle_sampling_kwargs
-            )
-        except Exception as e:
-            print('An error occurred, return already calculated data')
-            print(e)
-            break
-
-        #probably we can dry run some MD without collecting any data
-        try:
-            pressures_sample = MC.sample_pressures_to_target_error(
-                **pressure_sampling_kwargs
-                )
-        except Exception as e:
-            print('An error occurred, return already calculated data')
-            print(e)
-            break
-
-        #discard info about errors
-        del n_particles_sample['err']
-        del n_particles_sample['sample_size']
-        del pressures_sample['err']
-        del pressures_sample['sample_size']
-
-        res_dict = {**n_particles_sample, **pressures_sample}
-        results_ld.append(res_dict)
-        print(f"{i}/{target_sample_size}")
-        print(res_dict)
-
-    #convert list of dicts to dict of lists
-    results_dl = {k: [dic[k] for dic in results_ld] for k in results_ld[0]}
-    results_dl = {k: np.array(v) for k,v in results_dl.items()}
-    results_dl.update({ "reached_sample_size": i})
-    print('Sampling done, returning the data')
-    return results_dl
-
 
 def plotly_scatter3d(server, client):
     import plotly.express as px
