@@ -68,7 +68,7 @@ for idx, grouped in df.groupby(by = lvl0):
     #ax.scatter(v_, grouped.zeta_mean)
     #zeta_theory = [analytic_donnan.zeta(n_pairs, a_fix, volume_all*(1-v), volume_all*v) for v in vv]
     #zeta_theory = [analytic_donnan.zeta_compressed(utils.mol_to_n(c_s), a_fix, volume_all, v) for v in vv]
-    ax.errorbar(v_, grouped.zeta_mean, yerr=grouped.zeta_err, linewidth=0, elinewidth=1, marker = 'o', ms=2, label = (idx[0], idx[1], idx[2], idx[3]))
+    ax.errorbar(v_, grouped.zeta_mean, yerr=grouped.zeta_err, linewidth=0, elinewidth=1, marker = 'o', ms=2)
     #ax.plot(vv, zeta_theory, color = ax.lines[-1].get_color())
     p = utils.pressure_to_Pa(grouped.pressure_1_mean-grouped.pressure_0_mean)
     p_err = utils.pressure_to_Pa(grouped.pressure_1_err-grouped.pressure_0_err)
@@ -76,6 +76,7 @@ for idx, grouped in df.groupby(by = lvl0):
         v_, p*1e-5, yerr = p_err*1e-5,
         color = ax.lines[-1].get_color(),
         linewidth=0, elinewidth=1, marker = 'o', ms=2,
+        label = (idx[0], idx[1], idx[2], idx[3])
         )
     ax3.scatter(
         v_, grouped.anion_salt_conc_mol,
@@ -87,7 +88,7 @@ for idx, grouped in df.groupby(by = lvl0):
     #ax2.errorbar(v_, grouped.pressure_1_mean, yerr = grouped.pressure_1_err, linewidth=0, elinewidth=1, color = 'green')
 
 
-ax.legend(title="ion_pairs_mobile, anion_fixed, volume_all, electrostatic")
+ax2.legend(title="ion_pairs_mobile, anion_fixed, volume_all, electrostatic")
 plt.text(0.5,0.93, "← compression",  transform=ax.transAxes, va='bottom')
 plt.text(0.7,0.1, r"$\zeta = \frac{A^{-}_{gel}}{A^{-}_{salt}}$",fontsize=22, transform=ax.transAxes)
 plt.xlabel('v')

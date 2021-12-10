@@ -102,7 +102,7 @@ def charge_gel(system, gel_indices, alpha, particle_attr, add_counterions = True
             system.part.add(pos = system.box_l*np.random.random(3), **particle_attr['cation'])
         logging.debug(f'{i+1}/{n_charged} charged')
 
-def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05, int_steps = 10000):
+def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05, int_steps = 10000, minimize_energy_timeout=60):
     logging.debug (f'change_volume to the size L = {target_l}')
     system.integrator.run(int_steps)
     while system.box_l[0] != target_l:
@@ -113,6 +113,7 @@ def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 
             factor = scale_up_factor
         d_new = system.box_l[0]*factor
         system.change_volume_and_rescale_particles(d_new)
+        minimize_energy(system, timeout = minimize_energy_timeout)
         system.integrator.run(int_steps)
         logging.debug(f'gel box_size: {system.box_l[0]}')
         logging.debug(f"pressure: {system.analysis.pressure()['total']}")
@@ -183,7 +184,7 @@ def calc_Re(system, pairs):
         D = np.append(D, Re)
     return D
 
-def  minimize_energy(system, timeout=600):
+def minimize_energy(system, timeout=600):
     import time
     system.thermostat.suspend()
     # minimize energy using min_dist as the convergence criterion
@@ -207,17 +208,21 @@ def  minimize_energy(system, timeout=600):
     system.thermostat.set_langevin(kT=1.0, gamma=1.0)
 #%%
 if __name__=='__main__':
+    import logging
+    import sys
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
     #BONDED_ATTR = None
     #NON_BONDED_ATTR = None
     #system = init_diamond_system(15,0.966,0.5, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
-    system = init_diamond_system(15, 0.966, 1, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
-    N = 20
+    system = init_diamond_system(30, 0.966, 1, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=39)
+#%%
+    N = 229
 
-    #for i in range(N):
-    #    system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['cation'])
-    #    system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['anion'])
-    #    minimize_energy(system, timeout=5)
+    for i in range(N):
+        system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['cation'])
+        system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['anion'])
+        minimize_energy(system, timeout=5)
     #system.analysis.pressure()['total']
     #print(system.box_l)
 #%%

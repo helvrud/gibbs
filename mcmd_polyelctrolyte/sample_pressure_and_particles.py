@@ -144,7 +144,7 @@ class PickleStorage:
         #        self._content = pickle.load(f)
         if self._content is None:
             with open(self.path, 'rb') as f:
-                self._content = pickle.load(f)
+                self._content = pickle.load(f)    
         return self._content
 
     def reload(self):
