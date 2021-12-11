@@ -385,6 +385,10 @@ def build_gel(
     args=[[],[]]
 ):
     import socket_nodes
+    try:
+        socket_nodes.set_params(LOG_REQUESTS_INFO = False)
+    except:
+        pass
 
     n_gel_part = MPC*16+8
     # box volumes and dimmensions

@@ -1,6 +1,5 @@
-from ion_pair_monte_carlo import build_gel, build_gel_n_pairs, build_gel_salinity
-from utils import sample_all
-import pickle
+from ion_pair_monte_carlo import build_gel_n_pairs
+from sample_pressure_and_particles import sample_all
 import pathlib
 import logging
 
@@ -8,6 +7,7 @@ import time
 start_time = time.time()
 
 ##CLI INPUT##
+#example -gel_init_vol 50000 -n_pairs 100 -v 0.6 -fixed_anions 488 -MPC 30 -bl 1 -debug_node -debug_server -timeout_h 0.4
 import argparse
 parser = argparse.ArgumentParser(description="...")
 parser.add_argument('-n_pairs', metavar = 'n_pairs', type = int)
@@ -83,6 +83,22 @@ input_args = dict(
     args = other_args
     )
 
+subsampling_params = dict(
+    target_sample_size=200,# number of samples,
+    timeout = TIMEOUT_H*3600 - (time.time() - start_time),
+    save_file_path = output_dir/output_fname,
+    particle_count_sampling_kwargs=dict(
+        timeout=120,
+        target_eff_sample_size = 100,
+        initial_sample_size=100
+    ),
+    pressure_sampling_kwargs=dict(
+        timeout=120,
+        target_eff_sample_size = 50,
+        initial_sample_size=100
+    )
+)
+
 MC = build_gel_n_pairs(**input_args)
 # equilibration steps
 MC.equilibrate(
@@ -95,34 +111,19 @@ MC.equilibrate(
 # sample number of particles of each mobile species and pressures in the boxes
 # by alternating number of particles sampling and pressure sampling routines
 print("Hours left for sampling", TIMEOUT_H-(time.time() - start_time)/3600)
-subsampling_params = dict(
-    target_sample_size=200,# number of samples,
-    timeout = TIMEOUT_H*3600 - (time.time() - start_time),
-    n_particle_sampling_kwargs=dict(
-        timeout=120,
-        target_eff_sample_size = 100,
-        initial_sample_size=100
-    ),
-    pressure_sampling_kwargs=dict(
-        timeout=120,
-        target_eff_sample_size = 50,
-        initial_sample_size=100
-    )
-)
+
+# add inputs to output file and save the pickle to ../data/script_name.pkl
+result_header = {}
+result_header.update({'input':input_args})
+result_header.update({"timeout_h" : TIMEOUT_H})
+
 
 #save sampling settings to output
 result = sample_all(
     MC,
+    save_file_header = result_header,
     **subsampling_params
 )
 
-# add inputs to output file and save the pickle to ../data/script_name.pkl
-result.update({'input':input_args})
-result.update(subsampling_params)
-result.update({"timeout_h" : TIMEOUT_H})
 print(result)
-
-with open(output_dir/output_fname, 'wb') as f:
-    pickle.dump(result, f)
-
 print("DONE")
