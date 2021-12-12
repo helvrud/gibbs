@@ -1,14 +1,14 @@
-#%%
 import logging
-import pickle
-import pathlib
 import os
-from random import sample
+import pathlib
+import pickle
 import shutil
 import time
 
-from numpy import pi
+import numpy as np
+
 logger = logging.getLogger(__name__)
+
 def sample_all(
         MC, target_sample_size, timeout,
         save_file_path,
@@ -18,12 +18,6 @@ def sample_all(
         include_kwargs_to_header = True
         #list_to_ndarray = True
         ):
-    try:
-        from tqdm import trange
-    except:
-        trange = range
-    import numpy as np
-    import time
     #start timer
     start_time = time.time()
 
@@ -40,9 +34,14 @@ def sample_all(
     #sample stored as dict of lists
     sample_d = {}
     sample_d.update(save_file_header)
-    for i in trange(target_sample_size):
+    logger.info((
+        "Sampling pressure and particle count... \n",
+        f"Target sample size: {target_sample_size} \n",
+        f"Timeout: {timeout}s"
+        ))
+    for i in range(target_sample_size):
         if time.time()-start_time > timeout:
-            logger.warning("Timeout is reached, return already calculated data")
+            logger.warning("Timeout is reached")
             sample_d['message'] = "reached_timeout"
             break
         try:
@@ -50,9 +49,9 @@ def sample_all(
                 **particle_count_sampling_kwargs
             )
         except Exception as e:
-            logger.error('An error occurred, return already calculated data')
+            logger.error('An error occurred during sampling')
             logger.exception(e)
-            sample_d['message'] = "error_occured"
+            sample_d['message'] = "error_occurred"
             break
 
         #probably we can dry run some MD without collecting any data
@@ -61,9 +60,9 @@ def sample_all(
                 **pressure_sampling_kwargs
                 )
         except Exception as e:
-            logging.error('An error occurred, return already calculated data')
+            logger.error('An error occurred during sampling')
             logger.exception(e)
-            sample_d['message'] = "error_occured"
+            sample_d['message'] = "error_occurred"
             break
 
         #discard info about errors
@@ -75,16 +74,13 @@ def sample_all(
 
         #to each list in result dict append datum
         append_to_lists_in_dict(sample_d, datum_d)
-        print(f"{i+1}/{target_sample_size}")
-        print(datum_d)
-        #save to pickle storage
-        print(sample_d)
+        logger.info(f"{i+1}/{target_sample_size}")
+        logger.debug(datum_d)
+
+        #save updated data to pickle storage
         storage.content = sample_d
 
-    #convert list of dicts to dict of lists
-    #if list_to_ndarray:
-    #    sample_d = {k: np.array(v) for k,v in sample_d.items()}
-    print('Sampling is done, returning the data')
+    logger.info(f'Sampling is done, data are stored to {save_file_path}')
     return sample_d
 
 
@@ -106,7 +102,7 @@ class PickleStorage:
 
     def backup(self):
         try:
-            logging.info("Backup data")
+            #logger.debug("Backup data")
             shutil.copy(self.path, self.backup_path)
         except FileNotFoundError as e:
             pass
@@ -117,7 +113,7 @@ class PickleStorage:
                 pickle.dump(self._content, f)
         try:
             os.unlink(self.backup_path)
-            logging.info("Backup deleted")
+            #logging.info("Backup deleted")
         except FileNotFoundError as e:
             pass
 
@@ -144,7 +140,7 @@ class PickleStorage:
         #        self._content = pickle.load(f)
         if self._content is None:
             with open(self.path, 'rb') as f:
-                self._content = pickle.load(f)    
+                self._content = pickle.load(f)
         return self._content
 
     def reload(self):
@@ -171,14 +167,3 @@ def append_to_lists_in_dict(dict_A, dict_B):
                 dict_A[k] = []
             except AttributeError:
                 dict_A[k] = [dict_A[k]]
-
-#%%
-#if __name__ == "__main__":
-#    def __main():
-#        from time import sleep
-#        st = PickleStorage("test_storage.pkl", [], write_every=5)
-#        for i in range(100):
-#            st.content = st.content + [i]
-#            sleep(0.1)
-#        return True
-#    __main()
