@@ -49,16 +49,15 @@ def build_no_gel(
 
     return MC
 
-
 def build_gel(
-    Volume,
-    N_pairs,
-    fixed_anions,
-    MPC,
-    bond_length,
-    electrostatic=False,
-    no_interaction=False,
-    python_executable='python',
+    Volume : tuple,
+    N_pairs : tuple,
+    fixed_anions : int,
+    MPC : int,
+    bond_length : float,
+    electrostatic : bool = False,
+    no_interaction : bool = False,
+    python_executable = 'python',
     script_name = 'espresso_nodes/run_node.py',
     args=[[],[]]
 ):
@@ -80,7 +79,7 @@ def build_gel(
             ]+(['--no_interaction'] if no_interaction else []) + args[1],
         ],
         python_executable=python_executable,
-        connection_timeout_s = 1200
+        connection_timeout_s = 2400
         #stdout=subprocess.PIPE,
         #stderr=subprocess.PIPE,
     )
@@ -126,7 +125,10 @@ def build_gel_salinity(
     return MC
 
 def build_gel_n_pairs(
-    n_pairs_all, gel_initial_volume, v, **kwargs
+    n_pairs_all : float,
+    gel_initial_volume : float,
+    v : float,
+    **kwargs
     ):
     from analytic_donnan import speciation
     fixed_anions = kwargs["fixed_anions"]
@@ -136,7 +138,7 @@ def build_gel_n_pairs(
         round,
         speciation(n_pairs_all, fixed_anions, salt_volume, gel_volume)
     )
-    print(f'Started with {n_pairs} pairs')
+    print(f'Started with {n_pairs_all} pairs')
     print('Whithin donnan theory:\t',
         f"anion_salt: {anion_salt}",
         f"anion_gel: {anion_gel}",
