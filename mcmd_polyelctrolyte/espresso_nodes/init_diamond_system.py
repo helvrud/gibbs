@@ -11,7 +11,7 @@ from sample_to_target import sample_to_target
 import numpy as np
 import random
 import logging
-logging.getLogger("init_diamond_system.py")
+logger = logging.getLogger(__name__)
 
 def init_diamond_system(MPC, bond_length, alpha, bonded_attr, non_bonded_attr, particle_attr, target_l=None, target_pressure=None):
     import espressomd.interactions
@@ -24,20 +24,20 @@ def init_diamond_system(MPC, bond_length, alpha, bonded_attr, non_bonded_attr, p
     system.thermostat.set_langevin(kT=1, gamma=1, seed=42)
     #system.minimize_energy.init(f_max=50, gamma=60.0, max_steps=10000, max_displacement=0.001)
 
-    logging.debug(f"gel initial volume: {box_l}")
+    logger.debug(f"gel initial volume: {box_l}")
 
     if non_bonded_attr is not None:
         setup_non_bonded(system, non_bonded_attr)
-        logging.debug(f"non-bonded interaction is setup")
+        logger.debug(f"non-bonded interaction is setup")
 
     if bonded_attr is not None:
         if non_bonded_attr is None:
-            logging.debug(
+            logger.debug(
                 f"non-bonded interaction is not setup, bonded ignored")
         else:
             fene = espressomd.interactions.FeneBond(**bonded_attr['FeneBond'])
             system.bonded_inter.add(fene)
-            logging.debug(f"bonded interaction is setup")
+            logger.debug(f"bonded interaction is setup")
 
     start_id = system.part.highest_particle_id
     if bonded_attr is not None:
@@ -45,7 +45,7 @@ def init_diamond_system(MPC, bond_length, alpha, bonded_attr, non_bonded_attr, p
         espressomd.polymer.setup_diamond_polymer(system=system, bond=fene, MPC=MPC)
     else:
         for i in range(MPC*16+8):
-            logging.debug(
+            logger.debug(
                 f"bonded interaction is not setup, no net created")
             system.part.add(pos = system.box_l*np.random.random(3), **particle_attr['gel_neutral'])
     gel_indices  = (start_id+1, system.part.highest_particle_id+1)
@@ -53,7 +53,7 @@ def init_diamond_system(MPC, bond_length, alpha, bonded_attr, non_bonded_attr, p
     re_type_nodes(system, gel_indices, particle_attr)
     charge_gel(system, gel_indices, alpha, particle_attr)
     minimize_energy(system, timeout=60)
-    #logging.debug('Minimizing energy before volume change')
+    #logger.debug('Minimizing energy before volume change')
     #system.minimize_energy.minimize()
     if (target_pressure is not None) and (target_l is not None):
         raise ArithmeticError("Can not pass both target_pressure and target_l")
@@ -100,10 +100,10 @@ def charge_gel(system, gel_indices, alpha, particle_attr, add_counterions = True
                 setattr(part, attr_name, attr_val)
         if add_counterions:
             system.part.add(pos = system.box_l*np.random.random(3), **particle_attr['cation'])
-        logging.debug(f'{i+1}/{n_charged} charged')
+        logger.debug(f'{i+1}/{n_charged} charged')
 
 def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05, int_steps = 10000, minimize_energy_timeout=60):
-    logging.debug (f'change_volume to the size L = {target_l}')
+    logger.debug (f'change_volume to the size L = {target_l}')
     system.integrator.run(int_steps)
     while system.box_l[0] != target_l:
         factor = target_l/system.box_l[0]
@@ -115,9 +115,9 @@ def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 
         system.change_volume_and_rescale_particles(d_new)
         minimize_energy(system, timeout = minimize_energy_timeout)
         system.integrator.run(int_steps)
-        logging.debug(f'gel box_size: {system.box_l[0]}')
-        logging.debug(f"pressure: {system.analysis.pressure()['total']}")
-    logging.debug ('volume change done')
+        logger.debug(f'gel box_size: {system.box_l[0]}')
+        logger.debug(f"pressure: {system.analysis.pressure()['total']}")
+    logger.debug ('volume change done')
 
 def get_pressure(system, **kwargs):
     from montecarlo import sample_to_target
@@ -152,13 +152,12 @@ def get_VP(system, V_min, V_max, V_step, direction = 'any', **sampling_kwargs):
 
     P=[]
     P_err = []
-    print(V)
     for v,l in zip(V,L):
         change_volume(system, target_l=l)
         pressure, pressure_err, eff_sample = get_pressure(system, **sampling_kwargs)
         P.append(pressure)
         P_err.append(pressure_err)
-        print(f"V:{v}, l:{l}, P:{pressure}")
+        logger.debug(f"V:{v}, l:{l}, P:{pressure}")
     return V, P, P_err
 
 
@@ -193,22 +192,20 @@ def minimize_energy(system, timeout=600):
     start_time = time.time()
     while system.analysis.min_dist() < 0.9: #?
         elapsed_time = time.time() - start_time
-        #print(f"minimization: {system.analysis.energy()['total']:+.2e}")
-        #print(f"min_dist: {system.analysis.min_dist():+.2e}")
+        #logger.debug(f"minimization: {system.analysis.energy()['total']:+.2e}")
+        #logger.debug(f"min_dist: {system.analysis.min_dist():+.2e}")
         system.integrator.run(20)
         if elapsed_time>timeout:
-            print(timeout)
+            logger.debug(timeout)
             break
 
-    #print(f"minimization: {system.analysis.energy()['total']:+.2e}")
-    print()
+    #logger.debug(f"minimization: {system.analysis.energy()['total']:+.2e}")
     system.integrator.set_vv()
 
     # activate thermostat
     system.thermostat.set_langevin(kT=1.0, gamma=1.0)
 #%%
 if __name__=='__main__':
-    import logging
     import sys
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
@@ -224,7 +221,7 @@ if __name__=='__main__':
         system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['anion'])
         minimize_energy(system, timeout=5)
     #system.analysis.pressure()['total']
-    #print(system.box_l)
+    #logger.debug(system.box_l)
 #%%
     from espressomd.visualization_opengl import  openGLLive
     visualizer = openGLLive(system)

@@ -19,6 +19,9 @@ import numpy as np
 #auto sampling routine are the same as in montecarlo one
 from sample_to_target import sample_to_target
 
+import logging
+logger = logging.getLogger(__name__)
+
 class EspressoExecutorSalt(LocalScopeExecutor):
     ###########overridden base class functions #############
     def __init__(self, espresso_system_instance) -> None:
@@ -190,7 +193,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         d_new = new_vol**(1/3)
         system.change_volume_and_rescale_particles(d_new)
         system.integrator.run(int_steps)
-        print(f"Volume changed {old_vol} -> {new_vol}")
+        logger.debug(f"Volume changed {old_vol} -> {new_vol}")
         return self.potential_energy()
 
     def change_volume(self, new_vol, int_steps = 10000):
@@ -198,7 +201,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         d_new = new_vol**(1/3)
         system.change_volume_and_rescale_particles(d_new)
         system.integrator.run(int_steps)
-        print(f"Volume changed to {new_vol}")
+        logger.debug(f"Volume changed to {new_vol}")
         return self.potential_energy()
 
     def enable_electrostatic(self, l_bjerrum=2, int_steps = 10000):
@@ -207,7 +210,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         p3m = electrostatics.P3M(prefactor=l_bjerrum, accuracy=1e-3)
         self.system.actors.add(p3m)
         p3m_params = p3m.get_params()
-        print(p3m_params)
+        logger.debug(p3m_params)
         self.minimize_energy()
         return True
 
@@ -218,15 +221,16 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         system.thermostat.suspend()
         system.integrator.set_steepest_descent(f_max=0, gamma=0.1, max_displacement=0.1)
         min_d = system.analysis.min_dist()
-        print(f"Minimal distance: {min_d}")
+        logger.debug(
+            f"Minimal distance: {min_d} \nSteepest descent integration...")
         while (min_d < dist) or (min_d==np.inf):
             elapsed_time = time.time() - start_time
             if elapsed_time > timeout:
-                print('Timeout')
+                logger.debug('Timeout')
                 break
             system.integrator.run(100)
             min_d = system.analysis.min_dist()
-            print(f"Minimal distance: {min_d}")
+        logger.debug(f"Minimal distance: {min_d}")
         system.integrator.set_vv()
         system.thermostat.recover()
         self.system.integrator.run(10000)
@@ -260,7 +264,7 @@ class EspressoExecutorGel(EspressoExecutorSalt):
 #%%
 if __name__ == "__main__": ##for debugging
     from init_diamond_system import init_diamond_system
-    print('Initializing reservoir with a gel')
+    logger.debug('Initializing reservoir with a gel')
     from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
     MPC =30
     bond_length =1
