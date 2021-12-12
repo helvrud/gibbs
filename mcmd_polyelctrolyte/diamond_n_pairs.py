@@ -1,14 +1,17 @@
-from ion_pair_monte_carlo import build_gel_n_pairs
-from sample_pressure_and_particles import sample_all
-import pathlib
 import logging
-
+import pathlib
 import time
+import uuid
+
+from ion_pair_monte_carlo_builder import build_gel_n_pairs
+from sample_pressure_and_particles import sample_all
+
 start_time = time.time()
 
 ##CLI INPUT##
 #example -gel_init_vol 50000 -n_pairs 100 -v 0.6 -fixed_anions 488 -MPC 30 -bl 1 -debug_node -debug_server -timeout_h 0.4
 import argparse
+
 parser = argparse.ArgumentParser(description="...")
 parser.add_argument('-n_pairs', metavar = 'n_pairs', type = int)
 parser.add_argument('-gel_init_vol', metavar = 'gel_init_vol', type = float)
@@ -41,7 +44,6 @@ logs_dir.mkdir(parents=True, exist_ok=True)
 print('path to logs', logs_dir)
 
 #random file name
-import uuid
 base_name = '{:.4f}'.format(args.v)+'_'+uuid.uuid4().hex[:8]
 output_fname =base_name+'.pkl'
 print('output filename', output_fname)
@@ -83,6 +85,13 @@ input_args = dict(
     args = other_args
     )
 
+equilibration_params = dict(
+    rounds=25,  # repeats mc and md steps, 10 rounds seems to be enough,
+    md_steps=10000,  # call integrator.run(md_steps)
+    mc_steps=args.n_pairs+args.MPC*16,
+    timeout_h=1 #let's not spend to much time on it :)
+)
+
 subsampling_params = dict(
     target_sample_size=200,# number of samples,
     timeout = TIMEOUT_H*3600 - (time.time() - start_time),
@@ -101,13 +110,7 @@ subsampling_params = dict(
 
 MC = build_gel_n_pairs(**input_args)
 # equilibration steps
-MC.equilibrate(
-    rounds=25,  # repeats mc and md steps, 10 rounds seems to be enough,
-    md_steps=10000,  # call integrator.run(md_steps)
-    mc_steps=args.n_pairs+args.MPC*16,
-    timeout_h=1 #let's not spend to much time on it :)
-)
-
+MC.equilibrate(**equilibration_params)
 # sample number of particles of each mobile species and pressures in the boxes
 # by alternating number of particles sampling and pressure sampling routines
 print("Hours left for sampling", TIMEOUT_H-(time.time() - start_time)/3600)
