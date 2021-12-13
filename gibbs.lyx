@@ -146,26 +146,6 @@ Lucie
 Nova
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-%
-\backslash
-author[cuni]{Peter~Kosovan}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
 \begin_layout Author
 \begin_inset Argument 1
 status collapsed
@@ -457,8 +437,7 @@ All three processes occur simultaneously in real systems, however, we simulate
  them alternating each other in stop-run mode in a random order.
  
 \begin_inset Float figure
-placement h
-wide false
+wide true
 sideways false
 status open
 
@@ -477,9 +456,17 @@ centering
 
  
 \begin_inset Graphics
-	filename figures/vmdscene.pdf
+	filename figures/gel_snapshot.jpg
 	lyxscale 20
-	width 50col%
+	width 50text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figures/salt_snapshot.jpg
+	lyxscale 20
+	width 50text%
 
 \end_inset
 
@@ -1217,11 +1204,12 @@ In order to find the initial state of the gel we performed the preliminary
 n box with the gel is freely exchanges with a bath of certain constant salinity,
  which is defined by setting up chemical potential of ion pair in bath.
 \begin_inset Float table
-wide false
+wide true
 sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="8" columns="6">
 <features tabularvalignment="middle">
@@ -1721,6 +1709,111 @@ The results of simulation of gel (MPC = 30) in grand canonical ensemble
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Standard
+First we simulated the compression of the hydrogel in grand-cannonical ensemble
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ in the conditions of constant salinity (or infinite reservoir).
+ In order to find a free swelling equilibrium of the gel, which corresponds
+ to a certain salinity we measured the dependence of the pressure on the
+ volume of the simulation box.
+ The value of the gel volume corresponding to zero pressure is a size o
+ fthe gel in free swelling equilibrium.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/P_on_density_GC.pdf
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The compression of the gel in grand canonical ensemble for different salinities.
+ The crossection of the curves with x-axis indicate the free selling equilibrium.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We were compressing the hydrogel 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/c_s_on_density.pdf
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The dependence of the salinity of the outside bath, during the hydrogel
+ compression.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
