@@ -9,7 +9,8 @@ from sample_pressure_and_particles import sample_all
 start_time = time.time()
 
 ##CLI INPUT##
-#example -gel_init_vol 50000 -n_pairs 100 -v 0.6 -fixed_anions 488 -MPC 30 -bl 1 -debug_node -debug_server -timeout_h 0.4
+#example
+#python  mcmd_polyelctrolyte/diamond_n_pairs.py -gel_init_vol 50000 -n_pairs 100 -v 0.6 -fixed_anions 488 -MPC 30 -bl 1 -debug_node -debug_server -timeout_h 0.4
 import argparse
 
 parser = argparse.ArgumentParser(description="...")

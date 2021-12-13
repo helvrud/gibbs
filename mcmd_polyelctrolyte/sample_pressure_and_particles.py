@@ -34,11 +34,11 @@ def sample_all(
     #sample stored as dict of lists
     sample_d = {}
     sample_d.update(save_file_header)
-    logger.info(''.join(
-        "Sampling pressure and particle count... \n",
-        f"Target sample size: {target_sample_size} \n",
+    logger.info(
+        "Sampling pressure and particle count... \n" + \
+        f"Target sample size: {target_sample_size} \n" + \
         f"Timeout: {timeout}s"
-        ))
+        )
     for i in range(target_sample_size):
         if time.time()-start_time > timeout:
             logger.warning("Timeout is reached")
