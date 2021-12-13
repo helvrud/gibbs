@@ -327,7 +327,7 @@ noprefix "false"
 
  presents a diamond-like polymer network inserted in a simple cubic simulation
  box of volume 
-\begin_inset Formula $V_{\mathrm{box}}$
+\begin_inset Formula $V_{\mathrm{gel}}$
 \end_inset
 
  with periodic boundaries.
@@ -373,7 +373,8 @@ PE{}
 \begin_layout Standard
 Our target is to model the thermodynamic equilibrium of the gel with a finite
  volume of an aqueous solution.
- In order to do it we simultaneously simulate a box containing only 
+ In order to do it we run molecular dynamics in two simulation box in parallel.
+ One box containing hydrogel with 
 \begin_inset Formula $\na$
 \end_inset
 
@@ -381,14 +382,16 @@ Our target is to model the thermodynamic equilibrium of the gel with a finite
 \begin_inset Formula $\cl$
 \end_inset
 
- ions.
- The two simulation boxes are exchanging ion pairs until the thermodynamic
- equilibrium is reached.
-\end_layout
+ ions, another box containing only ions.
+ We model the exchange 
+\begin_inset Formula $\na$
+\end_inset
 
-\begin_layout Standard
-In order to find the thermodynamic equilibrium properties of the two interacting
- systems we perform a Monte-Carlo procedure 
+ and 
+\begin_inset Formula $\cl$
+\end_inset
+
+ ion pairs using a Monte-Carlo procedure described in 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Panagiotopoulos1988"
@@ -397,21 +400,56 @@ literal "false"
 \end_inset
 
 .
- :
+ In general terms, the algorithm of our simulation is as follows:
 \end_layout
 
 \begin_layout Enumerate
-the thermal movement of all segments in simulation box (Langevin dynamics);
+simulate molecular dynamics in both systems in parallel
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+collect the observables sample arrays: pressure and end-to-end distances,
  
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{e}$
+\end_inset
+
+; 
 \end_layout
 
+\end_deeper
 \begin_layout Enumerate
-the transfer of ions between two vessels: 
+perform Monte-Carlo procedure simulating ion pair exchange: 
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+collect the observables sample arrays: number of ions in both systems, 
+\begin_inset Formula $\nna^{I}$
+\end_inset
+
+, 
+\begin_inset Formula $\ncl^{I}$
+\end_inset
+
+, 
+\begin_inset Formula $\nna^{II}$
+\end_inset
+
+ and 
+\begin_inset Formula $\ncl^{II}$
+\end_inset
+
+ ; 
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
-the change of ratio between volumes of the two vessels emulationg the piston
- applying certain pressure to one of the vessels: 
+repeat the procedure untill the desired length of sample arrays is reached.
 \end_layout
 
 \begin_layout Standard
