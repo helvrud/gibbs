@@ -55,19 +55,55 @@ def split_2d_arrays_in_columns(column_name, df, postfix = None, replace = True):
 
 #%%
 path = pathlib.Path('data/diamond_n_pairs')
+pickle_path = pathlib.Path('data/gel_all_data.pkl')
 df = read_data(path)
+
+columns_to_store =[
+    'anion', 'cation', 'zeta', 'pressure',
+    'input_gel_initial_volume', 'input_n_pairs_all', 'input_fixed_anions',
+    'input_v', 'input_MPC', 'input_electrostatic'
+]
+
+df = df[columns_to_store]
+
+salt_gel_columns = ['anion', 'cation', 'pressure']
+
+for col in salt_gel_columns: df[col] = df[col].apply(np.array)
+
+columns_to_rename = {
+    'input_gel_initial_volume' : 'V0', 
+    'input_n_pairs_all' : 'n_pairs', 
+    'input_fixed_anions' : 'fixed_anions',
+    'input_v' : 'v', 
+    'input_MPC' : 'MPC', 
+    'input_electrostatic' : 'electrostatic', 
+}
+
+df.rename(columns = columns_to_rename, inplace=True)
+
+n_pairs_c_s_mol = {
+    229 : 0.2083,
+    138 : 0.1308,
+    71 : 0.0617,
+    11 : 0.0111,
+    5 : 0.0065
+}
+def f(x):
+    if x in n_pairs_c_s_mol: return n_pairs_c_s_mol[x]
+    else: return None
+df['c_mol'] = df.n_pairs.apply(f)
 # %%
-for col in df.columns:
-    print(col)
+for col in salt_gel_columns:
     try:
         split_2d_arrays_in_columns(col, df, postfix=['salt', 'gel'])
-    except:
-        pass
+    except Exception as e:
+        print(e)
 #%%
 for col in df.columns:
-    print(col)
     try:
         mean_and_err(col, df)
     except:
         pass
+# %%
+df.to_pickle(pickle_path)
 # %%

@@ -56,7 +56,10 @@ df['n_pairs'] = round((n_particles - df['input_fixed_anions'])/2,3)
 # %%
 import numpy as np
 import matplotlib.pyplot as plt
-fig, (ax, ax2, ax3) = plt.subplots(nrows=3, sharex=True)
+fig, (ax, ax2, ax3) = plt.subplots(
+    nrows=3, 
+    sharex=True
+    )
 vv = np.linspace(0.2, 0.9)
 lvl0 = ['input_n_pairs_all', 'input_fixed_anions', 'input_gel_initial_volume', 'input_electrostatic']
 for idx, grouped in df.groupby(by = lvl0):
@@ -88,7 +91,7 @@ for idx, grouped in df.groupby(by = lvl0):
     #ax2.errorbar(v_, grouped.pressure_1_mean, yerr = grouped.pressure_1_err, linewidth=0, elinewidth=1, color = 'green')
 
 
-ax2.legend(title="ion_pairs_mobile, anion_fixed, volume_all, electrostatic")
+ax2.legend(title="ion_pairs_mobile, anion_fixed, volume_all, electrostatic", bbox_to_anchor= (1.05, 0.5))
 plt.text(0.5,0.93, "← compression",  transform=ax.transAxes, va='bottom')
 plt.text(0.7,0.1, r"$\zeta = \frac{A^{-}_{gel}}{A^{-}_{salt}}$",fontsize=22, transform=ax.transAxes)
 plt.xlabel('v')
