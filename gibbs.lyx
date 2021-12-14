@@ -1203,6 +1203,118 @@ In order to find the initial state of the gel we performed the preliminary
  That is we perform a simulation in grand canonical ensemble where the simulatio
 n box with the gel is freely exchanges with a bath of certain constant salinity,
  which is defined by setting up chemical potential of ion pair in bath.
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Standard
+The presence of salt ions affects the swelling of the gel.
+ So in order to find a hydrogel density and to estimate the volume occupied
+ by one mol of gel in free swelling equilibrium, we simulated first the
+ compression of the hydrogel in grand-cannonical ensemble, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ in the conditions of constant salinity (or infinite reservoir).
+ This we done using the hybrid molecular dynamics and Monte-Carlo method
+ described in our recent publications 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Landsgesel2020a,Rud2020"
+literal "false"
+
+\end_inset
+
+.
+ Similarly to the cited studies we simulated the compression of the gel
+ within a range of simulation box volumes.
+ Each simulation with particular box size resulted with a certain value
+ of partial pressure of the gel, 
+\begin_inset Formula $\Delta P$
+\end_inset
+
+.
+ As a free selling equilibrium we took the box size, which corresponds to
+ the closest to zero 
+\begin_inset Formula $\Delta P$
+\end_inset
+
+.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:PV-GC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ illustrates the compression of the gel in grand cannonical ensemble; the
+ points marked by big circles are correspond to free swelling equilibrium.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/P_on_density_GC.pdf
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The compression of the gel in grand canonical ensemble for different salinities.
+ The crossection of the curves with x-axis indicate the free selling equilibrium.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:PV-GC"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The simulation of grand canonical ensemble resulted in the following initial
+ parameters for our model.
 \begin_inset Float table
 wide true
 sideways false
@@ -1302,7 +1414,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.5702
 \end_layout
 
 \end_inset
@@ -1311,7 +1423,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+1.7337
 \end_layout
 
 \end_inset
@@ -1320,7 +1432,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+32.0
 \end_layout
 
 \end_inset
@@ -1329,7 +1441,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+845.7
 \end_layout
 
 \end_inset
@@ -1338,7 +1450,7 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+365.8
 \end_layout
 
 \end_inset
@@ -1349,6 +1461,9 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\emph on
+\color red
 0.70
 \end_layout
 
@@ -1358,6 +1473,9 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\emph on
+\color red
 0.2762
 \end_layout
 
@@ -1367,6 +1485,9 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\emph on
+\color red
 4.9838
 \end_layout
 
@@ -1376,6 +1497,9 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\emph on
+\color red
 45.5
 \end_layout
 
@@ -1385,6 +1509,9 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\emph on
+\color red
 1058.2
 \end_layout
 
@@ -1394,6 +1521,9 @@ box_l,
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\emph on
+\color red
 578.1
 \end_layout
 
@@ -1705,65 +1835,18 @@ box_l,
 
 \begin_layout Plain Layout
 The results of simulation of gel (MPC = 30) in grand canonical ensemble
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:table"
 
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Results
-\end_layout
-
-\begin_layout Standard
-First we simulated the compression of the hydrogel in grand-cannonical ensemble
- 
-\begin_inset ERT
+\begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-
-\backslash
-ie
-\end_layout
-
-\end_inset
-
- in the conditions of constant salinity (or infinite reservoir).
- In order to find a free swelling equilibrium of the gel, which corresponds
- to a certain salinity we measured the dependence of the pressure on the
- volume of the simulation box.
- The value of the gel volume corresponding to zero pressure is a size o
- fthe gel in free swelling equilibrium.
- 
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename figures/P_on_density_GC.pdf
-	width 100col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-The compression of the gel in grand canonical ensemble for different salinities.
- The crossection of the curves with x-axis indicate the free selling equilibrium.
+the second row is a bit confusing
 \end_layout
 
 \end_inset
@@ -1771,7 +1854,8 @@ The compression of the gel in grand canonical ensemble for different salinities.
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
 
 \end_layout
 
