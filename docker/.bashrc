@@ -1,0 +1,9 @@
+export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
+export HISTFILE=~/.history/history.$HOSTNAME
+export HISTCONTROL=ignoreboth
+export HISTTIMEFORMAT=$TIMEFORMAT
+export HISTIGNORE="&:bg:fg:ll:h"
+export HOSTFILE=$HOME/.hosts	# Put a list of remote hosts in ~/.hosts
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export PYTHONPATH="/usr/local/lib/python3/dist-packages/:$PYTHONPATH"
+export LANG=en_US.UTF-8

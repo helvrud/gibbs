@@ -1,0 +1,23 @@
+*log
+__pycache__/
+ *.pyc
+.vscode/
+log_*
+*.csv
+docker/espresso/**
+docker/packages/**
+*.pkl
+*.qsub
+qsubs/**
+*.log
+**/build/**
+**/*.egg-info/**
+*.html
+*.ipynb
+gibbs.bib
+#snippets.txt
+#qsub_factory.py
+#plots.py
+*.lyx~
+*.bak
+figures/*.vsz

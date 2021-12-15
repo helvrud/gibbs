@@ -1,0 +1,9 @@
+ipython
+scipy
+numpy
+ipython
+statsmodels
+tqdm
+h5py
+sphinx
+pandas

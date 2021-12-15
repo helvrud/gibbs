@@ -1,0 +1,54 @@
+The Augmented Dickey-Fuller test is a type of statistical test called a unit root test.
+
+The intuition behind a unit root test is that it determines how strongly a time series is defined by a trend.
+
+There are a number of unit root tests and the Augmented Dickey-Fuller may be one of the more widely used. It uses an autoregressive model and optimizes an information criterion across multiple different lag values.
+
+The null hypothesis of the test is that the time series can be represented by a unit root, that it is not stationary (has some time-dependent structure). The alternate hypothesis (rejecting the null hypothesis) is that the time series is stationary.
+
+Null Hypothesis (H0): If failed to be rejected, it suggests the time series has a unit root, meaning it is non-stationary. It has some time dependent structure.
+Alternate Hypothesis (H1): The null hypothesis is rejected; it suggests the time series does not have a unit root, meaning it is stationary. It does not have time-dependent structure.
+
+(BUSTER)laktionm@skirit:~/gibbs/qsuberr$ cat v_0.345_c_s_0.1_gel_init_vol_20000_fixed_anions_248_MPC_15_bl_1.qsuberr
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              adan6
+  Local adapter:           hfi1_0
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   adan6
+  Local device: hfi1_0
+--------------------------------------------------------------------------
+adan6.grid.cesnet.cz.45439PSM2 can't open hfi unit: -1 (err=23)
+--------------------------------------------------------------------------
+PSM2 was unable to open an endpoint. Please make sure that the network link is
+active on the node and the hardware is functioning.
+
+  Error: Failure in initializing endpoint
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+It looks like MPI_INIT failed for some reason; your parallel process is
+likely to abort.  There are many reasons that a parallel process can
+fail during MPI_INIT; some of which are due to configuration or environment
+problems.  This failure appears to be an internal failure; here's some
+additional information (which may only be relevant to an Open MPI
+developer):
+
+  PML add procs failed
+  --> Returned "Error" (-1) instead of "Success" (0)
+--------------------------------------------------------------------------
+[adan6:45439] *** An error occurred in MPI_Init
+[adan6:45439] *** reported by process [1,0]
+[adan6:45439] *** on a NULL communicator
+[adan6:45439] *** Unknown error
+[adan6:45439] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+[adan6:45439] ***    and potentially your MPI job)
+=>> PBS: job killed: walltime 39615 exceeded limit 39600
