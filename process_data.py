@@ -57,7 +57,7 @@ def split_2d_arrays_in_columns(column_name, df, postfix = None, replace = True):
 path = pathlib.Path('data/diamond_n_pairs')
 pickle_path = pathlib.Path('data/gel_all_data.pkl')
 df = read_data(path)
-
+#%%
 columns_to_store =[
     'anion', 'cation', 'zeta', 'pressure',
     'input_gel_initial_volume', 'input_n_pairs_all', 'input_fixed_anions',
@@ -65,11 +65,12 @@ columns_to_store =[
 ]
 
 df = df[columns_to_store]
+df = df.loc[df.input_electrostatic==True]
 
 salt_gel_columns = ['anion', 'cation', 'pressure']
 
 for col in salt_gel_columns: df[col] = df[col].apply(np.array)
-
+#%%
 columns_to_rename = {
     'input_gel_initial_volume' : 'V0',
     'input_n_pairs_all' : 'n_pairs',
@@ -80,7 +81,7 @@ columns_to_rename = {
 }
 
 df.rename(columns = columns_to_rename, inplace=True)
-
+#%%
 #from grand canonical ensemble calculation
 '''
 pCl	    \cs	    V       box_l   na^{gel}    cl^{gel}    v_5bar
