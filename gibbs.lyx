@@ -1846,7 +1846,7 @@ name "tab:table"
 status open
 
 \begin_layout Plain Layout
-the second row is a bit confusing
+the second row is out of order
 \end_layout
 
 \end_inset
@@ -1875,9 +1875,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
-	filename figures/c_s_on_density.pdf
-	width 100col%
+	filename figures/c_s_on_density_pub.pdf
+	width 50text%
 
 \end_inset
 
@@ -1890,6 +1891,8 @@ status open
 \begin_layout Plain Layout
 The dependence of the salinity of the outside bath, during the hydrogel
  compression.
+ The numbe4s reflect the initial and final salt concentration of the external
+ solution.
 \end_layout
 
 \end_inset

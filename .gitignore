@@ -20,4 +20,4 @@ gibbs.bib
 #plots.py
 *.lyx~
 *.bak
-figures/*.vsz
+#figures/*.vsz
