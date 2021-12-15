@@ -1,6 +1,0 @@
-[submodule "packages/sample_to_target"]
-	path = packages/sample_to_target
-	url = https://github.com/miklakt/sample_to_target.git
-[submodule "packages/socket_nodes"]
-	path = packages/socket_nodes
-	url = https://github.com/miklakt/socket_nodes.git

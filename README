@@ -1,4 +1,0 @@
-
-in order to update all the submodules in repository 
->>> git submodule update --init --recursive # this must be run only once 
->>> git submodule update --recursive --remote
