@@ -93,6 +93,7 @@ def vplot(  x=[],y=[],
         x_data = x
         g.SetData(x_dataname, x_data)
     if len(np.shape(y)) == 2:
+        print("Y errors notified")
         y_data = y[0]
         y_data_err = y[1]
         g.SetData(y_dataname, y_data, symerr = y_data_err)
