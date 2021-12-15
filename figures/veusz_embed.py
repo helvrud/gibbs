@@ -48,7 +48,7 @@ def addxy(graph,
     #~ x_axis.max.val = 0.6
 
     xy.ErrorBarLine.width.val = '2pt'
-
+global xy, x_axis, y_axis, x_data, y_data, x_dataname, y_dataname
 def vplot(  x=[],y=[],
             xname = 'x', yname = 'y',
             xlog = False, ylog = False,

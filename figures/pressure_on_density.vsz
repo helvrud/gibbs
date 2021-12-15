@@ -1,5 +1,5 @@
 # Veusz saved document (version 3.0.1)
-# Saved at 2021-12-15T14:43:31.888874
+# Saved at 2021-12-15T15:06:27.921825
 
 AddImportPath(u'/home/kvint/gibbs/figures')
 ImportString(u'x11(numeric)','''
@@ -439,7 +439,7 @@ Add('graph', name=u'graph1', autoadd=False)
 To(u'graph1')
 Add('axis', name=u'x', autoadd=False)
 To(u'x')
-Set('label', u'x366')
+Set('label', u'hydrogel density, \\varphi, [mol/l]')
 Set('log', False)
 To('..')
 Add('axis', name=u'y', autoadd=False)
