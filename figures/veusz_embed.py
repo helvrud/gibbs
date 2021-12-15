@@ -109,7 +109,7 @@ def vplot(  x=[],y=[],
     #~ xy_sim.ErrorBarLine.transparency.val = 50
 
 
-    return g
+    return g, graph, xy
 
 matplotlib_colors = [
     '#1f77b4',
