@@ -115,7 +115,7 @@ from mcmd_polyelctrolyte.utils import n_to_mol, pressure_to_Pa
 df['volume_gel'] = df.v*df.V0
 df['volume_salt'] = (1-df.v)*df.V0
 df['c_s_mol'] = df.apply(lambda _: n_to_mol(_.anion_salt/_.volume_salt), axis =1)
-df['gel_density'] = df.apply(lambda _: n_to_mol((_.MPC*16+8)/_.volume_salt), axis =1)
+df['gel_density'] = df.apply(lambda _: n_to_mol((_.MPC*16+8)/_.volume_gel), axis =1)
 df['delta_P_Pa'] =  df.apply(lambda _: pressure_to_Pa(_.pressure_gel - _.pressure_salt), axis =1)
 #%%
 for col in df.columns:
