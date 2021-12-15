@@ -9,6 +9,7 @@ Here we inherit socket_nodes.LocalScopeExecutor to create EspressoExecutorSalt a
 In the child classes we define functions that will be exposed to the server (monte carlo script).
 """
 #%%
+from random import sample
 from socket_nodes import LocalScopeExecutor
 
 ##import all you might need later when requesting from server
@@ -251,19 +252,31 @@ class EspressoExecutorGel(EspressoExecutorSalt):
         if return_only_mean:
             return np.mean(acc), np.std(acc)
         else:
-            return acc
+            return np.array(acc)
 
-    def sample_Re_to_target_error(
-            self, target_error, initial_sample_size,
-            tau = None, int_steps = 1000,
-            timeout = 30, ci = 0.95):
-        def get_data_callback(n):
-            return self.sample_Re(int_steps=int_steps, n_samples = n)
-        return sample_to_target(get_data_callback, target_error, initial_sample_size, tau, timeout, ci)
+    def get_Re_tau(self, int_steps : int = 1000, init_n_samples : int = 1000):
+        from sample_to_target import get_tau_2d
+        logger.debug(f"get_Re_tau()")
+        n_samples = init_n_samples
+        re = self.sample_Re(int_steps, init_n_samples).T
+        tau = max(get_tau_2d(re))
+        n_samples_eff = n_samples/(2*tau)
+        logger.debug(f"tau: {tau}, n_samples_eff: {n_samples_eff}")
+        #we should have at least 100 datums to estimate tau
+        while n_samples_eff<50:
+            re_next = self.sample_Re(int_steps, n_samples).T
+            re = np.hstack(re, re_next)
+            tau = max(get_tau_2d(re))
+            n_samples = n_samples*2
+            n_samples_eff = n_samples/(2*tau)
+            logger.debug(f"tau: {tau}, n_samples_eff: {n_samples_eff}")
+        return tau
 
 #%%
 if __name__ == "__main__": ##for debugging
     from init_diamond_system import init_diamond_system
+    import sys
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     logger.debug('Initializing reservoir with a gel')
     from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
     MPC =30
@@ -274,7 +287,7 @@ if __name__ == "__main__": ##for debugging
         MPC = MPC, bond_length = bond_length, alpha = alpha, target_l = target_l,
         bonded_attr = BONDED_ATTR, non_bonded_attr = NON_BONDED_ATTR, particle_attr =PARTICLE_ATTR
         )
-    executor = EspressoExecutorSalt(system)
+    executor = EspressoExecutorGel(system)
 #%%
     executor.add_particle({'id':'int'}, type = 0, q=-1)
     executor.add_particle({'id':'int'}, type = 1, q=1)
