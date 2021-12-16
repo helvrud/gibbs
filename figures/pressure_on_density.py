@@ -5,6 +5,11 @@ import pandas as pd
 #%%
 df = pd.read_pickle('../data/gel_all_data.pkl')
 df.sort_values(by = 'v', inplace = True)
+
+df = df.loc[df['delta_P_Pa_mean'] < 6e5] #select less than 6bar
+
+df['sample_size'] = df['anion_salt'].apply(len) #get sample size
+df = df.loc[df['sample_size'] >30] #select significant samples
 #%%
 g =None
 
