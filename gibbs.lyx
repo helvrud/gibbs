@@ -4,10 +4,108 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass elsarticle
+\textclass achemso
 \begin_preamble
-\input{definitions.tex}
-% by courtesy of Mico
+%\usepackage[utf8]{inputenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\newcommand{\ie}{\textit{i.~e.} }
+\newcommand{\cref}{c^{\ominus}}
+%\newcommand{\cs}{c_{s}}
+\newcommand{\kT}{k_\mathrm{B}T}
+\newcommand{\kB}{k_\mathrm{B}}
+\newcommand{\lb}{l_\mathrm{B}}
+\newcommand{\NA}{N_{\mathrm{A^-}}}
+\newcommand{\muna}{\mu_\mathrm{Na^+}}
+
+\newcommand{\mucl}{\mu_\mathrm{Cl^-}}
+\newcommand{\muca}{\mu_\mathrm{Ca^{2+}}}
+\newcommand{\muh}{\mu_\mathrm{H^+}}
+\newcommand{\mua}{\mu_\mathrm{A^-}}
+\newcommand{\muha}{\mu_\mathrm{HA}}
+\newcommand{\muoh}{\mu_\mathrm{OH}}
+
+\newcommand{\cna}{c_\mathrm{Na^+}}
+\newcommand{\ccl}{c_\mathrm{Cl^-}}
+\newcommand{\cca}{c_\mathrm{Ca^{2+}}}
+\newcommand{\ch}{c_\mathrm{H^+}}
+\newcommand{\cp}{c_\mathrm{p}}
+\newcommand{\nna}{N_\mathrm{Na^+}}
+\newcommand{\ncl}{N_\mathrm{Cl^-}}
+\newcommand{\nca}{N_\mathrm{Ca^{2+}}}
+
+\newcommand{\superin}{^\mathrm{in}}
+\newcommand{\subin}{_\mathrm{in}}
+\newcommand{\subi}{_\mathrm{i}}
+
+\newcommand{\gel}{^\mathrm{gel}}
+\newcommand{\out}{^{out}}
+\newcommand{\coh}{c_\mathrm{OH}}
+\newcommand{\bulk}{^{\mathrm{b}}}
+\renewcommand{\H}{\mathrm{H^+}}
+\newcommand{\A}{\mathrm{A^-}}
+\newcommand{\AH}{\mathrm{AH}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% A simple dot to overcome graphicx limitations
+\newcommand{\lyxdot}{.}
+\newcommand{\todoi}[1]{\todo[inline]{#1}}
+
+
+\newcommand{\cl}{\mathrm{Cl^-}}
+\newcommand{\br}{\mathrm{Br^-}}
+\newcommand{\na}{\mathrm{Na^+}}
+\newcommand{\h}{\mathrm{H^+}}
+\newcommand{\ka}{\mathrm{K^+}}
+\newcommand{\oh}{\mathrm{OH^-}}
+\newcommand{\ca}{\mathrm{Ca^{2+}}}
+\newcommand{\mg}{\mathrm{Mg^{2+}}}
+\newcommand{\so}{\mathrm{SO_4^{2-}}}
+
+\newcommand{\EI}{E_{\mathrm{I}}}
+\newcommand{\EII}{E_{\mathrm{II}}}
+\newcommand{\SI}{S_{\mathrm{I}}}
+\newcommand{\SII}{S_{\mathrm{II}}}
+\newcommand{\NI}{N_{\mathrm{I}}}
+\newcommand{\NII}{N_{\mathrm{II}}}
+\newcommand{\VI}{V_{\mathrm{I}}}
+\newcommand{\VII}{V_{\mathrm{II}}}
+\newcommand{\FI}{F_{\mathrm{I}}}
+\newcommand{\FII}{F_{\mathrm{II}}}
+\newcommand{\nnaI}{N^{\na}_{\mathrm{I}}}
+\newcommand{\nclI}{N^{\cl}_{\mathrm{I}}}
+\newcommand{\nnaII}{N^{\na}_{\mathrm{II}}}
+\newcommand{\nclII}{N^{\cl}_{\mathrm{II}}}
+
+
+
+
+\newcommand{\Ka}{K_{\mathrm{A}}}
+\newcommand{\pKa}{\mathrm{p}\Ka}
+\newcommand{\pK}{\mathrm{p}K}
+\newcommand{\pH}{\mathrm{pH}}
+\newcommand{\mol}{\mathrm{mol}}
+\newcommand{\molperl}{\mathrm{mol/l}}
+\newcommand{\kg}{\mathrm{kg}}
+\newcommand{\res}{^{\mathrm{res}}}
+\newcommand{\pHres}{\pH\res}
+\newcommand{\pHgel}{\pH\gel}
+\newcommand{\cs}{c_{\mathrm{s}}}
+%\newcommand{\cs}{c_{\mathrm{salt}}}
+\newcommand{\csres}{\cs\res}
+\newcommand{\Vgel}{V\gel}
+\newcommand{\PE}{polyelectrolyte{}}
+
+\newcommand{\reffig}[1]{Figure~\ref{#1}}
+\newcommand{\refeq}[1]{Equation~\ref{#1}{}}
+\usepackage{afterpage}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+
+\newcommand{\mytitle}{Gibbs ensemble for \PE{} hydrogel}
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children false
@@ -34,7 +132,16 @@
 \index_command default
 \paperfontsize default
 \spacing single
-\use_hyperref false
+\use_hyperref true
+\pdf_bookmarks false
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
 \use_geometry true
 \use_package amsmath 1
@@ -47,8 +154,8 @@
 \use_package stackrel 0
 \use_package stmaryrd 0
 \use_package undertilde 0
-\cite_engine natbib
-\cite_engine_type authoryear
+\cite_engine basic
+\cite_engine_type default
 \biblio_style plain
 \use_bibtopic false
 \use_indices false
@@ -86,38 +193,14 @@ Gibbs ensemble for polyelectrolyte hydrogel
 \end_layout
 
 \begin_layout Author
-\begin_inset Argument 1
-status collapsed
-
-\begin_layout Plain Layout
-cuni,imc
-\end_layout
-
-\end_inset
-
 Michail Laktionov
 \end_layout
 
-\begin_layout Email
-michail.laktionov@natur.cuni.cz
-\end_layout
-
-\begin_layout Email
+\begin_layout Affiliation
+Department of Physical and Macromolecular Chemistry, Faculty of Science,
+ Charles University in Prague, Czech Republic
 \begin_inset Argument 1
-status collapsed
-
-\begin_layout Plain Layout
-url
-\end_layout
-
-\end_inset
-
-http://www.physchem.cz/
-\end_layout
-
-\begin_layout Author
-\begin_inset Argument 1
-status collapsed
+status open
 
 \begin_layout Plain Layout
 cuni
@@ -125,61 +208,28 @@ cuni
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Alt Affiliation
+ITMO
+\end_layout
+
+\begin_layout Author
 Oleg V.
  Rud
 \end_layout
 
-\begin_layout Author
-\begin_inset Argument 1
-status collapsed
-
-\begin_layout Plain Layout
-cuni
-\end_layout
-
-\end_inset
-
-Lucie
-\begin_inset space ~
-\end_inset
-
-Nova
-\end_layout
-
-\begin_layout Author
-\begin_inset Argument 1
-status collapsed
-
-\begin_layout Plain Layout
-cuni
-\end_layout
-
-\end_inset
-
-Filip
-\begin_inset space ~
-\end_inset
-
-Uhlik
-\end_layout
-
-\begin_layout Address
-\begin_inset Argument 1
-status collapsed
-
-\begin_layout Plain Layout
-cuni
-\end_layout
-
-\end_inset
-
+\begin_layout Affiliation
 Department of Physical and Macromolecular Chemistry, Faculty of Science,
- Charles University in Prague, Hlavova 8, Praha 2 128 00, Czech Republic
+ Charles University in Prague, Czech Republic
 \end_layout
 
-\begin_layout Address
+\begin_layout Also Affiliation
+Institute of Macromolecular Compounds of Russian Academy of Sciences, Saint-Pete
+rsburg, Russia
 \begin_inset Argument 1
-status collapsed
+status open
 
 \begin_layout Plain Layout
 imc
@@ -187,32 +237,65 @@ imc
 
 \end_inset
 
-Institute of Macromolecular Compounds of Russian Academy of Sciences, 199004,
- Bolshoy pr.
- 31, Saint-Petersburg, Russia
+
 \end_layout
 
-\begin_layout Abstract
-By this article we model compression of 
-\begin_inset ERT
-status collapsed
+\begin_layout Email
+oleg.rud@natur.cuni.cz
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The affiliation of authors is given after the authors; each 
+\family sans
+Affiliation
+\family default
+ applies to all preceding authors not already assigned an affiliation.
+\end_layout
 
 \begin_layout Plain Layout
 
+\family sans
+Altaffiliation
+\family default
+ should be used for new address, etc.
+\end_layout
 
-\backslash
-PE
+\begin_layout Plain Layout
+
+\family sans
+Alsoaffiliation
+\family default
+ is used on a per author basis when authors are associated with multiple
+ institutions.
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Abbreviations
+MC, MD
+\end_layout
+
+\begin_layout Keywords
+polyelectrolye hydrogel, simulation, desalination
+\end_layout
+
+\begin_layout Abstract
+By this article we model compression of 
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
-{}
+
+\backslash
+PE{}
 \end_layout
 
 \end_inset
@@ -514,48 +597,6 @@ name "fig:diamond"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-todo
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\end_inset
-
-remove 
-\begin_inset Formula $\ca$
-\end_inset
-
- ions from snapshot
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Subsection
@@ -1875,7 +1916,13 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\align center
+\begin_inset Graphics
+	filename figures/pressure_on_density_pub.pdf
+	width 50text%
+
+\end_inset
+
+
 \begin_inset Graphics
 	filename figures/c_s_on_density_pub.pdf
 	width 50text%
@@ -1889,7 +1936,8 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-The dependence of the salinity of the outside bath, during the hydrogel
+(a)The pressure extension curve of the gel.
+ (b) The dependence of the salinity of the outside bath, during the hydrogel
  compression.
  The numbe4s reflect the initial and final salt concentration of the external
  solution.
@@ -1916,43 +1964,13 @@ Acknowledgments
 \begin_layout Standard
 This research was supported by the Czech Science Foundation (grant 19-17847Y)
  (OR, LN, AK), Government of Russian Federation, grant number 14.W03.31.0022.
- 
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-% is it really necessary to add this aknowledgement? Who is paid from this
- project?
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-AK thanks the Grant Agency of Charles University for support (project 318120).
+ AK thanks the Grant Agency of Charles University for support (project 318120).
  Computational resources were supplied by the project 
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-"
-\end_layout
-
+\begin_inset Quotes eld
 \end_inset
 
 e-Infrastruktura CZ
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-"
-\end_layout
-
+\begin_inset Quotes erd
 \end_inset
 
  (e-INFRA LM2018140) provided within the program Projects of Large Research,
@@ -1964,7 +1982,6 @@ status collapsed
 LatexCommand bibtex
 btprint "btPrintCited"
 bibfiles "gibbs"
-options "unsrtnat"
 
 \end_inset
 

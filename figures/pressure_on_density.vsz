@@ -1,9 +1,8 @@
-# Veusz saved document (version 3.4)
-# Saved at 2021-12-15T16:04:53.993360
+# Veusz saved document (version 3.0.1)
+# Saved at 2021-12-15T16:14:39.384024
 
-SetCompatLevel(0)
-AddImportPath('/home/ml/Studium/gibbs/figures')
-ImportString('x11(numeric)','''
+AddImportPath(u'/home/kvint/gibbs/figures')
+ImportString(u'x11(numeric)','''
 1.383704e+00
 1.257913e+00
 1.153087e+00
@@ -93,7 +92,7 @@ ImportString('x11(numeric)','''
 1.572391e-01
 1.554723e-01
 ''')
-ImportString('x138(numeric)','''
+ImportString(u'x138(numeric)','''
 3.066716e+00
 2.787924e+00
 2.555597e+00
@@ -184,7 +183,7 @@ ImportString('x138(numeric)','''
 3.445748e-01
 3.407462e-01
 ''')
-ImportString('x229(numeric)','''
+ImportString(u'x229(numeric)','''
 1.593093e+00
 1.517231e+00
 1.327577e+00
@@ -280,7 +279,7 @@ ImportString('x229(numeric)','''
 3.579983e-01
 3.540206e-01
 ''')
-ImportString('x366(numeric)','''
+ImportString(u'x366(numeric)','''
 1.922621e+00
 1.860601e+00
 1.802457e+00
@@ -332,7 +331,7 @@ ImportString('x366(numeric)','''
 6.480744e-01
 6.408736e-01
 ''')
-ImportString('x5(numeric)','''
+ImportString(u'x5(numeric)','''
 6.045301e-01
 5.770515e-01
 5.519623e-01
@@ -376,7 +375,7 @@ ImportString('x5(numeric)','''
 1.739059e-01
 1.715558e-01
 ''')
-ImportString('x71(numeric)','''
+ImportString(u'x71(numeric)','''
 2.377166e+00
 2.161060e+00
 1.980972e+00
@@ -460,7 +459,7 @@ ImportString('x71(numeric)','''
 2.732374e-01
 2.670973e-01
 ''')
-ImportString('y11(numeric),+-','''
+ImportString(u'y11(numeric),+-','''
 1.360371e+01 8.575524e-02
 1.156565e+01 6.832229e-02
 1.030689e+01 6.237936e-02
@@ -550,7 +549,7 @@ ImportString('y11(numeric),+-','''
 1.899320e-01 2.398330e-02
 1.320525e-01 2.262639e-02
 ''')
-ImportString('y138(numeric),+-','''
+ImportString(u'y138(numeric),+-','''
 5.112615e+01 1.963621e-01
 4.175745e+01 1.690377e-01
 3.470667e+01 1.942487e-01
@@ -641,7 +640,7 @@ ImportString('y138(numeric),+-','''
 -1.236716e-01 1.348054e-01
 -8.942040e-03 1.568076e-01
 ''')
-ImportString('y229(numeric),+-','''
+ImportString(u'y229(numeric),+-','''
 1.106465e+01 2.085620e-01
 9.786763e+00 2.384853e-01
 7.276053e+00 2.479730e-01
@@ -737,7 +736,7 @@ ImportString('y229(numeric),+-','''
 4.025919e-01 1.849995e-01
 2.821800e-01 1.612363e-01
 ''')
-ImportString('y366(numeric),+-','''
+ImportString(u'y366(numeric),+-','''
 1.039209e+01 3.091282e-01
 9.295061e+00 2.848112e-01
 8.414252e+00 4.128902e-01
@@ -789,7 +788,7 @@ ImportString('y366(numeric),+-','''
 -1.544777e-01 4.594840e-01
 5.675417e-01 3.886502e-01
 ''')
-ImportString('y5(numeric),+-','''
+ImportString(u'y5(numeric),+-','''
 4.106292e+00 5.248518e-02
 3.871064e+00 3.458748e-02
 3.630477e+00 3.557255e-02
@@ -833,7 +832,7 @@ ImportString('y5(numeric),+-','''
 4.927701e-01 1.418284e-02
 4.909867e-01 3.279831e-02
 ''')
-ImportString('y71(numeric),+-','''
+ImportString(u'y71(numeric),+-','''
 3.225342e+01 1.465685e-01
 2.699255e+01 1.346177e-01
 2.296158e+01 1.168774e-01
@@ -917,119 +916,121 @@ ImportString('y71(numeric),+-','''
 8.917731e-02 7.320208e-02
 3.162666e-01 6.746437e-02
 ''')
-Set('StyleSheet/axis-function/autoRange', 'next-tick')
-Add('page', name='page1', autoadd=False)
-To('page1')
-Set('width', '16cm')
-Set('height', '10.0cm')
-Add('graph', name='graph1', autoadd=False)
-To('graph1')
-Add('axis', name='x', autoadd=False)
-To('x')
-Set('label', 'hydrogel density, \\varphi, [mol/l]')
+Set('StyleSheet/axis-function/autoRange', u'next-tick')
+Add('page', name=u'page1', autoadd=False)
+To(u'page1')
+Set('width', u'16cm')
+Set('height', u'10.0cm')
+Add('graph', name=u'graph1', autoadd=False)
+To(u'graph1')
+Add('axis', name=u'x', autoadd=False)
+To(u'x')
+Set('label', u'hydrogel density, \\varphi, [mol/l]')
+Set('log', True)
+To('..')
+Add('axis', name=u'y', autoadd=False)
+To(u'y')
+Set('label', u'\\Delta P = P - P_{res}, [bar]')
+Set('min', 0.0)
+Set('max', 5.0)
 Set('log', False)
+Set('direction', u'vertical')
 To('..')
-Add('axis', name='y', autoadd=False)
-To('y')
-Set('label', '\\Delta P = P - P_{res}, [bar]')
-Set('log', False)
-Set('direction', 'vertical')
+Add('xy', name=u'xy1', autoadd=False)
+To(u'xy1')
+Set('marker', u'circle')
+Set('markerSize', u'2pt')
+Set('xData', u'x5')
+Set('yData', u'y5')
+Set('key', u'c_{s} = 0.0065')
+Set('PlotLine/color', u'#1f77b4')
+Set('PlotLine/width', u'2pt')
+Set('PlotLine/style', u'dotted')
+Set('MarkerLine/color', u'transparent')
+Set('MarkerFill/color', u'#1f77b4')
+Set('ErrorBarLine/color', u'#1f77b4')
+Set('ErrorBarLine/width', u'2pt')
 To('..')
-Add('xy', name='xy1', autoadd=False)
-To('xy1')
-Set('marker', 'circle')
-Set('markerSize', '2pt')
-Set('xData', 'x5')
-Set('yData', 'y5')
-Set('key', 'c_{s} = 0.0065')
-Set('PlotLine/color', '#1f77b4')
-Set('PlotLine/width', '2pt')
-Set('PlotLine/style', 'dotted')
-Set('MarkerLine/color', 'transparent')
-Set('MarkerFill/color', '#1f77b4')
-Set('ErrorBarLine/color', '#1f77b4')
-Set('ErrorBarLine/width', '2pt')
+Add('xy', name=u'xy2', autoadd=False)
+To(u'xy2')
+Set('marker', u'circle')
+Set('markerSize', u'2pt')
+Set('xData', u'x11')
+Set('yData', u'y11')
+Set('key', u'c_{s} = 0.0111')
+Set('PlotLine/color', u'#ff7f0e')
+Set('PlotLine/width', u'2pt')
+Set('PlotLine/style', u'dotted')
+Set('MarkerLine/color', u'transparent')
+Set('MarkerFill/color', u'#ff7f0e')
+Set('ErrorBarLine/color', u'#ff7f0e')
+Set('ErrorBarLine/width', u'2pt')
 To('..')
-Add('key', name='key1', autoadd=False)
-Add('xy', name='xy2', autoadd=False)
-To('xy2')
-Set('marker', 'circle')
-Set('markerSize', '2pt')
-Set('xData', 'x11')
-Set('yData', 'y11')
-Set('key', 'c_{s} = 0.0111')
-Set('PlotLine/color', '#ff7f0e')
-Set('PlotLine/width', '2pt')
-Set('PlotLine/style', 'dotted')
-Set('MarkerLine/color', 'transparent')
-Set('MarkerFill/color', '#ff7f0e')
-Set('ErrorBarLine/color', '#ff7f0e')
-Set('ErrorBarLine/width', '2pt')
+Add('xy', name=u'xy3', autoadd=False)
+To(u'xy3')
+Set('marker', u'circle')
+Set('markerSize', u'2pt')
+Set('xData', u'x71')
+Set('yData', u'y71')
+Set('key', u'c_{s} = 0.0617')
+Set('PlotLine/color', u'#2ca02c')
+Set('PlotLine/width', u'2pt')
+Set('PlotLine/style', u'dotted')
+Set('MarkerLine/color', u'transparent')
+Set('MarkerFill/color', u'#2ca02c')
+Set('ErrorBarLine/color', u'#2ca02c')
+Set('ErrorBarLine/width', u'2pt')
 To('..')
-Add('key', name='key2', autoadd=False)
-Add('xy', name='xy3', autoadd=False)
-To('xy3')
-Set('marker', 'circle')
-Set('markerSize', '2pt')
-Set('xData', 'x71')
-Set('yData', 'y71')
-Set('key', 'c_{s} = 0.0617')
-Set('PlotLine/color', '#2ca02c')
-Set('PlotLine/width', '2pt')
-Set('PlotLine/style', 'dotted')
-Set('MarkerLine/color', 'transparent')
-Set('MarkerFill/color', '#2ca02c')
-Set('ErrorBarLine/color', '#2ca02c')
-Set('ErrorBarLine/width', '2pt')
+Add('xy', name=u'xy4', autoadd=False)
+To(u'xy4')
+Set('marker', u'circle')
+Set('markerSize', u'2pt')
+Set('xData', u'x138')
+Set('yData', u'y138')
+Set('key', u'c_{s} = 0.1308')
+Set('PlotLine/color', u'#d62728')
+Set('PlotLine/width', u'2pt')
+Set('PlotLine/style', u'dotted')
+Set('MarkerLine/color', u'transparent')
+Set('MarkerFill/color', u'#d62728')
+Set('ErrorBarLine/color', u'#d62728')
+Set('ErrorBarLine/width', u'2pt')
 To('..')
-Add('key', name='key3', autoadd=False)
-Add('xy', name='xy4', autoadd=False)
-To('xy4')
-Set('marker', 'circle')
-Set('markerSize', '2pt')
-Set('xData', 'x138')
-Set('yData', 'y138')
-Set('key', 'c_{s} = 0.1308')
-Set('PlotLine/color', '#d62728')
-Set('PlotLine/width', '2pt')
-Set('PlotLine/style', 'dotted')
-Set('MarkerLine/color', 'transparent')
-Set('MarkerFill/color', '#d62728')
-Set('ErrorBarLine/color', '#d62728')
-Set('ErrorBarLine/width', '2pt')
+Add('xy', name=u'xy5', autoadd=False)
+To(u'xy5')
+Set('marker', u'circle')
+Set('markerSize', u'2pt')
+Set('xData', u'x229')
+Set('yData', u'y229')
+Set('key', u'c_{s} = 0.2083')
+Set('PlotLine/color', u'#9467bd')
+Set('PlotLine/width', u'2pt')
+Set('PlotLine/style', u'dotted')
+Set('MarkerLine/color', u'transparent')
+Set('MarkerFill/color', u'#9467bd')
+Set('ErrorBarLine/color', u'#9467bd')
+Set('ErrorBarLine/width', u'2pt')
 To('..')
-Add('key', name='key4', autoadd=False)
-Add('xy', name='xy5', autoadd=False)
-To('xy5')
-Set('marker', 'circle')
-Set('markerSize', '2pt')
-Set('xData', 'x229')
-Set('yData', 'y229')
-Set('key', 'c_{s} = 0.2083')
-Set('PlotLine/color', '#9467bd')
-Set('PlotLine/width', '2pt')
-Set('PlotLine/style', 'dotted')
-Set('MarkerLine/color', 'transparent')
-Set('MarkerFill/color', '#9467bd')
-Set('ErrorBarLine/color', '#9467bd')
-Set('ErrorBarLine/width', '2pt')
+Add('xy', name=u'xy6', autoadd=False)
+To(u'xy6')
+Set('marker', u'circle')
+Set('markerSize', u'2pt')
+Set('xData', u'x366')
+Set('yData', u'y366')
+Set('key', u'c_{s} = 0.5702')
+Set('PlotLine/color', u'#8c564b')
+Set('PlotLine/width', u'2pt')
+Set('PlotLine/style', u'dotted')
+Set('MarkerLine/color', u'transparent')
+Set('MarkerFill/color', u'#8c564b')
+Set('ErrorBarLine/color', u'#8c564b')
+Set('ErrorBarLine/width', u'2pt')
 To('..')
-Add('key', name='key5', autoadd=False)
-Add('xy', name='xy6', autoadd=False)
-To('xy6')
-Set('marker', 'circle')
-Set('markerSize', '2pt')
-Set('xData', 'x366')
-Set('yData', 'y366')
-Set('key', 'c_{s} = 0.5702')
-Set('PlotLine/color', '#8c564b')
-Set('PlotLine/width', '2pt')
-Set('PlotLine/style', 'dotted')
-Set('MarkerLine/color', 'transparent')
-Set('MarkerFill/color', '#8c564b')
-Set('ErrorBarLine/color', '#8c564b')
-Set('ErrorBarLine/width', '2pt')
+Add('key', name=u'key1', autoadd=False)
+To(u'key1')
+Set('Border/hide', True)
+Set('horzPosn', u'left')
+Set('vertPosn', u'top')
 To('..')
-Add('key', name='key6', autoadd=False)
 To('..')
 To('..')
