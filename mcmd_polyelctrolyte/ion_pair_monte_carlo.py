@@ -264,22 +264,6 @@ class MonteCarloPairs(AbstractMonteCarlo):
             'sample_size': (sample_size_0, sample_size_1)
         }
 
-    def sample_Re_to_target_error(self, **kwargs):
-        if "initial_sample_size" not in kwargs:
-            kwargs["initial_sample_size"] = 1000
-        if "target_error" not in kwargs:
-            kwargs["target_error"] = 0.1
-        request = self.server(
-            f'sample_Re_to_target_error(**{kwargs})', 1)  # gel box only
-        Re, err, sample_size = request.result()
-        self.setup()
-        return {
-            'Re': Re,
-            'err': err,
-            'sample_size': sample_size
-        }
-
-
     # MD functions
     # request connected nodes to do some MD and espressomd specific jobs
 

@@ -74,7 +74,7 @@ def sample_all(
 
         #to each list in result dict append datum
         append_to_lists_in_dict(sample_d, datum_d)
-        logger.info(f"{i+1}/{target_sample_size}")
+        logger.info(f"Sampling {i+1}/{target_sample_size}")
         logger.debug(datum_d)
 
         #save updated data to pickle storage
