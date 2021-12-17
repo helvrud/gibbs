@@ -2,6 +2,7 @@ from ion_pair_monte_carlo import MonteCarloPairs
 import socket_nodes
 import logging
 logger = logging.getLogger(__name__)
+socket_nodes.set_params(ON_NODE_ERROR = 'raise_error') #stop server if an error occurred in a node
 
 def build_no_gel(
     Volume, N_pairs, fixed_anions,
@@ -11,7 +12,6 @@ def build_no_gel(
     script_name = 'espresso_nodes/run_node.py',
     args=[[],[]]
 ):
-    import socket_nodes
 
     # box volumes and dimmensions
     box_l = [V_**(1/3) for V_ in Volume]

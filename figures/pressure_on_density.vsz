@@ -1,8 +1,8 @@
 # Veusz saved document (version 3.4)
-# Saved at 2021-12-16T21:53:24.245369
+# Saved at 2021-12-17T14:11:52.953739
 
 SetCompatLevel(0)
-AddImportPath('/home/ml/gibbs/figures')
+AddImportPath('/home/ml/Studium/gibbs/figures')
 ImportString('x11(numeric)','''
 7.687244e-01
 6.918519e-01
