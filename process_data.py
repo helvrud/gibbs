@@ -33,11 +33,8 @@ def read_data(path, cast_pandas = True):
 
 def mean_and_err(column_name, df):
     if isinstance(df[column_name][0], np.ndarray):
-        try:
-            df[column_name +"_mean"] = df[column_name].apply(np.mean)
-            df[column_name +"_err"]=df[column_name].apply(lambda _: np.std(_)/np.sqrt(len(_)))
-        except:
-            pass
+        df[column_name +"_mean"] = df[column_name].apply(np.mean)
+        df[column_name +"_err"]=df[column_name].apply(lambda _: np.std(_)/np.sqrt(len(_)))
 
 def split_2d_arrays_in_columns(column_name, df, postfix = None, replace = True):
     df[column_name]=df[column_name].apply(np.array)
