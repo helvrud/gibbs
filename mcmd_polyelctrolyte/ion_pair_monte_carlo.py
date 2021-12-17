@@ -278,7 +278,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         for ROUND in trange(rounds):
             [self.step() for i in range(mc_steps)]
             self.run_md(md_steps)
-            logger.info(f"Equilibrating {ROUND}/{rounds}")
+            logger.info(f"Equilibrating {ROUND+1}/{rounds}")
             if (time.time() - start_time)/3600 >= timeout_h: return True
         logger.info("Equilibrated")
         return True
