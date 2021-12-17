@@ -20,7 +20,7 @@ PAIR = [0, 1]
 CHARGES = [-1, 1]
 MOBILE_SPECIES = [0, 1]
 
-params = {" log_accept_reject" : False}
+params = {"log_accept_reject" : False}
 
 def set_param(**kwargs):
     params.update(kwargs)
@@ -188,13 +188,13 @@ class MonteCarloPairs(AbstractMonteCarlo):
         ], other_side)
 
     def on_accept(self):
-        if params[' log_accept_reject'] == True:
+        if params['log_accept_reject'] == True:
             logger.info("Accepted")
         return super().on_accept()
 
     def on_reject(self):
-        if params[' log_accept_reject'] == True:
-            logger.info("Accepted")
+        if params['log_accept_reject'] == True:
+            logger.info("Rejected")
         return super().on_reject()
 
     # AUXILIARY
