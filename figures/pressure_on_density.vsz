@@ -1,5 +1,5 @@
 # Veusz saved document (version 3.4)
-# Saved at 2021-12-20T14:01:05.785979
+# Saved at 2021-12-20T14:19:13.157906
 
 SetCompatLevel(0)
 AddImportPath('/home/ml/Studium/gibbs/figures')
@@ -908,7 +908,7 @@ To('y')
 Set('label', '\\Delta P = P - P_{res}, [bar]')
 Set('min', 0.0)
 Set('max', 5.0)
-Set('log', False)
+Set('log', True)
 Set('direction', 'vertical')
 To('..')
 Add('xy', name='xy1', autoadd=False)
