@@ -1,0 +1,2009 @@
+unitcell 54.5 54.5 54.5
+atom 0 radius 1.0 name 8 type 8
+atom 1 radius 1.0 name 8 type 8
+atom 2 radius 1.0 name 8 type 8
+atom 3 radius 1.0 name 8 type 8
+atom 4 radius 1.0 name 8 type 8
+atom 5 radius 1.0 name 8 type 8
+atom 6 radius 1.0 name 8 type 8
+atom 7 radius 1.0 name 8 type 8
+atom 8 radius 1.0 name 6 type 6
+atom 9 radius 1.0 name 7 type 7
+atom 10 radius 1.0 name 7 type 7
+atom 11 radius 1.0 name 7 type 7
+atom 12 radius 1.0 name 7 type 7
+atom 13 radius 1.0 name 7 type 7
+atom 14 radius 1.0 name 7 type 7
+atom 15 radius 1.0 name 7 type 7
+atom 16 radius 1.0 name 7 type 7
+atom 17 radius 1.0 name 7 type 7
+atom 18 radius 1.0 name 7 type 7
+atom 19 radius 1.0 name 7 type 7
+atom 20 radius 1.0 name 7 type 7
+atom 21 radius 1.0 name 7 type 7
+atom 22 radius 1.0 name 7 type 7
+atom 23 radius 1.0 name 7 type 7
+atom 24 radius 1.0 name 6 type 6
+atom 25 radius 1.0 name 7 type 7
+atom 26 radius 1.0 name 7 type 7
+atom 27 radius 1.0 name 7 type 7
+atom 28 radius 1.0 name 7 type 7
+atom 29 radius 1.0 name 7 type 7
+atom 30 radius 1.0 name 7 type 7
+atom 31 radius 1.0 name 6 type 6
+atom 32 radius 1.0 name 7 type 7
+atom 33 radius 1.0 name 7 type 7
+atom 34 radius 1.0 name 7 type 7
+atom 35 radius 1.0 name 7 type 7
+atom 36 radius 1.0 name 6 type 6
+atom 37 radius 1.0 name 7 type 7
+atom 38 radius 1.0 name 7 type 7
+atom 39 radius 1.0 name 7 type 7
+atom 40 radius 1.0 name 7 type 7
+atom 41 radius 1.0 name 7 type 7
+atom 42 radius 1.0 name 7 type 7
+atom 43 radius 1.0 name 7 type 7
+atom 44 radius 1.0 name 7 type 7
+atom 45 radius 1.0 name 7 type 7
+atom 46 radius 1.0 name 7 type 7
+atom 47 radius 1.0 name 7 type 7
+atom 48 radius 1.0 name 7 type 7
+atom 49 radius 1.0 name 7 type 7
+atom 50 radius 1.0 name 7 type 7
+atom 51 radius 1.0 name 7 type 7
+atom 52 radius 1.0 name 6 type 6
+atom 53 radius 1.0 name 7 type 7
+atom 54 radius 1.0 name 6 type 6
+atom 55 radius 1.0 name 7 type 7
+atom 56 radius 1.0 name 7 type 7
+atom 57 radius 1.0 name 7 type 7
+atom 58 radius 1.0 name 7 type 7
+atom 59 radius 1.0 name 7 type 7
+atom 60 radius 1.0 name 7 type 7
+atom 61 radius 1.0 name 7 type 7
+atom 62 radius 1.0 name 7 type 7
+atom 63 radius 1.0 name 7 type 7
+atom 64 radius 1.0 name 7 type 7
+atom 65 radius 1.0 name 7 type 7
+atom 66 radius 1.0 name 7 type 7
+atom 67 radius 1.0 name 6 type 6
+atom 68 radius 1.0 name 7 type 7
+atom 69 radius 1.0 name 7 type 7
+atom 70 radius 1.0 name 7 type 7
+atom 71 radius 1.0 name 7 type 7
+atom 72 radius 1.0 name 7 type 7
+atom 73 radius 1.0 name 7 type 7
+atom 74 radius 1.0 name 7 type 7
+atom 75 radius 1.0 name 7 type 7
+atom 76 radius 1.0 name 7 type 7
+atom 77 radius 1.0 name 7 type 7
+atom 78 radius 1.0 name 7 type 7
+atom 79 radius 1.0 name 7 type 7
+atom 80 radius 1.0 name 6 type 6
+atom 81 radius 1.0 name 7 type 7
+atom 82 radius 1.0 name 7 type 7
+atom 83 radius 1.0 name 7 type 7
+atom 84 radius 1.0 name 7 type 7
+atom 85 radius 1.0 name 7 type 7
+atom 86 radius 1.0 name 7 type 7
+atom 87 radius 1.0 name 7 type 7
+atom 88 radius 1.0 name 7 type 7
+atom 89 radius 1.0 name 7 type 7
+atom 90 radius 1.0 name 7 type 7
+atom 91 radius 1.0 name 7 type 7
+atom 92 radius 1.0 name 7 type 7
+atom 93 radius 1.0 name 7 type 7
+atom 94 radius 1.0 name 7 type 7
+atom 95 radius 1.0 name 7 type 7
+atom 96 radius 1.0 name 7 type 7
+atom 97 radius 1.0 name 7 type 7
+atom 98 radius 1.0 name 7 type 7
+atom 99 radius 1.0 name 7 type 7
+atom 100 radius 1.0 name 7 type 7
+atom 101 radius 1.0 name 7 type 7
+atom 102 radius 1.0 name 7 type 7
+atom 103 radius 1.0 name 7 type 7
+atom 104 radius 1.0 name 6 type 6
+atom 105 radius 1.0 name 7 type 7
+atom 106 radius 1.0 name 7 type 7
+atom 107 radius 1.0 name 7 type 7
+atom 108 radius 1.0 name 7 type 7
+atom 109 radius 1.0 name 7 type 7
+atom 110 radius 1.0 name 7 type 7
+atom 111 radius 1.0 name 6 type 6
+atom 112 radius 1.0 name 7 type 7
+atom 113 radius 1.0 name 7 type 7
+atom 114 radius 1.0 name 7 type 7
+atom 115 radius 1.0 name 7 type 7
+atom 116 radius 1.0 name 6 type 6
+atom 117 radius 1.0 name 7 type 7
+atom 118 radius 1.0 name 6 type 6
+atom 119 radius 1.0 name 7 type 7
+atom 120 radius 1.0 name 7 type 7
+atom 121 radius 1.0 name 7 type 7
+atom 122 radius 1.0 name 7 type 7
+atom 123 radius 1.0 name 7 type 7
+atom 124 radius 1.0 name 7 type 7
+atom 125 radius 1.0 name 7 type 7
+atom 126 radius 1.0 name 7 type 7
+atom 127 radius 1.0 name 6 type 6
+atom 128 radius 1.0 name 7 type 7
+atom 129 radius 1.0 name 7 type 7
+atom 130 radius 1.0 name 6 type 6
+atom 131 radius 1.0 name 7 type 7
+atom 132 radius 1.0 name 7 type 7
+atom 133 radius 1.0 name 7 type 7
+atom 134 radius 1.0 name 7 type 7
+atom 135 radius 1.0 name 7 type 7
+atom 136 radius 1.0 name 6 type 6
+atom 137 radius 1.0 name 7 type 7
+atom 138 radius 1.0 name 7 type 7
+atom 139 radius 1.0 name 7 type 7
+atom 140 radius 1.0 name 6 type 6
+atom 141 radius 1.0 name 7 type 7
+atom 142 radius 1.0 name 7 type 7
+atom 143 radius 1.0 name 7 type 7
+atom 144 radius 1.0 name 7 type 7
+atom 145 radius 1.0 name 7 type 7
+atom 146 radius 1.0 name 7 type 7
+atom 147 radius 1.0 name 7 type 7
+atom 148 radius 1.0 name 7 type 7
+atom 149 radius 1.0 name 7 type 7
+atom 150 radius 1.0 name 7 type 7
+atom 151 radius 1.0 name 7 type 7
+atom 152 radius 1.0 name 7 type 7
+atom 153 radius 1.0 name 7 type 7
+atom 154 radius 1.0 name 7 type 7
+atom 155 radius 1.0 name 7 type 7
+atom 156 radius 1.0 name 6 type 6
+atom 157 radius 1.0 name 7 type 7
+atom 158 radius 1.0 name 7 type 7
+atom 159 radius 1.0 name 7 type 7
+atom 160 radius 1.0 name 7 type 7
+atom 161 radius 1.0 name 6 type 6
+atom 162 radius 1.0 name 7 type 7
+atom 163 radius 1.0 name 7 type 7
+atom 164 radius 1.0 name 7 type 7
+atom 165 radius 1.0 name 7 type 7
+atom 166 radius 1.0 name 7 type 7
+atom 167 radius 1.0 name 7 type 7
+atom 168 radius 1.0 name 7 type 7
+atom 169 radius 1.0 name 7 type 7
+atom 170 radius 1.0 name 7 type 7
+atom 171 radius 1.0 name 7 type 7
+atom 172 radius 1.0 name 7 type 7
+atom 173 radius 1.0 name 7 type 7
+atom 174 radius 1.0 name 7 type 7
+atom 175 radius 1.0 name 7 type 7
+atom 176 radius 1.0 name 7 type 7
+atom 177 radius 1.0 name 7 type 7
+atom 178 radius 1.0 name 7 type 7
+atom 179 radius 1.0 name 7 type 7
+atom 180 radius 1.0 name 6 type 6
+atom 181 radius 1.0 name 7 type 7
+atom 182 radius 1.0 name 7 type 7
+atom 183 radius 1.0 name 7 type 7
+atom 184 radius 1.0 name 7 type 7
+atom 185 radius 1.0 name 7 type 7
+atom 186 radius 1.0 name 7 type 7
+atom 187 radius 1.0 name 7 type 7
+atom 188 radius 1.0 name 6 type 6
+atom 189 radius 1.0 name 7 type 7
+atom 190 radius 1.0 name 6 type 6
+atom 191 radius 1.0 name 7 type 7
+atom 192 radius 1.0 name 7 type 7
+atom 193 radius 1.0 name 6 type 6
+atom 194 radius 1.0 name 7 type 7
+atom 195 radius 1.0 name 7 type 7
+atom 196 radius 1.0 name 7 type 7
+atom 197 radius 1.0 name 7 type 7
+atom 198 radius 1.0 name 7 type 7
+atom 199 radius 1.0 name 7 type 7
+atom 200 radius 1.0 name 7 type 7
+atom 201 radius 1.0 name 7 type 7
+atom 202 radius 1.0 name 7 type 7
+atom 203 radius 1.0 name 7 type 7
+atom 204 radius 1.0 name 7 type 7
+atom 205 radius 1.0 name 7 type 7
+atom 206 radius 1.0 name 7 type 7
+atom 207 radius 1.0 name 7 type 7
+atom 208 radius 1.0 name 7 type 7
+atom 209 radius 1.0 name 7 type 7
+atom 210 radius 1.0 name 7 type 7
+atom 211 radius 1.0 name 7 type 7
+atom 212 radius 1.0 name 6 type 6
+atom 213 radius 1.0 name 7 type 7
+atom 214 radius 1.0 name 7 type 7
+atom 215 radius 1.0 name 7 type 7
+atom 216 radius 1.0 name 7 type 7
+atom 217 radius 1.0 name 7 type 7
+atom 218 radius 1.0 name 7 type 7
+atom 219 radius 1.0 name 7 type 7
+atom 220 radius 1.0 name 7 type 7
+atom 221 radius 1.0 name 7 type 7
+atom 222 radius 1.0 name 7 type 7
+atom 223 radius 1.0 name 7 type 7
+atom 224 radius 1.0 name 7 type 7
+atom 225 radius 1.0 name 7 type 7
+atom 226 radius 1.0 name 7 type 7
+atom 227 radius 1.0 name 7 type 7
+atom 228 radius 1.0 name 7 type 7
+atom 229 radius 1.0 name 7 type 7
+atom 230 radius 1.0 name 7 type 7
+atom 231 radius 1.0 name 7 type 7
+atom 232 radius 1.0 name 7 type 7
+atom 233 radius 1.0 name 7 type 7
+atom 234 radius 1.0 name 7 type 7
+atom 235 radius 1.0 name 6 type 6
+atom 236 radius 1.0 name 7 type 7
+atom 237 radius 1.0 name 7 type 7
+atom 238 radius 1.0 name 7 type 7
+atom 239 radius 1.0 name 6 type 6
+atom 240 radius 1.0 name 7 type 7
+atom 241 radius 1.0 name 7 type 7
+atom 242 radius 1.0 name 7 type 7
+atom 243 radius 1.0 name 7 type 7
+atom 244 radius 1.0 name 7 type 7
+atom 245 radius 1.0 name 6 type 6
+atom 246 radius 1.0 name 7 type 7
+atom 247 radius 1.0 name 7 type 7
+atom 248 radius 1.0 name 7 type 7
+atom 249 radius 1.0 name 7 type 7
+atom 250 radius 1.0 name 7 type 7
+atom 251 radius 1.0 name 7 type 7
+atom 252 radius 1.0 name 7 type 7
+atom 253 radius 1.0 name 7 type 7
+atom 254 radius 1.0 name 7 type 7
+atom 255 radius 1.0 name 7 type 7
+atom 256 radius 1.0 name 7 type 7
+atom 257 radius 1.0 name 7 type 7
+atom 258 radius 1.0 name 7 type 7
+atom 259 radius 1.0 name 7 type 7
+atom 260 radius 1.0 name 7 type 7
+atom 261 radius 1.0 name 7 type 7
+atom 262 radius 1.0 name 7 type 7
+atom 263 radius 1.0 name 6 type 6
+atom 264 radius 1.0 name 6 type 6
+atom 265 radius 1.0 name 7 type 7
+atom 266 radius 1.0 name 7 type 7
+atom 267 radius 1.0 name 7 type 7
+atom 268 radius 1.0 name 7 type 7
+atom 269 radius 1.0 name 6 type 6
+atom 270 radius 1.0 name 7 type 7
+atom 271 radius 1.0 name 6 type 6
+atom 272 radius 1.0 name 7 type 7
+atom 273 radius 1.0 name 7 type 7
+atom 274 radius 1.0 name 7 type 7
+atom 275 radius 1.0 name 7 type 7
+atom 276 radius 1.0 name 7 type 7
+atom 277 radius 1.0 name 7 type 7
+atom 278 radius 1.0 name 7 type 7
+atom 279 radius 1.0 name 7 type 7
+atom 280 radius 1.0 name 7 type 7
+atom 281 radius 1.0 name 7 type 7
+atom 282 radius 1.0 name 7 type 7
+atom 283 radius 1.0 name 7 type 7
+atom 284 radius 1.0 name 7 type 7
+atom 285 radius 1.0 name 7 type 7
+atom 286 radius 1.0 name 7 type 7
+atom 287 radius 1.0 name 7 type 7
+atom 288 radius 1.0 name 7 type 7
+atom 289 radius 1.0 name 6 type 6
+atom 290 radius 1.0 name 7 type 7
+atom 291 radius 1.0 name 6 type 6
+atom 292 radius 1.0 name 7 type 7
+atom 293 radius 1.0 name 7 type 7
+atom 294 radius 1.0 name 7 type 7
+atom 295 radius 1.0 name 7 type 7
+atom 296 radius 1.0 name 7 type 7
+atom 297 radius 1.0 name 7 type 7
+atom 298 radius 1.0 name 7 type 7
+atom 299 radius 1.0 name 7 type 7
+atom 300 radius 1.0 name 7 type 7
+atom 301 radius 1.0 name 7 type 7
+atom 302 radius 1.0 name 7 type 7
+atom 303 radius 1.0 name 7 type 7
+atom 304 radius 1.0 name 7 type 7
+atom 305 radius 1.0 name 7 type 7
+atom 306 radius 1.0 name 7 type 7
+atom 307 radius 1.0 name 7 type 7
+atom 308 radius 1.0 name 7 type 7
+atom 309 radius 1.0 name 7 type 7
+atom 310 radius 1.0 name 7 type 7
+atom 311 radius 1.0 name 7 type 7
+atom 312 radius 1.0 name 7 type 7
+atom 313 radius 1.0 name 7 type 7
+atom 314 radius 1.0 name 7 type 7
+atom 315 radius 1.0 name 7 type 7
+atom 316 radius 1.0 name 7 type 7
+atom 317 radius 1.0 name 7 type 7
+atom 318 radius 1.0 name 7 type 7
+atom 319 radius 1.0 name 7 type 7
+atom 320 radius 1.0 name 7 type 7
+atom 321 radius 1.0 name 7 type 7
+atom 322 radius 1.0 name 7 type 7
+atom 323 radius 1.0 name 7 type 7
+atom 324 radius 1.0 name 7 type 7
+atom 325 radius 1.0 name 6 type 6
+atom 326 radius 1.0 name 7 type 7
+atom 327 radius 1.0 name 7 type 7
+atom 328 radius 1.0 name 7 type 7
+atom 329 radius 1.0 name 7 type 7
+atom 330 radius 1.0 name 7 type 7
+atom 331 radius 1.0 name 7 type 7
+atom 332 radius 1.0 name 7 type 7
+atom 333 radius 1.0 name 7 type 7
+atom 334 radius 1.0 name 7 type 7
+atom 335 radius 1.0 name 6 type 6
+atom 336 radius 1.0 name 7 type 7
+atom 337 radius 1.0 name 7 type 7
+atom 338 radius 1.0 name 6 type 6
+atom 339 radius 1.0 name 7 type 7
+atom 340 radius 1.0 name 7 type 7
+atom 341 radius 1.0 name 7 type 7
+atom 342 radius 1.0 name 7 type 7
+atom 343 radius 1.0 name 7 type 7
+atom 344 radius 1.0 name 7 type 7
+atom 345 radius 1.0 name 6 type 6
+atom 346 radius 1.0 name 7 type 7
+atom 347 radius 1.0 name 7 type 7
+atom 348 radius 1.0 name 7 type 7
+atom 349 radius 1.0 name 6 type 6
+atom 350 radius 1.0 name 7 type 7
+atom 351 radius 1.0 name 7 type 7
+atom 352 radius 1.0 name 7 type 7
+atom 353 radius 1.0 name 7 type 7
+atom 354 radius 1.0 name 7 type 7
+atom 355 radius 1.0 name 7 type 7
+atom 356 radius 1.0 name 7 type 7
+atom 357 radius 1.0 name 7 type 7
+atom 358 radius 1.0 name 7 type 7
+atom 359 radius 1.0 name 7 type 7
+atom 360 radius 1.0 name 7 type 7
+atom 361 radius 1.0 name 7 type 7
+atom 362 radius 1.0 name 7 type 7
+atom 363 radius 1.0 name 6 type 6
+atom 364 radius 1.0 name 7 type 7
+atom 365 radius 1.0 name 7 type 7
+atom 366 radius 1.0 name 6 type 6
+atom 367 radius 1.0 name 7 type 7
+atom 368 radius 1.0 name 7 type 7
+atom 369 radius 1.0 name 7 type 7
+atom 370 radius 1.0 name 7 type 7
+atom 371 radius 1.0 name 6 type 6
+atom 372 radius 1.0 name 6 type 6
+atom 373 radius 1.0 name 6 type 6
+atom 374 radius 1.0 name 7 type 7
+atom 375 radius 1.0 name 7 type 7
+atom 376 radius 1.0 name 7 type 7
+atom 377 radius 1.0 name 7 type 7
+atom 378 radius 1.0 name 7 type 7
+atom 379 radius 1.0 name 7 type 7
+atom 380 radius 1.0 name 7 type 7
+atom 381 radius 1.0 name 6 type 6
+atom 382 radius 1.0 name 7 type 7
+atom 383 radius 1.0 name 7 type 7
+atom 384 radius 1.0 name 7 type 7
+atom 385 radius 1.0 name 7 type 7
+atom 386 radius 1.0 name 7 type 7
+atom 387 radius 1.0 name 7 type 7
+atom 388 radius 1.0 name 7 type 7
+atom 389 radius 1.0 name 7 type 7
+atom 390 radius 1.0 name 7 type 7
+atom 391 radius 1.0 name 7 type 7
+atom 392 radius 1.0 name 7 type 7
+atom 393 radius 1.0 name 7 type 7
+atom 394 radius 1.0 name 6 type 6
+atom 395 radius 1.0 name 6 type 6
+atom 396 radius 1.0 name 7 type 7
+atom 397 radius 1.0 name 7 type 7
+atom 398 radius 1.0 name 7 type 7
+atom 399 radius 1.0 name 7 type 7
+atom 400 radius 1.0 name 7 type 7
+atom 401 radius 1.0 name 7 type 7
+atom 402 radius 1.0 name 7 type 7
+atom 403 radius 1.0 name 7 type 7
+atom 404 radius 1.0 name 6 type 6
+atom 405 radius 1.0 name 7 type 7
+atom 406 radius 1.0 name 7 type 7
+atom 407 radius 1.0 name 6 type 6
+atom 408 radius 1.0 name 7 type 7
+atom 409 radius 1.0 name 7 type 7
+atom 410 radius 1.0 name 7 type 7
+atom 411 radius 1.0 name 7 type 7
+atom 412 radius 1.0 name 7 type 7
+atom 413 radius 1.0 name 7 type 7
+atom 414 radius 1.0 name 6 type 6
+atom 415 radius 1.0 name 7 type 7
+atom 416 radius 1.0 name 7 type 7
+atom 417 radius 1.0 name 7 type 7
+atom 418 radius 1.0 name 7 type 7
+atom 419 radius 1.0 name 7 type 7
+atom 420 radius 1.0 name 7 type 7
+atom 421 radius 1.0 name 7 type 7
+atom 422 radius 1.0 name 6 type 6
+atom 423 radius 1.0 name 7 type 7
+atom 424 radius 1.0 name 6 type 6
+atom 425 radius 1.0 name 7 type 7
+atom 426 radius 1.0 name 7 type 7
+atom 427 radius 1.0 name 7 type 7
+atom 428 radius 1.0 name 7 type 7
+atom 429 radius 1.0 name 7 type 7
+atom 430 radius 1.0 name 6 type 6
+atom 431 radius 1.0 name 7 type 7
+atom 432 radius 1.0 name 7 type 7
+atom 433 radius 1.0 name 7 type 7
+atom 434 radius 1.0 name 7 type 7
+atom 435 radius 1.0 name 7 type 7
+atom 436 radius 1.0 name 7 type 7
+atom 437 radius 1.0 name 7 type 7
+atom 438 radius 1.0 name 7 type 7
+atom 439 radius 1.0 name 7 type 7
+atom 440 radius 1.0 name 7 type 7
+atom 441 radius 1.0 name 7 type 7
+atom 442 radius 1.0 name 7 type 7
+atom 443 radius 1.0 name 7 type 7
+atom 444 radius 1.0 name 7 type 7
+atom 445 radius 1.0 name 7 type 7
+atom 446 radius 1.0 name 7 type 7
+atom 447 radius 1.0 name 6 type 6
+atom 448 radius 1.0 name 7 type 7
+atom 449 radius 1.0 name 7 type 7
+atom 450 radius 1.0 name 7 type 7
+atom 451 radius 1.0 name 7 type 7
+atom 452 radius 1.0 name 7 type 7
+atom 453 radius 1.0 name 6 type 6
+atom 454 radius 1.0 name 7 type 7
+atom 455 radius 1.0 name 7 type 7
+atom 456 radius 1.0 name 7 type 7
+atom 457 radius 1.0 name 7 type 7
+atom 458 radius 1.0 name 7 type 7
+atom 459 radius 1.0 name 7 type 7
+atom 460 radius 1.0 name 7 type 7
+atom 461 radius 1.0 name 7 type 7
+atom 462 radius 1.0 name 7 type 7
+atom 463 radius 1.0 name 7 type 7
+atom 464 radius 1.0 name 7 type 7
+atom 465 radius 1.0 name 6 type 6
+atom 466 radius 1.0 name 6 type 6
+atom 467 radius 1.0 name 7 type 7
+atom 468 radius 1.0 name 7 type 7
+atom 469 radius 1.0 name 7 type 7
+atom 470 radius 1.0 name 7 type 7
+atom 471 radius 1.0 name 7 type 7
+atom 472 radius 1.0 name 7 type 7
+atom 473 radius 1.0 name 7 type 7
+atom 474 radius 1.0 name 7 type 7
+atom 475 radius 1.0 name 7 type 7
+atom 476 radius 1.0 name 7 type 7
+atom 477 radius 1.0 name 6 type 6
+atom 478 radius 1.0 name 7 type 7
+atom 479 radius 1.0 name 7 type 7
+atom 480 radius 1.0 name 7 type 7
+atom 481 radius 1.0 name 7 type 7
+atom 482 radius 1.0 name 7 type 7
+atom 483 radius 1.0 name 6 type 6
+atom 484 radius 1.0 name 7 type 7
+atom 485 radius 1.0 name 7 type 7
+atom 486 radius 1.0 name 7 type 7
+atom 487 radius 1.0 name 7 type 7
+atom 488 radius 1.0 name 1 type 1
+atom 489 radius 1.0 name 1 type 1
+atom 490 radius 1.0 name 4 type 4
+atom 491 radius 1.0 name 4 type 4
+atom 492 radius 1.0 name 1 type 1
+atom 493 radius 1.0 name 4 type 4
+atom 494 radius 1.0 name 4 type 4
+atom 495 radius 1.0 name 1 type 1
+atom 496 radius 1.0 name 4 type 4
+atom 497 radius 1.0 name 0 type 0
+atom 498 radius 1.0 name 4 type 4
+atom 499 radius 1.0 name 4 type 4
+atom 500 radius 1.0 name 4 type 4
+atom 501 radius 1.0 name 0 type 0
+atom 502 radius 1.0 name 1 type 1
+atom 503 radius 1.0 name 4 type 4
+atom 504 radius 1.0 name 1 type 1
+atom 505 radius 1.0 name 4 type 4
+atom 506 radius 1.0 name 4 type 4
+atom 507 radius 1.0 name 4 type 4
+atom 508 radius 1.0 name 4 type 4
+atom 509 radius 1.0 name 4 type 4
+atom 510 radius 1.0 name 1 type 1
+atom 511 radius 1.0 name 4 type 4
+atom 512 radius 1.0 name 4 type 4
+atom 513 radius 1.0 name 0 type 0
+atom 515 radius 1.0 name 1 type 1
+atom 516 radius 1.0 name 1 type 1
+atom 517 radius 1.0 name 1 type 1
+atom 518 radius 1.0 name 4 type 4
+atom 519 radius 1.0 name 4 type 4
+atom 520 radius 1.0 name 4 type 4
+atom 521 radius 1.0 name 1 type 1
+atom 522 radius 1.0 name 0 type 0
+atom 523 radius 1.0 name 1 type 1
+atom 524 radius 1.0 name 1 type 1
+atom 525 radius 1.0 name 4 type 4
+atom 526 radius 1.0 name 1 type 1
+atom 527 radius 1.0 name 4 type 4
+atom 528 radius 1.0 name 4 type 4
+atom 529 radius 1.0 name 1 type 1
+atom 530 radius 1.0 name 1 type 1
+atom 531 radius 1.0 name 4 type 4
+atom 532 radius 1.0 name 4 type 4
+atom 533 radius 1.0 name 1 type 1
+atom 534 radius 1.0 name 4 type 4
+atom 535 radius 1.0 name 4 type 4
+atom 536 radius 1.0 name 4 type 4
+atom 537 radius 1.0 name 4 type 4
+atom 538 radius 1.0 name 1 type 1
+atom 539 radius 1.0 name 4 type 4
+atom 540 radius 1.0 name 4 type 4
+atom 541 radius 1.0 name 4 type 4
+atom 542 radius 1.0 name 4 type 4
+atom 543 radius 1.0 name 4 type 4
+atom 544 radius 1.0 name 1 type 1
+atom 545 radius 1.0 name 4 type 4
+atom 546 radius 1.0 name 4 type 4
+atom 547 radius 1.0 name 4 type 4
+atom 548 radius 1.0 name 1 type 1
+atom 549 radius 1.0 name 1 type 1
+atom 550 radius 1.0 name 1 type 1
+atom 551 radius 1.0 name 4 type 4
+atom 552 radius 1.0 name 4 type 4
+atom 553 radius 1.0 name 4 type 4
+atom 554 radius 1.0 name 4 type 4
+atom 555 radius 1.0 name 4 type 4
+atom 556 radius 1.0 name 4 type 4
+atom 557 radius 1.0 name 4 type 4
+atom 558 radius 1.0 name 4 type 4
+atom 559 radius 1.0 name 0 type 0
+atom 560 radius 1.0 name 4 type 4
+atom 561 radius 1.0 name 4 type 4
+atom 562 radius 1.0 name 4 type 4
+atom 563 radius 1.0 name 4 type 4
+atom 564 radius 1.0 name 4 type 4
+atom 565 radius 1.0 name 4 type 4
+atom 566 radius 1.0 name 4 type 4
+atom 567 radius 1.0 name 0 type 0
+atom 568 radius 1.0 name 1 type 1
+atom 569 radius 1.0 name 1 type 1
+atom 570 radius 1.0 name 0 type 0
+atom 571 radius 1.0 name 4 type 4
+atom 572 radius 1.0 name 1 type 1
+atom 573 radius 1.0 name 4 type 4
+atom 574 radius 1.0 name 1 type 1
+atom 575 radius 1.0 name 4 type 4
+atom 577 radius 1.0 name 4 type 4
+atom 578 radius 1.0 name 4 type 4
+atom 579 radius 1.0 name 0 type 0
+atom 580 radius 1.0 name 4 type 4
+atom 581 radius 1.0 name 4 type 4
+atom 582 radius 1.0 name 4 type 4
+atom 583 radius 1.0 name 4 type 4
+atom 584 radius 1.0 name 4 type 4
+atom 585 radius 1.0 name 4 type 4
+atom 586 radius 1.0 name 4 type 4
+atom 587 radius 1.0 name 4 type 4
+atom 588 radius 1.0 name 4 type 4
+atom 589 radius 1.0 name 4 type 4
+atom 590 radius 1.0 name 1 type 1
+atom 591 radius 1.0 name 4 type 4
+atom 592 radius 1.0 name 4 type 4
+atom 593 radius 1.0 name 4 type 4
+atom 594 radius 1.0 name 4 type 4
+atom 595 radius 1.0 name 4 type 4
+atom 596 radius 1.0 name 1 type 1
+atom 597 radius 1.0 name 1 type 1
+atom 598 radius 1.0 name 1 type 1
+atom 599 radius 1.0 name 4 type 4
+atom 600 radius 1.0 name 4 type 4
+atom 601 radius 1.0 name 4 type 4
+atom 602 radius 1.0 name 1 type 1
+atom 603 radius 1.0 name 4 type 4
+atom 604 radius 1.0 name 1 type 1
+atom 605 radius 1.0 name 1 type 1
+atom 606 radius 1.0 name 1 type 1
+atom 607 radius 1.0 name 4 type 4
+atom 608 radius 1.0 name 4 type 4
+atom 609 radius 1.0 name 1 type 1
+atom 610 radius 1.0 name 0 type 0
+atom 611 radius 1.0 name 1 type 1
+atom 612 radius 1.0 name 4 type 4
+atom 613 radius 1.0 name 4 type 4
+atom 614 radius 1.0 name 1 type 1
+atom 615 radius 1.0 name 4 type 4
+atom 616 radius 1.0 name 4 type 4
+atom 617 radius 1.0 name 4 type 4
+atom 618 radius 1.0 name 4 type 4
+atom 619 radius 1.0 name 4 type 4
+atom 620 radius 1.0 name 4 type 4
+atom 621 radius 1.0 name 1 type 1
+atom 622 radius 1.0 name 4 type 4
+atom 623 radius 1.0 name 4 type 4
+atom 624 radius 1.0 name 1 type 1
+atom 625 radius 1.0 name 1 type 1
+atom 626 radius 1.0 name 4 type 4
+atom 627 radius 1.0 name 4 type 4
+atom 628 radius 1.0 name 4 type 4
+atom 629 radius 1.0 name 4 type 4
+atom 630 radius 1.0 name 4 type 4
+atom 631 radius 1.0 name 0 type 0
+atom 632 radius 1.0 name 4 type 4
+atom 633 radius 1.0 name 0 type 0
+atom 634 radius 1.0 name 1 type 1
+atom 635 radius 1.0 name 4 type 4
+atom 636 radius 1.0 name 4 type 4
+atom 637 radius 1.0 name 1 type 1
+atom 638 radius 1.0 name 4 type 4
+atom 639 radius 1.0 name 4 type 4
+atom 640 radius 1.0 name 4 type 4
+atom 641 radius 1.0 name 0 type 0
+atom 642 radius 1.0 name 4 type 4
+atom 643 radius 1.0 name 4 type 4
+atom 644 radius 1.0 name 4 type 4
+atom 645 radius 1.0 name 0 type 0
+atom 646 radius 1.0 name 4 type 4
+atom 647 radius 1.0 name 4 type 4
+atom 648 radius 1.0 name 4 type 4
+atom 649 radius 1.0 name 1 type 1
+atom 650 radius 1.0 name 4 type 4
+atom 651 radius 1.0 name 4 type 4
+atom 652 radius 1.0 name 4 type 4
+atom 653 radius 1.0 name 4 type 4
+atom 654 radius 1.0 name 4 type 4
+atom 656 radius 1.0 name 4 type 4
+atom 657 radius 1.0 name 4 type 4
+atom 658 radius 1.0 name 4 type 4
+atom 659 radius 1.0 name 4 type 4
+atom 660 radius 1.0 name 1 type 1
+atom 661 radius 1.0 name 1 type 1
+atom 662 radius 1.0 name 4 type 4
+atom 663 radius 1.0 name 4 type 4
+atom 664 radius 1.0 name 4 type 4
+atom 665 radius 1.0 name 4 type 4
+atom 666 radius 1.0 name 4 type 4
+atom 667 radius 1.0 name 4 type 4
+atom 668 radius 1.0 name 1 type 1
+atom 669 radius 1.0 name 1 type 1
+atom 671 radius 1.0 name 4 type 4
+atom 672 radius 1.0 name 1 type 1
+atom 673 radius 1.0 name 4 type 4
+atom 675 radius 1.0 name 4 type 4
+atom 676 radius 1.0 name 4 type 4
+atom 677 radius 1.0 name 4 type 4
+atom 678 radius 1.0 name 4 type 4
+atom 679 radius 1.0 name 4 type 4
+atom 680 radius 1.0 name 4 type 4
+atom 681 radius 1.0 name 1 type 1
+atom 683 radius 1.0 name 1 type 1
+atom 684 radius 1.0 name 4 type 4
+atom 685 radius 1.0 name 4 type 4
+atom 686 radius 1.0 name 4 type 4
+atom 687 radius 1.0 name 4 type 4
+atom 688 radius 1.0 name 4 type 4
+atom 689 radius 1.0 name 4 type 4
+atom 690 radius 1.0 name 1 type 1
+atom 691 radius 1.0 name 4 type 4
+atom 692 radius 1.0 name 4 type 4
+atom 693 radius 1.0 name 4 type 4
+atom 694 radius 1.0 name 1 type 1
+atom 695 radius 1.0 name 4 type 4
+atom 696 radius 1.0 name 4 type 4
+atom 697 radius 1.0 name 4 type 4
+atom 698 radius 1.0 name 4 type 4
+atom 699 radius 1.0 name 4 type 4
+atom 700 radius 1.0 name 4 type 4
+atom 701 radius 1.0 name 4 type 4
+atom 703 radius 1.0 name 4 type 4
+atom 704 radius 1.0 name 0 type 0
+atom 705 radius 1.0 name 4 type 4
+atom 706 radius 1.0 name 4 type 4
+atom 707 radius 1.0 name 0 type 0
+atom 708 radius 1.0 name 4 type 4
+atom 709 radius 1.0 name 4 type 4
+atom 710 radius 1.0 name 4 type 4
+atom 711 radius 1.0 name 4 type 4
+atom 712 radius 1.0 name 4 type 4
+atom 713 radius 1.0 name 1 type 1
+atom 714 radius 1.0 name 4 type 4
+atom 715 radius 1.0 name 4 type 4
+atom 716 radius 1.0 name 4 type 4
+atom 717 radius 1.0 name 0 type 0
+atom 718 radius 1.0 name 4 type 4
+atom 719 radius 1.0 name 4 type 4
+atom 720 radius 1.0 name 4 type 4
+atom 721 radius 1.0 name 4 type 4
+atom 722 radius 1.0 name 4 type 4
+atom 723 radius 1.0 name 4 type 4
+atom 724 radius 1.0 name 4 type 4
+atom 725 radius 1.0 name 4 type 4
+atom 726 radius 1.0 name 4 type 4
+atom 727 radius 1.0 name 4 type 4
+atom 728 radius 1.0 name 4 type 4
+atom 729 radius 1.0 name 4 type 4
+atom 730 radius 1.0 name 4 type 4
+atom 731 radius 1.0 name 1 type 1
+atom 733 radius 1.0 name 4 type 4
+atom 734 radius 1.0 name 1 type 1
+atom 735 radius 1.0 name 4 type 4
+atom 736 radius 1.0 name 4 type 4
+atom 737 radius 1.0 name 4 type 4
+atom 738 radius 1.0 name 4 type 4
+atom 739 radius 1.0 name 4 type 4
+atom 740 radius 1.0 name 1 type 1
+atom 741 radius 1.0 name 4 type 4
+atom 742 radius 1.0 name 1 type 1
+atom 743 radius 1.0 name 4 type 4
+atom 744 radius 1.0 name 4 type 4
+atom 745 radius 1.0 name 4 type 4
+atom 746 radius 1.0 name 4 type 4
+atom 747 radius 1.0 name 4 type 4
+atom 748 radius 1.0 name 4 type 4
+atom 749 radius 1.0 name 1 type 1
+atom 750 radius 1.0 name 1 type 1
+atom 751 radius 1.0 name 4 type 4
+atom 753 radius 1.0 name 4 type 4
+atom 754 radius 1.0 name 4 type 4
+atom 755 radius 1.0 name 1 type 1
+atom 756 radius 1.0 name 4 type 4
+atom 757 radius 1.0 name 4 type 4
+atom 758 radius 1.0 name 4 type 4
+atom 759 radius 1.0 name 1 type 1
+atom 760 radius 1.0 name 4 type 4
+atom 761 radius 1.0 name 1 type 1
+atom 762 radius 1.0 name 1 type 1
+atom 763 radius 1.0 name 1 type 1
+atom 765 radius 1.0 name 1 type 1
+bond 8:0
+bond 9:8
+bond 10:9
+bond 11:10
+bond 12:11
+bond 13:12
+bond 14:13
+bond 15:14
+bond 16:15
+bond 17:16
+bond 18:17
+bond 19:18
+bond 20:19
+bond 21:20
+bond 22:21
+bond 23:22
+bond 24:23
+bond 25:24
+bond 26:25
+bond 27:26
+bond 28:27
+bond 29:28
+bond 30:29
+bond 31:30
+bond 32:31
+bond 33:32
+bond 34:33
+bond 35:34
+bond 36:35
+bond 37:36
+bond 37:1
+bond 38:1
+bond 39:38
+bond 40:39
+bond 41:40
+bond 42:41
+bond 43:42
+bond 44:43
+bond 45:44
+bond 46:45
+bond 47:46
+bond 48:47
+bond 49:48
+bond 50:49
+bond 51:50
+bond 52:51
+bond 53:52
+bond 54:53
+bond 55:54
+bond 56:55
+bond 57:56
+bond 58:57
+bond 59:58
+bond 60:59
+bond 61:60
+bond 62:61
+bond 63:62
+bond 64:63
+bond 65:64
+bond 66:65
+bond 67:66
+bond 67:2
+bond 68:1
+bond 69:68
+bond 70:69
+bond 71:70
+bond 72:71
+bond 73:72
+bond 74:73
+bond 75:74
+bond 76:75
+bond 77:76
+bond 78:77
+bond 79:78
+bond 80:79
+bond 81:80
+bond 82:81
+bond 83:82
+bond 84:83
+bond 85:84
+bond 86:85
+bond 87:86
+bond 88:87
+bond 89:88
+bond 90:89
+bond 91:90
+bond 92:91
+bond 93:92
+bond 94:93
+bond 95:94
+bond 96:95
+bond 97:96
+bond 97:3
+bond 98:1
+bond 99:98
+bond 100:99
+bond 101:100
+bond 102:101
+bond 103:102
+bond 104:103
+bond 105:104
+bond 106:105
+bond 107:106
+bond 108:107
+bond 109:108
+bond 110:109
+bond 111:110
+bond 112:111
+bond 113:112
+bond 114:113
+bond 115:114
+bond 116:115
+bond 117:116
+bond 118:117
+bond 119:118
+bond 120:119
+bond 121:120
+bond 122:121
+bond 123:122
+bond 124:123
+bond 125:124
+bond 126:125
+bond 127:126
+bond 127:4
+bond 128:2
+bond 129:128
+bond 130:129
+bond 131:130
+bond 132:131
+bond 133:132
+bond 134:133
+bond 135:134
+bond 136:135
+bond 137:136
+bond 138:137
+bond 139:138
+bond 140:139
+bond 141:140
+bond 142:141
+bond 143:142
+bond 144:143
+bond 145:144
+bond 146:145
+bond 147:146
+bond 148:147
+bond 149:148
+bond 150:149
+bond 151:150
+bond 152:151
+bond 153:152
+bond 154:153
+bond 155:154
+bond 156:155
+bond 157:156
+bond 157:5
+bond 158:3
+bond 159:158
+bond 160:159
+bond 161:160
+bond 162:161
+bond 163:162
+bond 164:163
+bond 165:164
+bond 166:165
+bond 167:166
+bond 168:167
+bond 169:168
+bond 170:169
+bond 171:170
+bond 172:171
+bond 173:172
+bond 174:173
+bond 175:174
+bond 176:175
+bond 177:176
+bond 178:177
+bond 179:178
+bond 180:179
+bond 181:180
+bond 182:181
+bond 183:182
+bond 184:183
+bond 185:184
+bond 186:185
+bond 187:186
+bond 187:6
+bond 188:4
+bond 189:188
+bond 190:189
+bond 191:190
+bond 192:191
+bond 193:192
+bond 194:193
+bond 195:194
+bond 196:195
+bond 197:196
+bond 198:197
+bond 199:198
+bond 200:199
+bond 201:200
+bond 202:201
+bond 203:202
+bond 204:203
+bond 205:204
+bond 206:205
+bond 207:206
+bond 208:207
+bond 209:208
+bond 210:209
+bond 211:210
+bond 212:211
+bond 213:212
+bond 214:213
+bond 215:214
+bond 216:215
+bond 217:216
+bond 217:7
+bond 218:5
+bond 219:218
+bond 220:219
+bond 221:220
+bond 222:221
+bond 223:222
+bond 224:223
+bond 225:224
+bond 226:225
+bond 227:226
+bond 228:227
+bond 229:228
+bond 230:229
+bond 231:230
+bond 232:231
+bond 233:232
+bond 234:233
+bond 235:234
+bond 236:235
+bond 237:236
+bond 238:237
+bond 239:238
+bond 240:239
+bond 241:240
+bond 242:241
+bond 243:242
+bond 244:243
+bond 245:244
+bond 246:245
+bond 247:246
+bond 247:0
+bond 248:5
+bond 249:248
+bond 250:249
+bond 251:250
+bond 252:251
+bond 253:252
+bond 254:253
+bond 255:254
+bond 256:255
+bond 257:256
+bond 258:257
+bond 259:258
+bond 260:259
+bond 261:260
+bond 262:261
+bond 263:262
+bond 264:263
+bond 265:264
+bond 266:265
+bond 267:266
+bond 268:267
+bond 269:268
+bond 270:269
+bond 271:270
+bond 272:271
+bond 273:272
+bond 274:273
+bond 275:274
+bond 276:275
+bond 277:276
+bond 277:3
+bond 278:5
+bond 279:278
+bond 280:279
+bond 281:280
+bond 282:281
+bond 283:282
+bond 284:283
+bond 285:284
+bond 286:285
+bond 287:286
+bond 288:287
+bond 289:288
+bond 290:289
+bond 291:290
+bond 292:291
+bond 293:292
+bond 294:293
+bond 295:294
+bond 296:295
+bond 297:296
+bond 298:297
+bond 299:298
+bond 300:299
+bond 301:300
+bond 302:301
+bond 303:302
+bond 304:303
+bond 305:304
+bond 306:305
+bond 307:306
+bond 307:4
+bond 308:6
+bond 309:308
+bond 310:309
+bond 311:310
+bond 312:311
+bond 313:312
+bond 314:313
+bond 315:314
+bond 316:315
+bond 317:316
+bond 318:317
+bond 319:318
+bond 320:319
+bond 321:320
+bond 322:321
+bond 323:322
+bond 324:323
+bond 325:324
+bond 326:325
+bond 327:326
+bond 328:327
+bond 329:328
+bond 330:329
+bond 331:330
+bond 332:331
+bond 333:332
+bond 334:333
+bond 335:334
+bond 336:335
+bond 337:336
+bond 337:0
+bond 338:6
+bond 339:338
+bond 340:339
+bond 341:340
+bond 342:341
+bond 343:342
+bond 344:343
+bond 345:344
+bond 346:345
+bond 347:346
+bond 348:347
+bond 349:348
+bond 350:349
+bond 351:350
+bond 352:351
+bond 353:352
+bond 354:353
+bond 355:354
+bond 356:355
+bond 357:356
+bond 358:357
+bond 359:358
+bond 360:359
+bond 361:360
+bond 362:361
+bond 363:362
+bond 364:363
+bond 365:364
+bond 366:365
+bond 367:366
+bond 367:2
+bond 368:6
+bond 369:368
+bond 370:369
+bond 371:370
+bond 372:371
+bond 373:372
+bond 374:373
+bond 375:374
+bond 376:375
+bond 377:376
+bond 378:377
+bond 379:378
+bond 380:379
+bond 381:380
+bond 382:381
+bond 383:382
+bond 384:383
+bond 385:384
+bond 386:385
+bond 387:386
+bond 388:387
+bond 389:388
+bond 390:389
+bond 391:390
+bond 392:391
+bond 393:392
+bond 394:393
+bond 395:394
+bond 396:395
+bond 397:396
+bond 397:4
+bond 398:7
+bond 399:398
+bond 400:399
+bond 401:400
+bond 402:401
+bond 403:402
+bond 404:403
+bond 405:404
+bond 406:405
+bond 407:406
+bond 408:407
+bond 409:408
+bond 410:409
+bond 411:410
+bond 412:411
+bond 413:412
+bond 414:413
+bond 415:414
+bond 416:415
+bond 417:416
+bond 418:417
+bond 419:418
+bond 420:419
+bond 421:420
+bond 422:421
+bond 423:422
+bond 424:423
+bond 425:424
+bond 426:425
+bond 427:426
+bond 427:0
+bond 428:7
+bond 429:428
+bond 430:429
+bond 431:430
+bond 432:431
+bond 433:432
+bond 434:433
+bond 435:434
+bond 436:435
+bond 437:436
+bond 438:437
+bond 439:438
+bond 440:439
+bond 441:440
+bond 442:441
+bond 443:442
+bond 444:443
+bond 445:444
+bond 446:445
+bond 447:446
+bond 448:447
+bond 449:448
+bond 450:449
+bond 451:450
+bond 452:451
+bond 453:452
+bond 454:453
+bond 455:454
+bond 456:455
+bond 457:456
+bond 457:2
+bond 458:7
+bond 459:458
+bond 460:459
+bond 461:460
+bond 462:461
+bond 463:462
+bond 464:463
+bond 465:464
+bond 466:465
+bond 467:466
+bond 468:467
+bond 469:468
+bond 470:469
+bond 471:470
+bond 472:471
+bond 473:472
+bond 474:473
+bond 475:474
+bond 476:475
+bond 477:476
+bond 478:477
+bond 479:478
+bond 480:479
+bond 481:480
+bond 482:481
+bond 483:482
+bond 484:483
+bond 485:484
+bond 486:485
+bond 487:486
+bond 487:3
+timestep indexed0 -12.960716155377796 -0.8770774678312208 -3.6486262415335844
+1 1.4271706797777914 14.64681269071417 7.276141074728996
+2 13.344655462614169 26.28861030794759 -4.780125168444705
+3 -12.197188540594851 25.728943013620867 20.986412074577682
+4 15.251516062679167 -1.3520694631434438 22.293560046050313
+5 27.225338014417957 40.72909618233799 8.885015727814206
+6 2.145385331480456 39.285095947432616 39.14331408613732
+7 29.302042508430212 14.022740838134336 35.21019114661172
+8 -12.59025871397948 -1.2060197315242434 -2.6567761440731985
+9 -13.121726132995441 -0.14160049854404377 -2.5609345366981913
+10 -12.960891431544475 -0.1317665791746805 -1.397005418634265
+11 -13.023477378948947 0.6889190019702326 -0.6106189685547037
+12 -12.606222095438142 0.4054324701576958 0.22872110453264372
+13 -11.717017589908764 0.8836470500651048 0.8423429138161448
+14 -10.922625427620005 1.3267920579192516 1.4832857113680036
+15 -9.880993199750854 1.0209955349391995 1.2074690276036997
+16 -9.20315327890706 1.6729670457233397 1.7771616646011443
+17 -8.569965141219157 2.372437277392627 2.2538558287163015
+18 -7.87986251280941 1.6381091498137632 2.905663266489313
+19 -7.907063512643418 2.168620694478771 3.6898638587000896
+20 -7.278202786935637 2.9813794769531454 4.035866114163024
+21 -6.900016771020027 3.827564370281445 4.365117544695717
+22 -6.74634719351328 4.65684098038146 4.988960984205967
+23 -6.515856690779863 5.074681045701855 4.131797014397708
+24 -5.5833916439679 5.3383622519709055 4.065677486471387
+25 -4.811604475966831 5.817603225859723 4.461278843303248
+26 -4.459565594392444 6.790202325427672 4.700134208109816
+27 -3.764959953197355 7.540151504481836 4.755781828299531
+28 -2.881814387748463 6.965878210834503 4.686349681364787
+29 -1.9078210623943548 6.944214581196036 5.0645122497307495
+30 -1.5293444129134883 7.492290196328799 5.813977915371355
+31 -1.2824214406234304 8.506121800417292 5.9374398858496855
+32 -1.5226110013940186 9.569498911342498 5.989688495598941
+33 -1.342986292905593 10.528334245978334 5.718288145889728
+34 -0.8023216033441187 11.271654189213448 6.542010977648259
+35 -0.13261043380889248 12.203011052494665 6.5812330266876335
+36 0.3799683350464609 13.112596151745398 6.079239312684316
+37 0.6302127919983842 13.995941885445818 6.654627783082085
+38 1.8878532647324817 15.430351297243574 6.72670394987296
+39 1.8267749188670903 15.920131068828692 5.893590797042654
+40 2.4736887556609286 15.30631321056555 5.2983878181415065
+41 2.421369591655828 16.248223368598676 4.835341287080445
+42 3.282132232190392 16.602837019478134 5.198094784276236
+43 3.8821475844030857 15.93269336225352 5.943650079364114
+44 4.884748972908369 16.18238962449531 5.696884037959567
+45 5.710662463381401 15.964357486981179 6.343225445826492
+46 6.2494796410147515 16.48484922652317 7.089803538473998
+47 6.91677243609024 16.61633130360182 6.43606137980431
+48 6.9676029880790376 17.358572749262144 5.700147752186356
+49 7.401016432045805 17.811384809518653 4.835125883662613
+50 8.300079521880669 18.580795385607015 4.284068574668385
+51 8.040312482215937 19.18079767010443 3.449527387073237
+52 7.103300339558145 19.439960537791084 3.0562341998055937
+53 7.732552083330138 20.22374869694906 3.1794444357935423
+54 7.650949036812284 20.702819917339472 2.3012173152441733
+55 7.781906831790847 21.497425434917346 1.7190445051155765
+56 6.853825328195536 21.728503977618438 1.199327387140276
+57 7.4017763066567746 22.540928217209913 1.0813088032123674
+58 8.058075331100222 23.342401097136346 1.3965118385123696
+59 8.672742436346446 23.8623114485758 0.7086053282160435
+60 8.85498729023187 24.269160491532475 -0.20666778090838278
+61 8.178772483163923 24.448475352415336 -0.9929578717642897
+62 8.825483125751628 24.58469562811618 -1.824327276342757
+63 9.2827300202379 25.15129927229628 -2.6312197197116163
+64 10.074504393694497 25.607666426924425 -3.289647021404093
+65 10.53268766383493 26.15199638092423 -3.911036553006106
+66 11.812058474767193 26.26429818424755 -3.985352165278506
+67 12.658443211013484 26.814544740259844 -4.262550056005374
+68 0.6843848537852364 15.337607075653903 7.31145621108866
+69 0.9183419237416867 16.053461847172045 7.970721924656447
+70 0.3686032334076702 16.87061577876089 8.252761969150013
+71 -0.12335630140750453 17.77775222682297 8.727848502763573
+72 0.32446687077139913 18.761199054891307 8.58378379745315
+73 -0.5561905566372616 19.088604872814752 8.895879309463885
+74 -1.224344451128161 18.87082987002031 9.698654653704452
+75 -1.4702050386703291 19.538248485160974 10.322548939623056
+76 -1.7885716503583708 19.850891699360734 11.23346313429955
+77 -1.8993774033504494 20.860256369570074 11.452089674927436
+78 -1.4400035921139676 21.03181022048643 12.284532834597684
+79 -2.221921474837096 20.701318941892247 12.888037437073308
+80 -2.7851256475497053 21.203493947022096 13.681132752046722
+81 -3.2122298132680456 20.942255622519923 14.782702998576326
+82 -3.039427364238904 21.173498681963995 15.782272156372422
+83 -3.89566479491495 20.34962088795543 16.215526370278162
+84 -4.763302919836924 19.703237781720592 16.25733638343263
+85 -5.8258916891430275 19.33356954159311 16.348897277866858
+86 -6.021559331558336 20.348040699867468 16.59553630219963
+87 -6.536354633774906 21.121296738326638 16.18704702553315
+88 -7.312581593251352 21.69976499651696 16.435158781385425
+89 -6.924017771903102 22.29393366514401 17.284185531868705
+90 -6.509116764743368 21.748873545294582 18.228679063155514
+91 -7.6125150247326445 22.19004760823661 18.32299528498106
+92 -8.253905030587127 22.731409652729827 18.865816832737334
+93 -9.374776705116517 22.94479346340497 18.808940138617285
+94 -9.667808667477665 23.957733581516514 19.344918692544365
+95 -9.887768739245459 24.17593429118733 20.34597543058466
+96 -10.649104668056495 24.603160900793846 21.07395413012808
+97 -11.354970537607414 25.27131250697933 21.047176032617937
+98 1.8369750798561975 13.862023327770439 7.639223499643805
+99 2.8569686830242516 13.739172052557032 8.072300699569439
+100 3.653987343447834 13.032335542527694 8.093133893781081
+101 4.543304067471807 12.333723470908376 8.32935271884889
+102 4.2430551667725025 11.72476427374861 9.195645522150304
+103 5.116101132039103 11.66931129283738 9.791550917397727
+104 5.641730730461139 12.039477976074037 10.988989113574307
+105 5.683271449374563 11.448992342763002 12.03345225104144
+106 6.649063225462709 10.641929004983917 12.342508223181058
+107 7.629110997824321 10.362994406981406 12.989674952358516
+108 8.627484854343752 9.960065477363546 13.22325778575447
+109 8.25878645756207 10.44501638348942 14.227369545024185
+110 8.36926512905594 9.934845899548373 15.280409420123597
+111 8.717856567850298 8.961049047148233 15.278253425385717
+112 9.516728359115548 8.759956899365175 14.525858593004708
+113 10.261496767840995 7.969863459937978 14.549656850086972
+114 10.714293055450037 7.870385536889395 15.542888632259217
+115 11.246205150297529 7.204665798330759 15.979424133019947
+116 11.467539059913852 6.286569686766388 16.13693541858574
+117 11.457147990537829 5.3778371283084745 16.649070763443056
+118 10.97721707744307 4.512651978033333 16.931179996850474
+119 11.09587918261176 3.7560056475173207 17.716813253690166
+120 11.691922744016258 2.9541305567803 18.106123435946056
+121 12.243372000675592 2.68373616519675 18.900140059115483
+122 12.151689169733316 2.311080848074728 19.797966235621494
+123 12.539380719013122 1.4047004213038372 20.289241587866062
+124 13.065625285044874 0.6262602970333163 20.869129936273506
+125 13.585600009605141 0.3914612302076751 21.740735861731576
+126 14.585140114492816 0.10423436715082315 21.43052002239025
+127 14.518461942559803 -0.6985992368063378 22.101700067093855
+128 13.900031289534903 27.165527004356157 -4.25545924844306
+129 13.878238021649432 27.79456079749194 -3.3329046815194374
+130 14.375019513412411 28.39276549064303 -2.7147321758048406
+131 14.461026529783284 29.3987086080964 -2.20860748791425
+132 15.501285657021093 29.51730298410155 -1.583419795692933
+133 16.00752287709281 30.0431268409694 -0.6989410751354512
+134 16.314304116898953 29.66169339666766 0.21885528500661436
+135 17.07264093337994 30.28415470882952 0.37759274260380127
+136 17.61861546410208 31.08612170904669 0.6388985696600958
+137 18.48464845408492 30.50707643687361 0.9886984617146988
+138 19.280206381758944 29.863556922169074 0.8090301855378027
+139 19.73508867646908 29.029142338482718 1.6171267818994581
+140 19.606380242512675 29.33545412470519 2.679201962964726
+141 20.603018917147452 29.478789854112968 2.8975398965403554
+142 21.146354705645635 30.258762555615927 3.7499618293027823
+143 21.59310796377047 31.102745877691305 4.188220740226516
+144 21.791528095228266 31.852116378807015 5.110401515733825
+145 21.6609152742611 32.86195174382516 5.376613761453638
+146 21.671575998483334 32.54210186852497 6.417268147105734
+147 22.818935708904636 32.635932887834734 6.746481925685523
+148 22.84010252271293 33.046757985955104 7.631221464234364
+149 23.332400405237742 33.833993675543596 8.211502526383368
+150 23.354744824718644 34.956753662100056 8.522010253082609
+151 24.091361874115503 35.55618128826945 8.06208575285221
+152 24.359972961612748 36.64565445073998 8.373423106367643
+153 25.14088558865417 37.34436020876346 8.700635874481765
+154 25.884776252989234 37.16695598324866 9.478151665532165
+155 26.04666175286707 38.184806423134575 9.657163153693219
+156 26.586103280851372 39.12050318543397 9.81871456238868
+157 27.295185392206907 40.0269468579936 9.634194602469496
+158 -11.655867793989053 26.65117926614258 21.33379225109944
+159 -10.876718032485037 27.515136700537514 21.476532003854707
+160 -10.234594111691003 27.912670447018375 22.312751660634227
+161 -10.036944447561027 28.650461609351392 23.03392548767653
+162 -9.412284831404314 28.82842628412865 23.905652178565433
+163 -9.3319579694789 29.640116074378426 24.579151809566408
+164 -9.517755944180884 30.576788650408194 24.95881541936975
+165 -8.68289143914511 30.896384439453463 25.584281094117447
+166 -8.304018165628726 30.80371167369985 26.557003225576253
+167 -7.648030694367485 31.22040380308339 27.339678352632923
+168 -6.805986542454434 31.314087772070092 27.816619308729738
+169 -6.595116135398747 32.16203815747255 28.347073347844116
+170 -5.89989657373291 32.93331253921215 28.243056076192275
+171 -5.519439585226998 33.63459342360123 29.11214590142291
+172 -5.272437822933298 33.598888986212884 30.067649944933038
+173 -5.235044944300547 34.57239057634601 30.368591821809883
+174 -5.666721790762523 35.45268617725992 30.659557027444787
+175 -5.271979608979514 35.811941113215276 31.56498891540973
+176 -4.916233951730078 36.402041474102525 32.38447070374067
+177 -4.385580857332066 37.017118383960145 33.262588471200395
+178 -4.261025807517008 37.63576254106996 34.09861895123024
+179 -4.565385702173529 37.69265519644788 35.030833814819644
+180 -4.6433788056103324 38.60786367891803 35.54480612962915
+181 -3.5870237679778256 38.400679764730306 35.95750255313459
+182 -3.0132788086792957 39.34505125013732 35.90381338159044
+183 -2.33725607153643 39.102567198469465 36.72855662765721
+184 -1.6889467210666993 38.406983050708064 37.51495963494938
+185 -0.48359827648620524 38.9320581721581 37.67113543415958
+186 0.18238781446729493 38.80190213650598 38.446393603894386
+187 1.1285352913416338 39.29990618242892 38.656144001944355
+188 16.22008137926202 -1.167802137109831 22.673049816482003
+189 17.091688214236257 -0.5705553271677246 22.804040052027695
+190 17.783712482530873 -0.0813081565187872 23.48133039516625
+191 18.267574304201904 0.8732782907766278 23.419512210809522
+192 18.981090144867956 1.303883486994067 24.039559183740035
+193 19.04032563692188 2.2592684069849205 24.441015864548444
+194 19.909599869351442 2.9083886933500636 24.614173020184897
+195 20.34275609508834 3.820187883062462 24.859074044333475
+196 20.171963411980805 5.0790193690036345 24.302595318698604
+197 20.85568810434639 5.880886925471459 24.50846248885211
+198 21.045843889335632 7.074086337189331 24.914450560936732
+199 22.025687376332428 7.075190517481358 25.254794503679506
+200 22.75934810147343 7.732546124042183 25.493178371564987
+201 23.359095488096084 8.171654787018879 26.242724657592802
+202 24.18352308485652 8.396518717055022 26.78376246290562
+203 25.279902938460932 8.259287864310409 26.93500101092072
+204 25.885126678075366 9.110860121434824 27.324514774919557
+205 26.09047432430855 9.375082897404972 28.32560578719346
+206 25.882952494185485 10.157682873465175 29.02383188990584
+207 25.795965244008954 11.141068835012918 29.55931100421103
+208 26.00821796155974 12.150842338941816 28.964954313340723
+209 26.726275527100128 12.865368866338297 29.376885946184007
+210 27.337156232391578 13.74095845658869 29.143446486692657
+211 28.111889338644833 13.042910403432119 29.429340334942218
+212 28.77095261249711 13.673268664248553 30.042936282163808
+213 28.76404336446552 13.546481422038237 31.13047272620566
+214 28.632261133387164 13.319590842798059 32.19870908013126
+215 28.572395371275753 13.19475079866158 33.22423354942154
+216 28.326146175059957 13.719180999788243 34.12768028211584
+217 29.041889490298733 13.201754483841697 34.684360978860624
+218 27.340680365240416 41.87533514074433 8.988839117544178
+219 27.84659743273188 42.77457307088888 8.839988194377703
+220 28.896616290601948 43.063111889901954 8.90577786638216
+221 29.73331297803522 42.81219444501239 8.350024899541623
+222 30.078091032689247 43.66248504263027 7.665507810579543
+223 31.142077378989942 43.66433027200777 7.4716453434017245
+224 31.514829086962695 44.649955383921046 6.912970986354701
+225 32.14878635926111 45.30756271619963 6.463416774188248
+226 33.01941407563674 44.93650082589288 6.139392513846307
+227 33.13706640148026 44.95753123695943 5.11249967256311
+228 34.0966387090231 44.89069493080954 4.641095355641849
+229 34.95452603752311 45.54545163170124 4.92752584975674
+230 35.73305333799398 45.56589078639679 4.200842692505973
+231 35.63208500163225 46.545226776599634 4.118513060125562
+232 35.88735326855235 46.38522355998477 3.1026280023386255
+233 35.59349449047936 45.36036168605887 2.8715941393237037
+234 36.16800660780458 45.871369212882996 2.1183339478542704
+235 37.07888872372223 45.74291534202868 1.757840540559353
+236 37.63684383596211 45.805566645763925 0.9016001242135169
+237 38.32315445045585 46.406897814709616 0.31419201595413027
+238 38.95932954195194 46.876394815557795 -0.29706286145272287
+239 39.149246620736754 47.906190147866326 -0.3707332634631584
+240 38.897903851855936 48.777265418489556 -0.7688773697461571
+241 38.607027003248824 49.85189754019138 -0.8763060255185451
+242 39.63133724121479 50.374466617500026 -1.1507797303613359
+243 40.17940306089026 50.65507644801019 -1.9990599717017545
+244 39.565382920455654 51.57431836101624 -1.6821378169212053
+245 40.1271494966607 52.08405663143878 -2.288078503427741
+246 41.016736532649695 52.39060169119857 -1.9604349352390642
+247 40.777257599171634 53.11791890997888 -2.8999311249436985
+248 28.270807290529483 40.64274890282204 9.03789017989607
+249 28.851134282251547 40.44728297015046 9.870002909703496
+250 29.716573710225262 40.89880595265482 9.917473778085476
+251 30.369866478679338 40.082767062480144 10.126532374787045
+252 31.334129273472836 39.97580842612785 9.985397987677313
+253 31.82084827168523 39.58971123176275 10.781873836948238
+254 32.030466921602724 38.50140051293934 11.106736704301607
+255 31.65632355643805 37.720056599862055 10.544236699441583
+256 32.49127697351236 37.18572850280089 10.642195865458723
+257 33.37761208845046 36.89728207500064 10.943258597026206
+258 33.783140180705466 35.854070853382325 10.972538750090916
+259 34.221008646257985 34.95543128117068 11.275808345283613
+260 34.691762768683596 34.031356755268746 11.437746690211053
+261 35.75982879077083 34.38650465254366 11.571580727089136
+262 35.7702184502953 33.713831312995744 12.498328659313696
+263 35.7205168577598 32.764083530580436 13.090985913036093
+264 36.51142400644029 32.50139970122666 13.695719328510679
+265 37.48859521519264 32.273877033533104 13.686554297467106
+266 38.136525619978784 32.12250977471897 14.504256944780197
+267 38.161869423453815 31.045546357696896 14.532585213646408
+268 39.09440493385736 30.86995978382767 15.001409176291522
+269 39.779769158118384 30.81241495356796 15.677753824371077
+270 39.90465174653869 29.89581912581018 16.15318999213478
+271 40.45787749030968 29.294775668631345 16.834738752707366
+272 41.06692683740554 29.28773205351544 17.710404849808757
+273 41.68860431566943 28.38289702395213 18.054319013791215
+274 42.00297359674815 27.79391507622073 18.84823125778196
+275 42.352466509944406 27.241246503592095 19.656223786612184
+276 42.112894250746415 27.440630151227978 20.813376195351896
+277 41.70913812953834 26.354152693537326 20.52978057037346
+278 26.755015255225384 41.01877156405533 9.71851686077273
+279 26.475531239424246 41.49000711399661 10.591920602528575
+280 25.88524398091185 42.22149424910957 11.246649403534239
+281 25.32257377085814 41.5000269093284 11.743454773923297
+282 24.856495348497212 40.61441932060733 11.707088210332968
+283 24.625929450436583 40.87872600849418 12.718361173428056
+284 24.6727017214224 41.59457488761748 13.43480805279289
+285 24.358690337948936 42.410754559378724 13.868969661200293
+286 23.421863715296702 42.79165882576001 13.59212202663514
+287 22.74832685983754 43.33000604081312 14.304625335626236
+288 22.492275492372922 44.24612861769697 13.70793163612141
+289 22.41066538240877 44.79171286545411 14.601425933810264
+290 22.336420719869633 45.47730544521555 15.428930189124683
+291 22.46270275751817 45.25140681601085 16.51358256792009
+292 22.393724946272556 45.599748005979386 17.531329587617414
+293 21.50926158240506 46.1726106456038 17.808816566096016
+294 21.57184167240287 45.797516668854506 18.674106442744968
+295 21.34855155296919 46.63100997496437 19.138066459548675
+296 20.824066017963737 47.276455451458894 18.391927232639446
+297 20.15535182090993 47.358362308812254 19.20883818633367
+298 19.29071763859421 46.59089173467981 19.431166978311325
+299 18.301906221114972 46.728946290278714 19.587253577486205
+300 18.082213007907985 47.467081450192474 20.176591072139264
+301 18.462668345190966 48.337556343107686 20.008709330312453
+302 18.315251373908705 49.07564420001635 20.849506418329728
+303 17.632915875711433 49.46159521090568 21.52355649106959
+304 16.872713894500993 50.09741775149915 21.592795495897967
+305 15.999725522228266 50.47958273421465 21.70829500856534
+306 15.73170595614377 51.04354617119348 22.6369351606276
+307 15.752973630215171 52.068991751212586 22.39096925456121
+308 1.7804052735032954 39.48182721976276 40.06554537890602
+309 1.5109266469357123 40.25425203996178 39.53095180458661
+310 1.6471527314056809 41.230442006889504 40.22494459810543
+311 1.678237236341743 41.59447377230507 41.29973618045818
+312 0.9066262720688897 42.30383431821122 41.449387818069646
+313 0.651619265797904 43.278430493290244 41.660681817944145
+314 0.4104387398664128 42.939197443697715 42.74316289517038
+315 -0.15210008182987167 43.06874201071957 43.56344873479419
+316 -0.591738321845817 44.009196130706655 44.03767669472672
+317 -1.0933732981215911 44.68435957201152 44.76137086380433
+318 -1.7466771146341173 45.2767553347618 45.479849719803475
+319 -1.7904548542061178 46.22864116934731 45.975242958433284
+320 -1.5830418142885705 47.20871211836448 45.64759111472238
+321 -1.9922401350038115 48.00975805142796 46.336301442272095
+322 -2.440736323391924 48.57158588332753 47.15451013952111
+323 -2.226750901968458 49.10350962969136 47.94714880803061
+324 -2.9153515228801297 49.66518568080457 48.44663724375381
+325 -3.5573395632277496 50.147820893703155 49.0810007092846
+326 -4.045151918769541 51.15093566314981 49.21962366695774
+327 -4.245940949883035 51.97765458090712 48.69820101012213
+328 -4.723717611265542 52.38639301307347 49.556642835162066
+329 -5.442019606364603 52.96465032645204 50.128442173244125
+330 -6.335573987262862 52.40303011624278 49.94107032452989
+331 -7.320698842633298 52.22951755880505 50.15813625786689
+332 -8.139988318824166 52.78901088830781 49.94181766860812
+333 -8.867118251962829 53.26795609555024 49.11579304631231
+334 -9.67686881813686 52.6369048467259 49.42729521927096
+335 -10.551439881984692 52.90240168765068 49.806082073471885
+336 -11.071733036486087 53.46937350813662 50.51432204437188
+337 -12.192914504799461 53.5533123777515 50.11490157567904
+338 2.382675679692678 38.421461850473285 38.66732224453123
+339 2.715807143261721 37.57694449610073 39.039121646922105
+340 3.595353447337505 38.062708147883015 38.62002618963264
+341 3.5921144307280124 37.6787568792086 37.498018268753434
+342 3.2505972576372595 36.49746882053594 37.315551382782665
+343 4.32731314854251 36.48490444648415 37.69103778133958
+344 4.066602426643394 36.445526056825265 38.68231170016266
+345 4.3201783245211125 35.57216970031359 39.12592546274248
+346 4.99255956387271 35.4562188803828 39.786454777976395
+347 4.654668987203052 36.03413980883418 40.71602390280542
+348 4.8932745821944605 36.77684645331648 41.447624094216025
+349 5.168505789652811 35.729303948360496 41.81355438568589
+350 5.456663605162624 34.88551921365323 42.23312968566048
+351 5.910007068245868 34.45815489185456 43.16387820236157
+352 6.592093744208341 33.70071445435947 43.07374116859308
+353 7.518195584001426 33.988430287101416 43.288798987583284
+354 8.408161139102647 33.67172130655906 43.72016789377187
+355 8.781713961976642 33.19823715829454 44.57250560411631
+356 9.29120942207418 33.00733075791166 45.611969040304324
+357 9.011046736515556 32.04601128206957 45.47231807670316
+358 10.050613142102371 31.68823732959419 45.79676097178381
+359 10.640042679969305 31.040939060346435 46.328702111597444
+360 10.936893715218828 30.549080031027334 47.23794953386837
+361 11.53275507264561 30.35123779021623 48.13646514130966
+362 11.454984586378192 29.304295202141393 47.96212055417122
+363 11.034882837829828 28.51061703179441 47.18954880815901
+364 11.479857714077594 27.535997483881964 46.83873798253059
+365 12.191552196453099 26.890325387417956 47.338623665570786
+366 12.776978698025625 27.232275798718945 48.149554529790926
+367 13.328098533945125 26.82889320940533 48.87601492939431
+368 3.0370540739838052 39.344828443994196 38.537455661898186
+369 3.404889599949514 39.65157054534602 37.6341176242949
+370 4.3077062593286835 39.71663143784497 37.32370912169754
+371 3.7265013654445434 39.30641105973472 36.451761739739204
+372 4.00454406078363 40.202783624938206 35.869296588367064
+373 4.625595785425765 40.995595756261025 35.95303745185209
+374 5.518691057068733 41.44941441059696 35.71922923590737
+375 5.708563209614724 41.35240418617054 34.68749031133963
+376 6.575278173806913 42.02753158737703 34.36287686283422
+377 6.489858733106014 42.34451514877294 33.35027432095511
+378 6.169081556459318 42.75091004258372 32.49247307952559
+379 6.8362506328955 43.26597128001024 31.739976815819862
+380 6.68154863961402 44.23155450624146 31.05889363350075
+381 6.844905059322485 44.46604132626398 30.09130344653049
+382 7.4321217251388285 43.97717731607706 29.42460826709796
+383 7.484775148892251 44.20705989424138 28.41773502357353
+384 8.202684700925134 44.517555705718024 27.820755131699443
+385 8.839766043686664 45.37941198127352 28.087360264067005
+386 9.449365986754511 45.883861382750744 27.483625769356667
+387 9.555472908919006 46.035945464925625 26.444770087050173
+388 10.379236610196342 46.56483178188127 26.510914607118877
+389 10.51331601058362 47.48936536636023 25.967629472143877
+390 10.608324513250448 48.57306958666618 25.576124150683906
+391 10.204200364392259 49.36970201302689 24.88732050057317
+392 10.982093710038347 50.14138208278419 24.774456620587273
+393 11.806072347612183 50.75270943747341 24.508335237796253
+394 12.132560411737467 50.96711913501543 23.493436180426947
+395 12.766299306975307 51.89110370277212 23.41718818008339
+396 13.558261687609827 52.08884914186951 22.615092082138226
+397 14.469666896910574 52.43276879212186 22.205569697107652
+398 29.28184551413989 13.25075898191023 35.879394429137555
+399 29.538248136382673 11.990178861737595 35.76853257288526
+400 30.544995099458692 11.946670574460983 36.22829694772596
+401 30.743223061026164 11.633142321170657 37.22739449740537
+402 31.231156291618014 10.770605819548656 37.75927921903876
+403 32.02447414586738 10.550591018670477 38.46521437334636
+404 32.266310792499546 9.906368453955686 39.247186684509344
+405 32.44008152429253 8.95835612137249 39.5666060483918
+406 33.098396104291936 8.568401374512167 40.348502726549455
+407 33.7077525933556 8.257218799861 41.116660628491985
+408 34.34977368428504 7.686003441078168 40.53238323230982
+409 34.9946738982705 7.059472140688807 40.72143406825485
+410 34.682482327160216 6.1027670362141375 41.11652843552369
+411 34.60704030461117 5.044962940930542 41.310455209030444
+412 35.14566173479908 4.517169252719573 42.02705064803166
+413 35.69908397125899 4.298519929625306 42.91514071440611
+414 36.782719257831346 3.486193882810313 43.2432553836058
+415 36.53654066346518 2.923640269797035 44.01981287471635
+416 37.44544548528615 2.4353458737560705 44.334292287185896
+417 37.78870833453403 2.418814698658015 45.35424724380699
+418 36.91235422175102 2.064129856622349 45.76807008313948
+419 37.48475506534394 2.1881301494017493 46.66377692552741
+420 38.06847295421083 1.0275675896267653 46.5849963366625
+421 39.173865977868616 0.8674622184758048 46.430852234372715
+422 39.77298722902605 0.045881151473119934 46.44597290722858
+423 40.32256896667582 0.07889492408983004 47.29377029692323
+424 40.556682286582046 0.19489833912543023 48.28693848847928
+425 40.341838383227994 -0.7773457817241578 48.87022417161315
+426 40.11990956948563 -0.8609408345372671 49.89107812500267
+427 40.380002587037104 -0.5137752434134981 50.91356971010714
+428 28.58588085969712 14.446285858571011 36.06156863074404
+429 27.652293965275533 14.90575908453194 35.97143575546084
+430 27.424385349281746 15.755939294979884 36.39460503026765
+431 27.09594104634888 16.681532137054266 36.715091273566415
+432 26.251365387752887 16.249570921929777 37.1440794571602
+433 25.734869440704564 16.170627547862654 37.993985361039215
+434 24.750979924659138 15.655445268461754 37.799056402672385
+435 24.41002244828443 16.0593162203839 38.69992105801495
+436 23.368151572422864 16.54615109320967 39.2484306107842
+437 22.93647718574224 16.62194960702858 38.292813245140685
+438 22.329058437759613 16.92882322151588 39.050384657306786
+439 21.842338039475973 17.193171268008523 39.78854532939068
+440 21.01124351170306 17.391620754748384 40.43652078898091
+441 20.043526360543495 18.03774279852729 40.52048785741046
+442 19.508128112279792 18.77049555070553 40.178592477994776
+443 19.606280031290687 19.02139018807874 41.22265110769002
+444 18.993578389105057 19.426823433170178 41.91469899788297
+445 18.04550474466264 19.35339887851056 42.613662800424336
+446 16.98306280495134 19.423353706245038 42.35695550440734
+447 16.38144958311644 20.346426234894302 42.479507389291776
+448 16.208941996133042 20.771408132285124 43.39048044479246
+449 15.641596062276783 21.65987852510739 44.07505898549666
+450 16.408544292022405 22.58330000590045 44.266877385922506
+451 16.293912432597192 22.67246549710074 45.32534598060977
+452 16.271978110269302 22.83465506176802 46.33411692161844
+453 16.055524116413206 23.70405670955699 47.02633346513189
+454 15.192520813993976 24.103200058050323 46.904054117472946
+455 15.27376619611166 24.659442373646545 47.824302676408415
+456 14.577535936780786 25.256402763924047 48.38613768480328
+457 14.005863279819186 25.753322783565224 49.20829150823924
+458 30.111743707801693 14.774306409725618 35.08893042016776
+459 30.759049891543015 15.595323976982964 35.4191538827764
+460 31.325587323972066 15.616752035864653 34.45321063946261
+461 31.762025445841704 15.264043513329945 33.4403833099097
+462 31.935906753172738 16.069114652230773 32.616036439566884
+463 32.789664373979704 16.76310098504861 32.54959639517404
+464 32.75617402859878 17.723767691250366 32.3087250229952
+465 33.442858066199236 18.112164724630368 31.40367959618367
+466 34.338238660162176 18.605692857582202 31.594075681381515
+467 34.40821961263936 18.74631858370549 30.545589716682986
+468 34.982489545248434 19.5104837301061 31.017820189127153
+469 35.78928711492512 20.07639658802436 30.380984510837894
+470 36.60485012277879 19.98466563562231 31.05773114945829
+471 36.532894496444946 20.893867263900407 30.717702665810158
+472 37.195503727346114 21.464662963461524 30.12837627586649
+473 38.0401721703433 21.266127516098816 29.615797683113712
+474 38.471098978135416 21.92209446510851 29.03825003783281
+475 38.34479502513139 21.69179938148442 28.044980446652133
+476 37.96036642573658 21.806662397361862 27.025781765361863
+477 38.68004291111401 21.908910223548613 26.141275912125526
+478 39.14377007865113 21.3938893246316 26.78938634572795
+479 40.02123300674477 21.346922376659034 27.149479348857938
+480 40.42647942350841 22.078208271900944 26.23341988974232
+481 39.89752415370634 22.958686576676897 26.470562478197508
+482 39.360399178742824 22.98964169478007 25.568583709690852
+483 39.301857926293216 23.68360286169867 24.7997974104551
+484 39.272502647542154 24.687030285588335 24.347425336760367
+485 40.183853661386074 25.40833476363055 23.610973618129535
+486 40.88318385812744 25.46201916636029 22.83070315662908
+487 41.64041078834003 25.62876735621684 22.06255187010062
+488 6.0108657678447726 37.270336082296005 51.350470894405504
+489 44.981434437306945 7.170292735637863 35.57020400600697
+490 -9.186073436646446 1.7965621769436393 2.8045203498661735
+491 29.386554499743696 10.925547338056713 37.5205758587823
+492 1.4758741719941306 14.757866090920876 5.544007499912096
+493 26.82298387421545 66.12063141633145 29.40443168130588
+494 21.448840158793224 16.12665777662031 39.975969017157446
+495 39.67499451476338 48.64227269359001 44.891008194916566
+496 46.373837923622844 22.068257754079777 17.36461855378913
+497 44.13492762235117 16.401722486082505 10.494813369827833
+498 46.084917989920406 1.0563599783129864 54.317849472117786
+499 19.934432579949473 49.996430473599595 9.210850478194885
+500 28.65593707879923 15.934802503013444 38.450934190063535
+501 1.473450604056382 47.00169307106058 9.985411289073749
+502 20.061554677741896 25.365892563181248 15.696060076183413
+503 33.62822304197125 53.85114631987993 6.950692611481897
+504 48.1717162367773 32.77924045981153 31.746470414451526
+505 29.804874732017048 67.7316712117988 32.205942249196355
+506 64.28329352372015 -21.93323905564923 44.80408694365532
+507 54.48375657493735 74.37104662517716 9.162166586630807
+508 36.333487383649675 35.8270045046212 10.335512135154708
+509 -7.016832251160686 30.84705392570765 26.46565560657595
+510 18.306612131926858 41.42426253023553 10.480158612464006
+511 52.87811603892059 -4.735011406764386 48.509666456687945
+512 40.55711776904015 54.688127387563554 52.587685209054726
+513 11.12456244018759 11.09883192165891 18.733956613226205
+515 33.670468732220804 42.9665036340639 19.99374380132353
+516 0.3549323805582635 26.4835042676464 28.205574479018278
+517 32.22885255649512 41.92028343315265 14.062051664404795
+518 6.024810502134202 9.555708477850256 12.55199500781656
+519 19.47114274912622 48.87175739951968 21.634419669192624
+520 14.874623629891875 51.40306319500077 21.639347695875394
+521 27.55098502086632 34.57352700133262 24.253915784835826
+522 22.74538724466303 48.360734499290174 45.03927272575518
+523 14.48939189874603 42.557964823577514 31.585939374476496
+524 48.4633168043621 6.641780463661367 6.649298437087143
+525 3.9844216114593696 36.02639288857618 39.92561370930275
+526 39.68624554848376 14.591856522424598 30.843107056149478
+527 53.45009417271101 17.66471161059106 9.373510806452867
+528 53.50428328682076 19.672339607967178 11.810834257152445
+529 17.79887165466522 20.60358829660309 30.92369007007415
+530 2.9482651916941593 0.836949533031936 1.1824274251581768
+531 21.486856061720385 18.023316888254126 38.38720215364236
+532 31.02103251517932 17.38429979390283 32.8217347759346
+533 10.05771096615063 42.43733559254252 19.07542019915443
+534 9.319380635104793 21.44882545977172 2.4523288556411638
+535 -5.067964318310054 20.667854660053695 70.82858643319634
+536 50.756654698853886 8.572425823745755 59.38742309031167
+537 49.76824601956322 36.390587795744686 34.222709194618965
+538 31.05704983590709 0.38365822959261303 39.823308065544836
+539 47.62974616612045 22.532297249777454 15.914430106758173
+540 -1.475030354968176 43.66042196868396 45.3089389094561
+541 19.31797017580373 30.239776810535048 1.8332061498553254
+542 57.6180771417551 15.161538831586732 6.497328969491104
+543 9.466202108258948 23.464720591186097 54.50901266660439
+544 5.275602539517283 6.298534540772923 24.705470875300215
+545 45.73470067254861 -24.55637503841144 25.825985805018593
+546 -13.160671373285275 26.617718028655286 21.757558873294744
+547 -1.3133705605869963 12.533492376960297 6.741170582746457
+548 41.34094842019384 39.44339539025644 46.5118581720154
+549 5.754304338218984 54.39881785650835 28.447371797396123
+550 33.71659286253746 22.973628390814714 13.32724678548858
+551 24.43589909925267 15.440921069545933 39.59516122212993
+552 24.300548931918126 41.84330933722957 12.50664118854297
+553 54.697825774728635 9.356683854695007 6.534252528860571
+554 61.992254025204275 32.70330662431734 -10.374148506322626
+555 26.989526728591624 35.03402094086618 53.30117181865514
+556 46.69448617397965 8.338027793434463 34.37207897917869
+557 61.44419611998015 -9.8237923861548 86.59728394141787
+558 -9.880926091657429 79.35239870916625 18.641630828674604
+559 21.414226063193535 3.0435473576205934 11.102030746472126
+560 4.605604872992107 37.92822500203736 36.72574248803641
+561 34.9675325098476 46.24416791312671 56.89469255567287
+562 34.271194134612564 45.97448305582212 5.543923035663118
+563 57.10312944843494 38.51634510494103 37.07405330676205
+564 15.817363928923845 28.701597062781413 -0.9124189167686723
+565 49.135472745810326 -2.9658735890434826 49.172628235492475
+566 25.03526811292259 39.176901137475674 9.939067193041296
+567 17.502937436507686 40.82298910567155 12.17461991236495
+568 45.33439198882013 49.16756874270054 50.02923951804819
+569 32.992704704848286 36.549450762028854 21.109817121906755
+570 8.580706402847923 21.303886010627537 28.146070506631045
+571 97.41749111920038 -26.66683375617005 74.8105640091317
+572 25.89293971188759 15.05823686136875 17.775122543376188
+573 17.979191633170984 19.71436731069261 41.63081645572101
+574 33.44930305935621 14.856521065183577 32.87425822650326
+575 -2.641603353416876 46.71630449112703 46.15801116730246
+577 33.531708742380495 37.48207822006721 11.808981751447707
+578 29.739060492632856 40.26447985752649 8.82288092499318
+579 2.071615864484466 1.6648797664359694 47.53892392213682
+580 38.77693780056359 32.75777956188248 13.188960410137424
+581 8.826333500367666 22.831704996907238 52.433392398243555
+582 47.90939786574581 38.71497634115507 39.65957828816823
+583 12.061747680982464 46.99128086579719 26.251789018398746
+584 69.36046965786022 25.537513867024664 -7.331971623609746
+585 12.930246648826314 3.5557596876287523 18.456013967182926
+586 24.801795812157717 11.478815679812007 29.421661568824025
+587 31.754811188107393 36.23851092565286 9.724838184845872
+588 33.368757995610025 6.136701489468532 41.29585406332668
+589 59.69389120275096 67.30255950430129 63.60455053903415
+590 34.01030114547573 35.62350412902565 13.178336004587154
+591 46.92096073174342 32.497622913766726 28.520875617362105
+592 32.035463675583685 40.62966042178433 10.620726332569529
+593 47.326033567704705 54.47487142446196 50.9104579008481
+594 31.474698685118113 28.941580524229575 18.15949728518835
+595 28.23190334398405 16.42728004918263 35.011753323000065
+596 15.141536398829848 8.601842521576438 52.307766565082204
+597 48.113405328211 44.17351421072739 38.9771788353336
+598 46.717081395765256 5.887216027370443 27.184276110472556
+599 -4.668848311525082 6.192982589651735 60.1309639899323
+600 23.68805533361706 61.55513866649492 26.229292779424334
+601 48.718446153323285 34.05591067382716 27.987111076845167
+602 19.286194054594116 5.6818999707656035 3.4705728949870576
+603 51.90353586055251 19.924656439886917 15.358584244086657
+604 34.29019799744256 46.47244036381975 54.41737750310187
+605 24.625295552527472 41.78906117948504 14.783082935456784
+606 40.886540619514655 42.03925898456632 2.207259480843395
+607 54.073181506708494 6.865681919843461 5.093681204369019
+608 19.760851979037078 46.349272527795044 18.333312684107035
+609 16.592030631627395 54.648572733837014 21.676378655475126
+610 43.16467679112077 36.86848252879168 28.683817666852555
+611 7.592429364051324 23.490683788476126 3.444989133595765
+612 29.949956142275393 12.725449255997734 35.00857865325905
+613 32.39565212675249 15.487579354531738 34.72452751888611
+614 21.86431759503053 17.68724162474963 35.77353137566449
+615 41.29306956932194 27.158432928632816 19.818670143531417
+616 37.57592069097316 1.1024967242286687 45.60270114966583
+617 -29.73645084818591 36.36709463649434 9.344427948639922
+618 -24.39089863495592 43.8888492732249 8.676375347003052
+619 41.079384064384925 53.35206108936271 49.51152638633946
+620 25.261177063527498 62.84309668872305 28.074431391395642
+621 53.29706106193252 1.1694256016828166 50.127733162631884
+622 16.244165291301925 21.956581264321326 -11.218291491785266
+623 20.227256862219413 19.41200475777929 42.34910586852746
+624 41.48337299186403 19.973144427697623 50.32936467078045
+625 19.38488131040799 9.445138662706048 38.48417483571925
+626 52.4205475337761 49.46796318720614 44.57441761597731
+627 9.311857378068346 -7.599474015896554 27.0329795730586
+628 12.721347892483596 27.49459923576478 51.06131594243618
+629 28.02927462658255 12.896484074284434 36.07663174607016
+630 6.324933098455389 34.529625422189355 41.96353778354183
+631 41.47457793205066 46.93968497913575 17.92639329069314
+632 -10.13084153418042 26.39286042806646 21.703324948659333
+633 36.67888101833975 33.979718987668676 7.013081537462706
+634 6.790005952274379 13.992089973509179 6.42929276512543
+635 -8.500435450389965 2.396698850799381 4.5046979987159945
+636 43.930537900808254 30.5547860805817 24.658773432480952
+637 21.98002746467033 43.600723537184514 14.978032495318182
+638 19.301511850556103 3.27869400269986 23.021748635918197
+639 15.805432931175702 19.45517189903949 -11.158888973110116
+640 2.2257050180137385 40.37365786964066 41.651439383132626
+641 11.831122017454035 37.65219314382034 43.22683543417458
+642 9.881781854794335 60.56811069942132 15.621991056564571
+643 39.50759389642711 48.76308465833722 54.73852200319543
+644 40.481677579366696 28.269520027713543 17.232353392147328
+645 4.676844182320349 19.17864187020488 35.93832600490406
+646 64.2068114573639 31.806006722177482 46.78326505198871
+647 53.49883647938769 16.674733176332403 7.325671845273377
+648 15.16461084348982 31.396161152304057 35.70289770824796
+649 42.43170342537021 17.04197594134708 43.42669483830864
+650 2.5056114285950835 16.698642829396416 60.92520332910725
+651 8.11926661923965 25.41917908674554 -2.9044649667770557
+652 8.860217215831588 51.52015683159716 26.280280812913674
+653 29.255810352544916 14.330166144668086 33.58372502181879
+654 43.24349377299307 23.811190881723057 20.624908745163776
+656 42.20678734063312 1.3892532833735953 54.09910881281382
+657 51.866048970319625 39.315987290240706 37.93216511426182
+658 23.888693938681794 43.76749090043152 68.20039525222106
+659 37.47814710111209 2.659047352905697 43.39001872195092
+660 43.36056975393908 26.321058046964502 10.45240194792126
+661 14.052165919032591 37.88197781525032 18.16526863661188
+662 34.20325295540193 21.17472448540015 35.751116243635934
+663 8.350717827282406 44.66719252859293 30.179837461510733
+664 64.50575742209993 63.20711945280961 15.516319302204591
+665 8.070212083850553 17.10670096244719 5.851705272948619
+666 15.633461839252767 51.87620182101286 23.4884115418274
+667 32.10161630317393 44.51805587122888 5.876489969382884
+668 51.14246375348111 29.88032140816778 31.43117711630642
+669 44.987189110841214 53.51906162297602 1.561116045932848
+671 42.697441193791754 -0.4467457237288599 -3.225830956499834
+672 17.286493657614677 35.07541648556608 10.913852911573036
+673 7.9100588529436475 43.78582310624158 81.65195204587187
+675 47.93057269731833 3.0638204165001444 2.66037330685443
+676 20.575002280206967 31.486851837252225 59.47897202704974
+677 19.916536208183008 60.5360953463128 24.263210357992588
+678 -14.685370420969413 24.335110878849346 26.337119890668596
+679 55.97629479131072 43.18545446293454 42.91982514629209
+680 9.74615832383345 29.1888927898766 -9.229912439408245
+681 13.994258147915426 33.73065678430812 14.883527935262894
+683 51.21454136413057 21.111926212721112 9.183404480724011
+684 49.6497458778787 34.66294392543945 31.496768358921393
+685 11.033118164664208 23.060727327570024 50.00047408867967
+686 24.06180677738004 34.61917612590632 7.3286275009662765
+687 67.22008998541345 54.67886928231103 19.92808582367302
+688 26.807334730382586 -41.12519762513846 30.339553549540625
+689 8.058441764665861 21.161646889242004 54.99935776453183
+690 24.94250375287218 19.96109325012726 47.46292055687627
+691 35.82782691807653 18.999143748204613 30.690270483364873
+692 27.865411245271453 41.53583097758694 9.716742510019479
+693 35.370590479512686 2.5673813686088875 44.20784305870664
+694 39.17871589544408 53.85895876175943 48.34404704473944
+695 60.015323316348365 42.0968597716544 33.884201599847366
+696 14.635985730959115 30.53960856822168 53.73043014431261
+697 2.593561780299029 15.741330129734637 58.23223160777113
+698 2.226181264600613 35.336681634726965 36.80505301176137
+699 33.795073052173386 44.262712255448264 5.645538929825032
+700 40.552696868282354 22.738203413069574 27.203051699881875
+701 22.2770455105024 46.994028993885266 19.667838385741764
+703 12.899297216917107 26.977903607201046 46.345265663686654
+704 19.375962143592744 16.487123886506065 47.4074265985187
+705 37.63483178394294 20.700017337035625 30.603588285202264
+706 45.13722585220451 -2.9572430280464417 49.80760817904562
+707 26.737657863581816 36.15147648982954 30.23193071968829
+708 15.797909764463975 2.160503191012041 6.12178065496547
+709 40.083394014790855 -30.77269458113997 23.57110757088455
+710 34.65590751616808 31.687915095361546 7.7170989122822755
+711 28.22264545629379 41.766907197475255 8.04911437836899
+712 48.17657404535997 20.81740617037084 72.16266417452816
+713 6.9820386413401945 13.287200761343042 2.722021743926113
+714 22.65104462163851 32.15907121672009 60.36918605848366
+715 -0.8855845151763191 45.93332840697523 45.59116470940948
+716 25.99893469525742 41.88879147528436 66.99954222005599
+717 10.814902850050267 50.64686048291694 9.619097765483065
+718 36.626402305556034 44.85911258270931 3.4638939117059437
+719 111.69089524604445 94.82853649538333 92.6515802971675
+720 6.1828928137293655 40.671712543691434 35.735317555186406
+721 2.2161670351894065 36.830196826098174 38.655903682654994
+722 9.586961122032406 2.0818383908189517 17.147647913351992
+723 31.75506260572903 12.5742896990982 36.26870814920419
+724 -13.499478950531618 -3.57072180872121 -0.9130549134356656
+725 8.959735283977261 35.79039635331676 43.77833725192271
+726 11.161769954253213 49.528235054138975 22.47722757811431
+727 57.051106936544876 66.89247003592477 62.444121489974314
+728 26.273200643511473 10.025813049681128 26.54774973448825
+729 40.9818436082271 54.452033629076524 -4.3630825512548554
+730 66.74035692111929 29.945265156899676 47.526553264134826
+731 52.976743212416636 15.311527706595431 4.444526875073013
+733 28.16102966769017 39.79033877055029 10.16708868813684
+734 21.39930381581717 30.023015646578845 0.04127245783535431
+735 44.065394871092515 24.69061049839957 22.305766272726245
+736 14.713868242786946 53.1323353877588 21.357517944890308
+737 48.73110535936316 19.356926779144917 13.409258264380014
+738 56.494517931391144 15.64895637124659 62.65902729383342
+739 8.657528122175034 33.85788918687348 51.46282364717207
+740 30.815033740538777 3.3484174015320236 32.815297440480855
+741 14.156460413059845 23.22484382373174 46.81346645725334
+742 5.907120642099382 37.20163483429969 44.15611386903118
+743 7.34983557760382 42.3976247837606 17.375925071365835
+744 32.80235960693467 7.365694692442087 40.29187001192429
+745 36.87461068603985 21.54425810222215 28.399481993276332
+746 0.6677387718297856 42.09427760411292 37.10581656559644
+747 16.842238371667534 -5.487037630614616 21.162474821125684
+748 33.86146331314337 40.841367779631945 23.374118250211346
+749 49.08125002658339 7.553121341175775 53.779113187250445
+750 26.67845014751052 28.919366506608295 42.38517564727143
+751 6.902251397830644 11.203191884314696 13.315407004093716
+753 49.30022044103217 36.725823953040425 30.50926293972453
+754 4.354792063222246 9.081497866178442 46.13001755413372
+755 11.728667263326878 4.134792094922466 20.398294892669846
+756 38.40605983460469 44.18566500009174 11.231456076568657
+757 60.514663976598 71.27719275193866 60.34290930889553
+758 39.00987867407176 50.73935364857608 -1.8959589589737433
+759 21.568495406317318 50.098510857149186 17.50317375719428
+760 41.89888447160794 45.99169466667405 1.3898503291867494
+761 13.660619571912367 41.51180891553549 4.6382744582430995
+762 42.61785054711856 27.12597367583552 54.29134364809951
+763 25.753815105750313 17.55214023005897 29.502568019258984
+765 21.675802880209353 34.01826077313574 8.040931019917629
