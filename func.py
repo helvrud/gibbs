@@ -107,4 +107,65 @@
             
         return        
         
-                
+    def writepdb(self):
+        import MDAnalysis as mda
+        from espressomd import MDA_ESP
+
+        # ... add particles here
+        eos = MDA_ESP.Stream(self.system)  # create the stream
+        u = mda.Universe(eos.topology, eos.trajectory)  # create the MDA universe
+
+        # example: write a single frame to PDB
+        u.atoms.write('data/'+self.name+".pdb")
+
+        # example: save the trajectory to GROMACS format
+        from MDAnalysis.coordinates.TRR import TRRWriter
+        W = TRRWriter("traj.trr", n_atoms=len(self.system.part))  # open the trajectory file
+        for i in range(100):
+            self.system.integrator.run(1)
+            u.load_new(eos.trajectory)  # load the frame to the MDA universe
+            W.write_next_timestep(u.trajectory.ts)  # append it to the trajectory
+
+    def blender(self):
+        selfcopy = self.load_merge(scp = False)
+        selfdict = selfcopy.__dict__
+        #~ selfdict = { 'a':1, 'b':2 }
+        dict_file = self.fnamepkl+'_dict'
+        output = open(dict_file, 'wb')
+        print('dict is saved in ', dict_file)
+        cPickle.dump(selfdict, output)
+        output.close()
+        # subprocess.run(["blender", "-P", "blender.py", self.fnamepkl])  # doesn't capture output (py3)
+        print (self.fnamepkl)
+        subprocess.call(["blender", "-P", "blender.py", dict_file])  # doesn't capture output (py2)
+    def xyz(self):
+        xyzfile = self.fname+'.xyz'
+        output = open(xyzfile, 'w')
+
+        string = 'pbc'+3*(' '+ str(self.box_l))+'\n'
+        output.write(string)
+        inv_TYPES = dict()
+        for key, value in self.TYPES.items():
+            inv_TYPES[value] = key
+        pos = self.part['pos'] % self.box_l
+        types = self.part['type']
+        bonds = self.part['bonds']
+        for bond in bonds:
+            if len(bond)>1:
+                string = 'bond '+str(bond[0])+':'+str(bond[1])+'\n'
+                output.write(string)
+        numberofatoms = sum(types==self.TYPES['nodes'])+sum(types==self.TYPES['PA'])+sum(types==self.TYPES['PHA'])
+        output.write(str(numberofatoms)+'\n\n')
+        for i in  range(numberofatoms):
+            TYPE = inv_TYPES[self.part['type'][i]]
+            string = TYPE+' '+str(pos[i])[1:-1]+'\n'
+            print (string)
+            output.write(string)
+
+        for j in  range(i, len(pos)):
+            TYPE = inv_TYPES[self.part['type'][j]]
+            output.write('1\n\n')
+            string = TYPE+' '+str(pos[j])[1:-1]+'\n'
+            print (string)
+            output.write(string)
+        output.close()                
