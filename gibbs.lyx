@@ -388,13 +388,17 @@ noprefix "false"
 
 \end_inset
 
- presents a diamond-like polymer network inserted in a simple cubic simulation
- box of volume 
+ presents two simulation boxes of volumes 
 \begin_inset Formula $V_{\mathrm{gel}}$
 \end_inset
 
+ and 
+\begin_inset Formula $V_{\text{out}}$
+\end_inset
+
  with periodic boundaries.
- The network consists of 
+ The first box contains a diamond-like polymer network, which consists of
+ 
 \begin_inset Formula $16$
 \end_inset
 
@@ -421,7 +425,7 @@ PE{}
 \end_inset
 
 .
- The mobile ions 
+ Except network the first box contains mobile ions, 
 \begin_inset Formula $\na$
 \end_inset
 
@@ -429,15 +433,33 @@ PE{}
 \begin_inset Formula $\cl$
 \end_inset
 
- are present in certain amount such that they fulfill the electroneutrality
- of the simulation box condition.
+, in such amounts that the total charge of the box is zero.
+ The second box contains only 
+\begin_inset Formula $\na$
+\end_inset
+
+ and 
+\begin_inset Formula $\cl$
+\end_inset
+
+ ion pairs of concentration 
+\begin_inset Formula $\cs$
+\end_inset
+
+.
+ The total volume of bothe boxes is kept constant, 
+\begin_inset Formula $V=V_{\mathrm{gel}}+V_{\mathrm{out}}$
+\end_inset
+
+, so the comptession of the gel implies the increase of the out volume.
 \end_layout
 
 \begin_layout Standard
-Our target is to model the thermodynamic equilibrium of the gel with a finite
- volume of an aqueous solution.
- In order to do it we run molecular dynamics in two simulation box in parallel.
- One box containing hydrogel with 
+The target of our study is to model the thermodynamic equilibrium between
+ the two boxes and to show how the compression of the gel affects the ion
+ density in the outside solution.
+ In order to do it we run molecular dynamics in both simulation boxes in
+ parallel and simultaneously model the exchange of 
 \begin_inset Formula $\na$
 \end_inset
 
@@ -445,16 +467,7 @@ Our target is to model the thermodynamic equilibrium of the gel with a finite
 \begin_inset Formula $\cl$
 \end_inset
 
- ions, another box containing only ions.
- We model the exchange 
-\begin_inset Formula $\na$
-\end_inset
-
- and 
-\begin_inset Formula $\cl$
-\end_inset
-
- ion pairs using a Monte-Carlo procedure described in 
+ ion pairs between boxes using a Monte-Carlo procedure described in 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Panagiotopoulos1988"
@@ -463,16 +476,16 @@ literal "false"
 \end_inset
 
 .
- In general terms, the algorithm of our simulation is as follows:
+ In general, the algorithm of our simulation is as follows:
 \end_layout
 
 \begin_layout Enumerate
-simulate molecular dynamics in both systems in parallel
+simulate molecular dynamics in both boxes in parallel
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-collect the observables sample arrays: pressure and end-to-end distances,
+collect the observable sample arrays: pressure and end-to-end distances,
  
 \begin_inset Formula $P$
 \end_inset
@@ -491,7 +504,7 @@ perform Monte-Carlo procedure simulating ion pair exchange:
 
 \begin_deeper
 \begin_layout Itemize
-collect the observables sample arrays: number of ions in both systems, 
+collect the observables sample arrays: number of ions in both boxes, 
 \begin_inset Formula $\nna^{I}$
 \end_inset
 
@@ -512,13 +525,10 @@ collect the observables sample arrays: number of ions in both systems,
 
 \end_deeper
 \begin_layout Enumerate
-repeat the procedure untill the desired length of sample arrays is reached.
+repeat the procedure until the desired length of sample arrays is reached.
 \end_layout
 
 \begin_layout Standard
-All three processes occur simultaneously in real systems, however, we simulate
- them alternating each other in stop-run mode in a random order.
- 
 \begin_inset Float figure
 wide true
 sideways false
@@ -599,6 +609,10 @@ name "fig:diamond"
 
 \end_layout
 
+\begin_layout Standard
+In the following subsections we will briefly describe our simulation approaches.
+\end_layout
+
 \begin_layout Subsection
 Langevin dynamics
 \begin_inset CommandInset label
@@ -624,12 +638,15 @@ ie
 
 \end_inset
 
- bonded interactions, short-range non-bonded interactions and electrostatic
- interactions.
+ the electrostatic interactions, short-range non-bonded interactions and
+ bonded interactions.
+ 
 \end_layout
 
 \begin_layout Standard
-We use Finite extension nonlinear elastic (FENE) potential
+The bonded interactions are used to model the bonds between the units of
+ the polymer network, we use Finite extension nonlinear elastic (FENE) potential
+ to describe this kind of interactions
 \begin_inset space ~
 \end_inset
 
@@ -668,27 +685,10 @@ status collapsed
 
 \end_inset
 
- to account for the bonding interactions.
  
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-%The potential accounts for nonlinear elastic extensions and as a consequence,
- the simulation is not constrained too much.
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
 \begin_inset Formula 
 \begin{equation}
-V_{\mathrm{FENE}}(r)=-\frac{1}{2}K\Delta r_{\mathrm{max}}^{2}\ln\left[1-\left(\frac{r-r_{0}}{\Delta r_{\mathrm{max}}}\right)^{2}\right],\label{eq:fene}
+U_{\mathrm{FENE}}(r)=-\frac{1}{2}K\Delta r_{\mathrm{max}}^{2}\ln\left[1-\left(\frac{r-r_{0}}{\Delta r_{\mathrm{max}}}\right)^{2}\right],\label{eq:fene}
 \end{equation}
 
 \end_inset
@@ -701,7 +701,7 @@ where
 \begin_inset Formula $\Delta r_{\mathrm{max}}$
 \end_inset
 
- is the maximal stretching length of the bond and 
+ is the maximal stretching length of a bond and 
 \begin_inset Formula $r_{0}$
 \end_inset
 
@@ -715,7 +715,7 @@ where
 \end_inset
 
  and 
-\begin_inset Formula $r_{0}=1.0\sigma$
+\begin_inset Formula $r_{0}=0$
 \end_inset
 
 
@@ -731,11 +731,17 @@ literal "true"
 \end_inset
 
 .
+ Note that, 
+\begin_inset Formula $r_{0}=0$
+\end_inset
+
+ does not mean that the average distance between units is zero, because
+ they also interact via short-range non-bonded potential, as well as all
+ the other particles.
 \end_layout
 
 \begin_layout Standard
-We model the non-bonded interactions using truncated Lennard-Jones interaction
- potential.
+This potential we describe using truncated Lennard-Jones interaction potential.
  This potential imposes strong repulsion between all particles at short
  distances: 
 \begin_inset Formula 
