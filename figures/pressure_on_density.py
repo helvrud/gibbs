@@ -1,5 +1,6 @@
 #%%
 from veusz_embed import *
+import os
 #%%
 import pandas as pd
 #%%
@@ -36,4 +37,7 @@ g.Root.page1.graph1.y.label.val = '\\Delta P = P - P_{res}, [bar]'
 
 #%%
 g.Save(__file__.replace('.py','.vsz'))
+fnamevsz = __file__.replace('.py','.vsz')
+fnamepdf = __file__.replace('.py','.pdf')
+os.popen('veusz '+fnamevsz)
 #%%

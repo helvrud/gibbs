@@ -382,9 +382,6 @@ Figure
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:diamond"
-plural "false"
-caps "false"
-noprefix "false"
 
 \end_inset
 
@@ -471,7 +468,7 @@ The target of our study is to model the thermodynamic equilibrium between
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Panagiotopoulos1988"
-literal "false"
+literal "true"
 
 \end_inset
 
@@ -1279,7 +1276,7 @@ ie
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Landsgesel2020a,Rud2020"
-literal "false"
+literal "true"
 
 \end_inset
 
@@ -1302,9 +1299,6 @@ literal "false"
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:PV-GC"
-plural "false"
-caps "false"
-noprefix "false"
 
 \end_inset
 
@@ -1347,10 +1341,6 @@ name "fig:PV-GC"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -1747,7 +1737,6 @@ box_l,
 \emph off
 \bar no
 \strikeout off
-\xout off
 \uuline off
 \uwave off
 \noun off
