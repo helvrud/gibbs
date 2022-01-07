@@ -309,10 +309,6 @@ PE{}
  
 \end_layout
 
-\begin_layout Standard
-
-\end_layout
-
 \begin_layout Section
 Introduction
 \begin_inset CommandInset label
@@ -2463,7 +2459,7 @@ status open
 
 
 \begin_inset Graphics
-	filename figures/c_s_on_density_pub.pdf
+	filename figures/c_s_on_density_pub2.pdf
 	width 50text%
 
 \end_inset
@@ -2484,10 +2480,6 @@ status open
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 

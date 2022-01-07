@@ -1,5 +1,5 @@
 # Veusz saved document (version 3.0.1)
-# Saved at 2022-01-07T15:31:12.684566
+# Saved at 2022-01-07T15:31:59.924361
 
 AddImportPath(u'/home/kvint/gibbs/figures')
 ImportString(u'x105(numeric)','''
@@ -1924,8 +1924,8 @@ To('..')
 Add('label', name=u'label4', autoadd=False)
 To(u'label4')
 Set('label', u'0.13')
-Set('xPos', [0.23])
-Set('yPos', [0.138])
+Set('xPos', [0.2])
+Set('yPos', [0.14])
 Set('positioning', u'axes')
 Set('Text/size', u'10pt')
 Set('Text/color', u'#17becf')

@@ -27,8 +27,8 @@ for (idx, group), color in zip(df.groupby(by = 'n_pairs'), color_cycle):
         xlog = True, ylog = True,
         g=g, color = color
         )
-    xy.key.val = 'c_{s} = '+str(float(group.c_s_reservoir_mol.head(1)))
-
+    #xy.key.val = 'c_{s} = '+str(float(group.c_s_reservoir_mol.head(1)))
+    xy.key.val = 'c_{{s}} = {:.2e}'.format(float(group.c_s_reservoir_mol.head(1))) 
 
 key = graph.Add('key')
 key.vertPosn.val = 'top'
@@ -44,5 +44,5 @@ fnamevsz = __file__.replace('.py','.vsz')
 fnamepdf = __file__.replace('.py','.pdf')
 g.Save(fnamevsz)
 g.Export(fnamepdf)
-#os.popen('veusz '+fnamevsz)
+os.popen('veusz '+fnamevsz)
 #%%

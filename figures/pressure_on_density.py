@@ -22,12 +22,13 @@ for (idx, group), color in zip(df.groupby(by = 'n_pairs'), color_cycle):
         list(group.gel_density), 
         [list(group.delta_P_bar_mean), list(group.delta_P_bar_err)],
         xname = 'x'+str(idx), yname = 'y'+str(idx), 
-        xlog = True, ylog = True,
+        xlog = True, ylog = False,
         g=g, color = color
         )
-    xy.key.val = 'c_{s} = '+str(float(group.c_s_reservoir_mol.head(1)))
+    #xy.key.val = 'c_{s} = {}'.format(float(group.c_s_reservoir_mol.head(1))
+    xy.key.val = 'c_{{s}} = {:.2e}'.format(float(group.c_s_reservoir_mol.head(1))) 
 graph.y.max.val=5
-graph.y.min.val=0
+graph.y.min.val=-0.56
 key = graph.Add('key')
 key.vertPosn.val = 'top'
 key.horzPosn.val = 'left'
