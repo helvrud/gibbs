@@ -17,6 +17,8 @@ g =None
 df['delta_P_bar_mean'] = df.delta_P_Pa_mean * 1e-5
 df['delta_P_bar_err'] = df.delta_P_Pa_err * 1e-5
 global xy, x_axis, y_axis, x_data, y_data, x_dataname, y_dataname
+cs_start = []
+cs_end = []
 for (idx, group), color in zip(df.groupby(by = 'n_pairs'), color_cycle):
     [g, graph, xy]=vplot(
         list(group.gel_density), 
