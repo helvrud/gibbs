@@ -47,7 +47,7 @@ if __name__=='__main__':
         ]
 
     _minimize_energy(system)
-    integrator_steps = 100000
+    integrator_steps = 1000
     system.integrator.run(integrator_steps)
 
     #from espressomd import electrostatics
