@@ -106,6 +106,7 @@
 
 
 \newcommand{\mytitle}{Gibbs ensemble for \PE{} hydrogel}
+\newcommand{\etal}{\textit{et al.}{}}
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children false
@@ -211,8 +212,21 @@ cuni
 
 \end_layout
 
-\begin_layout Alt Affiliation
-ITMO
+\begin_layout Also Affiliation
+St.
+ Petersburg National Research University of Information Technologies, Mechanics
+ and Optics, St.
+ Petersburg, Russia.
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+itmo
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Author
@@ -307,6 +321,25 @@ PE{}
  swelling of the gel increases the surrounding solution.
  This effect can be employed for water desalination ...
  
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+An Abstract must be provided for all Letters and Viewpoints.
+ Abstracts should be between 100 and 150 words in complete, concise sentences
+ to indicate what is new, different, and significant.
+ The abstract should be presented in a findings-oriented format; that is,
+ one in which the first sentence is a succinct, informative summation of
+ the most important results and conclusions.
+ The remainder should highlight pertinent supporting details, related findings,
+ types or classes of compounds investigated, and methods used.
+ The abstract should not contain any citations.
+ 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -866,8 +899,32 @@ Gibbs canonical ensemble
 \end_layout
 
 \begin_layout Standard
-Let us first consider the total free energy of both vessels assuming that
- we have only particles of a single type: 
+In order to model the exchange of ions between the parts of the model we
+ follow the algorithm described in the work of Panagiotopoulos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+etal{}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Panagiotopoulos1988b"
+literal "false"
+
+\end_inset
+
+.
+ Following the reasonong from the cited study we consider the total free
+ energy of both vessels assuming that we have only particles of a single
+ type: 
 \begin_inset Formula 
 \begin{equation}
 F=\left(E_{I}-TS_{I}\right)+\left(E_{II}-TS_{II}\right)\label{eq:F-gibbs}

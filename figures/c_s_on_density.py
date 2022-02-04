@@ -21,6 +21,12 @@ g = None
 
 global xy, x_axis, y_axis, x_data, y_data, x_dataname, y_dataname
 cs_start = []
+cs1 = []
+cs2 = []
+cs3 = []
+cs4 = []
+cs5 = []
+
 cs_end = []
 
 for (idx, group), color in zip(df.groupby(by = 'n_pairs'), color_cycle):
@@ -38,7 +44,11 @@ for (idx, group), color in zip(df.groupby(by = 'n_pairs'), color_cycle):
     xy.key.val = 'c_{{s}} = {:.2e}'.format(float(group.c_s_reservoir_mol.head(1))) 
     cs_start.append(c_s_mol_mean[1])
     cs_end.append(c_s_mol_mean[-1])
-
+    cs1.append(c_s_mol_mean[1])
+    cs2.append(c_s_mol_mean[2])
+    cs3.append(c_s_mol_mean[3])
+    cs4.append(c_s_mol_mean[4])
+    cs5.append(c_s_mol_mean[5])
 key = graph.Add('key')
 key.vertPosn.val = 'top'
 key.horzPosn.val = 'left'
