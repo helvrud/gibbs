@@ -10,7 +10,7 @@ def addxy(graph,
         xname='', yname='',
         xlog=False, ylog=False):
     # adds an xy plot to a graph
-    global xy
+    global xy,x_axis,y_axis
     xy = graph.Add('xy')
 
     xy.xData.val = x_dataname
@@ -66,6 +66,7 @@ def vplot(  x=[],y=[],
     if g == None:
         g = veusz.Embedded(title)
         g.EnableToolbar()
+        g.ResizeWindow(700,500)
         page = g.Root.Add('page')
         graph = page.Add('graph')
     else:
