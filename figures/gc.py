@@ -1,114 +1,129 @@
+import pandas as pd    
+from veusz_embed import *
+gibbs_data_path = "../data/gel_all_data.pkl"
+gc_data_path = "../data/GC.pkl"
 
-def create_g(box_l):
-    from gel import gel
-    # ~ print ('###')
-    g = gel()
-    g.sigma = sigma
-    g.USERNAME = 'kvint'
+gibbs_raw = pd.read_pickle(gibbs_data_path)
+gc_raw = pd.read_pickle(gc_data_path)
+
+
+
+
+
+gibbs_raw['delta_P_bar_mean'] = gibbs_raw.delta_P_Pa_mean * 1e-5
+gibbs_raw['delta_P_bar_err'] = gibbs_raw.delta_P_Pa_err * 1e-5
+
+
+(fig_PV, graph_PV, xy)  = vplot([],[], xlog = True)
+(fig_CV, graph_CV, xy)  = vplot([],[], xlog = True, ylog = True)
+#for (idx, group), color in zip(gc_raw.groupby(by = 'cs'), color_cycle):
+for index, row in gc_raw.iterrows():
+    #print (row)
+    V = row.V
+    V0 = row.V_eq
+
+    P = row.P
+    idx0 = np.where(V==V0)[0][0]
+    idx5 = (abs(P[0] - 5  ) == min(abs(P[0] - 5  ))).argmax()
+    idx10 = (abs(P[0] - 10  ) == min(abs(P[0] - 10  ))).argmax()
+    V5 = V[idx5]
+    V10 = V[idx10]
     
-    g.box_l = box_l
-    # ~ g.MPC = 5
-    g.swap = False
-    g.p['K'] = pK
-    if np.abs(g.p['K'])==np.infty:g.p['H']=np.infty
+    P0 = P[0][idx0]
+    P5 = P[0][idx5]
+    P10 = P[0][idx10]
+
+    CCl = row.cs*np.ones(len(V))
+    CCl0 = row.cs
+    CCl5 = CCl[idx5]
+    CCl10 = CCl[idx10]
+
+    phi = 1./V
+    phi0 = 1./V0
+    phi5 = 1./V5
+    phi10 = 1./V10
     
-    g.p['Cl'] = -np.log10(cs)
-
-    g.p['Ca'] = np.infty
-    g.p['Na'] = -np.log10(cs)
-    #g.p['H'] = 7.0
-    g.eq_steps = 10000
-    g.N_Samples = N_Samples
-    g.lB = lB
-    print('created gel:', g)    # important! this string generates all the names of the object, i.e. g.name, g.fname etc
-    return g
+    (fig_PV, graph_PV, xy) = vplot(phi, P, xname = 'GC_phi'+str(row.cs), yname = 'GC_P'+str(row.cs), g = fig_PV, marker='none')
+    (fig_PV, graph_PV, xy) = vplot([phi0], [P0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_P0'+str(row.cs), g = fig_PV, marker='circle' )
+    xy.markerSize.val = '4pt'
+    (fig_PV, graph_PV, xy) = vplot([phi5], [P5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_P5'+str(row.cs), g = fig_PV, marker='square' )
+    xy.markerSize.val = '4pt'
+    (fig_PV, graph_PV, xy) = vplot([phi10], [P10], xname = 'GC_phi10'+str(row.cs), yname = 'GC_P10'+str(row.cs), g = fig_PV, marker='cross' )
+    xy.markerSize.val = '4pt'
 
 
-
-def load_g(box_l):
-    
-    global g
-    
-    g = create_g(box_l)
-    try:
-        g = g.load_merge(scp =scp)
-    
-
-
-        n_samples = len(g.Samples['pressure'])
-        print (g.name, 'Loaded...', 'number of samples: ', n_samples)
-        g.keys['re'] = ['Na', 'Cl']
-        if g.p['K'] != np.inf: g.keys['re'].append('PA')
-
-        if 'mindist' in g.keys['md']: g.keys['md'].remove('mindist')
-        if n_samples>50:
-            g.Pearson(keys = g.keys['md']+g.keys['re'])
-            #g.VMD()
-        print ();
-    
-        return g
-    except FileNotFoundError:
-        pass
-    
-if __name__ == '__main__':
-    import pandas as pd    
-    from veusz_embed import *
-    gibbs_data_path = "../data/gel_all_data.pkl"
-    gc_data_path = "../data/GC.pkl"
-
-    gibbs_raw = pd.read_pickle(gibbs_data_path)
-    gc_raw = pd.read_pickle(gc_data_path)
-
-
-
-
-
-    gibbs_raw['delta_P_bar_mean'] = gibbs_raw.delta_P_Pa_mean * 1e-5
-    gibbs_raw['delta_P_bar_err'] = gibbs_raw.delta_P_Pa_err * 1e-5
-
-
-    (fig, graph, xy)  = vplot([],[])
-    #for (idx, group), color in zip(gc_raw.groupby(by = 'cs'), color_cycle):
-    for index, row in gc_raw.iterrows():
-        print (row)
-        P = row.P
-        V = row.V
-        phi = 1./V
-        vplot(phi,P, xname = 'GC_phi'+str(row.cs), yname = 'GC_P'+str(row.cs), g = fig, marker='none', xlog = True)
+    (fig_CV, graph_CV, xy) = vplot(phi, CCl, xname = 'GC_phi'+str(row.cs), yname = 'GC_CCl'+str(row.cs), g = fig_CV, marker='none')
+    (fig_CV, graph_CV, xy) = vplot([phi0], [CCl0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_CCl0'+str(row.cs), g = fig_CV, marker='circle' )
+    xy.markerSize.val = '4pt'
+    (fig_CV, graph_CV, xy) = vplot([phi5], [CCl5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_CCl5'+str(row.cs), g = fig_CV, marker='square' )
+    xy.markerSize.val = '4pt'
+    (fig_CV, graph_CV, xy) = vplot([phi10], [CCl10], xname = 'GC_phi10'+str(row.cs), yname = 'GC_CCl10'+str(row.cs), g = fig_CV, marker='cross' )
+    xy.markerSize.val = '4pt'
     
 
 
 
+for (idx, group), color in zip(gibbs_raw.groupby(by = 'n_pairs'), color_cycle):
+    group = group.sort_values(by = 'gel_density')
 
-    for (idx, group), color in zip(gibbs_raw.groupby(by = 'n_pairs'), color_cycle):
-        group = group.sort_values(by = 'gel_density')
-        vplot(
-            list(group.gel_density), 
-            [list(group.delta_P_bar_mean), list(group.delta_P_bar_err)],
-            xname = 'x'+str(idx), yname = 'y'+str(idx), 
-            xlog = True, ylog = False,
-            g=fig, color = color
-            )
-        #xy.key.val = 'c_{s} = {}'.format(float(group.c_s_reservoir_mol.head(1))
-        #xy.key.val = 'c_{{s}} = {:.2e}'.format(float(group.c_s_reservoir_mol.head(1))) 
+    CCl = np.array([list(group.c_s_mol_mean), list(group.c_s_mol_err)])
+    phi = np.array(group.gel_density)
+    P = np.array([list(group.delta_P_bar_mean), list(group.delta_P_bar_err)])
 
 
-
-
-
-
-
-
+    idx5 = (abs(P[0] - 5  ) == min(abs(P[0] - 5  ))).argmax()
+    idx10 = (abs(P[0] - 10  ) == min(abs(P[0] - 10  ))).argmax()
     
-    from veusz_embed import y_axis, x_axis
-    
-    y_axis.max.val=5
-    y_axis.min.val=-2        
-    x_axis.label.val = '\\phi'
-    y_axis.label.val = 'P' 
+
+    P5 = P[0][idx5]
+    P10 = P[0][idx10]
+
+    CCl5 = CCl[0][idx5]
+    CCl10 = CCl[0][idx10]
+
+    phi5 = phi[idx5]
+    phi10 = phi[idx10]
+    print (color)
+
+    (fig_PV, graph_PV, xy) = vplot(phi, P, xname = 'GB_phi'+str(idx), yname = 'GB_P'+str(idx), g=fig_PV, color = color)
+    (fig_PV, graph_PV, xy) = vplot([phi5], [P5], xname = 'GB_phi5'+str(idx), yname = 'GB_P5'+str(idx), g = fig_PV, marker='square', color = color )
+    xy.markerSize.val = '4pt'
+    xy.MarkerFill.color.val = color
+    (fig_PV, graph_PV, xy) = vplot([phi10], [P10], xname = 'GB_phi10'+str(idx), yname = 'GB_P10'+str(idx), g = fig_PV, marker='cross', color = color )
+    xy.markerSize.val = '4pt'
+    xy.MarkerFill.color.val = color
+
+    (fig_CV, graph_CV, xy) = vplot(phi, CCl, xname = 'GB_phi'+str(idx), yname = 'GB_CCl'+str(idx), g = fig_CV, marker='none', color = color)
+    (fig_CV, graph_CV, xy) = vplot([phi5], [CCl5], xname = 'GB_phi5'+str(idx), yname = 'GB_CCl5'+str(idx), g = fig_CV, marker='square', color = color )
+    xy.markerSize.val = '4pt'
+    xy.MarkerFill.color.val = color
+    (fig_CV, graph_CV, xy) = vplot([phi10], [CCl10], xname = 'GB_phi10'+str(idx), yname = 'GB_CCl10'+str(idx), g = fig_CV, marker='cross', color = color )
+    xy.markerSize.val = '4pt'
+    xy.MarkerFill.color.val = color
+
+
+from veusz_embed import y_axis, x_axis
+
+graph_PV.y.max.val=5
+graph_PV.y.min.val=-0.56        
+graph_PV.x.log.val = True
+graph_PV.x.label.val = 'hydrogel density, \\varphi, [mol/l]'
+graph_PV.y.label.val = '\\Delta P = P - P_{res}, [bar]'
+
+#graph_CV.y.max.val=5
+#graph_CV.y.min.val=-0.56        
+graph_CV.x.log.val = True
+graph_CV.y.log.val = True
+graph_CV.x.label.val = 'hydrogel density, \\varphi, [mol/l]'
+graph_CV.y.label.val = 'Salinity, c_{s}, [mol/l]'
 
 
 
+
+key = graph.Add('key')
+key.vertPosn.val = 'top'
+key.horzPosn.val = 'left'
+key.Border.hide.val  = True
 
 
 

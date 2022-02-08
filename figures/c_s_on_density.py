@@ -1,6 +1,6 @@
 #%%
 from veusz_embed import *
-from gc import *
+
 import os
 #%%
 import pandas as pd
