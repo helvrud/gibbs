@@ -21,6 +21,7 @@ g = None
 
 global xy, x_axis, y_axis, x_data, y_data, x_dataname, y_dataname
 cs_start = []
+
 cs1 = []
 cs2 = []
 cs3 = []
