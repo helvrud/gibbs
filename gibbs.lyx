@@ -384,6 +384,199 @@ name "sec: intro"
 
 \end_layout
 
+\begin_layout Paragraph
+Water desalination technologies.
+\end_layout
+
+\begin_layout Enumerate
+There are two basic approaches to separating water from salt.
+ The first approach is to use thermal means to effect a phase change of
+ the water (to vapor or solid), physically separate the new phase from the
+ remaining salt solution, and then recover the thermal energy for reuse
+ as the separated water reverts to liquid form.
+ Distillation processes were the first desalination processes to be conducted
+ on a large commercial scale and account for a large portion of the world’s
+ desalination capacity.
+ In addition to the thermal component, distillation processes often include
+ vacuum components to increase evaporation at lower temperatures.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The second approach to desalination is to physically separate the components,
+ generally with a membrane, as they move in response to an externally applied
+ gradient.
+ The two major processes of this type are reverse osmosis (RO), and electrodialy
+sis (ED).
+ In RO, water passes through a membrane that is impermeable to the solute
+ in response to a chemical potential gradient achieved through pressurization.
+ In ED, ions in solution migrate through anion and cation selective membranes
+ in response to an electric field.
+ Both of these processes have been commercialized on a large scale.
+ The flow through capacitor also uses an electric field to collect and separate
+ dissolved ions from water.
+\end_layout
+
+\begin_layout Enumerate
+Distillation is easy cheap technology but it is characterized by relatively
+ high energy costs, compared to RO.
+ On the contrary, RO uses expensive osmotic membrains and requires a very
+ huge pressures to apply, but in terms of energy losses it works close to
+ the thermodynamical limit.
+ That is, theoretically it may consume per one transferred from fresh water
+ to salty water ion pair only the energy which equals to the difference
+ of chemical potentials of that ions in fresh and salty water.
+ The drawback of this method is that the osmotic pressure of ions in seawater
+ may reach up to 100 bar, and this is the pressure which needs to be applied
+ to osmotic membrane let the water to pass through it.
+ This imposes certain requirements on the mechanical properties of the reverse
+ osmosis setup.
+\end_layout
+
+\begin_layout Enumerate
+The new emerging membrane technology is forward osmosis (FO) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Akther2015"
+literal "false"
+
+\end_inset
+
+.
+ In FO, a concentrated draw solution with a lower water chemical potential
+ and a more diluted feed solution with a higher water chemical potential
+ are separated by a membrane that rejects the salt but allows the passage
+ of water.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+rephrase
+\end_layout
+
+\end_inset
+
+ The water permeation from feed solution to draw solution is a spontaneous
+ process driven by the chemical potential gradient 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+rephrase
+\end_layout
+
+\end_inset
+
+.
+ The draw agent is a 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cai2016"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Hydrogels for desalination.
+\end_layout
+
+\begin_layout Enumerate
+Recently in desalination technology; hydrogels have been proposed as draw
+ agents for FO.
+ Hydrogels have the ability to absorb water across FO membrane as a result
+ of their swelling pressure.
+ Their insoluble cross-linked network enables dewatering under the influence
+ of stimuli (thermal and/or mechanical) 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+rephrase
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Razmjou2013,Zhang2020"
+literal "false"
+
+\end_inset
+
+.
+ For example, Zhang 
+\begin_inset Formula $\etal$
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhang2020"
+literal "false"
+
+\end_inset
+
+ proposed the use of hydrogel made of thermoresponsive polyelectrolyte (copolyme
+r of PNIPAM and polyacrylic acid).
+ As polyelectrolyte these particles have good affinity to water and as being
+ sensitive to heating they allow dewaterring.
+ Razmjou 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+etal
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Razmjou2013"
+literal "false"
+
+\end_inset
+
+ proposed to combine such gel with magnetic nanoparticles, which allowed
+ for direct magnetic field-induced heating.
+\end_layout
+
+\begin_layout Enumerate
+Meanwhile, Zhao has reported that the swelling pressure is not the same
+ as the osmotic pressure of a traditional solution 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhao2014"
+literal "false"
+
+\end_inset
+
+ .
+ Zhao concluded that it is unreason- able to use ‘‘forward osmosis’’ in
+ hydrogel absorbing water because the chemical residues present in hydrogels
+ are responsible for their water-absorption properties and not osmotic pressure.
+ However, Wang et al.
+ argued that hydrogels are essentially draw agents for FO because the network
+ structure of a polymer hydrogel is an osmotic membrane from a thermodynamics
+ perspective 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wang2014"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Enumerate
 Recently the new alternative to conventional desalination methods was proposed
  by prof.
@@ -395,7 +588,8 @@ literal "true"
 
 \end_inset
 
- 
+.
+ Their method 
 \end_layout
 
 \begin_layout Enumerate
@@ -404,6 +598,10 @@ The key feature of the gel employed in this study was the ability of the
  At the same time if the gel is made of polyelectrolyte it is able to reject
  ions.
  
+\end_layout
+
+\begin_layout Paragraph
+Physics of the desalination process.
 \end_layout
 
 \begin_layout Enumerate
@@ -636,8 +834,15 @@ literal "false"
  This method is a hybrid of molecular dynamics (MD) and Monte Carlo (MC).
  The whole simulation is represents a chain of subsimulations of MD and
  MC following each other.
- The MD simulation is a standard Langevin dynamics which models the mechanical
- movement of all the system particles.
+ The MD simulation is a standard Langevin dynamics 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Grest1986"
+literal "false"
+
+\end_inset
+
+ which models the mechanical movement of all the system particles.
  Whereas MC simulates the thermodynamic equilibrium with reservoir, which
  exchanges ions with the simulation box.
  The insertion (and deletion) of ion pairs is considered as a reaction of
