@@ -307,26 +307,31 @@ polyelectrolye hydrogel, simulation, desalination
 \end_layout
 
 \begin_layout Abstract
-By this article we model compression of 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-PE{}
+Recently polyelectrolyte hydrogels have been proposed as draw agents for
+ reverse osmosis desalination techniques.
+ Indeed, polyelectrolyte hydrogels have the ability to absorb a big amount
+ of water across forward osmosis membrane as a result of their swelling
+ pressure.
+ The insoluble cross-linked network of the gel enables dewatering under
+ the influence of stimuli (thermal and/or mechanical).
+ On the other hand, the network structure of a polymer hydrogel from a thermodyn
+amic perspective is already an osmotic membrane.
+ So hydrogel microparticles may allow to completely avoid the osmotic membranes
+ in forward osmosis and use microfiltration instead.
+ By this article, we present our recent theoretical study of the use of
+ polyelectrolyte hydrogel for water desalination.
+ We modeled the thermodynamic equilibrium of coexistence of the gel and
+ the aqueous salt solution in the so-called closed ensemble, in which the
+ total amount of ions is assumed to be constant.
+ We modeled the compression of the gel and the associated with that release
+ of the solution.
+ We have shown that the squeezed out solution has a little lower salinity
+ than that the gel was equilibrated with.
+ Also, we performed a set of simulations modeling the process of continuous
+ decrease of water salinity up to freshwater concentrations.
 \end_layout
 
-\end_inset
-
- hydrogel in equilibrium with small volume of salty aqueous solution.
- We show that the the change of the hydrogel volume affects the salinity
- of the solution.
- The decrease of the gel volume decreases the solution and vice versa the
- swelling of the gel increases the surrounding solution.
- This effect can be employed for water desalination ...
- 
+\begin_layout Abstract
 \begin_inset Note Note
 status open
 
