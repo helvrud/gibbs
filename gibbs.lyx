@@ -606,7 +606,7 @@ The key feature of the gel employed in this study was the ability of the
 \end_layout
 
 \begin_layout Paragraph
-Physics of the desalination process.
+Physics behind the desalination process.
 \end_layout
 
 \begin_layout Enumerate
@@ -728,34 +728,12 @@ Model
 \end_layout
 
 \begin_layout Standard
-We model the gel as a diamond-like polymer network, which consists of 
-\begin_inset Formula $16$
-\end_inset
-
- linear 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-PE{}
-\end_layout
-
-\end_inset
-
- chains, each chain comprising 
-\begin_inset Formula $30$
-\end_inset
-
- monomer units.
- Each unit carries an electric charge equal to the charge of electron, 
-\begin_inset Formula $-e$
-\end_inset
-
-.
- Except network the first box contains mobile ions, 
+16 linear polymer chains by 30 monomer units each are connected to a diamond-lik
+e polymer network.
+ The network is put into a simulation box with periodic boundaries.
+ Each unit of the network carries a negative electric charge, which is equal
+ to the charge of electron.
+ Except the particles of the network, the mobile monovalent ions, 
 \begin_inset Formula $\na$
 \end_inset
 
@@ -763,7 +741,25 @@ PE{}
 \begin_inset Formula $\cl$
 \end_inset
 
-, in such amounts that the total charge of the box is zero.
+, are present in simulation box.
+ The total electric charge of all the particles in the box is zero, therefore
+ the amount of 
+\begin_inset Formula $\na$
+\end_inset
+
+ ions is bigger than that of 
+\begin_inset Formula $\cl$
+\end_inset
+
+ by the number of charged hydrogel units, 
+\begin_inset Formula $N\gel=16\cdot30=480$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The ions are able to appear and disappear
 \end_layout
 
 \begin_layout Subsection
@@ -1003,8 +999,88 @@ ie
 
 \end_inset
 
- in equilibrium with big bath of certain salinity.
- Figure 
+ in equilibrium with big bath of certain salinity, 
+\begin_inset Formula $\cs$
+\end_inset
+
+, for example from 
+\begin_inset Formula $\cs=$
+\end_inset
+
+0.1 mol/l.
+ We do it for a set of different volumes of the simulation box and in any
+ case we calculate the pressure in the system, 
+\begin_inset Formula $P$
+\end_inset
+
+, and the number of present 
+\begin_inset Formula $\cl$
+\end_inset
+
+ ions, 
+\begin_inset Formula $\ncl$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+This pressure is composed from two impacts; from the osmotic pressure of
+ ions.
+ Therefore, in order to isolate the partial pressure of the gel we performed
+ a separate simulation of an empty box, without the gel, exchanging ions
+ with the bath of salinity 
+\begin_inset Formula $\cs$
+\end_inset
+
+.
+ This simulation resulted the corresponding to 
+\begin_inset Formula $\cs$
+\end_inset
+
+ ions osmotic pressure, 
+\begin_inset Formula $P_{res}$
+\end_inset
+
+.
+ Extracting the ions osmotic pressure from pressure in the box with gel
+ one obtains the 
+\emph on
+the gel partial pressure, 
+\emph default
+
+\begin_inset Formula $\Delta P=P-P^{res}$
+\end_inset
+
+
+\emph on
+~— 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+
+\emph default
+ that pressure which needs to be applied in mechanical equilibrium to compress
+ the hydrogel and achieve a specific density, 
+\begin_inset Formula $\varphi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:PV-GC"
@@ -1020,21 +1096,31 @@ noprefix "false"
 \end_inset
 
 .
- The partial pressure of the gel is that pressure which needs to be applied
- in mechanical equilibrium to compress the hydrogel and achieve a specific
- density, 
-\begin_inset Formula $\varphi$
-\end_inset
-
-.
  Several curves on the plot correspond to different salinities of the reservoir
  
 \begin_inset Formula $\cs$
 \end_inset
 
 .
- By big circles marked the states where the applied to the gel pressure
- is zero, that is the so called free swelling equilibrium states.
+ START FROM HERE
+\end_layout
+
+\begin_layout Standard
+Then we find such a value of the box volume where 
+\begin_inset Formula $\Delta P$
+\end_inset
+
+ equals to zero.
+ And this state we consider as a starting point for compression in 
+\emph on
+closed system
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+By big circles marked the states where the applied to the gel pressure is
+ zero, that is the so called free swelling equilibrium states.
  These states are characterized by the values of the gel density, 
 \begin_inset Formula $\varphi_{0}$
 \end_inset
@@ -1214,10 +1300,6 @@ name "fig:fig_CV"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
