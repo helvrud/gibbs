@@ -19,6 +19,7 @@ for (idx, group), color in zip(gibbs_raw.groupby(by = 'n_pairs'), color_cycle):
     group = group.sort_values(by = 'gel_density')
     Ccl = np.array([list(group.c_s_mol_mean), list(group.c_s_mol_err)])
     phi = np.array(group.gel_density)
+    
     P = np.array([list(group.delta_P_bar_mean), list(group.delta_P_bar_err)])
     n_pairs = list(group.n_pairs)[0]
     
@@ -51,7 +52,8 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
 
     
     print (index)
-    phi = row.phi
+    phi = row.phi  # l/mol
+    V = 1/phi      # mol/l
     P = row.P
     Ccl = row.cs
     Ncl = row.Ncl*np.ones(len(phi))
@@ -70,26 +72,29 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     cs_10.append(Ccl10)
     phi5 = phi[idx5]
     phi10 = phi[idx10]
+    V5 = V[idx5]
+    V10 = V[idx10]
+
     print (color)
     
 
-    (fig_PV, graph_PV, xy) = vplot(phi, P, xname = 'GB_phi'+str(row.Ncl), yname = 'GB_P'+str(row.Ncl), g=fig_PV, marker='none', color = color)
+    (fig_PV, graph_PV, xy) = vplot(V, P, xname = 'GB_phi'+str(row.Ncl), yname = 'GB_P'+str(row.Ncl), g=fig_PV, marker='none', color = color)
     xy.ErrorBarLine.width.val = '0.5pt'
     
-    (fig_PV, graph_PV, xy) = vplot([phi5], [P5], xname = 'GB_phi_5'+str(row.Ncl), yname = 'GB_P_5'+str(row.Ncl), g = fig_PV, marker='square', color = color )
+    (fig_PV, graph_PV, xy) = vplot([V5], [P5], xname = 'GB_phi_5'+str(row.Ncl), yname = 'GB_P_5'+str(row.Ncl), g = fig_PV, marker='square', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
-    (fig_PV, graph_PV, xy) = vplot([phi10], [P10], xname = 'GB_phi_10'+str(row.Ncl), yname = 'GB_P_10'+str(row.Ncl), g = fig_PV, marker='cross', color = color )
+    (fig_PV, graph_PV, xy) = vplot([V10], [P10], xname = 'GB_phi_10'+str(row.Ncl), yname = 'GB_P_10'+str(row.Ncl), g = fig_PV, marker='cross', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
 
 
-    (fig_CV, graph_CV, xy) = vplot(phi, Ccl, xname = 'GB_phi'+str(row.Ncl), yname = 'GB_Ccl'+str(row.Ncl), g = fig_CV, marker='none', color = color)
+    (fig_CV, graph_CV, xy) = vplot(V, Ccl, xname = 'GB_phi'+str(row.Ncl), yname = 'GB_Ccl'+str(row.Ncl), g = fig_CV, marker='none', color = color)
 
-    (fig_CV, graph_CV, xy) = vplot([phi5], [Ccl5], xname = 'GB_phi_5'+str(row.Ncl), yname = 'GB_Ccl_5'+str(row.Ncl), g = fig_CV, marker='square', color = color )
+    (fig_CV, graph_CV, xy) = vplot([V5], [Ccl5], xname = 'GB_phi_5'+str(row.Ncl), yname = 'GB_Ccl_5'+str(row.Ncl), g = fig_CV, marker='square', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
-    (fig_CV, graph_CV, xy) = vplot([phi10], [Ccl10], xname = 'GB_phi_10'+str(row.Ncl), yname = 'GB_Ccl_10'+str(row.Ncl), g = fig_CV, marker='cross', color = color )
+    (fig_CV, graph_CV, xy) = vplot([V10], [Ccl10], xname = 'GB_phi_10'+str(row.Ncl), yname = 'GB_Ccl_10'+str(row.Ncl), g = fig_CV, marker='cross', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
 
@@ -103,7 +108,7 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
 
 
 #for (idx, group), color in zip(gc_raw.groupby(by = 'cs'), color_cycle):
-for index, row in gc_raw.iterrows():
+for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     #print (row)
     V = row.V
     V0 = row.V_eq
@@ -129,24 +134,24 @@ for index, row in gc_raw.iterrows():
     phi5 = 1./V5
     phi10 = 1./V10
     
-    (fig_PV, graph_PV, xy) = vplot(phi, P, xname = 'GC_phi'+str(row.cs), yname = 'GC_P'+str(row.cs), g = fig_PV, marker='none')
+    (fig_PV, graph_PV, xy) = vplot(V, P, xname = 'GC_phi'+str(row.cs), yname = 'GC_P'+str(row.cs), g = fig_PV, marker='none',color=color)
     xy.PlotLine.width.val = '1pt'
     xy.ErrorBarLine.width.val = '0.5pt'
-    (fig_PV, graph_PV, xy) = vplot([phi0], [P0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_P0'+str(row.cs), g = fig_PV, marker='circle' )
+    (fig_PV, graph_PV, xy) = vplot([V0], [P0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_P0'+str(row.cs), g = fig_PV, marker='circle',color=color )
     xy.markerSize.val = '4pt'
-    (fig_PV, graph_PV, xy) = vplot([phi5], [P5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_P5'+str(row.cs), g = fig_PV, marker='square' )
+    (fig_PV, graph_PV, xy) = vplot([V5], [P5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_P5'+str(row.cs), g = fig_PV, marker='square',color=color )
     xy.markerSize.val = '4pt'
-    (fig_PV, graph_PV, xy) = vplot([phi10], [P10], xname = 'GC_phi10'+str(row.cs), yname = 'GC_P10'+str(row.cs), g = fig_PV, marker='cross' )
+    (fig_PV, graph_PV, xy) = vplot([V10], [P10], xname = 'GC_phi10'+str(row.cs), yname = 'GC_P10'+str(row.cs), g = fig_PV, marker='cross',color=color )
     xy.markerSize.val = '4pt'
 
 
-    (fig_CV, graph_CV, xy) = vplot(phi, Ccl, xname = 'GC_phi'+str(row.cs), yname = 'GC_Ccl'+str(row.cs), g = fig_CV, marker='none')
+    (fig_CV, graph_CV, xy) = vplot(V, Ccl, xname = 'GC_phi'+str(row.cs), yname = 'GC_Ccl'+str(row.cs), g = fig_CV, marker='none',color=color)
     xy.PlotLine.width.val = '1pt'
-    (fig_CV, graph_CV, xy) = vplot([phi0], [Ccl0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_Ccl0'+str(row.cs), g = fig_CV, marker='circle' )
+    (fig_CV, graph_CV, xy) = vplot([V0], [Ccl0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_Ccl0'+str(row.cs), g = fig_CV, marker='circle',color=color )
     xy.markerSize.val = '4pt'
-    (fig_CV, graph_CV, xy) = vplot([phi5], [Ccl5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_Ccl5'+str(row.cs), g = fig_CV, marker='square' )
+    (fig_CV, graph_CV, xy) = vplot([V5], [Ccl5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_Ccl5'+str(row.cs), g = fig_CV, marker='square',color=color )
     xy.markerSize.val = '4pt'
-    (fig_CV, graph_CV, xy) = vplot([phi10], [Ccl10], xname = 'GC_phi10'+str(row.cs), yname = 'GC_Ccl10'+str(row.cs), g = fig_CV, marker='cross' )
+    (fig_CV, graph_CV, xy) = vplot([V10], [Ccl10], xname = 'GC_phi10'+str(row.cs), yname = 'GC_Ccl10'+str(row.cs), g = fig_CV, marker='cross',color=color )
     xy.markerSize.val = '4pt'
     
 
@@ -160,14 +165,14 @@ from veusz_embed import y_axis, x_axis
 graph_PV.y.max.val=5
 graph_PV.y.min.val=-0.56        
 graph_PV.x.log.val = True
-graph_PV.x.label.val = 'hydrogel density, \\varphi, [mol/l]'
+graph_PV.x.label.val = 'hydrogel volume, V, [l/mol]'
 graph_PV.y.label.val = '\\Delta P = P - P_{res}, [bar]'
 
 #graph_CV.y.max.val=5
 #graph_CV.y.min.val=-0.56        
 graph_CV.x.log.val = True
 graph_CV.y.log.val = True
-graph_CV.x.label.val = 'hydrogel density, \\varphi, [mol/l]'
+graph_CV.x.label.val = 'hydrogel volume, V, [l/mol]'
 graph_CV.y.label.val = 'Salinity, c_{s}, [mol/l]'
 
 
@@ -179,10 +184,11 @@ key.horzPosn.val = 'left'
 key.Border.hide.val  = True
 
 
-
-
-
-
+import os
+fig_CV.Save('fig_CV.vsz')
+fig_PV.Save('fig_PV.vsz')
+os.popen('veusz fig_CV.vsz')
+os.popen('veusz fig_PV.vsz')
 
 
 

@@ -1029,7 +1029,7 @@ ie
 This pressure is composed from two impacts; from the osmotic pressure of
  ions.
  Therefore, in order to isolate the partial pressure of the gel we performed
- a separate simulation of an empty box, without the gel, exchanging ions
+ a separate simulation of a reservoir, without the gel, exchanging ions
  with the bath of salinity 
 \begin_inset Formula $\cs$
 \end_inset
@@ -1076,11 +1076,7 @@ ie
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-Figure 
+ See Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:PV-GC"
@@ -1090,19 +1086,7 @@ noprefix "false"
 
 \end_inset
 
- shows how the gel partial pressure depends on the density of the gel segments,
- 
-\begin_inset Formula $\varphi$
-\end_inset
-
 .
- Several curves on the plot correspond to different salinities of the reservoir
- 
-\begin_inset Formula $\cs$
-\end_inset
-
-.
- START FROM HERE
 \end_layout
 
 \begin_layout Standard
@@ -1225,7 +1209,7 @@ status open
 \begin_layout Plain Layout
 \align left
 \begin_inset Graphics
-	filename figures/P_on_density_GC.pdf
+	filename figures/fig_PV_pub.pdf
 	width 50text%
 
 \end_inset
@@ -1237,7 +1221,13 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-The compression of the gel in grand canonical ensemble for different salinities.
+The compression of the gel in grand canonical ensemble.
+ Different curves on the plot correspond to different salinities of the
+ reservoir 
+\begin_inset Formula $\cs$
+\end_inset
+
+.
  The crossection of the curves with x-axis indicate the free selling equilibrium.
  The states, which are close to pressure of 5 bar and 10 bar, ising the
  corresponding indices '5' and '10'.
@@ -1246,7 +1236,7 @@ The compression of the gel in grand canonical ensemble for different salinities.
 status open
 
 \begin_layout Plain Layout
-Do not forget to add the markers for the states of 5 and 10 bar
+rewrite the caption
 \end_layout
 
 \end_inset
