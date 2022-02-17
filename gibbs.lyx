@@ -38,9 +38,9 @@
 \newcommand{\subin}{_\mathrm{in}}
 \newcommand{\subi}{_\mathrm{i}}
 
-\newcommand{\gel}{^\mathrm{gel}}
-\newcommand{\tot}{^\mathrm{tot}}
-\newcommand{\out}{^{out}}
+\newcommand{\gel}{_\mathrm{gel}}
+\newcommand{\tot}{_\mathrm{tot}}
+\newcommand{\out}{_{out}}
 \newcommand{\coh}{c_\mathrm{OH}}
 \newcommand{\bulk}{^{\mathrm{b}}}
 \renewcommand{\H}{\mathrm{H^+}}
@@ -1099,8 +1099,8 @@ noprefix "false"
 .
  Solid lines on this plot represent the swelling (or compression) of the
  gel in open system.
- Blue solid line represents the compression in equilibrium with a reservoir
- of salinity, 
+ For example, blue solid line illustrates the compression in equilibrium
+ with a reservoir of salinity, 
 \begin_inset Formula $\cs=0.063$
 \end_inset
 
@@ -1109,7 +1109,7 @@ noprefix "false"
 \emph on
 free swelling equilibrium 
 \emph default
-states of the gel 
+states of the gel
 \emph on
 .
 
@@ -1148,41 +1148,7 @@ Compression in closed system.
 \end_layout
 
 \begin_layout Standard
-Knowing the free swelling equilibrium state, the salinty, the gel molar
- volume, and the amount of ions in gel, 
-\begin_inset Formula $\cs,$
-\end_inset
-
-
-\begin_inset Formula $\Vgel$
-\end_inset
-
- and 
-\begin_inset Formula $\ncl$
-\end_inset
-
-.
- The free swelling equilibrium states we consider as a starting point for
- compression of the gel in 
-\emph on
-closed system
-\emph default
-.
-\end_layout
-
-\begin_layout Standard
-We use the free swelling equilibrium states as the initial ones for simulation
- of the gel in closed system.
- So we compress the gel starting from the volume 
-\begin_inset Formula $\Vgel_{0}$
-\end_inset
-
- and zero pressure until the pressure reaches 10 bar.
- We compress it in a box of the same volume 
-\begin_inset Formula $\Vgel_{0}$
-\end_inset
-
-, 
+After defining the free swelling equilibrium state, 
 \begin_inset ERT
 status open
 
@@ -1195,15 +1161,110 @@ ie
 
 \end_inset
 
- the volume of outside solution increases starting from zero as much as
- the volume of the gel decreases, such that the total volume remains constant
- 
-\begin_inset Formula $\Vbox=\Vgel+\Vout$
+ knowing the salinity, the gel volume, and the amount of ions in gel, 
+\begin_inset Formula $\cs^{0}$
+\end_inset
+
+, 
+\begin_inset Formula $\Vgel^{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\ncl^{0}$
+\end_inset
+
+, we start the compression of the gel in 
+\emph on
+closed system
+\emph default
+.
+ So we continuously decrease the volume of the gel and simultaneously increase
+ the volume of the outside solution, in such a way that the total volume
+ remains constant and equal to the initial gel volume 
+\begin_inset Formula $V\tot=\Vgel^{0}=V\gel+V\out$
 \end_inset
 
 .
- Since the amount of external solution is small , the compression of the
- gel affects its salinity, which is depicted on Figure
+ At the same time the total number of ions remains constant.
+ Since the amount of external solution is small, the compression of the
+ gel affects its salinity, which now decreases, changing from 
+\begin_inset Formula $\cs^{0}=0.063$
+\end_inset
+
+ at free swelling equilibrium state to 0.045 mol/l at 
+\begin_inset Formula $P\gel=5$
+\end_inset
+
+ bar.
+ The corresponding process is depicted by dotted blue line in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:PV-GC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Desalination scheme.
+\end_layout
+
+\begin_layout Standard
+Then we repeat the simulation of hydrogel swelling in open system but setting
+ as a salinity of the reservoir the new, obtained from the previous process,
+ value 
+\begin_inset Formula $\cs=$
+\end_inset
+
+ 0.045 mol/l.
+ Again, as soon as we obtain the free swelling equilibrium state (at new
+ salinity), with corresponding new values of 
+\begin_inset Formula $V\gel$
+\end_inset
+
+ and 
+\begin_inset Formula $\ncl$
+\end_inset
+
+, we start simulating the compression in closed system.
+ Now the salinity changes again, decreasing from 0.045 to 0.031 mol/l (at
+ 5 bar).
+ These two processes are depicted by solid and dotted yellow lines in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:PV-GC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The Figure shows also the repetition of this procedure three more times
+ until the salinity reaches the value 
+\begin_inset Formula $\cs=0.01$
+\end_inset
+
+ mol/l.
+ Schematically this process is depicted in the inset to the plot.
+\end_layout
+
+\begin_layout Standard
+Since the amount of external solution is small , the compression of the
+ gel affects its salinity, which now decreases, changing from 
+\begin_inset Formula $\cs^{0}=0.063$
+\end_inset
+
+ to 0.045 mol/l is depicted on Figure
 \begin_inset space ~
 \end_inset
 
@@ -1263,7 +1324,7 @@ The compression of the gel in open system (solid lines) and in closed system
 status open
 
 \begin_layout Plain Layout
-replace open cirkles by squartes on the plot
+replace open circles by squares on the plot
 \end_layout
 
 \end_inset

@@ -1,5 +1,5 @@
 # Veusz saved document (version 3.0.1)
-# Saved at 2022-02-17T10:33:27.084743
+# Saved at 2022-02-17T16:29:17.047137
 
 AddImportPath(u'/home/kvint/gibbs/figures')
 ImportString(u'`GB_P105.0`(numeric),+-','''
@@ -17983,7 +17983,7 @@ Set('marker', u'none')
 Set('markerSize', u'2pt')
 Set('xData', u'GC_phi0.0319277791312653')
 Set('yData', u'GC_P0.0319277791312653')
-Set('key', u'c_{s} = 0.031 mol/l')
+Set('key', u'c_{s} = 0.032 mol/l')
 Set('PlotLine/bezierJoin', True)
 Set('PlotLine/color', u'#d62728')
 Set('PlotLine/width', u'2pt')
@@ -18523,7 +18523,7 @@ Set('markerSize', u'2pt')
 Set('xData', u'GC_phi0.063929608531416')
 Set('yData', u'GC_P0.063929608531416')
 Set('hide', False)
-Set('key', u'c_{s} = 0.063 mol/l')
+Set('key', u'c_{s} = 0.064 mol/l')
 Set('PlotLine/bezierJoin', True)
 Set('PlotLine/color', u'darkcyan')
 Set('PlotLine/width', u'2pt')

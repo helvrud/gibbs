@@ -106,6 +106,19 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
 
 
 
+PP0 = []
+PP5 = []
+PP10 = []
+
+CCcl0 = []
+CCcl5 = []
+CCcl10 = []
+
+VV0 = []
+VV5 = []
+VV10 = []
+
+
 
 #for (idx, group), color in zip(gc_raw.groupby(by = 'cs'), color_cycle):
 for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
@@ -134,6 +147,11 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     phi5 = 1./V5
     phi10 = 1./V10
     
+    PP0.append(P0); PP5.append(P5); PP10.append(P10)
+    CCcl0.append(Ccl0); CCcl5.append(Ccl5); CCcl10.append(Ccl10)
+    VV0.append(V0); VV5.append(V5); VV10.append(V10)
+    
+    
     (fig_PV, graph_PV, xy) = vplot(V, P, xname = 'GC_phi'+str(row.cs), yname = 'GC_P'+str(row.cs), g = fig_PV, marker='none',color=color)
     xy.PlotLine.width.val = '1pt'
     xy.ErrorBarLine.width.val = '0.5pt'
@@ -155,7 +173,9 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     xy.markerSize.val = '4pt'
     
 
-
+(fig_CV, graph_CV, xy) = vplot(VV0, CCcl0, xname = 'VV0', yname = 'CCcl0', g = fig_CV, marker='none',color=color)
+(fig_CV, graph_CV, xy) = vplot(VV5, CCcl5, xname = 'VV5', yname = 'CCcl5', g = fig_CV, marker='none',color=color)
+(fig_CV, graph_CV, xy) = vplot(VV10, CCcl10, xname = 'VV10', yname = 'CCcl10', g = fig_CV, marker='none',color=color)
 
 cs_5
 
