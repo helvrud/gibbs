@@ -94,6 +94,8 @@
 %\newcommand{\cs}{c_{\mathrm{salt}}}
 \newcommand{\csres}{\cs\res}
 \newcommand{\Vgel}{V\gel}
+\newcommand{\Pgel}{P\gel}
+\newcommand{\Pres}{P\res}
 \newcommand{\Vout}{V\out}
 \newcommand{\Vbox}{V\tot}
 \newcommand{\PE}{polyelectrolyte{}}
@@ -985,8 +987,8 @@ Compression in open system.
 \end_layout
 
 \begin_layout Standard
-First we run a set of simulations modeling the compression of the gel in
- open system, 
+First we run a set of simulations modeling the gel compression in open system,
+ 
 \begin_inset ERT
 status open
 
@@ -1003,17 +1005,27 @@ ie
 \begin_inset Formula $\cs$
 \end_inset
 
+
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
 , for example from 
 \begin_inset Formula $\cs=$
 \end_inset
 
-0.1 mol/l.
- We do it for a set of different volumes of the simulation box and in any
- case we calculate the pressure in the system, 
+0.1 mol/l
+\end_layout
+
+\end_inset
+
+.
+ We do it for a set of different simulation box volumes.
+ Each simulation returns the pressure in the box, 
 \begin_inset Formula $P$
 \end_inset
 
-, and the number of present 
+, and the number of present in the box 
 \begin_inset Formula $\cl$
 \end_inset
 
@@ -1026,57 +1038,55 @@ ie
 \end_layout
 
 \begin_layout Standard
-This pressure is composed from two impacts; from the osmotic pressure of
- ions.
- Therefore, in order to isolate the partial pressure of the gel we performed
- a separate simulation of a reservoir, without the gel, exchanging ions
- with the bath of salinity 
+The obtained values of pressure represent the sum of partial pressure of
+ hydrogel itself, 
+\begin_inset Formula $P^{gel}$
+\end_inset
+
+, and the osmotic pressure of mobile ions.
+ In order to isolate 
+\begin_inset Formula $P^{gel}$
+\end_inset
+
+ we perform a separate simulation of a reservoir, without the gel, exchanging
+ ions with the bath of salinity 
 \begin_inset Formula $\cs$
 \end_inset
 
 .
- This simulation resulted the corresponding to 
-\begin_inset Formula $\cs$
-\end_inset
-
- ions osmotic pressure, 
-\begin_inset Formula $P_{res}$
+ This simulation results the corresponding osmotic pressure, 
+\begin_inset Formula $P^{res}$
 \end_inset
 
 .
- Extracting the ions osmotic pressure from pressure in the box with gel
- one obtains the 
+ Thus the partial pressure of the gel is
 \emph on
-the gel partial pressure, 
+ 
 \emph default
 
-\begin_inset Formula $\Delta P=P-P^{res}$
+\begin_inset Formula $P^{gel}=P-P^{res}$
 \end_inset
 
 
 \emph on
-~— 
-\begin_inset ERT
-status open
+.
+ 
+\begin_inset Formula $P^{gel}$
+\end_inset
 
-\begin_layout Plain Layout
-
-
-\backslash
-ie
+ 
+\emph default
+is that pressure which needs to be applied in mechanical equilibrium to
+ compress the hydrogel and achieve a specific molar volume of the gel V.
+ 
 \end_layout
 
+\begin_layout Standard
+The dependence of 
+\begin_inset Formula $\Pgel$
 \end_inset
 
-
-\emph default
- that pressure which needs to be applied in mechanical equilibrium to compress
- the hydrogel and achieve a specific density, 
-\begin_inset Formula $\varphi$
-\end_inset
-
-.
- See Figure 
+ versus gel molar volume is present in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:PV-GC"
@@ -1087,38 +1097,31 @@ noprefix "false"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Then we find such a value of the box volume where 
-\begin_inset Formula $\Delta P$
+ Solid lines on this plot represent the swelling (or compression) of the
+ gel in open system.
+ Blue solid line represents the compression in equilibrium with a reservoir
+ of salinity, 
+\begin_inset Formula $\cs=0.063$
 \end_inset
 
- equals to zero.
- And this state we consider as a starting point for compression in 
+ mol/l.
+ The point where the pressure equals to zero is 
 \emph on
-closed system
+free swelling equilibrium 
 \emph default
+states of the gel 
+\emph on
 .
-\end_layout
 
-\begin_layout Standard
-By big circles marked the states where the applied to the gel pressure is
- zero, that is the so called free swelling equilibrium states.
- These states are characterized by the values of the gel density, 
-\begin_inset Formula $\varphi_{0}$
-\end_inset
-
-, and the corresponding molar volume of the gel, 
-\begin_inset Formula $\Vgel_{0}=\frac{1}{\varphi_{0}}$
-\end_inset
-
- .
- It is seen already from this figure that the increase of salinity shifts
- the free swelling equilibrium states towards higher densities.
+\emph default
+ It is seen already from this figure that the decrease of salinity shifts
+ the free swelling equilibrium states towards bigger volumes.
+ Generally speaking, all the solid curves shift towards bigger volumes with
+ decreasing salinity.
  In other words, increase of salinity shrinks the gel.
- This is well known effect, typical for all the strong polyelectrolytes
- and caused by the screening of electrostatic interactions by ions 
+ This is known effect, typical for all the branched strong polyelectrolytes
+ and caused by the screening of electrostatic interactions by ions and by
+ the condition of electroneutrality of the hydrogel media 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Zhulina2000"
@@ -1126,7 +1129,9 @@ literal "false"
 
 \end_inset
 
- and by the condition of electroneutrality of the hydrogel media 
+.
+ The dependence of the size of weak polyelectrolytes versus salinity is
+ in general nonmonotonic 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Rud2018"
@@ -1134,12 +1139,35 @@ literal "false"
 
 \end_inset
 
-.
+ but that is beyond the scope of this article.
  
 \end_layout
 
 \begin_layout Paragraph
 Compression in closed system.
+\end_layout
+
+\begin_layout Standard
+Knowing the free swelling equilibrium state, the salinty, the gel molar
+ volume, and the amount of ions in gel, 
+\begin_inset Formula $\cs,$
+\end_inset
+
+
+\begin_inset Formula $\Vgel$
+\end_inset
+
+ and 
+\begin_inset Formula $\ncl$
+\end_inset
+
+.
+ The free swelling equilibrium states we consider as a starting point for
+ compression of the gel in 
+\emph on
+closed system
+\emph default
+.
 \end_layout
 
 \begin_layout Standard
@@ -1221,22 +1249,21 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-The compression of the gel in grand canonical ensemble.
- Different curves on the plot correspond to different salinities of the
- reservoir 
+The compression of the gel in open system (solid lines) and in closed system
+ (dotted lines).
+ Each solid curve corresponds to different salinity of the reservoir 
 \begin_inset Formula $\cs$
 \end_inset
 
-.
- The crossection of the curves with x-axis indicate the free selling equilibrium.
- The states, which are close to pressure of 5 bar and 10 bar, ising the
- corresponding indices '5' and '10'.
+ (see legend).
+ The states where applied pressure is zero are marked by circles.
+ The states, corresponding to applied pressure of 5 bar are marked by square
  
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-rewrite the caption
+replace open cirkles by squartes on the plot
 \end_layout
 
 \end_inset
