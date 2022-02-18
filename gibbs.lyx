@@ -1255,6 +1255,12 @@ noprefix "false"
 \end_inset
 
  mol/l.
+ The last dashed magenta line shows the compression in closed system which
+ ends up with 
+\begin_inset Formula $\cs=4\cdot10^{-4}$
+\end_inset
+
+ mol/l.
  Schematically this process is depicted in the inset to the plot.
 \end_layout
 
@@ -1411,6 +1417,42 @@ The compression of the gel in open system (solid lines) and in closed system
 \end_inset
 
 
+\end_layout
+
+\begin_layout Paragraph
+The efficiency of desalination.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Section
+Conclusions
+\end_layout
+
+\begin_layout Enumerate
+We have modelled the compression of the gel in thermodynamic equilibrium
+ with the reservoir of limited ammount of water.
+\end_layout
+
+\begin_layout Enumerate
+We have shown that in case of gel made of strong polyelectrolyte, the compressio
+n always lead to decrease of the surrounding salinity.
+\end_layout
+
+\begin_layout Enumerate
+We have modelled the process of water desalination combining two processes:
+ (1) the swelling of the gel in open system, exchanging ions with big reservoir
+ at constant salinity.
+ (2) the compression of the gel in closed system, when the gel affect the
+ salinity in surrounding solution.
+\end_layout
+
+\begin_layout Enumerate
+We estimated the energy needed to produce one liter of water and have show
+ that the method at least theoreticaly may compete with the modern technologies
+ used in industry nowadays.
 \end_layout
 
 \begin_layout Section*
