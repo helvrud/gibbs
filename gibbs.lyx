@@ -1259,12 +1259,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-Since the amount of external solution is small , the compression of the
- gel affects its salinity, which now decreases, changing from 
-\begin_inset Formula $\cs^{0}=0.063$
-\end_inset
-
- to 0.045 mol/l is depicted on Figure
+The same process is depicted on Figure
 \begin_inset space ~
 \end_inset
 
@@ -1278,8 +1273,22 @@ noprefix "false"
 
 \end_inset
 
-.
- 
+ but in different coordinates: salinity versus volume.
+ In this coordinates the swelling in open system appear to be horizontal
+ line, since the salinity in this process is constant.
+ Again we start from swelling in open system untill the gel reaches its
+ free swelling equilibrium (solid blue line).
+ Then the gel is compressed in closed system (dashed blue line), anding
+ up in a state with applied to the gel pressure 5 bar.
+ In this process the surrounding solution salinitiy changes from 0.064 to
+ 0.045 mol/l.
+ Then the gel again swells in open system, but at new salinity.
+ The chain of alternating swelling and compression steps ends up when salinity
+ gets equal to 
+\begin_inset Formula $\cs=4\cdot10^{-3}$
+\end_inset
+
+ mol/l after comression in closed system (dashed magenta line).
 \end_layout
 
 \begin_layout Standard
@@ -1299,6 +1308,7 @@ status open
 \align left
 \begin_inset Graphics
 	filename figures/fig_PV_pub.pdf
+	lyxscale 30
 	width 50text%
 
 \end_inset
@@ -1310,16 +1320,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-The compression of the gel in open system (solid lines) and in closed system
- (dotted lines).
- Each solid curve corresponds to different salinity of the reservoir 
-\begin_inset Formula $\cs$
-\end_inset
-
- (see legend).
- The states where applied pressure is zero are marked by circles.
- The states, corresponding to applied pressure of 5 bar are marked by square
- 
+Pressure vs gel density 
 \begin_inset Note Note
 status open
 
@@ -1354,7 +1355,8 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename figures/fig_CV_pub.pdf
+	filename figures/fig_CV_pub.jpg
+	lyxscale 30
 	width 50text%
 
 \end_inset
@@ -1390,13 +1392,52 @@ name "fig:fig_CV"
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Compression of the gel in open and in closed system.
+The compression of the gel in open system (solid lines) and in closed system
+ (dotted lines).
+ Each solid curve corresponds to different salinity of the reservoir 
+\begin_inset Formula $\cs$
+\end_inset
+
+ (see legend).
+ Shadowed area limit the states with applied pressure below zero and above
+ 5 bar.
 \end_layout
 
 \end_inset
 
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Acknowledgments
+\end_layout
+
+\begin_layout Standard
+This research was supported by the Czech Science Foundation (grant 19-17847Y)
+ (OR, LN, AK), Government of Russian Federation, grant number 14.W03.31.0022.
+ AK thanks the Grant Agency of Charles University for support (project 318120).
+ Computational resources were supplied by the project 
+\begin_inset Quotes eld
+\end_inset
+
+e-Infrastruktura CZ
+\begin_inset Quotes erd
+\end_inset
+
+ (e-INFRA LM2018140) provided within the program Projects of Large Research,
+ Development and Innovations Infrastructures.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "gibbs"
 
 \end_inset
 
@@ -1404,6 +1445,10 @@ Compression of the gel in open and in closed system.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \begin_inset Float figure
 wide false
 sideways false
@@ -1443,37 +1488,6 @@ status open
 
 
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section*
-Acknowledgments
-\end_layout
-
-\begin_layout Standard
-This research was supported by the Czech Science Foundation (grant 19-17847Y)
- (OR, LN, AK), Government of Russian Federation, grant number 14.W03.31.0022.
- AK thanks the Grant Agency of Charles University for support (project 318120).
- Computational resources were supplied by the project 
-\begin_inset Quotes eld
-\end_inset
-
-e-Infrastruktura CZ
-\begin_inset Quotes erd
-\end_inset
-
- (e-INFRA LM2018140) provided within the program Projects of Large Research,
- Development and Innovations Infrastructures.
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset bibtex
-LatexCommand bibtex
-btprint "btPrintCited"
-bibfiles "gibbs"
 
 \end_inset
 
