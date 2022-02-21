@@ -30,18 +30,6 @@ def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=
         f.write(singularity_exec(prefix, pypresso_docker, script_name, args))
 
 import numpy as np
-#v = np.round(np.arange(0.1, 0.9, 0.01), 4)
-
-#from grand canonical ensemble calculation
-'''
-pCl	    cs	    V       box_l   na^{gel}    cl^{gel}    v_5bar
-0.40	0.5702	1.7337	32.0	845.7	    365.8       0.37
-0.82	0.2083	3.1385	39.0	709.0	    229.1       0.28
-1.00	0.1308	3.2607	39.5	617.7	    137.8       0.30
-1.30	0.0617	4.2066	43.0	550.9	    70.9        0.27
-2.00	0.0111	7.2268	51.5	490.8	    10.8        0.20
-2.22	0.0065	7.8768	53.0	484.7	    4.68        0.15
-'''
 v = np.round(np.arange(0.3, 0.9, 0.01), 3)
 timeout_h = 96
 
@@ -49,8 +37,8 @@ timeout_h = 96
 for vv in v:
     args = [
         '-v', vv,
-        '-n_pairs', 366,
-        '-gel_init_vol', 32**3,
+        '-n_pairs', 86,
+        '-gel_init_vol', 42**3,
         '-fixed_anions', 30*16+8,
         '-MPC', 30,
         '-bl', 1,

@@ -19,3 +19,14 @@ Anions_gel = solve(mass_law, x)[0]
 Anions_gel
 # %%
 print(Anions_gel)
+#%%
+c_s_0 = Symbol("c_s0", positive=True)  # init salt conc
+V_gel_0 = Symbol("V_gel0", positive=True)  # init salt conc
+v = Symbol("v", positive=True)  # compression
+c_gel_0 = Symbol("c_gel0", positive=True)
+c_gel = Symbol("c_salt", positive=True)
+c_s_reservoir = Symbol("c_salt^reservoir", positive=True)
+
+#%%
+Anions_gel.subs(N_pairs, c_s_0*V_gel_0)
+# %%
