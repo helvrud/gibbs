@@ -198,7 +198,8 @@ theorems-ams
 \begin_body
 
 \begin_layout Title
-Gibbs ensemble for polyelectrolyte hydrogel
+Water desalination using polyelectrolyte hydrogel.
+ Gibbs ensemble modelling
 \end_layout
 
 \begin_layout Author
@@ -301,7 +302,7 @@ Alsoaffiliation
 \end_layout
 
 \begin_layout Abbreviations
-MC, MD
+MC, MD, RO, FO
 \end_layout
 
 \begin_layout Keywords
@@ -395,53 +396,35 @@ name "sec: intro"
 Water desalination technologies.
 \end_layout
 
-\begin_layout Enumerate
-There are two basic approaches to separating water from salt.
- The first approach is to use thermal means to effect a phase change of
- the water (to vapor or solid), physically separate the new phase from the
- remaining salt solution, and then recover the thermal energy for reuse
- as the separated water reverts to liquid form.
+\begin_layout Standard
+Two basic approaches for separating water from salt are present in modern
+ desalination technology 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Miller2003,Curto2021"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The first approach — distillation, uses thermal means to effect a phase
+ change of the water to vapor (or solid), physically separate the vapor
+ phase from the remaining salt solution, and then recover the thermal energy
+ for reuse as the separated vapor reverts to liquid form.
  Distillation processes were the first desalination processes to be conducted
- on a large commercial scale and account for a large portion of the world’s
- desalination capacity.
- In addition to the thermal component, distillation processes often include
- vacuum components to increase evaporation at lower temperatures.
- 
+ on a large commercial scale and still account for a large portion of the
+ modern world’s desalination capacity.
 \end_layout
 
-\begin_layout Enumerate
-The second approach to desalination is to physically separate the components,
- generally with a membrane, as they move in response to an externally applied
- gradient.
- The two major processes of this type are reverse osmosis (RO), and electrodialy
-sis (ED).
- In RO, water passes through a membrane that is impermeable to the solute
- in response to a chemical potential gradient achieved through pressurization.
- In ED, ions in solution migrate through anion and cation selective membranes
- in response to an electric field.
- Both of these processes have been commercialized on a large scale.
- The flow through capacitor also uses an electric field to collect and separate
- dissolved ions from water.
-\end_layout
-
-\begin_layout Enumerate
-Distillation is easy cheap technology but it is characterized by relatively
- high energy costs, compared to RO.
- On the contrary, RO uses expensive osmotic membrains and requires a very
- huge pressures to apply, but in terms of energy losses it works close to
- the thermodynamical limit.
- That is, theoretically it may consume per one transferred from fresh water
- to salty water ion pair only the energy which equals to the difference
- of chemical potentials of that ions in fresh and salty water.
- The drawback of this method is that the osmotic pressure of ions in seawater
- may reach up to 100 bar, and this is the pressure which needs to be applied
- to osmotic membrane let the water to pass through it.
- This imposes certain requirements on the mechanical properties of the reverse
- osmosis setup.
-\end_layout
-
-\begin_layout Enumerate
-The new emerging membrane technology is forward osmosis (FO) 
+\begin_layout Standard
+The second approach is to physically separate the brine components, generally
+ with a membrane, as they move in response to an externally applied gradient.
+ In the context of our study, we will mention the reverse osmosis process
+ (RO) ~--- the major processes of all the desalination industry nowadays,
+ and the new emerging membrane technology --- forward osmosis (FO) 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Akther2015"
@@ -450,32 +433,55 @@ literal "false"
 \end_inset
 
 .
+ In RO, water passes through a membrane that is impermeable to the solute
+ in response to a chemical potential gradient achieved through pressurization.
  In FO, a concentrated draw solution with a lower water chemical potential
  and a more diluted feed solution with a higher water chemical potential
  are separated by a membrane that rejects the salt but allows the passage
  of water.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-rephrase
-\end_layout
-
-\end_inset
-
  The water permeation from feed solution to draw solution is a spontaneous
- process driven by the chemical potential gradient 
+ process driven by the chemical potential gradient.
+\end_layout
+
+\begin_layout Standard
+Distillation is easy cheap technology but it is characterized by relatively
+ high energy costs due to the dissipation of thermal energy.
+ On the contrary, RO uses expensive osmotic membranes and requires very
+ high operating pressures to let the water pass through the membrane.
+ But in terms of energy losses, it works close to the thermodynamic limit.
+ Thus, theoretically, per one transferred from freshwater to salty water
+ ion pair, it consumes only the energy of difference of those ions chemical
+ potentials.
+ The drawback of the RO method is that it requires expensive membranes and
+ the membranes need to be regularly replaced.
+ Also, the osmotic pressure of ions may range from 20 to 200 bar.
+ This imposes certain requirements on the mechanical properties of the RO
+ setup.
+\end_layout
+
+\begin_layout Standard
+The absence of large hydraulic pressure in FO process in comparison to RO
+ may help reduce the energy consumption in electrical pumping, and the lower
+ fouling propensity as well as higher fouling reversibility may prolong
+ the membrane's service life-time and reduce overall operational cost.
+ In FO, the draw solutes, also known as draw agents, dispersed and/or dissolved
+ in water to form homogeneous draw solutions, are of para- mount importance.
+ As an osmotically driven process, the draw solute should be able to signiﬁcantl
+y reduce the water chemical potential, and consequently generate a high
+ osmotic pressure in FO process.
+ On the other hand, the draw solute is also expected to be easily separated
+ from the diluted draw solution in the subsequent process to regenerate
+ the draw solute for reuse and to produce puriﬁed water 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-rephrase
+shorten and rephrase
 \end_layout
 
 \end_inset
 
-.
- The draw agent is a 
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Cai2016"
@@ -483,7 +489,7 @@ literal "false"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Paragraph
@@ -491,10 +497,32 @@ Hydrogels for desalination.
 \end_layout
 
 \begin_layout Enumerate
-Recently in desalination technology; hydrogels have been proposed as draw
- agents for FO.
- Hydrogels have the ability to absorb water across FO membrane as a result
- of their swelling pressure.
+An important, advantageous aspect of polymer hydrogels is that they can
+ undergo reversible volume change or solution — gel phase transitions in
+ response to environmental stimuli (this behavior causing them to be labeled
+ ‘intelligent’ or ‘smart’ hydrogels).
+ Many physical and chemical stimuli have been applied to induce various
+ responses of such smart hydrogel systems, in particular to change them
+ from hydrophilic to hydrophobic, thereby releasing water.
+ These stimuli include: temperature, electric fields, solvent composition,
+ light, pressure, sound and magnetic field, whilst the chemical or biochemical
+ stimuli include pH, ions and specific molecular recognition events.
+ [6–9] 
+\end_layout
+
+\begin_layout Enumerate
+Recently hydrogels have been proposed as draw agents for FO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Li2011"
+literal "false"
+
+\end_inset
+
+.
+ The point is that hydrogels have the ability to absorb water across FO
+ membrane as a result of their swelling pressure and osmotic pressure of
+ .
  Their insoluble cross-linked network enables dewatering under the influence
  of stimuli (thermal and/or mechanical) 
 \begin_inset Note Note
@@ -567,9 +595,9 @@ literal "false"
 \end_inset
 
  .
- Zhao concluded that it is unreason- able to use ‘‘forward osmosis’’ in
- hydrogel absorbing water because the chemical residues present in hydrogels
- are responsible for their water-absorption properties and not osmotic pressure.
+ Zhao concluded that it is unreasonable to use ‘‘forward osmosis’’ in hydrogel
+ absorbing water because the chemical residues present in hydrogels are
+ responsible for their water-absorption properties and not osmotic pressure.
  However, Wang et al.
  argued that hydrogels are essentially draw agents for FO because the network
  structure of a polymer hydrogel is an osmotic membrane from a thermodynamics
@@ -585,8 +613,7 @@ literal "false"
 \end_layout
 
 \begin_layout Enumerate
-Recently the new alternative to conventional desalination methods was proposed
- by prof.
+Recently this feature of hydrogels was employed by the group of prof.
  Manfred Wilhelm 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -596,15 +623,33 @@ literal "true"
 \end_inset
 
 .
- Their method 
+ They proposed to get rid of osmotic membrane and simply use a microfiltration
+ to compress the hydrogel and separate it from the solution.
+ In their method the deswollen hydrogel was equilibrated with saline water
+ feed.
+ while equilibrating the gel was sweelling absorbing water, then taken out
+ and mechanically compressed by means of microfiltration membrane.
+ The squeezed out water was obtained to have lower salinity than the feed
+ water.
+ 
 \end_layout
 
 \begin_layout Enumerate
-The key feature of the gel employed in this study was the ability of the
- gel gel to absorb a huge amount of water.
- At the same time if the gel is made of polyelectrolyte it is able to reject
- ions.
- 
+Later on Ali et all 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ali2015"
+literal "false"
+
+\end_inset
+
+ proposed to escape the mechanical compression by making the gel thermoresponsiv
+e.
+ They prepared the gel containing at the same time the ionic groups (acrylic
+ acid) and thermosensitive based on Nipam.
+ They have shown that under external heating stimulus (sunlight) the gel
+ experinces the collapse phase transition and shrinks releasing the collected
+ inside water.
 \end_layout
 
 \begin_layout Paragraph
@@ -620,6 +665,31 @@ g the gel charges, the density of mobile ions in the gel appear to be smaller
  Thus, providing that the gel counterions are kept in the gel squeezing
  the gel may release the solution of lower salinity then the gel was initially
  equilibrated with.
+\end_layout
+
+\begin_layout Enumerate
+Hydrogels are three-dimensional networks of polymer chains that are cross-
+ linked by either physical or chemical bonds.
+ They are able to entrap large volumes of water attracted by the high concentrat
+ion of hydrophilic groups.
+ In particular, hydrogels with ionic groups on the comonomer unit are able
+ to attract even greater amounts of water, this increased osmotic pressure
+ arising because the covalently-incorporated ionic groups are balanced by
+ mobile counter ions, and these counter ions provide a positive osmotic
+ pressure inside the hydrogel which drives greater water sorption.
+ When a dehydrated or deswollen hydrogel uptakes water, its polymer chains
+ extend, creating a swelling pressure.
+ For example, as reported in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wack_2009"
+literal "false"
+
+\end_inset
+
+ weakly crosslinked poly(acrylic acid)/poly(sodium acrylate) copolymers
+ with polymer volume fractions between 0.03 and 0.30 exhibit a swelling pressure
+ ranging from 0.20–4.23 MPa.
 \end_layout
 
 \begin_layout Enumerate
