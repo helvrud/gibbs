@@ -1,0 +1,1109 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass achemso
+\begin_preamble
+%\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\newcommand{\ie}{\textit{i.~e.} }
+\newcommand{\cref}{c^{\ominus}}
+%\newcommand{\cs}{c_{s}}
+\newcommand{\kT}{k_\mathrm{B}T}
+\newcommand{\kB}{k_\mathrm{B}}
+\newcommand{\lb}{l_\mathrm{B}}
+\newcommand{\NA}{N_{\mathrm{A^-}}}
+\newcommand{\muna}{\mu_\mathrm{Na^+}}
+
+\newcommand{\mucl}{\mu_\mathrm{Cl^-}}
+\newcommand{\muca}{\mu_\mathrm{Ca^{2+}}}
+\newcommand{\muh}{\mu_\mathrm{H^+}}
+\newcommand{\mua}{\mu_\mathrm{A^-}}
+\newcommand{\muha}{\mu_\mathrm{HA}}
+\newcommand{\muoh}{\mu_\mathrm{OH}}
+
+\newcommand{\cna}{c_\mathrm{Na^+}}
+\newcommand{\ccl}{c_\mathrm{Cl^-}}
+\newcommand{\cca}{c_\mathrm{Ca^{2+}}}
+\newcommand{\ch}{c_\mathrm{H^+}}
+\newcommand{\cp}{c_\mathrm{p}}
+\newcommand{\nna}{N_\mathrm{Na^+}}
+\newcommand{\ncl}{N_\mathrm{Cl^-}}
+\newcommand{\nca}{N_\mathrm{Ca^{2+}}}
+
+\newcommand{\superin}{^\mathrm{in}}
+\newcommand{\subin}{_\mathrm{in}}
+\newcommand{\subi}{_\mathrm{i}}
+
+\newcommand{\gel}{^\mathrm{gel}}
+\newcommand{\out}{^{out}}
+\newcommand{\coh}{c_\mathrm{OH}}
+\newcommand{\bulk}{^{\mathrm{b}}}
+\renewcommand{\H}{\mathrm{H^+}}
+\newcommand{\A}{\mathrm{A^-}}
+\newcommand{\AH}{\mathrm{AH}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% A simple dot to overcome graphicx limitations
+\newcommand{\lyxdot}{.}
+\newcommand{\todoi}[1]{\todo[inline]{#1}}
+
+
+\newcommand{\cl}{\mathrm{Cl^-}}
+\newcommand{\br}{\mathrm{Br^-}}
+\newcommand{\na}{\mathrm{Na^+}}
+\newcommand{\h}{\mathrm{H^+}}
+\newcommand{\ka}{\mathrm{K^+}}
+\newcommand{\oh}{\mathrm{OH^-}}
+\newcommand{\ca}{\mathrm{Ca^{2+}}}
+\newcommand{\mg}{\mathrm{Mg^{2+}}}
+\newcommand{\so}{\mathrm{SO_4^{2-}}}
+
+\newcommand{\EI}{E_{\mathrm{I}}}
+\newcommand{\EII}{E_{\mathrm{II}}}
+\newcommand{\SI}{S_{\mathrm{I}}}
+\newcommand{\SII}{S_{\mathrm{II}}}
+\newcommand{\NI}{N_{\mathrm{I}}}
+\newcommand{\NII}{N_{\mathrm{II}}}
+\newcommand{\VI}{V_{\mathrm{I}}}
+\newcommand{\VII}{V_{\mathrm{II}}}
+\newcommand{\FI}{F_{\mathrm{I}}}
+\newcommand{\FII}{F_{\mathrm{II}}}
+\newcommand{\nnaI}{N^{\na}_{\mathrm{I}}}
+\newcommand{\nclI}{N^{\cl}_{\mathrm{I}}}
+\newcommand{\nnaII}{N^{\na}_{\mathrm{II}}}
+\newcommand{\nclII}{N^{\cl}_{\mathrm{II}}}
+
+
+
+
+\newcommand{\Ka}{K_{\mathrm{A}}}
+\newcommand{\pKa}{\mathrm{p}\Ka}
+\newcommand{\pK}{\mathrm{p}K}
+\newcommand{\pH}{\mathrm{pH}}
+\newcommand{\mol}{\mathrm{mol}}
+\newcommand{\molperl}{\mathrm{mol/l}}
+\newcommand{\kg}{\mathrm{kg}}
+\newcommand{\res}{^{\mathrm{res}}}
+\newcommand{\pHres}{\pH\res}
+\newcommand{\pHgel}{\pH\gel}
+\newcommand{\cs}{c_{\mathrm{s}}}
+%\newcommand{\cs}{c_{\mathrm{salt}}}
+\newcommand{\csres}{\cs\res}
+\newcommand{\Vgel}{V\gel}
+\newcommand{\Vout}{V\out}
+\newcommand{\PE}{polyelectrolyte{}}
+
+\newcommand{\reffig}[1]{Figure~\ref{#1}}
+\newcommand{\refeq}[1]{Equation~\ref{#1}{}}
+\usepackage{afterpage}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+
+\newcommand{\mytitle}{Gibbs ensemble for \PE{} hydrogel}
+\newcommand{\etal}{\textit{et al.}{}}
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks false
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Gibbs ensemble for polyelectrolyte hydrogel
+\end_layout
+
+\begin_layout Author
+Michail Laktionov
+\end_layout
+
+\begin_layout Affiliation
+Department of Physical and Macromolecular Chemistry, Faculty of Science,
+ Charles University in Prague, Czech Republic
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+cuni
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Also Affiliation
+St.
+ Petersburg National Research University of Information Technologies, Mechanics
+ and Optics, St.
+ Petersburg, Russia.
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+itmo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Oleg V.
+ Rud
+\end_layout
+
+\begin_layout Affiliation
+Department of Physical and Macromolecular Chemistry, Faculty of Science,
+ Charles University in Prague, Czech Republic
+\end_layout
+
+\begin_layout Also Affiliation
+Institute of Macromolecular Compounds of Russian Academy of Sciences, Saint-Pete
+rsburg, Russia
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+imc
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Email
+oleg.rud@natur.cuni.cz
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The affiliation of authors is given after the authors; each 
+\family sans
+Affiliation
+\family default
+ applies to all preceding authors not already assigned an affiliation.
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+Altaffiliation
+\family default
+ should be used for new address, etc.
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+Alsoaffiliation
+\family default
+ is used on a per author basis when authors are associated with multiple
+ institutions.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abbreviations
+MC, MD
+\end_layout
+
+\begin_layout Keywords
+polyelectrolye hydrogel, simulation, desalination
+\end_layout
+
+\begin_layout Part*
+Supporting Information
+\end_layout
+
+\begin_layout Section
+Langevin dynamics
+\begin_inset CommandInset label
+LatexCommand label
+name "sec: MD"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We use three types of interactions, 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ the electrostatic interactions, short-range non-bonded interactions and
+ bonded interactions.
+ 
+\end_layout
+
+\begin_layout Standard
+The bonded interactions are used to model the bonds between the units of
+ the polymer network, we use Finite extension nonlinear elastic (FENE) potential
+ to describe this kind of interactions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+refeq
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+eq:fene
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+U_{\mathrm{FENE}}(r)=-\frac{1}{2}K\Delta r_{\mathrm{max}}^{2}\ln\left[1-\left(\frac{r-r_{0}}{\Delta r_{\mathrm{max}}}\right)^{2}\right],\label{eq:fene}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $K$
+\end_inset
+
+ is the magnitude of symmetric interaction between two segments, 
+\begin_inset Formula $\Delta r_{\mathrm{max}}$
+\end_inset
+
+ is the maximal stretching length of a bond and 
+\begin_inset Formula $r_{0}$
+\end_inset
+
+ is the equilibrium bond length.
+ In our simulations we set 
+\begin_inset Formula $K=10\kT/\sigma^{2}$
+\end_inset
+
+, 
+\begin_inset Formula $\Delta r_{\mathrm{max}}=2\sigma$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{0}=0$
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Jin2007"
+literal "true"
+
+\end_inset
+
+.
+ Note that, 
+\begin_inset Formula $r_{0}=0$
+\end_inset
+
+ does not mean that the average distance between units is zero, because
+ they also interact via short-range non-bonded potential, as well as all
+ the other particles.
+\end_layout
+
+\begin_layout Standard
+This potential we describe using truncated Lennard-Jones interaction potential.
+ This potential imposes strong repulsion between all particles at short
+ distances: 
+\begin_inset Formula 
+\begin{equation}
+\begin{split}\label{eq:LJ}V_{\mathrm{LJ}}(r)=\begin{cases}
+4\varepsilon\left(\left(\cfrac{\sigma}{r}\right)^{12}-\left(\cfrac{\sigma}{r}\right)^{6}\right) & \mathrm{if~}r<r_{\mathrm{cut}}\\
+0 & \mathrm{elsewhere}
+\end{cases},\end{split}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $r$
+\end_inset
+
+ is the interparticle distance, 
+\begin_inset Formula $\sigma=0.35\mathrm{nm}$
+\end_inset
+
+ is the characteristic size of the particles, 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ is the depth of the potential well in 
+\begin_inset Formula $\kT$
+\end_inset
+
+ units and 
+\begin_inset Formula $r_{\mathrm{cut}}$
+\end_inset
+
+ is the cut-off distance beyond which the potential is set zero.
+\end_layout
+
+\begin_layout Standard
+We model the long range electrostatic interactions by the Coulomb potential:
+ 
+\begin_inset Formula 
+\begin{equation}
+V_{\mathrm{EL}}=\lb\kT\cfrac{q_{1}q_{2}}{r},
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\lb$
+\end_inset
+
+ is Bjerrum length.
+ We set 
+\begin_inset Formula $\lb=2\sigma=0.7\mathrm{nm}$
+\end_inset
+
+ which corresponds to water at 
+\begin_inset Formula $T=300\mathrm{K}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We use Langevin thermostat, 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ we add two additional terms to force in equation of motion 
+\begin_inset Formula 
+\begin{equation}
+f_{i}=-\gamma v_{i}(t)+\sqrt{2\gamma\kT}\eta_{i}(t),
+\end{equation}
+
+\end_inset
+
+where the first term correspond to constant friction with 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ being a friction coefficient, and the second one corresponds to random
+ thermal force with 
+\begin_inset Formula $\eta_{i}$
+\end_inset
+
+ being a normally distributed random number (see for details 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Grest1986"
+literal "true"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Section
+Sampling in the Gibbs ensemble
+\begin_inset CommandInset label
+LatexCommand label
+name "sec: sampling the gibbs ensemble"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+All thermal moves are frozen during the sampling of the ion pairs exchange.
+ The system represents the ensemble with constant number of particles distribute
+d between two vessels (I) and (II).
+\end_layout
+
+\begin_layout Standard
+In the following paragraph we derive the criteria for sampling of the ion
+ exchange equilibrium.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Gibbs canonical ensemble
+\end_layout
+
+\begin_layout Standard
+In order to model the exchange of ions between the parts of the model we
+ follow the algorithm described in the work of Panagiotopoulos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+etal{}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Panagiotopoulos1988b"
+literal "false"
+
+\end_inset
+
+.
+ Following the reasonong from the cited study we consider the total free
+ energy of both vessels assuming that we have only particles of a single
+ type: 
+\begin_inset Formula 
+\begin{equation}
+F=\left(E_{I}-TS_{I}\right)+\left(E_{II}-TS_{II}\right)\label{eq:F-gibbs}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $E$
+\end_inset
+
+ is internal energy, 
+\begin_inset Formula $T$
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+— temperature, 
+\begin_inset Formula $S$
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+— entropy.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%Our model system represents a finite volume $V$ which exchanges particles
+ with the bath of infinite volume.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%The infinity of the volume means, that the particle exchange between the
+ system and the bath does not influence on the chemical potentials in the
+ bath.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%Such ensemble is called grand canonical ensemble; the free energy in this
+ ensemble, the Landau potential, is
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+The entropy 
+\begin_inset Formula $S$
+\end_inset
+
+ is given by the Boltzmann formula
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Nagle2004"
+literal "true"
+
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+S=\kB\ln\frac{V^{N}}{N!}\label{eq:entropy}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+todo{for partiles without interactions}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset Formula $N$
+\end_inset
+
+ is a number of particles in corresponding vessel.
+ This formula accounts for two contributions: 
+\end_layout
+
+\begin_layout Enumerate
+the combinatorial entropy 
+\begin_inset Formula $S_{c}=-\kB\ln N!$
+\end_inset
+
+ which reflects the freedom of choice among 
+\begin_inset Formula $N$
+\end_inset
+
+ particles 
+\end_layout
+
+\begin_layout Enumerate
+the mixing entropy 
+\begin_inset Formula $S_{m}=\kB N\ln V$
+\end_inset
+
+ which reflects the freedom to place the chosen particle randomly within
+ the simulation box.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $V$
+\end_inset
+
+ is the unitless volume, 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ the volume measured in units of 
+\begin_inset Formula $\sigma^{3}$
+\end_inset
+
+.
+ Thus 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+refeq
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+eq:F-gibbs
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ turns to 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+todo{this is not reason, moreover A.10 is already wrong as for units}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+F=\EI-\kT\ln\frac{\VI^{\NI}}{\NI!}\ +\ \EII-\kT\ln\frac{\VII^{\NII}}{{\NII}!}\label{eq: F_gibbs}
+\end{equation}
+
+\end_inset
+
+When a single particle transferred from the vessel (I) to the vessel (II)
+ the free energy in vessel (I) changes 
+\begin_inset Formula 
+\begin{equation}
+\Delta\FI=\Delta\EI+\kT\ln\frac{\VI^{\NI}}{\NI!}-\kT\ln\frac{\VI^{\NI-1}}{(\NI-1)!}=\Delta\EI+\kT\ln\frac{\VI}{\NI}
+\end{equation}
+
+\end_inset
+
+whereas the free energy change in (II) vessel is 
+\begin_inset Formula 
+\begin{equation}
+\Delta\FII=\Delta\EII+\kT\ln\frac{\VII^{\NII}}{\NII!}-\kT\ln\frac{\VII^{\NII+1}}{(\NII+1)!}=\Delta\EII+\kT\ln\frac{\NII+1}{\VII}
+\end{equation}
+
+\end_inset
+
+Thus the total change of free energy will be 
+\begin_inset Formula 
+\begin{equation}
+\Delta F=\Delta\EI+\Delta\EII+\kT\ln\frac{\VI}{\VII}\frac{\NII+1}{\NI}
+\end{equation}
+
+\end_inset
+
+Introducing 
+\begin_inset Formula $\xi=\pm1$
+\end_inset
+
+, which reflects the direction of movement of particle, 
+\begin_inset Formula $\xi$
+\end_inset
+
+= +1 if the particles moves from vessel (I) to vessel (II), and 
+\begin_inset Formula $\xi=-1$
+\end_inset
+
+ if the particles moves backwards, then the previous formula transfers to
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\Delta F=\Delta E_{tot}+\kT\xi\ln\frac{\VI}{\VII}\frac{\NII+\theta(\xi)}{\NI+\theta(-\xi)}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\theta(x)$
+\end_inset
+
+ is the Heaviside function.
+\end_layout
+
+\begin_layout Standard
+In order to keep electroneutrality of the system we transfer particles by
+ electroneutral pairs.
+ Accounting for two types of particles which are moved all the time together
+ the previous formula translates to the following 
+\begin_inset Formula 
+\begin{equation}
+\Delta F=\Delta E_{tot}+\kT\xi\left(\ln\frac{\VI}{\VII}\frac{\nnaII+\theta(\xi)}{\nnaI+\theta(-\xi)}+\ln\frac{\VI}{\VII}\frac{\nclII+\theta(\xi)}{\nclI+\theta(-\xi)}\right)
+\end{equation}
+
+\end_inset
+
+or 
+\begin_inset Formula 
+\begin{equation}
+\Delta F=\Delta E_{tot}+\kT\xi\ln\left(\left(\frac{\VI}{\VII}\right)^{2}\prod_{i}\frac{\NII^{i}+\theta(\xi)}{\NI^{i}+\theta(-\xi)}\right)
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $i$
+\end_inset
+
+ runs over the ion types 
+\begin_inset Formula $i\in\{\na,\ \cl\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In order to simulate an ensemble composed of two vessels exchanging particles
+ with each other we need to perform the following Monte Carlo procedure
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Panagiotopoulos1988,SilvaFernandes2015,Frenkel2002"
+literal "true"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+we propose the new configuration of the system by removing ion pair from
+ one vessel and inserting it to another 
+\end_layout
+
+\begin_layout Enumerate
+we accept the new configuration if 
+\begin_inset Formula 
+\begin{equation}
+\mathcal{R}^{\xi}<e^{\Delta F/\kT}\label{eq: GC acceptance}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathcal{R}$
+\end_inset
+
+ is uniformly distributed random number in range between 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Sampling routine
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename figures/sample_to_target_scheme.png
+	lyxscale 50
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Code organization
+\end_layout
+
+\begin_layout Subsection*
+Calculation order and parallelism
+\end_layout
+
+\begin_layout Standard
+Molecular dynamic integration of the gel and of the salt reservoir are independe
+nt of each other, thus can be parallelized to significantly reduce computational
+ time using multiple CPU's.
+ Moreover, for the sequential calculation we need to make snapshots of the
+ systems each time we are done with Monte Carlo steps, the latter not only
+ increases disk memory usage but also loads the disk system as the data
+ data has to be rewritten constantly.
+\end_layout
+
+\begin_layout Standard
+Take a look at the scheme on figure 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/program_scheme.pdf
+	lyxscale 50
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Program flow chart
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Suppose we need two processes working separately that are able to execute
+ requests and send the results back to the main program running on server.
+ In our case we will run two processes that integrate molecular dynamic
+ equations in parallel between Monte Carlo steps.
+ When molecular dynamic is running we can sample systems energy, pressure,
+ end-to-end distances.
+ Another goal of molecular dynamics integration is to reach new uncorrelated
+ state of the system.
+ We can not equillibrate ion pairs distribution without exchange of pairs
+ between two systems, which is achieved by Monte Carlo routine, where the
+ step is moving random ion pair from one system to the other.
+\end_layout
+
+\begin_layout Standard
+Summarizing, parallelization achieved on MD steps when presssure and potential
+ enegy are sampled and as a part of equilibration process.
+ On the other hand MC steps are synchronous and use only one thread.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename figures/mcmd_responsible.png
+	lyxscale 50
+	width 70text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+System creation
+\end_layout
+
+\begin_layout Standard
+To create MC-MD hybrid system we folow the next steps:
+\end_layout
+
+\begin_layout Enumerate
+Instantiate g
+\end_layout
+
+\begin_layout Subsubsection*
+Interprocess communications via TCP sockets
+\end_layout
+
+\begin_layout Standard
+Sockets allow sending and receiving data with TCP/IP protocol and can be
+ utilized as relatively fast interprocess communication (ICP) if used within
+ local machine (loopback network interface).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename figures/server_node_connection.png
+	lyxscale 50
+	width 70text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "gibbs"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
