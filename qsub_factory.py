@@ -30,7 +30,7 @@ def generate(prefix, pypresso_docker, script_name, args, N=None, mem=500, ncpus=
         f.write(singularity_exec(prefix, pypresso_docker, script_name, args))
 
 import numpy as np
-v = np.round(np.arange(0.3, 0.9, 0.01), 3)
+v = np.round(np.arange(0.3, 0.9, 0.01), 3) # ratio of the gel volume to the total volume
 timeout_h = 96
 
 
@@ -47,7 +47,7 @@ for vv in v:
         '-debug_server'
         ]
     generate(
-        prefix = "/storage/brno2/home/laktionm",
+        prefix = "/storage/brno2/home/kvint",
         pypresso_docker="pypresso",
         script_name="gibbs/mcmd_polyelctrolyte/diamond_n_pairs.py",
         args = args,
