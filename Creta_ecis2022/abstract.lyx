@@ -1,0 +1,307 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass achemso
+\begin_preamble
+%\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\newcommand{\ie}{\textit{i.~e.} }
+\newcommand{\cref}{c^{\ominus}}
+%\newcommand{\cs}{c_{s}}
+\newcommand{\kT}{k_\mathrm{B}T}
+\newcommand{\kB}{k_\mathrm{B}}
+\newcommand{\lb}{l_\mathrm{B}}
+\newcommand{\NA}{N_{\mathrm{A^-}}}
+\newcommand{\muna}{\mu_\mathrm{Na^+}}
+
+\newcommand{\mucl}{\mu_\mathrm{Cl^-}}
+\newcommand{\muca}{\mu_\mathrm{Ca^{2+}}}
+\newcommand{\muh}{\mu_\mathrm{H^+}}
+\newcommand{\mua}{\mu_\mathrm{A^-}}
+\newcommand{\muha}{\mu_\mathrm{HA}}
+\newcommand{\muoh}{\mu_\mathrm{OH}}
+
+\newcommand{\cna}{c_\mathrm{Na^+}}
+\newcommand{\ccl}{c_\mathrm{Cl^-}}
+\newcommand{\cca}{c_\mathrm{Ca^{2+}}}
+\newcommand{\ch}{c_\mathrm{H^+}}
+\newcommand{\cp}{c_\mathrm{p}}
+\newcommand{\nna}{N_\mathrm{Na^+}}
+\newcommand{\ncl}{N_\mathrm{Cl^-}}
+\newcommand{\nca}{N_\mathrm{Ca^{2+}}}
+
+\newcommand{\superin}{^\mathrm{in}}
+\newcommand{\subin}{_\mathrm{in}}
+\newcommand{\subi}{_\mathrm{i}}
+
+\newcommand{\gel}{_\mathrm{gel}}
+\newcommand{\tot}{_\mathrm{tot}}
+\newcommand{\out}{_{out}}
+\newcommand{\coh}{c_\mathrm{OH}}
+\newcommand{\bulk}{^{\mathrm{b}}}
+\renewcommand{\H}{\mathrm{H^+}}
+\newcommand{\A}{\mathrm{A^-}}
+\newcommand{\AH}{\mathrm{AH}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% A simple dot to overcome graphicx limitations
+\newcommand{\lyxdot}{.}
+\newcommand{\todoi}[1]{\todo[inline]{#1}}
+
+
+\newcommand{\cl}{\mathrm{Cl^-}}
+\newcommand{\br}{\mathrm{Br^-}}
+\newcommand{\na}{\mathrm{Na^+}}
+\newcommand{\h}{\mathrm{H^+}}
+\newcommand{\ka}{\mathrm{K^+}}
+\newcommand{\oh}{\mathrm{OH^-}}
+\newcommand{\ca}{\mathrm{Ca^{2+}}}
+\newcommand{\mg}{\mathrm{Mg^{2+}}}
+\newcommand{\so}{\mathrm{SO_4^{2-}}}
+
+\newcommand{\EI}{E_{\mathrm{I}}}
+\newcommand{\EII}{E_{\mathrm{II}}}
+\newcommand{\SI}{S_{\mathrm{I}}}
+\newcommand{\SII}{S_{\mathrm{II}}}
+\newcommand{\NI}{N_{\mathrm{I}}}
+\newcommand{\NII}{N_{\mathrm{II}}}
+\newcommand{\VI}{V_{\mathrm{I}}}
+\newcommand{\VII}{V_{\mathrm{II}}}
+\newcommand{\FI}{F_{\mathrm{I}}}
+\newcommand{\FII}{F_{\mathrm{II}}}
+\newcommand{\nnaI}{N^{\na}_{\mathrm{I}}}
+\newcommand{\nclI}{N^{\cl}_{\mathrm{I}}}
+\newcommand{\nnaII}{N^{\na}_{\mathrm{II}}}
+\newcommand{\nclII}{N^{\cl}_{\mathrm{II}}}
+
+
+
+
+\newcommand{\Ka}{K_{\mathrm{A}}}
+\newcommand{\pKa}{\mathrm{p}\Ka}
+\newcommand{\pK}{\mathrm{p}K}
+\newcommand{\pH}{\mathrm{pH}}
+\newcommand{\mol}{\mathrm{mol}}
+\newcommand{\molperl}{\mathrm{mol/l}}
+\newcommand{\kg}{\mathrm{kg}}
+\newcommand{\res}{^{\mathrm{res}}}
+\newcommand{\pHres}{\pH\res}
+\newcommand{\pHgel}{\pH\gel}
+\newcommand{\cs}{c_{\mathrm{s}}}
+%\newcommand{\cs}{c_{\mathrm{salt}}}
+\newcommand{\csres}{\cs\res}
+\newcommand{\Vgel}{V\gel}
+\newcommand{\Pgel}{P\gel}
+\newcommand{\Pres}{P\res}
+\newcommand{\Vout}{V\out}
+\newcommand{\Vbox}{V\tot}
+\newcommand{\PE}{polyelectrolyte{}}
+
+\newcommand{\reffig}[1]{Figure~\ref{#1}}
+\newcommand{\refeq}[1]{Equation~\ref{#1}{}}
+\usepackage{afterpage}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+
+\newcommand{\mytitle}{Gibbs ensemble for \PE{} hydrogel}
+\newcommand{\etal}{\textit{et al.}{}}
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks false
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5cm
+\topmargin 1cm
+\rightmargin 1.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Water desalination using polyelectrolyte hydrogel.
+ Gibbs ensemble modelling.
+\end_layout
+
+\begin_layout Author
+Michail Laktionov
+\end_layout
+
+\begin_layout Affiliation
+Department of Physical and Macromolecular Chemistry, Faculty of Science,
+ Charles University in Prague, Czech Republic
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+cuni
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Also Affiliation
+St.
+ Petersburg National Research University of Information Technologies, Mechanics
+ and Optics, St.
+ Petersburg, Russia.
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+itmo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Oleg V.
+ Rud
+\end_layout
+
+\begin_layout Affiliation
+Department of Physical and Macromolecular Chemistry, Faculty of Science,
+ Charles University in Prague, Czech Republic
+\end_layout
+
+\begin_layout Also Affiliation
+Institute of Macromolecular Compounds of Russian Academy of Sciences, Saint-Pete
+rsburg, Russia
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+imc
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Email
+helvrud@gmail.com
+\end_layout
+
+\begin_layout Abbreviations
+MC, MD
+\end_layout
+
+\begin_layout Keywords
+desalination, hydrogel, polyelectrolye, simulation 
+\end_layout
+
+\begin_layout Abstract
+Recently polyelectrolyte hydrogels have been proposed as draw agents for
+ reverse osmosis desalination techniques.
+ Indeed, polyelectrolyte hydrogels have the ability to absorb a big amount
+ of water across forward osmosis membrane as a result of their swelling
+ pressure.
+ The insoluble cross-linked network of the gel enables dewatering under
+ the influence of stimuli (thermal and/or mechanical).
+ On the other hand, the network structure of a polymer hydrogel from a thermodyn
+amic perspective is already an osmotic membrane.
+ So hydrogel microparticles may allow to completely avoid the osmotic membranes
+ in forward osmosis and use microfiltration instead.
+ By this article, we present our recent theoretical study of the use of
+ polyelectrolyte hydrogel for water desalination.
+ We modeled the thermodynamic equilibrium of coexistence of the gel and
+ the aqueous salt solution in the so-called closed ensemble, in which the
+ total amount of ions is assumed to be constant.
+ We modeled the compression of the gel and the associated with that release
+ of the solution.
+ We have shown that the squeezed out solution has a little lower salinity
+ than that the gel was equilibrated with.
+ Also, we performed a set of simulations modeling the process of continuous
+ decrease of water salinity up to freshwater concentrations.
+\end_layout
+
+\end_body
+\end_document

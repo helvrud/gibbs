@@ -410,10 +410,14 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-The first approach — distillation, uses thermal means to effect a phase
- change of the water to vapor (or solid), physically separate the vapor
- phase from the remaining salt solution, and then recover the thermal energy
- for reuse as the separated vapor reverts to liquid form.
+The first approach
+\begin_inset space ~
+\end_inset
+
+— distillation, uses thermal means to effect a phase change of the water
+ to vapor (or solid), physically separate the vapor phase from the remaining
+ salt solution, and then recover the thermal energy for reuse as the separated
+ vapor reverts to liquid form.
  Distillation processes were the first desalination processes to be conducted
  on a large commercial scale and still account for a large portion of the
  modern world’s desalination capacity.
@@ -498,9 +502,21 @@ Hydrogels for desalination.
 
 \begin_layout Enumerate
 An important, advantageous aspect of polymer hydrogels is that they can
- undergo reversible volume change or solution — gel phase transitions in
- response to environmental stimuli (this behavior causing them to be labeled
- ‘intelligent’ or ‘smart’ hydrogels).
+ undergo reversible volume change, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+solution — gel phase transitions in response to environmental stimuli (this
+ behavior causing them to be labeled ‘intelligent’ or ‘smart’ hydrogels).
  Many physical and chemical stimuli have been applied to induce various
  responses of such smart hydrogel systems, in particular to change them
  from hydrophilic to hydrophobic, thereby releasing water.
