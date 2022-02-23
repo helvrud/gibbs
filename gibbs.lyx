@@ -463,18 +463,27 @@ Distillation is easy cheap technology but it is characterized by relatively
 
 \begin_layout Standard
 The absence of large hydraulic pressure in FO process in comparison to RO
- allows to reduce the energy consumption in pumping, and to lower fouling
- propensity as well as to higher fouling reversibility of the membrane.
+ allows to reduce the energy consumption in pumping, reduce membrane scaling
+ and fouling, therefore significantly increase the lifetime of the membranes.
  In FO, the draw solutes (agents) dispersed and/or dissolved in water form
  homogeneous draw solutions.
- The correct choice of the draw agents is a task of paramount importance
- for the operation of the FO.
+ The correct choice of the draw agents is a task of paramount importance.
  As an osmotically driven process, the draw solute should be able to signiﬁcantl
 y reduce the water chemical potential, and consequently generate a high
  osmotic pressure.
  On the other hand, the draw solute is also expected to be easily separated
  from the diluted draw solution in the subsequent process to regenerate
- the draw solute for reuse and to produce puriﬁed water 
+ the draw solute for reuse and to produce puriﬁed water
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+shorten
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Cai2016"
@@ -489,7 +498,7 @@ literal "false"
 Hydrogels for desalination.
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
 An important, advantageous aspect of polymer hydrogels is that they can
  undergo reversible volume change, 
 \begin_inset ERT
@@ -504,37 +513,36 @@ ie
 
 \end_inset
 
- solution — gel phase transitions in response to environmental stimuli (this
- behavior causing them to be labeled ‘intelligent’ or ‘smart’ hydrogels).
+ solution — gel phase transitions in response to environmental stimuli.
+ This aspect causes hydrogels to be labeled ‘intelligent’ or ‘smart’ hydrogels.
  Many physical and chemical stimuli have been applied to induce various
  responses of such smart hydrogel systems, in particular to change them
  from hydrophilic to hydrophobic, thereby releasing water.
  These stimuli include: temperature, electric fields, solvent composition,
  light, pressure, sound and magnetic field, whilst the chemical or biochemical
  stimuli include pH, ions and specific molecular recognition events.
- [6–9] 
-\end_layout
-
-\begin_layout Enumerate
-Recently hydrogels have been proposed as draw agents for FO 
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Li2011"
+key "Tanaka_1982,Serizawa_2001,Lietor_Santos_2009,Qiu_2001"
 literal "false"
 
 \end_inset
 
 .
- The point is that hydrogels have the ability to absorb water across FO
- membrane as a result of their swelling pressure and osmotic pressure of
- .
- Their insoluble cross-linked network enables dewatering under the influence
- of stimuli (thermal and/or mechanical) 
-\begin_inset Note Note
+\end_layout
+
+\begin_layout Enumerate
+The smart properties of hydrogels were utilized for desalination in a recent
+ study by Li 
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-rephrase
+
+
+\backslash
+etal
 \end_layout
 
 \end_inset
@@ -542,12 +550,16 @@ rephrase
  
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Razmjou2013,Zhang2020"
+key "Li2011"
 literal "false"
 
 \end_inset
 
-.
+, where hydrogels have been considered as draw agents for FO.
+ The main point of the cited article is that hydrogels, due to their swelling
+ and osmotic pressure, have the ability to absorb water across FO membrane.
+ And the insoluble cross-linked network of the gel enables dewatering under
+ the influence of stimuli (thermal and/or mechanical).
  For example, Zhang 
 \begin_inset Formula $\etal$
 \end_inset
@@ -564,29 +576,7 @@ literal "false"
 r of PNIPAM and polyacrylic acid).
  As polyelectrolyte these particles have good affinity to water and as being
  sensitive to heating they allow dewaterring.
- Razmjou 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-etal
-\end_layout
-
-\end_inset
-
  
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Razmjou2013"
-literal "false"
-
-\end_inset
-
- proposed to combine such gel with magnetic nanoparticles, which allowed
- for direct magnetic field-induced heating.
 \end_layout
 
 \begin_layout Enumerate
