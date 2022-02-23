@@ -137,7 +137,7 @@ theorems-ams
 \graphics default
 \default_output_format default
 \output_sync 0
-\bibtex_command default
+\bibtex_command bibtex
 \index_command default
 \paperfontsize default
 \spacing single
@@ -165,7 +165,7 @@ theorems-ams
 \use_package undertilde 0
 \cite_engine basic
 \cite_engine_type default
-\biblio_style plain
+\biblio_style achemso
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -519,9 +519,8 @@ ie
  responses of such smart hydrogel systems, in particular to change them
  from hydrophilic to hydrophobic, thereby releasing water.
  These stimuli include: temperature, electric fields, solvent composition,
- light, pressure, sound and magnetic field, whilst the chemical or biochemical
- stimuli include pH, ions and specific molecular recognition events.
- 
+ light, pressure, sound, and magnetic field, whilst the chemical or biochemical
+ stimuli include pH, ions, and specific molecular recognition events 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Tanaka_1982,Serizawa_2001,Lietor_Santos_2009,Qiu_2001"
@@ -532,7 +531,7 @@ literal "false"
 .
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
 The smart properties of hydrogels were utilized for desalination in a recent
  study by Li 
 \begin_inset ERT
@@ -557,80 +556,69 @@ literal "false"
 
 , where hydrogels have been considered as draw agents for FO.
  The main point of the cited article is that hydrogels, due to their swelling
- and osmotic pressure, have the ability to absorb water across FO membrane.
- And the insoluble cross-linked network of the gel enables dewatering under
+ and osmotic pressure, have the ability to absorb water across the FO membrane.
+ The insoluble cross-linked network of the gel enables dewatering under
  the influence of stimuli (thermal and/or mechanical).
- For example, Zhang 
-\begin_inset Formula $\etal$
-\end_inset
+ For instance, Li 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
 
 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Zhang2020"
-literal "false"
-
-\end_inset
-
- proposed the use of hydrogel made of thermoresponsive polyelectrolyte (copolyme
-r of PNIPAM and polyacrylic acid).
- As polyelectrolyte these particles have good affinity to water and as being
- sensitive to heating they allow dewaterring.
- 
+\backslash
+etal
 \end_layout
 
-\begin_layout Enumerate
-Meanwhile, Zhao has reported that the swelling pressure is not the same
- as the osmotic pressure of a traditional solution 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Zhao2014"
-literal "false"
-
 \end_inset
 
- .
- Zhao concluded that it is unreasonable to use ‘‘forward osmosis’’ in hydrogel
- absorbing water because the chemical residues present in hydrogels are
- responsible for their water-absorption properties and not osmotic pressure.
- However, Wang et al.
- argued that hydrogels are essentially draw agents for FO because the network
- structure of a polymer hydrogel is an osmotic membrane from a thermodynamics
- perspective 
+ proposed the use of hydrogel made of thermoresponsive polyelectrolyte
+\begin_inset space ~
+\end_inset
+
+— copolymer of poly-N-isopropylacrylamide (p-NIPAAm) and polyacrylic acid
+ (p-AA).
+ Depending on the temperature the network of the gel may appear to be either
+ hydrophilic or hydrophobic.
+ In the hydrophilic state, the gel is used as a draw agent accumulating
+ water inside, then in the hydrophobic state, the water releases out.
+\end_layout
+
+\begin_layout Standard
+In one of the subsequent works of the group of prof.
+ Li 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Wang2014"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-Recently this feature of hydrogels was employed by the group of prof.
- Manfred Wilhelm 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Arens2019"
 literal "true"
 
 \end_inset
 
-.
- They proposed to get rid of osmotic membrane and simply use a microfiltration
- to compress the hydrogel and separate it from the solution.
- In their method the deswollen hydrogel was equilibrated with saline water
- feed.
- while equilibrating the gel was sweelling absorbing water, then taken out
- and mechanically compressed by means of microfiltration membrane.
- The squeezed out water was obtained to have lower salinity than the feed
+ the network structure of a polymer hydrogel was considered as an osmotic
+ membrane from a thermodynamics perspective.
+ Such a view on hydrogels was employed in a series of works by the group
+ of prof.
+ Wilhelm (see for example 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Arens_2017"
+literal "true"
+
+\end_inset
+
+).The authors proposed to get rid of the osmotic membrane and simply use
+ micro filtration to compress the hydrogel and separate it from the solution.
+ In their method first, the de-swollen hydrogel was equilibrated with saline
+ water feed.
+ During equilibration, the gel was swelling absorbing water.
+ Then it was taken out from the feed solution and mechanically compressed
+ by means of a microfiltration membrane.
+ The squeezed out brine was obtained to have lower salinity than the feed
  water.
- 
 \end_layout
 
-\begin_layout Enumerate
-Later on Ali et all 
+\begin_layout Standard
+A similar approach was used by Ali et all 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ali2015"
@@ -638,13 +626,13 @@ literal "false"
 
 \end_inset
 
- proposed to escape the mechanical compression by making the gel thermoresponsiv
-e.
- They prepared the gel containing at the same time the ionic groups (acrylic
- acid) and thermosensitive based on Nipam.
- They have shown that under external heating stimulus (sunlight) the gel
- experinces the collapse phase transition and shrinks releasing the collected
- inside water.
+.
+ In their study the thermosensitive gels were used (based on copolymers
+ p-NIPAAm and p-AA), so instead of physical compression, the dewatering
+ was done by an external heating stimulus (sunlight).
+ At night the gel was equilibrating with feed water and at daytime, under
+ sunlight, the gel was shrinking and releasing the collected inside water.
+ 
 \end_layout
 
 \begin_layout Paragraph
