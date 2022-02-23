@@ -48,8 +48,8 @@ FROM build0 as build_espresso
 
 COPY espresso/ /home/ml/espresso/
 RUN cd espresso
-RUN mkdir -p espresso/es-build
-WORKDIR /home/ml/espresso/espresso/es-build
+RUN mkdir -p build
+WORKDIR /home/ml/espresso/es-build
 RUN cmake ..
 RUN make -j 4
 RUN make install

@@ -366,14 +366,14 @@ fig.update_layout(
         title = "V_gel [l/mol]", 
         showspikes = True,
         range = [0.6, 10],
-        grid = False,
+        #grid = False,
         ),
     yaxis = dict(
         #type = "log",
         title = "pressure [bar]", 
         showspikes = True,
         range = [0,5],
-        grid = False,
+        #grid = False,
         ),
     legend = dict(title = "c<sub>s</sub><sup>GC</sup>")
 )
