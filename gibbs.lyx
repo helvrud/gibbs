@@ -499,6 +499,31 @@ Hydrogels for desalination.
 \end_layout
 
 \begin_layout Standard
+Hydrogels are three-dimensional networks of polymer chains that are crosslinked
+ by either physical or chemical bonds.
+ They are able to entrap large volumes of water attracted by the high concentrat
+ion of hydrophilic groups.
+ Hydrogels with ionic groups on the comonomer unit are able to attract even
+ greater amounts of water, this increased osmotic pressure arising because
+ the covalently-incorporated ionic groups are balanced by mobile counter
+ ions, and these counter ions provide positive osmotic pressure inside the
+ hydrogel which drives greater water sorption.
+ When a dehydrated or deswollen hydrogel uptakes water, its polymer chains
+ extend, creating a swelling pressure.
+ For example, as reported in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wack_2009"
+literal "false"
+
+\end_inset
+
+ weakly crosslinked poly(acrylic acid)/poly(sodium acrylate) copolymers
+ with polymer volume fractions between 0.03 and 0.30 exhibit a swelling pressure
+ ranging from 0.20–4.23 MPa.
+\end_layout
+
+\begin_layout Standard
 An important, advantageous aspect of polymer hydrogels is that they can
  undergo reversible volume change, 
 \begin_inset ERT
@@ -516,7 +541,7 @@ ie
  solution — gel phase transitions in response to environmental stimuli.
  This aspect causes hydrogels to be labeled ‘intelligent’ or ‘smart’ hydrogels.
  Many physical and chemical stimuli have been applied to induce various
- responses of such smart hydrogel systems, in particular to change them
+ responses of such smart hydrogel systems, in particular, to change them
  from hydrophilic to hydrophobic, thereby releasing water.
  These stimuli include: temperature, electric fields, solvent composition,
  light, pressure, sound, and magnetic field, whilst the chemical or biochemical
@@ -576,7 +601,7 @@ etal
 \begin_inset space ~
 \end_inset
 
-— copolymer of poly-N-isopropylacrylamide (p-NIPAAm) and polyacrylic acid
+— copolymer of poly-N-isopropyl acrylamide (p-NIPAAm) and polyacrylic acid
  (p-AA).
  Depending on the temperature the network of the gel may appear to be either
  hydrophilic or hydrophobic.
@@ -594,8 +619,8 @@ literal "true"
 
 \end_inset
 
- the network structure of a polymer hydrogel was considered as an osmotic
- membrane from a thermodynamics perspective.
+ the network structure of a polyelectrolyte polymer hydrogel was considered
+ as an osmotic membrane from a thermodynamics perspective.
  Such a view on hydrogels was employed in a series of works by the group
  of prof.
  Wilhelm (see for example 
@@ -639,40 +664,59 @@ literal "false"
 Physics behind the desalination process.
 \end_layout
 
-\begin_layout Enumerate
-Roughly speaking the maximum entropy principle requires the density of charges
- to be moreless the same throughout the system medium.
- Therefore since the gel has its own charges and its own counterions neutralizin
-g the gel charges, the density of mobile ions in the gel appear to be smaller
- than the density of ions outside the gel.
- Thus, providing that the gel counterions are kept in the gel squeezing
- the gel may release the solution of lower salinity then the gel was initially
- equilibrated with.
-\end_layout
-
-\begin_layout Enumerate
-Hydrogels are three-dimensional networks of polymer chains that are cross-
- linked by either physical or chemical bonds.
- They are able to entrap large volumes of water attracted by the high concentrat
-ion of hydrophilic groups.
- In particular, hydrogels with ionic groups on the comonomer unit are able
- to attract even greater amounts of water, this increased osmotic pressure
- arising because the covalently-incorporated ionic groups are balanced by
- mobile counter ions, and these counter ions provide a positive osmotic
- pressure inside the hydrogel which drives greater water sorption.
- When a dehydrated or deswollen hydrogel uptakes water, its polymer chains
- extend, creating a swelling pressure.
- For example, as reported in 
+\begin_layout Standard
+The maximum entropy principle requires the density of charges to be more-less
+ the same throughout the system medium.
+ Since the polyelectrolyte gel has its own charges and its own neutralizing
+ counterions, the density of mobile ions (which are able to freely enter
+ and leave the gel) in gel appears to be smaller than their density outside
+ the gel.
+ Therefore the gel contains inside the solution of lower salinity than outside.
+ In that sense, the gel acts as an osmotic membrane separating solutions
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Wack_2009"
-literal "false"
+key "Rud2020"
+literal "true"
 
 \end_inset
 
- weakly crosslinked poly(acrylic acid)/poly(sodium acrylate) copolymers
- with polymer volume fractions between 0.03 and 0.30 exhibit a swelling pressure
- ranging from 0.20–4.23 MPa.
+.
+ The internal solution can be extracted by means of compression and/or other
+ stimulus providing that the charge of the gel remains constant.
+ 
+\end_layout
+
+\begin_layout Standard
+In the case of gel made of weak (pH-sensitive) polyelectrolyte, the compression
+ initiates discharging of the gel, therefore the neutralizing counterions
+ may leave out the gel diminishing the desalination effect and affecting
+ the pH of the extracted solution.
+ Nevertheless, the release of counterions may be employed for desalination
+ as well and the way how to do it is discussed in
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rud2018"
+literal "true"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+However, the salinity of the water squeezed from hydrogel under a very high
+ hydraulic pressure revealed that sole Donnan effect is insufﬁcient to achieve
+ a high salt rejection and the water recovery is also low.
+\end_layout
+
+\begin_layout Standard
+In the current study we would like to concentrate on the use of gel made
+ of strong polyelectrolyte for water desalination.
+ Namely, to investigate how the compression of the gel affects the salinity
+ of the surrounding the gel solution.
+ 
 \end_layout
 
 \begin_layout Enumerate
