@@ -37,14 +37,14 @@ timeout_h = 96
 for vv in v:
     args = [
         '-v', vv,
-        '-n_pairs', 86,
-        '-gel_init_vol', 42**3,
+        '-n_pairs', 86, 
+        '-gel_init_vol', 42**3, # espresso units, sigma
         '-fixed_anions', 30*16+8,
         '-MPC', 30,
-        '-bl', 1,
+        '-bl', 1, # bond_length
         '-timeout_h', timeout_h,
-        '-electrostatic',
-        '-debug_server'
+        '-electrostatic', # True, False
+        '-debug_server' # Will log info from server
         ]
     generate(
         prefix = "/storage/brno2/home/kvint",
