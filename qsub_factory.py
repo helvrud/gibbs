@@ -41,7 +41,7 @@ for vv in v:
         '-gel_init_vol', 42**3,
         '-fixed_anions', 30*16+8,
         '-MPC', 30,
-        '-bl', 1,
+        '-bl', 1, # bond length
         '-timeout_h', timeout_h,
         '-electrostatic',
         '-debug_server'

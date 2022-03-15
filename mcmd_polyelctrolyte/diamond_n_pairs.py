@@ -20,7 +20,7 @@ parser.add_argument('-gel_init_vol', metavar = 'gel_init_vol', type = float)
 parser.add_argument('-v', metavar = 'v', type = float)
 parser.add_argument('-fixed_anions', metavar='fixed_anions', type = int),
 parser.add_argument('-MPC', metavar='MPC', type = int, default=30),
-parser.add_argument('-bl', metavar='bl', type = float, default=1.0),
+parser.add_argument('-bl', metavar='bl', type = float, default=1.0), # bond length
 parser.add_argument('-electrostatic', action = 'store_true', required=False, default=False)
 parser.add_argument('-debug_node', action = 'store_true', required=False, default=False)
 parser.add_argument('-debug_server', action = 'store_true', required=False, default=False)
