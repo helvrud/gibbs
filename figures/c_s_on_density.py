@@ -4,7 +4,7 @@ from veusz_embed import *
 import os
 #%%
 import pandas as pd
-save = True
+save = False
 #%%
 df = pd.read_pickle('../data/gel_all_data.pkl')
 df.sort_values(by = 'v', inplace = True)

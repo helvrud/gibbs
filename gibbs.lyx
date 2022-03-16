@@ -626,7 +626,7 @@ literal "true"
  Wilhelm (see for example 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Arens_2017"
+key "Arens_2017,Fengler_2020"
 literal "true"
 
 \end_inset
@@ -682,13 +682,58 @@ literal "true"
 \end_inset
 
 .
- The internal solution can be extracted by means of compression and/or other
- stimulus providing that the charge of the gel remains constant.
- 
+ The driving force of the separation is the Donnan potential originated
+ from the charges of the hydrogel network.
+ The density of mobile ions difference between ions concentrations in the
+ internal and external solutions is defined by Donnan law 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rud2018"
+literal "true"
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{c_{-}^{in}}{\cs}=\frac{\cs}{c_{+}^{in}}=\sqrt{1+\left(\frac{\alpha\cp}{2\cs}\right)^{2}}\pm\frac{\alpha\cp}{2\cs}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{-}^{in}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{+}^{in}$
+\end_inset
+
+ are the internal concentration of anions and cations, 
+\begin_inset Formula $\cs$
+\end_inset
+
+ is the salinity of external solution 
+\begin_inset Formula $\cp$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ are the gel molar density and the ionization degree.
+ The 
+\begin_inset Formula $\pm$
+\end_inset
+
+ sign in the formula depends on whether the gel is made of polyanion or
+ polycation.
 \end_layout
 
 \begin_layout Standard
-In the case of gel made of weak (pH-sensitive) polyelectrolyte, the compression
+The internal solution can be extracted by means of compression and/or other
+ stimulus providing that the charge of the gel remains constant.
+ In the case of gel made of weak (pH-sensitive) polyelectrolyte, the compression
  initiates discharging of the gel, therefore the neutralizing counterions
  may leave out the gel diminishing the desalination effect and affecting
  the pH of the extracted solution.
@@ -706,9 +751,47 @@ literal "true"
 \end_layout
 
 \begin_layout Enumerate
-However, the salinity of the water squeezed from hydrogel under a very high
- hydraulic pressure revealed that sole Donnan effect is insufﬁcient to achieve
- a high salt rejection and the water recovery is also low.
+However, one can argue that sole Donnan effect is insufﬁcient to achieve
+ a high salt rejection 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cai2016"
+literal "true"
+
+\end_inset
+
+ and the salinity of the water squeezed from hydrogel under a very high
+ hydraulic pressure (up to 100 bar 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fengler_2020"
+literal "true"
+
+\end_inset
+
+) turns to be not much different from the initial.
+\end_layout
+
+\begin_layout Enumerate
+Indeed, the use of high hydraulic pressure diminishes all the advantages
+ of this method over the reverse osmosis.
+ At the same time the reversibility of hydrogel swelling after such strong
+ compression remains questionable.
+ 
+\end_layout
+
+\begin_layout Enumerate
+In one of our previous works we had modeled the desalination process which
+ employs 
+\end_layout
+
+\begin_layout Enumerate
+Nevertheless by the current study we would like to model the compression
+ of the gel limiting ourselves within low compression rates, less than 5
+ bar.
+ We will show how the compression of the gel affects the surrounding salinity
+ and model the whole desalination process as a cascade of c.
+ 
 \end_layout
 
 \begin_layout Standard

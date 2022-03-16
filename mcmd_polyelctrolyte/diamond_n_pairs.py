@@ -41,7 +41,8 @@ file_dir =  pathlib.Path(__file__).parent
 Print('file_dir:', file_dir)
 
 output_dir = file_dir.parent / 'data' / pathlib.Path(__file__).stem
-output_dir.mkdir(parents=True, exist_ok=True)
+
+.mkdir(parents=True, exist_ok=True)
 
 run_node_path = file_dir / 'espresso_nodes'/ 'run_node.py'
 Print('node script path:', run_node_path)

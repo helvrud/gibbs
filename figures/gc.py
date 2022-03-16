@@ -6,7 +6,11 @@ gc_data_path = "../data/GC.pkl"
 gibbs_raw = pd.read_pickle(gibbs_data_path)
 gc_raw = pd.read_pickle(gc_data_path)
 
-
+Navogadro = 6.022e23 # 1/mol
+unit_of_length = 0.35 # nm
+unit = (unit_of_length*1e-9)**3*Navogadro*1000 # l/mol
+MPC = 30 
+Ngel = MPC*16+8
 
 
 
@@ -30,6 +34,7 @@ gibbs_df = gibbs_df.sort_values(by='Ncl',ignore_index = True)
 
 (fig_PV, graph_PV, xy)  = vplot([],[], xlog = True)
 (fig_CV, graph_CV, xy)  = vplot([],[], xlog = True, ylog = True)
+(fig_NV, graph_NV, xy)  = vplot([],[], xlog = True)
 
 
 
@@ -56,7 +61,7 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     V = 1/phi      # mol/l
     P = row.P
     Ccl = row.cs
-    Ncl = row.Ncl*np.ones(len(phi))
+    Ncl = row.Ncl / Ngel*np.ones(len(phi))
 
 
     idx5 = (abs(P[0] - 5  ) == min(abs(P[0] - 5  ))).argmax()
@@ -68,6 +73,11 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
 
     Ccl5 = Ccl[0][idx5]
     Ccl10 = Ccl[0][idx10]
+    
+    Ncl5 = Ncl[idx5]
+    Ncl10 = Ncl[idx10]
+
+    
     cs_5.append(Ccl5)
     cs_10.append(Ccl10)
     phi5 = phi[idx5]
@@ -97,6 +107,16 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     (fig_CV, graph_CV, xy) = vplot([V10], [Ccl10], xname = 'GB_phi_10'+str(row.Ncl), yname = 'GB_Ccl_10'+str(row.Ncl), g = fig_CV, marker='cross', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
+
+    (fig_NV, graph_NV, xy) = vplot(V, Ncl, xname = 'GB_phi'+str(row.Ncl), yname = 'GB_Ncl'+str(row.Ncl), g = fig_NV, marker='none', color = color)
+
+    (fig_NV, graph_NV, xy) = vplot([V5], [Ncl5], xname = 'GB_phi_5'+str(row.Ncl), yname = 'GB_Ncl_5'+str(row.Ncl), g = fig_NV, marker='square', color = color )
+    xy.markerSize.val = '4pt'
+    xy.MarkerFill.color.val = color
+    (fig_NV, graph_NV, xy) = vplot([V10], [Ncl10], xname = 'GB_phi_10'+str(row.Ncl), yname = 'GB_Ncl_10'+str(row.Ncl), g = fig_NV, marker='cross', color = color )
+    xy.markerSize.val = '4pt'
+    xy.MarkerFill.color.val = color
+
 
 
 
@@ -142,6 +162,13 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     Ccl5 = Ccl[idx5]
     Ccl10 = Ccl[idx10]
 
+    Ncl = row.NCl_gel[0] / Ngel + (row.V_eq - row.V)*row.cs
+    Ncl_err = row.NCl_gel[1] / Ngel 
+    Ncl0  = Ncl[idx0]
+    Ncl5  = Ncl[idx5]
+    Ncl10 = Ncl[idx10]
+
+
     phi = 1./V
     phi0 = 1./V0
     phi5 = 1./V5
@@ -173,6 +200,16 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     xy.markerSize.val = '4pt'
     
 
+    (fig_NV, graph_NV, xy) = vplot(V, [Ncl, Ncl_err], xname = 'GC_phi'+str(row.cs), yname = 'GC_Ncl'+str(row.cs),  g = fig_NV, marker='none',color=color)
+    xy.PlotLine.width.val = '1pt'
+    (fig_NV, graph_NV, xy) = vplot([V0], [Ncl0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_Ncl0'+str(row.cs),     g = fig_NV, marker='circle',color=color )
+    xy.markerSize.val = '4pt'
+    (fig_NV, graph_NV, xy) = vplot([V5], [Ncl5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_Ncl5'+str(row.cs),     g = fig_NV, marker='square',color=color )
+    xy.markerSize.val = '4pt'
+    (fig_NV, graph_NV, xy) = vplot([V10], [Ncl10], xname = 'GC_phi10'+str(row.cs), yname = 'GC_Ncl10'+str(row.cs), g = fig_NV, marker='cross',color=color )
+    xy.markerSize.val = '4pt'
+
+
 (fig_CV, graph_CV, xy) = vplot(VV0, CCcl0, xname = 'VV0', yname = 'CCcl0', g = fig_CV, marker='none',color=color)
 (fig_CV, graph_CV, xy) = vplot(VV5, CCcl5, xname = 'VV5', yname = 'CCcl5', g = fig_CV, marker='none',color=color)
 (fig_CV, graph_CV, xy) = vplot(VV10, CCcl10, xname = 'VV10', yname = 'CCcl10', g = fig_CV, marker='none',color=color)
@@ -195,6 +232,11 @@ graph_CV.y.log.val = True
 graph_CV.x.label.val = 'hydrogel volume, V, [l/mol]'
 graph_CV.y.label.val = 'Salinity, c_{s}, [mol/l]'
 
+#graph_CV.y.max.val=5
+#graph_CV.y.min.val=-0.56        
+graph_NV.x.log.val = True
+graph_NV.x.label.val = 'hydrogel volume, V, [l/mol]'
+graph_NV.y.label.val = 'Number of Cl ions per gel monomer, N_{Cl}, [mol/mol]'
 
 
 
@@ -207,8 +249,10 @@ key.Border.hide.val  = True
 import os
 fig_CV.Save('fig_CV.vsz')
 fig_PV.Save('fig_PV.vsz')
+fig_NV.Save('fig_NV.vsz')
 os.popen('veusz fig_CV.vsz')
 os.popen('veusz fig_PV.vsz')
+os.popen('veusz fig_NV.vsz')
 
 
 
