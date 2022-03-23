@@ -77,12 +77,11 @@ def correlated_data_mean_err(x, tau, ci = 0.95):
 
 def sample_to_target(
         get_data_callback,
-        target_error = None,
-        target_eff_sample_size = None,
-        timeout = 30,
-        initial_sample_size = 100,
-        tau = None,
-        ci = 0.95):
+        sampling_kwargs
+        #target_error = None,
+        #target_eff_sample_size = None,
+        #timeout = 30,
+        ):
     """The routine samples an autocorrelated observable till one of the exit loop criterion met.
     Possible criteria are sampling timeout, the margins of error and sample size.
     The routine calculates mean value and the margins of error in interations
@@ -107,22 +106,31 @@ def sample_to_target(
 
     Args:
         get_data_callback ([type]): Sampling function, see requirements above.
-        target_error (float, optional): Desired margins of error. Defaults to None.
-        target_eff_sample_size (float, optional): Desired effective sample size. Defaults to None.
-        timeout (int, optional): Timeout in seconds, in the worst case it takes two times longer. Defaults to 30.
-        initial_sample_size (int, optional): Initial sample size. Defaults to 100.
-        tau (float, optional): If autocorr time is known provide it to save some time. Defaults to None.
-        ci (float, optional): Confidence interval. Defaults to 0.95.
+        sampling_kwargs: dictionary conaining the following fields
+            target_error (float, optional): Desired margins of error. Defaults to None.
+            target_eff_sample_size (float, optional): Desired effective sample size. Defaults to None.
+            timeout (int, optional): Timeout in seconds, in the worst case it takes two times longer. Defaults to 30.
 
     Returns:
         tuple: Returns mean value, margins of error and effective sample size
     """
+    
+    target_error = sampling_kwargs['target_error']
+    target_eff_sample_size = sampling_kwargs['target_eff_sample_size']
+    timeout = sampling_kwargs['timeout']
+
     #stop sampling criteria
     def end_loop(elapsed_time, current_error, eff_sample_size):
+        #logger.debug('TARGETERRORO: ', target_error)
+
+        print ('CURRENT_ERROR: ', current_error)
+        print ('EFF_SAMPLE_SIZE: ', eff_sample_size)
+
         if elapsed_time > timeout:
             logger.info('Reached timeout')
             return True
         #check if kwarg provided
+        
         elif target_error is not None:
             if current_error <= target_error:
                 logger.info("Reached target error")
@@ -135,11 +143,13 @@ def sample_to_target(
             return False
     #init timer
     start_time = time.time()
+    initial_sample_size = 100 # Initial sample size. Defaults to 100.
     n_samples = initial_sample_size
     #first sample
     x = get_data_callback(n_samples)
     #if non autocorr time provided
-    if tau is None: tau = get_tau(x)
+    ci = 0.95 # Confidence interval. Defaults to 0.95.
+    tau = get_tau(x)
     #correlated data mean and err margin
     x_mean, x_err = correlated_data_mean_err(x, tau, ci)
     #sampling loop
@@ -174,3 +184,16 @@ def downsample(x, dist):
     import random
     n_chunks = int(len(x)/dist)
     return [random.choice(chunk) for chunk in np.array_split(x,n_chunks)]
+    
+    
+
+def append_to_lists_in_dict(dict_A, dict_B):
+    for k, v in dict_B.items():
+        while True:
+            try:
+                dict_A[k].append(v)
+                break
+            except KeyError:
+                dict_A[k] = []
+            except AttributeError:
+                dict_A[k] = [dict_A[k]]

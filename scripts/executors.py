@@ -19,7 +19,7 @@ import numpy as np
 
 #auto sampling routine are the same as in montecarlo one
 from routines import sample_to_target
-
+from pathlib import Path
 import logging
 logger = logging.getLogger(__name__)
 
@@ -177,7 +177,8 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         """
         return float(self.system.analysis.energy()['total'] - self.system.analysis.energy()['kinetic'])
 
-    def sample_pressure_to_target_error(self, int_steps=1000, **kwargs):
+    def sample_pressure_to_target_error(self, sampling_kwargs):
+        int_steps=1000
         system=self.system
         def get_data_callback(n):
                 acc = []
@@ -185,25 +186,16 @@ class EspressoExecutorSalt(LocalScopeExecutor):
                     system.integrator.run(int_steps)
                     acc.append(float(system.analysis.pressure()['total']))
                 return acc
-        return sample_to_target(get_data_callback, **kwargs)
+        return sample_to_target(get_data_callback, sampling_kwargs)
 
-    def increment_volume(self, incr_vol, int_steps = 10000):
-        system = self.system
-        old_vol = system.box_l[0]**3
-        new_vol = old_vol + incr_vol
-        d_new = new_vol**(1/3)
-        system.change_volume_and_rescale_particles(d_new)
-        system.integrator.run(int_steps)
-        logger.debug(f"Volume changed {old_vol} -> {new_vol}")
-        return self.potential_energy()
 
-    def change_volume(self, new_vol, int_steps = 10000):
-        system = self.system
-        d_new = new_vol**(1/3)
-        system.change_volume_and_rescale_particles(d_new)
-        system.integrator.run(int_steps)
-        logger.debug(f"Volume changed to {new_vol}")
-        return self.potential_energy()
+#    def change_volume(self, new_vol, int_steps = 10000):
+#        system = self.system
+#        d_new = new_vol**(1/3)
+#        system.change_volume_and_rescale_particles(d_new)
+#        system.integrator.run(int_steps)
+#        logger.debug(f"Volume changed to {new_vol}")
+#        return self.potential_energy()
 
     def enable_electrostatic(self, l_bjerrum=2, int_steps = 10000):
         from espressomd import electrostatics
@@ -215,27 +207,30 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         self.minimize_energy()
         return True
 
-    def minimize_energy(self, dist=1, timeout = 60):
-        system = self.system
-        import time
-        start_time = time.time()
-        system.thermostat.suspend()
-        system.integrator.set_steepest_descent(f_max=0, gamma=0.1, max_displacement=0.1)
-        min_d = system.analysis.min_dist()
-        logger.debug(
-            f"Minimal distance: {min_d} \nSteepest descent integration...")
-        while (min_d < dist) or (min_d==np.inf):
-            elapsed_time = time.time() - start_time
-            if elapsed_time > timeout:
-                logger.debug('Timeout')
-                break
-            system.integrator.run(100)
-            min_d = system.analysis.min_dist()
+    def minimize_energy(self):
+        min_d = self.system.analysis.min_dist()
+        logger.debug(f"minimize_energy from {__file__}")
         logger.debug(f"Minimal distance: {min_d}")
-        system.integrator.set_vv()
-        system.thermostat.recover()
+##
+        try:
+            from espressomd import minimize_energy
+###            minimize_energy.steepest_descent(self.system, f_max = 0, gamma = 10, max_steps = 2000, max_displacement= 0.01)
+        except AttributeError:
+            self.system.minimize_energy.init(f_max = 10, gamma = 10, max_steps = 2000, max_displacement= 0.1)
+            self.system.minimize_energy.minimize()
+        min_d = self.system.analysis.min_dist()
+        logger.debug(f"Minimal distance: {min_d}")
+        energies = self.system.analysis.energy()
+        #try:
+        #    print('total = ', energies['total'], 'kinetic=', energies['kinetic'], 'coulomb=', energies['coulomb'])
+        #except KeyError:
+        #    print('total = ', energies['total'], 'kinetic=', energies['kinetic'])
         self.system.integrator.run(10000)
+        print('Minimization energy done.')
         return min_d
+
+
+
 
 class EspressoExecutorGel(EspressoExecutorSalt):
     def Re(self):
@@ -272,35 +267,4 @@ class EspressoExecutorGel(EspressoExecutorSalt):
             logger.debug(f"tau: {tau}, n_samples_eff: {n_samples_eff}")
         return tau
 
-#%%
-if __name__ == "__main__": ##for debugging
-    from init_diamond_system import init_diamond_system
-    import sys
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-    logger.debug('Initializing reservoir with a gel')
-    from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
-    MPC =30
-    bond_length =1
-    alpha = 1
-    target_l = 50
-    system = init_diamond_system(
-        MPC = MPC, bond_length = bond_length, alpha = alpha, target_l = target_l,
-        bonded_attr = BONDED_ATTR, non_bonded_attr = NON_BONDED_ATTR, particle_attr =PARTICLE_ATTR
-        )
-    executor = EspressoExecutorGel(system)
-#%%
-    executor.add_particle({'id':'int'}, type = 0, q=-1)
-    executor.add_particle({'id':'int'}, type = 1, q=1)
-# %%
-    def plotly_scatter3d(executor):
-        import plotly.express as px
-        import pandas as pd
-        system = executor.system
-        box_l = system.box_l[0]
-        particles = executor.part_data((None,None), {'type':'int','q':'int', 'pos':'list'})
-        df = pd.DataFrame(particles)
-        df.q = df.q.astype('category')
-        df.type = df.type.astype('category')
-        df[['x', 'y', 'z']] = df.pos.apply(pd.Series).apply(lambda x: x%box_l)
-        fig = px.scatter_3d(df, x='x', y='y', z='z', color ='type', size_max=18)
-        return fig
+

@@ -14,9 +14,10 @@ import random
 import logging
 logger = logging.getLogger(__name__)
 
-def init_diamond_system(MPC, bond_length, alpha, bonded_attr, non_bonded_attr, particle_attr, target_l=None, target_pressure=None):
+def init_diamond_system(MPC, alpha, bonded_attr, non_bonded_attr, particle_attr, target_l=None, target_pressure=None):
     import espressomd.interactions
     import espressomd.polymer
+    bond_length = 1.0
     a = (MPC + 1) * bond_length / (0.25 * np.sqrt(3))
     box_l = [a]*3
     system = espressomd.System(box_l = box_l)
@@ -53,7 +54,7 @@ def init_diamond_system(MPC, bond_length, alpha, bonded_attr, non_bonded_attr, p
 
     re_type_nodes(system, gel_indices, particle_attr)
     charge_gel(system, gel_indices, alpha, particle_attr)
-    minimize_energy(system, timeout=60)
+    #minimize_energy(system, timeout=60)
     #logger.debug('Minimizing energy before volume change')
     #system.minimize_energy.minimize()
     if (target_pressure is not None) and (target_l is not None):
@@ -114,11 +115,12 @@ def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 
             factor = scale_up_factor
         d_new = system.box_l[0]*factor
         system.change_volume_and_rescale_particles(d_new)
-        minimize_energy(system, timeout = minimize_energy_timeout)
-        system.integrator.run(int_steps)
         logger.debug(f'gel box_size: {system.box_l[0]}')
-        logger.debug(f"pressure: {system.analysis.pressure()['total']}")
-    logger.debug ('volume change done')
+    #minimize_energy(system, timeout = minimize_energy_timeout)
+    #system.integrator.run(int_steps)
+    logger.debug ('volume change done. Do not forget to minimize energy')    
+    logger.debug(f"pressure: {system.analysis.pressure()['total']}")
+
 
 def get_pressure(system, **kwargs):
     from montecarlo import sample_to_target
@@ -184,47 +186,4 @@ def calc_Re(system, pairs):
         D = np.append(D, Re)
     return D
 
-def minimize_energy(system, timeout=600):
-    import time
-    system.thermostat.suspend()
-    # minimize energy using min_dist as the convergence criterion
-    system.integrator.set_steepest_descent(f_max=0, gamma=1e-3,
-                                        max_displacement=0.01)
-    start_time = time.time()
-    while system.analysis.min_dist() < 0.9: #?
-        elapsed_time = time.time() - start_time
-        #logger.debug(f"minimization: {system.analysis.energy()['total']:+.2e}")
-        #logger.debug(f"min_dist: {system.analysis.min_dist():+.2e}")
-        system.integrator.run(20)
-        if elapsed_time>timeout:
-            logger.debug(timeout)
-            break
-
-    #logger.debug(f"minimization: {system.analysis.energy()['total']:+.2e}")
-    system.integrator.set_vv()
-
-    # activate thermostat
-    system.thermostat.set_langevin(kT=1.0, gamma=1.0)
-#%%
-if __name__=='__main__':
-    import sys
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-    from shared import PARTICLE_ATTR, BONDED_ATTR, NON_BONDED_ATTR
-    #BONDED_ATTR = None
-    #NON_BONDED_ATTR = None
-    #system = init_diamond_system(15,0.966,0.5, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=20)
-    system = init_diamond_system(30, 0.966, 1, BONDED_ATTR, NON_BONDED_ATTR, PARTICLE_ATTR, target_l=39)
-#%%
-    N = 229
-
-    for i in range(N):
-        system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['cation'])
-        system.part.add(pos = system.box_l*np.random.random(3), **PARTICLE_ATTR['anion'])
-        minimize_energy(system, timeout=5)
-    #system.analysis.pressure()['total']
-    #logger.debug(system.box_l)
-#%%
-    from espressomd.visualization_opengl import  openGLLive
-    visualizer = openGLLive(system)
-    visualizer.run()
 # %%

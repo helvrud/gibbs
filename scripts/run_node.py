@@ -56,11 +56,6 @@ if __name__=="__main__":
                         type = int,
                         help = 'particles between nodes',
                         required='--gel' in sys.argv)
-    parser.add_argument('-bond_length',
-                        metavar='bond_length',
-                        type = float,
-                        help = 'bond length',
-                        required='--gel' in sys.argv)
     parser.add_argument('-alpha',
                         metavar='alpha',
                         type = float,
@@ -107,7 +102,7 @@ if __name__=="__main__":
         logger.info('Initializing reservoir with a gel')
         from shared import PARTICLE_ATTR
         system = init_diamond_system(
-            MPC = args.MPC, bond_length = args.bond_length, alpha = args.alpha, target_l = args.l,
+            MPC = args.MPC, alpha = args.alpha, target_l = args.l,
             bonded_attr = BONDED_ATTR, non_bonded_attr = NON_BONDED_ATTR, particle_attr =PARTICLE_ATTR
             )
         node = Node(args.IP, args.PORT, EspressoExecutorGel, system)

@@ -10,7 +10,7 @@ except:
     trange = range
 
 from montecarlo import *
-from routines import sample_to_target
+from routines import sample_to_target, append_to_lists_in_dict
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +41,12 @@ def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, re
 
 
 class MonteCarloPairs(AbstractMonteCarlo):
-
+    particle_count_sampling_kwargs=dict(timeout=240, target_eff_sample_size = 10, target_error = None)
+    pressure_sampling_kwargs =     dict(timeout=240, target_eff_sample_size = 5, target_error = None)
+    
+    
+    
+    
     def __init__(self, server):
         logger.info("Initializing Monte Carlo ion pairs exchange...")
         super().__init__()
@@ -218,7 +223,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
     # *kwargs are
 
     def sample_zeta_to_target_error(self, **kwargs):
-        print ('### sample_zeta_to_target_error ###')
+        print ('\n### sample_zeta_to_target_error ###')
         def get_zeta_callback(sample_size):
             zetas = []
             for i in range(sample_size):
@@ -228,8 +233,9 @@ class MonteCarloPairs(AbstractMonteCarlo):
             return np.array(zetas)
         return sample_to_target(get_zeta_callback, **kwargs)
 
-    def sample_particle_count_to_target_error(self, **kwargs):
-        print ('### sample_particle_count_to_target_error ###')
+    def sample_particle_count_to_target_error(self):
+    
+        print ('\n### sample_particle_count_to_target_error ###')
         def get_particle_count_callback(sample_size):
             anions = []
             for i in range(sample_size):
@@ -238,8 +244,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 self.step()
             return np.array(anions)
 
-        anion_salt, eff_err, eff_sample_size = sample_to_target(
-            get_particle_count_callback, **kwargs)
+        anion_salt, eff_err, eff_sample_size = sample_to_target(get_particle_count_callback, self.particle_count_sampling_kwargs)
 
         cation_salt = anion_salt
         anion_gel = sum(self.current_state.anions) - anion_salt
@@ -253,10 +258,9 @@ class MonteCarloPairs(AbstractMonteCarlo):
             'sample_size': eff_sample_size
         }
 
-    def sample_pressures_to_target_error(self, **kwargs):
-        print ('### sample_pressures_to_target_error ###')
-        request = self.server(
-            f'sample_pressure_to_target_error(**{kwargs})', [0, 1])
+    def sample_pressures_to_target_error(self):
+        print ('\n### sample_pressures_to_target_error ###')
+        request = self.server(f'sample_pressure_to_target_error({self.pressure_sampling_kwargs})', [0, 1])
         pressure_0, err_0, sample_size_0 = request[0].result()
         pressure_1, err_1, sample_size_1 = request[1].result()
         self.setup()
@@ -265,6 +269,59 @@ class MonteCarloPairs(AbstractMonteCarlo):
             'err': (err_0, err_1),
             'sample_size': (sample_size_0, sample_size_1)
         }
+
+
+    def sample_all(self, target_sample_size, timeout):
+        #start timer
+        start_time = time.time()
+
+        #add header to stored data
+
+        #sample stored as dict of lists
+        sample_d = {}
+        logger.info(
+            "Sampling pressure and particle count... \n" + \
+            f"Target sample size: {target_sample_size} \n" + \
+            f"Timeout: {timeout}s"
+            )
+        for i in range(target_sample_size):
+            if time.time()-start_time > timeout:
+                logger.warning("Timeout is reached")
+                sample_d['message'] = "reached_timeout"
+                break
+            try: particles_speciation = self.sample_particle_count_to_target_error()
+            except Exception as e:
+                logger.error('An error occurred during sampling while sampling number of particles')
+                logger.exception(e)
+                sample_d['message'] = "error_occurred"
+                break
+
+            #probably we can dry run some MD without collecting any data
+            try: pressure = self.sample_pressures_to_target_error()
+            except Exception as e:
+                logger.error('An error occurred during sampling while sampling pressure')
+                logger.exception(e)
+                sample_d['message'] = "error_occurred"
+                break
+
+            #discard info about errors
+            del particles_speciation['err']
+            del particles_speciation['sample_size']
+            del pressure['err']
+            del pressure['sample_size']
+            datum_d = {**particles_speciation, **pressure}
+
+            #to each list in result dict append datum
+            append_to_lists_in_dict(sample_d, datum_d)
+            logger.info(f"Sampling {i+1}/{target_sample_size}")
+            logger.debug(datum_d)
+
+            #save updated data to pickle storage
+            
+
+        logger.info(f'Sampling is done')
+        return sample_d
+
 
     # MD functions
     # request connected nodes to do some MD and espressomd specific jobs
@@ -301,7 +358,17 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 print(*[f'{attr}={val}' for attr,
                       val in PARTICLE_ATTR[species].items()], end=' ')
                 print(f'to side {i} ')
-                self.server(
-                    f"populate({count}, **{PARTICLE_ATTR[species]})", i)
+                self.server(f"populate({count}, **{PARTICLE_ATTR[species]})", i)
         self.setup()
         return True
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        

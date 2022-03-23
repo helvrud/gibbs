@@ -9,6 +9,11 @@ import time
 from routines import *
 logger = logging.getLogger(__name__)
 
+#logging.basicConfig(
+#    level=logging.INFO,
+#    stream=open('server.log', 'w'),
+#    format = '%(asctime)s - %(message)s')
+
 params = {
     #log every finished request
     'LOG_REQUESTS_INFO' : False,
@@ -524,8 +529,7 @@ class LocalScopeExecutor(BaseExecutorClass):
             return e
             
             
-            
-            
+
 class BaseNode:
     """Class implementing a node connected to a server,
     capable of to handle request. Can be used for distributed computing.
@@ -668,7 +672,7 @@ class BaseNode:
             trim_length = 100
             str_data = str(data)
             str_data = (str_data[:trim_length] + '...') if len(str_data) > trim_length else str_data
-            logger.debug('>>> '+str_data)
+            #logger.debug('>>> '+str_data)
         return True
 
     def handle_disconnection(self):
@@ -720,94 +724,35 @@ class ExecutorNode(BaseNode):
         
 import threading
 import subprocess 
-        
-def create_server_and_nodes(scripts: list,
-        args_list = None, python_executable = 'python',
-        connection_timeout_s = 2400,
-        **popen_kwargs
-        ):
+
+
+     
+def create_server_and_nodes(name, box_l_gel, box_l_out, alpha, lB, sigma, MPC):
+    connection_timeout_s = 2400
     server = Server()
     threading.Thread(target=server.run, daemon=True).start()
     logger.info('Server started')
-    if args_list is None:
-        args_list = [[]]*len(scripts)
-    for script, args in zip(scripts, args_list):
-        popen_list = [
-            python_executable, script,
-            server.IP, server.PORT,
-            *args
-            ]
-        popen_list = [str(item) for item in popen_list]
-        logger.info(f"Popen({popen_list}, {popen_kwargs})")
-        subprocess.Popen(popen_list, **popen_kwargs)
-        server.wait_connection(timeout = connection_timeout_s)
+        
+    python_executable = '/home/kvint/espresso/espresso/es-build/pypresso'         
+    script = 'run_node.py'
+
+    arg_list_gel = ['-l', box_l_gel, '--gel' , '-MPC', MPC, '-alpha', alpha, '-log_name', name+'_gel.log'] + ['--no_interaction']*bool(lB)
+    popen_list = [python_executable, script, server.IP, server.PORT]+arg_list_gel
+    popen_list = [str(item) for item in popen_list]
+    logger.info(f"{__file__}: Popen({popen_list})")
+    subprocess.Popen(popen_list)
+    server.wait_connection(timeout = connection_timeout_s)
+    
+    arg_list_out = ['-l', box_l_out, '--salt', '-log_name', name+'_out.log'] + ['--no_interaction']*bool(lB)    
+    popen_list = [python_executable, script, server.IP, server.PORT]+arg_list_out
+    popen_list = [str(item) for item in popen_list]
+    logger.info(f"{__file__}: Popen({popen_list})")
+    subprocess.Popen(popen_list)
+    server.wait_connection(timeout = connection_timeout_s)
+
+    print ('Server and nodes started: '+name)
+    
     return server
     
     
-    
-if __name__=='__main__':
-    
-    from ion_pair_monte_carlo import MonteCarloPairs
 
-
-    python_executable = '/home/kvint/espresso/espresso/es-build/pypresso' 
-    script_name = 'run_node.py'
-
-
-    c_s = 0.01 # mol/l
-    Vgel = 21600
-    Vout = 125
-    MPC = 10
-    bond_length = 1.0 # used for constructing the network during the gel initialization
-    lB = 0 # 0 means no electrostatic interaction
-    sigma =0 # 0 means no static interaction
-    alpha = 1
-
-
-
-    box_l_gel = Vgel**(1./3)
-    box_l_out = Vout**(1./3)
-
-    scripts = [script_name]*2
-    arg_list_gel = ['-l', box_l_gel, '--gel' , '-MPC', MPC, '-bond_length', bond_length, '-alpha', alpha, '-log_name', 'test_gel.log'] + ['--no_interaction']*bool(lB)
-    arg_list_out = ['-l', box_l_out, '--salt', '-log_name', 'test_out.log'] + ['--no_interaction']*bool(lB)
-
-    server = create_server_and_nodes(
-        scripts=scripts, args_list=[arg_list_gel, arg_list_out], python_executable=python_executable,
-        #stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-        )
-
-    #MC = MonteCarloPairs(server)
-    #MC.populate(N_pairs)
-    #server("minimize_energy()", [0,1])
-        
-
-
-
-
-
-    SIDES = [0, 1]
-    request_body = [
-        "potential_energy()",
-        "system.box_l",
-        "set(system.part.select(type=0).id)",  # mobile anions type 0
-        "set(system.part.select(type=1).id)",  # mobile cations type 1
-    ]
-    #system_init_state_request = server(request_body, SIDES)
-    system_init_state_request = server('potential_energy()', 0)
-    system_init_state_request = server('potential_energy()', 1)
-    #system_init_state_request = server('system', 1)
-
-
-
-
-
-
-
-
-
-
-    g = gel()
-    
-    
-    
