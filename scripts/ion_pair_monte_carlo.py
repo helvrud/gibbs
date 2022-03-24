@@ -261,6 +261,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
     def sample_pressures_to_target_error(self):
         print ('\n### sample_pressures_to_target_error ###')
         request = self.server(f'sample_pressure_to_target_error({self.pressure_sampling_kwargs})', [0, 1])
+        print ('REQUEST:',request)
         pressure_0, err_0, sample_size_0 = request[0].result()
         pressure_1, err_1, sample_size_1 = request[1].result()
         self.setup()

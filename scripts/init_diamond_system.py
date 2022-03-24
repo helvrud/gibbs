@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 def init_diamond_system(MPC, alpha, bonded_attr, non_bonded_attr, particle_attr, target_l=None, target_pressure=None):
     import espressomd.interactions
     import espressomd.polymer
-    bond_length = 1.0
+    bond_length = 0.966
     a = (MPC + 1) * bond_length / (0.25 * np.sqrt(3))
     box_l = [a]*3
     system = espressomd.System(box_l = box_l)
@@ -45,6 +45,7 @@ def init_diamond_system(MPC, alpha, bonded_attr, non_bonded_attr, particle_attr,
     if bonded_attr is not None:
         #diamond.Diamond(a=a, bond_length=bond_length, MPC=MPC)
         espressomd.polymer.setup_diamond_polymer(system=system, bond=fene, MPC=MPC)
+        print ('Diamond is set')
     else:
         for i in range(MPC*16+8):
             logger.debug(
@@ -61,7 +62,7 @@ def init_diamond_system(MPC, alpha, bonded_attr, non_bonded_attr, particle_attr,
         raise ArithmeticError("Can not pass both target_pressure and target_l")
     if target_l is not None:
         change_volume(system, target_l)
-
+    system.setup_type_map([0,1,2,3,4,5])
     return system
 
 def setup_non_bonded(system, non_bonded_attr):
@@ -104,7 +105,7 @@ def charge_gel(system, gel_indices, alpha, particle_attr, add_counterions = True
             system.part.add(pos = system.box_l*np.random.random(3), **particle_attr['cation'])
         logger.debug(f'{i+1}/{n_charged} charged')
 
-def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05, int_steps = 10000, minimize_energy_timeout=60):
+def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05):
     logger.debug (f'change_volume to the size L = {target_l}')
     system.integrator.run(int_steps)
     while system.box_l[0] != target_l:
@@ -115,12 +116,11 @@ def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 
             factor = scale_up_factor
         d_new = system.box_l[0]*factor
         system.change_volume_and_rescale_particles(d_new)
+        #minimize_energy(system, timeout = minimize_energy_timeout)
+        #system.integrator.run(int_steps)
         logger.debug(f'gel box_size: {system.box_l[0]}')
-    #minimize_energy(system, timeout = minimize_energy_timeout)
-    #system.integrator.run(int_steps)
-    logger.debug ('volume change done. Do not forget to minimize energy')    
-    logger.debug(f"pressure: {system.analysis.pressure()['total']}")
-
+        logger.debug(f"pressure: {system.analysis.pressure()['total']}")
+    logger.debug ('volume change done')
 
 def get_pressure(system, **kwargs):
     from montecarlo import sample_to_target
@@ -186,4 +186,4 @@ def calc_Re(system, pairs):
         D = np.append(D, Re)
     return D
 
-# %%
+

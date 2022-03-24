@@ -5,7 +5,7 @@ PARTICLE_ATTR = dict(
     gel_neutral = {'type' : 2, 'q':0},
     gel_anion = {'type' : 3, 'q':-1},
     gel_node_neutral = {'type' : 4, 'q':0},
-    gel_node_anion = {'type' : 5, 'q':-1},
+    gel_node_anion = {'type' : 5, 'q':0}, # The nodes are always neutral
 )
 #types of the particles that are mobile
 MOBILE_SPECIES = [0,1]

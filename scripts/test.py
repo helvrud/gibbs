@@ -15,7 +15,7 @@ class gel():
     lB = 0 # 0 means no electrostatic interaction
     sigma =0 # 0 means no static interaction
     alpha = 0.
-    Ncl = 10
+    Ncl = 100
 
 
     target_sample_size=200# number of samples,
@@ -44,20 +44,30 @@ class gel():
             
             self.server = socket_nodes.create_server_and_nodes(name = self.name, box_l_gel = self.box_l_gel, box_l_out = self.box_l_out, alpha = self.alpha, lB=self.lB, sigma=self.sigma, MPC = self.MPC)
             #self.server("minimize_energy()", [0,1])
-            
-            
+     
+    def NN(self):
+        """
+        This function  returns the number of mobile anion particles in gel and in reservoir as a list
+        """
+        Nanion_gel  = g.server("system.number_of_particles(0)", [0])[0].result()     
+        Ncation_gel = g.server("system.number_of_particles(1)", [0])[0].result()
+        Nanion_out  = g.server("system.number_of_particles(0)", [1])[0].result()
+        Ncation_out = g.server("system.number_of_particles(1)", [1])[0].result()
 
+        Ngel_neutral      = g.server("system.number_of_particles(2)", [0])[0].result()          
+        Ngel_anion        = g.server("system.number_of_particles(3)", [0])[0].result()
+        Ngel_node_neutral = g.server("system.number_of_particles(4)", [0])[0].result()
+        Ngel_node_anion   = g.server("system.number_of_particles(5)", [0])[0].result()
+        print ('Ncl_gel{}\n Nna_gel{}\n Ngel_neutral{}\n Ngel_anion{}\n Ngel_node_neutral{}\n Ngel_node_anion\n Ncl_out{}\n Nna_out{}\n'.format(Nanion_gel, Ncation_gel, Nanion_out, Ncation_out, Ngel_neutral, Ngel_anion, Ngel_node_neutral, Ngel_node_anion) )
+        return [Nanion_gel, Nanion_out]
+        
+        
 g = gel(run = True)
 #g.MC.equilibrate(1,1,1)
 
 g.MC = MonteCarloPairs(g.server)
 g.MC.populate([g.Ncl]*2)
 z = g.server("minimize_energy()", [0,1])
-g.MC.sample_pressures_to_target_error()
-
-
-
-
 if g.lB: 
     g.server('enable_electrostatic()', [0, 1])
     z = g.server("minimize_energy()", [0,1])

@@ -211,10 +211,10 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         min_d = self.system.analysis.min_dist()
         logger.debug(f"minimize_energy from {__file__}")
         logger.debug(f"Minimal distance: {min_d}")
-##
+
         try:
             from espressomd import minimize_energy
-###            minimize_energy.steepest_descent(self.system, f_max = 0, gamma = 10, max_steps = 2000, max_displacement= 0.01)
+            minimize_energy.steepest_descent(self.system, f_max = 0, gamma = 10, max_steps = 2000, max_displacement= 0.01)
         except AttributeError:
             self.system.minimize_energy.init(f_max = 10, gamma = 10, max_steps = 2000, max_displacement= 0.1)
             self.system.minimize_energy.minimize()
