@@ -107,7 +107,7 @@ def charge_gel(system, gel_indices, alpha, particle_attr, add_counterions = True
 
 def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05):
     logger.debug (f'change_volume to the size L = {target_l}')
-    system.integrator.run(int_steps)
+    #system.integrator.run(int_steps)
     while system.box_l[0] != target_l:
         factor = target_l/system.box_l[0]
         if factor<scale_down_factor:
@@ -116,11 +116,33 @@ def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 
             factor = scale_up_factor
         d_new = system.box_l[0]*factor
         system.change_volume_and_rescale_particles(d_new)
-        #minimize_energy(system, timeout = minimize_energy_timeout)
+        #minimize_energy(system)
         #system.integrator.run(int_steps)
         logger.debug(f'gel box_size: {system.box_l[0]}')
         logger.debug(f"pressure: {system.analysis.pressure()['total']}")
     logger.debug ('volume change done')
+
+def minimize_energy(system):
+    min_d = system.analysis.min_dist()
+    logger.debug(f"minimize_energy from {__file__}")
+    logger.debug(f"Minimal distance: {min_d}")
+
+    try:
+        from espressomd import minimize_energy
+        minimize_energy.steepest_descent(system, f_max = 0, gamma = 10, max_steps = 2000, max_displacement= 0.01)
+    except AttributeError:
+        system.minimize_energy.init(f_max = 10, gamma = 10, max_steps = 2000, max_displacement= 0.1)
+        system.minimize_energy.minimize()
+    min_d = system.analysis.min_dist()
+    logger.debug(f"Minimal distance: {min_d}")
+    energies = system.analysis.energy()
+    #try:
+    #    print('total = ', energies['total'], 'kinetic=', energies['kinetic'], 'coulomb=', energies['coulomb'])
+    #except KeyError:
+    #    print('total = ', energies['total'], 'kinetic=', energies['kinetic'])
+    system.integrator.run(10000)
+    print('Minimization energy done.')
+    return min_d
 
 def get_pressure(system, **kwargs):
     from montecarlo import sample_to_target

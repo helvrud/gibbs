@@ -15,7 +15,7 @@ class gel():
     lB = 0 # 0 means no electrostatic interaction
     sigma =0 # 0 means no static interaction
     alpha = 0.
-    Ncl = 100
+    Ncl = 50
 
 
     target_sample_size=200# number of samples,
@@ -66,14 +66,14 @@ g = gel(run = True)
 #g.MC.equilibrate(1,1,1)
 
 g.MC = MonteCarloPairs(g.server)
-g.MC.populate([g.Ncl]*2)
-z = g.server("minimize_energy()", [0,1])
-if g.lB: 
-    g.server('enable_electrostatic()', [0, 1])
-    z = g.server("minimize_energy()", [0,1])
+#g.MC.populate([g.Ncl]*2)
+#z = g.server("minimize_energy()", [0,1])
+#if g.lB: 
+#    g.server('enable_electrostatic()', [0, 1])
+#    z = g.server("minimize_energy()", [0,1])
 #self.MC.sample_pressures_to_target_error()
 
-result = g.MC.sample_all(200,1)
+#result = g.MC.sample_all(200,1)
 
 #g.MC.sample_pressures_to_target_error()
 #g.MC.sample_zeta_to_target_error()
