@@ -20,12 +20,16 @@ def get_tau(x, acf_n_lags : int = 200):
     #References:
     #https://www.physik.uni-leipzig.de/~janke/Paper/nic10_423_2002.pdf
     #https://dfm.io/posts/autocorr/
-    acf_arr = acf(x, nlags = acf_n_lags)
+    acf_arr = acf(x, nlags = acf_n_lags, fft=True)
     #integrated autocorrelation time
     #ideally integral of acf monotonically approaches some value
     #though due to calculations errors it does not hold
     #for that reason we use max(np.cumsum(acf_arr)) instead of simple sum(acf_arr)
-    tau_int =1/2+max(np.cumsum(acf_arr))
+    if acf_arr[0]==np.nan:
+        tau_int = len(x)
+        logger.warning('####################### ACF FAILED TO CALCULATE #######################')
+    else:
+        tau_int =1/2+max(np.cumsum(acf_arr))
     return tau_int
 
 get_tau_2d = np.vectorize(get_tau, signature='(n)->()', excluded=['acf_n_lags'])
@@ -130,7 +134,15 @@ def sample_to_target(
             logger.info('Reached timeout')
             return True
         #check if kwarg provided
-        
+        import numpy as np
+        if target_error is np.nan:
+            logger.error('target_error is nan')
+            raise ValueError('target_error is nan')
+            
+        if target_eff_sample_size is np.nan:
+            logger.error('target_eff_sample_size is nan')
+            raise ValueError('target_eff_sample_size is nan')
+            
         elif target_error is not None:
             if current_error <= target_error:
                 logger.info("Reached target error")
@@ -152,6 +164,7 @@ def sample_to_target(
     tau = get_tau(x)
     #correlated data mean and err margin
     x_mean, x_err = correlated_data_mean_err(x, tau, ci)
+
     #sampling loop
     while True:
         #time passed

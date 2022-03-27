@@ -1,7 +1,15 @@
 from ion_pair_monte_carlo import MonteCarloPairs
+import logging
 import socket_nodes
+socket_nodes.set_params(LOG_REQUESTS_INFO = True)
+
+
 from routines import sample_to_target
 import time
+logging.getLogger("socket_nodes")
+
+
+
 
 class gel():
     start_time = time.time()
@@ -28,6 +36,14 @@ class gel():
     Vout = 100
 
     def __init__(self, run=False):
+
+
+        # This defines the logging of server
+        logging.basicConfig(
+            level=logging.INFO,
+            #level=logging.DEBUG,
+            stream=open('server_log', 'w'),
+            format = '%(asctime)s - %(message)s')
     
     
         self.box_l_gel = self.Vgel**(1./3)

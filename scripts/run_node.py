@@ -74,6 +74,7 @@ if __name__=="__main__":
 
     args = parser.parse_args()
     logger = logging.getLogger("run_node.py")
+    
     #logging
     import logging
     if '-log_name' in sys.argv:

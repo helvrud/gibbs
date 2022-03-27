@@ -12,8 +12,13 @@ from routines import sample_to_target
 import numpy as np
 import random
 import logging
-logger = logging.getLogger(__name__)
 
+
+logger = logging.getLogger(__name__)
+    
+    
+    
+    
 def init_diamond_system(MPC, alpha, bonded_attr, non_bonded_attr, particle_attr, target_l=None, target_pressure=None):
     import espressomd.interactions
     import espressomd.polymer
@@ -123,16 +128,20 @@ def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 
     logger.debug(f"pressure: {system.analysis.pressure()['total']}")
 
 def minimize_energy(system):
+    # TO BE REMOVED
     min_d = system.analysis.min_dist()
     logger.debug(f"minimize_energy from {__file__}")
     logger.debug(f"Minimal distance: {min_d}")
+    
+    from espressomd import minimize_energy
+    minimize_energy.steepest_descent(system, f_max = 0, gamma = 10, max_steps = 2000, max_displacement= 0.01)
 
-    try:
-        from espressomd import minimize_energy
-        minimize_energy.steepest_descent(system, f_max = 0, gamma = 10, max_steps = 2000, max_displacement= 0.01)
-    except AttributeError:
-        system.minimize_energy.init(f_max = 10, gamma = 10, max_steps = 2000, max_displacement= 0.1)
-        system.minimize_energy.minimize()
+    #try:
+    #    from espressomd import minimize_energy
+    #    minimize_energy.steepest_descent(system, f_max = 0, gamma = 10, max_steps = 2000, max_displacement= 0.01)
+    #except AttributeError:
+    #    system.minimize_energy.init(f_max = 10, gamma = 10, max_steps = 2000, max_displacement= 0.1)
+    #    system.minimize_energy.minimize()
     min_d = system.analysis.min_dist()
     logger.debug(f"Minimal distance: {min_d}")
     energies = system.analysis.energy()
@@ -141,7 +150,7 @@ def minimize_energy(system):
     #except KeyError:
     #    print('total = ', energies['total'], 'kinetic=', energies['kinetic'])
     system.integrator.run(10000)
-    print('Minimization energy done.')
+    logger.info('### Minimization energy done. ###')
     return min_d
 
 def get_pressure(system, **kwargs):

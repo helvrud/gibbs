@@ -221,7 +221,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         #except KeyError:
         #    print('total = ', energies['total'], 'kinetic=', energies['kinetic'])
         self.system.integrator.run(10000)
-        print('Minimization energy done.')
+        logger.info('####### Minimization energy done #######.')
         return min_d
 
 

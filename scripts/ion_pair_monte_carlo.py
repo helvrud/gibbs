@@ -41,8 +41,8 @@ def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, re
 
 
 class MonteCarloPairs(AbstractMonteCarlo):
-    particle_count_sampling_kwargs=dict(timeout=240, target_eff_sample_size = 10, target_error = None)
-    pressure_sampling_kwargs =     dict(timeout=240, target_eff_sample_size = 5, target_error = None)
+    particle_count_sampling_kwargs=dict(timeout=240, target_eff_sample_size = 2, target_error = None)
+    pressure_sampling_kwargs =     dict(timeout=240, target_eff_sample_size = 2, target_error = None)
     
     
     
@@ -259,7 +259,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         cation_salt = anion_salt
         anion_gel = sum(self.current_state.anions) - anion_salt
         cation_gel = sum(self.current_state.cations) - cation_salt
-        self.server("minimize_energy()", [0,1])
+        #self.server("minimize_energy()", [0,1])
         return {
             'anion': (anion_salt, anion_gel),
             'cation': (cation_salt, cation_gel),
