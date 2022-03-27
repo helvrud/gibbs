@@ -15,7 +15,7 @@ class gel():
     lB = 0 # 0 means no electrostatic interaction
     sigma =0 # 0 means no static interaction
     alpha = 0.
-    Ncl = 50
+    Ncl = 10
 
 
     target_sample_size=200# number of samples,
@@ -58,7 +58,7 @@ class gel():
         Ngel_anion        = g.server("system.number_of_particles(3)", [0])[0].result()
         Ngel_node_neutral = g.server("system.number_of_particles(4)", [0])[0].result()
         Ngel_node_anion   = g.server("system.number_of_particles(5)", [0])[0].result()
-        print ('Ncl_gel{}\n Nna_gel{}\n Ngel_neutral{}\n Ngel_anion{}\n Ngel_node_neutral{}\n Ngel_node_anion\n Ncl_out{}\n Nna_out{}\n'.format(Nanion_gel, Ncation_gel, Nanion_out, Ncation_out, Ngel_neutral, Ngel_anion, Ngel_node_neutral, Ngel_node_anion) )
+        print (f'Ncl_gel {Nanion_gel}\n Nna_gel{Ncation_gel}\n Ngel_neutral{Ngel_neutral}\n Ngel_anion{Ngel_anion}\n Ngel_node_neutral{Ngel_node_neutral}\n Ngel_node_anion {Ngel_node_neutral}\n Ncl_out{Nanion_out}\n Nna_out{Ncation_out}\n')
         return [Nanion_gel, Nanion_out]
         
         
@@ -66,7 +66,9 @@ g = gel(run = True)
 #g.MC.equilibrate(1,1,1)
 
 g.MC = MonteCarloPairs(g.server)
-#g.MC.populate([g.Ncl]*2)
+g.MC.populate([g.Ncl]*2)
+#g.MC.populate([40]*2)
+
 #z = g.server("minimize_energy()", [0,1])
 #if g.lB: 
 #    g.server('enable_electrostatic()', [0, 1])
@@ -75,7 +77,10 @@ g.MC = MonteCarloPairs(g.server)
 
 #result = g.MC.sample_all(200,1)
 
-#g.MC.sample_pressures_to_target_error()
+#
 #g.MC.sample_zeta_to_target_error()
 #g.MC.sample_particle_count_to_target_error()
+g.server("minimize_energy()", [0,1])
+#g.MC.sample_pressures_to_target_error()
 
+#result = g.MC.sample_all(200,10)

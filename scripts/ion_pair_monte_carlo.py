@@ -19,7 +19,7 @@ PAIR = [0, 1]
 CHARGES = [-1, 1]
 MOBILE_SPECIES = [0, 1]
 
-params = {"log_accept_reject" : False}
+params = {"log_accept_reject" : True}
 
 def set_param(**kwargs):
     params.update(kwargs)
@@ -204,6 +204,16 @@ class MonteCarloPairs(AbstractMonteCarlo):
     # AUXILIARY
     # some minor extra calculation
 
+    def NN(self):
+        """
+        This function  returns the number of mobile anion particles in gel and in reservoir as a list
+        """
+        Nanion_gel  = self.server("system.number_of_particles(0)", [0])[0].result()     
+        Nanion_out  = self.server("system.number_of_particles(0)", [1])[0].result()
+        logger.debug(f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}\n')
+        print (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}\n')
+        return [Nanion_gel, Nanion_out]
+
     def entropy_change(self, side):
         volume = self.current_state.volume
         anion = self.current_state.anions
@@ -234,7 +244,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         return sample_to_target(get_zeta_callback, **kwargs)
 
     def sample_particle_count_to_target_error(self):
-    
+        self.NN()
         print ('\n### sample_particle_count_to_target_error ###')
         def get_particle_count_callback(sample_size):
             anions = []
@@ -249,7 +259,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         cation_salt = anion_salt
         anion_gel = sum(self.current_state.anions) - anion_salt
         cation_gel = sum(self.current_state.cations) - cation_salt
-
+        self.server("minimize_energy()", [0,1])
         return {
             'anion': (anion_salt, anion_gel),
             'cation': (cation_salt, cation_gel),
@@ -257,6 +267,8 @@ class MonteCarloPairs(AbstractMonteCarlo):
             'err': eff_err,
             'sample_size': eff_sample_size
         }
+        
+        
 
     def sample_pressures_to_target_error(self):
         print ('\n### sample_pressures_to_target_error ###')
@@ -272,10 +284,10 @@ class MonteCarloPairs(AbstractMonteCarlo):
         }
 
 
-    def sample_all(self, target_sample_size, timeout):
-        #start timer
+    def sample_all(self, target_sample_size, timeout_h):
+        # timeout_h in hours
+        timeout_s = timeout_h * 3600
         start_time = time.time()
-
         #add header to stored data
 
         #sample stored as dict of lists
@@ -283,10 +295,11 @@ class MonteCarloPairs(AbstractMonteCarlo):
         logger.info(
             "Sampling pressure and particle count... \n" + \
             f"Target sample size: {target_sample_size} \n" + \
-            f"Timeout: {timeout}s"
+            f"Timeout: {timeout_h}s"
             )
+        print (f'timeout{timeout_h}')
         for i in range(target_sample_size):
-            if time.time()-start_time > timeout:
+            if time.time()-start_time > timeout_s:
                 logger.warning("Timeout is reached")
                 sample_d['message'] = "reached_timeout"
                 break

@@ -10,6 +10,7 @@ In the child classes we define functions that will be exposed to the server (mon
 """
 #%%
 from random import sample
+from socket_nodes import LocalScopeExecutor
 
 ##import all you might need later when requesting from server
 import espressomd
@@ -22,29 +23,7 @@ from pathlib import Path
 import logging
 logger = logging.getLogger(__name__)
 
-
-
-class LocalScopeExecutor():
-    def __init__(self) -> None:
-        pass
-
-    def execute(self, expr):
-        super().execute(expr)
-        if isinstance(expr, list):
-            return [self.execute_item(expr_line) for expr_line in expr]
-        elif isinstance(expr, dict):
-            return {request_name:self.execute_item(expr_line) for request_name, expr_line in expr.items()}
-        else:
-            return self.execute_item(expr)
-
-    def execute_item(self, expr : str):
-        try:
-            scope = {k: getattr(self, k) for k in dir(self) if '__' not in k}
-            return eval(expr,scope)
-        except Exception as e:
-            return e
-
-class EspressoExecutorSalt():
+class EspressoExecutorSalt(LocalScopeExecutor):
     ###########overridden base class functions #############
     def __init__(self, espresso_system_instance) -> None:
         self.system = espresso_system_instance

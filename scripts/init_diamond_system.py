@@ -105,9 +105,9 @@ def charge_gel(system, gel_indices, alpha, particle_attr, add_counterions = True
             system.part.add(pos = system.box_l*np.random.random(3), **particle_attr['cation'])
         logger.debug(f'{i+1}/{n_charged} charged')
 
-def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05):
+def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05, int_steps = 10000, minimize_energy_timeout=60):
     logger.debug (f'change_volume to the size L = {target_l}')
-    #system.integrator.run(int_steps)
+    system.integrator.run(int_steps)
     while system.box_l[0] != target_l:
         factor = target_l/system.box_l[0]
         if factor<scale_down_factor:
@@ -116,11 +116,11 @@ def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 
             factor = scale_up_factor
         d_new = system.box_l[0]*factor
         system.change_volume_and_rescale_particles(d_new)
-        #minimize_energy(system)
-        #system.integrator.run(int_steps)
         logger.debug(f'gel box_size: {system.box_l[0]}')
-        logger.debug(f"pressure: {system.analysis.pressure()['total']}")
-    logger.debug ('volume change done')
+    #minimize_energy(system, timeout = minimize_energy_timeout)
+    #system.integrator.run(int_steps)
+    logger.debug ('volume change done. Do not forget to minimize energy')    
+    logger.debug(f"pressure: {system.analysis.pressure()['total']}")
 
 def minimize_energy(system):
     min_d = system.analysis.min_dist()
