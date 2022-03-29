@@ -19,6 +19,7 @@ class gel():
     A = 3*3**(0.5)/4 # The coefficient which relates volume per chain in the diamond lnetwork with the lenght of the chain R^3 = V*A
     Rmax = MPC * bond_length
     Vmax = Rmax**3/A
+    Vmax *= 16
     
     lB = 0 # 0 means no electrostatic interaction
     sigma =0 # 0 means no static interaction
