@@ -12,9 +12,18 @@ MOBILE_SPECIES = [0,1]
 
 #LJ
 from itertools import combinations_with_replacement
-lj_sigma=1
+
+# Avogadro number
+Navogadro = 6.022e23 # 1/mol
+kT = 1.38064852e-23*300 # J
+epsilon = 1.0 # kT
+sigma = 1.0 # esunits
+unit_of_length = sigma_SI = 0.35 # nm
+unit = (unit_of_length*1e-9)**3*Navogadro*1000 # l/mol
+punit = kT*Navogadro/(unit/1000) # J/m3 = Pa
+
 NON_BONDED_ATTR = {
-    pair : dict(epsilon=1, sigma=lj_sigma, cutoff=lj_sigma*2**(1./6), shift='auto')
+    pair : dict(epsilon=epsilon, sigma=sigma, cutoff=sigma*2**(1./6), shift='auto')
     for pair in (combinations_with_replacement([ATTR['type'] for ATTR in PARTICLE_ATTR.values()], 2))
 }
 

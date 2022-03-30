@@ -8,11 +8,12 @@ import sys
 import time
 from routines import *
 logger = logging.getLogger(__name__)
-
+# This defines the logging of server
 #logging.basicConfig(
 #    level=logging.INFO,
 #    stream=open('server.log', 'w'),
 #    format = '%(asctime)s - %(message)s')
+
 
 params = {
     #log every finished request
@@ -137,7 +138,7 @@ class ConnectedNode:
 
         #if log every finished request
         if params['LOG_REQUESTS_INFO']:
-            logger.info(f'node_{self.ids} : {Request.request} -> {result}')
+            logger.debug(f'node_{self.ids} : {Request.request} -> {result}')
 
         #'raise_error'|'log_warning'|'ignore'
         if  params['ON_NODE_ERROR'] != 'ignore':
@@ -197,7 +198,7 @@ class Server():
         """setup the TCP socket server that gather info from the nodes,
         make server available for nodes to connect
         """
-        logger.info(f'Setting the socket up...')
+        logger.info(f'Setting up the socket.')
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_socket.setblocking(0)
@@ -232,7 +233,7 @@ class Server():
         Args:
             timeout (int, optional): Timeout in seconds. Defaults to 10.
         """
-        logger.info(f"Server is expecting to connect one more node")
+        logger.info(f"Server is expecting to connect one more node\n")
         n_nodes = len(self.nodes)
         start_time = time.time()
         while len(self.nodes) == n_nodes:
@@ -254,7 +255,7 @@ class Server():
         self.nodes.append(Node)
 
         logger.info(f'Accepted new connection from {node_address}')
-        logger.debug(f'Nodes connected: {len(self.nodes)}')
+        logger.debug(f'Nodes connected: {len(self.nodes)}\n')
 
 
     def handle_disconnection(self, node_id : int):
@@ -273,7 +274,7 @@ class Server():
             if self.stop_if_no_one_connected:
                 self.shutdown()
 
-        logging.error("Node is disconnected, not expected for libserver.ServerNoDisconnectionAllowed")
+        logging.error("Node is disconnected, not expected for libserver.ServerNoDisconnectionAllowed\n")
         self.shutdown()
         
         
@@ -724,8 +725,8 @@ import threading
 import subprocess 
 
 
-     
-def create_server_and_nodes(name, box_l_gel, box_l_out, alpha, lB, sigma, MPC):
+
+def create_server_and_nodes(name, box_l_gel, box_l_out, alpha, MPC):
     connection_timeout_s = 2400
     server = Server()
     threading.Thread(target=server.run, daemon=True).start()
@@ -734,23 +735,31 @@ def create_server_and_nodes(name, box_l_gel, box_l_out, alpha, lB, sigma, MPC):
     python_executable = '/home/kvint/espresso/espresso/es-build/pypresso'         
     script = 'run_node.py'
 
-    arg_list_gel = ['-l', box_l_gel, '--gel' , '-MPC', MPC, '-alpha', alpha, '-log_name', name+'_gel.log'] + ['--no_interaction']*bool(lB)
+    arg_list_gel = ['-l', box_l_gel, '--gel' , '-MPC', MPC, '-alpha', alpha, '-log_name', name+'_gel.log'] 
     popen_list = [python_executable, script, server.IP, server.PORT]+arg_list_gel
     popen_list = [str(item) for item in popen_list]
     logger.info(f"{__file__}: Popen({popen_list})")
-    subprocess.Popen(popen_list)
+    popen_string = ''
+    for s in popen_list: popen_string+=s+' '
+    print(f"{__file__}: Popen({popen_string})")
+    sbp = subprocess.Popen(popen_list)
+    pid_gel = sbp.pid
     server.wait_connection(timeout = connection_timeout_s)
     
-    arg_list_out = ['-l', box_l_out, '--salt', '-log_name', name+'_out.log'] + ['--no_interaction']*bool(lB)    
+    arg_list_out = ['-l', box_l_out, '--salt', '-log_name', name+'_out.log'] 
     popen_list = [python_executable, script, server.IP, server.PORT]+arg_list_out
     popen_list = [str(item) for item in popen_list]
     logger.info(f"{__file__}: Popen({popen_list})")
-    subprocess.Popen(popen_list)
+    popen_string = ''
+    for s in popen_list: popen_string+=s+' '
+    print(f"{__file__}: Popen({popen_string})")
+    sbp = subprocess.Popen(popen_list)
+    pid_out = sbp.pid
     server.wait_connection(timeout = connection_timeout_s)
 
     print ('Server and nodes started: '+name)
     
-    return server
+    return server, pid_gel, pid_out
     
     
 

@@ -141,7 +141,9 @@ class AbstractMonteCarlo:
         Returns:
             [StateData]: system state after the step is made
         """
-        reversal, accept_criterion = self.move()
+        m = self.move()
+        if m == None: return self.current_state
+        else: reversal, accept_criterion = m
         if self.accept(accept_criterion):
             self.update_state(reversal)
             self.on_accept()

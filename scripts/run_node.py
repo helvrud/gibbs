@@ -23,8 +23,8 @@ The code goes through the next steps:
 from executors import EspressoExecutorSalt, EspressoExecutorGel
 from socket_nodes import ExecutorNode as Node
 
-import logging
-
+import logging, os
+PID = os.getpid()
 #an entry point to run the node in subprocesses
 if __name__=="__main__":
     import argparse
@@ -61,11 +61,11 @@ if __name__=="__main__":
                         type = float,
                         help = 'charged monomer ratio',
                         required='--gel' in sys.argv)
-    parser.add_argument('--no_interaction',
-                        action='store_true',
-                        help = 'switch off bonded and non bonded interaction',
-                        required= False,
-                        )
+    #parser.add_argument('--no_interaction',
+    #                    action='store_true',
+    #                    help = 'switch off bonded and non bonded interaction',
+    #                    required= False,
+    #                    )
     parser.add_argument('-log_name',
                         metavar='log_name',
                         help = 'name of log file',
@@ -83,13 +83,16 @@ if __name__=="__main__":
     logger.info("run_node.py started with args:")
     logger.info(' '.join(f'{k}={v}' for k, v in vars(args).items()))
     #set or disable interaction
-    if '--no_interaction' in sys.argv:
-        logger.warning('No interactions between particles')
-        NON_BONDED_ATTR = None
-        BONDED_ATTR = None
-    else:
-        from shared import NON_BONDED_ATTR, BONDED_ATTR
-        logger.debug("loading non_bonded_interaction params from shared.py")
+    #if '--no_interaction' in sys.argv:
+    #    logger.warning('No interactions between particles')
+    #    NON_BONDED_ATTR = None
+    #    BONDED_ATTR = None
+    #else:
+    #    from shared import NON_BONDED_ATTR, BONDED_ATTR
+    #    logger.debug("loading non_bonded_interaction params from shared.py")
+    from shared import NON_BONDED_ATTR, BONDED_ATTR
+    #NON_BONDED_ATTR = None
+    #BONDED_ATTR = None
 
     logger.info(f'non_bonded interaction params: {NON_BONDED_ATTR}')
     #init salt or gel
@@ -107,6 +110,7 @@ if __name__=="__main__":
             bonded_attr = BONDED_ATTR, non_bonded_attr = NON_BONDED_ATTR, particle_attr =PARTICLE_ATTR
             )
         node = Node(args.IP, args.PORT, EspressoExecutorGel, system)
+    
     logger.info("Starting the node...")
     try:
         node.run()

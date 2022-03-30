@@ -1,13 +1,16 @@
 from ion_pair_monte_carlo import MonteCarloPairs
 import logging
 import socket_nodes
+try: from tqdm import trange
+except: trange = range
+
 socket_nodes.set_params(LOG_REQUESTS_INFO = True)
 
 
 from routines import sample_to_target
 import time
-logging.getLogger("socket_nodes")
-
+#logger = logging.getLogger("socket_nodes")
+#logger = logging.getLogger(__name__)
 
 
 
@@ -19,12 +22,12 @@ class gel():
     A = 3*3**(0.5)/4 # The coefficient which relates volume per chain in the diamond lnetwork with the lenght of the chain R^3 = V*A
     Rmax = MPC * bond_length
     Vmax = Rmax**3/A
-    Vmax *= 16
+    Vmax *= 16 
     
-    lB = 0 # 0 means no electrostatic interaction
+    lB = 0 # 0 means no electrostatic interaction. Default is 2
     sigma =0 # 0 means no static interaction
-    alpha = 0.
-    Ncl = 10
+    alpha = 0.5
+    Ncl = 500
 
 
     target_sample_size=200# number of samples,
@@ -32,21 +35,14 @@ class gel():
     #save_file_path = output_dir/output_fname
 
     
+    Vbox = Vmax*0.5
+    Vgel = Vbox*0.7
+    Vout = Vbox*0.3
 
-    Vgel = Vmax*0.5
-    Vout = 100
 
     def __init__(self, run=False):
 
 
-        # This defines the logging of server
-        logging.basicConfig(
-            level=logging.INFO,
-            #level=logging.DEBUG,
-            stream=open('server_log', 'w'),
-            format = '%(asctime)s - %(message)s')
-    
-    
         self.box_l_gel = self.Vgel**(1./3)
         self.box_l_out = self.Vout**(1./3)
         
@@ -59,9 +55,20 @@ class gel():
         if self.sigma == 0.: self.name+='_sigma{:.0f}'.format(self.sigma)
         if run:
             
-            self.server = socket_nodes.create_server_and_nodes(name = self.name, box_l_gel = self.box_l_gel, box_l_out = self.box_l_out, alpha = self.alpha, lB=self.lB, sigma=self.sigma, MPC = self.MPC)
-            #self.server("minimize_energy()", [0,1])
-     
+            self.server, self.pid_gel, self.pid_out = socket_nodes.create_server_and_nodes(name = 'test', box_l_gel = self.box_l_gel, box_l_out = self.box_l_out, alpha = self.alpha, MPC = self.MPC)
+            
+            self.MC = MonteCarloPairs(self.server)
+            Ncl_gel = int(self.Ncl*self.Vgel/(self.Vout+self.Vgel))
+            Ncl_out = int(self.Ncl*self.Vout/(self.Vout+self.Vgel))
+            Ncl_out += self.Ncl - (Ncl_gel + Ncl_out)
+            self.MC.populate([Ncl_gel, Ncl_out])
+            self.server("minimize_energy()", [0,1])
+            #logger.info("#################################")
+            
+    def equilibrate(self) :
+        eq_params = {'timeout_eq':120, 'rounds_eq':10, 'mc_steps_eq':100, 'md_steps_eq':1000}
+        self.MC.equilibrate(**eq_params)
+        
     def NN(self):
         """
         This function  returns the number of mobile anion particles in gel and in reservoir as a list
@@ -83,13 +90,13 @@ g = gel(run = True)
 #g.MC.equilibrate(1,1,1)
 
 g.MC = MonteCarloPairs(g.server)
-g.MC.populate([g.Ncl]*2)
+
 #g.MC.populate([40]*2)
 
 #z = g.server("minimize_energy()", [0,1])
-#if g.lB: 
-#    g.server('enable_electrostatic()', [0, 1])
-#    z = g.server("minimize_energy()", [0,1])
+if g.lB: 
+    g.server('enable_electrostatic()', [0, 1])
+    z = g.server("minimize_energy()", [0,1])
 #self.MC.sample_pressures_to_target_error()
 
 #result = g.MC.sample_all(200,1)
@@ -97,7 +104,7 @@ g.MC.populate([g.Ncl]*2)
 #
 #g.MC.sample_zeta_to_target_error()
 #g.MC.sample_particle_count_to_target_error()
-g.server("minimize_energy()", [0,1])
+
 #g.MC.sample_pressures_to_target_error()
 
 #result = g.MC.sample_all(200,10)

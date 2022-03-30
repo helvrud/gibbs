@@ -192,10 +192,10 @@ class EspressoExecutorSalt(LocalScopeExecutor):
 #        logger.debug(f"Volume changed to {new_vol}")
 #        return self.potential_energy()
 
-    def enable_electrostatic(self, l_bjerrum=2, int_steps = 10000):
+    def enable_electrostatic(self, lB=2, int_steps = 10000):
         from espressomd import electrostatics
-        l_bjerrum = 2
-        p3m = electrostatics.P3M(prefactor=l_bjerrum, accuracy=1e-3)
+        lB = 2
+        p3m = electrostatics.P3M(prefactor=lB, accuracy=1e-3)
         self.system.actors.add(p3m)
         p3m_params = p3m.get_params()
         logger.debug(p3m_params)

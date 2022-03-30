@@ -11,6 +11,7 @@ except:
 
 from montecarlo import *
 from routines import sample_to_target, append_to_lists_in_dict
+from shared import unit
 
 logger = logging.getLogger(__name__)
 
@@ -41,8 +42,8 @@ def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, re
 
 
 class MonteCarloPairs(AbstractMonteCarlo):
-    particle_count_sampling_kwargs=dict(timeout=240, target_eff_sample_size = 2, target_error = None)
-    pressure_sampling_kwargs =     dict(timeout=240, target_eff_sample_size = 2, target_error = None)
+    particle_count_sampling_kwargs=dict(timeout=240, target_eff_sample_size = 50, target_error = None)
+    pressure_sampling_kwargs =     dict(timeout=240, target_eff_sample_size = 50, target_error = None)
     
     
     
@@ -52,7 +53,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         super().__init__()
         self.server = server
         self.setup()
-        logger.info("Monte Carlo ion pairs exchange initialized")
+        logger.info("Monte Carlo ion pairs exchange initialized\n")
 
     def setup(self) -> StateData:
         # request for energy, volume, mobile ions,
@@ -94,6 +95,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         # if there is no particles to be removed - switch sides
         if self.current_state.anions[side] == 0:
             side, other_side = other_side, side
+            #return [None, None]
         # get random indices for cation and anion
         pair_ids = [
             random.choice(tuple(self.current_state.anion_ids[side])),
@@ -293,11 +295,10 @@ class MonteCarloPairs(AbstractMonteCarlo):
         #sample stored as dict of lists
         sample_d = {}
         logger.info(
-            "Sampling pressure and particle count... \n" + \
+            "Sampling P and N." + \
             f"Target sample size: {target_sample_size} \n" + \
-            f"Timeout: {timeout_h}s"
+            f"Timeout: {timeout_s} s"
             )
-        print (f'timeout{timeout_h}')
         for i in range(target_sample_size):
             if time.time()-start_time > timeout_s:
                 logger.warning("Timeout is reached")
@@ -333,7 +334,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
             #save updated data to pickle storage
             
 
-        logger.info(f'Sampling is done')
+        logger.info(f'Sampling is done\n')
         return sample_d
 
 
@@ -344,26 +345,35 @@ class MonteCarloPairs(AbstractMonteCarlo):
         self.server(f"system.integrator.run({md_steps})", [0, 1])
         self.setup()
 
-    def equilibrate(self, timeout_h, rounds, mc_steps, md_steps=10000):
-        print ('### Equilibrate timeout_h={}, rounds={}, mc_steps={} ###'.format(timeout_h, rounds, mc_steps))  
-        logger.info("Equilibrating...")
-        self.run_md(md_steps)
+    def equilibrate(self, timeout_eq=3600, rounds_eq=100, mc_steps_eq=1000, md_steps_eq=10000):
+        print (f'### Equilibrate timeout_eq={timeout_eq}, rounds_eq={rounds_eq}, mc_steps_eq={mc_steps_eq}, md_steps_eq={md_steps_eq}  ###')  
+        logger.info(f'### Equilibrate timeout_eq={timeout_eq}, rounds_eq={rounds_eq}, mc_steps_eq={mc_steps_eq}, md_steps_eq={md_steps_eq}  ###')
+        #self.run_md(md_steps_eq)
         start_time = time.time()
-        for ROUND in trange(rounds):
-            [self.step() for i in range(mc_steps)]
-            self.run_md(md_steps)
-            logger.info(f"Equilibrating {ROUND+1}/{rounds}")
-            if (time.time() - start_time)/3600 >= timeout_h: return True
-        logger.info("Equilibrated")
+        for ROUND in trange(rounds_eq):
+            self.run_md(md_steps_eq)
+            for i in range(mc_steps_eq): 
+                self.step(); 
+                ccl_gel, ccl_out = np.array(self.current_state["anions"])/self.current_state["volume"] / unit # mol/l
+                logger.info(f'Anions density {ccl_gel}, {ccl_out}')
+                print(f'Anions density {ccl_gel}, {ccl_out}')
+                #logger.info(f'Anions {self.current_state["anions"]}')
+            logger.info(f"Equilibrating {ROUND+1}/{rounds_eq}")
+            if (time.time() - start_time) >= timeout_eq: 
+                logger.info(f"Equilibrating timeout {timeout_eq} s reached")
+                return True
+        logger.info("Equilibrated\n")
         return True
 
     def populate(self, N_pairs):
         """Populates boxes with ion pairs excl. counterion
         """
+        print (f'### Populate N_pairs={N_pairs} ###')  
+        logger.info(f'### Populate N_pairs={N_pairs} ###') 
+
         MOBILE_SPECIES_COUNT = [
             {'anion': int(N_pairs[0]), 'cation': int(N_pairs[0])},  # left side
-            {'anion': int(N_pairs[1]), 'cation': int(
-                N_pairs[1])},  # right side
+            {'anion': int(N_pairs[1]), 'cation': int(N_pairs[1])},  # right side
         ]
         from shared import PARTICLE_ATTR
         for i, side in enumerate(MOBILE_SPECIES_COUNT):
@@ -374,6 +384,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 print(f'to side {i} ')
                 self.server(f"populate({count}, **{PARTICLE_ATTR[species]})", i)
         self.setup()
+        logger.info("Populated\n")
         return True
         
         

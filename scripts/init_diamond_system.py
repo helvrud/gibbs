@@ -6,13 +6,14 @@ During the generation process counter-ions for the ionized monomers will be crea
 """
 #%%
 import sys
-print('##############################')
 import espressomd
 from routines import sample_to_target
 import numpy as np
 import random
 import logging
 
+import logging, os
+PID = os.getpid()
 
 logger = logging.getLogger(__name__)
     
@@ -33,34 +34,27 @@ def init_diamond_system(MPC, alpha, bonded_attr, non_bonded_attr, particle_attr,
 
     logger.debug(f"gel initial volume: {box_l}")
 
-    if non_bonded_attr is not None:
-        setup_non_bonded(system, non_bonded_attr)
-        logger.debug(f"non-bonded interaction is setup")
+    
+    setup_non_bonded(system, non_bonded_attr)
+    logger.debug(f"non-bonded interaction is setup")
 
-    if bonded_attr is not None:
-        if non_bonded_attr is None:
-            logger.debug(
-                f"non-bonded interaction is not setup, bonded ignored")
-        else:
-            fene = espressomd.interactions.FeneBond(**bonded_attr['FeneBond'])
-            system.bonded_inter.add(fene)
-            logger.debug(f"bonded interaction is setup")
+
+    fene = espressomd.interactions.FeneBond(**bonded_attr['FeneBond'])
+    system.bonded_inter.add(fene)
+    logger.debug(f"bonded interaction is setup")
 
     start_id = system.part.highest_particle_id
-    if bonded_attr is not None:
-        #diamond.Diamond(a=a, bond_length=bond_length, MPC=MPC)
-        espressomd.polymer.setup_diamond_polymer(system=system, bond=fene, MPC=MPC)
-        print ('Diamond is set')
-    else:
-        for i in range(MPC*16+8):
-            logger.debug(
-                f"bonded interaction is not setup, no net created")
-            system.part.add(pos = system.box_l*np.random.random(3), **particle_attr['gel_neutral'])
-    gel_indices  = (start_id+1, system.part.highest_particle_id+1)
-
+    
+    #diamond.Diamond(a=a, bond_length=bond_length, MPC=MPC)
+    espressomd.polymer.setup_diamond_polymer(system=system, bond=fene, MPC=MPC)
+    print ('Diamond is set')
+    
+    gel_indices  = (start_id+1, system.part.highest_particle_id+1) # the indicies of the gel particles excluding nodes
+    chains_indices  = (start_id+9, system.part.highest_particle_id+1) # the indicies of the gel particles excluding nodes
     re_type_nodes(system, gel_indices, particle_attr)
-    charge_gel(system, gel_indices, alpha, particle_attr)
-    #minimize_energy(system, timeout=60)
+    charge_gel(system, chains_indices, alpha, particle_attr)
+    print ('### Minimize energy before change_volume  ###')
+    minimize_energy(system)
     #logger.debug('Minimizing energy before volume change')
     #system.minimize_energy.minimize()
     if (target_pressure is not None) and (target_l is not None):
@@ -96,7 +90,7 @@ def re_type_nodes(system, gel_indices, particle_attr):
             for attr_name, attr_val in particle_attr['gel_neutral'].items():
                 setattr(part, attr_name, attr_val)
 
-def charge_gel(system, gel_indices, alpha, particle_attr, add_counterions = True):
+def charge_gel(system, gel_indices, alpha, particle_attr):
     particles = list(system.part[slice(*gel_indices)])
     n_charged = int(len(particles)*alpha)
     for i, part in enumerate(random.sample(particles, n_charged)):
@@ -104,10 +98,11 @@ def charge_gel(system, gel_indices, alpha, particle_attr, add_counterions = True
             for attr_name, attr_val in particle_attr['gel_anion'].items():
                 setattr(part, attr_name, attr_val)
         else: #part.type == particle_attr['gel_']:
+            print ('CHARGING THE NODE')
             for attr_name, attr_val in particle_attr['gel_node_anion'].items():
                 setattr(part, attr_name, attr_val)
-        if add_counterions:
-            system.part.add(pos = system.box_l*np.random.random(3), **particle_attr['cation'])
+        # add_counterions
+        system.part.add(pos = system.box_l*np.random.random(3), **particle_attr['cation'])
         logger.debug(f'{i+1}/{n_charged} charged')
 
 def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05, int_steps = 10000, minimize_energy_timeout=60):
