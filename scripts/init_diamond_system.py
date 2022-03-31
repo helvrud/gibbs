@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
     
     
     
-def init_diamond_system(MPC, alpha, bonded_attr, non_bonded_attr, particle_attr, target_l=None, target_pressure=None):
+def init_diamond_system(MPC, alpha, target_l, bonded_attr, non_bonded_attr, particle_attr):
     import espressomd.interactions
     import espressomd.polymer
     bond_length = 0.966
@@ -54,13 +54,13 @@ def init_diamond_system(MPC, alpha, bonded_attr, non_bonded_attr, particle_attr,
     re_type_nodes(system, gel_indices, particle_attr)
     charge_gel(system, chains_indices, alpha, particle_attr)
     print ('### Minimize energy before change_volume  ###')
-    minimize_energy(system)
+    #minimize_energy(system)
     #logger.debug('Minimizing energy before volume change')
     #system.minimize_energy.minimize()
-    if (target_pressure is not None) and (target_l is not None):
-        raise ArithmeticError("Can not pass both target_pressure and target_l")
-    if target_l is not None:
-        change_volume(system, target_l)
+    #if (target_pressure is not None) and (target_l is not None):
+    #    raise ArithmeticError("Can not pass both target_pressure and target_l")
+    #if target_l is not None:
+    change_volume(system, target_l)
     system.setup_type_map([0,1,2,3,4,5])
     return system
 
@@ -105,48 +105,14 @@ def charge_gel(system, gel_indices, alpha, particle_attr):
         system.part.add(pos = system.box_l*np.random.random(3), **particle_attr['cation'])
         logger.debug(f'{i+1}/{n_charged} charged')
 
-def change_volume(system, target_l, scale_down_factor = 0.97, scale_up_factor = 1.05, int_steps = 10000, minimize_energy_timeout=60):
+def change_volume(system, target_l):
+    print (f'### Change box_l to target_l = {target_l} ###')
+    scale_down_factor = 0.97
+    scale_up_factor = 1.05
     logger.debug (f'change_volume to the size L = {target_l}')
-    system.integrator.run(int_steps)
-    while system.box_l[0] != target_l:
-        factor = target_l/system.box_l[0]
-        if factor<scale_down_factor:
-            factor = scale_down_factor
-        elif factor>scale_up_factor:
-            factor = scale_up_factor
-        d_new = system.box_l[0]*factor
-        system.change_volume_and_rescale_particles(d_new)
-        logger.debug(f'gel box_size: {system.box_l[0]}')
-    #minimize_energy(system, timeout = minimize_energy_timeout)
-    #system.integrator.run(int_steps)
-    logger.debug ('volume change done. Do not forget to minimize energy')    
-    logger.debug(f"pressure: {system.analysis.pressure()['total']}")
+    system.change_volume_and_rescale_particles(target_l)
+    print (f'volume change done; gel box_size: {system.box_l[0]}. Do not forget to minimize energy')    
 
-def minimize_energy(system):
-    # TO BE REMOVED
-    min_d = system.analysis.min_dist()
-    logger.debug(f"minimize_energy from {__file__}")
-    logger.debug(f"Minimal distance: {min_d}")
-    
-    from espressomd import minimize_energy
-    minimize_energy.steepest_descent(system, f_max = 0, gamma = 10, max_steps = 2000, max_displacement= 0.01)
-
-    #try:
-    #    from espressomd import minimize_energy
-    #    minimize_energy.steepest_descent(system, f_max = 0, gamma = 10, max_steps = 2000, max_displacement= 0.01)
-    #except AttributeError:
-    #    system.minimize_energy.init(f_max = 10, gamma = 10, max_steps = 2000, max_displacement= 0.1)
-    #    system.minimize_energy.minimize()
-    min_d = system.analysis.min_dist()
-    logger.debug(f"Minimal distance: {min_d}")
-    energies = system.analysis.energy()
-    #try:
-    #    print('total = ', energies['total'], 'kinetic=', energies['kinetic'], 'coulomb=', energies['coulomb'])
-    #except KeyError:
-    #    print('total = ', energies['total'], 'kinetic=', energies['kinetic'])
-    system.integrator.run(10000)
-    logger.info('### Minimization energy done. ###')
-    return min_d
 
 def get_pressure(system, **kwargs):
     from montecarlo import sample_to_target

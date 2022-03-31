@@ -26,12 +26,12 @@ class gel():
     
     lB = 0 # 0 means no electrostatic interaction. Default is 2
     sigma =0 # 0 means no static interaction
-    alpha = 0.5
+    alpha = 1.0
     Ncl = 500
 
 
-    target_sample_size=200# number of samples,
-    timeout = 1*3600 - (time.time() - start_time) # seconds
+    target_sample_size=10# number of samples,
+    timeout = 1 # hours
     #save_file_path = output_dir/output_fname
 
     
@@ -64,9 +64,17 @@ class gel():
             self.MC.populate([Ncl_gel, Ncl_out])
             self.server("minimize_energy()", [0,1])
             #logger.info("#################################")
-            
+          
+    def change_volume(self, V0, V1):
+        
+        target_l0 = V0**(1./3)
+        target_l1 = V1**(1./3)
+        z0 = g.server(f"change_volume({target_l0})", [0])
+        z1 = g.server(f"change_volume({target_l1})", [1])
+    
+                
     def equilibrate(self) :
-        eq_params = {'timeout_eq':120, 'rounds_eq':10, 'mc_steps_eq':100, 'md_steps_eq':1000}
+        eq_params = {'timeout_eq':2, 'rounds_eq':10, 'mc_steps_eq':100, 'md_steps_eq':1000}
         self.MC.equilibrate(**eq_params)
         
     def NN(self):
@@ -84,8 +92,9 @@ class gel():
         Ngel_node_anion   = g.server("system.number_of_particles(5)", [0])[0].result()
         print (f'Ncl_gel {Nanion_gel}\n Nna_gel{Ncation_gel}\n Ngel_neutral{Ngel_neutral}\n Ngel_anion{Ngel_anion}\n Ngel_node_neutral{Ngel_node_neutral}\n Ngel_node_anion {Ngel_node_neutral}\n Ncl_out{Nanion_out}\n Nna_out{Ncation_out}\n')
         return [Nanion_gel, Nanion_out]
-        
-        
+    def sample(self):
+        sample_d = g.MC.sample_all(self.target_sample_size,self.timeout)
+        return sample_d
 g = gel(run = True)
 #g.MC.equilibrate(1,1,1)
 
@@ -93,10 +102,13 @@ g.MC = MonteCarloPairs(g.server)
 
 #g.MC.populate([40]*2)
 
-#z = g.server("minimize_energy()", [0,1])
-if g.lB: 
-    g.server('enable_electrostatic()', [0, 1])
+z = g.server("minimize_energy()", [0,1])
+equ1 = g.equilibrate()
+
+if g.lB:
+    z = g.server(f'enable_electrostatic(lB = {g.lB})', [0, 1])
     z = g.server("minimize_energy()", [0,1])
+    equ2 = g.equilibrate()
 #self.MC.sample_pressures_to_target_error()
 
 #result = g.MC.sample_all(200,1)
@@ -107,4 +119,15 @@ if g.lB:
 
 #g.MC.sample_pressures_to_target_error()
 
-#result = g.MC.sample_all(200,10)
+result = g.sample()
+
+
+
+
+
+
+
+
+
+
+

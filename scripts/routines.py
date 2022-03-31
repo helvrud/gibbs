@@ -122,13 +122,13 @@ def sample_to_target(
     target_error = sampling_kwargs['target_error']
     target_eff_sample_size = sampling_kwargs['target_eff_sample_size']
     timeout = sampling_kwargs['timeout']
-
+    print (f'### timeout = {timeout}, target_eff_sample_size = {target_eff_sample_size}, target_error = {target_error} ###') 
     #stop sampling criteria
     def end_loop(elapsed_time, current_error, eff_sample_size):
         #logger.debug('TARGETERRORO: ', target_error)
 
-        print ('CURRENT_ERROR: ', current_error)
-        print ('EFF_SAMPLE_SIZE: ', eff_sample_size)
+        #print ('CURRENT_ERROR: ', current_error)
+        #print ('EFF_SAMPLE_SIZE: ', eff_sample_size)
 
         if elapsed_time > timeout:
             logger.info('Reached timeout')
@@ -149,7 +149,7 @@ def sample_to_target(
                 return True
         elif target_eff_sample_size is not None:
             if eff_sample_size >= target_eff_sample_size:
-                logger.info("Reached effective sample size")
+                print(f"Reached effective sample size: {eff_sample_size}")
                 return True
         else:
             return False

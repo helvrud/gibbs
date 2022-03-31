@@ -173,14 +173,16 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         return float(self.system.analysis.energy()['total'] - self.system.analysis.energy()['kinetic'])
 
     def sample_pressure_to_target_error(self, sampling_kwargs):
+        logger.info(f'####### Energy minimization #######: {sampling_kwargs}')
         int_steps=1000
         system=self.system
         def get_data_callback(n):
-                acc = []
-                for i in range(n):
-                    system.integrator.run(int_steps)
-                    acc.append(float(system.analysis.pressure()['total']))
-                return acc
+            logger.info(f'Integrating n={n} times by int_steps={int_steps}')
+            acc = []
+            for i in range(n):
+                system.integrator.run(int_steps)
+                acc.append(float(system.analysis.pressure()['total']))
+            return acc
         return sample_to_target(get_data_callback, sampling_kwargs)
 
 
@@ -193,20 +195,24 @@ class EspressoExecutorSalt(LocalScopeExecutor):
 #        return self.potential_energy()
 
     def enable_electrostatic(self, lB=2, int_steps = 10000):
-        from espressomd import electrostatics
-        lB = 2
-        p3m = electrostatics.P3M(prefactor=lB, accuracy=1e-3)
-        self.system.actors.add(p3m)
-        p3m_params = p3m.get_params()
-        logger.debug(p3m_params)
-        self.minimize_energy()
-        return True
-
+        if lB:
+            from espressomd import electrostatics
+            print ( f'enabling electrostatics, lB = {lB}')
+            p3m = electrostatics.P3M(prefactor=lB, accuracy=1e-3)
+            self.system.actors.add(p3m)
+            p3m_params = p3m.get_params()
+            logger.debug(p3m_params)
+            self.minimize_energy()
+            return True
+        else:
+            print ( f'No electrostatics, lB = {lB}')
+            return True
+                
     def minimize_energy(self):
+        logger.info('####### Energy minimization #######.')
         min_d = self.system.analysis.min_dist()
         logger.debug(f"minimize_energy from {__file__}")
         logger.debug(f"Minimal distance: {min_d}")
-
         try:
             from espressomd import minimize_energy
             minimize_energy.steepest_descent(self.system, f_max = 0, gamma = 10, max_steps = 2000, max_displacement= 0.01)

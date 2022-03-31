@@ -20,9 +20,9 @@ The code goes through the next steps:
 
 @author: Laktionov Mikhail
 """
+
 from executors import EspressoExecutorSalt, EspressoExecutorGel
 from socket_nodes import ExecutorNode as Node
-
 import logging, os
 PID = os.getpid()
 #an entry point to run the node in subprocesses
@@ -78,7 +78,7 @@ if __name__=="__main__":
     #logging
     import logging
     if '-log_name' in sys.argv:
-        logging.basicConfig(level=logging.DEBUG, stream=open(args.log_name, 'w'))
+        logging.basicConfig(level=logging.INFO, stream=open(args.log_name, 'w'))
         logger.debug("run_node.py DEBUG")
     logger.info("run_node.py started with args:")
     logger.info(' '.join(f'{k}={v}' for k, v in vars(args).items()))
@@ -117,3 +117,4 @@ if __name__=="__main__":
     except Exception as e:
         logger.exception(e)
     logger.warning("Node is closed")
+    

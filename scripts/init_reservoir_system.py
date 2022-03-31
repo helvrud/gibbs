@@ -1,22 +1,9 @@
 #%%
 import espressomd
 from routines import sample_to_target
+
 import logging
 logger = logging.getLogger(__name__)
-
-def _minimize_energy(system):
-    system.thermostat.suspend()
-    system.integrator.set_steepest_descent(
-    f_max=0, gamma=0.1, max_displacement=0.1)
-    min_d = system.analysis.min_dist()
-    logger.info(f"Minimal distance: {min_d}")
-    while (min_d) < 0.5 or (min_d==np.inf):
-        system.integrator.run(100)
-        min_d = system.analysis.min_dist()
-        logger.debug(f"Minimal distance: {min_d}")
-    system.integrator.set_vv()
-    system.thermostat.recover()
-    system.integrator.run(10000)
 
 def init_reservoir_system(box_l, non_bonded_attr):
     system = espressomd.System(box_l = [box_l]*3)

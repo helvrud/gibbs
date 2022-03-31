@@ -42,8 +42,7 @@ def _entropy_change(anion_0, anion_1, cation_0, cation_1, volume_0, volume_1, re
 
 
 class MonteCarloPairs(AbstractMonteCarlo):
-    particle_count_sampling_kwargs=dict(timeout=240, target_eff_sample_size = 50, target_error = None)
-    pressure_sampling_kwargs =     dict(timeout=240, target_eff_sample_size = 50, target_error = None)
+    
     
     
     
@@ -213,7 +212,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         Nanion_gel  = self.server("system.number_of_particles(0)", [0])[0].result()     
         Nanion_out  = self.server("system.number_of_particles(0)", [1])[0].result()
         logger.debug(f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}\n')
-        print (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}\n')
+        #print (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}\n')
         return [Nanion_gel, Nanion_out]
 
     def entropy_change(self, side):
@@ -246,8 +245,15 @@ class MonteCarloPairs(AbstractMonteCarlo):
         return sample_to_target(get_zeta_callback, **kwargs)
 
     def sample_particle_count_to_target_error(self):
-        self.NN()
-        print ('\n### sample_particle_count_to_target_error ###')
+        particle_count_sampling_kwargs=dict(timeout=240, target_eff_sample_size = 10, target_error = None)
+        timeout = particle_count_sampling_kwargs['timeout']
+        start_time = time.time()
+        if time.time()-start_time > timeout:
+            print("sample_particle_count_to_target_error: Timeout is reached")
+        
+        [Nanion_gel, Nanion_out] = self.NN()
+        num_particles = (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}')
+        print (f'\n### sample_particle_count_to_target_error started: {num_particles} ###')
         def get_particle_count_callback(sample_size):
             anions = []
             for i in range(sample_size):
@@ -256,12 +262,17 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 self.step()
             return np.array(anions)
 
-        anion_salt, eff_err, eff_sample_size = sample_to_target(get_particle_count_callback, self.particle_count_sampling_kwargs)
+        anion_salt, eff_err, eff_sample_size = sample_to_target(get_particle_count_callback, particle_count_sampling_kwargs)
 
         cation_salt = anion_salt
+        # Вот в этом месте надо спросить у Миши что имеется здесь ввиду
         anion_gel = sum(self.current_state.anions) - anion_salt
         cation_gel = sum(self.current_state.cations) - cation_salt
         #self.server("minimize_energy()", [0,1])
+        [Nanion_gel, Nanion_out] = self.NN()
+        num_particles = (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}')
+        print (f'\n### sample_particle_count_to_target_error finished: {num_particles} ###')
+
         return {
             'anion': (anion_salt, anion_gel),
             'cation': (cation_salt, cation_gel),
@@ -269,13 +280,18 @@ class MonteCarloPairs(AbstractMonteCarlo):
             'err': eff_err,
             'sample_size': eff_sample_size
         }
-        
+
         
 
     def sample_pressures_to_target_error(self):
+        pressure_sampling_kwargs = dict(timeout=240, target_eff_sample_size = 10, target_error = None)
+        start_time = time.time()
+        timeout = pressure_sampling_kwargs['timeout']
+        if time.time()-start_time > timeout:
+            print("sample_pressures_to_target_error: Timeout is reached")
+                
         print ('\n### sample_pressures_to_target_error ###')
-        request = self.server(f'sample_pressure_to_target_error({self.pressure_sampling_kwargs})', [0, 1])
-        print ('REQUEST:',request)
+        request = self.server(f'sample_pressure_to_target_error({pressure_sampling_kwargs})', [0, 1])
         pressure_0, err_0, sample_size_0 = request[0].result()
         pressure_1, err_1, sample_size_1 = request[1].result()
         self.setup()
@@ -300,8 +316,9 @@ class MonteCarloPairs(AbstractMonteCarlo):
             f"Timeout: {timeout_s} s"
             )
         for i in range(target_sample_size):
+            print (f'\nSampling {i} out of target_sample_size = {target_sample_size}\n')
             if time.time()-start_time > timeout_s:
-                logger.warning("Timeout is reached")
+                print("Timeout is reached")
                 sample_d['message'] = "reached_timeout"
                 break
             try: particles_speciation = self.sample_particle_count_to_target_error()
