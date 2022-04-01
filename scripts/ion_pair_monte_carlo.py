@@ -255,6 +255,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         num_particles = (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}')
         print (f'\n### sample_particle_count_to_target_error started: {num_particles} ###')
         def get_particle_count_callback(sample_size):
+            # Returns the array of sample_size of anions in gel
             anions = []
             for i in range(sample_size):
                 a = self.current_state.anions[0]
@@ -262,20 +263,21 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 self.step()
             return np.array(anions)
 
-        anion_salt, eff_err, eff_sample_size = sample_to_target(get_particle_count_callback, particle_count_sampling_kwargs)
+        anion_gel, eff_err, eff_sample_size = sample_to_target(get_particle_count_callback, particle_count_sampling_kwargs)
 
-        cation_salt = anion_salt
+        anion_out = sum(self.current_state.anions) - anion_gel
+        cation_out = anion_out
         # Вот в этом месте надо спросить у Миши что имеется здесь ввиду. Хотя и ладно понятно
-        anion_gel = sum(self.current_state.anions) - anion_salt
-        cation_gel = sum(self.current_state.cations) - cation_salt
+        #anion_gel = sum(self.current_state.anions) - anion_out
+        cation_gel = sum(self.current_state.cations) - cation_out
         #self.server("minimize_energy()", [0,1])
         [Nanion_gel, Nanion_out] = self.NN()
         num_particles = (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}')
         print (f'\n### sample_particle_count_to_target_error finished: {num_particles} ###')
 
         return {
-            'anion': (anion_salt, anion_gel),
-            'cation': (cation_salt, cation_gel),
+            'anion': (anion_gel, anion_out),
+            'cation': (cation_gel, cation_out),
             'zeta' : self.zeta(),
             'err': eff_err,
             'sample_size': eff_sample_size
