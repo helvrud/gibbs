@@ -265,7 +265,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         anion_salt, eff_err, eff_sample_size = sample_to_target(get_particle_count_callback, particle_count_sampling_kwargs)
 
         cation_salt = anion_salt
-        # Вот в этом месте надо спросить у Миши что имеется здесь ввиду
+        # Вот в этом месте надо спросить у Миши что имеется здесь ввиду. Хотя и ладно понятно
         anion_gel = sum(self.current_state.anions) - anion_salt
         cation_gel = sum(self.current_state.cations) - cation_salt
         #self.server("minimize_energy()", [0,1])
@@ -302,9 +302,9 @@ class MonteCarloPairs(AbstractMonteCarlo):
         }
 
 
-    def sample_all(self, target_sample_size, timeout_h):
+    def sample_all(self, target_sample_size, timeout_s):
         # timeout_h in hours
-        timeout_s = timeout_h * 3600
+
         start_time = time.time()
         #add header to stored data
 
@@ -369,15 +369,17 @@ class MonteCarloPairs(AbstractMonteCarlo):
         start_time = time.time()
         for ROUND in trange(rounds_eq):
             self.run_md(md_steps_eq)
+            print(f'###    Round: {ROUND}    ###')
             for i in range(mc_steps_eq): 
                 self.step(); 
                 ccl_gel, ccl_out = np.array(self.current_state["anions"])/self.current_state["volume"] / unit # mol/l
                 logger.info(f'Anions density {ccl_gel}, {ccl_out}')
-                print(f'Anions density {ccl_gel}, {ccl_out}')
+                print(f'MC step: {i}. Anions density {ccl_gel}, {ccl_out}')
                 #logger.info(f'Anions {self.current_state["anions"]}')
             logger.info(f"Equilibrating {ROUND+1}/{rounds_eq}")
             if (time.time() - start_time) >= timeout_eq: 
                 logger.info(f"Equilibrating timeout {timeout_eq} s reached")
+                print(f"Equilibrating timeout {timeout_eq} s reached")
                 return True
         logger.info("Equilibrated\n")
         return True
