@@ -26,7 +26,6 @@ class gel():
 
     
     lB = 0 # 0 means no electrostatic interaction. Default is 2
-    sigma =0 # 0 means no static interaction
     alpha = 1.0
     
 
@@ -75,7 +74,7 @@ class gel():
         self.name = 'gibbs_Vgel{:.2f}_Vout{:.2f}_Ncl{}'.format(self.Vgel, self.Vout, self.Ncl)
         if self.alpha != 1.: self.name+='_alpha{:.2f}'.format(self.alpha)
         if self.lB == 0.:    self.name+='_lB{:.0f}'.format(self.lB)
-        if self.sigma == 0.: self.name+='_sigma{:.0f}'.format(self.sigma)
+        #if self.sigma == 0.: self.name+='_sigma{:.0f}'.format(self.sigma)
 
             
         if self.N_Samples != 100: self.name += '_N'+str(self.N_Samples)
@@ -149,7 +148,7 @@ class gel():
         infile.close()
         os.chmod(self.fnamepy, 0o774)
         
-    def send2metacentrum(self, run = False, walltime = 2, mem = '100mb', hostname = 'skirit'):
+    def send2metacentrum(self, run = False, walltime = 2, mem = '500mb', hostname = 'skirit'):
         #self.WD = '/storage/praha1/home/kvint/mv/'
         if hostname == 'skirit':
             self.HD = '/storage/brno2/home/{0}'.format(self.USERNAME) # home directory on skirit
@@ -248,9 +247,11 @@ if __name__ == '__main__':
     Vbox = 6158
     NCl = 500
     for Vgel in np.linspace(100, Vbox, 10):
-        g = gel(Vbox, Vgel)
+        g = gel(Vbox, Vgel, NCl)
+        g.lB = 2.
         g.timeout = 24*60*60 # secounds
-        g.N_Samples = 100
+        #g.timeout = 240 # secounds
+        g.N_Samples = 10
         g.send2metacentrum()
         #g.qsubfile()
 
