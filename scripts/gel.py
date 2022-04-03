@@ -105,7 +105,7 @@ class gel():
         #~ qsubfile.write('#$ -l nodes=1:ppn=1\n');
         #~ qsubfile.write('#$ -l walltime=200:00:00\n');
         qsubfile.write('#PBS -l mem='+mem+'\n');
-        qsubfile.write('#PBS -l ncpus=2\n');
+        qsubfile.write('#PBS -l ncpus=3\n');
         qsubfile.write('#PBS -l walltime='+str(int(walltime))+':0:0\n');
         qsubfile.write('#PBS -m ae\n');
         qsubfile.write('#PBS -e '+self.WD+self.fnameqsuberr+'\n');

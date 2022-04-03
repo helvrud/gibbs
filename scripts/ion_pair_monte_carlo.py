@@ -371,7 +371,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         start_time = time.time()
         for ROUND in trange(rounds_eq):
             self.run_md(md_steps_eq)
-            print(f'###    Round: {ROUND}    ###')
+            print(f'### {((time.time() - start_time)/60):.0f} m   ###    Round: {ROUND}    ###')
             for i in range(mc_steps_eq): 
                 self.step(); 
                 ccl_gel, ccl_out = np.array(self.current_state["anions"])/self.current_state["volume"] / unit # mol/l
