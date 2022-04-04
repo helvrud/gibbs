@@ -178,6 +178,7 @@ def sample_to_target(
         n_samples = n_samples*2
         #err, sample size, time passed
         x_mean, x_err = correlated_data_mean_err(x, tau, ci)
+        
         n_samples_eff = n_samples/(2*tau)
         elapsed_time = time.time() - start_time
         logger.debug((x_err, n_samples_eff, elapsed_time))

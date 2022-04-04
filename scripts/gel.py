@@ -2,13 +2,14 @@ from ion_pair_monte_carlo import MonteCarloPairs
 import logging, os
 import socket_nodes, getpass, time, pprint
 from copy import copy, deepcopy
+
 try: from tqdm import trange
 except: trange = range
 
 socket_nodes.set_params(LOG_REQUESTS_INFO = True)
 
 
-from routines import sample_to_target
+from routines import sample_to_target, append_to_lists_in_dict
 import numpy as np
 import time
 #logger = logging.getLogger("socket_nodes")
@@ -50,6 +51,7 @@ class gel():
         self.Rmax = self.MPC * self.bond_length
         self.Vmax = self.Rmax**3/self.A
         self.Vmax *= 16 
+        self.Vmin =  self.MPC *16 + 8 
         self.Vbox = Vbox
         self.Vgel = Vgel
         self.Ncl = Ncl
@@ -171,7 +173,7 @@ class gel():
         print(self) # this updates the filenames
 
         self.server, self.pid_gel, self.pid_out = socket_nodes.create_server_and_nodes(name = self.name, box_l_gel = self.box_l_gel, box_l_out = self.box_l_out, alpha = self.alpha, MPC = self.MPC)
-
+        self.minimize_energy() 
 
         self.MC = MonteCarloPairs(self.server)
         Ncl_gel = int(self.Ncl*self.Vgel/(self.Vout+self.Vgel))
@@ -192,8 +194,8 @@ class gel():
         self.uptime = time.time() - tini
         self.save()    
                 
-    def equilibrate(self):
-        timeout = self.timeout*0.1
+    def equilibrate(self, timeout = None):
+        if not timeout: timeout = self.timeout*0.1
         eq_params = {'timeout_eq':timeout, 'rounds_eq':self.eq_steps, 'mc_steps_eq':100, 'md_steps_eq':1000}
         self.MC.equilibrate(**eq_params)
         
@@ -213,7 +215,7 @@ class gel():
         print (f'Ncl_gel {Nanion_gel}\n Nna_gel{Ncation_gel}\n Ngel_neutral{Ngel_neutral}\n Ngel_anion{Ngel_anion}\n Ngel_node_neutral{Ngel_node_neutral}\n Ngel_node_anion {Ngel_node_neutral}\n Ncl_out{Nanion_out}\n Nna_out{Ncation_out}\n')
         return [Nanion_gel, Nanion_out]
     def sample(self):
-        sample_d = self.MC.sample_all(self.N_Samples,self.timeout)
+        sample_d = self.sample_all(self.N_Samples,self.timeout)
         return sample_d
 
     def save(self):
@@ -231,28 +233,81 @@ class gel():
         self.copy = deepcopy(COPY)
     
         pd.to_pickle(self.copy, self.fnamepkl)
-        print(f'The object is saved to {pklfile}')
+        print(f'The object is saved to {self.fnamepkl}')
         return True
 
     def minimize_energy(self):
         z = self.server("minimize_energy()", [0,1])
 
 
+    def sample_all(self, target_sample_size, timeout_s):
+        # timeout_h in hours
 
+        start_time = time.time()
+        #add header to stored data
+
+        #sample stored as dict of lists
+        sample_d = {}
+        print(f"Sampling P and N.\nTarget sample size: {target_sample_size}. Timeout: {(timeout_s/60):.1f} m")
+        for i in range(target_sample_size):
+            self.save()
+            sampling_time = time.time()-start_time
+            print (f'\nSampling {i} out of target_sample_size = {target_sample_size}')
+            print (f'Time spent {sampling_time:.1f} m out of {timeout_s/60} m\n')
+            if sampling_time > timeout_s:
+                print("Timeout is reached")
+                sample_d['message'] = "reached_timeout"
+                break
+            try: particles_speciation = self.MC.sample_particle_count_to_target_error()
+            except Exception as e:
+                print('An error occurred during sampling while sampling number of particles')
+                print(e)
+                sample_d['message'] = "error_occurred"
+                break
+
+            #probably we can dry run some MD without collecting any data
+            try: pressure = self.MC.sample_pressures_to_target_error()
+            except Exception as e:
+                print('An error occurred during sampling while sampling pressure')
+                print(e)
+                sample_d['message'] = "error_occurred"
+                break
+
+            #discard info about errors
+            del particles_speciation['err']
+            del particles_speciation['sample_size']
+            del pressure['err']
+            del pressure['sample_size']
+            datum_d = {**particles_speciation, **pressure}
+
+            #to each list in result dict append datum
+            append_to_lists_in_dict(sample_d, datum_d)
+            self.sample_d = sample_d
+            pprint.pprint(datum_d)
+
+            #save updated data to pickle storage
+            
+
+        print(f'Sampling is done\n')
+        return sample_d
 
 
 if __name__ == '__main__':
 
 
+
     Vbox = 6158
     NCl = 500
-    for Vgel in np.linspace(100, Vbox, 10):
+    
+    for Vgel in np.linspace(100, Vbox, 1):
         g = gel(Vbox, Vgel, NCl)
         g.lB = 2.
         g.timeout = 24*60*60 # secounds
-        #g.timeout = 240 # secounds
+        #g.timeout = 60*10 # secounds
+        
         g.N_Samples = 10
-        g.send2metacentrum()
+        #g.send2metacentrum()
+        #g.run()
         #g.qsubfile()
 
 
@@ -260,8 +315,11 @@ if __name__ == '__main__':
 
 
 
+        self = g
+        print(self) # this updates the filenames
 
-
+        self.server, self.pid_gel, self.pid_out = socket_nodes.create_server_and_nodes(name = self.name, box_l_gel = self.box_l_gel, box_l_out = self.box_l_out, alpha = self.alpha, MPC = self.MPC)
+        self.minimize_energy() 
 
 
 
