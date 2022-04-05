@@ -375,15 +375,15 @@ class MonteCarloPairs(AbstractMonteCarlo):
             for i in range(mc_steps_eq): 
                 self.step(); 
                 ccl_gel, ccl_out = np.array(self.current_state["anions"])/self.current_state["volume"] / unit # mol/l
-                logger.info(f'Anions density {ccl_gel}, {ccl_out}, mol/l')
-                print(f'MC step: {i}. Anions density {ccl_gel}, {ccl_out}')
+                #logger.info(f'Anions density {ccl_gel}, {ccl_out}, mol/l')
+                print(f'MC step: {i}. Anions density {ccl_gel}, {ccl_out}, mol/l')
                 #logger.info(f'Anions {self.current_state["anions"]}')
-            logger.info(f"Equilibrating {ROUND+1}/{rounds_eq}")
+            #logger.info(f"Equilibrating {ROUND+1}/{rounds_eq}")
             if (time.time() - start_time) >= timeout_eq: 
-                logger.info(f"Equilibrating timeout {timeout_eq} s reached")
+                #logger.info(f"Equilibrating timeout {timeout_eq} s reached")
                 print(f"Equilibrating timeout {timeout_eq} s reached")
                 return True
-        logger.info("Equilibrated\n")
+        print("Equilibrated\n")
         return True
 
     def populate(self, N_pairs):

@@ -54,7 +54,7 @@ class gel():
     wd = hd+'/gibbs/scripts'                                  # working directory on conteiner
     pypresso = hd+'/espresso/espresso/es-build/pypresso '
     
-    def __init__(self, Vbox, Vgel, Ncl, run=False):
+    def __init__(self, Vbox, Vgel, Ncl):
 
 
 
@@ -191,13 +191,13 @@ class gel():
         Ncl_out += self.Ncl - (Ncl_gel + Ncl_out)
         self.MC.populate([Ncl_gel, Ncl_out])
         self.minimize_energy()            
-        self.equilibrate()
+        self.equilibrate(timeout = 20*60) # equiloibrate 20 minutes
 
         if self.lB:
             print (f'\n###    Enabling electrostatics    ###\n')
             z = self.server(f'enable_electrostatic(lB = {self.lB})', [0, 1])
             z = self.server("minimize_energy()", [0,1])
-            self.equilibrate()
+        self.equilibrate()
         self.result = self.sample()
 
         #self.Pearson(keys = self.keys['md']+self.keys['re'])
@@ -308,8 +308,11 @@ if __name__ == '__main__':
 
     Vbox = 6158
     NCl = 500
+
     
-    for Vgel in np.linspace(100, Vbox, 1):
+    
+    
+    for Vgel in np.linspace(500, Vbox, 1):
         g = gel(Vbox, Vgel, NCl)
         g.lB = 2.
         g.timeout = 24*60*60 # secounds
@@ -325,7 +328,7 @@ if __name__ == '__main__':
     def rungel(Vgel):
         g = gel(Vbox, Vgel, Ncl)
         g.lB = 2.
-        g.timeout = 24*60*60 # secounds
+        g.timeout = 23*60*60 # secounds (23 hours)
         #g.timeout = 60 # secounds
         g.N_Samples = 100
         g.send2metacentrum()
@@ -338,6 +341,9 @@ if __name__ == '__main__':
     Vbox_range = GC.V_eq /g.unit*g.N
     Ncl_range  = GC.Ncl_eq
 
+
+
+    g.run()
     if False:
         from multiprocessing import Pool
         
