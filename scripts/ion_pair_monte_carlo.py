@@ -245,7 +245,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         return sample_to_target(get_zeta_callback, **kwargs)
 
     def sample_particle_count_to_target_error(self):
-        particle_count_sampling_kwargs=dict(timeout=240, target_eff_sample_size = 10, target_error = None)
+        particle_count_sampling_kwargs=dict(timeout=240, target_eff_sample_size = 20, target_error = None)
         timeout = particle_count_sampling_kwargs['timeout']
         start_time = time.time()
         if time.time()-start_time > timeout:
@@ -286,7 +286,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         
 
     def sample_pressures_to_target_error(self):
-        pressure_sampling_kwargs = dict(timeout=240, target_eff_sample_size = 10, target_error = None)
+        pressure_sampling_kwargs = dict(timeout=240, target_eff_sample_size = 20, target_error = None)
         start_time = time.time()
         timeout = pressure_sampling_kwargs['timeout']
         if time.time()-start_time > timeout:
@@ -375,7 +375,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
             for i in range(mc_steps_eq): 
                 self.step(); 
                 ccl_gel, ccl_out = np.array(self.current_state["anions"])/self.current_state["volume"] / unit # mol/l
-                logger.info(f'Anions density {ccl_gel}, {ccl_out}')
+                logger.info(f'Anions density {ccl_gel}, {ccl_out}, mol/l')
                 print(f'MC step: {i}. Anions density {ccl_gel}, {ccl_out}')
                 #logger.info(f'Anions {self.current_state["anions"]}')
             logger.info(f"Equilibrating {ROUND+1}/{rounds_eq}")

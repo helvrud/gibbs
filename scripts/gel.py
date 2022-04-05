@@ -20,7 +20,8 @@ import time
 class gel():
     start_time = time.time()
     c_s = 0.1 # mol/l
-    MPC = 10
+    MPC = 30
+    N = MPC*16+8
     bond_length = 1.0 # used for constructing the network during the gel initialization
     A = 3*3**(0.5)/4 # The coefficient which relates volume per chain in the diamond lnetwork with the lenght of the chain R^3 = V*A
 
@@ -35,7 +36,16 @@ class gel():
     timeout = 60 # seconds
     #save_file_path = output_dir/output_fname
 
-    
+    Navogadro = 6.022e23 # 1/mol
+    kT = 1.38064852e-23*300 # J
+    RT = kT * Navogadro # J/mol
+    # while there are no interactions sigma is arbitrary number (could be light-year), but it defines the unit of concentration
+
+    #epsilon = 1.0 # kT
+    #sigma = 1.0 # esunits
+    unit_of_length = sigma_SI = 0.35 # nm
+    unit = (unit_of_length*1e-9)**3*Navogadro*1000 # l/mol
+    punit = kT*Navogadro/(unit/1000) # J/m3 = Pa    
 
     USERNAME = getpass.getuser()
     #if USERNAME == 'alexander': USERNAME = "kazakov"
@@ -253,7 +263,7 @@ class gel():
             self.save()
             sampling_time = time.time()-start_time
             print (f'\nSampling {i} out of target_sample_size = {target_sample_size}')
-            print (f'Time spent {sampling_time:.1f} m out of {timeout_s/60} m\n')
+            print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
             if sampling_time > timeout_s:
                 print("Timeout is reached")
                 sample_d['message'] = "reached_timeout"
@@ -312,14 +322,49 @@ if __name__ == '__main__':
 
 
 
+    def rungel(Vgel):
+        g = gel(Vbox, Vgel, Ncl)
+        g.lB = 2.
+        g.timeout = 24*60*60 # secounds
+        #g.timeout = 60 # secounds
+        g.N_Samples = 100
+        g.send2metacentrum()
+        #g.run()
+        #g.qsubfile()
+        
+    import pandas as pd
+    GC = pd.read_pickle('../data/GC.pkl')
+    
+    Vbox_range = GC.V_eq /g.unit*g.N
+    Ncl_range  = GC.Ncl_eq
+
+    if False:
+        from multiprocessing import Pool
+        
+        for (index, row) in GC.iterrows():
+            Vbox = row.V_eq /g.unit*g.N # sigma^3
+            Ncl = int(np.ceil(row.Ncl_eq))
+            print (f'{row.cs:0.4f}, {row.Ncl_eq:04.2f}, {Vbox:04.2f}')
+            Vgel_range = np.linspace(Vbox/2, Vbox, 10)
+            pool = Pool(3)
+            pool.map(rungel, Vgel_range)
+            pool.close()
+            pool.join()
 
 
 
-        self = g
-        print(self) # this updates the filenames
 
-        self.server, self.pid_gel, self.pid_out = socket_nodes.create_server_and_nodes(name = self.name, box_l_gel = self.box_l_gel, box_l_out = self.box_l_out, alpha = self.alpha, MPC = self.MPC)
-        self.minimize_energy() 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
