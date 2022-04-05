@@ -365,8 +365,8 @@ class MonteCarloPairs(AbstractMonteCarlo):
         self.setup()
 
     def equilibrate(self, timeout_eq=3600, rounds_eq=100, mc_steps_eq=1000, md_steps_eq=10000):
-        print (f'### Equilibrate timeout_eq={timeout_eq}, rounds_eq={rounds_eq}, mc_steps_eq={mc_steps_eq}, md_steps_eq={md_steps_eq}  ###')  
-        logger.info(f'### Equilibrate timeout_eq={timeout_eq}, rounds_eq={rounds_eq}, mc_steps_eq={mc_steps_eq}, md_steps_eq={md_steps_eq}  ###')
+        print (f'### Equilibrate timeout_eq={timeout_eq/60} min, rounds_eq={rounds_eq}, mc_steps_eq={mc_steps_eq}, md_steps_eq={md_steps_eq}  ###')  
+        #logger.info(f'### Equilibrate timeout_eq={timeout_eq}, rounds_eq={rounds_eq}, mc_steps_eq={mc_steps_eq}, md_steps_eq={md_steps_eq}  ###')
         #self.run_md(md_steps_eq)
         start_time = time.time()
         for ROUND in trange(rounds_eq):
@@ -381,7 +381,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
             #logger.info(f"Equilibrating {ROUND+1}/{rounds_eq}")
             if (time.time() - start_time) >= timeout_eq: 
                 #logger.info(f"Equilibrating timeout {timeout_eq} s reached")
-                print(f"Equilibrating timeout {timeout_eq} s reached")
+                print(f"Equilibrating timeout {timeout_eq/60} min is reached")
                 return True
         print("Equilibrated\n")
         return True

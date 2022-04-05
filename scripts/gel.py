@@ -306,13 +306,13 @@ if __name__ == '__main__':
 
 
 
-    Vbox = 6158
+    Vbox = 332553/10
     NCl = 500
 
     
     
     
-    for Vgel in np.linspace(500, Vbox, 1):
+    for Vgel in np.linspace(Vbox*0.9, Vbox, 1):
         g = gel(Vbox, Vgel, NCl)
         g.lB = 2.
         g.timeout = 24*60*60 # secounds
