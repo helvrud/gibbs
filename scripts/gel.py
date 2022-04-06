@@ -31,9 +31,9 @@ class gel():
     alpha = 1.0
     
 
-    eq_steps = 100
-    N_Samples=2# number of samples,
-    timeout = 60 # seconds
+    eq_steps = 1000
+    N_Samples=100# number of samples,
+    timeout = 60*60*24 # seconds (24 hours)
     #save_file_path = output_dir/output_fname
 
     Navogadro = 6.022e23 # 1/mol
@@ -160,17 +160,16 @@ class gel():
         infile.close()
         os.chmod(self.fnamepy, 0o774)
         
-    def send2metacentrum(self, run = False, walltime = 2, mem = '500mb', hostname = 'skirit'):
+    def send2metacentrum(self):
         #self.WD = '/storage/praha1/home/kvint/mv/'
-        if hostname == 'skirit':
-            self.HD = '/storage/brno2/home/{0}'.format(self.USERNAME) # home directory on skirit
-            self.WD = self.HD+'/gibbs/scripts/'                                  # working directory on skirit
-        else:
-            self.HD = '/storage/praha1/home/{0}'.format(self.USERNAME) # home directory on skirit
-            self.WD = self.HD+'/gibbs/scripts/'                                  # working directory on skirit
-
+        mem = '500mb'
+        walltime = int(self.timeout/60/60)
+        hostname = 'skirit'
+        self.HD = '/storage/brno2/home/{0}'.format(self.USERNAME) # home directory on skirit
+        self.WD = self.HD+'/gibbs/scripts/'                                  # working directory on skirit
         # ~ self.runfile()
         self.seedscript()
+    
         self.qsubfile(walltime = walltime, mem = mem)
 
         # ~ os.system("scp " + self.fnamepkl  + " skirit.metacentrum.cz:"+self.WD+"data/")
@@ -224,9 +223,7 @@ class gel():
         Ngel_node_anion   = self.server("system.number_of_particles(5)", [0])[0].result()
         print (f'Ncl_gel {Nanion_gel}\n Nna_gel{Ncation_gel}\n Ngel_neutral{Ngel_neutral}\n Ngel_anion{Ngel_anion}\n Ngel_node_neutral{Ngel_node_neutral}\n Ngel_node_anion {Ngel_node_neutral}\n Ncl_out{Nanion_out}\n Nna_out{Ncation_out}\n')
         return [Nanion_gel, Nanion_out]
-    def sample(self):
-        sample_d = self.sample_all(self.N_Samples,self.timeout)
-        return sample_d
+   
 
     def save(self):
     
@@ -250,9 +247,10 @@ class gel():
         z = self.server("minimize_energy()", [0,1])
 
 
-    def sample_all(self, target_sample_size, timeout_s):
+    def sample(self, ):
         # timeout_h in hours
-
+        target_sample_size = self.N_Samples
+        timeout_s = self.timeout
         start_time = time.time()
         #add header to stored data
 
@@ -268,7 +266,7 @@ class gel():
                 print("Timeout is reached")
                 sample_d['message'] = "reached_timeout"
                 break
-            try: particles_speciation = self.MC.sample_particle_count_to_target_error()
+            try: particles_speciation = self.MC.sample_particle_count_to_target_error(timeout=self.timeout/300, target_eff_sample_size = 20)
             except Exception as e:
                 print('An error occurred during sampling while sampling number of particles')
                 print(e)
@@ -276,7 +274,7 @@ class gel():
                 break
 
             #probably we can dry run some MD without collecting any data
-            try: pressure = self.MC.sample_pressures_to_target_error()
+            try: pressure = self.MC.sample_pressures_to_target_error(timeout=self.timeout/300, target_eff_sample_size = 20)
             except Exception as e:
                 print('An error occurred during sampling while sampling pressure')
                 print(e)
@@ -307,56 +305,59 @@ if __name__ == '__main__':
 
 
     Vbox = 332553/10
+    Vgel = Vbox/2
     NCl = 500
+    g = gel(Vbox, Vgel, NCl)
+    
+    if False:    
 
-    
-    
-    
-    for Vgel in np.linspace(Vbox*0.9, Vbox, 1):
-        g = gel(Vbox, Vgel, NCl)
-        g.lB = 2.
-        g.timeout = 24*60*60 # secounds
-        #g.timeout = 60*10 # secounds
-        
-        g.N_Samples = 10
-        #g.send2metacentrum()
-        #g.run()
-        #g.qsubfile()
+        for Vgel in np.linspace(Vbox*0.9, Vbox, 1):
+            g = gel(Vbox, Vgel, NCl)
+            g.lB = 2.
+            g.timeout = 24*60*60 # secounds
+            g.timeout = 60 # secounds
+            
+            g.N_Samples = 10
+            #g.send2metacentrum()
+            #g.run()
+            #g.qsubfile()
 
 
 
     def rungel(Vgel):
         g = gel(Vbox, Vgel, Ncl)
         g.lB = 2.
-        g.timeout = 23*60*60 # secounds (23 hours)
+        #g.timeout = 23*60*60 # secounds (23 hours)
         #g.timeout = 60 # secounds
-        g.N_Samples = 100
+        #g.N_Samples = 100
         g.send2metacentrum()
         #g.run()
         #g.qsubfile()
         
+    
+    g = gel(Vbox, Vgel, 100)
     import pandas as pd
     GC = pd.read_pickle('../data/GC.pkl')
-    
     Vbox_range = GC.V_eq /g.unit*g.N
     Ncl_range  = GC.Ncl_eq
 
+    pool = False
 
+    from multiprocessing import Pool
+    
+    for (index, row) in GC.iterrows():
+        Vbox = row.V_eq /g.unit*g.N # sigma^3
+        Ncl = int(np.ceil(row.Ncl_eq))
+        print (f'{row.cs:0.4f}, {row.Ncl_eq:04.2f}, {Vbox:04.2f}')
+        Vgel_range = np.linspace(Vbox/2, Vbox, 10)
 
-    g.run()
-    if False:
-        from multiprocessing import Pool
-        
-        for (index, row) in GC.iterrows():
-            Vbox = row.V_eq /g.unit*g.N # sigma^3
-            Ncl = int(np.ceil(row.Ncl_eq))
-            print (f'{row.cs:0.4f}, {row.Ncl_eq:04.2f}, {Vbox:04.2f}')
-            Vgel_range = np.linspace(Vbox/2, Vbox, 10)
+        if pool:
             pool = Pool(3)
             pool.map(rungel, Vgel_range)
             pool.close()
             pool.join()
-
+        else: 
+            list(map(rungel, Vgel_range))
 
 
 

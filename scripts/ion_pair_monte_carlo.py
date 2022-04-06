@@ -244,8 +244,8 @@ class MonteCarloPairs(AbstractMonteCarlo):
             return np.array(zetas)
         return sample_to_target(get_zeta_callback, **kwargs)
 
-    def sample_particle_count_to_target_error(self):
-        particle_count_sampling_kwargs=dict(timeout=240, target_eff_sample_size = 20, target_error = None)
+    def sample_particle_count_to_target_error(self, timeout=300, target_eff_sample_size = 20):
+        particle_count_sampling_kwargs={'timeout':timeout, 'target_eff_sample_size': target_eff_sample_size, 'target_error' : None}
         timeout = particle_count_sampling_kwargs['timeout']
         start_time = time.time()
         if time.time()-start_time > timeout:
@@ -285,8 +285,8 @@ class MonteCarloPairs(AbstractMonteCarlo):
 
         
 
-    def sample_pressures_to_target_error(self):
-        pressure_sampling_kwargs = dict(timeout=240, target_eff_sample_size = 20, target_error = None)
+    def sample_pressures_to_target_error(self, timeout=300, target_eff_sample_size = 20):
+        pressure_sampling_kwargs = {'timeout':timeout, 'target_eff_sample_size': target_eff_sample_size, 'target_error' : None}
         start_time = time.time()
         timeout = pressure_sampling_kwargs['timeout']
         if time.time()-start_time > timeout:
@@ -325,16 +325,14 @@ class MonteCarloPairs(AbstractMonteCarlo):
                 break
             try: particles_speciation = self.sample_particle_count_to_target_error()
             except Exception as e:
-                logger.error('An error occurred during sampling while sampling number of particles')
-                logger.exception(e)
+                print('An error occurred during sampling while sampling number of particles')
                 sample_d['message'] = "error_occurred"
                 break
 
             #probably we can dry run some MD without collecting any data
             try: pressure = self.sample_pressures_to_target_error()
             except Exception as e:
-                logger.error('An error occurred during sampling while sampling pressure')
-                logger.exception(e)
+                print('An error occurred during sampling while sampling pressure')
                 sample_d['message'] = "error_occurred"
                 break
 
@@ -370,6 +368,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         #self.run_md(md_steps_eq)
         start_time = time.time()
         for ROUND in trange(rounds_eq):
+            print(f'### run_md {md_steps_eq} steps  ###')
             self.run_md(md_steps_eq)
             print(f'### {((time.time() - start_time)/60):.0f} m   ###    Round: {ROUND}    ###')
             for i in range(mc_steps_eq): 
