@@ -193,14 +193,17 @@ class gel():
 
         
         
-    def load(self, scp = False, forcesownload = False):
+    def load(self, scp = True, forcesownload = False):
+        toprint = 'loadpkl '+ str(self) # this updates the filenames
+
+        if scp:
+            s = "scp "+self.hostname+":"+self.WD+self.fnamepkl +" data/"
+            print (s)
+            os.system(s)
+
         g = self.readpkl()
-        if g == None:
-            if scp:
-                s = "scp "+self.hostname+":"+self.WD+self.fnamepkl +" data/"
-                print (s)
-                os.system(s)
-                g = self.readpkl()
+        if g == None: print (toprint+' return None')
+        else: print (toprint+' Done')
         return g
         
     def run(self):
