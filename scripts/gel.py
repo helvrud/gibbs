@@ -29,7 +29,13 @@ class gel():
     
     lB = 0 # 0 means no electrostatic interaction. Default is 2
     alpha = 1.0
-    
+
+    hostname = 'skirit'
+    USERNAME = 'kvint'
+    HD = '/storage/brno2/home/{0}'.format(USERNAME) # home directory on skirit
+    WD = HD+'/gibbs/scripts/'                                  # working directory on skirit
+
+
 
     eq_steps = 1000
     N_Samples=100# number of samples,
@@ -164,9 +170,7 @@ class gel():
         #self.WD = '/storage/praha1/home/kvint/mv/'
         mem = '500mb'
         walltime = int(self.timeout/60/60)
-        hostname = 'skirit'
-        self.HD = '/storage/brno2/home/{0}'.format(self.USERNAME) # home directory on skirit
-        self.WD = self.HD+'/gibbs/scripts/'                                  # working directory on skirit
+        hostname = self.hostname
         # ~ self.runfile()
         self.seedscript()
     
@@ -177,6 +181,28 @@ class gel():
         os.system("scp " + self.fnameqsub + " "+hostname+":"+self.WD+self.fnameqsub)
         os.system("scp " + self.fnamepy  + " " +hostname+":"+self.WD+self.fnamepy)
 
+    def readpkl(self):
+        s = 'READPKL '+ str(self) # this updates the filenames
+        
+        try: 
+            g = pd.read_pickle(self.fnamepkl)
+            print (s+' Done')
+            return g
+        except FileNotFoundError as e: 
+            print ('\n' + s + ' FileNotFoundError\n')
+
+        
+        
+    def load(self, scp = False, forcesownload = False):
+        g = self.readpkl()
+        if g == None:
+            if scp:
+                s = "scp "+self.hostname+":"+self.WD+self.fnamepkl +" data/"
+                print (s)
+                os.system(s)
+                g = self.readpkl()
+        return g
+        
     def run(self):
         tini = time.time()
         print(self) # this updates the filenames
@@ -190,7 +216,7 @@ class gel():
         Ncl_out += self.Ncl - (Ncl_gel + Ncl_out)
         self.MC.populate([Ncl_gel, Ncl_out])
         self.minimize_energy()            
-        self.equilibrate(timeout = 20*60) # equiloibrate 20 minutes
+        self.equilibrate(timeout = 60+1200*(self.timeout*0.1>1200)) # equiloibrate 21 minutes (if self.timeout*0.1<1200)
 
         if self.lB:
             print (f'\n###    Enabling electrostatics    ###\n')
@@ -323,10 +349,10 @@ if __name__ == '__main__':
             #g.qsubfile()
 
 
-
+    lB = 2.
     def rungel(Vgel):
         g = gel(Vbox, Vgel, Ncl)
-        g.lB = 2.
+        g.lB = lB
         #g.timeout = 23*60*60 # secounds (23 hours)
         #g.timeout = 60 # secounds
         #g.N_Samples = 100
@@ -334,6 +360,16 @@ if __name__ == '__main__':
         #g.run()
         #g.qsubfile()
         
+    def loadgel(Vgel):
+        g = gel(Vbox, Vgel, Ncl)
+        g.lB = lB
+        #g.timeout = 23*60*60 # secounds (23 hours)
+        #g.timeout = 60 # secounds
+        #g.N_Samples = 100
+        g.load()
+        #g.run()
+        #g.qsubfile()
+        return g
     
     g = gel(Vbox, Vgel, 100)
     import pandas as pd
@@ -344,11 +380,12 @@ if __name__ == '__main__':
     pool = False
 
     from multiprocessing import Pool
-    
+    GG = {}
     for (index, row) in GC.iterrows():
         Vbox = row.V_eq /g.unit*g.N # sigma^3
         Ncl = int(np.ceil(row.Ncl_eq))
-        print (f'{row.cs:0.4f}, {row.Ncl_eq:04.2f}, {Vbox:04.2f}')
+        key = f'{row.cs:0.4f} mol/l, {row.Ncl_eq:04.2f}, {Vbox:04.2f} sigma^3'
+        print (key)
         Vgel_range = np.linspace(Vbox/2, Vbox, 10)
 
         if pool:
@@ -357,11 +394,13 @@ if __name__ == '__main__':
             pool.close()
             pool.join()
         else: 
-            list(map(rungel, Vgel_range))
+            #list(map(rungel, Vgel_range))
+            gg = list(map(loadgel, Vgel_range))
+        GG[key] = gg
 
 
-
-
+    keys = list(GG.keys())
+    gg = GG[keys[1]]
 
 
 

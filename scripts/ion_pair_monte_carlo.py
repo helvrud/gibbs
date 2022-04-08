@@ -4,10 +4,10 @@ import numpy as np
 import random
 import logging
 
-try:
-    from tqdm import trange
-except:
-    trange = range
+#try:
+#    from tqdm import trange
+#except:
+#    trange = range
 
 from montecarlo import *
 from routines import sample_to_target, append_to_lists_in_dict
@@ -367,8 +367,8 @@ class MonteCarloPairs(AbstractMonteCarlo):
         #logger.info(f'### Equilibrate timeout_eq={timeout_eq}, rounds_eq={rounds_eq}, mc_steps_eq={mc_steps_eq}, md_steps_eq={md_steps_eq}  ###')
         #self.run_md(md_steps_eq)
         start_time = time.time()
-        for ROUND in trange(rounds_eq):
-            print(f'### run_md {md_steps_eq} steps  ###')
+        for ROUND in range(rounds_eq):
+            print(f'\n### run_md {md_steps_eq} steps  ###')
             self.run_md(md_steps_eq)
             print(f'### {((time.time() - start_time)/60):.0f} m   ###    Round: {ROUND}    ###')
             for i in range(mc_steps_eq): 
