@@ -1,6 +1,6 @@
 from ion_pair_monte_carlo import MonteCarloPairs
 import logging, os
-import socket_nodes, getpass, time, pprint
+import socket_nodes, getpass, time, pprint, webcolors, seaborn
 from copy import copy, deepcopy
 
 try: from tqdm import trange
@@ -10,6 +10,7 @@ socket_nodes.set_params(LOG_REQUESTS_INFO = True)
 
 
 from routines import sample_to_target, append_to_lists_in_dict
+from veusz_embed import *
 import numpy as np
 import time
 #logger = logging.getLogger("socket_nodes")
@@ -193,7 +194,7 @@ class gel():
 
         
         
-    def load(self, scp = True, forcesownload = False):
+    def load(self, scp = False, forcesownload = False):
         toprint = 'loadpkl '+ str(self) # this updates the filenames
 
         if scp:
@@ -369,12 +370,13 @@ if __name__ == '__main__':
         #g.timeout = 23*60*60 # secounds (23 hours)
         #g.timeout = 60 # secounds
         #g.N_Samples = 100
-        g.load()
+        z = g.load()
         #g.run()
         #g.qsubfile()
-        return g
+        
+        return z
     
-    g = gel(Vbox, Vgel, 100)
+    g0 = gel(Vbox, Vgel, 100)
     import pandas as pd
     GC = pd.read_pickle('../data/GC.pkl')
     Vbox_range = GC.V_eq /g.unit*g.N
@@ -384,10 +386,19 @@ if __name__ == '__main__':
 
     from multiprocessing import Pool
     GG = {}
+    GB_data = pd.DataFrame(columns=['cs_gc', 'cs_gb', 'cs_gb_err', 'Ncl', 'Vbox'])
+    fig = vplot()[0]
+    
+    
+    n_colors = len(GC)
+    colors = seaborn.color_palette("hls", n_colors)
+    colors = colors.as_hex()
+    
     for (index, row) in GC.iterrows():
-        Vbox = row.V_eq /g.unit*g.N # sigma^3
+        Vbox = row.V_eq /g0.unit*g0.N # sigma^3
         Ncl = int(np.ceil(row.Ncl_eq))
         key = f'{row.cs:0.4f} mol/l, {row.Ncl_eq:04.2f}, {Vbox:04.2f} sigma^3'
+        #GB_data = GB_data.append({'cs_gc':row.cs}, ignore_index = True)
         print (key)
         Vgel_range = np.linspace(Vbox/2, Vbox, 10)
 
@@ -402,11 +413,38 @@ if __name__ == '__main__':
         GG[key] = gg
 
 
-    keys = list(GG.keys())
-    gg = GG[keys[1]]
 
 
-
+        CS     = np.array([])
+        CS_err = np.array([])
+        VGEL   = np.array([])
+        for g in gg:
+            try:
+                ncl = np.array(g.sample_d['anion'])
+                nclgel = ncl[:,0]
+                nclout = ncl[:,1]
+                nclout_mean = np.mean( nclout )
+                nclout_err  = np.std( nclout )/ (len(nclout)-1)**0.5
+                cs = nclout_mean / g.Vout / g.unit
+                cs_err = nclout_err / g.Vout / g.unit
+                CS = np.append(CS, cs)
+                CS_err = np.append(CS_err, cs_err)
+                VGEL   = np.append(VGEL, g.Vgel)
+            except AttributeError: pass             
+        
+        GB_data_dic = {'cs_gc':row.cs, 'Vgel':VGEL, 'cs_gb':CS, 'cs_gb_err':CS_err, 'Ncl':row.Ncl_eq, 'Vbox':Vbox}
+        GB_data = GB_data.append(GB_data_dic, ignore_index = True)
+    
+        (fig, graph, xy) = vplot([Vbox*g0.unit/g0.N],[row.cs], xname = 'vbox_gc'+str(index), yname = 'cs_gc'+str(index), markersize = '4pt', color = colors[index], g = fig)  
+        (fig, graph, xy) = vplot(GB_data.Vgel[index]*g0.unit/g0.N, GB_data.cs_gb[index], xname = 'vbox_gb'+str(index), yname = 'cs_gb'+str(index), color = colors[index], g = fig)  
+        graph.x.label.val = 'V_{box}, l/mol'
+        graph.y.label.val = 'c_{s}'
+        #graph.y.max.val = 0.5
+        graph.y.log.val = True
+        
+        
+        
+        
 
 
 
