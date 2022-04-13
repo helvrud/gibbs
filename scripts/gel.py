@@ -28,7 +28,7 @@ class gel():
 
 
     
-    lB = 0 # 0 means no electrostatic interaction. Default is 2
+    lB = 2 # 0 means no electrostatic interaction. Default is 2
     alpha = 1.0
 
     hostname = 'skirit'
@@ -38,9 +38,9 @@ class gel():
 
 
 
-    eq_steps = 1000
-    N_Samples=100# number of samples,
-    timeout = 60*60*24 # seconds (24 hours)
+    eq_steps = 10000
+    N_Samples = 200# number of samples,
+    timeout = 60*60*24 + 60*60 # seconds (25 hours)
     #save_file_path = output_dir/output_fname
 
     Navogadro = 6.022e23 # 1/mol
@@ -220,7 +220,8 @@ class gel():
         Ncl_out += self.Ncl - (Ncl_gel + Ncl_out)
         self.MC.populate([Ncl_gel, Ncl_out])
         self.minimize_energy()            
-        self.equilibrate(timeout = 60+1200*(self.timeout*0.1>1200)) # equiloibrate 21 minutes (if self.timeout*0.1<1200)
+        #self.equilibrate(timeout = 60+1200*(self.timeout*0.1>1200)) # equiloibrate 21 minutes (if self.timeout*0.1<1200)
+        self.equilibrate(timeout = 60 + self.timeout*0.01) # equiloibrate 1 minute plus 0.01 of self.timeout (if self.timeout*0.1<1200)
 
         if self.lB:
             print (f'\n###    Enabling electrostatics    ###\n')
@@ -234,8 +235,8 @@ class gel():
         self.save()    
                 
     def equilibrate(self, timeout = None):
-        if not timeout: timeout = self.timeout*0.1
-        eq_params = {'timeout_eq':timeout, 'rounds_eq':self.eq_steps, 'mc_steps_eq':100, 'md_steps_eq':1000}
+        if not timeout: timeout = self.timeout*0.2
+        eq_params = {'timeout_eq':timeout, 'rounds_eq':self.eq_steps, 'mc_steps_eq':500, 'md_steps_eq':10000}
         self.MC.equilibrate(**eq_params)
         
     def NN(self):
@@ -291,12 +292,16 @@ class gel():
             self.save()
             sampling_time = time.time()-start_time
             print (f'\nSampling {i} out of target_sample_size = {target_sample_size}')
-            print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
+            
             if sampling_time > timeout_s:
                 print("Timeout is reached")
                 sample_d['message'] = "reached_timeout"
                 break
-            try: particles_speciation = self.MC.sample_particle_count_to_target_error(timeout=self.timeout/300, target_eff_sample_size = 20)
+            try:
+                print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
+                timeout=self.timeout/target_sample_size/2
+                target_eff_sample_size = 20 + self.Ncl
+                particles_speciation = self.MC.sample_particle_count_to_target_error(timeout=timeout, target_eff_sample_size = target_eff_sample_size)
             except Exception as e:
                 print('An error occurred during sampling while sampling number of particles')
                 print(e)
@@ -304,7 +309,11 @@ class gel():
                 break
 
             #probably we can dry run some MD without collecting any data
-            try: pressure = self.MC.sample_pressures_to_target_error(timeout=self.timeout/300, target_eff_sample_size = 20)
+            try: 
+                print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
+                timeout=self.timeout/target_sample_size/2
+                target_eff_sample_size = 100
+                pressure = self.MC.sample_pressures_to_target_error(timeout=timeout, target_eff_sample_size = target_eff_sample_size)
             except Exception as e:
                 print('An error occurred during sampling while sampling pressure')
                 print(e)
@@ -345,9 +354,9 @@ if __name__ == '__main__':
             g = gel(Vbox, Vgel, NCl)
             g.lB = 2.
             g.timeout = 24*60*60 # secounds
-            g.timeout = 60 # secounds
+            #g.timeout = 60 # secounds
             
-            g.N_Samples = 10
+            g.N_Samples = 200
             #g.send2metacentrum()
             #g.run()
             #g.qsubfile()
@@ -363,6 +372,7 @@ if __name__ == '__main__':
         g.send2metacentrum()
         #g.run()
         #g.qsubfile()
+        return g
         
     def loadgel(Vgel):
         g = gel(Vbox, Vgel, Ncl)
@@ -387,8 +397,8 @@ if __name__ == '__main__':
     from multiprocessing import Pool
     GG = {}
     GB_data = pd.DataFrame(columns=['cs_gc', 'cs_gb', 'cs_gb_err', 'Ncl', 'Vbox'])
-    fig = vplot()[0]
-    
+    figN = vplot()[0]
+    figP = vplot()[0]
     
     n_colors = len(GC)
     colors = seaborn.color_palette("hls", n_colors)
@@ -408,43 +418,65 @@ if __name__ == '__main__':
             pool.close()
             pool.join()
         else: 
-            #list(map(rungel, Vgel_range))
-            gg = list(map(loadgel, Vgel_range))
+            gg = list(map(rungel, Vgel_range))
+            #gg = list(map(loadgel, Vgel_range))
         GG[key] = gg
 
 
+        plot = False
+        if plot:
+            CS     = np.array([])
+            CS_err = np.array([])
+            VGEL   = np.array([])
+            P      = np.array([])
+            P_err  = np.array([])
+            for g in gg:
+                try:
+                    ncl = np.array(g.sample_d['anion'])
+                    nclgel = ncl[:,0]
+                    nclout = ncl[:,1]
+                    nclout_mean = np.mean( nclout )
+                    nclout_err  = np.std( nclout )/ (len(nclout)-1)**0.5
+                    cs = nclout_mean / g.Vout / g.unit
+                    cs_err = nclout_err / g.Vout / g.unit
+                    pall = np.array(g.sample_d['pressure'])
+                    pgel = pall[:,0]
+                    pout = pall[:,1]
+                    p = pgel - pout
+                    p_err = np.std( p )/ (len(p)-1)**0.5
+                    CS = np.append(CS, cs)
+                    CS_err = np.append(CS_err, cs_err)
+                    VGEL   = np.append(VGEL, g.Vgel)
+                    P      = np.append(P, p)
+                    P_err  = np.append(P_err, p_err)
+                except AttributeError: pass             
+            
+            GB_data_dic = {'cs_gc':row.cs, 'Vgel':VGEL, 'cs_gb':CS, 'cs_gb_err':CS_err, 'p_gb':P, 'p_gb_err':P_err, 'Ncl':row.Ncl_eq, 'Vbox':Vbox}
+            GB_data = GB_data.append(GB_data_dic, ignore_index = True)
+        
+        
+            
+            (figN, graphN, xy) = vplot([Vbox*g0.unit/g0.N],[row.cs], xname = 'vbox_gc'+str(index), yname = 'cs_gc'+str(index), markersize = '4pt', color = colors[index], g = figN)  
+            
+            x = GB_data.Vgel[index]*g0.unit/g0.N
+            y = GB_data.cs_gb[index]
+            (figN, graphN, xy) = vplot(x, y, xname = 'vbox_gb'+str(index), yname = 'cs_gb'+str(index), color = colors[index], g = figN)  
+            graphN.x.label.val = 'V_{box}, l/mol'
+            graphN.y.label.val = 'c_{s}'
+            #graph.y.max.val = 0.5
+            graphN.y.log.val = True
+            graphN.x.log.val = True
 
-
-        CS     = np.array([])
-        CS_err = np.array([])
-        VGEL   = np.array([])
-        for g in gg:
-            try:
-                ncl = np.array(g.sample_d['anion'])
-                nclgel = ncl[:,0]
-                nclout = ncl[:,1]
-                nclout_mean = np.mean( nclout )
-                nclout_err  = np.std( nclout )/ (len(nclout)-1)**0.5
-                cs = nclout_mean / g.Vout / g.unit
-                cs_err = nclout_err / g.Vout / g.unit
-                CS = np.append(CS, cs)
-                CS_err = np.append(CS_err, cs_err)
-                VGEL   = np.append(VGEL, g.Vgel)
-            except AttributeError: pass             
-        
-        GB_data_dic = {'cs_gc':row.cs, 'Vgel':VGEL, 'cs_gb':CS, 'cs_gb_err':CS_err, 'Ncl':row.Ncl_eq, 'Vbox':Vbox}
-        GB_data = GB_data.append(GB_data_dic, ignore_index = True)
-    
-        (fig, graph, xy) = vplot([Vbox*g0.unit/g0.N],[row.cs], xname = 'vbox_gc'+str(index), yname = 'cs_gc'+str(index), markersize = '4pt', color = colors[index], g = fig)  
-        (fig, graph, xy) = vplot(GB_data.Vgel[index]*g0.unit/g0.N, GB_data.cs_gb[index], xname = 'vbox_gb'+str(index), yname = 'cs_gb'+str(index), color = colors[index], g = fig)  
-        graph.x.label.val = 'V_{box}, l/mol'
-        graph.y.label.val = 'c_{s}'
-        #graph.y.max.val = 0.5
-        graph.y.log.val = True
-        
-        
-        
-        
+            y = GB_data.p_gb[index]*g0.punit/1e5
+            (figP, graphP, xy) = vplot(x, y, xname = 'vbox_gb'+str(index), yname = 'p_gb'+str(index), color = colors[index], g = figP)  
+            graphP.x.label.val = 'V_{box}, l/mol'
+            graphP.y.label.val = 'P^{gel'
+            graphP.y.max.val = 5.1
+            graphP.y.min.val = -1
+            graphP.x.log.val = True
+            
+            
+            
 
 
 
