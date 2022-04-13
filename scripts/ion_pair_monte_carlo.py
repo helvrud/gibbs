@@ -248,12 +248,12 @@ class MonteCarloPairs(AbstractMonteCarlo):
         particle_count_sampling_kwargs={'timeout':timeout, 'target_eff_sample_size': target_eff_sample_size, 'target_error' : None}
         timeout = particle_count_sampling_kwargs['timeout']
         start_time = time.time()
-        if time.time()-start_time > timeout:
-            print("sample_particle_count_to_target_error: Timeout is reached")
         
         [Nanion_gel, Nanion_out] = self.NN()
         num_particles = (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}')
         print (f'\n### sample_particle_count_to_target_error started: {num_particles} ###')
+        if time.time()-start_time > timeout: print("sample_particle_count_to_target_error: Timeout is reached")
+        
         def get_particle_count_callback(sample_size):
             # Returns the array of sample_size of anions in gel
             anions = []
@@ -289,10 +289,10 @@ class MonteCarloPairs(AbstractMonteCarlo):
         pressure_sampling_kwargs = {'timeout':timeout, 'target_eff_sample_size': target_eff_sample_size, 'target_error' : None}
         start_time = time.time()
         timeout = pressure_sampling_kwargs['timeout']
-        if time.time()-start_time > timeout:
-            print("sample_pressures_to_target_error: Timeout is reached")
                 
         print ('\n### sample_pressures_to_target_error ###')
+        if time.time()-start_time > timeout: print("sample_pressures_to_target_error: Timeout is reached")
+        
         request = self.server(f'sample_pressure_to_target_error({pressure_sampling_kwargs})', [0, 1])
         pressure_0, err_0, sample_size_0 = request[0].result()
         pressure_1, err_1, sample_size_1 = request[1].result()
@@ -304,55 +304,6 @@ class MonteCarloPairs(AbstractMonteCarlo):
         }
 
 
-    def sample_all(self, target_sample_size, timeout_s):
-        # timeout_h in hours
-
-        start_time = time.time()
-        #add header to stored data
-
-        #sample stored as dict of lists
-        sample_d = {}
-        logger.info(
-            "Sampling P and N." + \
-            f"Target sample size: {target_sample_size} \n" + \
-            f"Timeout: {timeout_s} s"
-            )
-        for i in range(target_sample_size):
-            print (f'\nSampling {i} out of target_sample_size = {target_sample_size}\n')
-            if time.time()-start_time > timeout_s:
-                print("Timeout is reached")
-                sample_d['message'] = "reached_timeout"
-                break
-            try: particles_speciation = self.sample_particle_count_to_target_error()
-            except Exception as e:
-                print('An error occurred during sampling while sampling number of particles')
-                sample_d['message'] = "error_occurred"
-                break
-
-            #probably we can dry run some MD without collecting any data
-            try: pressure = self.sample_pressures_to_target_error()
-            except Exception as e:
-                print('An error occurred during sampling while sampling pressure')
-                sample_d['message'] = "error_occurred"
-                break
-
-            #discard info about errors
-            del particles_speciation['err']
-            del particles_speciation['sample_size']
-            del pressure['err']
-            del pressure['sample_size']
-            datum_d = {**particles_speciation, **pressure}
-
-            #to each list in result dict append datum
-            append_to_lists_in_dict(sample_d, datum_d)
-            logger.info(f"Sampling {i+1}/{target_sample_size}")
-            logger.debug(datum_d)
-
-            #save updated data to pickle storage
-            
-
-        logger.info(f'Sampling is done\n')
-        return sample_d
 
 
     # MD functions
