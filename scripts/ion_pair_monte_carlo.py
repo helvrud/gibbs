@@ -273,7 +273,7 @@ class MonteCarloPairs(AbstractMonteCarlo):
         #self.server("minimize_energy()", [0,1])
         [Nanion_gel, Nanion_out] = self.NN()
         num_particles = (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}')
-        print (f'\n### sample_particle_count_to_target_error finished: {num_particles} ###')
+        print (f'### sample_particle_count_to_target_error finished: {num_particles} ###')
 
         return {
             'anion': (anion_gel, anion_out),
@@ -319,7 +319,8 @@ class MonteCarloPairs(AbstractMonteCarlo):
         #self.run_md(md_steps_eq)
         start_time = time.time()
         for ROUND in range(rounds_eq):
-            print(f'\n### run_md {md_steps_eq} steps  ###')
+            print(f'\n### {((time.time() - start_time)/60):.0f} m   ###   run_md {md_steps_eq} steps  ###')
+            #print(f'\n### run_md {md_steps_eq} steps  ###')
             self.run_md(md_steps_eq)
             print(f'### {((time.time() - start_time)/60):.0f} m   ###    Round: {ROUND}    ###')
             for i in range(mc_steps_eq): 

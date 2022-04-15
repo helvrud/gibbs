@@ -174,7 +174,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
 
     def sample_pressure_to_target_error(self, sampling_kwargs):
         logger.info(f'####### Energy minimization #######: {sampling_kwargs}')
-        int_steps=1000
+        int_steps=10000
         system=self.system
         def get_data_callback(n):
             logger.info(f'Integrating n={n} times by int_steps={int_steps}')

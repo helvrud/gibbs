@@ -302,18 +302,19 @@ class gel():
                 timeout=self.timeout/target_sample_size/2 + 60
                 target_eff_sample_size = 20 + self.Ncl
                 particles_speciation = self.MC.sample_particle_count_to_target_error(timeout=timeout, target_eff_sample_size = target_eff_sample_size)
+                print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
             except Exception as e:
                 print('An error occurred during sampling while sampling number of particles')
                 print(e)
                 sample_d['message'] = "error_occurred"
                 break
-
+            sampling_time = time.time()-start_time
             #probably we can dry run some MD without collecting any data
             try: 
-                print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
                 timeout=self.timeout/target_sample_size/2 + 60
                 target_eff_sample_size = 100
                 pressure = self.MC.sample_pressures_to_target_error(timeout=timeout, target_eff_sample_size = target_eff_sample_size)
+                print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
             except Exception as e:
                 print('An error occurred during sampling while sampling pressure')
                 print(e)
@@ -380,7 +381,7 @@ if __name__ == '__main__':
         #g.timeout = 23*60*60 # secounds (23 hours)
         #g.timeout = 60 # secounds
         #g.N_Samples = 100
-        z = g.load()
+        z = g.load(scp = False)
         #g.run()
         #g.qsubfile()
         
@@ -418,12 +419,12 @@ if __name__ == '__main__':
             pool.close()
             pool.join()
         else: 
-            gg = list(map(rungel, Vgel_range))
-            #gg = list(map(loadgel, Vgel_range))
+            #gg = list(map(rungel, Vgel_range))
+            gg = list(map(loadgel, Vgel_range))
         GG[key] = gg
 
 
-        plot = False
+        plot = True
         if plot:
             CS     = np.array([])
             CS_err = np.array([])
@@ -482,7 +483,12 @@ if __name__ == '__main__':
 
 
 
-
+for key in GG.keys():  
+    gg = GG[key] 
+    for g in gg: 
+        try: 
+            print(g.name, len( g.sample_d['pressure'])) 
+        except AttributeError: print ('no samples')
 
 
 
