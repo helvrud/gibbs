@@ -1,8 +1,7 @@
 from ion_pair_monte_carlo import MonteCarloPairs
 import logging, os
 import socket_nodes, getpass, time, pprint
-try: import webcolors, seaborn
-except ModuleNotFoundError: pass
+
 from copy import copy, deepcopy
 
 try: from tqdm import trange
@@ -12,12 +11,16 @@ socket_nodes.set_params(LOG_REQUESTS_INFO = True)
 
 
 from routines import sample_to_target, append_to_lists_in_dict
-from veusz_embed import *
+
 import numpy as np
 import time
 #logger = logging.getLogger("socket_nodes")
 #logger = logging.getLogger(__name__)
 
+try: 
+    import webcolors, seaborn
+    from veusz_embed import *
+except ModuleNotFoundError: pass
 
 
 class gel():
