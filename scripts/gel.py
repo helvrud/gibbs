@@ -1,6 +1,6 @@
 from ion_pair_monte_carlo import MonteCarloPairs
 import logging, os
-import socket_nodes, getpass, time, pprint, 
+import socket_nodes, getpass, time, pprint
 try: import webcolors, seaborn
 except ModuleNotFoundError: pass
 from copy import copy, deepcopy
