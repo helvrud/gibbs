@@ -1,6 +1,8 @@
 from ion_pair_monte_carlo import MonteCarloPairs
 import logging, os
-import socket_nodes, getpass, time, pprint, webcolors, seaborn
+import socket_nodes, getpass, time, pprint, 
+try: import webcolors, seaborn
+except ModuleNotFoundError: pass
 from copy import copy, deepcopy
 
 try: from tqdm import trange
@@ -381,7 +383,7 @@ if __name__ == '__main__':
         #g.timeout = 23*60*60 # secounds (23 hours)
         #g.timeout = 60 # secounds
         #g.N_Samples = 100
-        z = g.load(scp = False)
+        z = g.load(scp = True)
         #g.run()
         #g.qsubfile()
         
@@ -481,14 +483,6 @@ if __name__ == '__main__':
 
 
 
-
-
-for key in GG.keys():  
-    gg = GG[key] 
-    for g in gg: 
-        try: 
-            print(g.name, len( g.sample_d['pressure'])) 
-        except AttributeError: print ('no samples')
 
 
 
