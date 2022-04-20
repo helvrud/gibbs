@@ -309,7 +309,7 @@ class gel():
                 #print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
                 timeout=self.timeout/target_sample_size/2 + 60
                 target_eff_sample_size = 20 + self.Ncl
-                particles_speciation = self.MC.sample_particle_count_to_target_error(timeout=timeout, target_eff_sample_size = target_eff_sample_size)
+                outmc = self.MC.sample_particle_count_to_target_error(timeout=timeout, target_eff_sample_size = target_eff_sample_size)
                 #print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
             except Exception as e:
                 print('An error occurred during sampling while sampling number of particles')
@@ -325,7 +325,7 @@ class gel():
             try: 
                 timeout=self.timeout/target_sample_size/2 + 60
                 target_eff_sample_size = 30
-                pressure = self.MC.sample_pressures_to_target_error(timeout=timeout, target_eff_sample_size = target_eff_sample_size)
+                outmd = self.MC.sample_pressures_to_target_error(timeout=timeout, target_eff_sample_size = target_eff_sample_size)
                 #print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
             except Exception as e:
                 print('An error occurred during sampling while sampling pressure')
@@ -337,14 +337,15 @@ class gel():
             t_tot = (start_time_mc - start_time)/60
 
             ccl_gel, ccl_out = np.array(self.MC.current_state["anions"])/self.MC.current_state["volume"] / self.unit # mol/l
-            p_gel, p_out = pressure/self.punit / 1e5
+            p_gel, p_out = outmd['pressure']/self.punit / 1e5
             print(f'Sampling: {i} # Anions density {ccl_gel:.4f}, {ccl_out:.4f}, mol/l # t_md = {t_md:.1f} # t_mc = {t_mc:.1f} # t_tot = {t_tot:.1f} min')
-            print(f'              # Pressure       {p_gel:.4f}, {p_out:.f}, bar # t_md = {t_md:.1f} # t_mc = {t_mc:.1f} # t_tot = {t_tot:.1f} min')
+            print(f'              # Pressure       {p_gel:.4f}, {p_out:.f}, bar ')
+            print(f'              # t_md = {t_md:.1f} # t_mc = {t_mc:.1f} # t_tot = {t_tot:.1f} min')
             # discard info about errors
-            del particles_speciation['err']
-            del particles_speciation['sample_size']
-            del pressure['err']
-            del pressure['sample_size']
+            del outmc['err']
+            del outms['sample_size']
+            del outmd['err']
+            del outmd['sample_size']
             datum_d = {**particles_speciation, **pressure}
 
             #to each list in result dict append datum
