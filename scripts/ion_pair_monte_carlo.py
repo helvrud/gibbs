@@ -245,13 +245,14 @@ class MonteCarloPairs(AbstractMonteCarlo):
         return sample_to_target(get_zeta_callback, **kwargs)
 
     def sample_particle_count_to_target_error(self, timeout=300, target_eff_sample_size = 20):
+        print(f'\nMC: ')
         particle_count_sampling_kwargs={'timeout':timeout, 'target_eff_sample_size': target_eff_sample_size, 'target_error' : None}
         timeout = particle_count_sampling_kwargs['timeout']
         start_time = time.time()
         
-        [Nanion_gel, Nanion_out] = self.NN()
-        num_particles = (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}')
-        print (f'\n### sample_particle_count_to_target_error started: {num_particles} ###')
+        #[Nanion_gel, Nanion_out] = self.NN()
+        #num_particles = (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}')
+        #print (f'\n### sample_particle_count_to_target_error started: {num_particles} ###')
         if time.time()-start_time > timeout: print("sample_particle_count_to_target_error: Timeout is reached")
         
         def get_particle_count_callback(sample_size):
@@ -271,9 +272,9 @@ class MonteCarloPairs(AbstractMonteCarlo):
         #anion_gel = sum(self.current_state.anions) - anion_out
         cation_gel = sum(self.current_state.cations) - cation_out
         #self.server("minimize_energy()", [0,1])
-        [Nanion_gel, Nanion_out] = self.NN()
-        num_particles = (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}')
-        print (f'### sample_particle_count_to_target_error finished: {num_particles} ###')
+        #[Nanion_gel, Nanion_out] = self.NN()
+        #num_particles = (f'Ncl_gel {Nanion_gel}, Ncl_out{Nanion_out}')
+        #print (f'### sample_particle_count_to_target_error finished: {num_particles} ###')
 
         return {
             'anion': (anion_gel, anion_out),
@@ -286,11 +287,11 @@ class MonteCarloPairs(AbstractMonteCarlo):
         
 
     def sample_pressures_to_target_error(self, timeout=300, target_eff_sample_size = 20):
+        print(f'\nMD: ')
         pressure_sampling_kwargs = {'timeout':timeout, 'target_eff_sample_size': target_eff_sample_size, 'target_error' : None}
         start_time = time.time()
         timeout = pressure_sampling_kwargs['timeout']
                 
-        print ('\n### sample_pressures_to_target_error ###')
         if time.time()-start_time > timeout: print("sample_pressures_to_target_error: Timeout is reached")
         
         request = self.server(f'sample_pressure_to_target_error({pressure_sampling_kwargs})', [0, 1])
@@ -318,18 +319,25 @@ class MonteCarloPairs(AbstractMonteCarlo):
         #logger.info(f'### Equilibrate timeout_eq={timeout_eq}, rounds_eq={rounds_eq}, mc_steps_eq={mc_steps_eq}, md_steps_eq={md_steps_eq}  ###')
         #self.run_md(md_steps_eq)
         start_time = time.time()
+        start_time_md = start_time
         for ROUND in range(rounds_eq):
-            print(f'\n### {((time.time() - start_time)/60):.0f} m   ###   run_md {md_steps_eq} steps  ###')
+            #print(f'\n### {((time.time() - start_time)/60):.0f} m   ###   run_md {md_steps_eq} steps  ###')
             #print(f'\n### run_md {md_steps_eq} steps  ###')
-            self.run_md(md_steps_eq)
-            print(f'### {((time.time() - start_time)/60):.0f} m   ###    Round: {ROUND}    ###')
+            if md_steps_eq: self.run_md(md_steps_eq)
+            start_time_mc = time.time()
+            t_md = (start_time_mc - start_time_md)/60
+            #print(f'### {((time.time() - start_time)/60):.0f} m   ###    Round: {ROUND}    ###')
             for i in range(mc_steps_eq): 
                 self.step(); 
                 ccl_gel, ccl_out = np.array(self.current_state["anions"])/self.current_state["volume"] / unit # mol/l
                 #logger.info(f'Anions density {ccl_gel}, {ccl_out}, mol/l')
-                print(f'MC step: {i}. Anions density {ccl_gel}, {ccl_out}, mol/l')
+                
                 #logger.info(f'Anions {self.current_state["anions"]}')
             #logger.info(f"Equilibrating {ROUND+1}/{rounds_eq}")
+            start_time_md = time.time()
+            t_mc = (start_time_md - start_time_mc)/60
+            t_tot = (start_time_md - start_time)/60
+            print(f'Round: {ROUND} # Anions density {ccl_gel:.4f}, {ccl_out:.4f}, mol/l # t_md = {t_md:.1f} # t_mc = {t_mc:.1f} # t_tot = {t_tot:.1f} min')
             if (time.time() - start_time) >= timeout_eq: 
                 #logger.info(f"Equilibrating timeout {timeout_eq} s reached")
                 print(f"Equilibrating timeout {timeout_eq/60} min is reached")

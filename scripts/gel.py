@@ -226,7 +226,9 @@ class gel():
         self.MC.populate([Ncl_gel, Ncl_out])
         self.minimize_energy()            
         #self.equilibrate(timeout = 60+1200*(self.timeout*0.1>1200)) # equiloibrate 21 minutes (if self.timeout*0.1<1200)
-        self.equilibrate(timeout = 60 + self.timeout*0.01) # equiloibrate 1 minute plus 0.01 of self.timeout (if self.timeout*0.1<1200)
+        # this is preliminary equilibration with no electrostatics so no md truns
+        # equiloibrate 1 minute plus 0.01 of self.timeout (if self.timeout*0.1<1200)
+        self.equilibrate(timeout = 60 + self.timeout*0.001, md_steps_eq = 0, mc_steps_eq=100) 
 
         if self.lB:
             print (f'\n###    Enabling electrostatics    ###\n')
@@ -239,9 +241,9 @@ class gel():
         self.uptime = time.time() - tini
         self.save()    
                 
-    def equilibrate(self, timeout = None):
+    def equilibrate(self, timeout = None, mc_steps_eq=500, md_steps_eq = 5000):
         if not timeout: timeout = self.timeout*0.2
-        eq_params = {'timeout_eq':timeout, 'rounds_eq':self.eq_steps, 'mc_steps_eq':500, 'md_steps_eq':10000}
+        eq_params = {'timeout_eq':timeout, 'rounds_eq':self.eq_steps, 'mc_steps_eq':mc_steps_eq, 'md_steps_eq':md_steps_eq}
         self.MC.equilibrate(**eq_params)
         
     def NN(self):
@@ -288,6 +290,7 @@ class gel():
         target_sample_size = self.N_Samples
         timeout_s = self.timeout
         start_time = time.time()
+        start_time_mc = start_time
         #add header to stored data
 
         #sample stored as dict of lists
@@ -297,17 +300,17 @@ class gel():
             self.save()
             sampling_time = time.time()-start_time
             print (f'\nSampling {i} out of target_sample_size = {target_sample_size}')
-            
+            t_mc = sampling_time
             if sampling_time > timeout_s:
                 print("Timeout is reached")
                 sample_d['message'] = "reached_timeout"
                 break
             try:
-                print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
+                #print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
                 timeout=self.timeout/target_sample_size/2 + 60
                 target_eff_sample_size = 20 + self.Ncl
                 particles_speciation = self.MC.sample_particle_count_to_target_error(timeout=timeout, target_eff_sample_size = target_eff_sample_size)
-                print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
+                #print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
             except Exception as e:
                 print('An error occurred during sampling while sampling number of particles')
                 print(e)
@@ -315,18 +318,29 @@ class gel():
                 break
             sampling_time = time.time()-start_time
             #probably we can dry run some MD without collecting any data
+            
+            
+            start_time_md = time.time()
+            t_mc = (start_time_md - start_time_mc)/60
             try: 
                 timeout=self.timeout/target_sample_size/2 + 60
-                target_eff_sample_size = 100
+                target_eff_sample_size = 30
                 pressure = self.MC.sample_pressures_to_target_error(timeout=timeout, target_eff_sample_size = target_eff_sample_size)
-                print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
+                #print (f'Time spent {(sampling_time/60):.1f} m out of {timeout_s/60} m\n')
             except Exception as e:
                 print('An error occurred during sampling while sampling pressure')
                 print(e)
                 sample_d['message'] = "error_occurred"
                 break
+            start_time_mc = time.time()
+            t_md = (start_time_mc - start_time_md)/60
+            t_tot = (start_time_mc - start_time)/60
 
-            #discard info about errors
+            ccl_gel, ccl_out = np.array(self.MC.current_state["anions"])/self.MC.current_state["volume"] / self.unit # mol/l
+            p_gel, p_out = pressure/self.punit / 1e5
+            print(f'Sampling: {i} # Anions density {ccl_gel:.4f}, {ccl_out:.4f}, mol/l # t_md = {t_md:.1f} # t_mc = {t_mc:.1f} # t_tot = {t_tot:.1f} min')
+            print(f'              # Pressure       {p_gel:.4f}, {p_out:.f}, bar # t_md = {t_md:.1f} # t_mc = {t_mc:.1f} # t_tot = {t_tot:.1f} min')
+            # discard info about errors
             del particles_speciation['err']
             del particles_speciation['sample_size']
             del pressure['err']
@@ -386,7 +400,7 @@ if __name__ == '__main__':
         #g.timeout = 23*60*60 # secounds (23 hours)
         #g.timeout = 60 # secounds
         #g.N_Samples = 100
-        z = g.load(scp = True)
+        z = g.load(scp = False)
         #g.run()
         #g.qsubfile()
         
@@ -490,4 +504,9 @@ if __name__ == '__main__':
 
 
 
-
+    for gg in GG.values():
+        for g in gg:
+            try:
+                print(g.name, 'number of samples', len(g.sample_d['pressure']))
+            except AttributeError as e:
+                print(e)

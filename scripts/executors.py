@@ -173,11 +173,10 @@ class EspressoExecutorSalt(LocalScopeExecutor):
         return float(self.system.analysis.energy()['total'] - self.system.analysis.energy()['kinetic'])
 
     def sample_pressure_to_target_error(self, sampling_kwargs):
-        logger.info(f'####### Energy minimization #######: {sampling_kwargs}')
-        int_steps=10000
+        int_steps=1000
         system=self.system
         def get_data_callback(n):
-            logger.info(f'Integrating n={n} times by int_steps={int_steps}')
+            print(f'Integrating n={n} times by int_steps={int_steps}')
             acc = []
             for i in range(n):
                 system.integrator.run(int_steps)
@@ -194,7 +193,7 @@ class EspressoExecutorSalt(LocalScopeExecutor):
 #        logger.debug(f"Volume changed to {new_vol}")
 #        return self.potential_energy()
 
-    def enable_electrostatic(self, lB=2, int_steps = 10000):
+    def enable_electrostatic(self, lB=2):
         if lB:
             from espressomd import electrostatics
             print ( f'enabling electrostatics, lB = {lB}')
