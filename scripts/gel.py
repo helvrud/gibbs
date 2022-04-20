@@ -337,7 +337,7 @@ class gel():
             t_tot = (start_time_mc - start_time)/60
 
             ccl_gel, ccl_out = np.array(self.MC.current_state["anions"])/self.MC.current_state["volume"] / self.unit # mol/l
-            p_gel, p_out = outmd['pressure']/self.punit / 1e5
+            p_gel, p_out = np.array(outmd['pressure'])/self.punit / 1e5
             print(f'Sampling: {i} # Anions density {ccl_gel:.4f}, {ccl_out:.4f}, mol/l # t_md = {t_md:.1f} # t_mc = {t_mc:.1f} # t_tot = {t_tot:.1f} min')
             print(f'              # Pressure       {p_gel:.4f}, {p_out:.f}, bar ')
             print(f'              # t_md = {t_md:.1f} # t_mc = {t_mc:.1f} # t_tot = {t_tot:.1f} min')
