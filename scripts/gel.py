@@ -1,7 +1,7 @@
 from ion_pair_monte_carlo import MonteCarloPairs
 import logging, os
 import socket_nodes, getpass, time, pprint
-
+import pandas as pd
 from copy import copy, deepcopy
 
 try: from tqdm import trange
@@ -265,7 +265,7 @@ class gel():
 
     def save(self):
     
-        import pandas as pd
+        
 
 
         COPY = copy(self)
@@ -343,7 +343,7 @@ class gel():
             print(f'              # t_md = {t_md:.1f} # t_mc = {t_mc:.1f} # t_tot = {t_tot:.1f} min')
             # discard info about errors
             del outmc['err']
-            del outms['sample_size']
+            del outmc['sample_size']
             del outmd['err']
             del outmd['sample_size']
             datum_d = {**particles_speciation, **pressure}
@@ -408,7 +408,7 @@ if __name__ == '__main__':
         return z
     
     g0 = gel(Vbox, Vgel, 100)
-    import pandas as pd
+    
     GC = pd.read_pickle('../data/GC.pkl')
     Vbox_range = GC.V_eq /g.unit*g.N
     Ncl_range  = GC.Ncl_eq
