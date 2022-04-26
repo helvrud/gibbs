@@ -401,7 +401,7 @@ if __name__ == '__main__':
         #g.timeout = 23*60*60 # secounds (23 hours)
         #g.timeout = 60 # secounds
         #g.N_Samples = 100
-        z = g.load(scp = False)
+        z = g.load(scp = False )
         #g.run()
         #g.qsubfile()
         
