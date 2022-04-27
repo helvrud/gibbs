@@ -346,7 +346,7 @@ class gel():
             del outmc['sample_size']
             del outmd['err']
             del outmd['sample_size']
-            datum_d = {**particles_speciation, **pressure}
+            datum_d = {outmc, outmd}
 
             #to each list in result dict append datum
             append_to_lists_in_dict(sample_d, datum_d)
