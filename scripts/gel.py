@@ -121,8 +121,8 @@ class gel():
     def qsubfile(self, mem = '2gb', walltime = 24):
         # ~ self.WD = '/storage/praha1/home/kvint/hydrogel/scripts/'
         # this part prepares the scripts for qsub to run ot tarkil    WD = '/storage/brno2/home/{}/mv/'.format(USERNAME)
-
-        print(f'Creating the qsubfile {self}.qsub') # this updates the filenames
+        str(self)
+        #print(f'Creating the qsubfile {self}.qsub') # this updates the filenames
         qsubfile = open(self.fnameqsub,'w')
         qsubfile.write('#!/bin/bash\n');
         qsubfile.write('#PBS -N '+self.name.replace('/','_')+'\n');
@@ -145,7 +145,8 @@ class gel():
         qsubfile.close()
 
     def seedscript(self):
-        print(f'Creating the seedscript {self}.py') # this updates the filenames
+        str(self)
+        #print(f'Creating the seedscript {self}.py') # this updates the filenames
         output = []
         output.append("#!espresso/es-build/pypresso")
         # ~ output.append("#!venv/bin/python")
@@ -172,7 +173,7 @@ class gel():
         infile.close()
         os.chmod(self.fnamepy, 0o774)
         
-    def send2metacentrum(self):
+    def send2metacentrum(self, scp = True):
         #self.WD = '/storage/praha1/home/kvint/mv/'
         mem = '500mb'
         walltime = int(self.timeout/60/60)
@@ -184,18 +185,20 @@ class gel():
 
         # ~ os.system("scp " + self.fnamepkl  + " skirit.metacentrum.cz:"+self.WD+"data/")
         # ~ os.system("scp salt.py base.py gel.py "+hostname+".metacentrum.cz:"+self.WD)
-        os.system("scp " + self.fnameqsub + " "+hostname+":"+self.WD+self.fnameqsub)
-        os.system("scp " + self.fnamepy  + " " +hostname+":"+self.WD+self.fnamepy)
+        if scp:
+            os.system("scp " + self.fnameqsub + " "+hostname+":"+self.WD+self.fnameqsub)
+            os.system("scp " + self.fnamepy  + " " +hostname+":"+self.WD+self.fnamepy)
 
     def readpkl(self):
         s = 'READPKL '+ str(self) # this updates the filenames
         
         try: 
             g = pd.read_pickle(self.fnamepkl)
-            print (s+' Done')
+            #print (s+' Done')
             return g
         except FileNotFoundError as e: 
-            print ('\n' + s + ' FileNotFoundError\n')
+            pass
+            #print ('\n' + s + ' FileNotFoundError\n')
 
         
         
@@ -208,8 +211,12 @@ class gel():
             os.system(s)
 
         g = self.readpkl()
-        if g == None: print (toprint+' return None')
-        else: print (toprint+' Done')
+        if g == None: 
+            pass
+            #print (toprint+' return None')
+        else: 
+            #print (toprint+' Done')
+            pass
         return g
         
     def run(self):
@@ -364,23 +371,7 @@ if __name__ == '__main__':
 
 
 
-    Vbox = 332553/10
-    Vgel = Vbox/2
-    NCl = 500
-    g = gel(Vbox, Vgel, NCl)
-    
-    if False:    
 
-        for Vgel in np.linspace(Vbox*0.9, Vbox, 1):
-            g = gel(Vbox, Vgel, NCl)
-            g.lB = 2.
-            g.timeout = 24*60*60 # secounds
-            #g.timeout = 60 # secounds
-            
-            g.N_Samples = 200
-            #g.send2metacentrum()
-            #g.run()
-            #g.qsubfile()
 
 
     lB = 2.
@@ -390,7 +381,7 @@ if __name__ == '__main__':
         #g.timeout = 23*60*60 # secounds (23 hours)
         #g.timeout = 60 # secounds
         #g.N_Samples = 100
-        g.send2metacentrum()
+        g.send2metacentrum(scp =False)
         #g.run()
         #g.qsubfile()
         return g
@@ -401,16 +392,31 @@ if __name__ == '__main__':
         #g.timeout = 23*60*60 # secounds (23 hours)
         #g.timeout = 60 # secounds
         #g.N_Samples = 100
+        #rungel(Vgel)
         z = g.load(scp = False )
+        if hasattr(z, 'sample_d'):
+            nsamples = len(z.sample_d['pressure'])
+            
+            if nsamples < 50: 
+                print(z.name, 'number of samples', nsamples)
+                rungel(Vgel)
+        else: rungel(Vgel)
+
+        
         #g.run()
         #g.qsubfile()
         
         return z
-    
-    g0 = gel(Vbox, Vgel, 100)
+    Vbox = 332553/10
+    Vgel = Vbox/2
+    NCl = 500
+    g0 = gel(Vbox, Vgel, NCl)
     
     GC = pd.read_pickle('../data/GC.pkl')
-    Vbox_range = GC.V_eq /g.unit*g.N
+    GC = GC[GC['cs']<=0.11]
+    GC.drop_duplicates(subset=['cs'])
+    
+    Vbox_range = GC.V_eq /g0.unit*g0.N
     Ncl_range  = GC.Ncl_eq
 
     pool = False
@@ -426,13 +432,21 @@ if __name__ == '__main__':
     colors = colors.as_hex()
     
     for (index, row) in GC.iterrows():
+        Vcom = 1 #mol/l The maximum compression volume
+        Vcom = np.floor(Vcom/g0.unit*g0.N) # sigma^3
         Vbox = row.V_eq /g0.unit*g0.N # sigma^3
+        
         Ncl = int(np.ceil(row.Ncl_eq))
         key = f'{row.cs:0.4f} mol/l, {row.Ncl_eq:04.2f}, {Vbox:04.2f} sigma^3'
         #GB_data = GB_data.append({'cs_gc':row.cs}, ignore_index = True)
         print (key)
         Vgel_range = np.linspace(Vbox/2, Vbox, 10)
-
+        Vgel_range2 = np.logspace(np.log10(Vcom), np.log10(Vbox), 50)
+        Vgel_range3 = np.linspace(Vcom, Vbox, 50)
+        Vgel_range = np.append(Vgel_range, Vgel_range3)
+        Vgel_range = np.sort(np.unique(Vgel_range))
+        
+        
         if pool:
             pool = Pool(3)
             pool.map(rungel, Vgel_range)
@@ -504,10 +518,10 @@ if __name__ == '__main__':
 
 
 
-
-    for gg in GG.values():
-        for g in gg:
-            try:
-                print(g.name, 'number of samples', len(g.sample_d['pressure']))
-            except AttributeError as e:
-                print(e)
+    if False:
+        for gg in GG.values():
+            for g in gg:
+                try:
+                    print(g.name, 'number of samples', len(g.sample_d['pressure']))
+                except AttributeError as e:
+                    print(e)
