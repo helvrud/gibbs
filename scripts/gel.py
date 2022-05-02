@@ -45,7 +45,7 @@ class gel():
 
     eq_steps = 10000
     N_Samples = 200# number of samples,
-    timeout = 60*60*24 + 60*60 # seconds (25 hours)
+    timeout = 60*60*24  # seconds (24 hours)
     #save_file_path = output_dir/output_fname
 
     Navogadro = 6.022e23 # 1/mol
@@ -110,8 +110,8 @@ class gel():
 
         # ~ self.fnamerun     = self.fname+'.run'
         self.fnameqsub    = self.fname+'.qsub'
-        self.fnameqsubout = self.fname+'.qsubout'
-        self.fnameqsuberr = self.fname+'.qsuberr'
+        self.fnameqsubout = self.fname+'.qout'
+        self.fnameqsuberr = self.fname+'.qerr'
 
         return self.name          
 
@@ -175,7 +175,7 @@ class gel():
         
     def send2metacentrum(self, scp = True):
         #self.WD = '/storage/praha1/home/kvint/mv/'
-        mem = '500mb'
+        mem = '600mb'
         walltime = int(self.timeout/60/60)
         hostname = self.hostname
         # ~ self.runfile()
@@ -378,7 +378,7 @@ if __name__ == '__main__':
     def rungel(Vgel):
         g = gel(Vbox, Vgel, Ncl)
         g.lB = lB
-        #g.timeout = 23*60*60 # secounds (23 hours)
+        g.timeout = 23*60*60 # secounds (23 hours)
         #g.timeout = 60 # secounds
         #g.N_Samples = 100
         g.send2metacentrum(scp =False)
