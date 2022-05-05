@@ -491,11 +491,11 @@ if __name__ == '__main__':
         
         
             
-            (figN, graphN, xy) = vplot([Vbox*g0.unit/g0.N],[row.cs], xname = 'vbox_gc'+str(index), yname = 'cs_gc'+str(index), markersize = '4pt', color = colors[index], g = figN)  
+            (figN, graphN, xy) = vplot([Vbox*g0.unit/g0.N],[row.cs], xname = f'vbox_gc{cs:.2e}', yname = f'cs_gc{cs:.2e}', markersize = '4pt', color = colors[index], g = figN)  
             
             x = GB_data.Vgel[index]*g0.unit/g0.N
             y = GB_data.cs_gb[index]
-            (figN, graphN, xy) = vplot(x, y, xname = 'vbox_gb'+str(index), yname = 'cs_gb'+str(index), color = colors[index], g = figN)  
+            (figN, graphN, xy) = vplot(x, y, xname = f'vbox_gb{cs:.2e}', yname = f'cs_gb{cs:.2e}', color = colors[index], g = figN)  
             graphN.x.label.val = 'V_{box}, l/mol'
             graphN.y.label.val = 'c_{s}'
             #graph.y.max.val = 0.5
@@ -503,7 +503,7 @@ if __name__ == '__main__':
             graphN.x.log.val = True
 
             y = GB_data.p_gb[index]*g0.punit/1e5
-            (figP, graphP, xy) = vplot(x, y, xname = 'vbox_gb'+str(index), yname = 'p_gb'+str(index), color = colors[index], g = figP)  
+            (figP, graphP, xy) = vplot(x, y, xname = f'vbox_gb{cs:.2e}', yname = f'p_gb{cs:.2e}', color = colors[index], g = figP)  
             graphP.x.label.val = 'V_{box}, l/mol'
             graphP.y.label.val = 'P^{gel'
             graphP.y.max.val = 5.1

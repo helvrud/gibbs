@@ -26,8 +26,14 @@ for (idx, group), color in zip(gibbs_raw.groupby(by = 'n_pairs'), color_cycle):
     
     P = np.array([list(group.delta_P_bar_mean), list(group.delta_P_bar_err)])
     n_pairs = list(group.n_pairs)[0]
+    NNa = list(group.cation_salt_mean + group.cation_gel_mean)[0]
+
+    Vtot = np.array(list(group.volume_gel + group.volume_salt))/Ngel*unit # l/mol
     
-    gibbs_df = gibbs_df.append({'Ncl':n_pairs, 'P':P, 'phi':phi, 'cs':Ccl}, ignore_index = True)
+    gibbs_df = gibbs_df.append({'Ncl':n_pairs, 'P':P, 'phi':phi, 'cs':Ccl, 'Vtot': Vtot[0], 'NNa':NNa}, ignore_index = True)
+
+
+
 
 gibbs_df = gibbs_df.sort_values(by='Ncl',ignore_index = True)
 
@@ -52,17 +58,22 @@ gibbs_df = gibbs_df.sort_values(by='Ncl',ignore_index = True)
 
 cs_5 = []
 cs_10 = []
+VV_closed = []
 for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):    
 
 
     
     print (index)
-    phi = row.phi  # l/mol
-    V = 1/phi      # mol/l
+    phi = row.phi  # mol/l
+    Vtot = row.Vtot  # l/mol
+    VV_closed.append(Vtot)
+    V = 1/phi      # l/mol
     P = row.P
     Ccl = row.cs
-    Ncl = row.Ncl / Ngel*np.ones(len(phi))
-
+    Ncl_closed = row.Ncl / Ngel / Vtot * np.ones(len(phi))
+    # Ncl = row.Ncl / Ngel*np.ones(len(phi))
+    # Ncl = row.Ncl *np.ones(len(phi))
+    # Ncl = row.NNa *np.ones(len(phi))
 
     idx5 = (abs(P[0] - 5  ) == min(abs(P[0] - 5  ))).argmax()
     idx10 = (abs(P[0] - 10  ) == min(abs(P[0] - 10  ))).argmax()
@@ -71,17 +82,21 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     P5 = P[0][idx5]
     P10 = P[0][idx10]
 
+    #Ccl0 = Ncl_closed[0] / Vtot
     Ccl5 = Ccl[0][idx5]
     Ccl10 = Ccl[0][idx10]
     
-    Ncl5 = Ncl[idx5]
-    Ncl10 = Ncl[idx10]
+    Ncl0 = Ncl_closed[0]
+    Ncl5 = Ncl_closed[idx5]
+    Ncl10 = Ncl_closed[idx10]
 
     
     cs_5.append(Ccl5)
     cs_10.append(Ccl10)
     phi5 = phi[idx5]
     phi10 = phi[idx10]
+    
+    V0 = Vtot
     V5 = V[idx5]
     V10 = V[idx10]
 
@@ -101,6 +116,9 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
 
     (fig_CV, graph_CV, xy) = vplot(V, Ccl, xname = 'GB_phi'+str(row.Ncl), yname = 'GB_Ccl'+str(row.Ncl), g = fig_CV, marker='none', color = color)
 
+    #(fig_CV, graph_CV, xy) = vplot([V0], [Ccl0], xname = 'GB_phi_0'+str(row.Ncl), yname = 'GB_Ccl_0'+str(row.Ncl), g = fig_CV, marker='circle', color = color )
+    #xy.markerSize.val = '4pt'
+    #xy.MarkerFill.color.val = color
     (fig_CV, graph_CV, xy) = vplot([V5], [Ccl5], xname = 'GB_phi_5'+str(row.Ncl), yname = 'GB_Ccl_5'+str(row.Ncl), g = fig_CV, marker='square', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
@@ -108,8 +126,11 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
 
-    (fig_NV, graph_NV, xy) = vplot(V, Ncl, xname = 'GB_phi'+str(row.Ncl), yname = 'GB_Ncl'+str(row.Ncl), g = fig_NV, marker='none', color = color)
+    (fig_NV, graph_NV, xy) = vplot(V, Ncl_closed, xname = 'GB_phi'+str(row.Ncl), yname = 'GB_Ncl'+str(row.Ncl), g = fig_NV, marker='none', color = color)
 
+    (fig_NV, graph_NV, xy) = vplot([V0], [Ncl0], xname = 'GB_phi_0'+str(row.Ncl), yname = 'GB_Ncl_0'+str(row.Ncl), g = fig_NV, marker='circle', color = color )
+    xy.markerSize.val = '4pt'
+    xy.MarkerFill.color.val = color
     (fig_NV, graph_NV, xy) = vplot([V5], [Ncl5], xname = 'GB_phi_5'+str(row.Ncl), yname = 'GB_Ncl_5'+str(row.Ncl), g = fig_NV, marker='square', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
@@ -138,20 +159,34 @@ VV0 = []
 VV5 = []
 VV10 = []
 
-
-
+gc_raw_ =  gc_raw.loc[[1,6,11,12,15,18,20,24,27,30,33,40]]
+gc_raw__ = gc_raw.loc[[1,6,10,12,15,18,21,23,27,30,34,40]]
+indicies_to_plot_  = [1,6,11,12,15,18,20,24,27,30,33,40]
+indicies_to_plot = [1,6,10,12,13,15,18,21,23,27,30,34]
+#indicies_to_plot = indicies_to_plot + indicies_to_plot_
+#indicies_to_plot = np.sort(np.unique(indicies_to_plot)) 
+i = 0 
 #for (idx, group), color in zip(gc_raw.groupby(by = 'cs'), color_cycle):
 for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     #print (row)
-    V = row.V
-    V0 = row.V_eq
+    V = row.V # l/mol per one gel segment
+    V0 = row.V_eq # l/mol per one gel segment
+    
 
     P = row.P
+    
     idx0 = np.where(V==V0)[0][0]
     idx5 = (abs(P[0] - 5  ) == min(abs(P[0] - 5  ))).argmax()
     idx10 = (abs(P[0] - 10  ) == min(abs(P[0] - 10  ))).argmax()
     V5 = V[idx5]
     V10 = V[idx10]
+    
+    if index in indicies_to_plot: 
+        V0 = VV_closed[i]
+        i = i+1
+    Ncharges = 488
+    
+    
     
     P0 = P[0][idx0]
     P5 = P[0][idx5]
@@ -162,11 +197,16 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     Ccl5 = Ccl[idx5]
     Ccl10 = Ccl[idx10]
 
-    Ncl = row.NCl_gel[0] / Ngel + (row.V_eq - row.V)*row.cs
-    Ncl_err = row.NCl_gel[1] / Ngel 
-    Ncl0  = Ncl[idx0]
-    Ncl5  = Ncl[idx5]
-    Ncl10 = Ncl[idx10]
+    #Ncl = row.NCl_gel[0] / Ngel + (V0 - row.V)*row.cs
+    #Ncl_err = row.NCl_gel[1] / Ngel 
+    Ncl_open = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) / V0
+    #Ncl = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
+    #Ncl = (row.NNa_gel[0] + (V0 - row.V)*row.cs * Ngel )
+    Ncl_open_err = row.NCl_gel[1] / Ncharges / row.V_eq # per charge per volume of the box
+
+    Ncl0  = Ncl_open[idx0]
+    Ncl5  = Ncl_open[idx5]
+    Ncl10 = Ncl_open[idx10]
 
 
     phi = 1./V
@@ -174,14 +214,16 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     phi5 = 1./V5
     phi10 = 1./V10
     
-    PP0.append(P0); PP5.append(P5); PP10.append(P10)
+    PP0.append(P0); 
+    PP5.append(P5); PP10.append(P10)
     CCcl0.append(Ccl0); CCcl5.append(Ccl5); CCcl10.append(Ccl10)
     VV0.append(V0); VV5.append(V5); VV10.append(V10)
     
     
-    (fig_PV, graph_PV, xy) = vplot(V, P, xname = 'GC_phi'+str(row.cs), yname = 'GC_P'+str(row.cs), g = fig_PV, marker='none',color=color)
-    xy.PlotLine.width.val = '1pt'
-    xy.ErrorBarLine.width.val = '0.5pt'
+    if index in indicies_to_plot: 
+        (fig_PV, graph_PV, xy) = vplot(V, P, xname = 'GC_phi'+str(row.cs), yname = 'GC_P'+str(row.cs), g = fig_PV, marker='none',color=color)
+        xy.PlotLine.width.val = '1pt'
+        xy.ErrorBarLine.width.val = '0.5pt'
     (fig_PV, graph_PV, xy) = vplot([V0], [P0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_P0'+str(row.cs), g = fig_PV, marker='circle',color=color )
     xy.markerSize.val = '4pt'
     (fig_PV, graph_PV, xy) = vplot([V5], [P5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_P5'+str(row.cs), g = fig_PV, marker='square',color=color )
@@ -190,8 +232,9 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     xy.markerSize.val = '4pt'
 
 
-    (fig_CV, graph_CV, xy) = vplot(V, Ccl, xname = 'GC_phi'+str(row.cs), yname = 'GC_Ccl'+str(row.cs), g = fig_CV, marker='none',color=color)
-    xy.PlotLine.width.val = '1pt'
+    if index in indicies_to_plot: 
+        (fig_CV, graph_CV, xy) = vplot(V, Ccl, xname = 'GC_phi'+str(row.cs), yname = 'GC_Ccl'+str(row.cs), g = fig_CV, marker='none',color=color)
+        xy.PlotLine.width.val = '1pt'
     (fig_CV, graph_CV, xy) = vplot([V0], [Ccl0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_Ccl0'+str(row.cs), g = fig_CV, marker='circle',color=color )
     xy.markerSize.val = '4pt'
     (fig_CV, graph_CV, xy) = vplot([V5], [Ccl5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_Ccl5'+str(row.cs), g = fig_CV, marker='square',color=color )
@@ -200,8 +243,9 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     xy.markerSize.val = '4pt'
     
 
-    (fig_NV, graph_NV, xy) = vplot(V, [Ncl, Ncl_err], xname = 'GC_phi'+str(row.cs), yname = 'GC_Ncl'+str(row.cs),  g = fig_NV, marker='none',color=color)
-    xy.PlotLine.width.val = '1pt'
+    if index in indicies_to_plot: 
+        (fig_NV, graph_NV, xy) = vplot(V, [Ncl_open, Ncl_open_err], xname = 'GC_phi'+str(row.cs), yname = 'GC_Ncl'+str(row.cs),  g = fig_NV, marker='none',color=color)
+        xy.PlotLine.width.val = '1pt'
     (fig_NV, graph_NV, xy) = vplot([V0], [Ncl0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_Ncl0'+str(row.cs),     g = fig_NV, marker='circle',color=color )
     xy.markerSize.val = '4pt'
     (fig_NV, graph_NV, xy) = vplot([V5], [Ncl5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_Ncl5'+str(row.cs),     g = fig_NV, marker='square',color=color )
@@ -232,9 +276,13 @@ graph_CV.y.log.val = True
 graph_CV.x.label.val = 'hydrogel volume, V, [l/mol]'
 graph_CV.y.label.val = 'Salinity, c_{s}, [mol/l]'
 
-#graph_CV.y.max.val=5
-#graph_CV.y.min.val=-0.56        
+#graph_NV.y.max.val=0.38
+#graph_NV.y.min.val=0.01
+graph_NV.y.log.val = True
 graph_NV.x.log.val = True
+graph_NV.x.max.val=11.79
+graph_NV.x.min.val=0.7
+
 graph_NV.x.label.val = 'hydrogel volume, V, [l/mol]'
 graph_NV.y.label.val = 'Number of Cl ions per gel monomer, N_{Cl}, [mol/mol]'
 
