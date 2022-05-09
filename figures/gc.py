@@ -72,6 +72,7 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     P = row.P
     Ccl = row.cs
     Ncl_closed = row.Ncl / Ngel /Vtot * np.ones(len(phi))
+    Ncl_closed_2 = row.Ncl / Ngel  * np.ones(len(phi))
     # Ncl = row.Ncl / Ngel*np.ones(len(phi))
     # Ncl = row.Ncl *np.ones(len(phi))
     # Ncl = row.NNa *np.ones(len(phi))
@@ -90,6 +91,10 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     Ncl0 = Ncl_closed[0]
     Ncl5 = Ncl_closed[idx5]
     Ncl10 = Ncl_closed[idx10]
+
+    Ncl0_2 = Ncl_closed_2[0]
+    Ncl5_2 = Ncl_closed_2[idx5]
+    Ncl10_2 = Ncl_closed_2[idx10]
 
     
     cs_5.append(Ccl5)
@@ -135,13 +140,21 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     (fig_NV, graph_NV, xy) = vplot([V5], [Ncl5], xname = f'GB_phi_5'+str(row.Ncl), yname = f'GB_Ncl_5'+str(row.Ncl), g = fig_NV, marker='square', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
-    (fig_NV, graph_NV, xy) = vplot([V10], [Ncl10], xname = f'GB_phi_10'+str(row.Ncl), yname = f'GB_Ncl_10'+str(row.Ncl), g = fig_NV, marker='cross', color = color )
+    #(fig_NV, graph_NV, xy) = vplot([V10], [Ncl10], xname = f'GB_phi_10'+str(row.Ncl), yname = f'GB_Ncl_10'+str(row.Ncl), g = fig_NV, marker='cross', color = color )
+    #xy.markerSize.val = '4pt'
+    #xy.MarkerFill.color.val = color
+
+
+
+
+    (fig_Nmu, graph_Nmu, xy) = vplot(Ncl_closed_2, Ccl, xname = f'GB_Ncl'+str(row.Ncl), yname = f'GB_phi'+str(row.Ncl), g = fig_Nmu, marker='none', color = color)
+
+    (fig_Nmu, graph_Nmu, xy) = vplot([Ncl5_2], [Ccl5], xname = f'GB_Ncl_5'+str(row.Ncl), yname = f'GB_phi_5'+str(row.Ncl), g = fig_Nmu, marker='square', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
-
-
-
-
+    (fig_Nmu, graph_Nmu, xy) = vplot([Ncl10_2], [Ccl10], xname = f'GB_Ncl_10'+str(row.Ncl), yname = f'GB_phi_10'+str(row.Ncl), g = fig_Nmu, marker='cross', color = color )
+    xy.markerSize.val = '4pt'
+    xy.MarkerFill.color.val = color
 
 
 
@@ -202,15 +215,19 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     #Ncl = row.NCl_gel[0] / Ngel + (V0 - row.V)*row.cs
     #Ncl_err = row.NCl_gel[1] / Ngel 
     Ncl_open = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) / V0
+    Ncl_open_2 = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
     #Ncl_open = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
     #Ncl = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
     #Ncl = (row.NNa_gel[0] + (V0 - row.V)*row.cs * Ngel )
     Ncl_open_err = row.NCl_gel[1] / V0/ Ncharges  # per charge per volume of the box
+    Ncl_open_err_2 = row.NCl_gel[1] / Ncharges  # per charge per volume of the box
 
     Ncl0  = Ncl_open[idx0]
     Ncl5  = Ncl_open[idx5]
     Ncl10 = Ncl_open[idx10]
-
+    Ncl0_2  = Ncl_open_2[idx0]
+    Ncl5_2  = Ncl_open_2[idx5]
+    Ncl10_2 = Ncl_open_2[idx10]
 
     phi = 1./V
     phi0 = 1./V0
@@ -255,6 +272,17 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     xy.markerSize.val = '4pt'
     (fig_NV, graph_NV, xy) = vplot([V10], [Ncl10], xname = f'GC_phi10{row.cs}_V0{V0}', yname = f'GC_Ncl10{row.cs}_V0{V0}', g = fig_NV, marker='cross',color=color )
     xy.markerSize.val = '4pt'
+    
+    
+    #if index in indicies_to_plot: 
+    (fig_Nmu, graph_Nmu, xy) = vplot([Ncl_open_2, Ncl_open_err_2], Ccl, xname = f'GC_Ncl{row.cs}_V0{V0}', yname = f'GC_phi{row.cs}_V0{V0}',  g = fig_Nmu, marker='none',color=color)
+    xy.PlotLine.width.val = '1pt'
+    (fig_Nmu, graph_Nmu, xy) = vplot([Ncl0_2], [Ccl0], xname = f'GC_Ncl0{row.cs}_V0{V0}', yname = f'GC_phi0{row.cs}_V0{V0}',     g = fig_Nmu, marker='circle',color=color )
+    xy.markerSize.val = '4pt'
+    (fig_Nmu, graph_Nmu, xy) = vplot([Ncl5_2], [Ccl5],  xname = f'GC_Ncl5{row.cs}_V0{V0}', yname = f'GC_phi5{row.cs}_V0{V0}',     g = fig_Nmu, marker='square',color=color )
+    xy.markerSize.val = '4pt'
+    (fig_Nmu, graph_Nmu, xy) = vplot([Ncl10_2], [Ccl10],  xname = f'GC_Ncl10{row.cs}_V0{V0}', yname = f'GC_phi10{row.cs}_V0{V0}', g = fig_Nmu, marker='cross',color=color )
+    xy.markerSize.val = '4pt'
 
 
 (fig_CV, graph_CV, xy) = vplot(VV0, CCcl0, xname = 'VV0', yname = 'CCcl0', g = fig_CV, marker='none',color=color)
@@ -290,6 +318,16 @@ graph_NV.x.label.val = 'hydrogel volume, V, [l/mol]'
 graph_NV.y.label.val = 'Number of Cl ions per gel monomer, N_{Cl}, [mol/mol]'
 
 
+graph_Nmu.y.label.val = 'Salinity, c_{s}, [mol/l]'
+graph_Nmu.x.label.val = 'Number of Cl ions per gel monomer, N_{Cl}, [mol/mol]'
+graph_Nmu.y.log.val = True
+graph_Nmu.x.log.val = True
+graph_Nmu.x.max.val=1
+graph_Nmu.x.min.val=1e-3
+graph_Nmu.y.max.val=1
+graph_Nmu.y.min.val=1e-3
+
+
 
 key = graph_PV.Add('key')
 key.vertPosn.val = 'top'
@@ -301,9 +339,10 @@ import os
 fig_CV.Save('fig_CV.vsz')
 fig_PV.Save('fig_PV.vsz')
 fig_NV.Save('fig_NV.vsz')
+fig_Nmu.Save('fig_Nmu.vsz')
 os.popen('veusz fig_CV.vsz')
 os.popen('veusz fig_PV.vsz')
 os.popen('veusz fig_NV.vsz')
-
+os.popen('veusz fig_Nmu.vsz')
 
 
