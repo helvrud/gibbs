@@ -41,6 +41,7 @@ gibbs_df = gibbs_df.sort_values(by='Ncl',ignore_index = True)
 (fig_PV, graph_PV, xy)  = vplot([],[], xlog = True)
 (fig_CV, graph_CV, xy)  = vplot([],[], xlog = True, ylog = True)
 (fig_NV, graph_NV, xy)  = vplot([],[], xlog = True)
+(fig_Nmu, graph_Nmu, xy)  = vplot([],[], xlog = True)
 
 
 
@@ -70,7 +71,7 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     V = 1/phi      # l/mol
     P = row.P
     Ccl = row.cs
-    Ncl_closed = row.Ncl / Ngel / Vtot * np.ones(len(phi))
+    Ncl_closed = row.Ncl / Ngel /Vtot * np.ones(len(phi))
     # Ncl = row.Ncl / Ngel*np.ones(len(phi))
     # Ncl = row.Ncl *np.ones(len(phi))
     # Ncl = row.NNa *np.ones(len(phi))
@@ -103,38 +104,38 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     print (color)
     
 
-    (fig_PV, graph_PV, xy) = vplot(V, P, xname = 'GB_phi'+str(row.Ncl), yname = 'GB_P'+str(row.Ncl), g=fig_PV, marker='none', color = color)
+    (fig_PV, graph_PV, xy) = vplot(V, P, xname = f'GB_phi'+str(row.Ncl), yname = f'GB_P'+str(row.Ncl), g=fig_PV, marker='none', color = color)
     xy.ErrorBarLine.width.val = '0.5pt'
     
-    (fig_PV, graph_PV, xy) = vplot([V5], [P5], xname = 'GB_phi_5'+str(row.Ncl), yname = 'GB_P_5'+str(row.Ncl), g = fig_PV, marker='square', color = color )
+    (fig_PV, graph_PV, xy) = vplot([V5], [P5], xname = 'GB_phi_5'+str(row.Ncl), yname = f'GB_P_5'+str(row.Ncl), g = fig_PV, marker='square', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
-    (fig_PV, graph_PV, xy) = vplot([V10], [P10], xname = 'GB_phi_10'+str(row.Ncl), yname = 'GB_P_10'+str(row.Ncl), g = fig_PV, marker='cross', color = color )
+    (fig_PV, graph_PV, xy) = vplot([V10], [P10], xname = 'GB_phi_10'+str(row.Ncl), yname = f'GB_P_10'+str(row.Ncl), g = fig_PV, marker='cross', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
 
 
-    (fig_CV, graph_CV, xy) = vplot(V, Ccl, xname = 'GB_phi'+str(row.Ncl), yname = 'GB_Ccl'+str(row.Ncl), g = fig_CV, marker='none', color = color)
+    (fig_CV, graph_CV, xy) = vplot(V, Ccl, xname = f'GB_phi{row.Ncl}_V0{V0}', yname = f'GB_Ccl{row.Ncl}_V0{V0}', g = fig_CV, marker='none', color = color)
 
-    #(fig_CV, graph_CV, xy) = vplot([V0], [Ccl0], xname = 'GB_phi_0'+str(row.Ncl), yname = 'GB_Ccl_0'+str(row.Ncl), g = fig_CV, marker='circle', color = color )
+    #(fig_CV, graph_CV, xy) = vplot([V0], [Ccl0], xname = f'GB_phi_0'+str(row.Ncl), yname = 'GB_Ccl_0'+str(row.Ncl), g = fig_CV, marker='circle', color = color )
     #xy.markerSize.val = '4pt'
     #xy.MarkerFill.color.val = color
-    (fig_CV, graph_CV, xy) = vplot([V5], [Ccl5], xname = 'GB_phi_5'+str(row.Ncl), yname = 'GB_Ccl_5'+str(row.Ncl), g = fig_CV, marker='square', color = color )
+    (fig_CV, graph_CV, xy) = vplot([V5], [Ccl5], xname = f'GB_phi_5'+str(row.Ncl), yname = f'GB_Ccl_5{row.Ncl}_V0{V0}', g = fig_CV, marker='square', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
-    (fig_CV, graph_CV, xy) = vplot([V10], [Ccl10], xname = 'GB_phi_10'+str(row.Ncl), yname = 'GB_Ccl_10'+str(row.Ncl), g = fig_CV, marker='cross', color = color )
+    (fig_CV, graph_CV, xy) = vplot([V10], [Ccl10], xname = f'GB_phi_10'+str(row.Ncl), yname = f'GB_Ccl_10'+str(row.Ncl), g = fig_CV, marker='cross', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
 
-    (fig_NV, graph_NV, xy) = vplot(V, Ncl_closed, xname = 'GB_phi'+str(row.Ncl), yname = 'GB_Ncl'+str(row.Ncl), g = fig_NV, marker='none', color = color)
+    (fig_NV, graph_NV, xy) = vplot(V, Ncl_closed, xname = f'GB_phi'+str(row.Ncl), yname = f'GB_Ncl'+str(row.Ncl), g = fig_NV, marker='none', color = color)
 
-    (fig_NV, graph_NV, xy) = vplot([V0], [Ncl0], xname = 'GB_phi_0'+str(row.Ncl), yname = 'GB_Ncl_0'+str(row.Ncl), g = fig_NV, marker='circle', color = color )
+    (fig_NV, graph_NV, xy) = vplot([V0], [Ncl0], xname = f'GB_phi_0'+str(row.Ncl), yname = f'GB_Ncl_0'+str(row.Ncl), g = fig_NV, marker='circle', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
-    (fig_NV, graph_NV, xy) = vplot([V5], [Ncl5], xname = 'GB_phi_5'+str(row.Ncl), yname = 'GB_Ncl_5'+str(row.Ncl), g = fig_NV, marker='square', color = color )
+    (fig_NV, graph_NV, xy) = vplot([V5], [Ncl5], xname = f'GB_phi_5'+str(row.Ncl), yname = f'GB_Ncl_5'+str(row.Ncl), g = fig_NV, marker='square', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
-    (fig_NV, graph_NV, xy) = vplot([V10], [Ncl10], xname = 'GB_phi_10'+str(row.Ncl), yname = 'GB_Ncl_10'+str(row.Ncl), g = fig_NV, marker='cross', color = color )
+    (fig_NV, graph_NV, xy) = vplot([V10], [Ncl10], xname = f'GB_phi_10'+str(row.Ncl), yname = f'GB_Ncl_10'+str(row.Ncl), g = fig_NV, marker='cross', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
 
@@ -162,7 +163,8 @@ VV10 = []
 gc_raw_ =  gc_raw.loc[[1,6,11,12,15,18,20,24,27,30,33,40]]
 gc_raw__ = gc_raw.loc[[1,6,10,12,15,18,21,23,27,30,34,40]]
 indicies_to_plot_  = [1,6,11,12,15,18,20,24,27,30,33,40]
-indicies_to_plot = [1,6,10,12,13,15,18,21,23,27,30,34]
+indicies_to_plot = [1,6,10,12,13,15,18,21,24,27,30,34]
+indicies_to_plot = []
 #indicies_to_plot = indicies_to_plot + indicies_to_plot_
 #indicies_to_plot = np.sort(np.unique(indicies_to_plot)) 
 i = 0 
@@ -200,9 +202,10 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     #Ncl = row.NCl_gel[0] / Ngel + (V0 - row.V)*row.cs
     #Ncl_err = row.NCl_gel[1] / Ngel 
     Ncl_open = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) / V0
+    #Ncl_open = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
     #Ncl = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
     #Ncl = (row.NNa_gel[0] + (V0 - row.V)*row.cs * Ngel )
-    Ncl_open_err = row.NCl_gel[1] / Ncharges / row.V_eq # per charge per volume of the box
+    Ncl_open_err = row.NCl_gel[1] / V0/ Ncharges  # per charge per volume of the box
 
     Ncl0  = Ncl_open[idx0]
     Ncl5  = Ncl_open[idx5]
@@ -220,37 +223,37 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     VV0.append(V0); VV5.append(V5); VV10.append(V10)
     
     
-    if index in indicies_to_plot: 
-        (fig_PV, graph_PV, xy) = vplot(V, P, xname = 'GC_phi'+str(row.cs), yname = 'GC_P'+str(row.cs), g = fig_PV, marker='none',color=color)
-        xy.PlotLine.width.val = '1pt'
-        xy.ErrorBarLine.width.val = '0.5pt'
-    (fig_PV, graph_PV, xy) = vplot([V0], [P0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_P0'+str(row.cs), g = fig_PV, marker='circle',color=color )
+    #if index in indicies_to_plot: 
+    (fig_PV, graph_PV, xy) = vplot(V, P, xname = f'GC_phi{row.cs}_V0{V0}', yname = f'GC_P{row.cs}_V0{V0}', g = fig_PV, marker='none',color=color)
+    xy.PlotLine.width.val = '1pt'
+    xy.ErrorBarLine.width.val = '0.5pt'
+    (fig_PV, graph_PV, xy) = vplot([V0], [P0], xname = f'GC_phi0{row.cs}_V0{V0}', yname = f'GC_P0{row.cs}_V0{V0}', g = fig_PV, marker='circle',color=color )
     xy.markerSize.val = '4pt'
-    (fig_PV, graph_PV, xy) = vplot([V5], [P5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_P5'+str(row.cs), g = fig_PV, marker='square',color=color )
+    (fig_PV, graph_PV, xy) = vplot([V5], [P5], xname = f'GC_phi5{row.cs}_V0{V0}', yname = f'GC_P5{row.cs}_V0{V0}', g = fig_PV, marker='square',color=color )
     xy.markerSize.val = '4pt'
-    (fig_PV, graph_PV, xy) = vplot([V10], [P10], xname = 'GC_phi10'+str(row.cs), yname = 'GC_P10'+str(row.cs), g = fig_PV, marker='cross',color=color )
+    (fig_PV, graph_PV, xy) = vplot([V10], [P10], xname = 'GC_phi10{row.cs}_V0{V0}', yname = f'GC_P10{row.cs}_V0{V0}', g = fig_PV, marker='cross',color=color )
     xy.markerSize.val = '4pt'
 
 
-    if index in indicies_to_plot: 
-        (fig_CV, graph_CV, xy) = vplot(V, Ccl, xname = 'GC_phi'+str(row.cs), yname = 'GC_Ccl'+str(row.cs), g = fig_CV, marker='none',color=color)
-        xy.PlotLine.width.val = '1pt'
-    (fig_CV, graph_CV, xy) = vplot([V0], [Ccl0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_Ccl0'+str(row.cs), g = fig_CV, marker='circle',color=color )
+    #if index in indicies_to_plot: 
+    (fig_CV, graph_CV, xy) = vplot(V, Ccl, xname = f'GC_phi{row.cs}_V0{V0}', yname = f'GC_Ccl{row.cs}_V0{V0}', g = fig_CV, marker='none',color=color)
+    xy.PlotLine.width.val = '1pt'
+    (fig_CV, graph_CV, xy) = vplot([V0], [Ccl0], xname = f'GC_phi0{row.cs}_V0{V0}', yname = f'GC_Ccl0{row.cs}_V0{V0}', g = fig_CV, marker='circle',color=color )
     xy.markerSize.val = '4pt'
-    (fig_CV, graph_CV, xy) = vplot([V5], [Ccl5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_Ccl5'+str(row.cs), g = fig_CV, marker='square',color=color )
+    (fig_CV, graph_CV, xy) = vplot([V5], [Ccl5], xname = f'GC_phi5{row.cs}_V0{V0}', yname = f'GC_Ccl5{row.cs}_V0{V0}', g = fig_CV, marker='square',color=color )
     xy.markerSize.val = '4pt'
-    (fig_CV, graph_CV, xy) = vplot([V10], [Ccl10], xname = 'GC_phi10'+str(row.cs), yname = 'GC_Ccl10'+str(row.cs), g = fig_CV, marker='cross',color=color )
+    (fig_CV, graph_CV, xy) = vplot([V10], [Ccl10], xname = f'GC_phi10{row.cs}_V0{V0}', yname = f'GC_Ccl10{row.cs}_V0{V0}', g = fig_CV, marker='cross',color=color )
     xy.markerSize.val = '4pt'
     
 
-    if index in indicies_to_plot: 
-        (fig_NV, graph_NV, xy) = vplot(V, [Ncl_open, Ncl_open_err], xname = 'GC_phi'+str(row.cs), yname = 'GC_Ncl'+str(row.cs),  g = fig_NV, marker='none',color=color)
-        xy.PlotLine.width.val = '1pt'
-    (fig_NV, graph_NV, xy) = vplot([V0], [Ncl0], xname = 'GC_phi0'+str(row.cs), yname = 'GC_Ncl0'+str(row.cs),     g = fig_NV, marker='circle',color=color )
+    #if index in indicies_to_plot: 
+    (fig_NV, graph_NV, xy) = vplot(V, [Ncl_open, Ncl_open_err], xname = f'GC_phi{row.cs}_V0{V0}', yname = f'GC_Ncl{row.cs}_V0{V0}',  g = fig_NV, marker='none',color=color)
+    xy.PlotLine.width.val = '1pt'
+    (fig_NV, graph_NV, xy) = vplot([V0], [Ncl0], xname = f'GC_phi0{row.cs}_V0{V0}', yname = f'GC_Ncl0{row.cs}_V0{V0}',     g = fig_NV, marker='circle',color=color )
     xy.markerSize.val = '4pt'
-    (fig_NV, graph_NV, xy) = vplot([V5], [Ncl5], xname = 'GC_phi5'+str(row.cs), yname = 'GC_Ncl5'+str(row.cs),     g = fig_NV, marker='square',color=color )
+    (fig_NV, graph_NV, xy) = vplot([V5], [Ncl5], xname = f'GC_phi5{row.cs}_V0{V0}', yname = f'GC_Ncl5{row.cs}_V0{V0}',     g = fig_NV, marker='square',color=color )
     xy.markerSize.val = '4pt'
-    (fig_NV, graph_NV, xy) = vplot([V10], [Ncl10], xname = 'GC_phi10'+str(row.cs), yname = 'GC_Ncl10'+str(row.cs), g = fig_NV, marker='cross',color=color )
+    (fig_NV, graph_NV, xy) = vplot([V10], [Ncl10], xname = f'GC_phi10{row.cs}_V0{V0}', yname = f'GC_Ncl10{row.cs}_V0{V0}', g = fig_NV, marker='cross',color=color )
     xy.markerSize.val = '4pt'
 
 
