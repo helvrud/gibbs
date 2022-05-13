@@ -1,4 +1,6 @@
+
 import pandas as pd    
+import scipy
 from veusz_embed import *
 gibbs_data_path = "../data/gel_all_data.pkl"
 gc_data_path = "../data/GC.pkl"
@@ -12,7 +14,10 @@ unit = (unit_of_length*1e-9)**3*Navogadro*1000 # l/mol
 MPC = 30 
 Ngel = MPC*16+8
 
-
+from scipy import optimize        
+def function(v, a, gamma):
+   return a*v**(-gamma)
+   
 
 gibbs_raw['delta_P_bar_mean'] = gibbs_raw.delta_P_Pa_mean * 1e-5
 gibbs_raw['delta_P_bar_err'] = gibbs_raw.delta_P_Pa_err * 1e-5
@@ -118,7 +123,12 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     (fig_PV, graph_PV, xy) = vplot([V10], [P10], xname = 'GB_phi_10'+str(row.Ncl), yname = f'GB_P_10'+str(row.Ncl), g = fig_PV, marker='cross', color = color )
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
-
+    #####
+    popt,cov = scipy.optimize.curve_fit(function, V, P[0])
+    fun= graph_PV.Add('function')  
+    a,gamma = popt 
+    fun.function.val =f'{a}*x**{-gamma}'
+    #####
 
     (fig_CV, graph_CV, xy) = vplot(V, Ccl, xname = f'GB_phi{row.Ncl}_V0{V0}', yname = f'GB_Ccl{row.Ncl}_V0{V0}', g = fig_CV, marker='none', color = color)
 
@@ -250,7 +260,12 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     xy.markerSize.val = '4pt'
     (fig_PV, graph_PV, xy) = vplot([V10], [P10], xname = 'GC_phi10{row.cs}_V0{V0}', yname = f'GC_P10{row.cs}_V0{V0}', g = fig_PV, marker='cross',color=color )
     xy.markerSize.val = '4pt'
-
+    #####
+    popt,cov = scipy.optimize.curve_fit(function, V, P[0])
+    fun = graph_PV.Add('function')  
+    a,gamma = popt 
+    fun.function.val =f'{a}*x**{-gamma}'
+    #####
 
     #if index in indicies_to_plot: 
     (fig_CV, graph_CV, xy) = vplot(V, Ccl, xname = f'GC_phi{row.cs}_V0{V0}', yname = f'GC_Ccl{row.cs}_V0{V0}', g = fig_CV, marker='none',color=color)
