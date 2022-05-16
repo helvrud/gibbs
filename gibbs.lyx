@@ -1541,7 +1541,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename figures/fig_CV_pub.jpg
+	filename figures/fig_CV_pub.pdf
 	lyxscale 30
 	width 50text%
 
@@ -1599,12 +1599,147 @@ The compression of the gel in open system (solid lines) and in closed system
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align left
+\begin_inset Graphics
+	filename figures/fig_NV_pub.pdf
+	lyxscale 30
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pressure vs gel density 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+replace open circles by squares on the plot
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:NV"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/fig_Nmu_pub.pdf
+	lyxscale 30
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Salinity vs gel density
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fig_CN"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The compression of the gel in open system (solid lines) and in closed system
+ (dotted lines).
+ Each solid curve corresponds to different salinity of the reservoir 
+\begin_inset Formula $\cs$
+\end_inset
+
+ (see legend).
+ Shadowed area limit the states with applied pressure below zero and above
+ 5 bar.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph
 The efficiency of desalination.
 \end_layout
 
 \begin_layout Standard
+The desalination process works as a cascade of swelings at 
+\begin_inset Formula $N$
+\end_inset
 
+ constant salinity (
+\begin_inset Formula $c_{s}=c_{s}^{0},\ c_{s}^{1},\ ...,c_{s}^{n}$
+\end_inset
+
+ = and 
+\begin_inset Formula $N$
+\end_inset
+
+ compressions at constant number of particles.
+ 
 \end_layout
 
 \begin_layout Section

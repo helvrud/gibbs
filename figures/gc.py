@@ -14,9 +14,10 @@ unit = (unit_of_length*1e-9)**3*Navogadro*1000 # l/mol
 MPC = 30 
 Ngel = MPC*16+8
 
-from scipy import optimize        
-def function(v, a, gamma):
-   return a*v**(-gamma)
+from scipy import optimize
+from scipy import integrate
+def function(v, a, gamma, b):
+   return a*v**(-gamma) +b
    
 
 gibbs_raw['delta_P_bar_mean'] = gibbs_raw.delta_P_Pa_mean * 1e-5
@@ -65,6 +66,8 @@ gibbs_df = gibbs_df.sort_values(by='Ncl',ignore_index = True)
 cs_5 = []
 cs_10 = []
 VV_closed = []
+W_gb = {}
+W_gb = pd.DataFrame(columns = ['Ncl', 'cs0', 'cs1', 'v0', 'v1', 'Inum', 'vfit0', 'vfit1', 'Ifit'])
 for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):    
 
 
@@ -75,7 +78,7 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     VV_closed.append(Vtot)
     V = 1/phi      # l/mol
     P = row.P
-    Ccl = row.cs
+    Ccl_closed = row.cs
     Ncl_closed = row.Ncl / Ngel /Vtot * np.ones(len(phi))
     Ncl_closed_2 = row.Ncl / Ngel  * np.ones(len(phi))
     # Ncl = row.Ncl / Ngel*np.ones(len(phi))
@@ -90,8 +93,8 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     P10 = P[0][idx10]
 
     #Ccl0 = Ncl_closed[0] / Vtot
-    Ccl5 = Ccl[0][idx5]
-    Ccl10 = Ccl[0][idx10]
+    Ccl5 = Ccl_closed[0][idx5]
+    Ccl10 = Ccl_closed[0][idx10]
     
     Ncl0 = Ncl_closed[0]
     Ncl5 = Ncl_closed[idx5]
@@ -124,13 +127,34 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
     #####
-    popt,cov = scipy.optimize.curve_fit(function, V, P[0])
+    pp = P[0]
+    vv = V
+    cc = Ccl_closed[0]
+    pp = np.delete(pp,np.argwhere(P[0]<0))
+    pp = np.delete(pp,np.argwhere(P[0]>5))
+    vv = np.delete(vv,np.argwhere(P[0]<0))
+    vv = np.delete(vv,np.argwhere(P[0]>5))
+    cc = np.delete(cc,np.argwhere(P[0]<0))
+    cc = np.delete(cc,np.argwhere(P[0]>5))
+
+
+    popt,cov = scipy.optimize.curve_fit(function, vv, pp)
     fun= graph_PV.Add('function')  
-    a,gamma = popt 
-    fun.function.val =f'{a}*x**{-gamma}'
+    a,gamma,b = popt 
+    fun.function.val =f'{a}*x**{-gamma}+{b}'
+
+    I_num = integrate.trapz(pp,vv)
+
+    v0 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b)-5, min(vv))
+    v1 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b), max(vv))
+    I_fit = integrate.quad(function, v0, v1, args=(a,gamma,b))
+
+    DeltaV = max(vv) - min(vv)
+    #W_gb[row.Ncl]=[min(cc), max(cc), min(vv), max(vv), I_num, v0,v1, I_fit]
+    W_gb = W_gb.append({'Ncl':row.Ncl, 'cs0':min(cc), 'cs1':max(cc), 'v0':min(vv), 'v1':max(vv), 'Inum':I_num, 'vfit0':v0, 'vfit1':v1, 'Ifit':I_fit}, ignore_index = True)
     #####
 
-    (fig_CV, graph_CV, xy) = vplot(V, Ccl, xname = f'GB_phi{row.Ncl}_V0{V0}', yname = f'GB_Ccl{row.Ncl}_V0{V0}', g = fig_CV, marker='none', color = color)
+    (fig_CV, graph_CV, xy) = vplot(V, Ccl_closed, xname = f'GB_phi{row.Ncl}_V0{V0}', yname = f'GB_Ccl{row.Ncl}_V0{V0}', g = fig_CV, marker='none', color = color)
 
     #(fig_CV, graph_CV, xy) = vplot([V0], [Ccl0], xname = f'GB_phi_0'+str(row.Ncl), yname = 'GB_Ccl_0'+str(row.Ncl), g = fig_CV, marker='circle', color = color )
     #xy.markerSize.val = '4pt'
@@ -157,7 +181,7 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
 
 
 
-    (fig_Nmu, graph_Nmu, xy) = vplot(Ncl_closed_2, Ccl, xname = f'GB_Ncl'+str(row.Ncl), yname = f'GB_phi'+str(row.Ncl), g = fig_Nmu, marker='none', color = color)
+    (fig_Nmu, graph_Nmu, xy) = vplot(Ncl_closed_2, Ccl_closed, xname = f'GB_Ncl'+str(row.Ncl), yname = f'GB_phi'+str(row.Ncl), g = fig_Nmu, marker='none', color = color)
 
     (fig_Nmu, graph_Nmu, xy) = vplot([Ncl5_2], [Ccl5], xname = f'GB_Ncl_5'+str(row.Ncl), yname = f'GB_phi_5'+str(row.Ncl), g = fig_Nmu, marker='square', color = color )
     xy.markerSize.val = '4pt'
@@ -192,6 +216,8 @@ indicies_to_plot = []
 #indicies_to_plot = np.sort(np.unique(indicies_to_plot)) 
 i = 0 
 #for (idx, group), color in zip(gc_raw.groupby(by = 'cs'), color_cycle):
+
+W_gc = pd.DataFrame(columns = ['cs', 'n0', 'n1', 'v0', 'v1', 'Inum', 'vfit0', 'vfit1', 'Ifit'])
 for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     #print (row)
     V = row.V # l/mol per one gel segment
@@ -261,10 +287,30 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     (fig_PV, graph_PV, xy) = vplot([V10], [P10], xname = 'GC_phi10{row.cs}_V0{V0}', yname = f'GC_P10{row.cs}_V0{V0}', g = fig_PV, marker='cross',color=color )
     xy.markerSize.val = '4pt'
     #####
-    popt,cov = scipy.optimize.curve_fit(function, V, P[0])
+    pp = P[0]
+    vv = V
+    nn = Ncl_open
+    pp = np.delete(pp,np.argwhere(P[0]<0))
+    pp = np.delete(pp,np.argwhere(P[0]>5))
+    vv = np.delete(vv,np.argwhere(P[0]<0))
+    vv = np.delete(vv,np.argwhere(P[0]>5))
+    nn = np.delete(nn,np.argwhere(P[0]<0))
+    nn = np.delete(nn,np.argwhere(P[0]>5))
+
+    
+    popt,cov = scipy.optimize.curve_fit(function, vv, pp)
     fun = graph_PV.Add('function')  
-    a,gamma = popt 
-    fun.function.val =f'{a}*x**{-gamma}'
+    a,gamma,b = popt 
+    fun.function.val =f'{a}*x**{-gamma}+{b}'
+
+    I_num = integrate.trapz(pp,vv)
+    v0 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b)-5, min(vv))
+    v1 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b), max(vv))
+    I_fit = integrate.quad(function, v0, v1, args=(a,gamma,b))
+    
+    DeltaV = max(vv) - min(vv)
+    W_gc = W_gc.append({'cs':row.cs, 'n0':min(nn), 'n1':max(nn), 'v0':min(vv), 'v1':max(vv), 'Inum':I_num, 'vfit0':v0, 'vfit1':v1, 'Ifit':I_fit}, ignore_index = True)
+
     #####
 
     #if index in indicies_to_plot: 
