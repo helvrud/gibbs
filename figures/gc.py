@@ -7,7 +7,8 @@ gc_data_path = "../data/GC.pkl"
 
 gibbs_raw = pd.read_pickle(gibbs_data_path)
 gc_raw = pd.read_pickle(gc_data_path)
-
+kB = 1.380649e-23 # J/K
+kT = kB*300 # J
 Navogadro = 6.022e23 # 1/mol
 unit_of_length = 0.35 # nm
 unit = (unit_of_length*1e-9)**3*Navogadro*1000 # l/mol
@@ -67,11 +68,10 @@ cs_5 = []
 cs_10 = []
 VV_closed = []
 W_gb = {}
-W_gb = pd.DataFrame(columns = ['Ncl', 'cs0', 'cs1', 'v0', 'v1', 'Inum', 'vfit0', 'vfit1', 'Ifit'])
+
+W_gc = pd.DataFrame(columns = ['cs5', 'cs0', 'Ncl5', 'Ncl0', 'v5', 'v0', 'deltaV', 'Inum', 'vfit5', 'vfit0', 'deltaVfit', 'Ifit'])
+W_gb = pd.DataFrame(columns = ['cs5', 'cs0', 'Ncl5', 'Ncl0',  'v5', 'v0', 'deltaV', 'Inum', 'vfit5', 'vfit0', 'deltaVfit', 'Ifit'])
 for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):    
-
-
-    
     print (index)
     phi = row.phi  # mol/l
     Vtot = row.Vtot  # l/mol
@@ -85,6 +85,7 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     # Ncl = row.Ncl *np.ones(len(phi))
     # Ncl = row.NNa *np.ones(len(phi))
 
+    idx0 = (abs(P[0] - 0  ) == min(abs(P[0] - 0  ))).argmax()
     idx5 = (abs(P[0] - 5  ) == min(abs(P[0] - 5  ))).argmax()
     idx10 = (abs(P[0] - 10  ) == min(abs(P[0] - 10  ))).argmax()
     
@@ -92,7 +93,7 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     P5 = P[0][idx5]
     P10 = P[0][idx10]
 
-    #Ccl0 = Ncl_closed[0] / Vtot
+    Ccl0 = Ccl_closed[0][idx0] 
     Ccl5 = Ccl_closed[0][idx5]
     Ccl10 = Ccl_closed[0][idx10]
     
@@ -145,13 +146,18 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
 
     I_num = integrate.trapz(pp,vv)
 
-    v0 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b)-5, min(vv))
-    v1 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b), max(vv))
-    I_fit = integrate.quad(function, v0, v1, args=(a,gamma,b))
+    vfit5 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b)-5, min(vv))[0]
+    vfit0 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b), max(vv))[0]
+    I_fit = integrate.quad(function, vfit5, vfit0, args=(a,gamma,b))[0]
 
-    DeltaV = max(vv) - min(vv)
+    DeltaV = V5 - V0
+    DeltaVfit = vfit5 - vfit0
     #W_gb[row.Ncl]=[min(cc), max(cc), min(vv), max(vv), I_num, v0,v1, I_fit]
-    W_gb = W_gb.append({'Ncl':row.Ncl, 'cs0':min(cc), 'cs1':max(cc), 'v0':min(vv), 'v1':max(vv), 'Inum':I_num, 'vfit0':v0, 'vfit1':v1, 'Ifit':I_fit}, ignore_index = True)
+    W_gb = W_gb.append({'cs5':Ccl5, 'cs0':Ccl0, 'Ncl5':row.Ncl, 'Ncl0':row.Ncl, 'v5':V5, 'v0':V0, 'deltaV': DeltaV, 'Inum':I_num, 'vfit0':vfit0, 'vfit5':vfit5, 'deltaVfit': DeltaVfit, 'Ifit':I_fit}, ignore_index = True)
+    
+    
+    #Iid_V = (V0*cs0-V5*cs5)*np.log(cs5/cs0)*kT*Navogadro / deltaV # J/l
+    
     #####
 
     (fig_CV, graph_CV, xy) = vplot(V, Ccl_closed, xname = f'GB_phi{row.Ncl}_V0{V0}', yname = f'GB_Ccl{row.Ncl}_V0{V0}', g = fig_CV, marker='none', color = color)
@@ -217,7 +223,7 @@ indicies_to_plot = []
 i = 0 
 #for (idx, group), color in zip(gc_raw.groupby(by = 'cs'), color_cycle):
 
-W_gc = pd.DataFrame(columns = ['cs', 'n0', 'n1', 'v0', 'v1', 'Inum', 'vfit0', 'vfit1', 'Ifit'])
+
 for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     #print (row)
     V = row.V # l/mol per one gel segment
@@ -251,6 +257,7 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     #Ncl = row.NCl_gel[0] / Ngel + (V0 - row.V)*row.cs
     #Ncl_err = row.NCl_gel[1] / Ngel 
     Ncl_open = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) / V0
+    Ncl_open_abs = (row.NCl_gel[0] + (V0 - V)*row.cs * Ncharges) 
     Ncl_open_2 = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
     #Ncl_open = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
     #Ncl = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
@@ -261,6 +268,11 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     Ncl0  = Ncl_open[idx0]
     Ncl5  = Ncl_open[idx5]
     Ncl10 = Ncl_open[idx10]
+
+    Ncl0_abs  = Ncl_open_abs[idx0]
+    Ncl5_abs  = Ncl_open_abs[idx5]
+    Ncl10_abs  = Ncl_open_abs[idx10]
+
     Ncl0_2  = Ncl_open_2[idx0]
     Ncl5_2  = Ncl_open_2[idx5]
     Ncl10_2 = Ncl_open_2[idx10]
@@ -304,12 +316,13 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     fun.function.val =f'{a}*x**{-gamma}+{b}'
 
     I_num = integrate.trapz(pp,vv)
-    v0 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b)-5, min(vv))
-    v1 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b), max(vv))
-    I_fit = integrate.quad(function, v0, v1, args=(a,gamma,b))
+    vfit5 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b)-5, min(vv))[0]
+    vfit0 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b), max(vv))[0]
+    I_fit = integrate.quad(function, vfit5, vfit0, args=(a,gamma,b))[0]
     
-    DeltaV = max(vv) - min(vv)
-    W_gc = W_gc.append({'cs':row.cs, 'n0':min(nn), 'n1':max(nn), 'v0':min(vv), 'v1':max(vv), 'Inum':I_num, 'vfit0':v0, 'vfit1':v1, 'Ifit':I_fit}, ignore_index = True)
+    DeltaV = V5 - V0
+    DeltaVfit = vfit5 - vfit0
+    W_gc = W_gc.append({'cs5':row.cs, 'cs0':row.cs, 'Ncl5':Ncl5_abs, 'Ncl0':Ncl0_abs, 'v5':V5, 'v0':V0, 'deltaV':DeltaV, 'Inum':I_num, 'vfit0':vfit0, 'vfit5':vfit5, 'deltaVfit':DeltaVfit, 'Ifit':I_fit}, ignore_index = True)
 
     #####
 
@@ -346,11 +359,36 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     xy.markerSize.val = '4pt'
 
 
-(fig_CV, graph_CV, xy) = vplot(VV0, CCcl0, xname = 'VV0', yname = 'CCcl0', g = fig_CV, marker='none',color=color)
-(fig_CV, graph_CV, xy) = vplot(VV5, CCcl5, xname = 'VV5', yname = 'CCcl5', g = fig_CV, marker='none',color=color)
+(fig_CV, graph_CV, xy) = vplot(VV0,  CCcl0,  xname = 'VV0',  yname = 'CCcl0', g = fig_CV, marker='none',color=color)
+(fig_CV, graph_CV, xy) = vplot(VV5,  CCcl5,  xname = 'VV5',  yname = 'CCcl5', g = fig_CV, marker='none',color=color)
 (fig_CV, graph_CV, xy) = vplot(VV10, CCcl10, xname = 'VV10', yname = 'CCcl10', g = fig_CV, marker='none',color=color)
 
 cs_5
+
+Inum_V = W_gb.Inum / W_gb.deltaV*100     # J/V
+Ifit_V = W_gb.Ifit / W_gb.deltaVfit*100  # J/V
+#Iid_V = (W_gb.v0*W_gb.cs0-W_gb.v5*W_gb.cs5)*np.log(W_gb.cs5/W_gb.cs0)*kT*Navogadro / W_gb.deltaV # J/l
+
+
+
+
+W_gb.insert(11,'WL',Inum_V)
+W_gb.insert(11,'WLfit',Ifit_V)
+#W_gb.insert(0,'WLid',Iid_V)
+
+
+Inum_V = W_gc.Inum / W_gc.deltaV*100
+Ifit_V = W_gc.Ifit / W_gc.deltaVfit*100
+W_gc.insert(11,'WL',Inum_V)
+W_gc.insert(11,'WLfit',Ifit_V)
+
+
+W_gb = W_gb.iloc[[1, 3, 4, 5, 7, 8]]
+W_gc = W_gc.iloc[[6,13,15,18,24,27]]
+
+W = pd.concat ([W_gb,W_gc])
+W = W.loc[[1, 6, 3, 13, 4, 15, 5, 18, 7, 24, 8, 27]]
+
 
 
 from veusz_embed import y_axis, x_axis
@@ -405,5 +443,25 @@ os.popen('veusz fig_CV.vsz')
 os.popen('veusz fig_PV.vsz')
 os.popen('veusz fig_NV.vsz')
 os.popen('veusz fig_Nmu.vsz')
+
+
+
+
+cs0 = 0.6
+V0 = 2
+cs1 = 0.000001
+V1 = 1
+V2 = 1
+N1 = cs1*V1
+N0 = cs0*V0
+N2 = N0-N1
+cs2 = N2/V2
+w = Navogadro*kT * (N1*np.log(cs1/cs0) + N2*np.log(cs2/cs0)) / V1
+
+w_pdv = Navogadro*kT* cs0*V0 *np.log(2)
+
+
+
+
 
 
