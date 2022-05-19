@@ -4193,7 +4193,99 @@ of solution at
 
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Itemize
+During the open process the gel swells from 
+\begin_inset Formula $v_{5bar}^{0}$
+\end_inset
+
+ to 
+\begin_inset Formula $v_{0bar}^{0}$
+\end_inset
+
+, so it takes from bath #0 the volume 
+\begin_inset Formula $\Delta v^{0}=v_{0bar}^{0}-v_{5bar}^{0}$
+\end_inset
+
+ of solution of concentration 
+\begin_inset Formula $c_{s}^{0}$
+\end_inset
+
+.
+ Its free energy is
+\begin_inset Formula 
+\[
+\Delta G_{0}=\Delta v^{0}RT\frac{c_{s}^{0}}{c_{w}}\left(\ln\frac{c_{s}^{0}}{c_{w}}-1\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+At the same time it releases the certain amount of ions, 
+\begin_inset Formula $\Delta N_{cl}$
+\end_inset
+
+ to the bath at concentration 
+\begin_inset Formula $c_{s}^{0}$
+\end_inset
+
+.
+ The free energy of these ions is
+\begin_inset Formula 
+\[
+\Delta G'_{0}=\Delta N_{cl}RT\ln\frac{c_{s}^{0}}{c_{w}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+After swelling, compression of the gel.
+ The volume changes from 
+\begin_inset Formula $v_{0bar}^{0}$
+\end_inset
+
+ to 
+\begin_inset Formula $v_{5bar}^{1}$
+\end_inset
+
+ so it releases to the bath #1 the solution of the amount 
+\begin_inset Formula $\Delta v^{1}=v_{0bar}^{0}-v_{5bar}^{1}$
+\end_inset
+
+ at concentration 
+\begin_inset Formula $c_{s}^{1}$
+\end_inset
+
+.
+ Its free energy is
+\begin_inset Formula 
+\[
+\Delta G_{1}=\Delta v^{1}RT\frac{c_{s}^{1}}{c_{w}}\left(\ln\frac{c_{s}^{1}}{c_{w}}-1\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The energy change of the 
+\begin_inset Formula 
+\[
+\Delta G_{0}-\Delta G'_{0}-\Delta G_{1}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
