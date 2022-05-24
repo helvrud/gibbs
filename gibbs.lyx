@@ -822,7 +822,7 @@ The theoretical minimum specific energy for seawater desalination (
 \begin_inset Formula $\cs=35$
 \end_inset
 
- mg/l, 
+ g/l, 
 \begin_inset Formula $\simeq0.6$
 \end_inset
 
@@ -4145,7 +4145,13 @@ W=2RT\left(\frac{c_{f}}{R_{w}}\ln\frac{c_{b}}{c_{f}}-c_{p}\ln\frac{c_{b}}{c_{p}}
 
 \end_inset
 
-
+For the chosen values of 
+\backslash
+cs^{f} 
+\backslash
+cs^{f} and 
+\backslash
+cs^{f}, the specific energy consumption is 34.0 J/l.
 \end_layout
 
 \begin_layout Section
