@@ -387,8 +387,8 @@ W_gb = W_gb.iloc[[1, 3, 4, 5, 7, 8]]
 W_gc = W_gc.iloc[[6,13,15,18,24,27]]
 
 W = pd.concat ([W_gb,W_gc])
-W = W.loc[[1, 6, 3, 13, 4, 15, 5, 18, 7, 24, 8, 27]]
-
+#W = W.loc[[1, 6, 3, 13, 4, 15, 5, 18, 7, 24, 8, 27]]
+W = W.loc[[27, 8, 24, 7, 18, 5, 15, 4, 13, 3, 6, 1]]
 
 
 from veusz_embed import y_axis, x_axis
@@ -460,8 +460,63 @@ w = Navogadro*kT * (N1*np.log(cs1/cs0) + N2*np.log(cs2/cs0)) / V1
 
 w_pdv = Navogadro*kT* cs0*V0 *np.log(2)
 
+Wid_open1  = []
+Wid_open2  = []
+Wid_closed = []
+cw = 1/unit #mol/l
+i = 0
+for (index, row) in W.iterrows():
+    
+    
+    print (row)
+    if row.cs5 == row.cs0:
+        wid_open1 = kT*Navogadro*(row.v0 - row.v5)*row.cs0/cw*(np.log(row.cs0/cw) - 1)
+        wid_open2 = kT*Navogadro*(row.Ncl0 -row.Ncl5)/488*np.log(row.cs0/W.iloc[i-2].cs0)
+        Wid_open1.append(wid_open1)
+        Wid_open2.append(wid_open2)
+    else:        
+        wid_closed = kT*Navogadro*(W.iloc[i-1].v0 - row.v5)*row.cs5/cw*(np.log(row.cs5/cw) - 1)
+        Wid_closed.append(wid_closed)    
+    i+=1        
+    if i > 11: break
+    
+    
+    
+    
+    
+    
+    
+f = 15    
+b = 18
+p = 4
 
+    
+cf = W.loc[f].cs0
+cf = 0.6
+cb = W.loc[b].cs0
+cf = 1.2
+cp = W.loc[p].cs5
+cp = 1e-6
+DVp = W.loc[f].v0 - W.loc[p].v5  
+DVf = W.loc[b].v0 - W.loc[f].v5  
+Rw = DV2 / (DV1+DV2)
+Rw = 0.5
 
+SEC = 2*Navogadro*kT*(cf/Rw*np.log(cb/cf) - cp*np.log(cb/cp))
 
-
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
