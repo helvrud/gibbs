@@ -440,20 +440,20 @@ literal "false"
 .
  In RO, water passes through a membrane that is impermeable to the solute
  in response to a chemical potential gradient achieved through pressurization.
- In FO, a concentrated draw solution with a lower water chemical potential
- and a feed solution with a higher water chemical potential are separated
+ In FO, a concentrated draw solution, with a lower water chemical potential,
+ and a feed solution, with a higher water chemical potential, are separated
  by a membrane that rejects the salt but allows the passage of water.
  The water permeation from feed solution to draw solution is a spontaneous
  process driven by the chemical potential gradient.
 \end_layout
 
 \begin_layout Standard
-Distillation is easy cheap technology but it is characterized by relatively
+Distillation is easy and cheap technology but it is characterized by relatively
  high energy costs due to the dissipation of thermal energy.
  On the contrary, RO uses expensive osmotic membranes, which need to be
- replaced regularly because of scaling and fouling.Moreover, RO requires
- very high operating pressures, ranging from 20 to 200 bar, to let the water
- pass through the membrane.
+ replaced regularly because of scaling and fouling.
+ Moreover, RO requires very high operating pressures, ranging from 20 to
+ 200 bar, to let the water pass through the membrane.
  But in terms of energy losses, it works close to the thermodynamic limit.
  Thus, theoretically, per one transferred from freshwater to salty water
  ion pair, it consumes only the energy of difference of those ions chemical
@@ -468,12 +468,11 @@ The absence of large hydraulic pressure in FO process in comparison to RO
  In FO, the draw solutes (agents) dispersed and/or dissolved in water form
  homogeneous draw solutions.
  The correct choice of the draw agents is a task of paramount importance.
- As an osmotically driven process, the draw solute should be able to signiﬁcantl
-y reduce the water chemical potential, and consequently generate a high
- osmotic pressure.
- On the other hand, the draw solute is also expected to be easily separated
- from the diluted draw solution in the subsequent process to regenerate
- the draw solute for reuse and to produce puriﬁed water
+ As an osmotically driven process, the draw solute is expected to signiﬁcantly
+ reduce the water chemical potential, and consequently generate a high osmotic
+ pressure.
+ On the other hand, the diluted draw solution is also expected to be easily
+ separated to fresh water and to concentrated draw solution for reuse
 \begin_inset Note Note
 status open
 
@@ -503,11 +502,9 @@ Hydrogels are three-dimensional networks of polymer chains that are crosslinked
  by either physical or chemical bonds.
  They are able to entrap large volumes of water attracted by the high concentrat
 ion of hydrophilic groups.
- Hydrogels with ionic groups on the comonomer unit are able to attract even
- greater amounts of water, this increased osmotic pressure arising because
- the covalently-incorporated ionic groups are balanced by mobile counter
- ions, and these counter ions provide positive osmotic pressure inside the
- hydrogel which drives greater water sorption.
+ Hydrogels with ionic groups on the comonomer unit are able to reject salt
+ ions from the solution, they absorb a solution of lower salinity than that
+ they are equilibrated with.
  When a dehydrated or deswollen hydrogel uptakes water, its polymer chains
  extend, creating a swelling pressure.
  For example, as reported in 
@@ -539,13 +536,14 @@ ie
 \end_inset
 
  solution — gel phase transitions in response to environmental stimuli.
- This aspect causes hydrogels to be labeled ‘intelligent’ or ‘smart’ hydrogels.
+ This aspect causes hydrogels to be labeled as ‘smart’ hydrogels.
  Many physical and chemical stimuli have been applied to induce various
- responses of such smart hydrogel systems, in particular, to change them
- from hydrophilic to hydrophobic, thereby releasing water.
- These stimuli include: temperature, electric fields, solvent composition,
- light, pressure, sound, and magnetic field, whilst the chemical or biochemical
- stimuli include pH, ions, and specific molecular recognition events 
+ responses of such smart hydrogels, in particular, to change them from hydrophil
+ic to hydrophobic, thereby releasing water.
+ These stimuli include: temperature, solvent composition, light, mechanical
+ pressure, sound, electric and/or magnetic field, whilst the chemical or
+ biochemical stimuli include pH, ions, and specific molecular recognition
+ events 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Tanaka_1982,Serizawa_2001,Lietor_Santos_2009,Qiu_2001"
@@ -581,7 +579,7 @@ literal "false"
 
 , where hydrogels have been considered as draw agents for FO.
  The main point of the cited article is that hydrogels, due to their swelling
- and osmotic pressure, have the ability to absorb water across the FO membrane.
+ and osmotic pressure, were abile to absorb water across the FO membrane.
  The insoluble cross-linked network of the gel enables dewatering under
  the influence of stimuli (thermal and/or mechanical).
  For instance, Li 
@@ -610,8 +608,8 @@ etal
 \end_layout
 
 \begin_layout Standard
-In one of the subsequent works of the group of prof.
- Li 
+Moreover the hydrogel can be as an osmotic membrane from a thermodynamics
+ perspective 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Wang2014"
@@ -619,8 +617,7 @@ literal "true"
 
 \end_inset
 
- the network structure of a polyelectrolyte polymer hydrogel was considered
- as an osmotic membrane from a thermodynamics perspective.
+.
  Such a view on hydrogels was employed in a series of works by the group
  of prof.
  Wilhelm (see for example 
@@ -632,7 +629,8 @@ literal "true"
 \end_inset
 
 ).The authors proposed to get rid of the osmotic membrane and simply use
- micro filtration to compress the hydrogel and separate it from the solution.
+ only a micro filtration membrane to compress the hydrogel and separate
+ it from the solution.
  In their method first, the de-swollen hydrogel was equilibrated with saline
  water feed.
  During equilibration, the gel was swelling absorbing water.
@@ -640,6 +638,7 @@ literal "true"
  by means of a microfiltration membrane.
  The squeezed out brine was obtained to have lower salinity than the feed
  water.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -652,9 +651,9 @@ literal "false"
 \end_inset
 
 .
- In their study the thermosensitive gels were used (based on copolymers
- p-NIPAAm and p-AA), so instead of physical compression, the dewatering
- was done by an external heating stimulus (sunlight).
+ In their study the thermosensitive gel was used (based on copolymers p-NIPAAm
+ and p-AA), so instead of physical compression, the dewatering was done
+ by an external heating stimulus (sunlight).
  At night the gel was equilibrating with feed water and at daytime, under
  sunlight, the gel was shrinking and releasing the collected inside water.
  
@@ -671,7 +670,8 @@ The maximum entropy principle requires the density of charges to be more-less
  counterions, the density of mobile ions (which are able to freely enter
  and leave the gel) in gel appears to be smaller than their density outside
  the gel.
- Therefore the gel contains inside the solution of lower salinity than outside.
+ Therefore the internal solution of the gel has lower density of mobile
+ ions than the solution outside.
  In that sense, the gel acts as an osmotic membrane separating solutions
  
 \begin_inset CommandInset citation
@@ -781,11 +781,6 @@ Indeed, the use of high hydraulic pressure diminishes all the advantages
 \end_layout
 
 \begin_layout Enumerate
-In one of our previous works we had modeled the desalination process which
- employs 
-\end_layout
-
-\begin_layout Enumerate
 Nevertheless by the current study we would like to model the compression
  of the gel limiting ourselves within low compression rates, less than 5
  bar.
@@ -798,13 +793,9 @@ Nevertheless by the current study we would like to model the compression
 In the current study we would like to concentrate on the use of gel made
  of strong polyelectrolyte for water desalination.
  Namely, to investigate how the compression of the gel affects the salinity
- of the surrounding the gel solution.
+ of the surrounding the gel solution and to propose the way of water desalinatio
+n employing the hydrogel swelling deswelling set of processes.
  
-\end_layout
-
-\begin_layout Enumerate
-The motivation of this study was to simulate the process of desalination
- using polyelectrolyte hydrogel.
 \end_layout
 
 \begin_layout Standard
@@ -910,9 +901,10 @@ Model
 \end_layout
 
 \begin_layout Standard
-16 linear polymer chains by 30 monomer units each are connected to a diamond-lik
-e polymer network.
- The network is put into a simulation box with periodic boundaries.
+We model our gel as a network of 16 linear polymer chains, each by 30 monomer
+ units.
+ The chains are connected to a diamond-like polymer network and put into
+ a simulation box with periodic boundaries.
  Each unit of the network carries a negative electric charge, which is equal
  to the charge of electron.
  Except the particles of the network, the mobile monovalent ions, 
@@ -933,19 +925,11 @@ e polymer network.
 \begin_inset Formula $\cl$
 \end_inset
 
- by the number of charged hydrogel units, 
+ by the number of hydrogel units, 
 \begin_inset Formula $N\gel=16\cdot30=480$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-The ions are able to appear and disappear
-\end_layout
-
-\begin_layout Subsection
-Simulation
 \end_layout
 
 \begin_layout Standard
@@ -959,8 +943,8 @@ The first is so called
 \emph on
 open system
 \emph default
-, when the simulation gel freely exchanges ions with a big amount of aqueous
- solution.
+, when the simulation box with gel freely exchanges ions with a big amount
+ of aqueous solution of certain constant.
  
 \end_layout
 
@@ -969,8 +953,7 @@ And in
 \emph on
 closed system
 \emph default
-, when the gel is in equilibrium with a finite volume of aqueous solution,
- so that the total amount of salt ions .
+, when the gel is in equilibrium with a finite volume of aqueous solution.
 \end_layout
 
 \begin_layout Standard
@@ -1005,7 +988,7 @@ Open system.
 \end_layout
 
 \begin_layout Standard
-We simulate the first ensemble using the grand reaction method 
+We simulate the open system using the grand reaction method 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Landsgesel2020a,Rud2020"
@@ -1015,9 +998,9 @@ literal "false"
 
 .
  This method is a hybrid of molecular dynamics (MD) and Monte Carlo (MC).
- The whole simulation is represents a chain of subsimulations of MD and
- MC following each other.
- The MD simulation is a standard Langevin dynamics 
+ The whole simulation represents a chain of subsimulations of MD and MC
+ followed one by each other.
+ For MD simulation we used a standard Langevin dynamics 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Grest1986"
@@ -1029,7 +1012,7 @@ literal "false"
  Whereas MC simulates the thermodynamic equilibrium with reservoir, which
  exchanges ions with the simulation box.
  The insertion (and deletion) of ion pairs is considered as a reaction of
- creation (annihilation) of an ion pair 
+ creation (or annihilation) of an ion pair 
 \begin_inset Formula 
 \[
 \varnothing\stackrel{K}{\leftrightarrows}\na+\cl
@@ -1037,8 +1020,7 @@ literal "false"
 
 \end_inset
 
-with corresponding reaction constant, which is defined by chemical potential
- of ions, 
+with a reaction constant defined by the chemical potential of ions, 
 \begin_inset Formula $K=\exp\left(\muna+\mucl\right).$
 \end_inset
 
@@ -1051,8 +1033,8 @@ Closed system.
 
 \begin_layout Standard
 The similar scheme we use to simulate the gel in closed system.
- Again the procedure represents a chain of subsequent MD and MC simulation,
- but now we run the molecular dynamics in two simulation boxes simultaneously.
+ The procedure represents a chain of subsequent MD and MC simulation, but
+ now we run the molecular dynamics in two simulation boxes simultaneously.
  The first box of the volume 
 \begin_inset Formula $\Vgel$
 \end_inset
@@ -1061,11 +1043,7 @@ The similar scheme we use to simulate the gel in closed system.
 \begin_inset Formula $\Vout$
 \end_inset
 
-— contains only ions of certain density, 
-\begin_inset Formula $\cs$
-\end_inset
-
-.
+— contains only ions.
  These two boxes are represented in Figure
 \begin_inset space ~
 \end_inset
@@ -1082,13 +1060,21 @@ reference "fig:diamond"
 \begin_inset Formula $V=V_{\mathrm{gel}}+V_{\mathrm{out}}$
 \end_inset
 
-, so the compression of the gel implies the increase of the out volume.
+, so the compression of the gel implies the decrease 
+\begin_inset Formula $\Vgel$
+\end_inset
+
+ and increase 
+\begin_inset Formula $\Vout$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The thermodynamic equilibrium, that is exchange of the ion pairs between
- the boxes, is done using MC procedure in a way similar to described in
- 
+The thermodynamic equilibrium between the two volumes implies the exchange
+ of the ion pairs between them, which is done by means of MC procedure in
+ a way similar to described in 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Panagiotopoulos1988"
@@ -1117,25 +1103,21 @@ Algorithm.
 \end_layout
 
 \begin_layout Standard
-In general the simulation algorithm looks the following:
+In general the simulation algorithm is the following:
 \end_layout
 
 \begin_layout Enumerate
-simulate molecular dynamics in both boxes in parallel; collect the observable
- sample arrays: pressure and end-to-end distances, 
+simulate molecular dynamics in both boxes; collect the observables, for
+ examples pressure values 
 \begin_inset Formula $P$
 \end_inset
 
- and 
-\begin_inset Formula $R_{e}$
-\end_inset
-
-; 
+, to an array; 
 \end_layout
 
 \begin_layout Enumerate
 perform Monte-Carlo procedure simulating ion pair exchange; collect the
- observables sample arrays: number of ions in both boxes, 
+ arrays ofobservables sample : number of ions in both boxes, 
 \begin_inset Formula $\nna^{I}$
 \end_inset
 
@@ -1228,13 +1210,13 @@ The obtained values of pressure represent the sum of partial pressure of
 \begin_inset Formula $P^{gel}$
 \end_inset
 
- we perform a separate simulation of a reservoir, without the gel, exchanging
- ions with the bath of salinity 
+ we perform a separate simulation of a reservoir, containing only ions in
+ equilibrium with the bath of the same salinity 
 \begin_inset Formula $\cs$
 \end_inset
 
 .
- This simulation results the corresponding osmotic pressure, 
+ This simulation results the corresponding ions osmotic pressure, 
 \begin_inset Formula $P^{res}$
 \end_inset
 
@@ -1256,17 +1238,22 @@ The obtained values of pressure represent the sum of partial pressure of
 
  
 \emph default
-is that pressure which needs to be applied in mechanical equilibrium to
- compress the hydrogel and achieve a specific molar volume of the gel V.
+is the pressure which needs to be applied in mechanical equilibrium to compress
+ the hydrogel and achieve a specific molar volume of the gel 
+\begin_inset Formula $V$
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-The dependence of 
+The dependencies of 
 \begin_inset Formula $\Pgel$
 \end_inset
 
- versus gel molar volume is present in Figure 
+ versus gel molar volume (the volume calculated per one mole of gel segment)
+ are present in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:PV-GC"
@@ -1276,11 +1263,10 @@ noprefix "false"
 
 \end_inset
 
-.
- Solid lines on this plot represent the swelling (or compression) of the
- gel in open system.
- For example, blue solid line illustrates the compression in equilibrium
- with a reservoir of salinity, 
+ for a set of different salinities.
+ These are represented by solid lines.
+ For example, blue solid line illustrates the compression (or swelling)
+ of the gel in equilibrium with a reservoir of salinity, 
 \begin_inset Formula $\cs=0.063$
 \end_inset
 
@@ -1294,14 +1280,16 @@ states of the gel
 .
 
 \emph default
- It is seen already from this figure that the decrease of salinity shifts
- the free swelling equilibrium states towards bigger volumes.
- Generally speaking, all the solid curves shift towards bigger volumes with
- decreasing salinity.
- In other words, increase of salinity shrinks the gel.
- This is known effect, typical for all the branched strong polyelectrolytes
- and caused by the screening of electrostatic interactions by ions and by
- the condition of electroneutrality of the hydrogel media 
+ It is seen, that the increase of salinity shifts the free swelling equilibrium
+ states towards bigger volumes (shrinks the gel).
+ In general, all the solid curves shift towards smaller volumes with increasing
+ salinity.
+ This is known effect, which is typical for all the branched 
+\emph on
+strong
+\emph default
+ polyelectrolytes, and caused by the increase of ions osmotic pressure and
+ by screening of electrostatic interactions 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Zhulina2000"
@@ -1310,8 +1298,16 @@ literal "false"
 \end_inset
 
 .
- The dependence of the size of weak polyelectrolytes versus salinity is
- in general nonmonotonic 
+ 
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+The dependence of the size of 
+\emph on
+weak
+\emph default
+ polyelectrolyte versus salinity is in general nonmonotonic 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Rud2018"
@@ -1323,44 +1319,37 @@ literal "false"
  
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph
 Compression in closed system.
 \end_layout
 
 \begin_layout Standard
-After defining the free swelling equilibrium state, 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ie
-\end_layout
-
-\end_inset
-
- knowing the salinity, the gel volume, and the amount of ions in gel, 
-\begin_inset Formula $\cs^{0}$
+Each set of simulations in open system defines the free swelling equilibrium
+ state of the gel for each salinity.
+ Namelly, a certain gel molar volume, and a certaion amount of ions in gel
+ in equilibrium state, correspond to each salinity, 
+\begin_inset Formula $\cs\longrightarrow$
 \end_inset
 
 , 
-\begin_inset Formula $\Vgel^{0}$
+\begin_inset Formula $\left(\Vgel^{0},\ \ncl^{0}\right)$
 \end_inset
 
- and 
-\begin_inset Formula $\ncl^{0}$
-\end_inset
-
-, we start the compression of the gel in 
+.
+ These equilibrium states we use as starting points for simulationg gel
+ compression in 
 \emph on
 closed system
 \emph default
 .
- So we continuously decrease the volume of the gel and simultaneously increase
- the volume of the outside solution, in such a way that the total volume
- remains constant and equal to the initial gel volume 
+ Thus we continuously decrease the volume of the gel starting and simultaneously
+ increase the volume of the outside solution, in such a way that the total
+ volume remains constant and equal to the initial gel volume 
 \begin_inset Formula $V\tot=\Vgel^{0}=V\gel+V\out$
 \end_inset
 
