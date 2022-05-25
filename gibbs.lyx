@@ -813,51 +813,6 @@ The target of our study is to model the thermodynamic equilibrium between
  density in the outside solution
 \end_layout
 
-\begin_layout Paragraph*
-On the efficiency of RO
-\end_layout
-
-\begin_layout Standard
-The theoretical minimum specific energy for seawater desalination (
-\begin_inset Formula $\cs=35$
-\end_inset
-
- g/l, 
-\begin_inset Formula $\simeq0.6$
-\end_inset
-
- mol/l as for pure NaCl) is 1.1 kWh/m3 (3.9 kJ/L) for 50% recovery 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Wang_2020"
-literal "true"
-
-\end_inset
-
-, and a significantly amount of additional energy is required to actually
- operate the system
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kim_2019"
-literal "true"
-
-\end_inset
-
-.
- It has been reported that the specific energy consumption (SEC) of seawater
- reverse osmosis (SWRO) process is 2.5 - 4.0 kWh/m3 (9 - 14.4 kJ/l), which
- is significantly higher than its minimum specific energy.
- The SEC of a real-scale SWRO plant is even higher, approximately 3.5 - 4.5
- kWh/
-\begin_inset Formula $m^{3}$
-\end_inset
-
- (12.6 - 16.2 kJ/L), including pre-treatment and post-treatment processes
- [6].
- Because of the inherent high energy requirement for SWRO desalination,
- seawater is not commonly utilized over traditional surface water.
-\end_layout
-
 \begin_layout Section
 Theory behind the simulation
 \begin_inset CommandInset label
@@ -1770,6 +1725,51 @@ The compression of the gel in open system (solid lines) and in closed system
 The efficiency of desalination.
 \end_layout
 
+\begin_layout Paragraph*
+On the efficiency of RO
+\end_layout
+
+\begin_layout Standard
+The theoretical minimum specific energy for seawater desalination (
+\begin_inset Formula $\cs=35$
+\end_inset
+
+ g/l, 
+\begin_inset Formula $\simeq0.6$
+\end_inset
+
+ mol/l as for pure NaCl) is 1.1 kWh/m3 (3.9 kJ/L) for 50% recovery 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wang_2020"
+literal "true"
+
+\end_inset
+
+, and a significantly amount of additional energy is required to actually
+ operate the system
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kim_2019"
+literal "true"
+
+\end_inset
+
+.
+ It has been reported that the specific energy consumption (SEC) of seawater
+ reverse osmosis (SWRO) process is 2.5 - 4.0 kWh/m3 (9 - 14.4 kJ/l), which
+ is significantly higher than its minimum specific energy.
+ The SEC of a real-scale SWRO plant is even higher, approximately 3.5 - 4.5
+ kWh/
+\begin_inset Formula $m^{3}$
+\end_inset
+
+ (12.6 - 16.2 kJ/L), including pre-treatment and post-treatment processes
+ [6].
+ Because of the inherent high energy requirement for SWRO desalination,
+ seawater is not commonly utilized over traditional surface water.
+\end_layout
+
 \begin_layout Standard
 The desalination process works as a cascade of swelings at 
 \begin_inset Formula $N$
@@ -1795,11 +1795,8 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="13" columns="13">
+<lyxtabular version="3" rows="13" columns="10">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -1863,55 +1860,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $v_{5}$
-\end_inset
-
-, l
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $v_{0}$
-\end_inset
-
-, l
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 \begin_inset Formula $\Delta v$
-\end_inset
-
-, l
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $v_{5}^{fit}$
-\end_inset
-
-, l
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $v_{0}^{fit}$
 \end_inset
 
 , l
@@ -1927,6 +1876,18 @@ status open
 \end_inset
 
 , l
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{w}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2009,24 +1970,6 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.041
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.782
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 -2.740
 \end_layout
 
@@ -2036,25 +1979,16 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.052 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.646 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 -2.594 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -2128,24 +2062,6 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.059
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.782 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 -2.723 
 \end_layout
 
@@ -2155,25 +2071,16 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.071
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.583
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 -2.512
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -2255,28 +2162,6 @@ status open
 \begin_layout Plain Layout
 
 \color teal
-1.100
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color teal
-4.984
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color teal
 -3.255
 \end_layout
 
@@ -2288,29 +2173,16 @@ status open
 \begin_layout Plain Layout
 
 \color teal
-1.125
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color teal
-4.261
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color teal
 -3.136
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.53
 \end_layout
 
 \end_inset
@@ -2337,13 +2209,11 @@ status open
 
 \end_inset
 </cell>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\color teal
-71.364
+50.8
 \end_layout
 
 \end_inset
@@ -2398,28 +2268,6 @@ status open
 \begin_layout Plain Layout
 
 \color teal
-1.176
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color teal
-4.984
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color teal
 -3.179
 \end_layout
 
@@ -2431,29 +2279,16 @@ status open
 \begin_layout Plain Layout
 
 \color teal
-1.159
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color teal
-4.225
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color teal
 -3.066
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -2480,7 +2315,7 @@ status open
 
 \end_inset
 </cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2539,28 +2374,6 @@ status open
 \begin_layout Plain Layout
 
 \color olive
-1.161
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color olive
-5.150
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color olive
 -3.822
 \end_layout
 
@@ -2572,29 +2385,16 @@ status open
 \begin_layout Plain Layout
 
 \color olive
-1.196
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color olive
-5.114
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color olive
 -3.918
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.54
 \end_layout
 
 \end_inset
@@ -2621,13 +2421,11 @@ status open
 
 \end_inset
 </cell>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\color olive
-51.011
+36.9
 \end_layout
 
 \end_inset
@@ -2682,28 +2480,6 @@ status open
 \begin_layout Plain Layout
 
 \color olive
-1.236
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color olive
-5.150
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color olive
 -3.914 
 \end_layout
 
@@ -2715,29 +2491,16 @@ status open
 \begin_layout Plain Layout
 
 \color olive
-1.238
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color olive
-4.785
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color olive
 -3.547
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -2764,7 +2527,7 @@ status open
 
 \end_inset
 </cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2823,28 +2586,6 @@ status open
 \begin_layout Plain Layout
 
 \color brown
-1.290
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color brown
-5.493
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color brown
 -4.203
 \end_layout
 
@@ -2856,29 +2597,16 @@ status open
 \begin_layout Plain Layout
 
 \color brown
-1.246
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color brown
-5.616 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color brown
 -4.370
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.53
 \end_layout
 
 \end_inset
@@ -2905,13 +2633,11 @@ status open
 
 \end_inset
 </cell>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\color brown
-39.029
+20.6
 \end_layout
 
 \end_inset
@@ -2966,28 +2692,6 @@ status open
 \begin_layout Plain Layout
 
 \color brown
-1.318
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color brown
-5.493
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color brown
 -4.175
 \end_layout
 
@@ -2999,29 +2703,16 @@ status open
 \begin_layout Plain Layout
 
 \color brown
-1.310
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color brown
-5.482
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color brown
 -4.173
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -3048,7 +2739,7 @@ status open
 
 \end_inset
 </cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3107,28 +2798,6 @@ status open
 \begin_layout Plain Layout
 
 \color orange
-1.290
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color orange
-6.036
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color orange
 -4.746
 \end_layout
 
@@ -3140,29 +2809,16 @@ status open
 \begin_layout Plain Layout
 
 \color orange
-1.307
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color orange
-6.428
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color orange
 -5.120
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.52
 \end_layout
 
 \end_inset
@@ -3189,13 +2845,11 @@ status open
 
 \end_inset
 </cell>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\color orange
-29.235
+17.4
 \end_layout
 
 \end_inset
@@ -3250,28 +2904,6 @@ status open
 \begin_layout Plain Layout
 
 \color orange
-1.328
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color orange
-6.036
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color orange
 -4.708
 \end_layout
 
@@ -3283,29 +2915,16 @@ status open
 \begin_layout Plain Layout
 
 \color orange
-1.354
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color orange
-6.053
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color orange
 -4.699
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -3332,7 +2951,7 @@ status open
 
 \end_inset
 </cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3391,28 +3010,6 @@ status open
 \begin_layout Plain Layout
 
 \color magenta
-1.358
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color magenta
-7.439 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color magenta
 -6.081
 \end_layout
 
@@ -3424,29 +3021,16 @@ status open
 \begin_layout Plain Layout
 
 \color magenta
-1.376
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color magenta
-8.077
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color magenta
 -6.701
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -3473,13 +3057,11 @@ status open
 
 \end_inset
 </cell>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
-\color magenta
-23.211
 \end_layout
 
 \end_inset
@@ -3534,28 +3116,6 @@ status open
 \begin_layout Plain Layout
 
 \color magenta
-1.445
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color magenta
-7.227
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color magenta
 -5.781
 \end_layout
 
@@ -3567,29 +3127,16 @@ status open
 \begin_layout Plain Layout
 
 \color magenta
-1.391
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color magenta
-7.435
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\color magenta
 -6.044
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -3616,7 +3163,7 @@ status open
 
 \end_inset
 </cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4146,12 +3693,18 @@ W=2RT\left(\frac{c_{f}}{R_{w}}\ln\frac{c_{b}}{c_{f}}-c_{p}\ln\frac{c_{b}}{c_{p}}
 \end_inset
 
 For the chosen values of 
-\backslash
-cs^{f} 
-\backslash
-cs^{f} and 
-\backslash
-cs^{f}, the specific energy consumption is 34.0 J/l.
+\begin_inset Formula $\cs^{f}$
+\end_inset
+
+, 
+\begin_inset Formula $\cs^{p}$
+\end_inset
+
+ and 
+\begin_inset Formula $\cs^{b}$
+\end_inset
+
+, the specific energy consumption is 34.0 J/l.
 \end_layout
 
 \begin_layout Section

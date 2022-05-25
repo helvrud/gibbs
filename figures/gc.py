@@ -485,22 +485,22 @@ for (index, row) in W.iterrows():
     
     
     
-    
-f = 15    
-b = 18
-p = 4
-
+f = 13; b = 15; p = 6  # cs = 0.022    
+f = 15; b = 18; p = 4 # cs = 0.032
+f = 18; b = 24; p = 15 # cs = 0.045
+#f = 24; b = 27; p = 18 # cs = 0.064
     
 cf = W.loc[f].cs0
-cf = 0.6
+
 cb = W.loc[b].cs0
-cf = 1.2
+
 cp = W.loc[p].cs5
-cp = 1e-6
+
 DVp = W.loc[f].v0 - W.loc[p].v5  
-DVf = W.loc[b].v0 - W.loc[f].v5  
-Rw = DV2 / (DV1+DV2)
-Rw = 0.5
+DVb = W.loc[b].v0 - W.loc[f].v5  
+
+Rw = DVp / (DVp+DVb)
+#Rw = DV2 / (DV1+DV2)
 
 SEC = 2*Navogadro*kT*(cf/Rw*np.log(cb/cf) - cp*np.log(cb/cp))
 
