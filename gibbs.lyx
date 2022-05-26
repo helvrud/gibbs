@@ -664,6 +664,85 @@ Physics behind the desalination process.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename figures/gc.pdf
+	width 50text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figures/gibbs.pdf
+	width 50text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diamond-like network in the simulation box.
+ Color code represents the individual ion types (red: 
+\begin_inset Formula $\na$
+\end_inset
+
+, blue: 
+\begin_inset Formula $\cl$
+\end_inset
+
+, yellow: 
+\begin_inset Formula $\ca$
+\end_inset
+
+) and the hydrogel (gray: neutral segment (
+\begin_inset Formula $\AH$
+\end_inset
+
+), cyan: charged segment (
+\begin_inset Formula $\A$
+\end_inset
+
+)).
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:open and closed"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The maximum entropy principle requires the density of charges to be more-less
  the same throughout the system medium.
  Since the polyelectrolyte gel has its own charges and its own neutralizing
@@ -836,21 +915,12 @@ centering
 
  
 \begin_inset Graphics
-	filename figures/gel_snapshot.jpg
-	lyxscale 20
+	filename figures/simgibbs.pdf
 	width 50text%
 
 \end_inset
 
 
-\begin_inset Graphics
-	filename figures/salt_snapshot.jpg
-	lyxscale 20
-	width 50text%
-
-\end_inset
-
- 
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1076,8 +1146,8 @@ The thermodynamic equilibrium between the two volumes implies the exchange
  of the ion pairs between them, which is done by means of MC procedure in
  a way similar to described in 
 \begin_inset CommandInset citation
-LatexCommand citet
-key "Panagiotopoulos1988"
+LatexCommand cite
+key "Panagiotopoulos1988b"
 literal "true"
 
 \end_inset
@@ -1141,7 +1211,7 @@ repeat the procedure until the desired length of sample arrays is reached.
 \end_layout
 
 \begin_layout Section
-Results
+Results and discussion 
 \end_layout
 
 \begin_layout Paragraph
@@ -1167,31 +1237,17 @@ ie
 \begin_inset Formula $\cs$
 \end_inset
 
-
-\begin_inset Note Comment
-status open
-
-\begin_layout Plain Layout
-, for example from 
-\begin_inset Formula $\cs=$
-\end_inset
-
-0.1 mol/l
-\end_layout
-
-\end_inset
-
 .
- We do it for a set of different simulation box volumes.
- Each simulation returns the pressure in the box, 
+ The simulations are run for a set of different simulation box volumes.
+ Each simulation returns the averaged pressure in the box, 
 \begin_inset Formula $P$
 \end_inset
 
-, and the number of present in the box 
+, and the number of 
 \begin_inset Formula $\cl$
 \end_inset
 
- ions, 
+ ions present in the box, 
 \begin_inset Formula $\ncl$
 \end_inset
 
@@ -1200,24 +1256,19 @@ status open
 \end_layout
 
 \begin_layout Standard
-The obtained values of pressure represent the sum of partial pressure of
- hydrogel itself, 
-\begin_inset Formula $P^{gel}$
+In order to isolate the partial pressure of the gel, we substitute from
+ 
+\begin_inset Formula $P$
 \end_inset
 
-, and the osmotic pressure of mobile ions.
- In order to isolate 
-\begin_inset Formula $P^{gel}$
-\end_inset
-
- we perform a separate simulation of a reservoir, containing only ions in
- equilibrium with the bath of the same salinity 
-\begin_inset Formula $\cs$
-\end_inset
-
-.
- This simulation results the corresponding ions osmotic pressure, 
+ the osmotic pressure of ions, 
 \begin_inset Formula $P^{res}$
+\end_inset
+
+, which in turn we calculate by running separate simulation of a reservoir,
+ containing only ions in equilibrium with the bath of the same salinity
+ 
+\begin_inset Formula $\cs$
 \end_inset
 
 .
@@ -1239,11 +1290,7 @@ The obtained values of pressure represent the sum of partial pressure of
  
 \emph default
 is the pressure which needs to be applied in mechanical equilibrium to compress
- the hydrogel and achieve a specific molar volume of the gel 
-\begin_inset Formula $V$
-\end_inset
-
-.
+ the hydrogel and to achieve a specific volume of the gel.
  
 \end_layout
 
@@ -1252,11 +1299,15 @@ The dependencies of
 \begin_inset Formula $\Pgel$
 \end_inset
 
- versus gel molar volume (the volume calculated per one mole of gel segment)
- are present in Figure 
+ versus gel molar volume 
+\begin_inset Formula $V$
+\end_inset
+
+ (the volume calculated per one mole of gel segment) are present in Figure
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:PV-GC"
+reference "fig:fig_PV"
 plural "false"
 caps "false"
 noprefix "false"
@@ -1271,35 +1322,36 @@ noprefix "false"
 \end_inset
 
  mol/l.
- The point where the pressure equals to zero is 
+ The points where the pressure equals to zero (indicated by filled circles)
+ are the gel 
 \emph on
 free swelling equilibrium 
 \emph default
-states of the gel
+states
 \emph on
 .
 
 \emph default
  It is seen, that the increase of salinity shifts the free swelling equilibrium
- states towards bigger volumes (shrinks the gel).
+ towards smaller volumes (the gel shrinks).
  In general, all the solid curves shift towards smaller volumes with increasing
  salinity.
- This is known effect, which is typical for all the branched 
+ This effect is well known, and is typical for all the branched 
 \emph on
 strong
 \emph default
- polyelectrolytes, and caused by the increase of ions osmotic pressure and
- by screening of electrostatic interactions 
+ polyelectrolytes.
+ It is caused by the increase of ions osmotic pressure and by screening
+ of electrostatic interactions 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Zhulina2000"
+key "Zhulina2000,Landsgesel2020a"
 literal "false"
 
 \end_inset
 
 .
- 
-\begin_inset Note Comment
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
@@ -1321,6 +1373,16 @@ literal "false"
 
 \end_inset
 
+ 
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -1331,7 +1393,7 @@ Compression in closed system.
 \begin_layout Standard
 Each set of simulations in open system defines the free swelling equilibrium
  state of the gel for each salinity.
- Namelly, a certain gel molar volume, and a certaion amount of ions in gel
+ Namely, a certain gel molar volume, and a certain amount of ions in gel
  in equilibrium state, correspond to each salinity, 
 \begin_inset Formula $\cs\longrightarrow$
 \end_inset
@@ -1341,22 +1403,207 @@ Each set of simulations in open system defines the free swelling equilibrium
 \end_inset
 
 .
- These equilibrium states we use as starting points for simulationg gel
- compression in 
+ These equilibrium states we use as starting points for the gel compression
+ in 
 \emph on
 closed system
 \emph default
 .
- Thus we continuously decrease the volume of the gel starting and simultaneously
- increase the volume of the outside solution, in such a way that the total
- volume remains constant and equal to the initial gel volume 
-\begin_inset Formula $V\tot=\Vgel^{0}=V\gel+V\out$
+ Thus we prepare two systems simulating the gel of the volume 
+\begin_inset Formula $\Vgel$
+\end_inset
+
+ and the external solution of the volume 
+\begin_inset Formula $\Vout$
+\end_inset
+
+ in such a way that the total volume of both systems equals to the initial
+ gel volume 
+\begin_inset Formula $V\tot=\Vgel^{0}=\Vgel+\Vout$
 \end_inset
 
 .
- At the same time the total number of ions remains constant.
- Since the amount of external solution is small, the compression of the
- gel affects its salinity, which now decreases, changing from 
+ Also the total number of ions 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\ncl^{0}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ is shared between the two volumes.
+ For each different initial states we run a set of simulations emulating
+ the compression of the gel, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ varying simulataneously 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\Vgel$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\Vout$
+\end_inset
+
+.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ At any time the amount of shared between two volumes ions remains equal
+ to
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $\ncl^{0}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The process of the gel compression in 
+\emph on
+closed 
+\emph default
+system is depicted in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fig_PV"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ by dotted blue line.
+ The blue dotted line, for example, illustrates the compression of the gel
+ after equilibration with the reservoir of salinity 
+\begin_inset Formula $\cs=0.063$
+\end_inset
+
+ mol/l in a volume, which is equal to the gel initial volume.
+ Since the volumes 
+\begin_inset Formula $\Vgel$
+\end_inset
+
+ and 
+\begin_inset Formula $\Vout$
+\end_inset
+
+ are comparable, the compression of the gel affects the salinity in the
+ outside volume 
+\begin_inset Formula $\Vout$
+\end_inset
+
+, which now decreases, changing from 
 \begin_inset Formula $\cs^{0}=0.063$
 \end_inset
 
@@ -1365,76 +1612,7 @@ closed system
 \end_inset
 
  bar.
- The corresponding process is depicted by dotted blue line in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:PV-GC"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Paragraph
-Desalination scheme.
-\end_layout
-
-\begin_layout Standard
-Then we repeat the simulation of hydrogel swelling in open system but setting
- as a salinity of the reservoir the new, obtained from the previous process,
- value 
-\begin_inset Formula $\cs=$
-\end_inset
-
- 0.045 mol/l.
- Again, as soon as we obtain the free swelling equilibrium state (at new
- salinity), with corresponding new values of 
-\begin_inset Formula $V\gel$
-\end_inset
-
- and 
-\begin_inset Formula $\ncl$
-\end_inset
-
-, we start simulating the compression in closed system.
- Now the salinity changes again, decreasing from 0.045 to 0.031 mol/l (at
- 5 bar).
- These two processes are depicted by solid and dotted yellow lines in Figure
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:PV-GC"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- The Figure shows also the repetition of this procedure three more times
- until the salinity reaches the value 
-\begin_inset Formula $\cs=0.01$
-\end_inset
-
- mol/l.
- The last dashed magenta line shows the compression in closed system which
- ends up with 
-\begin_inset Formula $\cs=4\cdot10^{-4}$
-\end_inset
-
- mol/l.
- Schematically this process is depicted in the inset to the plot.
-\end_layout
-
-\begin_layout Standard
-The same process is depicted on Figure
+ The change of salinity is seen from the Figure
 \begin_inset space ~
 \end_inset
 
@@ -1448,22 +1626,48 @@ noprefix "false"
 
 \end_inset
 
- but in different coordinates: salinity versus volume.
- In this coordinates the swelling in open system appear to be horizontal
- line, since the salinity in this process is constant.
- Again we start from swelling in open system untill the gel reaches its
- free swelling equilibrium (solid blue line).
- Then the gel is compressed in closed system (dashed blue line), anding
- up in a state with applied to the gel pressure 5 bar.
- In this process the surrounding solution salinitiy changes from 0.064 to
- 0.045 mol/l.
- Then the gel again swells in open system, but at new salinity.
- The chain of alternating swelling and compression steps ends up when salinity
- gets equal to 
-\begin_inset Formula $\cs=4\cdot10^{-3}$
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In this figures the gel swelling/compression processes are illustrated in
+ different coordinates: salinity of outside the gel versus the gel molar
+ volume, 
+\begin_inset Formula $\cs(\Vgel)$
 \end_inset
 
- mol/l after comression in closed system (dashed magenta line).
+.
+ Similarly, as in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fig_PV"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the solid lines correspond to compression in 
+\emph on
+open
+\emph default
+ system and dotted lines
+\begin_inset space ~
+\end_inset
+
+— in 
+\emph on
+closed
+\emph default
+.
+ In this coordinates all the compressions in open system turn to the horizontal
+ lines, indicating the constant outside salinity, whereas in closed system
+ the compression lead to decrease of outside salinity.
 \end_layout
 
 \begin_layout Standard
@@ -1508,7 +1712,7 @@ replace open circles by squares on the plot
  
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:PV-GC"
+name "fig:fig_PV"
 
 \end_inset
 
@@ -1589,6 +1793,117 @@ The compression of the gel in open system (solid lines) and in closed system
 \end_layout
 
 \begin_layout Standard
+Even though the salinity during compression in 
+\emph on
+open
+\emph default
+ system remains constant, the number of ions in the volume that the gel
+ was having at zero pressure changes.
+ These dependencies are seen from the Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fig_NV"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, where Similarly, plotting out these dependencies as number of 
+\begin_inset Formula $\cl$
+\end_inset
+
+ ions in 
+\end_layout
+
+\begin_layout Paragraph
+Desalination scheme.
+\end_layout
+
+\begin_layout Standard
+Then we repeat the simulation of hydrogel swelling in open system but setting
+ as a salinity of the reservoir the new, obtained from the previous process,
+ value 
+\begin_inset Formula $\cs=$
+\end_inset
+
+ 0.045 mol/l.
+ Again, as soon as we obtain the free swelling equilibrium state (at new
+ salinity), with corresponding new values of 
+\begin_inset Formula $V\gel$
+\end_inset
+
+ and 
+\begin_inset Formula $\ncl$
+\end_inset
+
+, we start simulating the compression in closed system.
+ Now the salinity changes again, decreasing from 0.045 to 0.031 mol/l (at
+ 5 bar).
+ These two processes are depicted by solid and dotted yellow lines in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fig_PV"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The Figure shows also the repetition of this procedure three more times
+ until the salinity reaches the value 
+\begin_inset Formula $\cs=0.01$
+\end_inset
+
+ mol/l.
+ The last dashed magenta line shows the compression in closed system which
+ ends up with 
+\begin_inset Formula $\cs=4\cdot10^{-4}$
+\end_inset
+
+ mol/l.
+ Schematically this process is depicted in the inset to the plot.
+\end_layout
+
+\begin_layout Standard
+The same process is depicted on Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fig_CV"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ but in different coordinates: salinity versus volume.
+ In this coordinates the swelling in open system appear to be horizontal
+ line, since the salinity in this process is constant.
+ Again we start from swelling in open system untill the gel reaches its
+ free swelling equilibrium (solid blue line).
+ Then the gel is compressed in closed system (dashed blue line), anding
+ up in a state with applied to the gel pressure 5 bar.
+ In this process the surrounding solution salinitiy changes from 0.064 to
+ 0.045 mol/l.
+ Then the gel again swells in open system, but at new salinity.
+ The chain of alternating swelling and compression steps ends up when salinity
+ gets equal to 
+\begin_inset Formula $\cs=4\cdot10^{-3}$
+\end_inset
+
+ mol/l after comression in closed system (dashed magenta line).
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -1630,7 +1945,7 @@ replace open circles by squares on the plot
  
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:NV"
+name "fig:fig_NV"
 
 \end_inset
 
@@ -3748,7 +4063,7 @@ e-Infrastruktura CZ
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 btprint "btPrintCited"
-bibfiles "gibbs"
+bibfiles "lit/gibbs"
 
 \end_inset
 
@@ -3757,49 +4072,6 @@ bibfiles "gibbs"
 
 \begin_layout Standard
 \begin_inset Newpage newpage
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename figures/pressure_on_density_pub.pdf
-	width 50text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename figures/c_s_on_density_pub2.pdf
-	width 50text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-(a)The pressure extension curve of the gel.
- (b) The dependence of the salinity of the outside bath, during the hydrogel
- compression.
- The numbe4s reflect the initial and final salt concentration of the external
- solution.
- HERE MUST BE A PANEL ILLUSTRATING THE EFFICIENCY OF THE STAIRCASE, HOW
- MANY LITRES OF WATER FOR HOW MUCH ENERGY
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \end_inset
 
 
