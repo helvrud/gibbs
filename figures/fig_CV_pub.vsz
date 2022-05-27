@@ -1,5 +1,5 @@
 # Veusz saved document (version 3.0.1)
-# Saved at 2022-05-24T13:36:45.649167
+# Saved at 2022-05-27T14:26:24.920502
 
 AddImportPath(u'/home/kvint/gibbs/figures')
 ImportString(u'CCcl0(numeric)','''
@@ -8637,6 +8637,7 @@ Set('min', 0.003)
 Set('max', 0.19)
 Set('log', True)
 Set('direction', u'vertical')
+Set('TickLabels/size', u'12pt')
 To('..')
 Add('label', name=u'label10', autoadd=False)
 To(u'label10')
@@ -8892,7 +8893,7 @@ Set('FillAbove/transparency', 50)
 To('..')
 Add('xy', name=u'xy_P0', autoadd=False)
 To(u'xy_P0')
-Set('marker', u'star')
+Set('marker', u'none')
 Set('markerSize', u'8pt')
 Set('xData', [10.03, 8.567, 5.515, 3.751, 1.1])
 Set('yData', [0.001432, 0.003954, 0.0314, 0.08997, 0.5794])

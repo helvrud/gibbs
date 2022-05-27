@@ -1501,6 +1501,13 @@ The compression of the gel in open system (solid lines) and in closed system
  (see legend).
  Shadowed area limit the states with applied pressure below zero and above
  5 bar.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:PV and CV"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1894,12 +1901,316 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-At the end the same processes are depicted in coordinates number of particles
- — salinity of the outside solution.
+Finally in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fig_CN"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ the same processes are depicted in coordinates number of particles in compressi
+on volume — salinity of the outside solution.
+ In this coordinates both ways of the compression, in 
+\emph on
+open
+\emph default
+ and in 
+\emph on
+closed
+\emph default
+ system, appear as straight vertical and horizontal lines correspondingly.
+ 
+\end_layout
+
+\begin_layout Standard
+In our study we modeled the compression of the gel in equilibrium with reservoir
+s of 40 different salinities, ranging from 0.001 to 0.5 mol/l.
+ Every open system compression resulted a defined free swelling equilibrium
+ state, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ the the gel molar volume and the number of ions in gel 
+\begin_inset Formula $\left(\Vgel^{0},\ \ncl^{0}\right)$
+\end_inset
+
+ at zero pressure.
+ These states were used as the initial ones for the compression in closed
+ systems.
+ All the corresponding dependencies are depicted in Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fig_PV"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ — 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fig_CN"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as thin grey dashed lines.
+ The states corresponding to 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $P^{gel}=0$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+, 5 and 10 bar pressure are marked by open circles, squares and crosses
+ respectively.
+ Non shadowed area on the Figures limits the states between 0 and 5 bar
+ applied to the gel prerssure.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement t
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align left
+\begin_inset Graphics
+	filename figures/fig_NV_pub.pdf
+	lyxscale 30
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pressure vs gel density 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fig_NV"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/fig_NVbox_mu_pub.pdf
+	lyxscale 30
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Salinity vs gel density
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fig_CN"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The compression of the gel in open system (solid lines) and in closed system
+ (dotted lines).
+ Each solid curve corresponds to different salinity of the reservoir 
+\begin_inset Formula $\cs$
+\end_inset
+
+ (see legend).
+ Shadowed area limit the states with applied pressure below zero and above
+ 5 bar.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig: NV and CN"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
 Desalination scheme.
+\end_layout
+
+\begin_layout Standard
+As we have seen the compression of the gel in closed and open system affects
+ the salinity and amount of ions in a reservoir the gel is compressed in.
+ Here we try to show how to employ this fenomena for water desalination.
+ The highligted colored lines on plots of Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:PV and CV"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig: NV and CN"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ form a sequence of the followed one by each other hydrogel swellings in
+ 
+\emph on
+open
+\emph default
+ system and compressions in 
+\emph on
+closed
+\emph default
+ system.
+ This sequence composes the whole desalination process.
+ Starting from swelling the gel in 
+\emph on
+open
+\emph default
+ system at high salinity (
+\begin_inset Formula $\cs=0.091$
+\end_inset
+
+ mol/l in our case), the gel gets compressed in 
+\emph on
+closed
+\emph default
+ system until the pressure reaches 5 bar.
+ Then the same gel swells in a reservoir of smaller salinity (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\cs=0.064$
+\end_inset
+
+ mol/l).
+ After swelling the gel is again compressed in 
+\emph on
+closed
+\emph default
+ system by pressure 5 bar.
+ Then it is put swelling in a reservoir of even smaller salinity (
+\begin_inset Formula $\cs=0.045$
+\end_inset
+
+ mol/l).
+ And so on, the process ends by a reservoir of salinity 
+\begin_inset Formula $\cs=4\cdot10^{-3}$
+\end_inset
+
+ mol/l.
 \end_layout
 
 \begin_layout Standard
@@ -1972,7 +2283,7 @@ noprefix "false"
  line, since the salinity in this process is constant.
  Again we start from swelling in open system untill the gel reaches its
  free swelling equilibrium (solid blue line).
- Then the gel is compressed in closed system (dashed blue line), anding
+ Then the gel is compressed in closed system (dashed blue line), ending
  up in a state with applied to the gel pressure 5 bar.
  In this process the surrounding solution salinitiy changes from 0.064 to
  0.045 mol/l.
@@ -1982,130 +2293,7 @@ noprefix "false"
 \begin_inset Formula $\cs=4\cdot10^{-3}$
 \end_inset
 
- mol/l after comression in closed system (dashed magenta line).
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement t
-wide true
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align left
-\begin_inset Graphics
-	filename figures/fig_NV_pub.pdf
-	lyxscale 30
-	width 50text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Pressure vs gel density 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-replace open circles by squares on the plot
-\end_layout
-
-\end_inset
-
- 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:fig_NV"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename figures/fig_NVbox_mu_pub.pdf
-	lyxscale 30
-	width 50text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Salinity vs gel density
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:fig_CN"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-The compression of the gel in open system (solid lines) and in closed system
- (dotted lines).
- Each solid curve corresponds to different salinity of the reservoir 
-\begin_inset Formula $\cs$
-\end_inset
-
- (see legend).
- Shadowed area limit the states with applied pressure below zero and above
- 5 bar.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+ mol/l after compression in closed system (dashed magenta line).
 \end_layout
 
 \begin_layout Paragraph

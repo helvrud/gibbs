@@ -1,5 +1,5 @@
 # Veusz saved document (version 3.0.1)
-# Saved at 2022-05-27T06:04:28.752510
+# Saved at 2022-05-27T16:59:13.995498
 
 AddImportPath(u'/home/kvint/gibbs/figures')
 ImportString(u'`GB_P105.0`(numeric),+-','''
@@ -19738,15 +19738,15 @@ To(u'graph1')
 Add('axis', name=u'x', autoadd=False)
 To(u'x')
 Set('label', u'hydrogel volume, V, [l/mol]')
-Set('min', 1.625)
+Set('min', 0.0)
 Set('max', 10.0)
-Set('log', True)
+Set('log', False)
 To('..')
 Add('axis', name=u'y', autoadd=False)
 To(u'y')
 Set('label', u'P^{ gel} = P - P^{ res}, [bar]')
 Set('min', -0.5)
-Set('max', 2.23)
+Set('max', 60.0)
 Set('log', False)
 Set('direction', u'vertical')
 To('..')

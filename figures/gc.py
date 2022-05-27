@@ -18,7 +18,7 @@ Ngel = MPC*16+8
 from scipy import optimize
 from scipy import integrate
 def function(v, a, gamma, b):
-   return a*v**(-gamma) +b
+   return a*v**(-gamma) + b
    
 
 gibbs_raw['delta_P_bar_mean'] = gibbs_raw.delta_P_Pa_mean * 1e-5
@@ -299,15 +299,27 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     (fig_PV, graph_PV, xy) = vplot([V10], [P10], xname = 'GC_phi10{row.cs}_V0{V0}', yname = f'GC_P10{row.cs}_V0{V0}', g = fig_PV, marker='cross',color=color )
     xy.markerSize.val = '4pt'
     #####
-    pp = P[0]
-    vv = V
-    nn = Ncl_open
-    pp = np.delete(pp,np.argwhere(P[0]<0))
-    pp = np.delete(pp,np.argwhere(P[0]>5))
-    vv = np.delete(vv,np.argwhere(P[0]<0))
-    vv = np.delete(vv,np.argwhere(P[0]>5))
-    nn = np.delete(nn,np.argwhere(P[0]<0))
-    nn = np.delete(nn,np.argwhere(P[0]>5))
+    pp = np.array(P[0])
+    vv = np.array(V)
+    nn = np.array(Ncl_open)
+    pp[np.argwhere(P[0]<0)] = np.inf
+    pp[np.argwhere(P[0]>5)] = np.inf
+    pp = np.delete(pp,np.argwhere(pp == np.inf))
+
+    vv[np.argwhere(P[0]<0)] = np.inf
+    vv[np.argwhere(P[0]>5)] = np.inf
+    vv = np.delete(vv,np.argwhere(vv == np.inf))
+
+    nn[np.argwhere(P[0]<0)] = np.inf
+    nn[np.argwhere(P[0]>5)] = np.inf
+    nn = np.delete(nn,np.argwhere(nn == np.inf))
+
+
+    #pp = np.delete(pp,np.argwhere(P[0]>5))
+    #vv = np.delete(vv,np.argwhere(P[0]<0))
+    #vv = np.delete(vv,np.argwhere(P[0]>5))
+    #nn = np.delete(nn,np.argwhere(P[0]<0))
+    #nn = np.delete(nn,np.argwhere(P[0]>5))
 
     
     popt,cov = scipy.optimize.curve_fit(function, vv, pp)
@@ -365,8 +377,8 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
 
 cs_5
 
-Inum_V = W_gb.Inum / W_gb.deltaV*100     # J/V
-Ifit_V = W_gb.Ifit / W_gb.deltaVfit*100  # J/V
+Inum_V = W_gb.Inum / W_gb.deltaV*100     # J/l
+Ifit_V = W_gb.Ifit / W_gb.deltaVfit*100  # J/l
 #Iid_V = (W_gb.v0*W_gb.cs0-W_gb.v5*W_gb.cs5)*np.log(W_gb.cs5/W_gb.cs0)*kT*Navogadro / W_gb.deltaV # J/l
 
 

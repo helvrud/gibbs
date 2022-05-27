@@ -1,5 +1,5 @@
 # Veusz saved document (version 3.0.1)
-# Saved at 2022-05-27T11:18:18.065648
+# Saved at 2022-05-27T14:02:03.597280
 
 AddImportPath(u'/home/kvint/gibbs/figures')
 ImportString(u'`GB_Ncl105.0`(numeric)','''
@@ -9415,6 +9415,8 @@ Set('min', 0.003)
 Set('max', 0.16)
 Set('log', True)
 Set('direction', u'vertical')
+Set('Label/size', u'14pt')
+Set('TickLabels/size', u'12pt')
 To('..')
 Add('label', name=u'label3', autoadd=False)
 To(u'label3')
