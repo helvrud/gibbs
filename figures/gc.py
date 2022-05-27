@@ -499,7 +499,7 @@ for (index, row) in W.iterrows():
     
 f = 13; b = 15; p = 6  # cs = 0.022    
 f = 15; b = 18; p = 4 # cs = 0.032
-f = 18; b = 24; p = 15 # cs = 0.045
+#f = 18; b = 24; p = 15 # cs = 0.045
 #f = 24; b = 27; p = 18 # cs = 0.064
     
 cf = W.loc[f].cs0

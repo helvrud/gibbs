@@ -3772,227 +3772,8 @@ All the units calculated per one mol of gel segments
 
 \end_layout
 
-\begin_layout Standard
-A compressed gel to the volume 
-\begin_inset Formula $v_{5bar}^{0}$
-\end_inset
-
- is put to an infinitelly big reservoir of salinity 
-\begin_inset Formula $c_{0}$
-\end_inset
-
-.
- It swells there reaching the volume 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-the volume
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- 
-\begin_inset Formula $v_{0bar}^{0}$
-\end_inset
-
-.
- Then it is taken out from the reservoir.
- The volume of the solution has changed by 
-\begin_inset Formula $\Delta V^{0}=v_{0bar}^{0}-v_{5bar}^{0}$
-\end_inset
-
-.
- Then the gel of volume 
-\begin_inset Formula $v_{0}$
-\end_inset
-
- is compressed to the volume 
-\begin_inset Formula $v_{5bar}^{1}>v_{5bar}^{0}$
-\end_inset
-
-.
- The salinity of the solution meanwhile changes from 
-\begin_inset Formula $c_{s}^{0}$
-\end_inset
-
- to 
-\begin_inset Formula $c_{s}^{1}$
-\end_inset
-
-.
- The solution of volume 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $\Delta V^{1}=v_{0bar}^{0}-v_{5bar}^{1}$
-\end_inset
-
- at salinity 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-
-\begin_inset Formula $c_{s}^{1}$
-\end_inset
-
- is collected.
- The ideal work needed to produce 
-\begin_inset Formula $\Delta V^{1}$
-\end_inset
-
-of solution at 
-\begin_inset Formula $c_{s}^{1}$
-\end_inset
-
- out of 
-\begin_inset Formula $\Delta V^{0}$
-\end_inset
-
- at 
-\begin_inset Formula $c_{s}^{0}$
-\end_inset
-
- is 
-\begin_inset Formula 
-\[
-\kT N_{A}\left(\Delta V^{0}c_{s}^{0}-\Delta V^{1}c_{s}^{1}\right)\cdot\ln\frac{c_{s}^{1}}{c_{s}^{0}}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-During the open process the gel swells from 
-\begin_inset Formula $v_{5bar}^{0}$
-\end_inset
-
- to 
-\begin_inset Formula $v_{0bar}^{0}$
-\end_inset
-
-, so it takes from bath #0 the volume 
-\begin_inset Formula $\Delta v^{0}=v_{0bar}^{0}-v_{5bar}^{0}$
-\end_inset
-
- of solution of concentration 
-\begin_inset Formula $c_{s}^{0}$
-\end_inset
-
-.
- Its free energy is
-\begin_inset Formula 
-\[
-\Delta G_{0}=\Delta v^{0}RT\frac{c_{s}^{0}}{c_{w}}\left(\ln\frac{c_{s}^{0}}{c_{w}}-1\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-At the same time it releases the certain amount of ions, 
-\begin_inset Formula $\Delta N_{cl}$
-\end_inset
-
- to the bath at concentration 
-\begin_inset Formula $c_{s}^{0}$
-\end_inset
-
-.
- The free energy of these ions is
-\begin_inset Formula 
-\[
-\Delta G'_{0}=\Delta N_{cl}RT\ln\frac{c_{s}^{0}}{c_{w}}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-After swelling, compression of the gel.
- The volume changes from 
-\begin_inset Formula $v_{0bar}^{0}$
-\end_inset
-
- to 
-\begin_inset Formula $v_{5bar}^{1}$
-\end_inset
-
- so it releases to the bath #1 the solution of the amount 
-\begin_inset Formula $\Delta v^{1}=v_{0bar}^{0}-v_{5bar}^{1}$
-\end_inset
-
- at concentration 
-\begin_inset Formula $c_{s}^{1}$
-\end_inset
-
-.
- Its free energy is
-\begin_inset Formula 
-\[
-\Delta G_{1}=\Delta v^{1}RT\frac{c_{s}^{1}}{c_{w}}\left(\ln\frac{c_{s}^{1}}{c_{w}}-1\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-The energy change of the 
-\begin_inset Formula 
-\[
-\Delta G_{0}-\Delta G'_{0}-\Delta G_{1}
-\]
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Paragraph
-The efficiency of desalination 2.
+The ideal efficiency of desalination .
 \end_layout
 
 \begin_layout Standard
@@ -4247,7 +4028,7 @@ Recovery ratio is
 \noun off
 \color none
 
-\begin_inset Formula $R_{w}=\Delta v_{2}/\Delta v_{1}$
+\begin_inset Formula $R_{w}=\Delta v_{2}/\Delta v_{1}=0.53$
 \end_inset
 
 .
@@ -4279,7 +4060,7 @@ For the chosen values of
 \begin_inset Formula $\cs^{b}$
 \end_inset
 
-, the specific energy consumption is 34.0 J/l.
+, the specific energy consumption is 20.6 J/l.
 \end_layout
 
 \begin_layout Section
