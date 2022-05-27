@@ -79,8 +79,8 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     V = 1/phi      # l/mol
     P = row.P
     Ccl_closed = row.cs
-    Ncl_closed = row.Ncl / Ngel /Vtot * np.ones(len(phi))
-    Ncl_closed_2 = row.Ncl / Ngel  * np.ones(len(phi))
+    Ncl_closed =   row.Ncl / Ngel  * np.ones(len(phi))/Vtot
+    Ncl_closed_2 = row.Ncl / Ngel  * np.ones(len(phi))/Vtot
     # Ncl = row.Ncl / Ngel*np.ones(len(phi))
     # Ncl = row.Ncl *np.ones(len(phi))
     # Ncl = row.NNa *np.ones(len(phi))
@@ -256,9 +256,9 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
 
     #Ncl = row.NCl_gel[0] / Ngel + (V0 - row.V)*row.cs
     #Ncl_err = row.NCl_gel[1] / Ngel 
-    Ncl_open = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) / V0
+    Ncl_open =   (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) / V0
+    Ncl_open_2 = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) / V0 
     Ncl_open_abs = (row.NCl_gel[0] + (V0 - V)*row.cs * Ncharges) 
-    Ncl_open_2 = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
     #Ncl_open = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
     #Ncl = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
     #Ncl = (row.NNa_gel[0] + (V0 - row.V)*row.cs * Ngel )

@@ -1247,7 +1247,7 @@ ie
 \begin_inset Formula $\cl$
 \end_inset
 
- ions present in the box, 
+ ions present in the simulation box, 
 \begin_inset Formula $\ncl$
 \end_inset
 
@@ -1391,10 +1391,137 @@ Compression in closed system.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+placement t
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align left
+\begin_inset Graphics
+	filename figures/fig_PV_pub.pdf
+	lyxscale 30
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pressure vs gel density 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+replace open circles by squares on the plot
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fig_PV"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/fig_CV_pub.pdf
+	lyxscale 30
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Salinity vs gel density
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fig_CV"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The compression of the gel in open system (solid lines) and in closed system
+ (dotted lines).
+ Each solid curve corresponds to different salinity of the reservoir 
+\begin_inset Formula $\cs$
+\end_inset
+
+ (see legend).
+ Shadowed area limit the states with applied pressure below zero and above
+ 5 bar.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Each set of simulations in open system defines the free swelling equilibrium
  state of the gel for each salinity.
  Namely, a certain gel molar volume, and a certain amount of ions in gel
- in equilibrium state, correspond to each salinity, 
+ in equilibrium state (at zero pressure, 
+\begin_inset Formula $P^{gel}=0$
+\end_inset
+
+), correspond to each salinity, 
 \begin_inset Formula $\cs\longrightarrow$
 \end_inset
 
@@ -1529,8 +1656,8 @@ ie
 \uwave default
 \noun default
 \color inherit
- At any time the amount of shared between two volumes ions remains equal
- to
+ At any all the ions are getting redistributed between the systems but their
+ total amount remains constant and equal to
 \family roman
 \series medium
 \shape up
@@ -1631,9 +1758,9 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-In this figures the gel swelling/compression processes are illustrated in
- different coordinates: salinity of outside the gel versus the gel molar
- volume, 
+In this Figure the gel swelling/compression processes are illustrated in
+ different coordinates: salinity outside the gel versus the gel molar volume,
+ 
 \begin_inset Formula $\cs(\Vgel)$
 \end_inset
 
@@ -1666,140 +1793,18 @@ closed
 \emph default
 .
  In this coordinates all the compressions in open system turn to the horizontal
- lines, indicating the constant outside salinity, whereas in closed system
- the compression lead to decrease of outside salinity.
+ lines, indicating the constant surrounding the gel salinity, whereas in
+ closed system the compression lead to decrease of outside salinity.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align left
-\begin_inset Graphics
-	filename figures/fig_PV_pub.pdf
-	lyxscale 30
-	width 50text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Pressure vs gel density 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-replace open circles by squares on the plot
-\end_layout
-
-\end_inset
-
- 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:fig_PV"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename figures/fig_CV_pub.pdf
-	lyxscale 30
-	width 50text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Salinity vs gel density
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:fig_CV"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-The compression of the gel in open system (solid lines) and in closed system
- (dotted lines).
- Each solid curve corresponds to different salinity of the reservoir 
-\begin_inset Formula $\cs$
-\end_inset
-
- (see legend).
- Shadowed area limit the states with applied pressure below zero and above
- 5 bar.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Even though the salinity during compression in 
+Although the salinity during compression in 
 \emph on
 open
 \emph default
- system remains constant, the number of ions in the volume that the gel
- was having at zero pressure changes.
- These dependencies are seen from the Figure 
+ system remains constant, the number of ions in volume where the gel is
+ compressed changes.
+ In the Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:fig_NV"
@@ -1809,11 +1814,88 @@ noprefix "false"
 
 \end_inset
 
-, where Similarly, plotting out these dependencies as number of 
+ we depicted the number of 
 \begin_inset Formula $\cl$
 \end_inset
 
- ions in 
+ ions in the volume
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $\Vgel^{0}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+, which gel has at free swelling equilibrium state, as a function of the
+ gel molar volume.
+ The depicted value is calculated per volume 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\Vgel^{0}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ and per gel monomer, so it shows how many mols of 
+\begin_inset Formula $\cl$
+\end_inset
+
+ particles are present in a unit of compression volume.
+ As it is expected in the closed system theses dependencies are looking
+ like horizontal lines, whereas in open system it is seen, that compression
+ of the gel increases the number of ions in compression volume.
+ In other words, the compression of the gel in open system pulls out the
+ ions from the bath to compression volume, and vice versa, the swelling
+ of the gel pushes ions out to the bath.
+\end_layout
+
+\begin_layout Standard
+At the end the same processes are depicted in coordinates number of particles
+ — salinity of the outside solution.
 \end_layout
 
 \begin_layout Paragraph
@@ -1905,7 +1987,8 @@ noprefix "false"
 
 \begin_layout Standard
 \begin_inset Float figure
-wide false
+placement t
+wide true
 sideways false
 status open
 
@@ -1967,7 +2050,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename figures/fig_Nmu_pub.pdf
+	filename figures/fig_NVbox_mu_pub.pdf
 	lyxscale 30
 	width 50text%
 
