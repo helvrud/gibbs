@@ -16,7 +16,7 @@
    version="1.1"
    id="svg1251"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="work\.svg">
+   sodipodi:docname="work.svg">
   <defs
      id="defs1245">
     <marker
@@ -153,9 +153,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="-1111.1666"
-     inkscape:cy="475.28795"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="-1805.6811"
+     inkscape:cy="546.21806"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -220,7 +220,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -2613,5 +2613,12 @@
          x="-401.57245"
          id="tspan4661"
          sodipodi:role="line">v1_5bar</tspan></text>
+    <rect
+       style="opacity:1;fill:#bcbd22;fill-opacity:0.03968254;stroke:none;stroke-width:0.23464853;stroke-miterlimit:4;stroke-dasharray:0.23464851, 0.23464851000000000;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect7116"
+       width="81.316765"
+       height="17.506598"
+       x="-380.65863"
+       y="95.533875" />
   </g>
 </svg>
