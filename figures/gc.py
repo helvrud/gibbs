@@ -493,14 +493,18 @@ for (index, row) in W.iterrows():
     if i > 11: break
     
     
-    
-    
-    
+W.insert(4,'n0', W.Ncl0/488/W.v0)
+W.insert(4,'n5', W.Ncl5/488/W.v0)
+W.insert(6,'cgel0', 1/W.v0)
+W.insert(6,'cgel5', 1/W.v5)
     
 f = 13; b = 15; p = 6  # cs = 0.022    
 f = 15; b = 18; p = 4 # cs = 0.032
 #f = 18; b = 24; p = 15 # cs = 0.045
 #f = 24; b = 27; p = 18 # cs = 0.064
+
+
+
     
 cf = W.loc[f].cs0
 
@@ -520,15 +524,157 @@ SEC = 2*Navogadro*kT*(cf/Rw*np.log(cb/cf) - cp*np.log(cb/cp))
     
     
     
+# This for calculateing the correction of red line    
+pp= gibbs_df.loc[4].P
+vv = 1/gibbs_df.loc[4].phi
+Vtot = gibbs_df.loc[4].Vtot
+v5new = 2.272 # l/mol
+vv = vv[:38]
+pp = pp[0][:38]
+
+
+
+I_num = integrate.trapz(pp,vv)
+DeltaV = Vtot - v5new
+
+WL = I_num / DeltaV*100     # J/l
+
+f = 15; b = 18; p = 13  # cs = 0.022    
+cf = W.loc[f].cs0
+cb = W.loc[b].cs0
+cp = W.loc[p].cs0
+DVp = DeltaV
+DVb = W.loc[b].v0 - W.loc[b].v5
+Rw = DVp / (DVp+DVb)
+WL_id = 2*Navogadro*kT*(cf/Rw*np.log(cb/cf) - cp*np.log(cb/cp))
+
+
+
     
+# This for calculateing the correction of orange solid line        
+
+pp= gc_raw.loc[13].P
+vv = gc_raw.loc[13].V
+nn = gc_raw.loc[13].NCl_gel
+
+Vtot = gc_raw.loc[13].V_eq
+v5new = 2.272 # l/mol
+vv = vv[40:69]
+pp = pp[0][40:69]
+nn = nn[0][40:69]
+nn = (nn + (Vtot - vv)*gc_raw.loc[13].cs * Ncharges ) 
+
+
+I_num = integrate.trapz(pp,vv)
+DeltaV = Vtot - v5new
+WL = I_num / DeltaV*100     # J/l
+
+f= 13; b = 15; p = 6
+cf = W.loc[f].cs0
+cb = W.loc[b].cs0
+cp = W.loc[p].cs0
+DVb = DeltaV
+V_taken = W.loc[13].v0
+V_returned = W.loc[6].v5
+DVp = V_taken - V_returned
+
+V_taken = W.loc[13].v0
+V_returned = W.loc[15].v5
+DVb = V_taken - V_returned
+#DVp = W.loc[p].v0 - W.loc[f].v5
+Rw = DVp / (DVp+DVb)
+WL_id = 2*Navogadro*kT*(cf/Rw*np.log(cb/cf) - cp*np.log(cb/cp))
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+# This for calculateing the Wid for gree solid
+f= 18; b = 24; p = 15
+cf = W.loc[f].cs0
+cb = W.loc[b].cs0
+cp = W.loc[p].cs0
+
+V_taken = W.loc[f].v0
+V_returned = W.loc[p].v5
+DVp = V_taken - V_returned
+
+V_taken = W.loc[b].v0
+V_returned = W.loc[b].v5
+DVb = V_taken - V_returned
+#DVp = W.loc[p].v0 - W.loc[f].v5
+Rw = DVp / (DVp+DVb)
+WL_id = 2*Navogadro*kT*(cf/Rw*np.log(cb/cf) - cp*np.log(cb/cp))
+
+
+# This for calculateing the Wid for blue solid
+f= 24; b = 27; p = 18
+cf = W.loc[f].cs0
+cb = W.loc[b].cs0
+cp = W.loc[p].cs0
+
+V_taken = W.loc[f].v0
+V_returned = W.loc[p].v5
+DVp = V_taken - V_returned
+
+V_taken = W.loc[b].v0
+V_returned = W.loc[b].v5
+DVb = V_taken - V_returned
+#DVp = W.loc[p].v0 - W.loc[f].v5
+Rw = DVp / (DVp+DVb)
+WL_id = 2*Navogadro*kT*(cf/Rw*np.log(cb/cf) - cp*np.log(cb/cp))
+
+
+# This for calculateing the Wid for red solid
+f= 15; b = 18; p = 13
+cf = W.loc[f].cs0
+cb = W.loc[b].cs0
+cp = W.loc[4].cs0
+
+V_taken = W.loc[f].v0
+V_returned = W.loc[4].v5
+DVp = V_taken - V_returned
+
+V_taken = W.loc[b].v0
+V_returned = W.loc[b].v5
+DVb = V_taken - V_returned
+#DVp = W.loc[p].v0 - W.loc[f].v5
+Rw = DVp / (DVp+DVb)
+WL_id = 2*Navogadro*kT*(cf/Rw*np.log(cb/cf) - cp*np.log(cb/cp))
+
+# This for calculateing the Wid for orange solid
+f= 13; b = 15; p = 6
+cf = W.loc[f].cs0
+cb = W.loc[b].cs0
+cp = W.loc[4].cs0
+
+V_taken = W.loc[f].v0
+V_returned = W.loc[p].v5
+DVp = V_taken - V_returned
+
+V_taken = W.loc[b].v0
+V_returned = W.loc[b].v5
+DVb = V_taken - V_returned
+#DVp = W.loc[p].v0 - W.loc[f].v5
+Rw = DVp / (DVp+DVb)
+WL_id = 2*Navogadro*kT*(cf/Rw*np.log(cb/cf) - cp*np.log(cb/cp))
+
+
+
+# This for calculateing the Wid for magenta solid
+f= 6; b = 13; p = 1
+cf = W.loc[f].cs0
+cb = W.loc[b].cs0
+cp = W.loc[b].cs5
+
+V_taken = W.loc[f].v0
+V_returned = W.loc[p].v5
+DVp = V_taken - V_returned
+
+V_taken = W.loc[b].v0
+V_returned = W.loc[b].v5
+DVb = V_taken - V_returned
+#DVp = W.loc[p].v0 - W.loc[f].v5
+Rw = DVp / (DVp+DVb)
+WL_id = 2*Navogadro*kT*(cf/Rw*np.log(cb/cf) - cp*np.log(cb/cp))
+
+
+
+
