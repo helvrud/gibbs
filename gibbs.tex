@@ -452,7 +452,7 @@ In general the simulation algorithm is following:
 \item simulate molecular dynamics in both boxes; collect the observables,
 for examples pressure values $P$, to an array; 
 \item perform Monte-Carlo procedure simulating ion pair exchange; collect
-the arrays ofobservables sample : number of ions in both boxes, $\nna^{I}$,
+the arrays of observables sample : number of ions in both boxes, $\nna^{I}$,
 $\ncl^{I}$, $\nna^{II}$ and $\ncl^{II}$ ; 
 \item repeat the procedure until the desired length of sample arrays is
 reached.
@@ -620,14 +620,13 @@ This value is calculated as integral of corresponding $\Pgel(\Vgel)$ dependence
 Here, in the table we present the absolute value, whereas one should keep in mind that the compression implies the work which is done by external force, whereas the swelling implies the work which is done by gel.
 \todo{may be we return back the 'minuses' to the W values}
 
-\begin{table*}[h]
-\caption{\label{tab: table}All the units calculated per one mol of gel segments.}
-\begin{tabular*}{1\textwidth}{@{\extracolsep{\fill}}|ll|ll|l|l|ll|}
+\begin{table}
+\begin{tabular*}{1\textwidth}{@{\extracolsep{\fill}}ll|lc|c|l|l|ll}
+\multicolumn{1}{l|}{$c_{s}^{0}$, mM} & $c_{s}^{5}$, mM & \multicolumn{1}{l|}{$n_{\cl}^{0}$, mM} & $n_{\cl}^{5}$, mM & $\Delta v$, l & $R_{w}$ & $|W$\textbar , J/L & \multicolumn{2}{c}{$W^{id}$, J/L}\tabularnewline
 \hline 
-\multicolumn{1}{|l|}{$c_{s}^{0}$, M} & $c_{s}^{5}$,M & \multicolumn{1}{l|}{$\ncl^{0}$} & $\ncl^{5}$ & $\Delta v$, l & $|W$\textbar , J/L & \multicolumn{2}{c|}{$W^{id}$, J/L}\tabularnewline
 \hline 
-\multirow{2}{*}{0.092} & \multirow{2}{*}{} & \multirow{2}{*}{0.057 $\rightarrow$} & \multirow{2}{*}{0.072} & \multirow{2}{*}{2.74} & \multirow{2}{*}{95.4} &  & \multirow{2}{*}{}\tabularnewline
- &  &  &  &  &  & \multirow{8}{*}{\hspace{-1em}\textcolor{teal}{$\left.\begin{array}{l}
+\multirow{2}{*}{{\small{}$91.47$}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{{\small{}$57.08\pm0.122\enskip\longrightarrow$}} & \multirow{2}{*}{{\small{}2.74}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}$95.4\pm1.86$}} &  & \multirow{2}{*}{}\tabularnewline
+ &  & \multicolumn{2}{r|}{{\small{}$71.75\pm0.024$}} &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{teal}{\small{}$\left.\begin{array}{l}
 \\
 \\
 \\
@@ -639,12 +638,12 @@ Here, in the table we present the absolute value, whereas one should keep in min
 W^{id}= & (52.9)\\
 R_{w}= & 0.54
 \end{array}}}$}} & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{0.089 $\rightarrow$} & \multirow{2}{*}{0.074} & \multirow{2}{*}{0.057} & \multirow{2}{*}{} & \multirow{2}{*}{2.72} & \multirow{2}{*}{109.1} &  & \multirow{2}{*}{}\tabularnewline
- &  &  &  &  &  &  & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{teal}{0.064}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{teal}{0.037 $\rightarrow$}} & \multirow{2}{*}{\textcolor{teal}{0.051}} & \multirow{2}{*}{\textcolor{teal}{3.26}} & \multirow{2}{*}{\textcolor{teal}{100.9}} &  & \tabularnewline
- &  &  &  &  &  &  & \multirow{8}{*}{\hspace{-1em}\textcolor{olive}{$\left.\begin{array}{l}
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{2}{l|}{{\small{}$89.41\pm0.229\enskip\longrightarrow$}} & \multirow{2}{*}{{\small{}56.90}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}2.72}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}$109.1\pm1.72$}} &  & \multirow{2}{*}{}\tabularnewline
+\multicolumn{2}{r|}{{\small{}$73.63\pm0.03$}} &  &  &  &  &  &  & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multirow{2}{*}{\textcolor{teal}{\small{}63.93}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{teal}{\small{}$37.28\pm0.083\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{teal}{\small{}3.26}} & \multirow{2}{*}{\textcolor{teal}{\small{}0.54}} & \multirow{2}{*}{\textcolor{teal}{\small{}$100.9\pm1.69$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{teal}{\small{}$50.58\pm0.013$}} &  &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{olive}{\small{}$\left.\begin{array}{l}
 \\
 \\
 \\
@@ -656,12 +655,12 @@ R_{w}= & 0.54
 W^{id}= & 38.2\\
 R_{w}= & 0.53
 \end{array}}}$}}\tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{teal}{0.062 $\rightarrow$}} & \multirow{2}{*}{\textcolor{teal}{0.048}} & \multirow{2}{*}{\textcolor{teal}{0.037}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{teal}{3.18}} & \multirow{2}{*}{\textcolor{teal}{107.4}} &  & \tabularnewline
- &  &  &  &  &  &  & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{olive}{0.045}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{olive}{0.024 $\rightarrow$}} & \multirow{2}{*}{\textcolor{olive}{0.036}} & \multirow{2}{*}{\textcolor{olive}{3.82}} & \multirow{2}{*}{\textcolor{olive}{106.7}} &  & \tabularnewline
- &  &  &  &  &  & \multirow{8}{*}{\hspace{-1em}\textcolor{red}{$\left.\begin{array}{l}
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{2}{l|}{\textcolor{teal}{\small{}$62.05\pm0.15\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{teal}{\small{}37.17}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{teal}{\small{}3.18}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{teal}{\small{}$107.4\pm1.37$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{teal}{\small{}$48.21\pm0.016$}} &  &  &  &  &  &  & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multirow{2}{*}{\textcolor{olive}{\small{}44.91}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{olive}{\small{}$23.75\pm0.057\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{olive}{\small{}3.82}} & \multirow{2}{*}{\textcolor{olive}{\small{}0.53}} & \multirow{2}{*}{\textcolor{olive}{\small{}$106.7\pm1.51$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{olive}{\small{}$35.91\pm0.010$}} &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{red}{\small{}$\left.\begin{array}{l}
 \\
 \\
 \\
@@ -673,12 +672,12 @@ R_{w}= & 0.53
 W^{id}= & 43.8\ {\color{red}{\scriptstyle (41.0)}}\\
 R_{w}= & 0.52\ {\scriptstyle (0.46)}
 \end{array}}}$}} & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{olive}{0.044 $\rightarrow$}} & \multirow{2}{*}{\textcolor{olive}{0.031}} & \multirow{2}{*}{\textcolor{olive}{0.024}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{olive}{3.91}} & \multirow{2}{*}{\textcolor{olive}{106.4}} &  & \tabularnewline
- &  &  &  &  &  &  & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{red}{0.032}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{red}{0.015 $\rightarrow$}} & \multirow{2}{*}{\textcolor{red}{0.025}} & \multirow{2}{*}{\textcolor{red}{4.20}} & \multirow{2}{*}{\textcolor{red}{107.9}} &  & \tabularnewline
- &  &  &  &  &  &  & \multirow{8}{*}{\hspace{-1em}\textcolor{orange}{$\left.\begin{array}{l}
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{2}{l|}{\textcolor{olive}{\small{}$43.46\pm0.12\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{olive}{\small{}24.27}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{olive}{\small{}3.91}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{olive}{\small{}$106.4\pm1.13$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{olive}{\small{}$30.80\pm0.008$}} &  &  &  &  &  &  & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multirow{2}{*}{\textcolor{red}{\small{}31.93}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{red}{\small{}$14.66\pm0.037\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{red}{\small{}4.20}} & \multirow{2}{*}{\textcolor{red}{\small{}0.52}} & \multirow{2}{*}{\textcolor{red}{\small{}$107.9\pm1.42$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{red}{\small{}$25.30\pm0.006$}} &  &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{orange}{\small{}$\left.\begin{array}{l}
 \\
 \\
 \\
@@ -690,30 +689,30 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 W^{id}= & 66.6\ {\scriptstyle (22.0)}\\
 R_{w}= & 0.53\ {\scriptstyle (0.49)}
 \end{array}}}$}}\tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{red}{0.030 $\rightarrow$}} & \multirow{2}{*}{\textcolor{red}{$\begin{array}{c}
-0.019\\
-{\scriptstyle (0.022)}
-\end{array}$}} & \multirow{2}{*}{\textcolor{red}{0.015}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{red}{$\begin{array}{c}
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{2}{l|}{\textcolor{red}{\small{}$30.03\pm0.084\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{red}{\small{}14.55}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{red}{\small{}$\begin{array}{c}
 4.17\\
 {\scriptstyle (3.22)}
-\end{array}$}} & \multirow{2}{*}{\textcolor{red}{$\begin{array}{c}
-115.6\\
+\end{array}$}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{red}{\small{}$\begin{array}{c}
+115.6\pm0.92\\
 {\scriptstyle (57.3)}
 \end{array}$}} &  & \tabularnewline
- &  &  &  &  &  &  & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{orange}{0.022}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{orange}{0.009 $\rightarrow$}} & \multirow{2}{*}{\textcolor{orange}{$\begin{array}{c}
-0.018\\
-{\scriptstyle (0.015)}
-\end{array}$}} & \multirow{2}{*}{\textcolor{orange}{$\begin{array}{c}
+\multicolumn{2}{r|}{\textcolor{red}{\small{}$\begin{array}{c}
+18.59\pm0.004\,\\
+{\scriptstyle (22.32)}
+\end{array}$}} &  &  &  &  &  &  & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multirow{2}{*}{\textcolor{orange}{\small{}22.30}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{orange}{\small{}$8.84\pm0.026\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{orange}{\small{}$\begin{array}{c}
 4.75\\
 {\scriptstyle (3.76)}
-\end{array}$}} & \multirow{2}{*}{\textcolor{orange}{$\begin{array}{c}
-108.1\\
+\end{array}$}} & \multirow{2}{*}{\textcolor{orange}{\small{}0.53}} & \multirow{2}{*}{\textcolor{orange}{\small{}$\begin{array}{c}
+108.1\pm1.26\\
 {\scriptstyle (68.3)}
 \end{array}$}} &  & \tabularnewline
- &  &  &  &  &  & \multirow{7}{*}{\hspace{-1em}\textcolor{magenta}{$\left.\begin{array}{l}
+ &  & \multicolumn{2}{r|}{\textcolor{orange}{\small{}$\begin{array}{c}
+\text{17.95}\pm\text{0.004}\\
+{\scriptstyle (14.56)}
+\end{array}$}} &  &  &  & \multirow{7}{*}{{\small{}\hspace{-1em}}\textcolor{magenta}{\small{}$\left.\begin{array}{l}
 \\
 \\
 \\
@@ -724,38 +723,40 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 W^{id}= & 69.7\\
 R_{w}= & 0.55
 \end{array}}}$}} & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{orange}{0.021 $\rightarrow$}} & \multirow{2}{*}{\textcolor{orange}{0.011}} & \multirow{2}{*}{\textcolor{orange}{0.009}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{orange}{$4.71$}} & \multirow{2}{*}{\textcolor{orange}{110.8}} &  & \tabularnewline
- &  &  &  &  &  &  & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{magenta}{0.011}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{0.003 $\rightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{0.009}} & \multirow{2}{*}{\textcolor{magenta}{6.08}} & \multirow{2}{*}{\textcolor{magenta}{106.9}} &  & \tabularnewline
- &  &  &  &  &  &  & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{magenta}{0.010 $\rightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{0.004}} & \multirow{2}{*}{\textcolor{magenta}{0.003}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{5.78}} & \multirow{2}{*}{\textcolor{magenta}{119.4}} &  & \tabularnewline
- &  &  &  &  &  &  & \tabularnewline
-\hline 
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{2}{l|}{\textcolor{orange}{\small{}$20.74\pm0.064\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{orange}{\small{}8.83}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{orange}{\small{}$4.71$}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{orange}{\small{}$110.8\pm0.77$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{orange}{\small{}$11.08\pm0.002$}} &  &  &  &  &  &  & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multirow{2}{*}{\textcolor{magenta}{\small{}10.90}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{magenta}{\small{}$3.00\pm0.01\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}6.08}} & \multirow{2}{*}{\textcolor{magenta}{\small{}0.55}} & \multirow{2}{*}{\textcolor{magenta}{\small{}$106.9\pm1.05$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{magenta}{\small{}9.01$\pm$0.002}} &  &  &  &  & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{2}{l|}{\textcolor{magenta}{\small{}$9.83\pm0.046\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}3.12}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{\small{}5.78}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{\small{}$119.4\pm0.97$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{magenta}{\small{}$3.86\pm0.001$}} &  &  &  &  &  &  & \tabularnewline
 \end{tabular*}
-\end{table*}
+
+\caption{All the units calculated per one mol of gel segments. Values in brackets
+are the estimates corresponding to crossection of 'red' and 'orange'
+lines on the plots of figures \ref{fig: PV and CV} and \ref{fig: NV and CN}
+}
+\end{table}
 
 
 
 
-The six column \todo{check if it is sixth column} contains the values of specific energy consumption, $W^\text{id}$, which are calculated as follows.
-We consider, for example, the solution of concentration $\cs^f=0.045$ M as a feed solution, and the solutions of $\cs^p=0.032M$ and $\cs^b=0.064M$ correspondingly as produced product and brine solutions.
+
+The fifth column \todo{check if it is fifth column} contains the values of specific energy consumption, $W^\text{id}$, which are calculated as follows.
+We consider, for example, the solution of concentration $\cs^f=0.045$ mol/l as a feed solution, and the solutions of $\cs^p=0.032M$ and $\cs^b = 0.064$ mol/l 
+correspondingly as produced product and brine solutions.
 \begin{enumerate}
-    \item first the gel is equilibrated with feed solution is getting compressed in closed system. 
-    The salinity of supernatant decreases from $\cs^f$ to $\cs^p$.
-    The change of the gel volume equals to $\Delta v^p =$ 3.69 l, so does the  the volume of produced desalinated solution
-    \item Then the squeezed gel is put back to feed solution and getting equilibrated with it under pressure 5 bar, so that it does not swell. 
+    \item first, the gel, equilibrated with feed solution, is getting compressed in a closed system.
+    while compression it changes its volume by $\Delta v^p = 3.69$  l/mol and the salinity of supernate decreases from $\cs^f$ to $\cs^p$.
+    The volume of product solution equals to $\Delta v^p$
+    \item Then the squeezed gel is put back to feed solution and is getting equilibrated there under pressure, so it does not swell. 
     \item then the squeezed gel is let to swell in closed system such that the salinity of external solution increases reaching the value of $\cs^b$
     \item finally, the gel is taken out and squeezed by 5 bar in open system in equilibrium with the bath of the brine. 
-    The change of the gel volume in this process is $\Delta v^b =$ 3.26 l, so that the volume of the produced brine. 
+    The change of the gel volume in this process is $\Delta v^b = 3.26$ l/mol, which equals to the volume of produced brine. 
 \end{enumerate}
-The recovery ratio $R_w = \Delta v^p / (\Delta v^p + \Delta v^b) simeq $ 0.53
-The theoretical minimum specific energy of desalination with corresponding $\cs^f$, $\cs^p$ and $\cs^b$, according to \refeq{eq: SEC} is $W^{id} =$ 38.2 J/l
-
-
-
+Thus the recovery ratio $R_w = \Delta v^p / (\Delta v^p + \Delta v^b) \simeq $ 0.53 and the theoretical minimum specific energy of desalination with corresponding $\cs^f$, $\cs^p$ and $\cs^b$ is $W^{id} =$ 38.2 J/l (\refeq{eq:SEC})
 
 
 
@@ -856,6 +857,203 @@ The routine is also described in Figure \ref{fig: sampling_diagram}
 \label{fig: sampling_diagram}
 \end{figure*}
 
+\subsection{Monte Carlo process}
+\subsubsection{Open system}
+Free energy in grand-cannonical ensemble
+\begin{equation}
+\Omega = E-TS + \mu N 
+\end{equation}
+where $S$ is the entropy. Boltzman formula
+\begin{equation}
+S= k_B \ln \frac{V^N}{N!}
+\end{equation}
+The change of free energy associated with insertion ($\xi=1$) or deletion ($\xi=-1$) a particle is
+\begin{equation}
+\Delta \Omega =\kT\ln\left(V^{\xi}\frac{N!}{ (N+\xi)!}\right)+\xi\mu+\Delta E
+\end{equation}
+\subsubsection{Closed system}
+In closed system ion pairs are exchanged between two finite volume boxes.
+
+\begin{equation}
+    \na_{I} + \cl_{I} \leftrightarrows \na_{II} + \cl_{II}
+\end{equation}
+
+Suppose an ion pair has been moved from box to another, then the change in entropy can be expressed as
+\begin{eqnarray}
+    \Delta S = 2 \log \left(\frac{V^{I}}{V^{II}} \right) ^ {\gamma}  \left(\frac{(N_{Na^{+}}^{I}+\mathcal{H}(\gamma))(N_{Cl^{-}}^{I}+\mathcal{H}(\gamma))}{(N_{Na^{+}}^{II}+\mathcal{H}(-\gamma))(N_{Cl^{-}}^{II}+\mathcal{H}(-\gamma))}\right)^{-\gamma}
+\end{eqnarray}
+where $\gamma$ defines the direction of the trial move, so that $\gamma_{I \rightarrow II} = -1$ when an ion pair moved from box I to box II and  $\gamma_{II \rightarrow I} = 1$ otherwise, $\mathcal{H}$ is the Heaviside step function.
+
+The probability that the move will be accepted is calculated from the free energy change as
+\begin{equation}
+    \mathcal{P} = \exp(-\beta (\Delta E_{pot} - k_B T \Delta S))
+\end{equation}
+
+Thus, moving an ion pair from box I to box II change the entropy
+\begin{equation}
+    \Delta S_{I \rightarrow II} = 2 \log \left(\frac{V^{II}}{V^{I}} \right)  \frac{N_{Na^{+}}^{I} N_{Cl^{-}}^{I}}{(N_{Na^{+}}^{II}+1)(N_{Cl^{-}}^{II}+1)}
+\end{equation}
+
+The probability of this move ${I \rightarrow II}$ to be accepted
+
+\begin{equation}
+    \mathcal{P}_{I \rightarrow II} = \exp\left(-\beta (\Delta E_{pot} - 2 k_B T \log \left(\frac{V^{II}}{V^{I}} \right)  \frac{N_{Na^{+}}^{I} N_{Cl^{-}}^{I}}{(N_{Na^{+}}^{II}+1)(N_{Cl^{-}}^{II}+1)})\right)
+\end{equation}
+
+\begin{itemize}
+\item perform a move of a random ion pair 
+    \begin{equation}
+    \left(\na +\cl\right)^{I} \leftrightarrows\left(\na +\cl\right)^{II}
+\end{equation}
+
+\item accept if 
+    \begin{equation}
+    \mathrm{rand}(0,1] < \left(\frac{V^{II}}{V^{I}}\right)^{\xi}\prod_{i=Na,\ Cl}\frac{N^I_i!}{(N^I_i+\xi)!}\frac{N^{II}_i!}{(N^{II}_i+\xi)!}\exp(-\beta\Delta E_{pot})
+\end{equation}
+\end{itemize}
 
 
+\subsection{Donnan equilibrium in finite volume reservoirs}
+Before we can explore any system properties and collect data the system has to be equilibrated. To achieve this we perform equilibration routine consist of sequence of Molecular Dynamics and Monte Carlo steps.
+%Here we describe our technique
+The result of equilibration is stationary of any observable such as pressure, end-to-end distance for polymer chains and ion distribution between reservoirs. 
+
+The success and the cost in terms of computational time for the equilibration process heavily depend on initial guess. In our case we initialize the system with ion distribution corresponds to Donnan equilibrium.
+
+In closed system number of ions in the system is constant, so Donnan equilibrium can be formulated as follows
+\begin{equation}
+    \frac{\left(N_{pairs} - N_{Cl^{-}}^{(gel)}\right)^2}{V_{salt}^2} = \frac{N_{Cl^{-}}^{gel} (N^{{(gel)}}_{A^{-}} + N_{Cl^{-}}^{(gel)})}{V_{gel}^2}
+\end{equation}
+where $N^{{(gel)}}_{A^{-}}$ is number of fixed anions in the box with the gel \ie acetic groups in the polymer gel.
+Solving this equation with respect to $N^{{(gel)}}_{A^{-}}$ gives us the distribution of the ions between two boxes.
+
+%probably not needed
+\begin{eqnarray}
+    %N_{Cl^{-}}^{(gel)} = \frac{\frac{N^{{(gel)}}_{A^{-}} V_{salt}^{2}}{2} + N_{pairs} V_{gel}^{2} - \frac{V_{salt} \sqrt{N^{{(gel)}}_{A^{-}}^{2} V_{salt}^{2} + 4 N^{{(gel)}}_{A^{-}} N_{pairs} V_{gel}^{2} + 4 N_{pairs}^{2} V_{gel}^{2}}}{2}}{V_{gel}^{2} - V_{salt}^{2}}
+    \\
+    N_{Na^{+}}^{(gel)} = N^{{(gel)}}_{A^{-}} + N_{Cl^{-}}^{(gel)}
+    \\
+    N_{Cl^{-}}^{(salt)} = N_{Na^{+}}^{(gel)} = N_{pairs} - N_{Cl^{-}}^{(gel)}
+\end{eqnarray}
+
+
+
+
+\begin{table}
+\begin{tabular*}{1\textwidth}{@{\extracolsep{\fill}}ll|lc|c|l|l|ll}
+\multicolumn{1}{l|}{$c_{s}^{0}$, mM} & $c_{s}^{5}$, mM & \multicolumn{1}{l|}{$n_{\cl}^{0}$, mM} & $n_{\cl}^{5}$, mM & $\Delta v$, l & $R_{w}$ & $|W$\textbar , J/L & \multicolumn{2}{c}{$W^{id}$, J/L}\tabularnewline
+\hline 
+\hline 
+\multirow{2}{*}{{\small{}91.466}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{{\small{}$57.083\pm0.1215\quad\longrightarrow$}} & \multirow{2}{*}{{\small{}2.74}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}$95.4\pm1.86$}} &  & \multirow{2}{*}{}\tabularnewline
+ &  & \multicolumn{2}{r|}{{\small{}$71.751\pm0.024$}} &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{teal}{\small{}$\left.\begin{array}{l}
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\end{array}\right\rbrace $$\rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
+W^{id}= & (52.9)\\
+R_{w}= & 0.54
+\end{array}}}$}} & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{2}{l|}{{\small{}$89.414\pm0.2286\quad\longrightarrow$}} & \multirow{2}{*}{{\small{}56.898}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}2.72}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}$109.1\pm1.72$}} &  & \multirow{2}{*}{}\tabularnewline
+\multicolumn{2}{r|}{{\small{}$73.633\pm0.029$}} &  &  &  &  &  &  & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multirow{2}{*}{\textcolor{teal}{\small{}63.93}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{teal}{\small{}$37.281\pm0.083\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{teal}{\small{}3.26}} & \multirow{2}{*}{\textcolor{teal}{\small{}0.54}} & \multirow{2}{*}{\textcolor{teal}{\small{}$100.9\pm1.69$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{teal}{\small{}$50.579\pm0.0134$}} &  &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{olive}{\small{}$\left.\begin{array}{l}
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\end{array}\right\rbrace $$\rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
+W^{id}= & 38.2\\
+R_{w}= & 0.53
+\end{array}}}$}}\tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{2}{l|}{\textcolor{teal}{\small{}$62.052\pm0.148\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{teal}{\small{}37.172}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{teal}{\small{}3.18}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{teal}{\small{}$107.4\pm1.37$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{teal}{\small{}$48.206\pm0.0157$}} &  &  &  &  &  &  & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multirow{2}{*}{\textcolor{olive}{\small{}44.915}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{olive}{\small{}$23.747\pm0.0572\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{olive}{\small{}3.82}} & \multirow{2}{*}{\textcolor{olive}{\small{}0.53}} & \multirow{2}{*}{\textcolor{olive}{\small{}$106.7\pm1.51$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{olive}{\small{}$35.911\pm0.0101$}} &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{red}{\small{}$\left.\begin{array}{l}
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\end{array}\right\rbrace \rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
+W^{id}= & 43.8\ {\color{red}{\scriptstyle (41.0)}}\\
+R_{w}= & 0.52\ {\scriptstyle (0.46)}
+\end{array}}}$}} & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{2}{l|}{\textcolor{olive}{\small{}$43.463\pm0.116\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{olive}{\small{}24.272}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{olive}{\small{}3.91}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{olive}{\small{}$106.4\pm1.13$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{olive}{\small{}$30.795\pm0.0078$}} &  &  &  &  &  &  & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multirow{2}{*}{\textcolor{red}{\small{}31.928}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{red}{\small{}$14.658\pm0.0368\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{red}{\small{}4.20}} & \multirow{2}{*}{\textcolor{red}{\small{}0.52}} & \multirow{2}{*}{\textcolor{red}{\small{}$107.9\pm1.42$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{red}{\small{}$25.297\pm0.0061$}} &  &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{orange}{\small{}$\left.\begin{array}{l}
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\end{array}\right\rbrace \rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
+W^{id}= & 66.6\ {\scriptstyle (22.0)}\\
+R_{w}= & 0.53\ {\scriptstyle (0.49)}
+\end{array}}}$}}\tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{2}{l|}{\textcolor{red}{\small{}$30.029\pm0.0839\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{red}{\small{}14.549}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{red}{\small{}$\begin{array}{c}
+4.17\\
+{\scriptstyle (3.22)}
+\end{array}$}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{red}{\small{}$\begin{array}{c}
+115.6\pm0.92\\
+{\scriptstyle (57.3)}
+\end{array}$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{red}{\small{}$\begin{array}{c}
+18.585\pm0.0036\,\\
+{\scriptstyle (22.32)}
+\end{array}$}} &  &  &  &  &  &  & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multirow{2}{*}{\textcolor{orange}{\small{}22.301}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{orange}{\small{}$8.838\pm0.0262\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{orange}{\small{}$\begin{array}{c}
+4.75\\
+{\scriptstyle (3.76)}
+\end{array}$}} & \multirow{2}{*}{\textcolor{orange}{\small{}0.53}} & \multirow{2}{*}{\textcolor{orange}{\small{}$\begin{array}{c}
+108.1\pm1.26\\
+{\scriptstyle (68.3)}
+\end{array}$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{orange}{\small{}$\begin{array}{c}
+\text{17.945}\pm\text{0.0041}\\
+{\scriptstyle (14.56)}
+\end{array}$}} &  &  &  & \multirow{7}{*}{{\small{}\hspace{-1em}}\textcolor{magenta}{\small{}$\left.\begin{array}{l}
+\\
+\\
+\\
+\\
+\\
+\\
+\end{array}\right\rbrace \rotatebox{90}{\hspace{-3em}\ensuremath{\begin{array}{cc}
+W^{id}= & 69.7\\
+R_{w}= & 0.55
+\end{array}}}$}} & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{2}{l|}{\textcolor{orange}{\small{}$20.743\pm0.0638\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{orange}{\small{}8.827}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{orange}{\small{}$4.71$}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{orange}{\small{}$110.8\pm0.77$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{orange}{\small{}$11.082\pm0.002$}} &  &  &  &  &  &  & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multirow{2}{*}{\textcolor{magenta}{\small{}10.904}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{magenta}{\small{}$3.002\pm0.0098\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}6.08}} & \multirow{2}{*}{\textcolor{magenta}{\small{}0.55}} & \multirow{2}{*}{\textcolor{magenta}{\small{}$106.9\pm1.05$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{magenta}{\small{}9.011$\pm$0.0019}} &  &  &  &  & \tabularnewline
+\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\multicolumn{2}{l|}{\textcolor{magenta}{\small{}$9.834\pm0.0461\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}3.119}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{\small{}5.78}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{\small{}$119.4\pm0.97$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{magenta}{\small{}$3.862\pm0.0014$}} &  &  &  &  &  &  & \tabularnewline
+\end{tabular*}
+
+\caption{ORIGINAL TABLE (to be removed)
+}
+\end{table}
 \end{document}

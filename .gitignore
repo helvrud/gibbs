@@ -20,4 +20,14 @@ gibbs.bib
 #plots.py
 *.lyx~
 *.bak
+*.bbl
+*.synctex.gz
+
+*.aux
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.tdo
+
 #figures/*.vsz
