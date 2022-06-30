@@ -150,8 +150,9 @@ Saint-Petersburg, Russia}
 \newcommand{\cs}{c_{\mathrm{s}}}
 %\newcommand{\cs}{c_{\mathrm{salt}}}
 \newcommand{\csres}{\cs\res}
-\newcommand{\Vgel}{V\gel}
-\newcommand{\Vgeleq}{\widetilde{V}\gel}
+%\newcommand{\Vgel}{V\gel}
+\newcommand{\Vgel}{v_\mathrm{gel}}
+\newcommand{\Vgeleq}{\widetilde{\Vgel}}
 \newcommand{\Pgel}{P\gel}
 \newcommand{\Pres}{P\res}
 \newcommand{\Vout}{V\out}
@@ -178,136 +179,80 @@ Saint-Petersburg, Russia}
 
 \begin{document}
 \begin{abstract}
-Recently polyelectrolyte hydrogels have been proposed as draw agents
-for reverse osmosis desalination techniques. Indeed, polyelectrolyte
-hydrogels have the ability to absorb a big amount of water across
-forward osmosis membrane as a result of their swelling pressure. The
-insoluble cross-linked network of the gel enables dewatering under
-the influence of a stimuli (thermal and/or mechanical). On the other
-hand, the network structure of a polymer hydrogel from a thermodynamic
-perspective is already an osmotic membrane. So hydrogel microparticles
+Recently polyelectrolyte hydrogels have been proposed as draw agents for reverse osmosis desalination techniques. 
+Indeed, polyelectrolyte hydrogels have the ability to absorb a big amount of water across forward osmosis membrane as a result of their swelling pressure. 
+The insoluble cross-linked network of the gel enables dewatering under the influence of a stimulus (thermal and/or mechanical) \todo{remove this sentence?}.
+On the other hand, the network structure of a polymer hydrogel, from a thermodynamic
+perspective, is already an osmotic membrane. So hydrogel microparticles
 may allow to completely avoid the osmotic membranes in forward osmosis
-and use microfiltration instead. By this article, we present our recent
-theoretical study of the use of polyelectrolyte hydrogel for water
-desalination. We modeled the thermodynamic equilibrium of coexistence
-of the gel and the aqueous salt solution in the so-called closed ensemble,
-in which the total amount of ions is assumed to be constant. We modeled
-the compression of the gel and the associated with that release of
-the solution. We have shown that the squeezed out solution has a little
-lower salinity than that the gel was equilibrated with. Also, we performed
-a set of simulations modeling the process of continuous decrease of
-water salinity up to freshwater concentrations.
+and use microfiltration instead.
 
+In this article, we present our recent theoretical study of the use of polyelectrolyte hydrogel for water desalination. 
+We modeled the thermodynamic equilibrium of coexisting gel and aqueous salt solution phases in the so-called `closed' ensemble, in which the total amount of ions is assumed to be constant. 
+We modeled the compression of the gel associated with the release of solution and have shown that the squeezed-out solution has a little lower salinity than the one the gel was equilibrated with. 
+Finally, we performed a set of simulations modeling the process of continuous decrease of water salinity up to freshwater concentrations.
 \end{abstract}
 
 \section{Introduction\label{sec: intro}}
 
 \paragraph{Water desalination technologies.}
 
-Two basic approaches for separating water from salt are present in
-modern desalination technology \cite{Miller2003,Curto2021}.
+Two basic approaches for separating water from salt are present in modern desalination technology \cite{Miller2003,Curto2021}.
 
-The first approach~--- distillation. It uses thermal means to effect
-a phase change of the water to vapor (or solid), then to physically
-separate the vapor phase from the remaining salt solution, and then
-recover the thermal energy for reuse as the separated vapor reverts
-to liquid form. Distillation processes were the first desalination
-techniques conducted on a large commercial scale and still account
-for a large portion of the modern world’s desalination capacity.
+The first approach is distillation, which uses heat to cause a phase change of the water to vapor. The vapor phase is separated from the brine and condenses to liquid fresh water. 
+The released condensation energy is directed back to heating the feed solution.
+Distillation processes were the first desalination techniques conducted on a large commercial scale and still account for a large portion of the modern world’s desalination capacity.
 
-The second approach is to physically separate the brine components,
-generally with a membrane, as they move in response to an externally
-applied gradient. In the context of our study, we will mention the
-reverse osmosis process (RO) \textasciitilde -{}-{}- the major processes
-of all the modern desalination industry, and the new emerging membrane
-technology -{}-{}- forward osmosis (FO) \cite{Akther2015}. In RO,
-water passes through a membrane that is impermeable to the solute
-in response to a chemical potential gradient achieved through pressurization.
-In FO, a concentrated draw solution, with a lower water chemical potential,
-and a feed solution, with a higher water chemical potential, are separated
-by a membrane that rejects the salt but allows the passage of water.
-The water permeation from feed solution to draw solution is a spontaneous
-process driven by the chemical potential gradient.
+The second approach is to physically separate the brine components using an osmotic membrane transparent only for water molecules, which move in response to a water chemical potential difference.
+In the context of our study, we will mention the reverse osmosis process (RO)~--- the major process of all the modern desalination industry, and the newly emerging membrane
+technology~--- forward osmosis (FO) \cite{Akther2015}. 
+In RO, the difference in water chemical potential originates from a difference in pressures applied to the feed and to product solutions. 
+In FO, the chemical potential difference is due to an addition to solution from one side of the membrane (draw solution) the so-called draw solutes, which are lowering the water chemical potential in draw solution.
 
-Distillation is easy and cheap technology but it is characterized
-by relatively high energy costs due to the dissipation of thermal
-energy. On the contrary, RO uses expensive osmotic membranes, which
-need to be replaced regularly because of scaling and fouling. Moreover,
-RO requires very high operating pressures, ranging from 20 to 200
-bar, to let the water pass through the membrane. But in terms of energy
-losses, it works close to the thermodynamic limit. Thus, theoretically,
-per one transferred from freshwater to salty water ion pair, it consumes
-only the energy of difference of those ions chemical potentials. 
 
-The absence of large hydraulic pressure in FO process in comparison
-to RO allows to reduce the energy consumption in pumping, reduce membrane
-scaling and fouling, therefore significantly increase the lifetime
-of the membranes. In FO, the draw solutes (agents) dispersed and/or
-dissolved in water form homogeneous draw solutions. The correct choice
-of the draw agents is a task of paramount importance. As an osmotically
-driven process, the draw solute is expected to significantly reduce
-the water chemical potential, and consequently generate a high osmotic
-pressure. On the other hand, the diluted draw solution is also expected
-to be easily separated to fresh water and to concentrated draw solution
-for reuse \cite{Cai2016}.
+Distillation is easy and cheap technology but it is characterized by relatively high energy costs due to the dissipation of thermal energy. 
+On the contrary, RO uses expensive osmotic membranes, which need to be replaced regularly because of scaling and fouling. 
+Moreover, RO requires very high operating pressures, ranging from 20 to 200 bar, to let the water pass through the membrane. 
+But in terms of energy losses, it works close to the thermodynamic limit.
+Thus, theoretically, per one ion pair transferred from freshwater to salty water, it consumes only the energy equal to the difference between the chemical potentials of the transfered ions.
+
+The absence of large hydraulic pressure in FO process (unlike in RO) allows to reduce the energy consumption in pumping, reduce membrane scaling and fouling, and therefore significantly increase the lifetime of the membranes. 
+In FO, the draw solutes (agents) are dispersed and/or dissolved in water form homogeneous draw solutions. 
+The correct choice of the draw agents is a task of paramount importance. 
+As an osmotically driven process, the draw solute is expected to significantly reduce the water chemical potential, and consequently generate a high osmotic pressure. 
+On the other hand, the draw solute is expected to be easily separated from water \cite{Cai2016}.
 
 \paragraph{Hydrogels for desalination.}
+Hydrogels are three-dimensional networks of polymer chains that are crosslinked by either physical or chemical bonds. 
+They are able to entrap large volumes of water attracted by the high concentration of hydrophilic groups. 
+When a dehydrated or deswollen hydrogel uptakes water, its polymer chains extend, creating a swelling pressure. 
+For example, as reported in \cite{Wack_2009} weakly crosslinked poly(acrylic acid) (PAA) copolymers with polymer volume fractions between 0.03 and 0.30 exhibit a swelling pressure ranging from 0.20--4.23 MPa.
+Polyelectrolyte hydrogels, which are carrying ionic groups on the comonomer units (like PAA), are able to reject salt ions from the solution, they absorb a solution of lower salinity than that they are equilibrated with. 
 
-Hydrogels are three-dimensional networks of polymer chains that are
-crosslinked by either physical or chemical bonds. They are able to
-entrap large volumes of water attracted by the high concentration
-of hydrophilic groups. Hydrogels with ionic groups on the comonomer
-unit are able to reject salt ions from the solution, they absorb a
-solution of lower salinity than that they are equilibrated with. When
-a dehydrated or deswollen hydrogel uptakes water, its polymer chains
-extend, creating a swelling pressure. For example, as reported in
-\cite{Wack_2009} weakly crosslinked poly(acrylic acid)/poly(sodium
-acrylate) copolymers with polymer volume fractions between 0.03 and
-0.30 exhibit a swelling pressure ranging from 0.20--4.23 MPa.
+An important, advantageous aspect of polymer hydrogels is that they can undergo reversible volume change, \ie solution --- gel phase transitions in response to environmental stimuli. 
+This aspect causes hydrogels to be labeled as ‘smart’ hydrogels. 
+Many physical and chemical stimuli have been applied to induce various responses of such smart hydrogels, in particular, to change them from hydrophilic to hydrophobic, thereby releasing water. 
+The physical stimuli include: temperature, solvent composition, light, mechanical pressure, sound, electric and/or magnetic field, whilst the chemical (or biochemical) stimuli include pH, ionic strength, and specific molecular recognition \cite{Tanaka_1982,Serizawa_2001,Lietor_Santos_2009,Qiu_2001}.
 
-An important, advantageous aspect of polymer hydrogels is that they
-can undergo reversible volume change, \ie solution --- gel phase
-transitions in response to environmental stimuli. This aspect causes
-hydrogels to be labeled as ‘smart’ hydrogels. Many physical and chemical
-stimuli have been applied to induce various responses of such smart
-hydrogels, in particular, to change them from hydrophilic to hydrophobic,
-thereby releasing water. These stimuli include: temperature, solvent
-composition, light, mechanical pressure, sound, electric and/or magnetic
-field, whilst the chemical or biochemical stimuli include pH, ions,
-and specific molecular recognition events \cite{Tanaka_1982,Serizawa_2001,Lietor_Santos_2009,Qiu_2001}.
+The smart properties of hydrogels were utilized for desalination in a recent study by Li \etal \cite{Li2011}, where hydrogels have been considered as draw agents for FO. 
+In this study authors have shown, that hydrogels, 
+are able to absorb water across the FO membrane due to their swelling and osmotic pressure and
+allow dewatering under the influence of stimuli (thermal and/or mechanical), due to their insoluble cross-linked polymer network.
+For instance, Li \etal proposed the use of hydrogel made of thermoresponsive polyelectrolyte~--- copolymer of poly-N-isopropyl acrylamide (p-NIPAAm) and polyacrylic acid (p-AA).
+Depending on the temperature the network of the gel appears to be either hydrophilic or hydrophobic. 
+In the hydrophilic state, the gel is used as a draw solute accumulating water inside, then in the hydrophobic state, the water releases out.
 
-The smart properties of hydrogels were utilized for desalination in
-a recent study by Li \etal \cite{Li2011}, where hydrogels have been
-considered as draw agents for FO. The main point of the cited article
-is that hydrogels, due to their swelling and osmotic pressure, were
-able to absorb water across the FO membrane. The insoluble cross-linked
-network of the gel enables dewatering under the influence of stimuli
-(thermal and/or mechanical). For instance, Li \etal proposed the
-use of hydrogel made of thermoresponsive polyelectrolyte~--- copolymer
-of poly-N-isopropyl acrylamide (p-NIPAAm) and polyacrylic acid (p-AA).
-Depending on the temperature the network of the gel may appear to
-be either hydrophilic or hydrophobic. In the hydrophilic state, the
-gel is used as a draw agent accumulating water inside, then in the
-hydrophobic state, the water releases out.
+Moreover, from a thermodynamics perspective, the polyelectrolyte hydrogel itself is an osmotic membrane generating Donnan potential, which rejects ions between outer and inner solutions \cite{Wang_2014}. 
+Such a view on hydrogels was employed in a series of works by the group of prof. Wilhelm (see for example \cite{Arens_2017,Fengler_2020}). 
+The authors of these works proposed to get rid of the osmotic membrane and simply use only micro filtration to compress the hydrogel squeezing out the accumulated inside the gel solution. 
+In their method first, the deswollen hydrogel was equilibrated with saline water feed. 
+During equilibration, the gel was swelling absorbing water. 
+Then it was taken out from the feed solution and mechanically squeezed by means of a microfiltration membrane. 
+The squeezed out brine was obtained to have lower salinity than the feed water. 
 
-Moreover the hydrogel can be as an osmotic membrane from a thermodynamics
-perspective \cite{Wang_2014}. Such a view on hydrogels was employed
-in a series of works by the group of prof. Wilhelm (see for example
-\cite{Arens_2017,Fengler_2020}). The authors proposed to get rid of
-the osmotic membrane and simply use only a micro filtration membrane
-to compress the hydrogel and separate it from the solution. In their
-method first, the deswollen hydrogel was equilibrated with saline
-water feed. During equilibration, the gel was swelling absorbing water.
-Then it was taken out from the feed solution and mechanically compressed
-by means of a microfiltration membrane. The squeezed out brine was
-obtained to have lower salinity than the feed water. 
-
-A similar approach was used by Ali \etal \cite{Ali2015}. In their
-study the thermosensitive gel was used (based on copolymers p-NIPAAm
-and p-AA), so instead of physical compression, the dewatering was
-done by an external heating stimulus (sunlight). At night the gel
-was equilibrating with feed water and at daytime, under sunlight,
-the gel was shrinking and releasing the collected inside water. 
+A similar approach was used by Ali \etal \cite{Ali2015}. 
+In their study the thermosensitive gel was used (based on copolymers p-NIPAAm and p-AA), so instead of physical compression, the dewatering was done by an external heating stimulus (sunlight). 
+At night the gel was equilibrating with feed water and at daytime, under sunlight, the gel was shrinking and releasing the collected inside solution. 
 
 \paragraph{Physics behind the desalination process.}
 
@@ -319,59 +264,31 @@ and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
 ($\A$)). \label{fig:open and closed}.}
 \end{figure*}
 
-The maximum entropy principle requires the density of charges to be
-more-less the same throughout the system medium. Since the polyelectrolyte
-gel has its own charges and its own neutralizing counterions, the
-density of mobile ions (which are able to freely enter and leave the
-gel) in gel appears to be smaller than their density outside the gel.
-Therefore the internal solution of the gel has lower density of mobile
-ions than the solution outside. In that sense, the gel acts as an
-osmotic membrane separating solutions \cite{Rud2020}. The driving
-force of the separation is the Donnan potential originated from the
-charges of the hydrogel network. The density of mobile ions difference
-between ions concentrations in the internal and external solutions
+%The maximum entropy principle requires the density of charges to be more-less the same throughout the system medium. 
+Since the polyelectrolyte gel has its own charges and its own neutralizing counterions, the density of mobile ions (which are able to freely enter and leave the gel) in gel appears to be smaller than their density outside the gel.
+Therefore the internal solution of the gel has a lower density of mobile ions than that in the solution outside. 
+In that sense, the gel acts as an osmotic membrane separating solutions \cite{Rud2020}. 
+The driving force of the separation is the Donnan potential originated from the charges of the hydrogel network. 
+The density of mobile ions difference between ions concentrations in the internal and external solutions
 is defined by Donnan law \cite{Rud2018}
-\[
-\frac{c_{-}^{in}}{\cs}=\frac{\cs}{c_{+}^{in}}=\sqrt{1+\left(\frac{\alpha\cp}{2\cs}\right)^{2}}\pm\frac{\alpha\cp}{2\cs}
-\]
-where $c_{-}^{in}$ and $c_{+}^{in}$ are the internal concentration
-of anions and cations, $\cs$ is the salinity of external solution
-$\cp$ and $\alpha$ are the gel molar density and the ionization
-degree. The $\pm$ sign in the formula depends on whether the gel
-is made of polyanion or polycation.
+\begin{equation*}
+\frac{\ccl\gel}{\cs}=\frac{\cs}{\cna\gel}=\sqrt{1+\left(\frac{\alpha}{2\cs\Vgel}\right)^{2}}\pm\frac{\alpha}{2\cs\Vgel}
+\end{equation*}
+where $\ccl\gel$ and $\cna\gel$ are the internal concentration of monovalent anions and cations, $\cs$ is the salinity of external solution $\Vgel$ is the gel molar volume (inverse density of gel segments) and $\alpha$ is ionization degree. 
+The $\pm$ sign in the formula accounts for the change between the cases of gel made of polyanion or polycation.
 
-The internal solution can be extracted by means of compression and/or
-other stimulus providing that the charge of the gel remains constant.
-In the case of gel made of weak (pH-sensitive) polyelectrolyte, the
-compression initiates discharging of the gel, therefore the neutralizing
-counterions may leave out the gel diminishing the desalination effect
-and affecting the pH of the extracted solution. Nevertheless, the
-release of counterions may be employed for desalination as well and
-the way how to do it is discussed in\cite{Rud2018}. 
-\begin{enumerate}
-\item However, one can argue that sole Donnan effect is insufficient to
-achieve a high salt rejection \cite{Cai2016} and the salinity of
-the water squeezed from hydrogel under a very high hydraulic pressure
-(up to 100 bar \cite{Fengler_2020}) turns to be not much different
-from the initial.
-\item Indeed, the use of high hydraulic pressure diminishes all the advantages
-of this method over the reverse osmosis. At the same time the reversibility
-of hydrogel swelling after such strong compression remains questionable. 
-\item Nevertheless by the current study we would like to model the compression
-of the gel limiting ourselves within low compression rates, less than
-5 bar. We will show how the compression of the gel affects the surrounding
-salinity and model the whole desalination process as a cascade of
-$c$. 
-\end{enumerate}
-In the current study we would like to concentrate on the use of gel
-made of strong polyelectrolyte for water desalination. Namely, to
-investigate how the compression of the gel affects the salinity of
-the surrounding the gel solution and to propose the way of water desalination
-employing the hydrogel swelling/deswelling set of processes. 
+The lower salinity solution can be extracted from the gel by means of compression and/or other stimulus providing that the charge of the gel remains constant.
+In the case of gel made of weak (pH-sensitive) polyelectrolyte, the compression discharges the gel, therefore the neutralizing counterions leave out the gel diminishing the desalination effect \cite{Rud2018}. 
+%Nevertheless, in\cite{Rud2018} we discussed how the release of counterions may be employed for desalination as well. 
 
-The target of our study is to model the thermodynamic equilibrium
-between the two boxes and to show how the compression of the gel affects
-the ion density in the outside solution.
+One can argue that the sole Donnan effect is insufficient to achieve a high salt rejection \cite{Cai2016} and the salinity of the water squeezed from hydrogel under a very high hydraulic pressure (up to 100 bar \cite{Fengler_2020}) turns out to be not much different from the initial.
+Indeed, the use of high hydraulic pressure diminishes all the advantages of this method over RO, and the reversibility of hydrogel swelling after strong compression remains questionable. 
+Nevertheless, in the current study, we model the compression of the gel limiting ourselves to low compression rates, less than 5 bar, and studied how the compression of the gel affects the surrounding salinity.
+We demonstrated the desalination process composed of a cascade of following one by each other gel swellings and compressions driving the salinity of gel supernate down to drinkable water. 
+%In the current study we would like to concentrate on the use of gel made of strong polyelectrolyte for water desalination. 
+%Namely, to investigate how the compression of the gel affects the salinity of the surrounding the gel solution and to propose the way of water desalination employing the hydrogel swelling/deswelling set of processes. 
+
+%The target of our study is to model the thermodynamic equilibrium between the two boxes and to show how the compression of the gel affects the ion density in the outside solution.
 
 \section{Theory behind the simulation\label{sec: theory}}
 
@@ -482,10 +399,10 @@ It is caused by the decrease of ions osmotic pressure and by screening of electr
 \paragraph{Compression in closed system.}
 
 \begin{figure*}[t]
-\subfloat[Partial pressure of the gel versus gel molar volume \label{fig: PV}]
+\subfloat[The gel partial pressure vs gel molar volume \label{fig: PV}]
 {\includegraphics[width=0.48\textwidth]{figures/fig_PV_pub}}
 \hspace{0.02\textwidth}
-\subfloat[Supernatant salinity versus gel molar volume\label{fig: CV}]
+\subfloat[Supernate salinity vs gel molar volume\label{fig: CV}]
 {\includegraphics[width=0.48\textwidth]{figures/fig_CV_pub}}
 \caption{
 The compression of the gel in open system (solid lines) and in closed system (dotted lines). 
@@ -534,9 +451,9 @@ The states corresponding to $P^{gel}=0$, 5 and 10 bar pressure are marked by ope
 The non-shadowed areas on the Figures limit the states corresponding to gel partial pressure ranging between 0 and 5 bar.
 
 \begin{figure*}[t]
-\subfloat[Pressure vs gel density \label{fig: NV}]
+\subfloat[Pressure vs gel molar volume \label{fig: NV}]
 {\includegraphics[width=0.49\textwidth]{figures/fig_NV_pub}}
-\subfloat[Salinity vs gel density\label{fig: CN}]
+\subfloat[Salinity vs gel molar volume\label{fig: CN}]
 {\includegraphics[width=0.495\textwidth]{figures/fig_NVbox_mu_pub}}
 \caption{The compression of the gel in open system (solid lines) and in closed
 system (dotted lines). Each solid curve corresponds to different salinity
@@ -1056,4 +973,5 @@ R_{w}= & 0.55
 \caption{ORIGINAL TABLE (to be removed)
 }
 \end{table}
+
 \end{document}
