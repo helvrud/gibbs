@@ -181,16 +181,14 @@ Saint-Petersburg, Russia}
 \begin{abstract}
 Recently polyelectrolyte hydrogels have been proposed as draw agents for reverse osmosis desalination techniques. 
 Indeed, polyelectrolyte hydrogels have the ability to absorb a big amount of water across forward osmosis membrane as a result of their swelling pressure. 
-The insoluble cross-linked network of the gel enables dewatering under the influence of a stimulus (thermal and/or mechanical) \todo{remove this sentence?}.
-On the other hand, the network structure of a polymer hydrogel, from a thermodynamic
-perspective, is already an osmotic membrane. So hydrogel microparticles
-may allow to completely avoid the osmotic membranes in forward osmosis
-and use microfiltration instead.
-
+On the other hand, the insoluble cross-linked network of the gel enables dewatering under the influence of a stimulus (thermal and/or mechanical).
+Moreover, from a thermodynamic perspective, the polyelectrolyte hydrogel is already an osmotic membrane rejecting ions between external and internal solutions.
+These three properties of the gels make it possible to use them for desalination and at the same time avoid the use of expensive membranes.
 In this article, we present our recent theoretical study of the use of polyelectrolyte hydrogel for water desalination. 
-We modeled the thermodynamic equilibrium of coexisting gel and aqueous salt solution phases in the so-called `closed' ensemble, in which the total amount of ions is assumed to be constant. 
-We modeled the compression of the gel associated with the release of solution and have shown that the squeezed-out solution has a little lower salinity than the one the gel was equilibrated with. 
-Finally, we performed a set of simulations modeling the process of continuous decrease of water salinity up to freshwater concentrations.
+We modeled the thermodynamic equilibrium between coexisting phases of the gel and supernate aqueous salt solution.
+We have shown that the salinity of the supernate phase decreases during compression of the gel due to the release of absorbed in gel solution of lower salinity. 
+Finally, we performed a set of simulations modeling the process of continuous decrease of solution salinity up to freshwater concentrations.
+
 \end{abstract}
 
 \section{Introduction\label{sec: intro}}
@@ -255,15 +253,6 @@ In their study the thermosensitive gel was used (based on copolymers p-NIPAAm an
 At night the gel was equilibrating with feed water and at daytime, under sunlight, the gel was shrinking and releasing the collected inside solution. 
 
 \paragraph{Physics behind the desalination process.}
-
-\begin{figure*}
-\centering 
-\includegraphics[width=0.5\textwidth]{figures/gc}\includegraphics[width=0.5\textwidth]{figures/gibbs}\caption{Diamond-like network in the simulation box. Color code represents
-the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
-and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
-($\A$)). \label{fig:open and closed}.}
-\end{figure*}
-
 %The maximum entropy principle requires the density of charges to be more-less the same throughout the system medium. 
 Since the polyelectrolyte gel has its own charges and its own neutralizing counterions, the density of mobile ions (which are able to freely enter and leave the gel) in gel appears to be smaller than their density outside the gel.
 Therefore the internal solution of the gel has a lower density of mobile ions than that in the solution outside. 
@@ -284,7 +273,7 @@ In the case of gel made of weak (pH-sensitive) polyelectrolyte, the compression 
 One can argue that the sole Donnan effect is insufficient to achieve a high salt rejection \cite{Cai2016} and the salinity of the water squeezed from hydrogel under a very high hydraulic pressure (up to 100 bar \cite{Fengler_2020}) turns out to be not much different from the initial.
 Indeed, the use of high hydraulic pressure diminishes all the advantages of this method over RO, and the reversibility of hydrogel swelling after strong compression remains questionable. 
 Nevertheless, in the current study, we model the compression of the gel limiting ourselves to low compression rates, less than 5 bar, and studied how the compression of the gel affects the surrounding salinity.
-We demonstrated the desalination process composed of a cascade of following one by each other gel swellings and compressions driving the salinity of gel supernate down to drinkable water. 
+We modelled also the desalination process, as a cascade of following one by each other gel swellings and compressions driving the salinity of supernate down to drinkable water. 
 %In the current study we would like to concentrate on the use of gel made of strong polyelectrolyte for water desalination. 
 %Namely, to investigate how the compression of the gel affects the salinity of the surrounding the gel solution and to propose the way of water desalination employing the hydrogel swelling/deswelling set of processes. 
 
@@ -292,7 +281,7 @@ We demonstrated the desalination process composed of a cascade of following one 
 
 \section{Theory behind the simulation\label{sec: theory}}
 
-\begin{figure*}
+\begin{figure*}[t]
 \centering \includegraphics[width=0.5\textwidth]{figures/simgibbs}\caption{Diamond-like network in the simulation box. Color code represents
 the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
 and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
@@ -328,8 +317,16 @@ By $\nna$ and $\ncl$ we will understand the density of the corresponding ion in 
 \begin{equation}
 \ncl = \left(\ncl\gel + \cs\cdot(\Vbox - \Vgel)\right)/\Vbox
 \end{equation}
-\paragraph{Open system.}
 
+\begin{figure*}[t]
+\centering 
+\includegraphics[width=0.5\textwidth]{figures/gc}\includegraphics[width=0.5\textwidth]{figures/gibbs}\caption{Diamond-like network in the simulation box. Color code represents
+the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
+and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
+($\A$)). \label{fig:open and closed}.}
+\end{figure*}
+
+\paragraph{Open system.}
 We simulate the open system using the grand reaction method \cite{Landsgesel2020a,Rud2020}.
 This method is a hybrid of molecular dynamics (MD) and Monte Carlo
 (MC). The whole simulation represents a chain of subsimulations of
