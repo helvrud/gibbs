@@ -86,8 +86,8 @@ Saint-Petersburg, Russia}
 \newcommand{\cca}{c_\mathrm{Ca^{2+}}}
 \newcommand{\ch}{c_\mathrm{H^+}}
 \newcommand{\cp}{c_\mathrm{p}}
-\newcommand{\nna}{N_\mathrm{Na^+}}
-\newcommand{\ncl}{N_\mathrm{Cl^-}}
+\newcommand{\nna}{n_\mathrm{Na^+}}
+\newcommand{\ncl}{n_\mathrm{Cl^-}}
 \newcommand{\ncleq}{\widetilde{N}_\mathrm{Cl^-}}
 \newcommand{\nca}{N_\mathrm{Ca^{2+}}}
 
@@ -151,12 +151,13 @@ Saint-Petersburg, Russia}
 %\newcommand{\cs}{c_{\mathrm{salt}}}
 \newcommand{\csres}{\cs\res}
 %\newcommand{\Vgel}{V\gel}
-\newcommand{\Vgel}{v_\mathrm{gel}}
+\newcommand{\Vgel}{V_\mathrm{gel}}
+\newcommand{\Ngel}{N_\mathrm{gel}}
 \newcommand{\Vgeleq}{\widetilde{\Vgel}}
 \newcommand{\Pgel}{P\gel}
 \newcommand{\Pres}{P\res}
-\newcommand{\Vout}{V\out}
-\newcommand{\Vbox}{V\tot}
+\newcommand{\Vout}{V_\mathrm{out}}
+\newcommand{\Vbox}{V_\mathrm{box}}
 \newcommand{\PE}{polyelectrolyte{}}
 
 \newcommand{\reffig}[1]{Figure~\ref{#1}}
@@ -282,28 +283,32 @@ We modelled also the desalination process, as a cascade of following one by each
 \section{Theory behind the simulation\label{sec: theory}}
 
 \begin{figure*}[t]
-\centering \includegraphics[width=0.5\textwidth]{figures/simgibbs}\caption{Diamond-like network in the simulation box. Color code represents
+\centering \includegraphics[width=0.7\textwidth]{figures/simgibbs}\caption{Diamond-like network in the simulation box. Color code represents
 the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
 and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
 ($\A$)). \label{fig:diamond}.}
 \end{figure*}
 
-
 \subsection{Model}
 
-We model our gel as a network of 16 linear polymer chains, each by
-30 monomer units. The chains are connected to a diamond-like polymer
-network and put into a simulation box with periodic boundaries. Each
-unit of the network carries a negative electric charge, which is equal
-to the charge of electron. Except the particles of the network, the
-mobile monovalent ions, $\na$ and $\cl$, are present in simulation
-box. The total electric charge of all the particles in the box is
-zero, therefore the amount of $\na$ ions is bigger than that of $\cl$
-by the number of hydrogel units, $N\gel=16\cdot30=480$.
+We model the gel as a network of 16 linear polymer chains, each by 30 monomer units. 
+The chains are connected to a diamond-like polymer network throught 8 crosslinking units, and put into a simulation box with periodic boundaries (see \reffig{fig:diamond}). 
+Each unit of the network carries a negative electric charge, which is equal to the charge of electron. 
+Except the particles of the network, the monovalent co- and counter-ions ions, $\cl$ and $\na$, are present in simulation box. 
+The total electric charge of all the particles in the box is zero, therefore the amount of $\na$ ions is bigger than that of $\cl$ by the number of hydrogel units, $\Ngel=16\cdot30 + 8=488$.
 
-The goal of this study is to simulate the process of water desalination
-by means of compression. In order to do it we simulate the gel in
-two ensembles.
+\begin{figure*}[t]
+\centering 
+\subfloat[Open system \label{fig: open}]
+{\includegraphics[width=0.5\textwidth]{figures/gc}}
+\subfloat[Closed system \label{fig: closed}]
+{\includegraphics[width=0.5\textwidth]{figures/gibbs}}
+\caption{Diamond-like network in the simulation box. Color code represents
+the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
+and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
+($\A$)). \label{fig:open and closed}.}
+\end{figure*}
+We simulate the compression of the gel in two ensembles.
 \begin{enumerate}
 \item The first is so called \emph{open system}, when the simulation box
 with gel freely exchanges ions with a big amount of aqueous solution
@@ -311,20 +316,17 @@ of certain constant salinity.
 \item And in \emph{closed system}, when the gel is in equilibrium with a
 finite volume of aqueous solution.
 \end{enumerate}
-The compression of the gel in the open system does not affect the surrounding salinity, thus the chemical potential of ions remains constant $\muna=$ $\mucl=$ $\text{Const}$. 
-On the contrary, what remains constant in the closed system is total number of ions, that are contained in the gel and in the external volume, $\nna=\text{Const}$ and $\ncl=\text{Const}$.
-By $\nna$ and $\ncl$ we will understand the density of the corresponding ion in the compression volume
-\begin{equation}
-\ncl = \left(\ncl\gel + \cs\cdot(\Vbox - \Vgel)\right)/\Vbox
-\end{equation}
+The compression of the gel in the \emph{open} system does not affect the surrounding salinity, thus the density of ions outside the gel remains constant $\cs =$ $\cna=$ $\ccl=$ $\text{Const}$ (\reffig{fig: open}). 
+On the contrary, what remains constant in the \emph{closed} system, is the total number of $\na$ and $\cl$ ions, that are contained in the gel and in the external volume, \ie in the volume $\Vbox$ (\reffig{fig: closed}).
 
-\begin{figure*}[t]
-\centering 
-\includegraphics[width=0.5\textwidth]{figures/gc}\includegraphics[width=0.5\textwidth]{figures/gibbs}\caption{Diamond-like network in the simulation box. Color code represents
-the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
-and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
-($\A$)). \label{fig:open and closed}.}
-\end{figure*}
+Let $\nna$ and $\ncl$ be the density of the corresponding ion in the compression volume, $\Vbox$ averaged over this volume
+\begin{equation}
+n_i = \left(N_i\gel + \cs\cdot(\Vbox - \Vgel)\right) / \Vbox
+\end{equation}
+where $ i \in \{\na, \cl\}$,  $N_i$ is the amount of the corresponding ions in gel.
+Then in closed system $\nna$ and $\ncl$ remain constant, whereas the salinity of supernate, $\cs$, may change with the change of the gel volume.
+
+
 
 \paragraph{Open system.}
 We simulate the open system using the grand reaction method \cite{Landsgesel2020a,Rud2020}.
@@ -344,32 +346,20 @@ $K=\exp\left(\muna+\mucl\right).$
 
 \paragraph{Closed system.}
 
-The similar scheme we use to simulate the gel in closed system. The
-procedure represents a chain of subsequent MD and MC simulation, but
-now we run the molecular dynamics in two simulation boxes simultaneously.
-The first box of the volume $\Vgel$ contains the gel with ions, and
-the second box, $\Vout$--- contains only ions. These two boxes are
-represented in Figure~\ref{fig:diamond}. The total volume of both
-boxes is kept constant, $V=V_{\mathrm{gel}}+V_{\mathrm{out}}$, so
-the compression of the gel implies the decrease $\Vgel$ and increase
-$\Vout$.
-
-The thermodynamic equilibrium between the two volumes implies the
-exchange of the ion pairs between them, which is done by means of
-MC procedure in a way similar to described in \cite{Panagiotopoulos1988b}.
-
+The similar scheme we use to simulate the gel in closed system. 
+The procedure represents a chain of subsequent MD and MC simulation, but now the molecular dynamics is runing in two simulation boxes simultaneously.
+The first box of the volume $\Vgel$ contains the gel with ions, and the second box, $\Vout$--- contains only ions. 
+The total volume of both boxes is kept constant, $\Vbox=V_{\mathrm{gel}}+V_{\mathrm{out}}$, so the compression of the gel implies the decrease $\Vgel$ and increase $\Vout$.
+These two boxes are represented in \reffig{fig:diamond}. 
 
 \paragraph{Algorithm.}
-
-In general the simulation algorithm is following:
+The thermodynamic equilibrium between the two volumes implies the exchange of the ion pairs between them, which is done by means of MC procedure in a way similar to described in \cite{Panagiotopoulos1988b}.
+The simulation algorithm is following:
 \begin{enumerate}
-\item simulate molecular dynamics in both boxes; collect the observables,
-for examples pressure values $P$, to an array; 
-\item perform Monte-Carlo procedure simulating ion pair exchange; collect
-the arrays of observables sample : number of ions in both boxes, $\nna^{I}$,
-$\ncl^{I}$, $\nna^{II}$ and $\ncl^{II}$ ; 
-\item repeat the procedure until the desired length of sample arrays is
-reached.
+\item Simulate molecular dynamics in both boxes; collect the observables, for examples, values of pressure $P$, to an array; 
+\item Perform Monte-Carlo procedure simulating ion pair exchange; collect the arrays of observables samples: number of ions in both boxes, $\nna\gel$,
+$\ncl\gel$, $\nna\out$ and $\ncl\out$ ; 
+\item Repeat the procedure until the desired length of sample arrays is reached.
 \end{enumerate}
 
 \section{Results and discussion }
