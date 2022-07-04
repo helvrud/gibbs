@@ -1,33 +1,7 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 %\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\setcounter{secnumdepth}{3}
-\usepackage[english]{babel}
-\usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage[unicode=true,
-            %pdfusetitle,
-            bookmarks=true,
-            bookmarksnumbered=false,
-            bookmarksopen=false,
-            breaklinks=false,
-            pdfborder={0 0 0},
-            backref=false,
-            colorlinks=true]{hyperref}
-
-
-
-\usepackage{paracol}
-
-\usepackage{subfig}
-\usepackage{color}
-\usepackage[textsize=small]{todonotes}
-\usepackage{mhchem}
-\makeatother
-
-\usepackage{units}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 \newcommand{\ie}{\textit{i.~e.} }
 \newcommand{\cref}{c^{\ominus}}
@@ -50,8 +24,12 @@
 \newcommand{\cca}{c_\mathrm{Ca^{2+}}}
 \newcommand{\ch}{c_\mathrm{H^+}}
 \newcommand{\cp}{c_\mathrm{p}}
-\newcommand{\nna}{N_\mathrm{Na^+}}
-\newcommand{\ncl}{N_\mathrm{Cl^-}}
+\newcommand{\nna}{n_\mathrm{Na^+}}
+\newcommand{\ncl}{n_\mathrm{Cl^-}}
+\newcommand{\Nna}{N_\mathrm{Na^+}}
+\newcommand{\Ncl}{N_\mathrm{Cl^-}}
+
+\newcommand{\ncleq}{\widetilde{N}_\mathrm{Cl^-}}
 \newcommand{\nca}{N_\mathrm{Ca^{2+}}}
 
 \newcommand{\superin}{^\mathrm{in}}
@@ -59,6 +37,7 @@
 \newcommand{\subi}{_\mathrm{i}}
 
 \newcommand{\gel}{^\mathrm{gel}}
+\newcommand{\tot}{^\mathrm{tot}}
 \newcommand{\out}{^{\mathrm{out}}}
 \newcommand{\coh}{c_\mathrm{OH}}
 \newcommand{\bulk}{^{\mathrm{b}}}
@@ -69,7 +48,7 @@
 %% A simple dot to overcome graphicx limitations
 \newcommand{\lyxdot}{.}
 \newcommand{\todoi}[1]{\todo[inline]{#1}}
-
+\setuptodonotes{fancyline, color=blue!30, size=\tiny}
 
 \newcommand{\cl}{\mathrm{Cl^-}}
 \newcommand{\br}{\mathrm{Br^-}}
@@ -112,7 +91,15 @@
 \newcommand{\cs}{c_{\mathrm{s}}}
 %\newcommand{\cs}{c_{\mathrm{salt}}}
 \newcommand{\csres}{\cs\res}
-\newcommand{\Vgel}{V\gel}
+%\newcommand{\Vgel}{V\gel}
+\newcommand{\Vgel}{V_\mathrm{gel}}
+\newcommand{\Ngel}{N_\mathrm{gel}}
+%\newcommand{\Vgeleq}{\widetilde{V}_\mathrm{gel}}}
+\newcommand{\Pgel}{P_\mathrm{gel}}
+\newcommand{\Pres}{P_\mathrm{res}}
+\newcommand{\Pout}{P_\mathrm{out}}
+\newcommand{\Vout}{V_\mathrm{out}}
+\newcommand{\Vbox}{V_\mathrm{box}}
 \newcommand{\PE}{polyelectrolyte{}}
 
 \newcommand{\reffig}[1]{Figure~\ref{#1}}
@@ -125,5 +112,9 @@
     \newpage}
 
 
-\usepackage{dirtytalk}
 \newcommand{\mytitle}{Gibbs ensemble for \PE{} hydrogel}
+\newcommand{\etal}{\textit{et al.}{}}
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
