@@ -198,19 +198,20 @@ We simulate the compression of the gel in two ensembles.
 \begin{enumerate}
 \item The first is so called \emph{open system}, when the simulation box
 with gel freely exchanges ions with a big amount of aqueous solution
-of certain constant salinity. 
+of certain constant salinity, $\cs$. 
 \item And in \emph{closed system}, when the gel is in equilibrium with a
 finite volume of aqueous solution.
 \end{enumerate}
 The compression of the gel in the \emph{open} system does not affect the surrounding salinity, thus the density of ions outside the gel remains constant $\cs =$ $\cna=$ $\ccl=$ $\text{Const}$ (\reffig{fig: open}). 
 On the contrary, what remains constant in the \emph{closed} system, is the total number of $\na$ and $\cl$ ions, that are contained in the gel and in the external volume, \ie in the volume $\Vbox$ (\reffig{fig: closed}).
 
-Let $\nna$ and $\ncl$ be the density of the corresponding ion in the compression volume, $\Vbox$ averaged over this volume
+%Let $\nna$ and $\ncl$ be the density of the corresponding ion in the compression volume, $\Vbox$ averaged over this volume
 \begin{equation}
-n_i = \left(N_i\gel + \cs\cdot(\Vbox - \Vgel)\right) / \Vbox
+N_i = N_i\gel + \cs\cdot(\Vbox - \Vgel)
 \end{equation}
-where $ i \in \{\na, \cl\}$,  $N_i$ is the amount of the corresponding ions in gel.
-Then in closed system $\nna$ and $\ncl$ remain constant, whereas the salinity of supernate, $\cs$, may change with the change of the gel volume.
+where $i \in \{\na, \cl\}$,  $N_i$ is the amount of the corresponding ions in gel,  
+
+%Then in closed system $\nna$ and $\ncl$ remain constant, whereas the salinity of supernate, $\cs$, may change with the change of the gel volume.
 
 
 
@@ -230,7 +231,7 @@ $K=\exp\left(\muna+\mucl\right).$
 The similar scheme we use to simulate the gel in closed system. 
 The procedure represents a chain of subsequent MD and MC simulation, but now the molecular dynamics is runing in two simulation boxes simultaneously.
 The first box of the volume $\Vgel$ contains the gel with ions, and the second box, $\Vout$--- contains only ions. 
-The total volume of both boxes is kept constant, $\Vbox=V_{\mathrm{gel}}+V_{\mathrm{out}}$, so the compression of the gel implies the decrease $\Vgel$ and increase $\Vout$.
+The total volume of both boxes is kept constant, $\Vbox=V_{\mathrm{gel}}+V_{\mathrm{out}}$, so the compression of the gel implies the decreasing $\Vgel$ and increasing $\Vout$.
 These two boxes are represented in \reffig{fig:diamond}. 
 
 \paragraph{Algorithm.}
@@ -270,11 +271,10 @@ These dependencies (the case of \emph{open system}) are represented by solid lin
 For example, the blue solid line illustrates the compression (or swelling) of the gel in equilibrium with a reservoir of salinity, $\cs=0.063$ mol/l. 
 The points where the pressure equals zero, $\Pgel=0$, (indicated by filled circles) are the gel \emph{free swelling equilibrium} states. 
 These states shift towards smaller volumes with increase of salinity. 
-It is seen, that the increase of salinity shifts the free swelling equilibrium towards smaller volumes. 
-In general, the increase of salinity shift all the $\Pgel(V)$ curves towards smaller volumes
-
+In general, the increase of salinity shift all the $\Pgel(V)$ curves towards smaller volumes.
 This effect is well known and is typical for all branched \emph{strong} polyelectrolytes. 
-It is caused by the decrease of ions osmotic pressure and by a screening of electrostatic interactions \cite{Zhulina2000, Landsgesel2020a}.\footnote{The salinity dependence of the size of \emph{weak} polyelectrolyte gel is in general non-monotonic. We discuss this case in \cite{Rud2018}. } %
+It is caused by the decrease of ions osmotic pressure and by a screening of electrostatic interactions \cite{Zhulina2000, Landsgesel2020a}.
+\footnote{The salinity dependence of the size of \emph{weak} polyelectrolyte gel is in general non-monotonic. We discuss this case in \cite{Rud2018}.}
 
 \begin{figure*}[t]
 \subfloat[Pressure vs gel molar volume \label{fig: NV}]
@@ -289,25 +289,24 @@ with applied pressure below zero and above 5 bar.\label{fig: NV and CN}}
 \end{figure*}
 
 \paragraph{Compression in closed system.}
-Each set of simulations in an \emph{open system} defines the free swelling equilibrium states of the gel for each salinity, that is the state where the gel partial pressure equals zero. 
-These states are characterized by the corresponding molar volume of the gel, $\Vgel^0$ and the densities of ions in gel \{$\nna^0$, $\ncl^0$\} 
+Each set of simulations in \emph{open system} defines the free swelling equilibrium states of the gel for each salinity, \ie the state where the gel partial pressure equals zero. 
+These states are characterized by the corresponding molar volume of the gel, $\Vgel^0$ and the amount of ions in gel \{$\Nna^0$, $\Ncl^0$\} 
 (Index ``0'' stands for zero bar applied pressure).
 We use the free swelling equilibrium states as the starting ones for the gel compression in \emph{closed system}. 
-Thus, we simulate the compression of the gel in the closed volume, $\Vbox$, which is equal to $\Vgel^0$, and contains $\ncl^0$ of $\cl$ ions and the $\na$ ions in the amount neutralizing the system,$\ncl^0$.
+Thus, we simulate the compression of the gel in a closed volume, $\Vbox$, which is equal to $\Vgel^0$, and contains $\Ncl^0$ of $\cl$ ions and the $\na$ ions in the amount neutralizing the system, $\Nna^0 = $$\Ncl^0 + \Ngel$.
 
 We prepare two systems, one~--- simulating the gel of the volume $\Vgel$, and another~--- simulating the supernatant solution of the volume $\Vout = \Vbox - \Vgel$.
 Also, the ions of the amount $\Ncl^0$ and $\Nna^0$ are shared between the two volumes. 
 
-The process of the gel compression in the \emph{closed} system is depicted in Figure~\ref{fig: PV} (dotted lines) as the dependence of gel partial pressure versus the gel molar volume.
+The processes of the gel compression in \emph{closed} system are depicted in Figure~\ref{fig: PV} as dotted lines.
 In this plot, the blue dotted line, for example, illustrates the compression of the gel equilibrated with the solution of salinity $\cs=0.063$ mol/l, in a volume which gel has at zero pressure. 
 Since, in this case, the volumes of the gel $\Vgel$ and of the supernate $\Vout$ are comparable, the compression of the gel affects the salinity of supernate, $\cs$. 
-The supernate salinity now decreases, changing from $\cs^{0}=0.063$ at the free swelling equilibrium state to $\cs^{5}=0.045$ mol/l in the state with applied pressure $P\gel=5$ bar (index ``5'' stands for 5 bar). 
+The supernate salinity now decreases with compression.
+This decrease is illustrated \reffig{fig: CV}, where the same swelling/compression processes are displayed in different coordinates: \ie salinity of supernate versus the gel molar volume, $\cs(\Vgel)$.
+In these coordinates, all the open system compressions show up as horizontal lines, which reflects the constant salinity, whereas the compressions in closed system demonstrate the change of $\cs$ from $\cs^{0}=0.063$ at zero pressure $\Pgel$ to $\cs^{5}=0.045$ mol/l at $P\gel=5$ bar (index ``5'' stands for 5 bar). 
 
-The \reffig{fig: CV} illustrates the same swelling/compression processes, but in different coordinates: \ie salinity of supernate versus the gel molar volume, $\cs(\Vgel)$.
-In these coordinates, all the open system compressions show up as horizontal lines, which reflects the constant salinity, whereas the compressions in the closed system demonstrate the decrease of $\cs$.
-
-Although the salinity during compression in \emph{open} system remains constant, the number of ions in a compression volume, i.e. in the volume where the gel is compressed (or swells), changes.
-As the compression volume $\Vbox$ we chose the volume of the free swelling equilibrium state of the gel, $\Vbox = \Vgel^0$.
+Although the salinity during compression in \emph{open} system remains constant, the number of ions in a compression volume, \ie in the volume where the gel is compressed (or swells), changes.
+%As the compression volume $\Vbox$ we chose the volume of the free swelling equilibrium state of the gel, $\Vbox = \Vgel^0$.
 In the Figure \ref{fig: NV} we depicted the number of $\cl$ ions in the volume $\Vbox$, calculated per unit volume, $\ncl =$ $\Ncl/\Vbox$, as a function of the gel molar volume. 
 The depicted value can be considered as the density of $\cl$ ions averaged out over the volume $\Vbox$. 
 
