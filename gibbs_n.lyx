@@ -1,0 +1,1606 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass achemso
+\begin_preamble
+%\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\newcommand{\ie}{\textit{i.~e.} }
+\newcommand{\cref}{c^{\ominus}}
+%\newcommand{\cs}{c_{s}}
+\newcommand{\kT}{k_\mathrm{B}T}
+\newcommand{\kB}{k_\mathrm{B}}
+\newcommand{\lb}{l_\mathrm{B}}
+\newcommand{\NA}{N_{\mathrm{A^-}}}
+\newcommand{\muna}{\mu_\mathrm{Na^+}}
+
+\newcommand{\mucl}{\mu_\mathrm{Cl^-}}
+\newcommand{\muca}{\mu_\mathrm{Ca^{2+}}}
+\newcommand{\muh}{\mu_\mathrm{H^+}}
+\newcommand{\mua}{\mu_\mathrm{A^-}}
+\newcommand{\muha}{\mu_\mathrm{HA}}
+\newcommand{\muoh}{\mu_\mathrm{OH}}
+
+\newcommand{\cna}{c_\mathrm{Na^+}}
+\newcommand{\ccl}{c_\mathrm{Cl^-}}
+\newcommand{\cca}{c_\mathrm{Ca^{2+}}}
+\newcommand{\ch}{c_\mathrm{H^+}}
+\newcommand{\cp}{c_\mathrm{p}}
+\newcommand{\nna}{N_\mathrm{Na^+}}
+\newcommand{\ncl}{N_\mathrm{Cl^-}}
+\newcommand{\nca}{N_\mathrm{Ca^{2+}}}
+
+\newcommand{\superin}{^\mathrm{in}}
+\newcommand{\subin}{_\mathrm{in}}
+\newcommand{\subi}{_\mathrm{i}}
+
+\newcommand{\gel}{_\mathrm{gel}}
+\newcommand{\tot}{_\mathrm{tot}}
+\newcommand{\out}{_{out}}
+\newcommand{\coh}{c_\mathrm{OH}}
+\newcommand{\bulk}{^{\mathrm{b}}}
+\renewcommand{\H}{\mathrm{H^+}}
+\newcommand{\A}{\mathrm{A^-}}
+\newcommand{\AH}{\mathrm{AH}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% A simple dot to overcome graphicx limitations
+\newcommand{\lyxdot}{.}
+\newcommand{\todoi}[1]{\todo[inline]{#1}}
+
+
+\newcommand{\cl}{\mathrm{Cl^-}}
+\newcommand{\br}{\mathrm{Br^-}}
+\newcommand{\na}{\mathrm{Na^+}}
+\newcommand{\h}{\mathrm{H^+}}
+\newcommand{\ka}{\mathrm{K^+}}
+\newcommand{\oh}{\mathrm{OH^-}}
+\newcommand{\ca}{\mathrm{Ca^{2+}}}
+\newcommand{\mg}{\mathrm{Mg^{2+}}}
+\newcommand{\so}{\mathrm{SO_4^{2-}}}
+
+\newcommand{\EI}{E_{\mathrm{I}}}
+\newcommand{\EII}{E_{\mathrm{II}}}
+\newcommand{\SI}{S_{\mathrm{I}}}
+\newcommand{\SII}{S_{\mathrm{II}}}
+\newcommand{\NI}{N_{\mathrm{I}}}
+\newcommand{\NII}{N_{\mathrm{II}}}
+\newcommand{\VI}{V_{\mathrm{I}}}
+\newcommand{\VII}{V_{\mathrm{II}}}
+\newcommand{\FI}{F_{\mathrm{I}}}
+\newcommand{\FII}{F_{\mathrm{II}}}
+\newcommand{\nnaI}{N^{\na}_{\mathrm{I}}}
+\newcommand{\nclI}{N^{\cl}_{\mathrm{I}}}
+\newcommand{\nnaII}{N^{\na}_{\mathrm{II}}}
+\newcommand{\nclII}{N^{\cl}_{\mathrm{II}}}
+
+
+
+
+\newcommand{\Ka}{K_{\mathrm{A}}}
+\newcommand{\pKa}{\mathrm{p}\Ka}
+\newcommand{\pK}{\mathrm{p}K}
+\newcommand{\pH}{\mathrm{pH}}
+\newcommand{\mol}{\mathrm{mol}}
+\newcommand{\molperl}{\mathrm{mol/l}}
+\newcommand{\kg}{\mathrm{kg}}
+\newcommand{\res}{^{\mathrm{res}}}
+\newcommand{\pHres}{\pH\res}
+\newcommand{\pHgel}{\pH\gel}
+\newcommand{\cs}{c_{\mathrm{s}}}
+%\newcommand{\cs}{c_{\mathrm{salt}}}
+\newcommand{\csres}{\cs\res}
+\newcommand{\Vgel}{V\gel}
+\newcommand{\Pgel}{P\gel}
+\newcommand{\Pres}{P\res}
+\newcommand{\Vout}{V\out}
+\newcommand{\Vbox}{V\tot}
+\newcommand{\PE}{polyelectrolyte{}}
+
+\newcommand{\reffig}[1]{Figure~\ref{#1}}
+\newcommand{\refeq}[1]{Equation~\ref{#1}{}}
+\usepackage{afterpage}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+
+\newcommand{\mytitle}{Gibbs ensemble for \PE{} hydrogel}
+\newcommand{\etal}{\textit{et al.}{}}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks false
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Water desalination using polyelectrolyte hydrogel.
+ Gibbs ensemble modelling
+\end_layout
+
+\begin_layout Author
+Michail Laktionov
+\end_layout
+
+\begin_layout Affiliation
+Department of Physical and Macromolecular Chemistry, Faculty of Science,
+ Charles University in Prague, Czech Republic
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+cuni
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Also Affiliation
+St.
+ Petersburg National Research University of Information Technologies, Mechanics
+ and Optics, St.
+ Petersburg, Russia.
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+itmo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Oleg V.
+ Rud
+\end_layout
+
+\begin_layout Affiliation
+Department of Physical and Macromolecular Chemistry, Faculty of Science,
+ Charles University in Prague, Czech Republic
+\end_layout
+
+\begin_layout Also Affiliation
+Institute of Macromolecular Compounds of Russian Academy of Sciences, Saint-Pete
+rsburg, Russia
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+imc
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Email
+oleg.rud@natur.cuni.cz
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The affiliation of authors is given after the authors; each 
+\family sans
+Affiliation
+\family default
+ applies to all preceding authors not already assigned an affiliation.
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+Altaffiliation
+\family default
+ should be used for new address, etc.
+\end_layout
+
+\begin_layout Plain Layout
+
+\family sans
+Alsoaffiliation
+\family default
+ is used on a per author basis when authors are associated with multiple
+ institutions.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abbreviations
+MC, MD, RO, FO
+\end_layout
+
+\begin_layout Keywords
+polyelectrolye hydrogel, simulation, desalination
+\end_layout
+
+\begin_layout Abstract
+Recently polyelectrolyte hydrogels have been proposed as draw agents for
+ reverse osmosis desalination techniques.
+ Indeed, polyelectrolyte hydrogels have the ability to absorb a big amount
+ of water across forward osmosis membrane as a result of their swelling
+ pressure.
+ The insoluble cross-linked network of the gel enables dewatering under
+ the influence of stimuli (thermal and/or mechanical).
+ On the other hand, the network structure of a polymer hydrogel from a thermodyn
+amic perspective is already an osmotic membrane.
+ So hydrogel microparticles may allow to completely avoid the osmotic membranes
+ in forward osmosis and use microfiltration instead.
+ By this article, we present our recent theoretical study of the use of
+ polyelectrolyte hydrogel for water desalination.
+ We modeled the thermodynamic equilibrium of coexistence of the gel and
+ the aqueous salt solution in the so-called closed ensemble, in which the
+ total amount of ions is assumed to be constant.
+ We modeled the compression of the gel and the associated with that release
+ of the solution.
+ We have shown that the squeezed out solution has a little lower salinity
+ than that the gel was equilibrated with.
+ Also, we performed a set of simulations modeling the process of continuous
+ decrease of water salinity up to freshwater concentrations.
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+An Abstract must be provided for all Letters and Viewpoints.
+ Abstracts should be between 100 and 150 words in complete, concise sentences
+ to indicate what is new, different, and significant.
+ The abstract should be presented in a findings-oriented format; that is,
+ one in which the first sentence is a succinct, informative summation of
+ the most important results and conclusions.
+ The remainder should highlight pertinent supporting details, related findings,
+ types or classes of compounds investigated, and methods used.
+ The abstract should not contain any citations.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+Letters.
+ Brief reports that are of unusual urgency, significance, and interest to
+ the broad polymer science field.
+ Letters should be approximately 2500 words or less, excluding abstract,
+ tables, graphics/artwork and figure/scheme legends, acknowledgments, funding
+ statements, and references.
+ Letters can contain a maximum of 6 display items (figures/tables/schemes).
+ Graphics must be numbered consecutively and placed within the text near
+ the point of first mention.
+ Each graphic must have a brief (one phrase or sentence) title that describes
+ the contents.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "https://publish.acs.org/publish/author_guidelines?coden=amlccd#journal_scope"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\begin_inset CommandInset label
+LatexCommand label
+name "sec: intro"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Water desalination technologies.
+\end_layout
+
+\begin_layout Standard
+Two basic approaches for separating water from salt are present in modern
+ desalination technology 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Miller2003,Curto2021"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The first approach
+\begin_inset space ~
+\end_inset
+
+— distillation.
+ It uses thermal means to effect a phase change of the water to vapor (or
+ solid), then to physically separate the vapor phase from the remaining
+ salt solution, and then recover the thermal energy for reuse as the separated
+ vapor reverts to liquid form.
+ Distillation processes were the first desalination techniques conducted
+ on a large commercial scale and still account for a large portion of the
+ modern world’s desalination capacity.
+\end_layout
+
+\begin_layout Standard
+The second approach is to physically separate the brine components, generally
+ with a membrane, as they move in response to an externally applied gradient.
+ In the context of our study, we will mention the reverse osmosis process
+ (RO) ~--- the major processes of all the modern desalination industry,
+ and the new emerging membrane technology --- forward osmosis (FO) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Akther2015"
+literal "false"
+
+\end_inset
+
+.
+ In RO, water passes through a membrane that is impermeable to the solute
+ in response to a chemical potential gradient achieved through pressurization.
+ In FO, a concentrated draw solution with a lower water chemical potential
+ and a feed solution with a higher water chemical potential are separated
+ by a membrane that rejects the salt but allows the passage of water.
+ The water permeation from feed solution to draw solution is a spontaneous
+ process driven by the chemical potential gradient.
+\end_layout
+
+\begin_layout Standard
+Distillation is easy cheap technology but it is characterized by relatively
+ high energy costs due to the dissipation of thermal energy.
+ On the contrary, RO uses expensive osmotic membranes, which need to be
+ replaced regularly because of scaling and fouling.Moreover, RO requires
+ very high operating pressures, ranging from 20 to 200 bar, to let the water
+ pass through the membrane.
+ But in terms of energy losses, it works close to the thermodynamic limit.
+ Thus, theoretically, per one transferred from freshwater to salty water
+ ion pair, it consumes only the energy of difference of those ions chemical
+ potentials.
+ 
+\end_layout
+
+\begin_layout Standard
+The absence of large hydraulic pressure in FO process in comparison to RO
+ allows to reduce the energy consumption in pumping, reduce membrane scaling
+ and fouling, therefore significantly increase the lifetime of the membranes.
+ In FO, the draw solutes (agents) dispersed and/or dissolved in water form
+ homogeneous draw solutions.
+ The correct choice of the draw agents is a task of paramount importance.
+ As an osmotically driven process, the draw solute should be able to signiﬁcantl
+y reduce the water chemical potential, and consequently generate a high
+ osmotic pressure.
+ On the other hand, the draw solute is also expected to be easily separated
+ from the diluted draw solution in the subsequent process to regenerate
+ the draw solute for reuse and to produce puriﬁed water
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+shorten
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cai2016"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Hydrogels for desalination.
+\end_layout
+
+\begin_layout Standard
+An important, advantageous aspect of polymer hydrogels is that they can
+ undergo reversible volume change, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ solution — gel phase transitions in response to environmental stimuli.
+ This aspect causes hydrogels to be labeled ‘intelligent’ or ‘smart’ hydrogels.
+ Many physical and chemical stimuli have been applied to induce various
+ responses of such smart hydrogel systems, in particular to change them
+ from hydrophilic to hydrophobic, thereby releasing water.
+ These stimuli include: temperature, electric fields, solvent composition,
+ light, pressure, sound and magnetic field, whilst the chemical or biochemical
+ stimuli include pH, ions and specific molecular recognition events.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tanaka_1982,Serizawa_2001,Lietor_Santos_2009,Qiu_2001"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The smart properties of hydrogels were utilized for desalination in a recent
+ study by Li 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+etal
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Li2011"
+literal "false"
+
+\end_inset
+
+, where hydrogels have been considered as draw agents for FO.
+ The main point of the cited article is that hydrogels, due to their swelling
+ and osmotic pressure, have the ability to absorb water across FO membrane.
+ And the insoluble cross-linked network of the gel enables dewatering under
+ the influence of stimuli (thermal and/or mechanical).
+ For example, Zhang 
+\begin_inset Formula $\etal$
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhang2020"
+literal "false"
+
+\end_inset
+
+ proposed the use of hydrogel made of thermoresponsive polyelectrolyte (copolyme
+r of PNIPAM and polyacrylic acid).
+ As polyelectrolyte these particles have good affinity to water and as being
+ sensitive to heating they allow dewaterring.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Meanwhile, Zhao has reported that the swelling pressure is not the same
+ as the osmotic pressure of a traditional solution 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhao2014"
+literal "false"
+
+\end_inset
+
+ .
+ Zhao concluded that it is unreasonable to use ‘‘forward osmosis’’ in hydrogel
+ absorbing water because the chemical residues present in hydrogels are
+ responsible for their water-absorption properties and not osmotic pressure.
+ However, Wang et al.
+ argued that hydrogels are essentially draw agents for FO because the network
+ structure of a polymer hydrogel is an osmotic membrane from a thermodynamics
+ perspective 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wang2014"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Recently this feature of hydrogels was employed by the group of prof.
+ Manfred Wilhelm 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Arens2019"
+literal "true"
+
+\end_inset
+
+.
+ They proposed to get rid of osmotic membrane and simply use a microfiltration
+ to compress the hydrogel and separate it from the solution.
+ In their method the deswollen hydrogel was equilibrated with saline water
+ feed.
+ while equilibrating the gel was sweelling absorbing water, then taken out
+ and mechanically compressed by means of microfiltration membrane.
+ The squeezed out water was obtained to have lower salinity than the feed
+ water.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Later on Ali et all 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ali2015"
+literal "false"
+
+\end_inset
+
+ proposed to escape the mechanical compression by making the gel thermoresponsiv
+e.
+ They prepared the gel containing at the same time the ionic groups (acrylic
+ acid) and thermosensitive based on Nipam.
+ They have shown that under external heating stimulus (sunlight) the gel
+ experinces the collapse phase transition and shrinks releasing the collected
+ inside water.
+\end_layout
+
+\begin_layout Paragraph
+Physics behind the desalination process.
+\end_layout
+
+\begin_layout Enumerate
+Roughly speaking the maximum entropy principle requires the density of charges
+ to be moreless the same throughout the system medium.
+ Therefore since the gel has its own charges and its own counterions neutralizin
+g the gel charges, the density of mobile ions in the gel appear to be smaller
+ than the density of ions outside the gel.
+ Thus, providing that the gel counterions are kept in the gel squeezing
+ the gel may release the solution of lower salinity then the gel was initially
+ equilibrated with.
+\end_layout
+
+\begin_layout Enumerate
+Hydrogels are three-dimensional networks of polymer chains that are cross-
+ linked by either physical or chemical bonds.
+ They are able to entrap large volumes of water attracted by the high concentrat
+ion of hydrophilic groups.
+ In particular, hydrogels with ionic groups on the comonomer unit are able
+ to attract even greater amounts of water, this increased osmotic pressure
+ arising because the covalently-incorporated ionic groups are balanced by
+ mobile counter ions, and these counter ions provide a positive osmotic
+ pressure inside the hydrogel which drives greater water sorption.
+ When a dehydrated or deswollen hydrogel uptakes water, its polymer chains
+ extend, creating a swelling pressure.
+ For example, as reported in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wack_2009"
+literal "false"
+
+\end_inset
+
+ weakly crosslinked poly(acrylic acid)/poly(sodium acrylate) copolymers
+ with polymer volume fractions between 0.03 and 0.30 exhibit a swelling pressure
+ ranging from 0.20–4.23 MPa.
+\end_layout
+
+\begin_layout Enumerate
+The motivation of this study was to simulate the process of desalination
+ using polyelectrolyte hydrogel.
+\end_layout
+
+\begin_layout Standard
+The target of our study is to model the thermodynamic equilibrium between
+ the two boxes and to show how the compression of the gel affects the ion
+ density in the outside solution
+\end_layout
+
+\begin_layout Section
+Theory behind the simulation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec: theory"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide true
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename figures/gel_snapshot.jpg
+	lyxscale 20
+	width 50text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figures/salt_snapshot.jpg
+	lyxscale 20
+	width 50text%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diamond-like network in the simulation box.
+ Color code represents the individual ion types (red: 
+\begin_inset Formula $\na$
+\end_inset
+
+, blue: 
+\begin_inset Formula $\cl$
+\end_inset
+
+, yellow: 
+\begin_inset Formula $\ca$
+\end_inset
+
+) and the hydrogel (gray: neutral segment (
+\begin_inset Formula $\AH$
+\end_inset
+
+), cyan: charged segment (
+\begin_inset Formula $\A$
+\end_inset
+
+)).
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:diamond"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Model
+\end_layout
+
+\begin_layout Standard
+16 linear polymer chains by 30 monomer units each are connected to a diamond-lik
+e polymer network.
+ The network is put into a simulation box with periodic boundaries.
+ Each unit of the network carries a negative electric charge, which is equal
+ to the charge of electron.
+ Except the particles of the network, the mobile monovalent ions, 
+\begin_inset Formula $\na$
+\end_inset
+
+ and 
+\begin_inset Formula $\cl$
+\end_inset
+
+, are present in simulation box.
+ The total electric charge of all the particles in the box is zero, therefore
+ the amount of 
+\begin_inset Formula $\na$
+\end_inset
+
+ ions is bigger than that of 
+\begin_inset Formula $\cl$
+\end_inset
+
+ by the number of charged hydrogel units, 
+\begin_inset Formula $N\gel=16\cdot30=480$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The ions are able to appear and disappear
+\end_layout
+
+\begin_layout Subsection
+Simulation
+\end_layout
+
+\begin_layout Standard
+The goal of this study is to simulate the process of water desalination
+ by means of compression.
+ In order to do it we simulate the gel in two ensembles.
+\end_layout
+
+\begin_layout Enumerate
+The first is so called 
+\emph on
+open system
+\emph default
+, when the simulation gel freely exchanges ions with a big amount of aqueous
+ solution.
+ 
+\end_layout
+
+\begin_layout Enumerate
+And in 
+\emph on
+closed system
+\emph default
+, when the gel is in equilibrium with a finite volume of aqueous solution,
+ so that the total amount of salt ions .
+\end_layout
+
+\begin_layout Standard
+The compression of the gel in the open system does not affect the surrounding
+ salinity, thus the chemical potential of ions remains constant 
+\begin_inset Formula $\muna=$
+\end_inset
+
+ 
+\begin_inset Formula $\mucl=$
+\end_inset
+
+ 
+\begin_inset Formula $\text{Const}$
+\end_inset
+
+.
+ On the contrary, what remains constant in the closed system is total number
+ of ions, that are contained in the gel and in the external volume, 
+\begin_inset Formula $\nna=\text{Const}$
+\end_inset
+
+ and 
+\begin_inset Formula $\ncl=\text{Const}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Open system.
+\end_layout
+
+\begin_layout Standard
+We simulate the first ensemble using the grand reaction method 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Landsgesel2020a,Rud2020"
+literal "false"
+
+\end_inset
+
+.
+ This method is a hybrid of molecular dynamics (MD) and Monte Carlo (MC).
+ The whole simulation is represents a chain of subsimulations of MD and
+ MC following each other.
+ The MD simulation is a standard Langevin dynamics 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Grest1986"
+literal "false"
+
+\end_inset
+
+ which models the mechanical movement of all the system particles.
+ Whereas MC simulates the thermodynamic equilibrium with reservoir, which
+ exchanges ions with the simulation box.
+ The insertion (and deletion) of ion pairs is considered as a reaction of
+ creation (annihilation) of an ion pair 
+\begin_inset Formula 
+\[
+\varnothing\stackrel{K}{\leftrightarrows}\na+\cl
+\]
+
+\end_inset
+
+with corresponding reaction constant, which is defined by chemical potential
+ of ions, 
+\begin_inset Formula $K=\exp\left(\muna+\mucl\right).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Closed system.
+\end_layout
+
+\begin_layout Standard
+The similar scheme we use to simulate the gel in closed system.
+ Again the procedure represents a chain of subsequent MD and MC simulation,
+ but now we run the molecular dynamics in two simulation boxes simultaneously.
+ The first box of the volume 
+\begin_inset Formula $\Vgel$
+\end_inset
+
+ contains the gel with ions, and the second box, 
+\begin_inset Formula $\Vout$
+\end_inset
+
+— contains only ions of certain density, 
+\begin_inset Formula $\cs$
+\end_inset
+
+.
+ These two boxes are represented in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:diamond"
+
+\end_inset
+
+.
+ The total volume of both boxes is kept constant, 
+\begin_inset Formula $V=V_{\mathrm{gel}}+V_{\mathrm{out}}$
+\end_inset
+
+, so the compression of the gel implies the increase of the out volume.
+\end_layout
+
+\begin_layout Standard
+The thermodynamic equilibrium, that is exchange of the ion pairs between
+ the boxes, is done using MC procedure in a way similar to described in
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Panagiotopoulos1988"
+literal "true"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Add here few words about how the MC works.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Algorithm.
+\end_layout
+
+\begin_layout Standard
+In general the simulation algorithm looks the following:
+\end_layout
+
+\begin_layout Enumerate
+simulate molecular dynamics in both boxes in parallel; collect the observable
+ sample arrays: pressure and end-to-end distances, 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{e}$
+\end_inset
+
+; 
+\end_layout
+
+\begin_layout Enumerate
+perform Monte-Carlo procedure simulating ion pair exchange; collect the
+ observables sample arrays: number of ions in both boxes, 
+\begin_inset Formula $\nna^{I}$
+\end_inset
+
+, 
+\begin_inset Formula $\ncl^{I}$
+\end_inset
+
+, 
+\begin_inset Formula $\nna^{II}$
+\end_inset
+
+ and 
+\begin_inset Formula $\ncl^{II}$
+\end_inset
+
+ ; 
+\end_layout
+
+\begin_layout Enumerate
+repeat the procedure until the desired length of sample arrays is reached.
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Paragraph
+Compression in open system.
+\end_layout
+
+\begin_layout Standard
+First we run a set of simulations modeling the gel compression in open system,
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ in equilibrium with big bath of certain salinity, 
+\begin_inset Formula $\cs$
+\end_inset
+
+
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+, for example from 
+\begin_inset Formula $\cs=$
+\end_inset
+
+0.1 mol/l
+\end_layout
+
+\end_inset
+
+.
+ We do it for a set of different simulation box volumes.
+ Each simulation returns the pressure in the box, 
+\begin_inset Formula $P$
+\end_inset
+
+, and the number of present in the box 
+\begin_inset Formula $\cl$
+\end_inset
+
+ ions, 
+\begin_inset Formula $\ncl$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The obtained values of pressure represent the sum of partial pressure of
+ hydrogel itself, 
+\begin_inset Formula $P^{gel}$
+\end_inset
+
+, and the osmotic pressure of mobile ions.
+ In order to isolate 
+\begin_inset Formula $P^{gel}$
+\end_inset
+
+ we perform a separate simulation of a reservoir, without the gel, exchanging
+ ions with the bath of salinity 
+\begin_inset Formula $\cs$
+\end_inset
+
+.
+ This simulation results the corresponding osmotic pressure, 
+\begin_inset Formula $P^{res}$
+\end_inset
+
+.
+ Thus the partial pressure of the gel is
+\emph on
+ 
+\emph default
+
+\begin_inset Formula $P^{gel}=P-P^{res}$
+\end_inset
+
+
+\emph on
+.
+ 
+\begin_inset Formula $P^{gel}$
+\end_inset
+
+ 
+\emph default
+is that pressure which needs to be applied in mechanical equilibrium to
+ compress the hydrogel and achieve a specific molar volume of the gel V.
+ 
+\end_layout
+
+\begin_layout Standard
+The dependence of 
+\begin_inset Formula $\Pgel$
+\end_inset
+
+ versus gel molar volume is present in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:PV-GC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Solid lines on this plot represent the swelling (or compression) of the
+ gel in open system.
+ For example, blue solid line illustrates the compression in equilibrium
+ with a reservoir of salinity, 
+\begin_inset Formula $\cs=0.063$
+\end_inset
+
+ mol/l.
+ The point where the pressure equals to zero is 
+\emph on
+free swelling equilibrium 
+\emph default
+states of the gel
+\emph on
+.
+
+\emph default
+ It is seen already from this figure that the decrease of salinity shifts
+ the free swelling equilibrium states towards bigger volumes.
+ Generally speaking, all the solid curves shift towards bigger volumes with
+ decreasing salinity.
+ In other words, increase of salinity shrinks the gel.
+ This is known effect, typical for all the branched strong polyelectrolytes
+ and caused by the screening of electrostatic interactions by ions and by
+ the condition of electroneutrality of the hydrogel media 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhulina2000"
+literal "false"
+
+\end_inset
+
+.
+ The dependence of the size of weak polyelectrolytes versus salinity is
+ in general nonmonotonic 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rud2018"
+literal "false"
+
+\end_inset
+
+ but that is beyond the scope of this article.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Compression in closed system.
+\end_layout
+
+\begin_layout Standard
+After defining the free swelling equilibrium state, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ie
+\end_layout
+
+\end_inset
+
+ knowing the salinity, the gel volume, and the amount of ions in gel, 
+\begin_inset Formula $\cs^{0}$
+\end_inset
+
+, 
+\begin_inset Formula $\Vgel^{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\ncl^{0}$
+\end_inset
+
+, we start the compression of the gel in 
+\emph on
+closed system
+\emph default
+.
+ So we continuously decrease the volume of the gel and simultaneously increase
+ the volume of the outside solution, in such a way that the total volume
+ remains constant and equal to the initial gel volume 
+\begin_inset Formula $V\tot=\Vgel^{0}=V\gel+V\out$
+\end_inset
+
+.
+ At the same time the total number of ions remains constant.
+ Since the amount of external solution is small, the compression of the
+ gel affects its salinity, which now decreases, changing from 
+\begin_inset Formula $\cs^{0}=0.063$
+\end_inset
+
+ at free swelling equilibrium state to 0.045 mol/l at 
+\begin_inset Formula $P\gel=5$
+\end_inset
+
+ bar.
+ The corresponding process is depicted by dotted blue line in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:PV-GC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Desalination scheme.
+\end_layout
+
+\begin_layout Standard
+Then we repeat the simulation of hydrogel swelling in open system but setting
+ as a salinity of the reservoir the new, obtained from the previous process,
+ value 
+\begin_inset Formula $\cs=$
+\end_inset
+
+ 0.045 mol/l.
+ Again, as soon as we obtain the free swelling equilibrium state (at new
+ salinity), with corresponding new values of 
+\begin_inset Formula $V\gel$
+\end_inset
+
+ and 
+\begin_inset Formula $\ncl$
+\end_inset
+
+, we start simulating the compression in closed system.
+ Now the salinity changes again, decreasing from 0.045 to 0.031 mol/l (at
+ 5 bar).
+ These two processes are depicted by solid and dotted yellow lines in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:PV-GC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The Figure shows also the repetition of this procedure three more times
+ until the salinity reaches the value 
+\begin_inset Formula $\cs=0.01$
+\end_inset
+
+ mol/l.
+ The last dashed magenta line shows the compression in closed system which
+ ends up with 
+\begin_inset Formula $\cs=4\cdot10^{-4}$
+\end_inset
+
+ mol/l.
+ Schematically this process is depicted in the inset to the plot.
+\end_layout
+
+\begin_layout Standard
+The same process is depicted on Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fig_CV"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ but in different coordinates: salinity versus volume.
+ In this coordinates the swelling in open system appear to be horizontal
+ line, since the salinity in this process is constant.
+ Again we start from swelling in open system untill the gel reaches its
+ free swelling equilibrium (solid blue line).
+ Then the gel is compressed in closed system (dashed blue line), anding
+ up in a state with applied to the gel pressure 5 bar.
+ In this process the surrounding solution salinitiy changes from 0.064 to
+ 0.045 mol/l.
+ Then the gel again swells in open system, but at new salinity.
+ The chain of alternating swelling and compression steps ends up when salinity
+ gets equal to 
+\begin_inset Formula $\cs=4\cdot10^{-3}$
+\end_inset
+
+ mol/l after comression in closed system (dashed magenta line).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align left
+\begin_inset Graphics
+	filename figures/fig_PV_pub.pdf
+	lyxscale 30
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pressure vs gel density 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+replace open circles by squares on the plot
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:PV-GC"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/fig_CV_pub.jpg
+	lyxscale 30
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Salinity vs gel density
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fig_CV"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The compression of the gel in open system (solid lines) and in closed system
+ (dotted lines).
+ Each solid curve corresponds to different salinity of the reservoir 
+\begin_inset Formula $\cs$
+\end_inset
+
+ (see legend).
+ Shadowed area limit the states with applied pressure below zero and above
+ 5 bar.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+The efficiency of desalination.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Section
+Conclusions
+\end_layout
+
+\begin_layout Enumerate
+We have modelled the compression of the gel in thermodynamic equilibrium
+ with the reservoir of limited ammount of water.
+\end_layout
+
+\begin_layout Enumerate
+We have shown that in case of gel made of strong polyelectrolyte, the compressio
+n always lead to decrease of the surrounding salinity.
+\end_layout
+
+\begin_layout Enumerate
+We have modelled the process of water desalination combining two processes:
+ (1) the swelling of the gel in open system, exchanging ions with big reservoir
+ at constant salinity.
+ (2) the compression of the gel in closed system, when the gel affect the
+ salinity in surrounding solution.
+\end_layout
+
+\begin_layout Enumerate
+We estimated the energy needed to produce one liter of water and have show
+ that the method at least theoreticaly may compete with the modern technologies
+ used in industry nowadays.
+\end_layout
+
+\begin_layout Section*
+Acknowledgments
+\end_layout
+
+\begin_layout Standard
+This research was supported by the Czech Science Foundation (grant 19-17847Y)
+ (OR, LN, AK), Government of Russian Federation, grant number 14.W03.31.0022.
+ AK thanks the Grant Agency of Charles University for support (project 318120).
+ Computational resources were supplied by the project 
+\begin_inset Quotes eld
+\end_inset
+
+e-Infrastruktura CZ
+\begin_inset Quotes erd
+\end_inset
+
+ (e-INFRA LM2018140) provided within the program Projects of Large Research,
+ Development and Innovations Infrastructures.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/pressure_on_density_pub.pdf
+	width 50text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figures/c_s_on_density_pub2.pdf
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+(a)The pressure extension curve of the gel.
+ (b) The dependence of the salinity of the outside bath, during the hydrogel
+ compression.
+ The numbe4s reflect the initial and final salt concentration of the external
+ solution.
+ HERE MUST BE A PANEL ILLUSTRATING THE EFFICIENCY OF THE STAIRCASE, HOW
+ MANY LITRES OF WATER FOR HOW MUCH ENERGY
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "gibbs"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
