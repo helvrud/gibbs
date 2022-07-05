@@ -209,7 +209,7 @@ On the contrary, what remains constant in the \emph{closed} system, is the total
 \begin{equation}
 N_i = N_i\gel + \cs\cdot(\Vbox - \Vgel)
 \end{equation}
-where $i \in \{\na, \cl\}$,  $N_i$ is the amount of the corresponding ions in gel,  
+where $i \in \{\na, \cl\}$,  $N_i$ is the amount of the corresponding ions in gel, $\Vgel$~--- volume of the gel, $\Vbox$~--- the volume in which the gel is compressed. As $\Vbox$ we choose the volume of the gel in the free swelling equilibrium state.
 
 %Then in closed system $\nna$ and $\ncl$ remain constant, whereas the salinity of supernate, $\cs$, may change with the change of the gel volume.
 
@@ -218,7 +218,8 @@ where $i \in \{\na, \cl\}$,  $N_i$ is the amount of the corresponding ions in ge
 \paragraph{Open system.}
 We simulate the open system using the grand reaction method \cite{Landsgesel2020a,Rud2020}.
 This method is a hybrid of molecular dynamics (MD) and Monte Carlo (MC). 
-The whole simulation represents a chain of subsimulations of MD and MC followed one by each other. For MD simulation we used a standard Langevin dynamics \cite{Grest1986} which models the mechanical movement of all the system particles. 
+The whole simulation represents a chain of subsimulations of MD and MC followed one by each other. 
+For MD simulation we used a standard Langevin dynamics \cite{Grest1986} which models the mechanical movement of all the system particles. 
 Whereas MC simulates the thermodynamic equilibrium with reservoir, which exchanges ions with the simulation box. 
 The insertion (and deletion) of ion pairs is considered as a reaction of creation (or annihilation) of an ion pair 
 \[
@@ -229,18 +230,21 @@ $K=\exp\left(\muna+\mucl\right).$
 
 \paragraph{Closed system.}
 The similar scheme we use to simulate the gel in closed system. 
-The procedure represents a chain of subsequent MD and MC simulation, but now the molecular dynamics is runing in two simulation boxes simultaneously.
+The procedure represents a chain of subsequent MD and MC simulation, but now the molecular dynamics is running in two simulation boxes simultaneously.
 The first box of the volume $\Vgel$ contains the gel with ions, and the second box, $\Vout$--- contains only ions. 
 The total volume of both boxes is kept constant, $\Vbox=V_{\mathrm{gel}}+V_{\mathrm{out}}$, so the compression of the gel implies the decreasing $\Vgel$ and increasing $\Vout$.
 These two boxes are represented in \reffig{fig:diamond}. 
 
 \paragraph{Algorithm.}
-The thermodynamic equilibrium between the two volumes implies the exchange of the ion pairs between them, which is done by means of MC procedure in a way similar to described in \cite{Panagiotopoulos1988b}.
+The thermodynamic equilibrium between the two volumes implies the exchange of ion pairs between them, which is done by means of MC procedure in a way similar to described in \cite{Panagiotopoulos1988b}.
 The simulation algorithm is following:
 \begin{enumerate}
-\item Simulate molecular dynamics in both boxes; collect the observables, for examples, values of pressure $P$, to an array; 
-\item Perform Monte-Carlo procedure simulating ion pair exchange; collect the arrays of observables samples: number of ions in both boxes, $\nna\gel$,
-$\ncl\gel$, $\nna\out$ and $\ncl\out$ ; 
+\item Simulate molecular dynamics in both boxes; collect the observables, for example, values of pressure $P$, to an array; 
+\item Perform Monte-Carlo procedure simulating ion pair exchange; collect the arrays of observables samples: number of ions in both boxes, 
+%$\nna\gel$,
+$\Ncl\gel$ 
+%$\nna\out$ 
+and $\Ncl\out$ ; 
 \item Repeat the procedure until the desired length of sample arrays is reached.
 \end{enumerate}
 
@@ -266,7 +270,7 @@ In order to get the partial pressure of the gel, we substitute from $P$ the osmo
 $\Pout$, in turn, we calculate by running a separate simulation of a reservoir, containing ionic gas in equilibrium with the bath of the same salinity $\cs$. 
 The gel partial pressure, $\Pgel$, is the pressure that needs to be applied to the gel via a solvent permeable filter to compress the gel to a molar-specific volume, $\Vgel$. 
 
-The dependencies of $\Pgel$ on the gel molar volume $\Vgel$ are present in Figure \ref{fig: PV} for a set of different salinities. 
+The dependencies of $\Pgel$ on the gel molar volume $\Vgel$ are present in Figure \ref{fig: PV} for a set of different salinities. \todo{consider treplacing $\Pgel$ by $\Pi$}
 These dependencies (the case of \emph{open system}) are represented by solid lines. 
 For example, the blue solid line illustrates the compression (or swelling) of the gel in equilibrium with a reservoir of salinity, $\cs=0.063$ mol/l. 
 The points where the pressure equals zero, $\Pgel=0$, (indicated by filled circles) are the gel \emph{free swelling equilibrium} states. 
@@ -289,10 +293,10 @@ with applied pressure below zero and above 5 bar.\label{fig: NV and CN}}
 \end{figure*}
 
 \paragraph{Compression in closed system.}
-Each set of simulations in \emph{open system} defines the free swelling equilibrium states of the gel for each salinity, \ie the state where the gel partial pressure equals zero. 
-These states are characterized by the corresponding molar volume of the gel, $\Vgel^0$ and the amount of ions in gel \{$\Nna^0$, $\Ncl^0$\} 
+%Each set of simulations in \emph{open system} defines the free swelling equilibrium states of the gel for each salinity, \ie the state where the gel partial pressure equals zero. 
+The free swelling equilibrium states are characterized by the corresponding molar volume of the gel, $\Vgel^0$ and the amount of ions in gel \{$\Nna^0$, $\Ncl^0$\} 
 (Index ``0'' stands for zero bar applied pressure).
-We use the free swelling equilibrium states as the starting ones for the gel compression in \emph{closed system}. 
+We use these states as the starting ones for the gel compression in \emph{closed system}. 
 Thus, we simulate the compression of the gel in a closed volume, $\Vbox$, which is equal to $\Vgel^0$, and contains $\Ncl^0$ of $\cl$ ions and the $\na$ ions in the amount neutralizing the system, $\Nna^0 = $$\Ncl^0 + \Ngel$.
 
 We prepare two systems, one~--- simulating the gel of the volume $\Vgel$, and another~--- simulating the supernatant solution of the volume $\Vout = \Vbox - \Vgel$.
@@ -300,23 +304,22 @@ Also, the ions of the amount $\Ncl^0$ and $\Nna^0$ are shared between the two vo
 
 The processes of the gel compression in \emph{closed} system are depicted in Figure~\ref{fig: PV} as dotted lines.
 In this plot, the blue dotted line, for example, illustrates the compression of the gel equilibrated with the solution of salinity $\cs=0.063$ mol/l, in a volume which gel has at zero pressure. 
-Since, in this case, the volumes of the gel $\Vgel$ and of the supernate $\Vout$ are comparable, the compression of the gel affects the salinity of supernate, $\cs$. 
-The supernate salinity now decreases with compression.
-This decrease is illustrated \reffig{fig: CV}, where the same swelling/compression processes are displayed in different coordinates: \ie salinity of supernate versus the gel molar volume, $\cs(\Vgel)$.
+Since, in this case, the volumes of the gel $\Vgel$ and of the supernate $\Vout$ are comparable, the compression of the gel decreases the salinity of supernate, $\cs$. 
+%The supernate salinity now decreases with compression.
+This dependence is illustrated \reffig{fig: CV}, where the same swelling/compression processes are displayed in different coordinates: \ie salinity of supernate versus the gel molar volume, $\cs(\Vgel)$.
 In these coordinates, all the open system compressions show up as horizontal lines, which reflects the constant salinity, whereas the compressions in closed system demonstrate the change of $\cs$ from $\cs^{0}=0.063$ at zero pressure $\Pgel$ to $\cs^{5}=0.045$ mol/l at $P\gel=5$ bar (index ``5'' stands for 5 bar). 
 
 Although the salinity during compression in \emph{open} system remains constant, the number of ions in a compression volume, \ie in the volume where the gel is compressed (or swells), changes.
 %As the compression volume $\Vbox$ we chose the volume of the free swelling equilibrium state of the gel, $\Vbox = \Vgel^0$.
 In the Figure \ref{fig: NV} we depicted the number of $\cl$ ions in the volume $\Vbox$, calculated per unit volume, $\ncl =$ $\Ncl/\Vbox$, as a function of the gel molar volume. 
-The depicted value can be considered as the density of $\cl$ ions averaged out over the volume $\Vbox$. 
+The depicted value can be considered as the density of $\cl$ ions averaged out over the compression volume $\Vbox$. 
 
-As it is expected in case of closed system these dependencies look like horizontal lines, whereas in open system, the amount of ions in compression volume increases with compression. 
-This implies, that the compression of the gel in open system pulls out the ions from the bath to the compression volume, $\Vbox$. 
+As expected in the case of closed system compression these dependencies look like horizontal lines, whereas in an open system, the amount of ions in compression volume increases with compression. 
+This implies, that the compression of the gel in the open system pulls out the ions from the bath to the compression volume, $\Vbox$. 
 And vice versa, the swelling of the gel pushes ions out to the bath.
 
 Finally, in Figure \ref{fig: CN} the same processes are depicted in coordinates $\ncl$ --- $\cs$. 
 In these coordinates, both ways of the compression, in \emph{open} and in \emph{closed} system, appear as straight vertical and horizontal lines correspondingly. 
-
 
 In our study, we modeled the compression of the gel in equilibrium with reservoirs of 40 different salinities, ranging from 0.001 to 0.5 mol/l. 
 Every open system compression resulted in a defined free swelling equilibrium state, which we used as the initial ones for the compression in closed systems. 
@@ -332,7 +335,7 @@ This sequence forms the water desalination process.
 Starting from swelling the gel in the \emph{open} system at high salinity ($\cs=0.091$ mol/l, solid black line), the gel gets compressed in \emph{closed} system until the pressure reaches 5 bar (dashed black line). 
 Then the same gel swells in a reservoir of a bit lower salinity (\ie $\cs=0.064$ mol/l, light blue line). 
 After swelling, the gel is compressed again by the pressure of 5 bar in \emph{closed} system (dashed light blue line).  
-Then it is put swelling in a reservoir of even smaller salinity ($\cs=0.045$ mol/l, solid yellow line). 
+Then the gel is put swelling in a reservoir of even smaller salinity ($\cs=0.045$ mol/l, solid yellow line). 
 And so on. 
 The chain of alternating swelling and compression steps ends up when salinity gets equal to $\cs=4\cdot10^{-3}$ mol/l after compression in closed system (dashed magenta line).
 
@@ -366,7 +369,9 @@ In all the plots the whole process looks like a staircase, especially in the Fig
 %Then the gel again swells in open system, but at new salinity. 
 
 \paragraph{The efficiency of desalination.}
-The theoretical minimum specific energy for seawater desalination ($\cs=35$ g/l, $\simeq0.6$ mol/l as for pure NaCl) is 1.1 kWh/m3 (3.9 kJ/L) for 50\% recovery \cite{Wang_2020}.
+The theoretical minimum specific energy for seawater desalination (
+%$\cs=35$ g/l, 
+$\cs\simeq0.6$ mol/l as for pure NaCl) is $\sim3.9$ kJ/l (1.1 kWh/m$^3$) for 50\% recovery \cite{Wang_2020}.
 This value is calculated as follows 
 \begin{equation}
 W=2RT\left(\frac{c_{f}}{R_{w}}\ln\frac{c_{b}}{c_{f}}-c_{p}\ln\frac{c_{b}}{c_{p}}\right)
@@ -380,30 +385,27 @@ It has been reported that the specific energy consumption (SEC) of reverse osmos
 The SEC of a real-scale RO plant is even higher, approximately 3.5~-- 4.5 kWh/$m^{3}$ (12.6 - 16.2 kJ/L), including pre-treatment and post-treatment processes \cite{Kim_2018}. 
 %Because of the inherent high energy requirement for RO desalination, seawater is not commonly utilized over traditional surface water.
 
-
-
-In order to compare the efficiency of the process presented in \ref{fig: PV and CV} and \ref{fig: NV and CN} with provided values we collect the corresponding data to the Table~\ref{tab: table}.
+In order to compare the efficiency of the process presented in \ref{fig: PV and CV} and \ref{fig: NV and CN} with provided values, we collect the corresponding data to the Table~\ref{tab: table}.
 The presented desalination process is a cascade of six swellings in open system, at six different (constant) salinities $\cs$, each followed by six compressions in closed system, at six different (constant) $\ncl$.
-Each swelling and compression presented as a row of the Table~\ref{tab: table}, which is collored to matching to the lines on Figures.
-The first column of the table contains values $\cs^0$ and $\cs^5$, which stand for the supernatant salinity at 0 and 5 bar compression; in open system supernatant salinity does not change, so $\cs^0$ and $\cs^5$ are presented by a single number. 
-The second column contains values of $n^0$ and $n^5$, which stand for the number of $\cl$ ions in compression volume at 0 and 5 bar pressure. \todo[fancyline]{it is not a number but a number in unit volume}
-The number of ion does not change in closed system compression, thus $n^0$ and $n^5$ are the same in corresponding row.
-The fourth column shows the change of the volume in corresponding process, $\Delta v$. 
-The fifth column contain the work needed for the compression in the corresponding process, calculated per volume of extracted solution. 
-This value is calculated as integral of corresponding $\Pgel(\Vgel)$ dependence
+Each swelling and compression process is presented as a row of Table~\ref{tab: table}, which is colored by matching the lines in the Figures.
+The first column of the table contains values $\cs^0$ and $\cs^5$, which stand for the supernate salinity at 0 and 5 bar compression; in open system, supernate salinity does not change, so $\cs^0$ and $\cs^5$ are presented by a single number. 
+The second column contains values of $n^0$ and $n^5$, which stand for the number of $\cl$ ions in compression volume $\Vbox$, at 0 and 5 bar pressure (divided by $\Vbox$). 
+The number of ion does not change in closed system compression, thus $n^0$ and $n^5$ are the same in the corresponding rows.
+The third column shows the change of the gel volume in corresponding process, $\Delta v$. 
+The fourth column contain the work needed for the compression in the corresponding process, calculated per volume of extracted solution. 
+This value is an integral of corresponding $\Pgel(\Vgel)$ dependence
 \begin{equation}
     W = \frac{\int_{v^0}^{v^5} \Pgel d\Vgel}{\Delta v}
 \end{equation}
-Here, in the table we present the absolute value, whereas one should keep in mind that the compression implies the work which is done by external force, whereas the swelling implies the work which is done by gel.
-\todo{may be we return back the 'minuses' to the W values}
+Here, in the table, we present the absolute values of the work, whereas one should keep in mind that the compression implies the work is done by external force and the swelling implies that the work is done by gel.
 
 \begin{table}
-\begin{tabular*}{1\textwidth}{@{\extracolsep{\fill}}ll|lc|c|l|l|ll}
-\multicolumn{1}{l|}{$c_{s}^{0}$, mM} & $c_{s}^{5}$, mM & \multicolumn{1}{l|}{$n_{\cl}^{0}$, mM} & $n_{\cl}^{5}$, mM & $\Delta v$, l & $R_{w}$ & $|W$\textbar , J/L & \multicolumn{2}{c}{$W^{id}$, J/L}\tabularnewline
+\begin{tabular*}{1\textwidth}{@{\extracolsep{\fill}}ll|lc|c|l|ll}
+\multicolumn{1}{l|}{$c_{s}^{0}$, mM} & $c_{s}^{5}$, mM & \multicolumn{1}{l|}{$n_{\cl}^{0}$, mM} & $n_{\cl}^{5}$, mM & $\Delta v$, l & $|W$\textbar , J/L & \multicolumn{2}{c}{$W^{id}$, J/L}\tabularnewline
 \hline 
 \hline 
-\multirow{2}{*}{{\small{}$91.47$}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{{\small{}$57.08\pm0.122\enskip\longrightarrow$}} & \multirow{2}{*}{{\small{}2.74}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}$95.4\pm1.86$}} &  & \multirow{2}{*}{}\tabularnewline
- &  & \multicolumn{2}{r|}{{\small{}$71.75\pm0.024$}} &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{teal}{\small{}$\left.\begin{array}{l}
+\multirow{2}{*}{{\small{}$91.47$}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{{\small{}$57.08\pm0.122\enskip\longrightarrow$}} & \multirow{2}{*}{{\small{}2.74}} & \multirow{2}{*}{{\small{}$95.4\pm1.86$}} &  & \multirow{2}{*}{}\tabularnewline
+ &  & \multicolumn{2}{r|}{{\small{}$71.75\pm0.024$}} &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{teal}{\small{}$\left.\begin{array}{l}
 \\
 \\
 \\
@@ -411,16 +413,18 @@ Here, in the table we present the absolute value, whereas one should keep in min
 \\
 \\
 \\
-\end{array}\right\rbrace $$\rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
-W^{id}= & (52.9)\\
+\\
+\end{array}\right\rbrace $$\rotatebox{90}{\hspace{-5em}{\color{teal}\ensuremath{\begin{array}{cc}
+W^{\mathrm{sim}}= & 202.8\pm3.23\\
+W^{id}= & 52.9\\
 R_{w}= & 0.54
-\end{array}}}$}} & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multicolumn{2}{l|}{{\small{}$89.41\pm0.229\enskip\longrightarrow$}} & \multirow{2}{*}{{\small{}56.90}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}2.72}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}$109.1\pm1.72$}} &  & \multirow{2}{*}{}\tabularnewline
-\multicolumn{2}{r|}{{\small{}$73.63\pm0.03$}} &  &  &  &  &  &  & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multirow{2}{*}{\textcolor{teal}{\small{}63.93}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{teal}{\small{}$37.28\pm0.083\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{teal}{\small{}3.26}} & \multirow{2}{*}{\textcolor{teal}{\small{}0.54}} & \multirow{2}{*}{\textcolor{teal}{\small{}$100.9\pm1.69$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{teal}{\small{}$50.58\pm0.013$}} &  &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{olive}{\small{}$\left.\begin{array}{l}
+\end{array}}}}$}} & \tabularnewline
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
+\multicolumn{2}{l|}{{\small{}$89.41\pm0.229\enskip\longrightarrow$}} & \multirow{2}{*}{{\small{}56.90}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}2.72}} & \multirow{2}{*}{{\small{}$109.1\pm1.72$}} &  & \multirow{2}{*}{}\tabularnewline
+\multicolumn{2}{r|}{{\small{}$73.63\pm0.03$}} &  &  &  &  &  & \tabularnewline
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
+\multirow{2}{*}{\textcolor{teal}{\small{}63.93}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{teal}{\small{}$37.28\pm0.083\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{teal}{\small{}3.26}} & \multirow{2}{*}{\textcolor{teal}{\small{}$100.9\pm1.69$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{teal}{\small{}$50.58\pm0.013$}} &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{olive}{\small{}$\left.\begin{array}{l}
 \\
 \\
 \\
@@ -428,16 +432,18 @@ R_{w}= & 0.54
 \\
 \\
 \\
-\end{array}\right\rbrace $$\rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
+\\
+\end{array}\right\rbrace $$\rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
+W^{\mathrm{sim}}= & 207.3\pm2.19\\
 W^{id}= & 38.2\\
 R_{w}= & 0.53
 \end{array}}}$}}\tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multicolumn{2}{l|}{\textcolor{teal}{\small{}$62.05\pm0.15\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{teal}{\small{}37.17}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{teal}{\small{}3.18}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{teal}{\small{}$107.4\pm1.37$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{teal}{\small{}$48.21\pm0.016$}} &  &  &  &  &  &  & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multirow{2}{*}{\textcolor{olive}{\small{}44.91}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{olive}{\small{}$23.75\pm0.057\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{olive}{\small{}3.82}} & \multirow{2}{*}{\textcolor{olive}{\small{}0.53}} & \multirow{2}{*}{\textcolor{olive}{\small{}$106.7\pm1.51$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{olive}{\small{}$35.91\pm0.010$}} &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{red}{\small{}$\left.\begin{array}{l}
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
+\multicolumn{2}{l|}{\textcolor{teal}{\small{}$62.05\pm0.15\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{teal}{\small{}37.17}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{teal}{\small{}3.18}} & \multirow{2}{*}{\textcolor{teal}{\small{}$107.4\pm1.37$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{teal}{\small{}$48.21\pm0.016$}} &  &  &  &  &  & \tabularnewline
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
+\multirow{2}{*}{\textcolor{olive}{\small{}44.91}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{olive}{\small{}$23.75\pm0.057\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{olive}{\small{}3.82}} & \multirow{2}{*}{\textcolor{olive}{\small{}$106.7\pm1.51$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{olive}{\small{}$35.91\pm0.010$}} &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{red}{\small{}$\left.\begin{array}{l}
 \\
 \\
 \\
@@ -445,16 +451,19 @@ R_{w}= & 0.53
 \\
 \\
 \\
-\end{array}\right\rbrace \rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
-W^{id}= & 43.8\ {\color{red}{\scriptstyle (41.0)}}\\
+\\
+\\
+\end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
+W^{\mathrm{sim}}= & 222.3\pm2.43\\
+W^{\mathrm{id}}= & 43.8\ {\color{red}{\scriptstyle (41.0)}}\\
 R_{w}= & 0.52\ {\scriptstyle (0.46)}
 \end{array}}}$}} & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multicolumn{2}{l|}{\textcolor{olive}{\small{}$43.46\pm0.12\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{olive}{\small{}24.27}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{olive}{\small{}3.91}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{olive}{\small{}$106.4\pm1.13$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{olive}{\small{}$30.80\pm0.008$}} &  &  &  &  &  &  & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multirow{2}{*}{\textcolor{red}{\small{}31.93}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{red}{\small{}$14.66\pm0.037\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{red}{\small{}4.20}} & \multirow{2}{*}{\textcolor{red}{\small{}0.52}} & \multirow{2}{*}{\textcolor{red}{\small{}$107.9\pm1.42$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{red}{\small{}$25.30\pm0.006$}} &  &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{orange}{\small{}$\left.\begin{array}{l}
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
+\multicolumn{2}{l|}{\textcolor{olive}{\small{}$43.46\pm0.12\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{olive}{\small{}24.27}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{olive}{\small{}3.91}} & \multirow{2}{*}{\textcolor{olive}{\small{}$106.4\pm1.13$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{olive}{\small{}$30.80\pm0.008$}} &  &  &  &  &  & \tabularnewline
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
+\multirow{2}{*}{\textcolor{red}{\small{}31.93}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{red}{\small{}$14.66\pm0.037\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{red}{\small{}4.20}} & \multirow{2}{*}{\textcolor{red}{\small{}$107.9\pm1.42$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{red}{\small{}$25.30\pm0.006$}} &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{orange}{\small{}$\left.\begin{array}{l}
 \\
 \\
 \\
@@ -462,83 +471,82 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 \\
 \\
 \\
-\end{array}\right\rbrace \rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
+\\
+\\
+\end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
+W^{\mathrm{sim}}= & 218.7\pm2.19\\
 W^{id}= & 66.6\ {\scriptstyle (22.0)}\\
 R_{w}= & 0.53\ {\scriptstyle (0.49)}
 \end{array}}}$}}\tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
 \multicolumn{2}{l|}{\textcolor{red}{\small{}$30.03\pm0.084\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{red}{\small{}14.55}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{red}{\small{}$\begin{array}{c}
 4.17\\
 {\scriptstyle (3.22)}
-\end{array}$}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{red}{\small{}$\begin{array}{c}
+\end{array}$}} & \multirow{2}{*}{\textcolor{red}{\small{}$\begin{array}{c}
 115.6\pm0.92\\
 {\scriptstyle (57.3)}
 \end{array}$}} &  & \tabularnewline
 \multicolumn{2}{r|}{\textcolor{red}{\small{}$\begin{array}{c}
 18.59\pm0.004\,\\
 {\scriptstyle (22.32)}
-\end{array}$}} &  &  &  &  &  &  & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
+\end{array}$}} &  &  &  &  &  & \tabularnewline
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
 \multirow{2}{*}{\textcolor{orange}{\small{}22.30}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{orange}{\small{}$8.84\pm0.026\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{orange}{\small{}$\begin{array}{c}
 4.75\\
 {\scriptstyle (3.76)}
-\end{array}$}} & \multirow{2}{*}{\textcolor{orange}{\small{}0.53}} & \multirow{2}{*}{\textcolor{orange}{\small{}$\begin{array}{c}
+\end{array}$}} & \multirow{2}{*}{\textcolor{orange}{\small{}$\begin{array}{c}
 108.1\pm1.26\\
 {\scriptstyle (68.3)}
 \end{array}$}} &  & \tabularnewline
  &  & \multicolumn{2}{r|}{\textcolor{orange}{\small{}$\begin{array}{c}
 \text{17.95}\pm\text{0.004}\\
 {\scriptstyle (14.56)}
-\end{array}$}} &  &  &  & \multirow{7}{*}{{\small{}\hspace{-1em}}\textcolor{magenta}{\small{}$\left.\begin{array}{l}
+\end{array}$}} &  &  & \multirow{7}{*}{{\small{}\hspace{-1em}}\textcolor{magenta}{\small{}$\left.\begin{array}{l}
 \\
 \\
 \\
 \\
 \\
 \\
-\end{array}\right\rbrace \rotatebox{90}{\hspace{-3em}\ensuremath{\begin{array}{cc}
+\\
+\end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
+W^{\mathrm{sim}}= & 227.5\pm2.23\\
 W^{id}= & 69.7\\
 R_{w}= & 0.55
 \end{array}}}$}} & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multicolumn{2}{l|}{\textcolor{orange}{\small{}$20.74\pm0.064\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{orange}{\small{}8.83}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{orange}{\small{}$4.71$}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{orange}{\small{}$110.8\pm0.77$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{orange}{\small{}$11.08\pm0.002$}} &  &  &  &  &  &  & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multirow{2}{*}{\textcolor{magenta}{\small{}10.90}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{magenta}{\small{}$3.00\pm0.01\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}6.08}} & \multirow{2}{*}{\textcolor{magenta}{\small{}0.55}} & \multirow{2}{*}{\textcolor{magenta}{\small{}$106.9\pm1.05$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{magenta}{\small{}9.01$\pm$0.002}} &  &  &  &  & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multicolumn{2}{l|}{\textcolor{magenta}{\small{}$9.83\pm0.046\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}3.12}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{\small{}5.78}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{\small{}$119.4\pm0.97$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{magenta}{\small{}$3.86\pm0.001$}} &  &  &  &  &  &  & \tabularnewline
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
+\multicolumn{2}{l|}{\textcolor{orange}{\small{}$20.74\pm0.064\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{orange}{\small{}8.83}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{orange}{\small{}$4.71$}} & \multirow{2}{*}{\textcolor{orange}{\small{}$110.8\pm0.77$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{orange}{\small{}$11.08\pm0.002$}} &  &  &  &  &  & \tabularnewline
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
+\multirow{2}{*}{\textcolor{magenta}{\small{}10.90}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{magenta}{\small{}$3.00\pm0.01\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}6.08}} & \multirow{2}{*}{\textcolor{magenta}{\small{}$106.9\pm1.05$}} &  & \tabularnewline
+ &  & \multicolumn{2}{r|}{\textcolor{magenta}{\small{}9.01$\pm$0.002}} &  &  &  & \tabularnewline
+\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
+\multicolumn{2}{l|}{\textcolor{magenta}{\small{}$9.83\pm0.046\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}3.12}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{\small{}5.78}} & \multirow{2}{*}{\textcolor{magenta}{\small{}$119.4\pm0.97$}} &  & \tabularnewline
+\multicolumn{2}{r|}{\textcolor{magenta}{\small{}$3.86\pm0.001$}} &  &  &  &  &  & \tabularnewline
 \end{tabular*}
 
-\caption{All the units calculated per one mol of gel segments. Values in brackets
-are the estimates corresponding to crossection of 'red' and 'orange'
-lines on the plots of figures \ref{fig: PV and CV} and \ref{fig: NV and CN}
+\caption{The estimates of the efficiency of the desalination process. All the units are calculated per one mol of gel segments. Values in brackets
+are the estimates corresponding to crossection of 'red' and 'orange' lines on the plots of figures \ref{fig: PV and CV} and \ref{fig: NV and CN}
 }
 \end{table}
 
-
-
-
-
-The fifth column \todo{check if it is fifth column} contains the values of specific energy consumption, $W^\text{id}$, which are calculated as follows.
-We consider, for example, the solution of concentration $\cs^f=0.045$ mol/l as a feed solution, and the solutions of $\cs^p=0.032M$ and $\cs^b = 0.064$ mol/l 
+To give a clue of comparison with ideal desalination process efficiency, in the fifth column we provided the values of specific energy consumption, $W^\text{id}$, which are calculated by means of \refeq{eq:SEC} as follows.
+We consider, for example, the solution of concentration $\cs^f=44.91$ mmol/l as a feed solution, and the solutions of $\cs^p=31.93$ mmol/l and $\cs^b = 63.93$ mmol/l 
 correspondingly as produced product and brine solutions.
 \begin{enumerate}
     \item first, the gel, equilibrated with feed solution, is getting compressed in a closed system.
-    while compression it changes its volume by $\Delta v^p = 3.69$  l/mol and the salinity of supernate decreases from $\cs^f$ to $\cs^p$.
-    The volume of product solution equals to $\Delta v^p$
-    \item Then the squeezed gel is put back to feed solution and is getting equilibrated there under pressure, so it does not swell. 
-    \item then the squeezed gel is let to swell in closed system such that the salinity of external solution increases reaching the value of $\cs^b$
-    \item finally, the gel is taken out and squeezed by 5 bar in open system in equilibrium with the bath of the brine. 
-    The change of the gel volume in this process is $\Delta v^b = 3.26$ l/mol, which equals to the volume of produced brine. 
+    The volume of the gel changes by $\Delta v^p = 3.69$ l  and the salinity of supernate decreases from $\cs^f$ to $\cs^p$.
+    The volume of product solution equals $\Delta v^p$
+    \item Then the squeezed gel is put back into the feed solution and is getting equilibrated there under pressure, so it does not swell. 
+    \item After equilibration the gel is let to swell in a closed system such that the salinity of the external solution increases reaching the value of $\cs^b$.
+    \item Finally, the gel is taken out and squeezed by 5 bar in an open system in equilibrium with the bath of the brine. 
+    The change of the gel volume in this process is $\Delta v^b = 3.26$ l/mol, which equals the volume of the produced brine. 
 \end{enumerate}
-Thus the recovery ratio $R_w = \Delta v^p / (\Delta v^p + \Delta v^b) \simeq $ 0.53 and the theoretical minimum specific energy of desalination with corresponding $\cs^f$, $\cs^p$ and $\cs^b$ is $W^{id} =$ 38.2 J/l (\refeq{eq:SEC})
+Thus the recovery ratio $R_w = \Delta v^p / (\Delta v^p + \Delta v^b) \simeq $ 0.53 and the theoretical minimum specific energy of desalination with corresponding $\cs^f$, $\cs^p$ and $\cs^b$ is $W^{id} =$ 38.2 J/l (\refeq{eq:SEC}).
 
-
-
-
-\todoi{Start from here next time}
+Such estimations are provided in the fifth column of the table, for five triplets of values $\cs^f$, $\cs^p$, and $\cs^b$.
+$W_{\mathrm{sim}}$ is the energy calculated by integration of $\Pgel(\Vgel)$ dependencies~--- sum of corresponding comressions in closed and open systems, $W_{\mathrm{id}}$~--- the estimate based on the equation \refeq{eq:SEC} and $R_w$~--- is the corresponding recovery ratio.
+Note that calculating the $W_{\mathrm{sim}}$ we accounted for only the work done on the gel during compression, whereas the work done by the gel itself during swelling was not taken into account.
 
 
 \section{Conclusions}

@@ -691,7 +691,7 @@ centering
 
 
 \begin_inset Graphics
-	filename figures/gibbs.eps
+	filename figures/gibbs.pdf
 	width 50text%
 
 \end_inset
@@ -919,7 +919,7 @@ centering
 
  
 \begin_inset Graphics
-	filename figures/simgibbs.eps
+	filename figures/simgibbs.pdf
 	width 50text%
 
 \end_inset
@@ -2035,7 +2035,7 @@ status collapsed
 
 
 \begin_inset Graphics
-	filename figures/fig_NV_pub.eps
+	filename figures/fig_NV_pub.pdf
 	width 49text%
 
 \end_inset
@@ -2937,14 +2937,13 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="25" columns="9">
+<lyxtabular version="3" rows="25" columns="8">
 <features tabularvalignment="middle" tabularwidth="100text%">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="middle" width="0pt">
-<column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -3005,18 +3004,6 @@ status open
 \end_inset
 
 , l
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $R_{w}$
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -3118,15 +3105,6 @@ status open
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \size small
 \begin_inset Formula $95.4\pm1.86$
 \end_inset
@@ -3206,15 +3184,6 @@ status open
 
 \end_inset
 </cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
 <cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -3245,14 +3214,16 @@ status open
 \\
 \\
 \\
+\\
 \end{array}\right\rbrace $
 \end_inset
 
 
-\begin_inset Formula $\rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
-W^{id}= & (52.9)\\
+\begin_inset Formula $\rotatebox{90}{\hspace{-5em}{\color{teal}\ensuremath{\begin{array}{cc}
+W^{\mathrm{sim}}= & 202.8\pm3.23\\
+W^{id}= & 52.9\\
 R_{w}= & 0.54
-\end{array}}}$
+\end{array}}}}$
 \end_inset
 
 
@@ -3330,15 +3301,6 @@ R_{w}= & 0.54
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \size small
 \begin_inset Formula $109.1\pm1.72$
 \end_inset
@@ -3401,15 +3363,6 @@ R_{w}= & 0.54
 \end_inset
 </cell>
 <cell multirow="4" alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3520,18 +3473,6 @@ R_{w}= & 0.54
 
 \size small
 \color teal
-0.54
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size small
-\color teal
 \begin_inset Formula $100.9\pm1.69$
 \end_inset
 
@@ -3611,15 +3552,6 @@ R_{w}= & 0.54
 
 \end_inset
 </cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
 <cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -3659,11 +3591,13 @@ R_{w}= & 0.54
 \\
 \\
 \\
+\\
 \end{array}\right\rbrace $
 \end_inset
 
 
 \begin_inset Formula $\rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
+W^{\mathrm{sim}}= & 207.3\pm2.19\\
 W^{id}= & 38.2\\
 R_{w}= & 0.53
 \end{array}}}$
@@ -3738,15 +3672,6 @@ R_{w}= & 0.53
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \size small
 \color teal
 \begin_inset Formula $107.4\pm1.37$
@@ -3811,15 +3736,6 @@ R_{w}= & 0.53
 \end_inset
 </cell>
 <cell multirow="4" alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3930,18 +3846,6 @@ R_{w}= & 0.53
 
 \size small
 \color olive
-0.53
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size small
-\color olive
 \begin_inset Formula $106.7\pm1.51$
 \end_inset
 
@@ -4030,15 +3934,6 @@ R_{w}= & 0.53
 
 \end_inset
 </cell>
-<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
 <cell multirow="3" alignment="left" valignment="middle" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -4060,8 +3955,11 @@ R_{w}= & 0.53
 \\
 \\
 \\
-\end{array}\right\rbrace \rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
-W^{id}= & 43.8\ {\color{red}{\scriptstyle (41.0)}}\\
+\\
+\\
+\end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
+W^{\mathrm{sim}}= & 222.3\pm2.43\\
+W^{\mathrm{id}}= & 43.8\ {\color{red}{\scriptstyle (41.0)}}\\
 R_{w}= & 0.52\ {\scriptstyle (0.46)}
 \end{array}}}$
 \end_inset
@@ -4144,15 +4042,6 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \size small
 \color olive
 \begin_inset Formula $106.4\pm1.13$
@@ -4217,15 +4106,6 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 \end_inset
 </cell>
 <cell multirow="4" alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4336,18 +4216,6 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 
 \size small
 \color red
-0.52
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size small
-\color red
 \begin_inset Formula $107.9\pm1.42$
 \end_inset
 
@@ -4427,15 +4295,6 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 
 \end_inset
 </cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
 <cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -4475,7 +4334,11 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 \\
 \\
 \\
-\end{array}\right\rbrace \rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
+\\
+\\
+\\
+\end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
+W^{\mathrm{sim}}= & 218.7\pm2.19\\
 W^{id}= & 66.6\ {\scriptstyle (22.0)}\\
 R_{w}= & 0.53\ {\scriptstyle (0.49)}
 \end{array}}}$
@@ -4556,15 +4419,6 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \size small
 \color red
 \begin_inset Formula $\begin{array}{c}
@@ -4635,15 +4489,6 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 \end_inset
 </cell>
 <cell multirow="4" alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4760,18 +4605,6 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 
 \size small
 \color orange
-0.53
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size small
-\color orange
 \begin_inset Formula $\begin{array}{c}
 108.1\pm1.26\\
 {\scriptstyle (68.3)}
@@ -4857,15 +4690,6 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 
 \end_inset
 </cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
 <cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -4895,7 +4719,9 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 \\
 \\
 \\
-\end{array}\right\rbrace \rotatebox{90}{\hspace{-3em}\ensuremath{\begin{array}{cc}
+\\
+\end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
+W^{\mathrm{sim}}= & 227.5\pm2.23\\
 W^{id}= & 69.7\\
 R_{w}= & 0.55
 \end{array}}}$
@@ -4982,15 +4808,6 @@ R_{w}= & 0.55
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \size small
 \color orange
 \begin_inset Formula $110.8\pm0.77$
@@ -5055,15 +4872,6 @@ R_{w}= & 0.55
 \end_inset
 </cell>
 <cell multirow="4" alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5174,18 +4982,6 @@ R_{w}= & 0.55
 
 \size small
 \color magenta
-0.55
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size small
-\color magenta
 \begin_inset Formula $106.9\pm1.05$
 \end_inset
 
@@ -5249,15 +5045,6 @@ R_{w}= & 0.55
 \end_inset
 </cell>
 <cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5366,15 +5153,6 @@ R_{w}= & 0.55
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \size small
 \color magenta
 \begin_inset Formula $119.4\pm0.97$
@@ -5439,15 +5217,6 @@ R_{w}= & 0.55
 \end_inset
 </cell>
 <cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
