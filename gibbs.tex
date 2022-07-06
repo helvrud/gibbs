@@ -196,11 +196,8 @@ and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
 \end{figure*}
 We simulate the compression of the gel in two ensembles.
 \begin{enumerate}
-\item The first is so called \emph{open system}, when the simulation box
-with gel freely exchanges ions with a big amount of aqueous solution
-of certain constant salinity, $\cs$. 
-\item And in \emph{closed system}, when the gel is in equilibrium with a
-finite volume of aqueous solution.
+\item The first is so called \emph{open system}, when the simulation box with gel freely exchanges ions with a big amount of aqueous solution of certain constant salinity, $\cs$. 
+\item And in \emph{closed system}, when the gel is in equilibrium with a finite volume of aqueous solution.
 \end{enumerate}
 The compression of the gel in the \emph{open} system does not affect the surrounding salinity, thus the density of ions outside the gel remains constant $\cs =$ $\cna=$ $\ccl=$ $\text{Const}$ (\reffig{fig: open}). 
 On the contrary, what remains constant in the \emph{closed} system, is the total number of $\na$ and $\cl$ ions, that are contained in the gel and in the external volume, \ie in the volume $\Vbox$ (\reffig{fig: closed}).
@@ -209,7 +206,8 @@ On the contrary, what remains constant in the \emph{closed} system, is the total
 \begin{equation}
 N_i = N_i\gel + \cs\cdot(\Vbox - \Vgel)
 \end{equation}
-where $i \in \{\na, \cl\}$,  $N_i$ is the amount of the corresponding ions in gel, $\Vgel$~--- volume of the gel, $\Vbox$~--- the volume in which the gel is compressed. As $\Vbox$ we choose the volume of the gel in the free swelling equilibrium state.
+where $i \in \{\na, \cl\}$,  $N_i$ is the amount of the corresponding ions in gel, $\Vgel$~--- volume of the gel, $\Vbox$~--- the volume in which the gel is compressed. 
+As $\Vbox$ we choose the volume of the gel in the free swelling equilibrium state.
 
 %Then in closed system $\nna$ and $\ncl$ remain constant, whereas the salinity of supernate, $\cs$, may change with the change of the gel volume.
 
@@ -260,7 +258,6 @@ and $\Ncl\out$ ;
 \caption{
 The compression of the gel in open system (solid lines) and in closed system (dotted lines). 
 Each solid curve corresponds to different salinity of the reservoir $\cs$ (see legend). Shadowed area limit the states with applied pressure below zero and above 5 bar.\label{fig: PV and CV}}
-\todoi{replace $V$ by $\Vgel$ in Figures}
 \end{figure*}
 First, we run a set of simulations modeling the gel compression in \emph{open system}, \ie in equilibrium with a big bath of certain salinity, $\cs$. 
 The simulations are run for a set of different simulation box volumes. 
@@ -268,9 +265,10 @@ Each simulation returns the averaged pressure, $P$, and the number of $\cl$ ions
 
 In order to get the partial pressure of the gel, we substitute from $P$ the osmotic pressure of ions in the reservoir: $\Pgel=P - \Pout$.
 $\Pout$, in turn, we calculate by running a separate simulation of a reservoir, containing ionic gas in equilibrium with the bath of the same salinity $\cs$. 
-The gel partial pressure, $\Pgel$, is the pressure that needs to be applied to the gel via a solvent permeable filter to compress the gel to a molar-specific volume, $\Vgel$. 
+The gel partial pressure, $\Pgel$, is the pressure that needs to be applied to the gel via a solvent permeable filter to compress the gel to a specific molar volume, $\Vgel$. 
+By gel molar volume $\Vgel$ we assume the volume of the gel calculated per on mole of gel monomer units.
 
-The dependencies of $\Pgel$ on the gel molar volume $\Vgel$ are present in Figure \ref{fig: PV} for a set of different salinities. \todo{consider treplacing $\Pgel$ by $\Pi$}
+The dependencies of $\Pgel$ on $\Vgel$ are present in Figure \ref{fig: PV} for a set of different salinities. 
 These dependencies (the case of \emph{open system}) are represented by solid lines. 
 For example, the blue solid line illustrates the compression (or swelling) of the gel in equilibrium with a reservoir of salinity, $\cs=0.063$ mol/l. 
 The points where the pressure equals zero, $\Pgel=0$, (indicated by filled circles) are the gel \emph{free swelling equilibrium} states. 
@@ -285,10 +283,11 @@ It is caused by the decrease of ions osmotic pressure and by a screening of elec
 {\includegraphics[width=0.49\textwidth]{figures/fig_NV_pub}}
 \subfloat[Salinity vs gel molar volume\label{fig: CN}]
 {\includegraphics[width=0.495\textwidth]{figures/fig_NVbox_mu_pub}}
-\caption{The compression of the gel in open system (solid lines) and in closed
-system (dotted lines). Each solid curve corresponds to different salinity
-of the reservoir $\cs$ (see legend). Shadowed area limit the states
-with applied pressure below zero and above 5 bar.\label{fig: NV and CN}}
+\caption{The compression of the gel in \emph{open system} (solid lines) and in \emph{closed system} (dotted lines). 
+Shadowed area limit the states with applied pressure below zero and above 5 bar.
+The values $N_\cl$ are the virtual numbers of present $\cl$ ions in \emph{closed system} simulation boxes.
+\label{fig: NV and CN}}
+
 %\todoi{Replace y-axis labels by $\ncl$}
 \end{figure*}
 
@@ -350,7 +349,7 @@ In all the plots the whole process looks like a staircase, especially in the Fig
 %\end{enumerate}
 
 
-\todo{we could get rid of saying 'gel molar volume' if we state elsewhere that all the values are calculated per one mol of the gel}
+
 
 %Then we repeat the simulation of hydrogel swelling in open system but setting as a salinity of the reservoir the new, obtained from the previous process, value $\cs=$ 0.045 mol/l. 
 %Again, as soon as we obtain the free swelling equilibrium state (at new salinity), with corresponding new values of $V\gel$ and $\ncl$, we start simulating the compression in closed system. Now the salinity changes again, decreasing from 0.045 to 0.031 mol/l (at 5 bar). 
@@ -547,22 +546,18 @@ Thus the recovery ratio $R_w = \Delta v^p / (\Delta v^p + \Delta v^b) \simeq $ 0
 Such estimations are provided in the fifth column of the table, for five triplets of values $\cs^f$, $\cs^p$, and $\cs^b$.
 $W_{\mathrm{sim}}$ is the energy calculated by integration of $\Pgel(\Vgel)$ dependencies~--- sum of corresponding comressions in closed and open systems, $W_{\mathrm{id}}$~--- the estimate based on the equation \refeq{eq:SEC} and $R_w$~--- is the corresponding recovery ratio.
 Note that calculating the $W_{\mathrm{sim}}$ we accounted for only the work done on the gel during compression, whereas the work done by the gel itself during swelling was not taken into account.
+The ratio between $W_{\mathrm{sim}}$ and $W_{\mathrm{id}}$ ranges from 3.26 to 5.43, which is comparable to that of RO.
 
 
 \section{Conclusions}
-\begin{enumerate}
-\item We have modeled the compression of the gel in thermodynamic equilibrium
-with the reservoir of limited amount of water.
-\item We have shown that in case of gel made of strong polyelectrolyte,
-the compression always lead to decrease of the surrounding salinity.
-\item We have modeled the process of water desalination combining two processes:
-(1) the swelling of the gel in open system, exchanging ions with big
-reservoir at constant salinity. (2) the compression of the gel in
-closed system, when the gel affect the salinity in surrounding solution.
-\item We estimated the energy needed to produce one liter of water and have
-show that the method at least theoretically may compete with the modern
-technologies used in industry nowadays.
-\end{enumerate}
+We have modeled the compression of the gel in thermodynamic equilibrium with the reservoir of limited amount of water.
+We have shown that in case of gel made of strong polyelectrolyte, the compression always lead to decrease of the surrounding salinity.
+We have modeled the process of water desalination combining two processes: 
+(1) the swelling of the gel in \emph{open} system, exchanging ions with big reservoir at constant salinity. 
+(2) the compression of the gel in \emph{closed} system, when the gel affect the salinity in surrounding solution.
+We estimated the energy needed to produce one liter of water and have show that the method 
+%at least theoretically 
+may compete with the modern technologies used in modern industry.
 
 \section*{Acknowledgments}
 
@@ -577,7 +572,7 @@ Infrastructures.
 \bibliography{lit/gibbs}
 
 \newpage
-\listoftodos
+%\listoftodos
 
 \newpage
 \section*{Supplementary Information}
@@ -720,126 +715,5 @@ Solving this equation with respect to $N^{{(gel)}}_{A^{-}}$ gives us the distrib
     \\
     N_{Cl^{-}}^{(salt)} = N_{Na^{+}}^{(gel)} = N_{pairs} - N_{Cl^{-}}^{(gel)}
 \end{eqnarray}
-
-
-
-
-\begin{table}
-\begin{tabular*}{1\textwidth}{@{\extracolsep{\fill}}ll|lc|c|l|l|ll}
-\multicolumn{1}{l|}{$c_{s}^{0}$, mM} & $c_{s}^{5}$, mM & \multicolumn{1}{l|}{$n_{\cl}^{0}$, mM} & $n_{\cl}^{5}$, mM & $\Delta v$, l & $R_{w}$ & $|W$\textbar , J/L & \multicolumn{2}{c}{$W^{id}$, J/L}\tabularnewline
-\hline 
-\hline 
-\multirow{2}{*}{{\small{}91.466}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{{\small{}$57.083\pm0.1215\quad\longrightarrow$}} & \multirow{2}{*}{{\small{}2.74}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}$95.4\pm1.86$}} &  & \multirow{2}{*}{}\tabularnewline
- &  & \multicolumn{2}{r|}{{\small{}$71.751\pm0.024$}} &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{teal}{\small{}$\left.\begin{array}{l}
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\end{array}\right\rbrace $$\rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
-W^{id}= & (52.9)\\
-R_{w}= & 0.54
-\end{array}}}$}} & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multicolumn{2}{l|}{{\small{}$89.414\pm0.2286\quad\longrightarrow$}} & \multirow{2}{*}{{\small{}56.898}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}2.72}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}$109.1\pm1.72$}} &  & \multirow{2}{*}{}\tabularnewline
-\multicolumn{2}{r|}{{\small{}$73.633\pm0.029$}} &  &  &  &  &  &  & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multirow{2}{*}{\textcolor{teal}{\small{}63.93}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{teal}{\small{}$37.281\pm0.083\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{teal}{\small{}3.26}} & \multirow{2}{*}{\textcolor{teal}{\small{}0.54}} & \multirow{2}{*}{\textcolor{teal}{\small{}$100.9\pm1.69$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{teal}{\small{}$50.579\pm0.0134$}} &  &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{olive}{\small{}$\left.\begin{array}{l}
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\end{array}\right\rbrace $$\rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
-W^{id}= & 38.2\\
-R_{w}= & 0.53
-\end{array}}}$}}\tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multicolumn{2}{l|}{\textcolor{teal}{\small{}$62.052\pm0.148\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{teal}{\small{}37.172}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{teal}{\small{}3.18}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{teal}{\small{}$107.4\pm1.37$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{teal}{\small{}$48.206\pm0.0157$}} &  &  &  &  &  &  & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multirow{2}{*}{\textcolor{olive}{\small{}44.915}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{olive}{\small{}$23.747\pm0.0572\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{olive}{\small{}3.82}} & \multirow{2}{*}{\textcolor{olive}{\small{}0.53}} & \multirow{2}{*}{\textcolor{olive}{\small{}$106.7\pm1.51$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{olive}{\small{}$35.911\pm0.0101$}} &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{red}{\small{}$\left.\begin{array}{l}
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\end{array}\right\rbrace \rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
-W^{id}= & 43.8\ {\color{red}{\scriptstyle (41.0)}}\\
-R_{w}= & 0.52\ {\scriptstyle (0.46)}
-\end{array}}}$}} & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multicolumn{2}{l|}{\textcolor{olive}{\small{}$43.463\pm0.116\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{olive}{\small{}24.272}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{olive}{\small{}3.91}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{olive}{\small{}$106.4\pm1.13$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{olive}{\small{}$30.795\pm0.0078$}} &  &  &  &  &  &  & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multirow{2}{*}{\textcolor{red}{\small{}31.928}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{red}{\small{}$14.658\pm0.0368\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{red}{\small{}4.20}} & \multirow{2}{*}{\textcolor{red}{\small{}0.52}} & \multirow{2}{*}{\textcolor{red}{\small{}$107.9\pm1.42$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{red}{\small{}$25.297\pm0.0061$}} &  &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{orange}{\small{}$\left.\begin{array}{l}
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\end{array}\right\rbrace \rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
-W^{id}= & 66.6\ {\scriptstyle (22.0)}\\
-R_{w}= & 0.53\ {\scriptstyle (0.49)}
-\end{array}}}$}}\tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multicolumn{2}{l|}{\textcolor{red}{\small{}$30.029\pm0.0839\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{red}{\small{}14.549}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{red}{\small{}$\begin{array}{c}
-4.17\\
-{\scriptstyle (3.22)}
-\end{array}$}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{red}{\small{}$\begin{array}{c}
-115.6\pm0.92\\
-{\scriptstyle (57.3)}
-\end{array}$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{red}{\small{}$\begin{array}{c}
-18.585\pm0.0036\,\\
-{\scriptstyle (22.32)}
-\end{array}$}} &  &  &  &  &  &  & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multirow{2}{*}{\textcolor{orange}{\small{}22.301}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{orange}{\small{}$8.838\pm0.0262\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{orange}{\small{}$\begin{array}{c}
-4.75\\
-{\scriptstyle (3.76)}
-\end{array}$}} & \multirow{2}{*}{\textcolor{orange}{\small{}0.53}} & \multirow{2}{*}{\textcolor{orange}{\small{}$\begin{array}{c}
-108.1\pm1.26\\
-{\scriptstyle (68.3)}
-\end{array}$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{orange}{\small{}$\begin{array}{c}
-\text{17.945}\pm\text{0.0041}\\
-{\scriptstyle (14.56)}
-\end{array}$}} &  &  &  & \multirow{7}{*}{{\small{}\hspace{-1em}}\textcolor{magenta}{\small{}$\left.\begin{array}{l}
-\\
-\\
-\\
-\\
-\\
-\\
-\end{array}\right\rbrace \rotatebox{90}{\hspace{-3em}\ensuremath{\begin{array}{cc}
-W^{id}= & 69.7\\
-R_{w}= & 0.55
-\end{array}}}$}} & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multicolumn{2}{l|}{\textcolor{orange}{\small{}$20.743\pm0.0638\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{orange}{\small{}8.827}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{orange}{\small{}$4.71$}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{orange}{\small{}$110.8\pm0.77$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{orange}{\small{}$11.082\pm0.002$}} &  &  &  &  &  &  & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multirow{2}{*}{\textcolor{magenta}{\small{}10.904}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{magenta}{\small{}$3.002\pm0.0098\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}6.08}} & \multirow{2}{*}{\textcolor{magenta}{\small{}0.55}} & \multirow{2}{*}{\textcolor{magenta}{\small{}$106.9\pm1.05$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{magenta}{\small{}9.011$\pm$0.0019}} &  &  &  &  & \tabularnewline
-\cline{1-7} \cline{2-7} \cline{3-7} \cline{4-7} \cline{5-7} \cline{6-7} \cline{7-7} 
-\multicolumn{2}{l|}{\textcolor{magenta}{\small{}$9.834\pm0.0461\quad\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}3.119}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{\small{}5.78}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{\small{}$119.4\pm0.97$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{magenta}{\small{}$3.862\pm0.0014$}} &  &  &  &  &  &  & \tabularnewline
-\end{tabular*}
-
-\caption{ORIGINAL TABLE (to be removed)
-}
-\end{table}
 
 \end{document}
