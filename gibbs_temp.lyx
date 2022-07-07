@@ -3596,7 +3596,7 @@ R_{w}= & 0.54
 \end_inset
 
 
-\begin_inset Formula $\rotatebox{90}{\hspace{-3.8em}\ensuremath{\begin{array}{cc}
+\begin_inset Formula $\rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
 W^{\mathrm{sim}}= & 207.3\pm2.19\\
 W^{id}= & 38.2\\
 R_{w}= & 0.53
@@ -4327,7 +4327,6 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 \color orange
 
 \begin_inset Formula $\left.\begin{array}{l}
-\\
 \\
 \\
 \\
