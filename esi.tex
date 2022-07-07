@@ -120,16 +120,19 @@ where $N^{{(gel)}}_{A^{-}}$ is number of fixed anions in the box with the gel \i
 Solving this equation with respect to $N^{{(gel)}}_{A^{-}}$ gives us the distribution of the ions between two boxes.
 
 
-\begin{equation}
-N_{Cl^{-}}^{(gel)} = \frac{\frac{\NA \Vout^{2}}{2} + N_{pairs} \Vgel^{2} - \frac{\Vout \sqrt{N^{{(gel)}}_{A^{-}}^{2} \Vout^{2} + 4 N^{{(gel)}}_{A^{-}} N_{pairs} \Vgel^{2} + 4 N_{pairs}^{2} \Vgel^{2}}}{2}}{\Vgel^{2} - \Vout^{2}}
-\end{equation}
+%\begin{equation}
+%N_{Cl^{-}}^{(gel)} = \frac{\frac{\NA \Vout^{2}}{2} + N_{pairs} \Vgel^{2} - \frac{\Vout \sqrt{N^{{(gel)}}_{A^{-}}^{2} \Vout^{2} + 4 N^{{(gel)}}_{A^{-}} N_{pairs} \Vgel^{2} + 4 N_{pairs}^{2} \Vgel^{2}}}{2}}{\Vgel^{2} - \Vout^{2}}
+%\end{equation}
 
 \todoi{
 This paragraph moved from overleaf
 
 Compression of the gel in infinite reservoir does not  change its salinity, on the contrary, upon compression of the gel in closed reservoir salinity of separated liquid is decreasing (supernatant salinity), using the Donnan law formulated for finite reservoir salinity can be expressed as
 \begin{equation*}
-    c_s^\prime = \frac{\sqrt{4\alpha^{2} c_{p}^{2} \left(1-\gamma\right)^{2} + \alpha c_{p} c_{s} \gamma^{2} + c_{s}^{2} \gamma^{2}}-\frac{\alpha c_{p} \left(1-\gamma\right)}{2} - c_{s} \left(1-\gamma\right)}{\gamma^{2} - \left(1-\gamma\right)^{2}}
+    %c_s^\prime = \frac{\sqrt{4\alpha^{2} c_{p}^{2} \left(1-\gamma\right)^{2} + \alpha c_{p} c_{s} \gamma^{2} + c_{s}^{2} \gamma^{2}}-\frac{\alpha c_{p} \left(1-\gamma\right)}{2} - c_{s} \left(1-\gamma\right)}{\gamma^{2} - \left(1-\gamma\right)^{2}}
+
+    c_s^\prime =\frac{- V c_{s} \left(V - V_{gel}\right) - \frac{\alpha \left(V - V_{gel}\right)}{2} + \sqrt{V^{2} V_{gel}^{2} c_{s}^{2} + V V_{gel}^{2} \alpha c_{s} + \frac{\alpha^{2} \left(V - V_{gel}\right)^{2}}{4}}}{V_{gel}^{2} - \left(V - V_{gel}\right)^{2}}
+
 \end{equation*}
 where $\gamma = V_{gel}/V_0$ is relative to initial volume compression.
 }
