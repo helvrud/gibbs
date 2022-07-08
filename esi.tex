@@ -105,44 +105,27 @@ The Monte Carlo sampling procedure is the following
 \end{enumerate}
 
 \subsection{Donnan equilibrium in finite volume reservoirs}
-\todo{mb we remove this section}
-Before we can explore any system properties and collect data the system has to be equilibrated. To achieve this we perform equilibration routine consist of sequence of Molecular Dynamics and Monte Carlo steps.
-%Here we describe our technique
+Before we can explore any system properties and collect data the system has to be equilibrated. To achieve this we perform equilibration routine which consist of sequence of Molecular Dynamics and Monte Carlo steps.
 The result of equilibration is stationary of any observable such as pressure, end-to-end distance for polymer chains and ion distribution between reservoirs. 
-
-The success and the cost in terms of computational time for the equilibration process heavily depend on initial guess. In our case we initialize the system with ion distribution corresponds to Donnan equilibrium.
+The success and the cost in terms of computational time for the equilibration process heavily depend on initial guess. 
+In our case we initialize the system with ion distribution corresponds to Donnan equilibrium.
 
 In closed system number of ions in the system is constant, so Donnan equilibrium can be formulated as follows
 \begin{equation}
-    \frac{\left(N_{pairs} - N_{Cl^{-}}^{(gel)}\right)^2}{V_{salt}^2} = \frac{N_{Cl^{-}}^{gel} (N^{{(gel)}}_{A^{-}} + N_{Cl^{-}}^{(gel)})}{V_{gel}^2}
+    \frac{\Ncl\out\Nna\out}{\Vout^2} = \frac{\Ncl\gel\Nna\gel}{\Vgel^2}
 \end{equation}
-where $N^{{(gel)}}_{A^{-}}$ is number of fixed anions in the box with the gel \ie acetic groups in the polymer gel.
-Solving this equation with respect to $N^{{(gel)}}_{A^{-}}$ gives us the distribution of the ions between two boxes.
+or
+\begin{equation}
+    \frac{\left(\Ncl\tot - \Ncl\gel\right)^2}{\Vout^2} = \frac{\Ncl\gel (\NA + \Ncl\gel)}{\Vgel^2}
+\end{equation}
+where $\NA$ is number of fixed anions in the box with the gel \ie acetic groups in the polymer gel.
+Solving this equation with respect to $\Ncl\gel$ gives us the distribution of the ions between two boxes.
+\begin{equation}
+\frac{- N - \frac{1}{2}\NA \gamma^{2} + \gamma \NA \sqrt{\left(\frac{N}{\NA}\right)^{2} + \frac{N}{\NA} +  \left(\frac{\gamma}{2}\right)^{2}}}{\gamma^{2} - 1 }
+\end{equation}
+where $\gamma = \Vout/\Vgel$ is a relative to initial volume compression.
 
 
-%\begin{equation}
-%N_{Cl^{-}}^{(gel)} = \frac{\frac{\NA \Vout^{2}}{2} + N_{pairs} \Vgel^{2} - \frac{\Vout \sqrt{N^{{(gel)}}_{A^{-}}^{2} \Vout^{2} + 4 N^{{(gel)}}_{A^{-}} N_{pairs} \Vgel^{2} + 4 N_{pairs}^{2} \Vgel^{2}}}{2}}{\Vgel^{2} - \Vout^{2}}
-%\end{equation}
-
-\todoi{
-This paragraph moved from overleaf
-
-Compression of the gel in infinite reservoir does not  change its salinity, on the contrary, upon compression of the gel in closed reservoir salinity of separated liquid is decreasing (supernatant salinity), using the Donnan law formulated for finite reservoir salinity can be expressed as
-\begin{equation*}
-    %c_s^\prime = \frac{\sqrt{4\alpha^{2} c_{p}^{2} \left(1-\gamma\right)^{2} + \alpha c_{p} c_{s} \gamma^{2} + c_{s}^{2} \gamma^{2}}-\frac{\alpha c_{p} \left(1-\gamma\right)}{2} - c_{s} \left(1-\gamma\right)}{\gamma^{2} - \left(1-\gamma\right)^{2}}
-
-    c_s^\prime =\frac{- V c_{s} \left(V - V_{gel}\right) - \frac{\alpha \left(V - V_{gel}\right)}{2} + \sqrt{V^{2} V_{gel}^{2} c_{s}^{2} + V V_{gel}^{2} \alpha c_{s} + \frac{\alpha^{2} \left(V - V_{gel}\right)^{2}}{4}}}{V_{gel}^{2} - \left(V - V_{gel}\right)^{2}}
-
-\end{equation*}
-where $\gamma = V_{gel}/V_0$ is relative to initial volume compression.
-}
-\begin{eqnarray}
-    %N_{Cl^{-}}^{(gel)} = \frac{\frac{N^{{(gel)}}_{A^{-}} V_{salt}^{2}}{2} + N_{pairs} V_{gel}^{2} - \frac{V_{salt} \sqrt{N^{{(gel)}}_{A^{-}}^{2} V_{salt}^{2} + 4 N^{{(gel)}}_{A^{-}} N_{pairs} V_{gel}^{2} + 4 N_{pairs}^{2} V_{gel}^{2}}}{2}}{V_{gel}^{2} - V_{salt}^{2}}
-    \\
-    N_{Na^{+}}^{(gel)} = N^{{(gel)}}_{A^{-}} + N_{Cl^{-}}^{(gel)}
-    \\
-    N_{Cl^{-}}^{(salt)} = N_{Na^{+}}^{(gel)} = N_{pairs} - N_{Cl^{-}}^{(gel)}
-\end{eqnarray}
 \subsection{Sampling routine}
 Data gained from Molecular Dynamics (MD) and Monte Carlo processes (MC) are highly autocorrelated, thus we can not imply statistic developed for uncorrelated data. 
 We have written a small in-house python package realizing the routine estimating mean and error for the observables provided by simulation, \ie pressure, number of particles, end-to-end distance of a chain for a given confidence level or effective sample size. 

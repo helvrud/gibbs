@@ -134,7 +134,7 @@ is defined by Donnan law \cite{Rud2018}
 \begin{equation*}
 \frac{\ccl\gel}{\cs}=\frac{\cs}{\cna\gel}=\sqrt{1+\left(\frac{\alpha}{2\cs\Vgel}\right)^{2}}\pm\frac{\alpha}{2\cs\Vgel}
 \end{equation*}
-where $\ccl\gel$ and $\cna\gel$ are the internal concentration of monovalent anions and cations, $\cs$ is the salinity of external solution $\Vgel$ is the gel molar volume (inverse density of gel segments) and $\alpha$ is ionization degree. 
+where $\ccl\gel$ and $\cna\gel$ are the internal concentration of monovalent anions and cations, $\cs$ is the salinity of external solution,  $\Vgel$ is the gel molar volume (inverse density of gel segments) and $\alpha$ is ionization degree (in the case of our study $\alpha=1$). 
 The $\pm$ sign in the formula accounts for the change between the cases of gel made of polyanion or polycation.
 
 The lower salinity solution can be extracted from the gel by means of compression and/or other stimulus providing that the charge of the gel remains constant.
@@ -250,7 +250,7 @@ Each simulation returns the averaged pressure, $P$, and the number of $\cl$ ions
 In order to get the partial pressure of the gel, we substitute from $P$ the osmotic pressure of ions in the reservoir: $\Pgel=P - \Pout$.
 $\Pout$, in turn, we calculate by running a separate simulation of a reservoir, containing ionic gas in equilibrium with the bath of the same salinity $\cs$. 
 The gel partial pressure, $\Pgel$, is the pressure that needs to be applied to the gel via a solvent permeable filter to compress the gel to a specific molar volume, $\Vgel$. 
-By gel molar volume $\Vgel$ we assume the volume of the gel calculated per on mole of gel monomer units.
+By gel molar volume $\Vgel$ we assume the volume of the gel calculated per on mol of gel monomer units.
 
 The dependencies of $\Pgel$ on $\Vgel$ are present in Figure \ref{fig: PV} for a set of different salinities. 
 These dependencies (the case of \emph{open system}) are represented by solid lines. 
@@ -384,7 +384,7 @@ Here, in the table, we present the absolute values of the work, whereas one shou
 
 \begin{table}
 \begin{tabular*}{1\textwidth}{@{\extracolsep{\fill}}ll|lc|c|l|ll}
-\multicolumn{1}{l|}{$c_{s}^{0}$, mM} & $c_{s}^{5}$, mM & \multicolumn{1}{l|}{$n_{\cl}^{0}$, mM} & $n_{\cl}^{5}$, mM & $\Delta v$, l & $|W$\textbar , J/L & \multicolumn{2}{c}{$W^{id}$, J/L}\tabularnewline
+\multicolumn{1}{l|}{$c_{s}^{0}$, mM} & $c_{s}^{5}$, mM & \multicolumn{1}{l|}{$n_{\cl}^{0}$, mM} & $n_{\cl}^{5}$, mM & $\Delta \Vgel$, l & $|W$\textbar , J/l & \multicolumn{2}{c}{$W^{id}$, J/l}\tabularnewline
 \hline 
 \hline 
 \multirow{2}{*}{{\small{}$91.47$}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{{\small{}$57.08\pm0.122\enskip\longrightarrow$}} & \multirow{2}{*}{{\small{}2.74}} & \multirow{2}{*}{{\small{}$95.4\pm1.9$}} &  & \multirow{2}{*}{}\tabularnewline
