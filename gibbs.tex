@@ -25,10 +25,7 @@ Mechanics and Optics, St. Petersburg, Russia.}
 \author{Oleg V. Rud}
 
 
-\affiliation{Department of Physical and Macromolecular Chemistry, Faculty of Science,
-Charles University in Prague, Czech Republic}
-
-
+\affiliation{Department of Physical and Macromolecular Chemistry, Faculty of Science, Charles University in Prague, Czech Republic}
 \alsoaffiliation[imc]{Institute of Macromolecular Compounds of Russian Academy of Sciences,
 Saint-Petersburg, Russia}
 
@@ -153,7 +150,7 @@ We modelled also the desalination process, as a cascade of following one by each
 \section{Theory behind the simulation\label{sec: theory}}
 
 \begin{figure*}[t]
-\centering \includegraphics[width=0.7\textwidth]{figures/simgibbs}\caption{Diamond-like network in the simulation box. Color code represents
+\centering \includegraphics[width=0.7\textwidth]{{figures/simgibbs}.pdf}\caption{Diamond-like network in the simulation box. Color code represents
 the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
 and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
 ($\A$)). \label{fig:diamond}.}
@@ -170,9 +167,9 @@ The total electric charge of all the particles in the box is zero, therefore the
 \begin{figure*}[t]
 \centering 
 \subfloat[Open system \label{fig: open}]
-{\includegraphics[width=0.5\textwidth]{figures/gc}}
+{\includegraphics[width=0.5\textwidth]{figures/gc.pdf}}
 \subfloat[Closed system \label{fig: closed}]
-{\includegraphics[width=0.5\textwidth]{figures/gibbs}}
+{\includegraphics[width=0.5\textwidth]{figures/gibbs.pdf}}
 \caption{Diamond-like network in the simulation box. Color code represents
 the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
 and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
@@ -235,10 +232,10 @@ and $\Ncl\out$ ;
 \paragraph{Compression in open system.}
 \begin{figure*}[t]
 \subfloat[The gel partial pressure vs gel molar volume \label{fig: PV}]
-{\includegraphics[width=0.48\textwidth]{figures/fig_PV_pub}}
+{\includegraphics[width=0.48\textwidth]{figures/fig_PV_pub.pdf}}
 \hspace{0.02\textwidth}
 \subfloat[Supernate salinity vs gel molar volume\label{fig: CV}]
-{\includegraphics[width=0.48\textwidth]{figures/fig_CV_pub}}
+{\includegraphics[width=0.48\textwidth]{figures/fig_CV_pub.pdf}}
 \caption{
 The compression of the gel in open system (solid lines) and in closed system (dotted lines). 
 Each solid curve corresponds to different salinity of the reservoir $\cs$ (see legend). Shadowed area limit the states with applied pressure below zero and above 5 bar.\label{fig: PV and CV}}
@@ -264,9 +261,9 @@ It is caused by the decrease of ions osmotic pressure and by a screening of elec
 
 \begin{figure*}[t]
 \subfloat[Pressure vs gel molar volume \label{fig: NV}]
-{\includegraphics[width=0.49\textwidth]{figures/fig_NV_pub}}
+{\includegraphics[width=0.49\textwidth]{figures/fig_NV_pub.pdf}}
 \subfloat[Salinity vs gel molar volume\label{fig: CN}]
-{\includegraphics[width=0.495\textwidth]{figures/fig_NVbox_mu_pub}}
+{\includegraphics[width=0.495\textwidth]{figures/fig_NVbox_mu_pub.pdf}}
 \caption{The compression of the gel in \emph{open system} (solid lines) and in \emph{closed system} (dotted lines). 
 Shadowed area limit the states with applied pressure below zero and above 5 bar.
 The values $N_\cl$ are the virtual numbers of present $\cl$ ions in \emph{closed system} simulation boxes.
@@ -534,24 +531,18 @@ The ratio between $W_{\mathrm{sim}}$ and $W_{\mathrm{id}}$ ranges from 3.26 to 5
 
 
 \section{Conclusions}
-We have modeled the compression of the gel in thermodynamic equilibrium with the reservoir of limited amount of water.
-We have shown that in case of gel made of strong polyelectrolyte, the compression always lead to decrease of the surrounding salinity.
-We have modeled the process of water desalination combining two processes: 
-(1) the swelling of the gel in \emph{open} system, exchanging ions with big reservoir at constant salinity. 
-(2) the compression of the gel in \emph{closed} system, when the gel affect the salinity in surrounding solution.
-We estimated the energy needed to produce one liter of water and have show that the method 
-%at least theoretically 
-may compete with the modern technologies used in modern industry.
+We have modeled the compression of the gel in thermodynamic equilibrium with the reservoir of the limited amount of water.
+We have shown that in the case of gel made of strong polyelectrolyte, the compression always decreases the surrounding salinity.
+We have modeled the process of water desalination by combining two processes: 
+(1) the swelling of the gel in \emph{open} system, exchanging ions with a big reservoir at constant salinity. 
+(2) the compression of the gel in \emph{closed} system, when the gel affects the salinity in the surrounding solution.
+We estimated the energy needed to produce one liter of water and have shown that the method may compete with the modern technologies used in modern industry.
 
 \section*{Acknowledgments}
 
-This research was supported by the Czech Science Foundation (grant
-19-17847Y) (OR, LN, AK), Government of Russian Federation, grant number
-14.W03.31.0022. AK thanks the Grant Agency of Charles University for
-support (project 318120). Computational resources were supplied by
-the project ``e-Infrastruktura CZ'' (e-INFRA LM2018140) provided
-within the program Projects of Large Research, Development and Innovations
-Infrastructures.
+This research was supported by the Czech Science Foundation (grant 19-17847Y)
+Government of Russian Federation, grant number 14.W03.31.0022. 
+Computational resources were supplied by the project ``e-Infrastruktura CZ'' (e-INFRA LM2018140) provided within the program Projects of Large Research, Development and Innovations Infrastructures.
 
 \bibliography{lit/gibbs}
 

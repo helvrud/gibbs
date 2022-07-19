@@ -1,0 +1,5 @@
+Mikhail Laktionov: Methodology, Software, Data curation
+Lucie Nová: Writing - Review & Editing, Formal analysis 
+Oleg V. Rud: Conceptualization, Methodology, Writing - Original draft preparation. 
+
+
