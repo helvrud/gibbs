@@ -3106,7 +3106,7 @@ status open
 \begin_layout Plain Layout
 
 \size small
-\begin_inset Formula $95.4\pm1.86$
+\begin_inset Formula $95.4\pm1.9$
 \end_inset
 
 
@@ -3220,7 +3220,7 @@ status open
 
 
 \begin_inset Formula $\rotatebox{90}{\hspace{-5em}{\color{teal}\ensuremath{\begin{array}{cc}
-W^{\mathrm{sim}}= & 202.8\pm3.23\\
+W^{\mathrm{sim}}= & 202.8\pm3.2\\
 W^{id}= & 52.9\\
 R_{w}= & 0.54
 \end{array}}}}$
@@ -3248,7 +3248,7 @@ R_{w}= & 0.54
 \begin_layout Plain Layout
 
 \size small
-\begin_inset Formula $89.41\pm0.229\enskip\longrightarrow$
+\begin_inset Formula $89.41\pm0.23\enskip\longrightarrow$
 \end_inset
 
 
@@ -3302,7 +3302,7 @@ R_{w}= & 0.54
 \begin_layout Plain Layout
 
 \size small
-\begin_inset Formula $109.1\pm1.72$
+\begin_inset Formula $109.1\pm1.7$
 \end_inset
 
 
@@ -3437,7 +3437,7 @@ R_{w}= & 0.54
 
 \size small
 \color teal
-\begin_inset Formula $37.28\pm0.083\enskip\longrightarrow$
+\begin_inset Formula $37.28\pm0.08\enskip\longrightarrow$
 \end_inset
 
 
@@ -3473,7 +3473,7 @@ R_{w}= & 0.54
 
 \size small
 \color teal
-\begin_inset Formula $100.9\pm1.69$
+\begin_inset Formula $100.9\pm1.7$
 \end_inset
 
 
@@ -3526,7 +3526,7 @@ R_{w}= & 0.54
 
 \size small
 \color teal
-\begin_inset Formula $50.58\pm0.013$
+\begin_inset Formula $50.579\pm0.013$
 \end_inset
 
 
@@ -3597,7 +3597,7 @@ R_{w}= & 0.54
 
 
 \begin_inset Formula $\rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
-W^{\mathrm{sim}}= & 207.3\pm2.19\\
+W^{\mathrm{sim}}= & 207.3\pm2.2\\
 W^{id}= & 38.2\\
 R_{w}= & 0.53
 \end{array}}}$
@@ -3674,7 +3674,7 @@ R_{w}= & 0.53
 
 \size small
 \color teal
-\begin_inset Formula $107.4\pm1.37$
+\begin_inset Formula $107.4\pm1.4$
 \end_inset
 
 
@@ -3709,7 +3709,7 @@ R_{w}= & 0.53
 
 \size small
 \color teal
-\begin_inset Formula $48.21\pm0.016$
+\begin_inset Formula $48.21\pm0.02$
 \end_inset
 
 
@@ -3810,7 +3810,7 @@ R_{w}= & 0.53
 
 \size small
 \color olive
-\begin_inset Formula $23.75\pm0.057\enskip\longrightarrow$
+\begin_inset Formula $23.75\pm0.06\enskip\longrightarrow$
 \end_inset
 
 
@@ -3846,7 +3846,7 @@ R_{w}= & 0.53
 
 \size small
 \color olive
-\begin_inset Formula $106.7\pm1.51$
+\begin_inset Formula $106.7\pm1.5$
 \end_inset
 
 
@@ -3899,7 +3899,7 @@ R_{w}= & 0.53
 
 \size small
 \color olive
-\begin_inset Formula $35.91\pm0.010$
+\begin_inset Formula $35.911\pm0.010$
 \end_inset
 
 
@@ -3958,7 +3958,7 @@ R_{w}= & 0.53
 \\
 \\
 \end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
-W^{\mathrm{sim}}= & 222.3\pm2.43\\
+W^{\mathrm{sim}}= & 222.3\pm2.5\\
 W^{\mathrm{id}}= & 43.8\ {\color{red}{\scriptstyle (41.0)}}\\
 R_{w}= & 0.52\ {\scriptstyle (0.46)}
 \end{array}}}$
@@ -4044,7 +4044,7 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 
 \size small
 \color olive
-\begin_inset Formula $106.4\pm1.13$
+\begin_inset Formula $106.4\pm1.1$
 \end_inset
 
 
@@ -4180,7 +4180,7 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 
 \size small
 \color red
-\begin_inset Formula $14.66\pm0.037\enskip\longrightarrow$
+\begin_inset Formula $14.66\pm0.04\enskip\longrightarrow$
 \end_inset
 
 
@@ -4216,7 +4216,7 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 
 \size small
 \color red
-\begin_inset Formula $107.9\pm1.42$
+\begin_inset Formula $107.9\pm1.4$
 \end_inset
 
 
@@ -4269,7 +4269,7 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 
 \size small
 \color red
-\begin_inset Formula $25.30\pm0.006$
+\begin_inset Formula $25.297\pm0.006$
 \end_inset
 
 
@@ -4337,7 +4337,7 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 \\
 \\
 \end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
-W^{\mathrm{sim}}= & 218.7\pm2.19\\
+W^{\mathrm{sim}}= & 218.7\pm2.2\\
 W^{id}= & 66.6\ {\scriptstyle (22.0)}\\
 R_{w}= & 0.53\ {\scriptstyle (0.49)}
 \end{array}}}$
@@ -4357,7 +4357,7 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 
 \size small
 \color red
-\begin_inset Formula $30.03\pm0.084\enskip\longrightarrow$
+\begin_inset Formula $30.03\pm0.08\enskip\longrightarrow$
 \end_inset
 
 
@@ -4421,7 +4421,7 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 \size small
 \color red
 \begin_inset Formula $\begin{array}{c}
-115.6\pm0.92\\
+115.6\pm0.9\\
 {\scriptstyle (57.3)}
 \end{array}$
 \end_inset
@@ -4562,7 +4562,7 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 
 \size small
 \color orange
-\begin_inset Formula $8.84\pm0.026\enskip\longrightarrow$
+\begin_inset Formula $8.84\pm0.03\enskip\longrightarrow$
 \end_inset
 
 
@@ -4605,7 +4605,7 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 \size small
 \color orange
 \begin_inset Formula $\begin{array}{c}
-108.1\pm1.26\\
+108.1\pm1.3\\
 {\scriptstyle (68.3)}
 \end{array}$
 \end_inset
@@ -4661,7 +4661,7 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 \size small
 \color orange
 \begin_inset Formula $\begin{array}{c}
-\text{17.95}\pm\text{0.004}\\
+\text{17.945}\pm\text{0.004}\\
 {\scriptstyle (14.56)}
 \end{array}$
 \end_inset
@@ -4720,7 +4720,7 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 \\
 \\
 \end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
-W^{\mathrm{sim}}= & 227.5\pm2.23\\
+W^{\mathrm{sim}}= & 227.5\pm2.3\\
 W^{id}= & 69.7\\
 R_{w}= & 0.55
 \end{array}}}$
@@ -4749,7 +4749,7 @@ R_{w}= & 0.55
 
 \size small
 \color orange
-\begin_inset Formula $20.74\pm0.064\enskip\longrightarrow$
+\begin_inset Formula $20.74\pm0.06\enskip\longrightarrow$
 \end_inset
 
 
@@ -4809,7 +4809,7 @@ R_{w}= & 0.55
 
 \size small
 \color orange
-\begin_inset Formula $110.8\pm0.77$
+\begin_inset Formula $110.8\pm0.8$
 \end_inset
 
 
@@ -4844,7 +4844,7 @@ R_{w}= & 0.55
 
 \size small
 \color orange
-\begin_inset Formula $11.08\pm0.002$
+\begin_inset Formula $11.082\pm0.002$
 \end_inset
 
 
@@ -4981,7 +4981,7 @@ R_{w}= & 0.55
 
 \size small
 \color magenta
-\begin_inset Formula $106.9\pm1.05$
+\begin_inset Formula $106.9\pm1.1$
 \end_inset
 
 
@@ -5034,7 +5034,7 @@ R_{w}= & 0.55
 
 \size small
 \color magenta
-9.01
+9.011
 \begin_inset Formula $\pm$
 \end_inset
 
@@ -5097,7 +5097,7 @@ R_{w}= & 0.55
 
 \size small
 \color magenta
-\begin_inset Formula $9.83\pm0.046\enskip\longrightarrow$
+\begin_inset Formula $9.83\pm0.05\enskip\longrightarrow$
 \end_inset
 
 
@@ -5154,7 +5154,7 @@ R_{w}= & 0.55
 
 \size small
 \color magenta
-\begin_inset Formula $119.4\pm0.97$
+\begin_inset Formula $119.4\pm1.0$
 \end_inset
 
 
@@ -5189,7 +5189,7 @@ R_{w}= & 0.55
 
 \size small
 \color magenta
-\begin_inset Formula $3.86\pm0.001$
+\begin_inset Formula $3.862\pm0.001$
 \end_inset
 
 
