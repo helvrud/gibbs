@@ -1,0 +1,1 @@
+pdftk slide0.pdf slide1.pdf slide2.pdf slide3.pdf slide4.pdf slide5.pdf slide5_1.pdf slide6.pdf slide7.pdf slide8.pdf slide9.pdf slide10.pdf slide11.pdf slide12.pdf slide13.pdf slide14.pdf  cat output  all.pdf

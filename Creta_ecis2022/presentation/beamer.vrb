@@ -1,0 +1,32 @@
+\frametitle{Donnan prediction}
+\begin{columns}[T,onlytextwidth]% COLUMNS
+    \column{0.35\textwidth}
+\begin{figure}
+\includegraphics[height=4.5cm]{figures/gel_donnan.png}
+\caption{The compression of hydrogel  affects the ionic composition of supernatant}
+\end{figure}
+
+  \column{0.55\textwidth}
+
+\begin{itemize}
+\item Donnan equilibrium
+$c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
+\item Electroneutrality
+$\alpha N$ of self charges\\
+$\alpha N$ of neutralizing counterions\\
+$c^{in}_{Cl}$ of free ion pairs
+\item
+By compression to the dry state
+one can exclude brine of concentration
+\begin{equation*}
+N_{excl}/V=\begin{cases}
+c_s^{in}<c_s,\\
+\\
+c_s^{in}+\alpha N/V_{gel}>c_s,
+\end{cases}
+\end{equation*}
+\end{itemize}
+
+  \end{columns}% COLUMNS
+
+
