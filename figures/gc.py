@@ -1,4 +1,3 @@
-
 import pandas as pd    
 import scipy
 from veusz_embed import *
@@ -23,7 +22,6 @@ def function(v, a, gamma, b):
 
 gibbs_raw['delta_P_bar_mean'] = gibbs_raw.delta_P_Pa_mean * 1e-5
 gibbs_raw['delta_P_bar_err'] = gibbs_raw.delta_P_Pa_err * 1e-5
-
 
 gibbs_df = pd.DataFrame()
 for (idx, group), color in zip(gibbs_raw.groupby(by = 'n_pairs'), color_cycle):
@@ -96,6 +94,10 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     Ccl0 = Ccl_closed[0][idx0] 
     Ccl5 = Ccl_closed[0][idx5]
     Ccl10 = Ccl_closed[0][idx10]
+
+    Ccl0_err  = Ccl_closed[1][idx0] 
+    Ccl5_err  = Ccl_closed[1][idx5]
+    Ccl10_err = Ccl_closed[1][idx10]
     
     Ncl0 = Ncl_closed[0]
     Ncl5 = Ncl_closed[idx5]
@@ -128,8 +130,11 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     xy.markerSize.val = '4pt'
     xy.MarkerFill.color.val = color
     #####
-    pp = P[0]
-    vv = V
+    pp = np.array(P[0])
+    pp_err = np.array(P[1])
+    pp_ceil = np.array(P[0]+0.5*P[1])
+    pp_floor = np.array(P[0]-0.5*P[1])
+    vv = np.array(V)
     cc = Ccl_closed[0]
     pp = np.delete(pp,np.argwhere(P[0]<0))
     pp = np.delete(pp,np.argwhere(P[0]>5))
@@ -138,6 +143,13 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     cc = np.delete(cc,np.argwhere(P[0]<0))
     cc = np.delete(cc,np.argwhere(P[0]>5))
 
+    pp_err = np.delete(pp_err, np.argwhere(P[0]<0))
+    pp_ceil = np.delete(pp_ceil,np.argwhere(P[0]<0))
+    pp_floor = np.delete(pp_floor,np.argwhere(P[0]<0))    
+    pp_err = np.delete(pp_err,np.argwhere(P[0]>5))
+    pp_ceil = np.delete(pp_ceil,np.argwhere(P[0]>5))
+    pp_floor = np.delete(pp_floor,np.argwhere(P[0]>5))   
+
 
     popt,cov = scipy.optimize.curve_fit(function, vv, pp)
     fun= graph_PV.Add('function')  
@@ -145,6 +157,10 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     fun.function.val =f'{a}*x**{-gamma}+{b}'
 
     I_num = integrate.trapz(pp,vv)
+    I_num_ceil = integrate.trapz(pp_ceil,vv)
+    I_num_floor = integrate.trapz(pp_floor,vv)
+    I_num_err = np.abs(I_num_ceil - I_num_floor)*0.5
+
 
     vfit5 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b)-5, min(vv))[0]
     vfit0 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b), max(vv))[0]
@@ -153,7 +169,7 @@ for (index, row), color in zip(gibbs_df.iterrows(), color_cycle):
     DeltaV = V5 - V0
     DeltaVfit = vfit5 - vfit0
     #W_gb[row.Ncl]=[min(cc), max(cc), min(vv), max(vv), I_num, v0,v1, I_fit]
-    W_gb = W_gb.append({'cs5':Ccl5, 'cs0':Ccl0, 'Ncl5':row.Ncl, 'Ncl0':row.Ncl, 'v5':V5, 'v0':V0, 'deltaV': DeltaV, 'Inum':I_num, 'vfit0':vfit0, 'vfit5':vfit5, 'deltaVfit': DeltaVfit, 'Ifit':I_fit}, ignore_index = True)
+    W_gb = W_gb.append({'cs5':Ccl5, 'cs0':Ccl0, 'cs5_err':Ccl5_err, 'cs0_err':Ccl0_err, 'Ncl5':row.Ncl, 'Ncl0':row.Ncl, 'v5':V5, 'v0':V0, 'deltaV': DeltaV, 'Inum':I_num, 'Inum_err':I_num_err, 'vfit0':vfit0, 'vfit5':vfit5, 'deltaVfit': DeltaVfit, 'Ifit':I_fit}, ignore_index = True)
     
     
     #Iid_V = (V0*cs0-V5*cs5)*np.log(cs5/cs0)*kT*Navogadro / deltaV # J/l
@@ -256,18 +272,27 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
 
     #Ncl = row.NCl_gel[0] / Ngel + (V0 - row.V)*row.cs
     #Ncl_err = row.NCl_gel[1] / Ngel 
-    Ncl_open =   (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) / V0
-    Ncl_open_2 = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) / V0 
+    Ncl_open =     (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) / V0
+    Ncl_open_2 =   (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) / V0 
     Ncl_open_abs = (row.NCl_gel[0] + (V0 - V)*row.cs * Ncharges) 
     #Ncl_open = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
     #Ncl = (row.NCl_gel[0] / Ncharges + (V0 - V)*row.cs  ) 
     #Ncl = (row.NNa_gel[0] + (V0 - row.V)*row.cs * Ngel )
-    Ncl_open_err = row.NCl_gel[1] / V0/ Ncharges  # per charge per volume of the box
+    Ncl_open_err = row.NCl_gel[1] / V0 / Ncharges  # per charge per volume of the box
+    Ncl_open_abs_err = row.NCl_gel[1]   # per charge per volume of the box
     Ncl_open_err_2 = row.NCl_gel[1] / Ncharges  # per charge per volume of the box
 
     Ncl0  = Ncl_open[idx0]
     Ncl5  = Ncl_open[idx5]
     Ncl10 = Ncl_open[idx10]
+
+    Ncl0_err  = Ncl_open_err[idx0]
+    Ncl5_err  = Ncl_open_err[idx5]
+    Ncl10_err = Ncl_open_err[idx10]
+
+    Ncl0_abs_err  = Ncl_open_abs_err[idx0]
+    Ncl5_abs_err  = Ncl_open_abs_err[idx5]
+    Ncl10_abs_err = Ncl_open_abs_err[idx10]
 
     Ncl0_abs  = Ncl_open_abs[idx0]
     Ncl5_abs  = Ncl_open_abs[idx5]
@@ -296,23 +321,38 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     xy.markerSize.val = '4pt'
     (fig_PV, graph_PV, xy) = vplot([V5], [P5], xname = f'GC_phi5{row.cs}_V0{V0}', yname = f'GC_P5{row.cs}_V0{V0}', g = fig_PV, marker='square',color=color )
     xy.markerSize.val = '4pt'
-    (fig_PV, graph_PV, xy) = vplot([V10], [P10], xname = 'GC_phi10{row.cs}_V0{V0}', yname = f'GC_P10{row.cs}_V0{V0}', g = fig_PV, marker='cross',color=color )
+    (fig_PV, graph_PV, xy) = vplot([V10], [P10], xname = f'GC_phi10{row.cs}_V0{V0}', yname = f'GC_P10{row.cs}_V0{V0}', g = fig_PV, marker='cross',color=color )
     xy.markerSize.val = '4pt'
     #####
     pp = np.array(P[0])
+    pp_err = np.array(P[1])
+    pp_ceil = np.array(P[0]+0.5*P[1])
+    pp_floor = np.array(P[0]-0.5*P[1])
     vv = np.array(V)
     nn = np.array(Ncl_open)
     pp[np.argwhere(P[0]<0)] = np.inf
     pp[np.argwhere(P[0]>5)] = np.inf
-    pp = np.delete(pp,np.argwhere(pp == np.inf))
+    pp = np.delete(pp, np.argwhere(pp == np.inf))
+
+    pp_err[np.argwhere(P[0]<0)] = np.inf
+    pp_err[np.argwhere(P[0]>5)] = np.inf
+    pp_err = np.delete(pp_err, np.argwhere(pp_err == np.inf))
+
+    pp_ceil[np.argwhere(P[0]<0)] = np.inf
+    pp_ceil[np.argwhere(P[0]>5)] = np.inf
+    pp_ceil = np.delete(pp_ceil, np.argwhere(pp_ceil == np.inf))
+
+    pp_floor[np.argwhere(P[0]<0)] = np.inf
+    pp_floor[np.argwhere(P[0]>5)] = np.inf
+    pp_floor = np.delete(pp_floor, np.argwhere(pp_floor == np.inf))
 
     vv[np.argwhere(P[0]<0)] = np.inf
     vv[np.argwhere(P[0]>5)] = np.inf
-    vv = np.delete(vv,np.argwhere(vv == np.inf))
+    vv = np.delete(vv, np.argwhere(vv == np.inf))
 
     nn[np.argwhere(P[0]<0)] = np.inf
     nn[np.argwhere(P[0]>5)] = np.inf
-    nn = np.delete(nn,np.argwhere(nn == np.inf))
+    nn = np.delete(nn, np.argwhere(nn == np.inf))
 
 
     #pp = np.delete(pp,np.argwhere(P[0]>5))
@@ -323,18 +363,22 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
 
     
     popt,cov = scipy.optimize.curve_fit(function, vv, pp)
+    popt,cov = scipy.optimize.curve_fit(function, vv, pp_ceil)
     fun = graph_PV.Add('function')  
     a,gamma,b = popt 
     fun.function.val =f'{a}*x**{-gamma}+{b}'
 
     I_num = integrate.trapz(pp,vv)
+    I_num_ceil = integrate.trapz(pp_ceil,vv)
+    I_num_floor = integrate.trapz(pp_floor,vv)
+    I_num_err = np.abs(I_num_ceil - I_num_floor)*0.5
     vfit5 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b)-5, min(vv))[0]
     vfit0 = scipy.optimize.fsolve(lambda v:function(v, a,gamma,b), max(vv))[0]
     I_fit = integrate.quad(function, vfit5, vfit0, args=(a,gamma,b))[0]
     
     DeltaV = V5 - V0
     DeltaVfit = vfit5 - vfit0
-    W_gc = W_gc.append({'cs5':row.cs, 'cs0':row.cs, 'Ncl5':Ncl5_abs, 'Ncl0':Ncl0_abs, 'v5':V5, 'v0':V0, 'deltaV':DeltaV, 'Inum':I_num, 'vfit0':vfit0, 'vfit5':vfit5, 'deltaVfit':DeltaVfit, 'Ifit':I_fit}, ignore_index = True)
+    W_gc = W_gc.append({'cs5':row.cs, 'cs0':row.cs, 'Ncl5':Ncl5_abs, 'Ncl0':Ncl0_abs, 'Ncl5_err':Ncl5_abs_err, 'Ncl0_err':Ncl0_abs_err, 'v5':V5, 'v0':V0, 'deltaV':DeltaV, 'Inum':I_num, 'Inum_err':I_num_err, 'vfit0':vfit0, 'vfit5':vfit5, 'deltaVfit':DeltaVfit, 'Ifit':I_fit}, ignore_index = True)
 
     #####
 
@@ -365,7 +409,7 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
     xy.PlotLine.width.val = '1pt'
     (fig_Nmu, graph_Nmu, xy) = vplot([Ncl0_2], [Ccl0], xname = f'GC_Ncl0{row.cs}_V0{V0}', yname = f'GC_phi0{row.cs}_V0{V0}',     g = fig_Nmu, marker='circle',color=color )
     xy.markerSize.val = '4pt'
-    (fig_Nmu, graph_Nmu, xy) = vplot([Ncl5_2], [Ccl5],  xname = f'GC_Ncl5{row.cs}_V0{V0}', yname = f'GC_phi5{row.cs}_V0{V0}',     g = fig_Nmu, marker='square',color=color )
+    (fig_Nmu, graph_Nmu, xy) = vplot([Ncl5_2], [Ccl5],  xname = f'GC_Ncl5{row.cs}_V0{V0}', yname = f'GC_phi5{row.cs}_V0{V0}',     g = fig_Nmu, marker='square', color=color )
     xy.markerSize.val = '4pt'
     (fig_Nmu, graph_Nmu, xy) = vplot([Ncl10_2], [Ccl10],  xname = f'GC_Ncl10{row.cs}_V0{V0}', yname = f'GC_phi10{row.cs}_V0{V0}', g = fig_Nmu, marker='cross',color=color )
     xy.markerSize.val = '4pt'
@@ -378,20 +422,20 @@ for (index, row), color in zip(gc_raw.iterrows(), color_cycle):
 cs_5
 
 Inum_V = W_gb.Inum / W_gb.deltaV*100     # J/l
+Inum_V_err = W_gb.Inum_err / W_gb.deltaV*100     # J/l
 Ifit_V = W_gb.Ifit / W_gb.deltaVfit*100  # J/l
 #Iid_V = (W_gb.v0*W_gb.cs0-W_gb.v5*W_gb.cs5)*np.log(W_gb.cs5/W_gb.cs0)*kT*Navogadro / W_gb.deltaV # J/l
-
-
-
-
-W_gb.insert(11,'WL',Inum_V)
-W_gb.insert(11,'WLfit',Ifit_V)
-#W_gb.insert(0,'WLid',Iid_V)
+W_gb.insert(11, 'WL',     Inum_V)
+W_gb.insert(11, 'WL_err', Inum_V_err)
+W_gb.insert(11, 'WLfit',  Ifit_V)
+#W_gb.insert(0, 'WLid', Iid_V)
 
 
 Inum_V = W_gc.Inum / W_gc.deltaV*100
+Inum_V_err = W_gc.Inum_err / W_gc.deltaV*100     # J/l
 Ifit_V = W_gc.Ifit / W_gc.deltaVfit*100
 W_gc.insert(11,'WL',Inum_V)
+W_gc.insert(11, 'WL_err', Inum_V_err)
 W_gc.insert(11,'WLfit',Ifit_V)
 
 
@@ -477,21 +521,18 @@ Wid_open2  = []
 Wid_closed = []
 cw = 1/unit #mol/l
 i = 0
-for (index, row) in W.iterrows():
-    
-    
-    print (row)
-    if row.cs5 == row.cs0:
-        wid_open1 = kT*Navogadro*(row.v0 - row.v5)*row.cs0/cw*(np.log(row.cs0/cw) - 1)
-        wid_open2 = kT*Navogadro*(row.Ncl0 -row.Ncl5)/488*np.log(row.cs0/W.iloc[i-2].cs0)
+for (index, rowW) in W.iterrows():
+    print (rowW)
+    if rowW.cs5 == rowW.cs0:
+        wid_open1 = kT*Navogadro*(rowW.v0 - rowW.v5)*rowW.cs0/cw*(np.log(rowW.cs0/cw) - 1)
+        wid_open2 = kT*Navogadro*(rowW.Ncl0 -rowW.Ncl5)/488*np.log(rowW.cs0/W.iloc[i-2].cs0)
         Wid_open1.append(wid_open1)
         Wid_open2.append(wid_open2)
     else:        
-        wid_closed = kT*Navogadro*(W.iloc[i-1].v0 - row.v5)*row.cs5/cw*(np.log(row.cs5/cw) - 1)
+        wid_closed = kT*Navogadro*(W.iloc[i-1].v0 - rowW.v5)*rowW.cs5/cw*(np.log(rowW.cs5/cw) - 1)
         Wid_closed.append(wid_closed)    
     i+=1        
     if i > 11: break
-    
     
 W.insert(4,'n0', W.Ncl0/488/W.v0)
 W.insert(4,'n5', W.Ncl5/488/W.v0)
@@ -500,8 +541,8 @@ W.insert(6,'cgel5', 1/W.v5)
     
 f = 13; b = 15; p = 6  # cs = 0.022    
 f = 15; b = 18; p = 4 # cs = 0.032
-#f = 18; b = 24; p = 15 # cs = 0.045
-#f = 24; b = 27; p = 18 # cs = 0.064
+# f = 18; b = 24; p = 15 # cs = 0.045
+# f = 24; b = 27; p = 18 # cs = 0.064
 
 
 
@@ -677,4 +718,4 @@ WL_id = 2*Navogadro*kT*(cf/Rw*np.log(cb/cf) - cp*np.log(cb/cp))
 
 
 
-
+for index, row in W.iterrows(): pprint.pprint({'n0':[round(row.Ncl0/row.v0/Ngel*1000,3), round(row.Ncl0_err/row.v0/Ngel*1000,4)], 'n5':[round(row.Ncl5/row.v0/Ngel*1000,3), round(row.Ncl5_err/row.v0/Ngel*1000,4)]} ) 

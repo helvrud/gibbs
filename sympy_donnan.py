@@ -1,5 +1,19 @@
 # %%
 from sympy import Symbol, Eq, solve, sqrt, latex
+
+
+
+x     = Symbol("x", positive=True)  # number of all particles
+gamma = Symbol("gamma", positive=True)  # number of all particles
+N     = Symbol("N", positive=True)  # number of all particles
+NA    = Symbol("NA", positive=True)  # number of all particles
+NA    = Symbol("NA", positive=True)  # number of all particles
+
+
+eq = x**2*(gamma**2-1)+x*(2*N-gamma**2*NA) - N**2
+solve(eq, x)
+
+
 # KNOWN
 N_pairs = Symbol("N_pairs", positive=True)  # number of all particles
 # v= Symbol("v", positive = True) #relative volume of the gel
