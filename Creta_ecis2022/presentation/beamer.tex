@@ -30,8 +30,8 @@
 \usepackage{xspace}
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
-\title{Modeling of weak polyelectrolyte hydrogels under compression. }
-\subtitle{Implications for water desalination.}
+\title{Water desalination using polyelectrolyte hydrogel.  }
+\subtitle{Gibbs ensemble modelling.}
 % \date{\today}
 \author{Oleg V. Rud}
 \institute{Department of Physical and Macromolecular Chemistry, Faculty of Science, Charles University in Prague, Hlavova 8, Praha 2 128 00, Czech Republic
@@ -52,65 +52,98 @@ Institute of Macromolecular Compounds of Russian Academy of Sciences, 199004, Bo
 %\end{frame}
 
 \section[Intro]{Introduction}
+\begin{frame}[fragile]{Introduction. Desalination.}
+\begin{enumerate}
+\item Distillation
+\item Reverse osmosis
+\item Forward osmosis
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile]{Introduction. Forward osmsis.}
 
-\begin{frame}[fragile]{Introduction}
-
-	\begin{columns}[T,onlytextwidth]% COLUMNS
-		\column{0.5\textwidth}
-			\begin{figure}[t]
-				{\includegraphics[width=\columnwidth]{{figures/gibbs_ca}.pdf}}
-			\end{figure}
-
-		\column{0.5\textwidth}
-	\begin{itemize}
-		\item Desalination
-		\item Hydrogels for desalination 
-		\item Forward osmosis
-		\item Various stimuli: thermo-, pH-, electric-, magnetic-, light-indused gel collapse
-		\item Manfred Wilhelm and Yu Chi experiment
-	\end{itemize}
-
-	\end{columns}% COLUMNS
-	{\scriptsize 
-	Fengler, C., Arens, L., Horn, H., Wilhelm, M. (2020). {\bf Desalination of Seawater Using Cationic Poly(acrylamide) Hydrogels and Mechanical Forces for Separation.} Macromolecular Materials and Engineering\\
-	Yu, C., Wang, Y., Lang, X., Fan, S. (2016). {\bf A Method for Seawater Desalination via Squeezing Ionic Hydrogels.} Environmental Science and Technology}
+\begin{enumerate}
+	\item Hydrogels for desalination
+	\item Forward osmosis
+	\item Various stimuli: thermo-, pH-, electric-, magnetic-, light-indused gel shrinkage
+\end{enumerate}
+\begin{figure}[t]
+	{\includegraphics[width=\columnwidth]{{figures/FO}.png}}
+\end{figure}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Introduction. Manfred Wilhelm experiment}
+	\begin{columns}[T,onlytextwidth]% COLUMNS
+		\column{0.4\textwidth}
+			\begin{figure}[t]
+				{\includegraphics[width=0.9\columnwidth]{{figures/exp}.png}}
+			\end{figure}
 
+		\column{0.6\textwidth}
+			\begin{figure}[t]
+				{\includegraphics[width=0.9\columnwidth]{{figures/scheme}.png}}
+			\end{figure}
+	\end{columns}% COLUMNS
+		
+		
+		
+	{\scriptsize Fengler, C., Arens, L., Horn, H., Wilhelm, M. (2020). {\bf Desalination of Seawater Using Cationic Poly(acrylamide) Hydrogels and Mechanical Forces for Separation.} Macromolecular Materials and Engineering\\
+	Yu, C., Wang, Y., Lang, X., Fan, S. (2016). {\bf A Method for Seawater Desalination via Squeezing Ionic Hydrogels.} Environmental Science and Technology}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]{Donnan prediction}
+\section[Model]{Model of the gel}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Model of the gel}
   \begin{columns}[T,onlytextwidth]% COLUMNS
     \column{0.35\textwidth}
 \begin{figure}
 \includegraphics[height=4.5cm]{figures/gel_donnan.png}
-\caption{The compression of hydrogel  affects the ionic composition of supernatant}
 \end{figure}   
   
   \column{0.55\textwidth}
   
 \begin{itemize}
-\item Donnan equilibrium
-$c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
-\item Electroneutrality
-$\alpha N$ of self charges\\
-$\alpha N$ of neutralizing counterions\\
-$c^{in}_{Cl}$ of free ion pairs
-\item
-By compression to the dry state 
-one can exclude brine of concentration
-\begin{equation*}
-N_{excl}/V=\begin{cases}
-c_s^{in}<c_s,\\
-\\
-c_s^{in}+\alpha N/V_{gel}>c_s,
-\end{cases}
-\end{equation*}
+\item The gel is a particle of mAcro size 
+\item In aqueous solution
+\item Infinite network of polymer chains
+\item Each bead is charged
 \end{itemize}
 
-  \end{columns}% COLUMNS
 
+  \end{columns}% COLUMNS
+\begin{itemize}
+\item The gel itself is a membrane
+\item Donnan equilibrium
+$c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
+\item The compression of hydrogel  affects the ionic composition of supernatant
+\end{itemize}
   
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Model of the gel. Two ensembles.}
+
+	\begin{columns}[T,onlytextwidth]% COLUMNS
+		\column{0.5\textwidth}
+			\begin{figure}[t]
+				{\includegraphics[width=0.9\columnwidth]{{figures/gc}.pdf}}
+			\end{figure}
+			\centering Open system \\(grand-cannonical ensemble)
+		\column{0.5\textwidth}
+			\begin{figure}[t]
+				{\includegraphics[width=0.9\columnwidth]{{figures/gibbs}.pdf}}
+			\end{figure}
+			\centering Closed system \\(Gibbs ensemble)
+	\end{columns}% COLUMNS
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 \section{The model of a polyelectrolyte gel.}
 \subsection{Langevin dynamics.}
