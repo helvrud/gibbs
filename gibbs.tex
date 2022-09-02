@@ -60,7 +60,7 @@ Finally, we performed a set of simulations modeling the process of continuous de
 
 \section{Introduction\label{sec: intro}}
 
-\paragraph{Water desalination technologies.}
+\paragraph{Water desalination technologies}
 
 Two basic approaches for separating water from salt are present in modern desalination technology \cite{Miller2003,Curto2021}.
 
@@ -87,7 +87,7 @@ The correct choice of the draw agents is a task of paramount importance.
 As an osmotically driven process, the draw solute is expected to significantly reduce the water chemical potential, and consequently generate a high osmotic pressure. 
 On the other hand, the draw solute is expected to be easily separated from water \cite{Cai2016}.
 
-\paragraph{Hydrogels for desalination.}
+\paragraph{Hydrogels for desalination}
 Hydrogels are three-dimensional networks of polymer chains that are crosslinked by either physical or chemical bonds. 
 They are able to entrap large volumes of water attracted by the high concentration of hydrophilic groups. 
 When a dehydrated or deswollen hydrogel uptakes water, its polymer chains extend, creating a swelling pressure. 
@@ -119,7 +119,7 @@ A similar approach was used by Ali \etal \cite{Ali2015}.
 In their study the thermosensitive gel was used (based on copolymers p-NIPAAm and p-AA), so instead of physical compression, the dewatering was done by an external heating stimulus (sunlight). 
 At night the gel was equilibrating with feed water and at daytime, under sunlight, the gel was shrinking and releasing the collected inside solution. 
 
-\paragraph{Physics behind the desalination process.}
+\paragraph{Physics behind the desalination process}
 %The maximum entropy principle requires the density of charges to be more-less the same throughout the system medium. 
 Since the polyelectrolyte gel has its own charges and its own neutralizing counterions, the density of mobile ions (which are able to freely enter and leave the gel) in gel appears to be smaller than their density outside the gel.
 Therefore the internal solution of the gel has a lower density of mobile ions than that in the solution outside. 
@@ -189,23 +189,20 @@ The simulation of the gel compression is performed in two ensembles:
 The compression of the gel in the \emph{open system} does not affect the salinity in the reservoir, thus the density of ions outside the gel remains constant $\cs =$ $\cna=$ $\ccl=$ $\text{Const}$ (\reffig{fig: open}). 
 On the contrary, the compression of the gel in the \emph{closed system} changes the salinity in the reservoir, but the total number of $\na$ and $\cl$ ions in the gel and in the reservoir, \ie in the volume $\Vbox$ (\reffig{fig: closed}), remains constant.
 
-%Let $\nna$ and $\ncl$ be the density of the corresponding ion in the compression volume, $\Vbox$ averaged over this volume
+The amount of the individual ion types in gel, $N_i$, is given by
 \begin{equation}
 N_i = N_i\gel + \cs\cdot(\Vbox - \Vgel)
 \end{equation}
-where $i \in \{\na, \cl\}$,  $N_i$ is the amount of the corresponding ions in gel, $\Vgel$~--- volume of the gel, $\Vbox$~--- the volume in which the gel is compressed. 
-As $\Vbox$ we choose the volume of the gel in the free swelling equilibrium state.
-
-%Then in closed system $\nna$ and $\ncl$ remain constant, whereas the salinity of supernate, $\cs$, may change with the change of the gel volume.
+where $i \in \{\na, \cl\}$, $\Vgel$~--- volume of the gel, $\Vbox$~--- the volume in which the gel is compressed. 
+Vbox$ is the gel volume in the free swelling equilibrium state.
 
 
-
-\paragraph{Open system.}
+\paragraph{Open system}
 We simulate the open system using the grand reaction method \cite{Landsgesel2020a,Rud2020}.
-This method is a hybrid of molecular dynamics (MD) and Monte Carlo (MC). 
-The whole simulation represents a chain of subsimulations of MD and MC followed one by each other. 
-For MD simulation we used a standard Langevin dynamics \cite{Grest1986} which models the mechanical movement of all the system particles. 
-Whereas MC simulates the thermodynamic equilibrium with reservoir, which exchanges ions with the simulation box. 
+This method is a hybrid of Molecular dynamics (MD) and Monte Carlo (MC). 
+The whole simulation consists of MD and MC subsimulations, followed one by each other. 
+The MD simulation is a standard Langevin dynamics \cite{Grest1986}, which models the mechanical motion of all particles in the system. 
+MC simulates the thermodynamic equilibrium with reservoir and handles the ion exchange with the simulation box. 
 The insertion (and deletion) of ion pairs is considered as a reaction of creation (or annihilation) of an ion pair 
 \[
 \varnothing\stackrel{K}{\leftrightarrows}\na+\cl
@@ -213,14 +210,14 @@ The insertion (and deletion) of ion pairs is considered as a reaction of creatio
 with a reaction constant defined by the chemical potential of ions,
 $K=\exp\left(\muna+\mucl\right).$
 
-\paragraph{Closed system.}
-The similar scheme we use to simulate the gel in closed system. 
+\paragraph{Closed system}
+Analogical scheme simulates the gel in the closed system. 
 The procedure represents a chain of subsequent MD and MC simulation, but now the molecular dynamics is running in two simulation boxes simultaneously.
 The first box of the volume $\Vgel$ contains the gel with ions, and the second box, $\Vout$--- contains only ions. 
 The total volume of both boxes is kept constant, $\Vbox=V_{\mathrm{gel}}+V_{\mathrm{out}}$, so the compression of the gel implies the decreasing $\Vgel$ and increasing $\Vout$.
 These two boxes are represented in \reffig{fig:diamond}. 
 
-\paragraph{Algorithm.}
+\paragraph{Algorithm}
 The thermodynamic equilibrium between the two volumes implies the exchange of ion pairs between them, which is done by means of MC procedure in a way similar to described in \cite{Panagiotopoulos1988b}.
 The simulation algorithm is following:
 \begin{enumerate}
@@ -235,7 +232,7 @@ and $\Ncl\out$ ;
 
 \section{Results and discussion }
 
-\paragraph{Compression in open system.}
+\paragraph{Compression in open system}
 \begin{figure*}[t]
 \subfloat[The gel partial pressure vs gel molar volume \label{fig: PV}]
 {\includegraphics[width=0.48\textwidth]{figures/fig_PV_pub.pdf}}
@@ -278,7 +275,7 @@ The values $N_\cl$ are the virtual numbers of present $\cl$ ions in \emph{closed
 %\todoi{Replace y-axis labels by $\ncl$}
 \end{figure*}
 
-\paragraph{Compression in closed system.}
+\paragraph{Compression in closed system}
 %Each set of simulations in \emph{open system} defines the free swelling equilibrium states of the gel for each salinity, \ie the state where the gel partial pressure equals zero. 
 The free swelling equilibrium states are characterized by the corresponding molar volume of the gel, $\Vgel^0$ and the amount of ions in gel \{$\Nna^0$, $\Ncl^0$\} 
 (Index ``0'' stands for zero bar applied pressure).
@@ -313,7 +310,7 @@ All the corresponding dependencies are depicted in Figures~\ref{fig: PV and CV} 
 The states corresponding to $P^{gel}=0$, 5 and 10 bar pressure are marked by open circles, squares, and crosses respectively. 
 The non-shadowed areas in the Figures highlight the states in which the gel partial pressure ranges between 0 and 5 bar.
 
-\paragraph{Desalination scheme.}
+\paragraph{Desalination scheme}
 As we have seen, the compression of the gel in a closed system affects the salinity, whereas the compression in an open system affects the amount of ions in a volume where the gel is compressed in. 
 Here we show how to employ these phenomena for water desalination. 
 The highlighted colored lines on plots of Figures \ref{fig: PV and CV} and \ref{fig: NV and CN} form a sequence of the following one by each other swellings and compressions of the hydrogel, correspondingly in \emph{open} and \emph{closed} systems. 
