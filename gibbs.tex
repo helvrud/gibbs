@@ -173,7 +173,7 @@ The entire simulation box setup employs periodic boundaries.
 {\includegraphics[width=0.5\textwidth]{figures/gibbs.pdf}}
 \caption{Diamond-like network in the simulation box. Color code represents
 the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
-and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
+and the hydrogel (grey: neutral segment ($\AH$), cyan: charged segment
 ($\A$)). \label{fig:open and closed}.}
 \end{figure*}
 
@@ -198,9 +198,9 @@ Vbox$ is the gel volume in the free swelling equilibrium state.
 
 
 \paragraph{Open system}
-We simulate the open system using the grand reaction method \cite{Landsgesel2020a,Rud2020}.
+We use the grand reaction method \cite{Landsgesel2020a,Rud2020} to simulate the open system.
 This method is a hybrid of Molecular dynamics (MD) and Monte Carlo (MC). 
-The whole simulation consists of MD and MC subsimulations, followed one by each other. 
+The whole simulation consists of MD and MC subsimulations, consecutively followed one by each other. 
 The MD simulation is a standard Langevin dynamics \cite{Grest1986}, which models the mechanical motion of all particles in the system. 
 MC simulates the thermodynamic equilibrium with reservoir and handles the ion exchange with the simulation box. 
 The insertion (and deletion) of ion pairs is considered as a reaction of creation (or annihilation) of an ion pair 
@@ -209,13 +209,14 @@ The insertion (and deletion) of ion pairs is considered as a reaction of creatio
 \]
 with a reaction constant defined by the chemical potential of ions,
 $K=\exp\left(\muna+\mucl\right).$
+The simulation setup is sketched in \reffig{fig:open}.
 
 \paragraph{Closed system}
-Analogical scheme simulates the gel in the closed system. 
-The procedure represents a chain of subsequent MD and MC simulation, but now the molecular dynamics is running in two simulation boxes simultaneously.
-The first box of the volume $\Vgel$ contains the gel with ions, and the second box, $\Vout$--- contains only ions. 
-The total volume of both boxes is kept constant, $\Vbox=V_{\mathrm{gel}}+V_{\mathrm{out}}$, so the compression of the gel implies the decreasing $\Vgel$ and increasing $\Vout$.
-These two boxes are represented in \reffig{fig:diamond}. 
+Analogical scheme is used for the simulation of the gel in the closed system. 
+The procedure  again consists of subsequent MD and MC subsimulation, but now the MD is running in two simulation boxes simultaneously.
+The first box of the volume $\Vgel$ contains the gel with ions and the second box of the volume $\Vout$ contains only ions. 
+The total volume of both boxes is constant, $\Vbox=V_{\mathrm{gel}}+V_{\mathrm{out}}$, so the gel compression implies the decrease of $\Vgel$ and increase of $\Vout$.
+The simulation setup is sketched in \reffig{fig:closed}. 
 
 \paragraph{Algorithm}
 The thermodynamic equilibrium between the two volumes implies the exchange of ion pairs between them, which is done by means of MC procedure in a way similar to described in \cite{Panagiotopoulos1988b}.
