@@ -177,14 +177,17 @@ and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
 ($\A$)). \label{fig:open and closed}.}
 \end{figure*}
 
+\subsection{Gibbs ensemble}
+\todoi{We have the "Gibbs ensemble" in the title, and this term is not used in the manuscript at all.}
+TODO concise description of Gibbs ensemble
 
-We simulate the compression of the gel in two ensembles.
+The simulation of the gel compression is performed in two ensembles:
 \begin{enumerate}
-\item The first is so called \emph{open system}, when the simulation box with gel freely exchanges ions with a big amount of aqueous solution of certain constant salinity, $\cs$. 
-\item And in \emph{closed system}, when the gel is in equilibrium with a finite volume of aqueous solution.
+\item \emph{open system}, when the simulation box with gel exchanges ions with an infinite reservoir containing aqueous solution of constant salinity, $\cs$. 
+\item emph{closed system}, when the simulation box with the gel exchanges ions with a finite volume of aqueous solution.
 \end{enumerate}
-The compression of the gel in the \emph{open} system does not affect the surrounding salinity, thus the density of ions outside the gel remains constant $\cs =$ $\cna=$ $\ccl=$ $\text{Const}$ (\reffig{fig: open}). 
-On the contrary, what remains constant in the \emph{closed} system, is the total number of $\na$ and $\cl$ ions, that are contained in the gel and in the external volume, \ie in the volume $\Vbox$ (\reffig{fig: closed}).
+The compression of the gel in the \emph{open system} does not affect the salinity in the reservoir, thus the density of ions outside the gel remains constant $\cs =$ $\cna=$ $\ccl=$ $\text{Const}$ (\reffig{fig: open}). 
+On the contrary, the compression of the gel in the \emph{closed system} changes the salinity in the reservoir, but the total number of $\na$ and $\cl$ ions in the gel and in the reservoir, \ie in the volume $\Vbox$ (\reffig{fig: closed}), remains constant.
 
 %Let $\nna$ and $\ncl$ be the density of the corresponding ion in the compression volume, $\Vbox$ averaged over this volume
 \begin{equation}
