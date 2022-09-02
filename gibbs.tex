@@ -157,11 +157,13 @@ and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
 
 \subsection{Model}
 
-We model the gel as a network of 16 linear polymer chains, each by 30 monomer units. 
-The chains are connected to a diamond-like polymer network throught 8 crosslinking units, and put into a simulation box with periodic boundaries (see \reffig{fig:diamond}). 
-Each unit of the network carries a negative electric charge, which is equal to the charge of electron. 
-Except the particles of the network, the monovalent co- and counter-ions ions, $\cl$ and $\na$, are present in simulation box. 
-The total electric charge of all the particles in the box is zero, therefore the amount of $\na$ ions is bigger than that of $\cl$ by the number of hydrogel units, $\Ngel=16\cdot30 + 8=488$.
+Our model of the gel is a network of 16 linear polymer chains, each consisting of 30 monomer units. 
+These polymer chains are connected to a diamond-like network by 8 crosslinking units.
+This means, there are together $\Ngel=16\cdot30 + 8=488$ gel monomers in the simulation box (see \reffig{fig:diamond}).
+Each monomer unit of the network carries a negative elementary electric charge, thus simulating fully ionized polyacidic gel.
+Except the particles in the network, the monovalent co- and counter-ions ions, $\cl$ and $\na$, are present in simulation box. 
+The total electric charge of all the particles in the box is zero, therefore the amount of $\na$ ions is bigger than that of $\cl$ by the number of hydrogel units.
+The entire simulation box setup employs periodic boundaries. 
 
 \begin{figure*}[t]
 \centering 
@@ -174,6 +176,8 @@ the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
 and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
 ($\A$)). \label{fig:open and closed}.}
 \end{figure*}
+
+
 We simulate the compression of the gel in two ensembles.
 \begin{enumerate}
 \item The first is so called \emph{open system}, when the simulation box with gel freely exchanges ions with a big amount of aqueous solution of certain constant salinity, $\cs$. 
