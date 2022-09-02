@@ -219,15 +219,17 @@ The total volume of both boxes is constant, $\Vbox=V_{\mathrm{gel}}+V_{\mathrm{o
 The simulation setup is sketched in \reffig{fig:closed}. 
 
 \paragraph{Algorithm}
-The thermodynamic equilibrium between the two volumes implies the exchange of ion pairs between them, which is done by means of MC procedure in a way similar to described in \cite{Panagiotopoulos1988b}.
-The simulation algorithm is following:
+The thermodynamic equilibrium between the two subvolumes implies the exchange of ion pairs between them.
+This is performed by means of MC procedure in a way similar to described in \cite{Panagiotopoulos1988b}.
+
+As mentioned above, the simulation consists of MD and MC subsimulations. The algorithm is following:
 \begin{enumerate}
-\item Simulate molecular dynamics in both boxes; collect the observables, for example, values of pressure $P$, to an array; 
-\item Perform Monte-Carlo procedure simulating ion pair exchange; collect the arrays of observables samples: number of ions in both boxes, 
+\item Simulate MD in both boxes and collect the observables (pressure, $P$)
+\item Perform MC procedure simulating ion exchange and collect the observables (number of ions in both boxes, 
 %$\nna\gel$,
 $\Ncl\gel$ 
 %$\nna\out$ 
-and $\Ncl\out$ ; 
+and $\Ncl\out$ )
 \item Repeat the procedure until the desired length of sample arrays is reached.
 \end{enumerate}
 
