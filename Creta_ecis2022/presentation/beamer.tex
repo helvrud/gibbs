@@ -16,6 +16,22 @@
 \newcommand{\pK}{\mathrm{p}K}
 \newcommand{\pH}{\mathrm{pH}}
 \newcommand{\cp}{c_\mathrm{p}}
+\newcommand{\muna}{\mu_\mathrm{Na^+}}
+\newcommand{\mucl}{\mu_\mathrm{Cl^-}}
+\newcommand{\muca}{\mu_\mathrm{Ca^{2+}}}
+\newcommand{\muh}{\mu_\mathrm{H^+}}
+\newcommand{\mua}{\mu_\mathrm{A^-}}
+\newcommand{\muha}{\mu_\mathrm{HA}}
+\newcommand{\muoh}{\mu_\mathrm{OH}}
+\newcommand{\cna}{c_\mathrm{Na^+}}
+\newcommand{\ccl}{c_\mathrm{Cl^-}}
+\newcommand{\cca}{c_\mathrm{Ca^{2+}}}
+\newcommand{\ch}{c_\mathrm{H^+}}
+
+\newcommand{\nna}{N_\mathrm{Na^+}}
+\newcommand{\ncl}{N_\mathrm{Cl^-}}
+\newcommand{\nca}{N_\mathrm{Ca^{2+}}}
+
 \newcommand{\kT}{kT}
 \usepackage{subfig}
 \usetheme[progressbar=frametitle]{metropolis}
@@ -92,7 +108,7 @@ Institute of Macromolecular Compounds of Russian Academy of Sciences, 199004, Bo
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section[Model]{Model of the gel}
+\section{The model of a polyelectrolyte gel.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Model of the gel}
   \begin{columns}[T,onlytextwidth]% COLUMNS
@@ -143,10 +159,66 @@ $c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Grand-cannonical ensemble.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{The model of a polyelectrolyte gel.}
+\begin{frame}{Grand-cannonical ensemble.}
+	\begin{columns}[T,onlytextwidth]% COLUMNS
+	\column{0.5\textwidth}
+	\column{0.5\textwidth}
+	The free energy of the grand-canonical ensemble exchanging ion pair with the bath
+	\begin{equation*}
+		\boxed{
+		\Omega=E-TS+\mu N}
+	\end{equation*}
+	The entropy $S$ expands via Boltzmann formula
+		\begin{equation*}
+			S=k_{B}\ln\frac{V^{N}}{N!}\label{eq:entropy}
+		\end{equation*}
+	\end{columns}% COLUMNS		
+	The change of free energy associated with a single particle exchange is 
+	\begin{equation*}
+		\boxed{
+		\Delta\Omega=k_BT\xi\ln V \left(N+\theta(\xi)\right)+\xi\mu+\Delta E\label{eq: DeltaG GC}}
+	\end{equation*}
+	{\tt accept if $\mathcal{R}^{\xi}<e^{\Delta\Omega/k_BT}$}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\subsection{Gibbs ensemble.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Gibbs ensemble.}
+	\begin{columns}[T,onlytextwidth]% COLUMNS
+		\column{0.5\textwidth}
+		\begin{figure}[t]
+			{\includegraphics[width=0.9\columnwidth]{{figures/simgibbs}.pdf}}
+		\end{figure}
+		\column{0.5\textwidth}
+			The free energy of the grand-canonical ensemble for single particle type
+	\begin{equation*}
+		\boxed{
+		\Omega=E_1+E_2-TS}
+	\end{equation*}
+	
+	\begin{equation}
+		S=k_B \ln \frac{V_1^{N_1}}{N_1!}\frac{V_2^{N_2}}{N_2!}
+	\end{equation}
+	\end{columns}% COLUMNS		
+	The change of free energy associated with a single particle exchange is 
+	\begin{equation*}
+		\boxed{
+		\Delta\Omega=k_BT\xi \ln\left(\frac{V_1}{V_2}\frac{N_2+\theta(-\xi)}{N_1+\theta(\xi)}\right)+\Delta E_1 +\Delta E_2\label{eq: DeltaG GC}}
+	\end{equation*}
+	{\tt accept if $\mathcal{R}^{\xi}<e^{\Delta\Omega/k_BT}$}
+			
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Langevin dynamics.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Langevin dynamics. }
 	\begin{columns}[T,onlytextwidth]% COLUMNS
 		\column{0.4\textwidth}
@@ -218,32 +290,7 @@ Macromolecules, 53(8), 3007–3020. }
 }
 
 {
-\begin{frame}{Grand-reaction ensemble.}
-	\textbf{Grand canonical ensemble}\\ 
-	\vspace{1cm}
-	The free energy of the grand-canonical ensemble for single particle type
-	\begin{equation*}
-		\boxed{
-		\Omega=E-TS+\mu N\label{eq:Omega-GC}}
-	\end{equation*}
-	The entropy $S$ expands via Boltzmann formula
-	\begin{columns}[T,onlytextwidth]% COLUMNS
-		\column{0.5\textwidth}
-			\begin{equation*}
-				S=k_{B}\ln\frac{V^{N}}{N!}\label{eq:entropy}
-			\end{equation*}
-		\column{0.5\textwidth}
-			\begin{equation*}
-				\Omega=E-k_BT\ln\frac{V^N}{N!}+\mu N \label{eq: Omega_GC}
-			\end{equation*}
-	\end{columns} % COLUMNS
-	The change of free energy associated with a sngle particle exchange is 
-	\begin{equation*}
-		\boxed{
-		\Delta\Omega=k_BT\ln\left(V^{\xi}\frac{N!}{\left(N+\xi\right)!}\right)+\xi\mu+\Delta E\label{eq: DeltaG GC}}
-	\end{equation*}
-	{\tt accept if $\mathcal{R}^{\xi}<e^{\Delta\Omega/k_BT}$}
-\end{frame}
+
 }
 
 {
@@ -323,32 +370,7 @@ K= 2\mu_\ca+\mu_\cl
 
 
 
-\begin{frame}{Grand-reaction ensemble.}
 
-	\begin{columns}[T,onlytextwidth]% COLUMNS
-		\column{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[height=4.cm]{figures/standard_states.pdf}
-			\end{figure} 
-		\column{0.5\textwidth}	
-			\textbf{Moderate pH conditions}\\ 
-			\vspace{1cm}
-			The reaction of an acidic unit 
-			\begin{equation*}
-				\mathrm{HA}\stackrel{K}{\leftrightarrows}\mathrm{A^-}+\mathrm{H^+}\label{eq: acid reaction}
-			\end{equation*}
-	Is happening only simultaneously with one of these two
-	\begin{eqnarray*}
-		\h&\leftrightarrows&\na \label{eq:hna} \\
-		2\h&\leftrightarrows&\ca \label{eq:hca}
-	\end{eqnarray*}
-
-	\end{columns} % COLUMNS
-\begin{eqnarray*}
-\mathrm{HA}\stackrel{K'}{\leftrightarrows}\mathrm{A}^{-}+\na, &K' = K \exp(\mu_\h-\mu_\na) \\
-2\mathrm{HA}\stackrel{K''}{\leftrightarrows}2\mathrm{A}^{-}+\ca, &K'' = K \exp(2\mu_\h-\mu_\ca)
-\end{eqnarray*}
-\end{frame}
 
 
 
