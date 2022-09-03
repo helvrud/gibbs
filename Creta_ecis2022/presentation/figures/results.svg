@@ -11,16 +11,17 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1229.3335"
-   height="801.57361"
-   viewBox="0 0 325.26116 212.08303"
+   width="1227.5343"
+   height="799.77448"
+   viewBox="0 0 324.78512 211.60701"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    sodipodi:docname="results.svg"
    inkscape:export-filename="/home/kvint/gibbs/poster/poster_150dpi.png"
    inkscape:export-xdpi="150.0074"
-   inkscape:export-ydpi="150.0074">
+   inkscape:export-ydpi="150.0074"
+   style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -28,9 +29,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="5573.7796"
-     inkscape:cy="301.66377"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="536.2157"
+     inkscape:cy="-7.9595043"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -48,122 +49,122 @@
      units="px"
      width="800px">
     <sodipodi:guide
-       position="1223.7175,864.17826"
+       position="867.96827,863.52505"
        orientation="1,0"
        id="guide30223"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="-122.94742,-321.66004"
+       position="-478.69668,-322.31325"
        orientation="0,1"
        id="guide24995"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="1015.1149,939.92006"
+       position="659.36567,939.26684"
        orientation="1,0"
        id="guide31819"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="2213.7901,-64.226048"
+       position="1858.0409,-64.879266"
        orientation="1,0"
        id="guide31151"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="2242.6018,-172.73748"
+       position="1886.8526,-173.39069"
        orientation="1,0"
        id="guide31153"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="577.49412,511.29497"
+       position="221.74489,510.64176"
        orientation="1,0"
        id="guide24187"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="715.60662,386.41167"
+       position="359.85739,385.75846"
        orientation="1,0"
        id="guide24224"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="1154.5504,654.69916"
+       position="798.80117,654.04595"
        orientation="1,0"
        id="guide28068"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="1029.1379,747.83256"
+       position="673.38867,747.17935"
        orientation="1,0"
        id="guide28070"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="377.29584,203.12055"
+       position="21.54662,202.46734"
        orientation="0,1"
        id="guide29193"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="433.91668,169.22051"
+       position="78.16746,168.5673"
        orientation="0,1"
        id="guide16492"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="343.49481,203.12055"
+       position="-12.25441,202.46734"
        orientation="0,1"
        id="guide58818"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="314.32501,-95.250004"
+       position="-41.42421,-95.903222"
        orientation="1,0"
        id="guide58928"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="17.212158,81.570663"
+       position="-338.53708,80.917445"
        orientation="1,0"
        id="guide58930"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="352.95418,19.314584"
+       position="-2.79505,18.661366"
        orientation="0,1"
        id="guide58932"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="-10.847917,-41.275002"
+       position="-366.59718,-41.92822"
        orientation="0,1"
        id="guide58944"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="30.162501,-289.45418"
+       position="-325.58668,-290.10739"
        orientation="0,1"
        id="guide58956"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="-21.328109,-538.44121"
+       position="-377.07738,-539.09442"
        orientation="0,1"
        id="guide58981"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="96.308335,-722.44484"
+       position="-259.44088,-723.09805"
        orientation="0,1"
        id="guide58983"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="-0.033072918,-0.95911462"
+       position="-355.78228,-1.6123323"
        orientation="1,0"
        id="guide59586"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="119.73675,-321.66005"
+       position="-236.01248,-322.31326"
        orientation="1,0"
        id="guide59588"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="106.64054,-154.90943"
+       position="-249.10868,-155.56264"
        orientation="1,0"
        id="guide59590"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="453.49584,19.314584"
+       position="97.74662,18.661366"
        orientation="1,0"
        id="guide59592"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="305.32917,212.19585"
+       position="-50.42005,211.54264"
        orientation="0,1"
        id="guide59981"
        inkscape:locked="false" />
@@ -1432,17 +1433,19 @@
        inkscape:label="Blur Double"
        inkscape:menu="Blurs"
        inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
-       style="color-interpolation-filters:sRGB;"
+       style="white-space:pre;color-interpolation-filters:sRGB;stroke-linecap:butt;stroke-linejoin:round"
        id="filter59248">
       <feGaussianBlur
          stdDeviation="5"
          result="fbSourceGraphic"
-         id="feGaussianBlur59240" />
+         id="feGaussianBlur59240"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feGaussianBlur
          stdDeviation="0.01"
          in="SourceGraphic"
          result="result1"
-         id="feGaussianBlur59242" />
+         id="feGaussianBlur59242"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feComposite
          in2="result1"
          operator="arithmetic"
@@ -1450,28 +1453,34 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite59244" />
+         id="feComposite59244"
+         k1="0"
+         k4="0"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feBlend
          in2="fbSourceGraphic"
          mode="normal"
          result="result3"
-         id="feBlend59246" />
+         id="feBlend59246"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
     </filter>
     <filter
        inkscape:label="Blur Double"
        inkscape:menu="Blurs"
        inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
-       style="color-interpolation-filters:sRGB;"
+       style="white-space:pre;color-interpolation-filters:sRGB;stroke-linecap:butt;stroke-linejoin:round"
        id="filter59258">
       <feGaussianBlur
          stdDeviation="5"
          result="fbSourceGraphic"
-         id="feGaussianBlur59250" />
+         id="feGaussianBlur59250"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feGaussianBlur
          stdDeviation="0.01"
          in="SourceGraphic"
          result="result1"
-         id="feGaussianBlur59252" />
+         id="feGaussianBlur59252"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feComposite
          in2="result1"
          operator="arithmetic"
@@ -1479,28 +1488,34 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite59254" />
+         id="feComposite59254"
+         k1="0"
+         k4="0"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feBlend
          in2="fbSourceGraphic"
          mode="normal"
          result="result3"
-         id="feBlend59256" />
+         id="feBlend59256"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
     </filter>
     <filter
        inkscape:label="Blur Double"
        inkscape:menu="Blurs"
        inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
-       style="color-interpolation-filters:sRGB;"
+       style="white-space:pre;color-interpolation-filters:sRGB;stroke-linecap:butt;stroke-linejoin:round"
        id="filter59268">
       <feGaussianBlur
          stdDeviation="5"
          result="fbSourceGraphic"
-         id="feGaussianBlur59260" />
+         id="feGaussianBlur59260"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feGaussianBlur
          stdDeviation="0.01"
          in="SourceGraphic"
          result="result1"
-         id="feGaussianBlur59262" />
+         id="feGaussianBlur59262"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feComposite
          in2="result1"
          operator="arithmetic"
@@ -1508,28 +1523,34 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite59264" />
+         id="feComposite59264"
+         k1="0"
+         k4="0"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feBlend
          in2="fbSourceGraphic"
          mode="normal"
          result="result3"
-         id="feBlend59266" />
+         id="feBlend59266"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
     </filter>
     <filter
        inkscape:label="Blur Double"
        inkscape:menu="Blurs"
        inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
-       style="color-interpolation-filters:sRGB;"
+       style="white-space:pre;color-interpolation-filters:sRGB;stroke-linecap:butt;stroke-linejoin:round"
        id="filter59308">
       <feGaussianBlur
          stdDeviation="5"
          result="fbSourceGraphic"
-         id="feGaussianBlur59300" />
+         id="feGaussianBlur59300"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feGaussianBlur
          stdDeviation="0.01"
          in="SourceGraphic"
          result="result1"
-         id="feGaussianBlur59302" />
+         id="feGaussianBlur59302"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feComposite
          in2="result1"
          operator="arithmetic"
@@ -1537,28 +1558,34 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite59304" />
+         id="feComposite59304"
+         k1="0"
+         k4="0"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feBlend
          in2="fbSourceGraphic"
          mode="normal"
          result="result3"
-         id="feBlend59306" />
+         id="feBlend59306"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
     </filter>
     <filter
        inkscape:label="Blur Double"
        inkscape:menu="Blurs"
        inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
-       style="color-interpolation-filters:sRGB;"
+       style="white-space:pre;color-interpolation-filters:sRGB;stroke-linecap:butt;stroke-linejoin:round"
        id="filter59318">
       <feGaussianBlur
          stdDeviation="5"
          result="fbSourceGraphic"
-         id="feGaussianBlur59310" />
+         id="feGaussianBlur59310"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feGaussianBlur
          stdDeviation="0.01"
          in="SourceGraphic"
          result="result1"
-         id="feGaussianBlur59312" />
+         id="feGaussianBlur59312"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feComposite
          in2="result1"
          operator="arithmetic"
@@ -1566,28 +1593,34 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite59314" />
+         id="feComposite59314"
+         k1="0"
+         k4="0"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feBlend
          in2="fbSourceGraphic"
          mode="normal"
          result="result3"
-         id="feBlend59316" />
+         id="feBlend59316"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
     </filter>
     <filter
        inkscape:label="Blur Double"
        inkscape:menu="Blurs"
        inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
-       style="color-interpolation-filters:sRGB;"
+       style="white-space:pre;color-interpolation-filters:sRGB;stroke-linecap:butt;stroke-linejoin:round"
        id="filter59328">
       <feGaussianBlur
          stdDeviation="5"
          result="fbSourceGraphic"
-         id="feGaussianBlur59320" />
+         id="feGaussianBlur59320"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feGaussianBlur
          stdDeviation="0.01"
          in="SourceGraphic"
          result="result1"
-         id="feGaussianBlur59322" />
+         id="feGaussianBlur59322"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feComposite
          in2="result1"
          operator="arithmetic"
@@ -1595,28 +1628,34 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite59324" />
+         id="feComposite59324"
+         k1="0"
+         k4="0"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feBlend
          in2="fbSourceGraphic"
          mode="normal"
          result="result3"
-         id="feBlend59326" />
+         id="feBlend59326"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
     </filter>
     <filter
        inkscape:label="Blur Double"
        inkscape:menu="Blurs"
        inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
-       style="color-interpolation-filters:sRGB;"
+       style="white-space:pre;color-interpolation-filters:sRGB;stroke-linecap:butt;stroke-linejoin:round"
        id="filter59338">
       <feGaussianBlur
          stdDeviation="5"
          result="fbSourceGraphic"
-         id="feGaussianBlur59330" />
+         id="feGaussianBlur59330"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feGaussianBlur
          stdDeviation="0.01"
          in="SourceGraphic"
          result="result1"
-         id="feGaussianBlur59332" />
+         id="feGaussianBlur59332"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feComposite
          in2="result1"
          operator="arithmetic"
@@ -1624,28 +1663,34 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite59334" />
+         id="feComposite59334"
+         k1="0"
+         k4="0"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feBlend
          in2="fbSourceGraphic"
          mode="normal"
          result="result3"
-         id="feBlend59336" />
+         id="feBlend59336"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
     </filter>
     <filter
        inkscape:label="Blur Double"
        inkscape:menu="Blurs"
        inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
-       style="color-interpolation-filters:sRGB;"
+       style="white-space:pre;color-interpolation-filters:sRGB;stroke-linecap:butt;stroke-linejoin:round"
        id="filter59348">
       <feGaussianBlur
          stdDeviation="5"
          result="fbSourceGraphic"
-         id="feGaussianBlur59340" />
+         id="feGaussianBlur59340"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feGaussianBlur
          stdDeviation="0.01"
          in="SourceGraphic"
          result="result1"
-         id="feGaussianBlur59342" />
+         id="feGaussianBlur59342"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feComposite
          in2="result1"
          operator="arithmetic"
@@ -1653,28 +1698,34 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite59344" />
+         id="feComposite59344"
+         k1="0"
+         k4="0"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feBlend
          in2="fbSourceGraphic"
          mode="normal"
          result="result3"
-         id="feBlend59346" />
+         id="feBlend59346"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
     </filter>
     <filter
        inkscape:label="Blur Double"
        inkscape:menu="Blurs"
        inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
-       style="color-interpolation-filters:sRGB;"
+       style="white-space:pre;color-interpolation-filters:sRGB;stroke-linecap:butt;stroke-linejoin:round"
        id="filter59358">
       <feGaussianBlur
          stdDeviation="5"
          result="fbSourceGraphic"
-         id="feGaussianBlur59350" />
+         id="feGaussianBlur59350"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feGaussianBlur
          stdDeviation="0.01"
          in="SourceGraphic"
          result="result1"
-         id="feGaussianBlur59352" />
+         id="feGaussianBlur59352"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feComposite
          in2="result1"
          operator="arithmetic"
@@ -1682,28 +1733,34 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite59354" />
+         id="feComposite59354"
+         k1="0"
+         k4="0"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feBlend
          in2="fbSourceGraphic"
          mode="normal"
          result="result3"
-         id="feBlend59356" />
+         id="feBlend59356"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
     </filter>
     <filter
        inkscape:label="Blur Double"
        inkscape:menu="Blurs"
        inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
-       style="color-interpolation-filters:sRGB;"
+       style="white-space:pre;color-interpolation-filters:sRGB;stroke-linecap:butt;stroke-linejoin:round"
        id="filter59368">
       <feGaussianBlur
          stdDeviation="5"
          result="fbSourceGraphic"
-         id="feGaussianBlur59360" />
+         id="feGaussianBlur59360"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feGaussianBlur
          stdDeviation="0.01"
          in="SourceGraphic"
          result="result1"
-         id="feGaussianBlur59362" />
+         id="feGaussianBlur59362"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feComposite
          in2="result1"
          operator="arithmetic"
@@ -1711,28 +1768,34 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite59364" />
+         id="feComposite59364"
+         k1="0"
+         k4="0"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feBlend
          in2="fbSourceGraphic"
          mode="normal"
          result="result3"
-         id="feBlend59366" />
+         id="feBlend59366"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
     </filter>
     <filter
        inkscape:label="Blur Double"
        inkscape:menu="Blurs"
        inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
-       style="color-interpolation-filters:sRGB;"
+       style="white-space:pre;color-interpolation-filters:sRGB;stroke-linecap:butt;stroke-linejoin:round"
        id="filter59378">
       <feGaussianBlur
          stdDeviation="5"
          result="fbSourceGraphic"
-         id="feGaussianBlur59370" />
+         id="feGaussianBlur59370"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feGaussianBlur
          stdDeviation="0.01"
          in="SourceGraphic"
          result="result1"
-         id="feGaussianBlur59372" />
+         id="feGaussianBlur59372"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feComposite
          in2="result1"
          operator="arithmetic"
@@ -1740,28 +1803,34 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite59374" />
+         id="feComposite59374"
+         k1="0"
+         k4="0"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feBlend
          in2="fbSourceGraphic"
          mode="normal"
          result="result3"
-         id="feBlend59376" />
+         id="feBlend59376"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
     </filter>
     <filter
        inkscape:label="Blur Double"
        inkscape:menu="Blurs"
        inkscape:menu-tooltip="Overlays two copies with different blur amounts and modifiable blend and composite"
-       style="color-interpolation-filters:sRGB;"
+       style="white-space:pre;color-interpolation-filters:sRGB;stroke-linecap:butt;stroke-linejoin:round"
        id="filter59388">
       <feGaussianBlur
          stdDeviation="5"
          result="fbSourceGraphic"
-         id="feGaussianBlur59380" />
+         id="feGaussianBlur59380"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feGaussianBlur
          stdDeviation="0.01"
          in="SourceGraphic"
          result="result1"
-         id="feGaussianBlur59382" />
+         id="feGaussianBlur59382"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feComposite
          in2="result1"
          operator="arithmetic"
@@ -1769,12 +1838,16 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite59384" />
+         id="feComposite59384"
+         k1="0"
+         k4="0"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
       <feBlend
          in2="fbSourceGraphic"
          mode="normal"
          result="result3"
-         id="feBlend59386" />
+         id="feBlend59386"
+         style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round" />
     </filter>
   </defs>
   <metadata
@@ -1793,7 +1866,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-98.251709,263.68381)"
+     transform="translate(-454.00092,263.86102)"
      style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round">
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_CV_pub.png"
@@ -1844,7 +1917,7 @@
        height="211.60699"
        width="324.78513"
        id="rect58934"
-       style="white-space:pre;opacity:1;vector-effect:none;fill:#7f7f7f;fill-opacity:0.12992129;stroke:#7f7f7f;stroke-width:0.47602803;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.59241704" />
+       style="white-space:pre;opacity:1;vector-effect:none;fill:#7f7f7f;fill-opacity:0.01968503;stroke:none;stroke-width:0.47602803;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.59241704" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_CV_pub.png"
        xlink:href="fig_CV_pub.png"
@@ -1894,7 +1967,7 @@
        height="211.60699"
        width="324.78513"
        id="rect58946"
-       style="white-space:pre;opacity:1;vector-effect:none;fill:#7f7f7f;fill-opacity:0.12992129;stroke:#7f7f7f;stroke-width:0.47602803;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.59241704" />
+       style="white-space:pre;opacity:1;vector-effect:none;fill:#7f7f7f;fill-opacity:0.01574803;stroke:none;stroke-width:0.47602803;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.59241704" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_CV_pub.png"
        xlink:href="fig_CV_pub.png"
@@ -1944,7 +2017,7 @@
        height="211.60699"
        width="324.78513"
        id="rect58971"
-       style="white-space:pre;opacity:1;vector-effect:none;fill:#7f7f7f;fill-opacity:0.12992129;stroke:#7f7f7f;stroke-width:0.47602803;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.59241704" />
+       style="white-space:pre;opacity:1;vector-effect:none;fill:#7f7f7f;fill-opacity:0.02755905;stroke:none;stroke-width:0.47602803;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.59241704" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_CV_pub.png"
        xlink:href="fig_CV_pub.png"
