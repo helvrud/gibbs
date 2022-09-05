@@ -259,9 +259,11 @@ The gel partial pressure, $\Pgel$, is the pressure that needs to be applied to t
 These dependencies of $\Pgel$ on $\Vgel$ for \emph{open system} for a set of various salinities are presented
 in Figure \ref{fig: PV} by solid lines. 
 For example, the blue solid line illustrates the compression (or swelling) of the gel in equilibrium with a reservoir of salinity, $\cs=0.063$ mol/l. 
-The points where the pressure equals zero, $\Pgel=0$, (indicated by filled circles) are the gel \emph{free swelling equilibrium} states. 
-These states shift towards smaller volumes with increase of salinity. 
-In general, the increase of salinity shift all the $\Pgel(V)$ curves towards smaller volumes.
+The points where the pressure equals zero, $\Pgel=0$, (indicated by filled circles) are the gel \emph{free swelling equilibrium} states.
+These states are characterized by the corresponding molar volume of the gel, $\Vgel^0$ and the amount of ions in gel \{$\Nna^0$, $\Ncl^0$\} 
+(Index ``0'' stands for zero bar applied pressure).
+The \emph{free swelling equilibrium} states' positions shift towards smaller volumes with increase of salinity. 
+In general, the increase of salinity shifts all the $\Pgel(V)$ curves towards smaller volumes.
 This effect is well known and is typical for all branched \emph{strong} polyelectrolytes. 
 It is caused by the decrease of ions osmotic pressure and by a screening of electrostatic interactions \cite{Zhulina2000, Landsgesel2020a}.
 (The salinity dependence of the size of \emph{weak} polyelectrolyte gel is in general non-monotonic. We discuss this case in \cite{Rud2018}.)
@@ -280,11 +282,10 @@ The values $N_\cl$ are the virtual numbers of present $\cl$ ions in \emph{closed
 \end{figure*}
 
 \paragraph{Compression in closed system}
-%Each set of simulations in \emph{open system} defines the free swelling equilibrium states of the gel for each salinity, \ie the state where the gel partial pressure equals zero. 
-The free swelling equilibrium states are characterized by the corresponding molar volume of the gel, $\Vgel^0$ and the amount of ions in gel \{$\Nna^0$, $\Ncl^0$\} 
-(Index ``0'' stands for zero bar applied pressure).
-We use these states as the starting ones for the gel compression in \emph{closed system}. 
-Thus, we simulate the compression of the gel in a closed volume, $\Vbox$, which is equal to $\Vgel^0$, and contains $\Ncl^0$ of $\cl$ ions and the $\na$ ions in the amount neutralizing the system, $\Nna^0 = $$\Ncl^0 + \Ngel$.
+The simulations in \emph{closed systems} start from the corresponding $\Vgel^0$ and \{$\Nna^0$, $\Ncl^0$\} values
+obtained from the \emph{open system} simulations.
+The simulation of gel compression in a closed volume, $\Vbox$, starts at the point $\Vbox = \Vgel^0$,
+and ion content $\Ncl^0$ for $\cl$ ions. The $\na$ ions amount is neutralize the system, $\Nna^0 = $$\Ncl^0 + \Ngel$.
 
 We prepare two systems, one~--- simulating the gel of the volume $\Vgel$, and another~--- simulating the supernatant solution of the volume $\Vout = \Vbox - \Vgel$.
 Also, the ions of the amount $\Ncl^0$ and $\Nna^0$ are shared between the two volumes. 
