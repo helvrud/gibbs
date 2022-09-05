@@ -248,17 +248,16 @@ The compression of the gel in the \emph{open system} (solid lines) and in the \e
 Each solid curve corresponds to different salinity of the reservoir $\cs$ (see legend).
 The shadowed areas limit the states with applied pressure below zero and above 5 bar.\label{fig: PV and CV}}
 \end{figure*}
-First, we run a set of simulations modeling the gel compression in \emph{open system}, \ie in equilibrium with a big bath of certain salinity, $\cs$. 
-The simulations are run for a set of different simulation box volumes. 
-Each simulation returns the averaged pressure, $P$, and the number of $\cl$ ions, which are present in the simulation box, $\ncl$. 
+First, we ran a set of simulations modeling the gel compression in \emph{open system}, \ie in equilibrium with a big bath of certain salinity, $\cs$. 
+The simulations were run for a set of different simulation box volumes. 
+Each simulation provided pressure, $P$, and the number of $\cl$ ions, which are present in the simulation box, $\ncl$. 
 
-In order to get the partial pressure of the gel, we substitute from $P$ the osmotic pressure of ions in the reservoir: $\Pgel=P - \Pout$.
-$\Pout$, in turn, we calculate by running a separate simulation of a reservoir, containing ionic gas in equilibrium with the bath of the same salinity $\cs$. 
-The gel partial pressure, $\Pgel$, is the pressure that needs to be applied to the gel via a solvent permeable filter to compress the gel to a specific molar volume, $\Vgel$. 
-By gel molar volume $\Vgel$ we assume the volume of the gel calculated per on mol of gel monomer units.
+In order to get the partial pressure of the gel, we subtracted from $P$ the osmotic pressure of ions in the reservoir: $\Pgel=P - \Pout$.
+$\Pout$, in turn, we obtained from a separate simulation of a reservoir, containing ionic gas in equilibrium with the bath of the same salinity $\cs$. 
+The gel partial pressure, $\Pgel$, is the pressure that needs to be applied to the gel via a solvent permeable filter to compress the gel to a specific molar volume, $\Vgel$. $\Vgel$ is the gel volume per one mole of gel monomer units.
 
-The dependencies of $\Pgel$ on $\Vgel$ are present in Figure \ref{fig: PV} for a set of different salinities. 
-These dependencies (the case of \emph{open system}) are represented by solid lines. 
+These dependencies of $\Pgel$ on $\Vgel$ for \emph{open system} for a set of various salinities are presented
+in Figure \ref{fig: PV} by solid lines. 
 For example, the blue solid line illustrates the compression (or swelling) of the gel in equilibrium with a reservoir of salinity, $\cs=0.063$ mol/l. 
 The points where the pressure equals zero, $\Pgel=0$, (indicated by filled circles) are the gel \emph{free swelling equilibrium} states. 
 These states shift towards smaller volumes with increase of salinity. 
