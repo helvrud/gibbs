@@ -369,7 +369,7 @@ This value is calculated as follows
 W=2RT\left(\frac{c_{f}}{R_{w}}\ln\frac{c_{b}}{c_{f}}-c_{p}\ln\frac{c_{b}}{c_{p}}\right)
 \label{eq:SEC}
 \end{equation}
-where $R$ is a universal gas constant, $c_{f}$ is the salinity of feed water, $c_p$~--- of product water and $c_b$~--- the salinity of the brine, which necessarily appears in any desalination process. 
+where $R$ is a universal gas constant, $c_{f}$ is the salinity of feed water, $c_p$ is the salinity of product water and $c_b$ is the salinity of the brine, which necessarily appears in any desalination process. 
 $R_{w}$ is a recovery ratio, \ie the ratio between volume of produced water and the volume of the feed water. 
 50\% recovery ratio means that one part of feed water divides into two equal volume solutions of the product water and of the brine.
 Of course, a significant amount of additional energy is required to operate the system\cite{Kim_2019}. 
@@ -384,12 +384,12 @@ The first column of the table contains values $\cs^0$ and $\cs^5$, which stand f
 The second column contains values of $n^0$ and $n^5$, which stand for the number of $\cl$ ions in compression volume $\Vbox$, at 0 and 5 bar pressure (divided by $\Vbox$). 
 The number of ion does not change in closed system compression, thus $n^0$ and $n^5$ are the same in the corresponding rows.
 The third column shows the change of the gel volume in corresponding process, $\Delta v$. 
-The fourth column contain the work needed for the compression in the corresponding process, calculated per volume of extracted solution. 
+The fourth column contains the work needed for the compression in the corresponding process per volume of extracted solution. 
 This value is an integral of corresponding $\Pgel(\Vgel)$ dependence
 \begin{equation}
     W = \frac{\int_{v^0}^{v^5} \Pgel d\Vgel}{\Delta v}
 \end{equation}
-Here, in the table, we present the absolute values of the work, whereas one should keep in mind that the compression implies the work is done by external force and the swelling implies that the work is done by gel.
+Table 1 presents the absolute values of the work. Note that the compression implies the work done by external force, but the swelling implies the work done by the gel.
 
 \begin{table}
 \begin{tabular*}{1\textwidth}{@{\extracolsep{\fill}}ll|lc|c|l|ll}
@@ -522,23 +522,22 @@ are the estimates corresponding to crossection of 'red' and 'orange' lines on th
 \label{tab: table}}
 \end{table}
 
-To give a clue of comparison with ideal desalination process efficiency, in the fifth column we provided the values of specific energy consumption, $W^\text{id}$, which are calculated by means of \refeq{eq:SEC} as follows.
-We consider, for example, the solution of concentration $\cs^f=44.91$ mmol/l as a feed solution, and the solutions of $\cs^p=31.93$ mmol/l and $\cs^b = 63.93$ mmol/l 
-correspondingly as produced product and brine solutions.
+To give a clue of comparison with ideal desalination process efficiency, the fifth column provides the values of specific energy consumption, $W^\text{id}$, which are calculated by means of \refeq{eq:SEC}, using the following procedure:
+Let§s assume the concentration of the feed solution to be $\cs^f=44.91$ mmol/l and the concentrations of product and brine solutions to be $\cs^p=31.93$ mmol/l and $\cs^b = 63.93$ mmol/l, respectively.
 \begin{enumerate}
-    \item first, the gel, equilibrated with feed solution, is getting compressed in a closed system.
-    The volume of the gel changes by $\Delta v^p = 3.69$ l  and the salinity of supernate decreases from $\cs^f$ to $\cs^p$.
-    The volume of product solution equals $\Delta v^p$
-    \item Then the squeezed gel is put back into the feed solution and is getting equilibrated there under pressure, so it does not swell. 
-    \item After equilibration the gel is let to swell in a closed system such that the salinity of the external solution increases reaching the value of $\cs^b$.
-    \item Finally, the gel is taken out and squeezed by 5 bar in an open system in equilibrium with the bath of the brine. 
-    The change of the gel volume in this process is $\Delta v^b = 3.26$ l/mol, which equals the volume of the produced brine. 
+    \item The gel, equilibrated with the feed solution, is compressed in the \emph{closed system}.
+    The gel volume decreases by $\Delta v^p = 3.69$ liters and the salinity of supernate decreases from $\cs^f$ to $\cs^p$.
+    The volume of the product solution is $\Delta v^p$
+    \item The squeezed gel is put back into the feed solution and is quilibrated there under pressure, so it does not swell. 
+    \item After the equilibration, the gel swells in the \emph{closed system} and the salinity of the external solution increases to the value $\cs^b$.
+    \item Finally, the gel is taken out and compressed by 5 bar in the \emph{open system} in equilibrium with the brine bath. 
+    The change of the gel volume in this process is $\Delta v^b = 3.26$ l/mol, which equals to the volume of the produced brine. 
 \end{enumerate}
-Thus the recovery ratio $R_w = \Delta v^p / (\Delta v^p + \Delta v^b) \simeq $ 0.53 and the theoretical minimum specific energy of desalination with corresponding $\cs^f$, $\cs^p$ and $\cs^b$ is $W^{id} =$ 38.2 J/l (\refeq{eq:SEC}).
+Thus the recovery ratio $R_w = \Delta v^p / (\Delta v^p + \Delta v^b) \simeq $ 0.53 and the theoretical minimum specific energy of the desalination process with corresponding $\cs^f$, $\cs^p$ and $\cs^b$ is $W^{id} =$ 38.2 J/l (\refeq{eq:SEC}).
 
-Such estimations are provided in the fifth column of the table, for five triplets of values $\cs^f$, $\cs^p$, and $\cs^b$.
-$W_{\mathrm{sim}}$ is the energy calculated by integration of $\Pgel(\Vgel)$ dependencies~--- sum of corresponding comressions in closed and open systems, $W_{\mathrm{id}}$~--- the estimate based on the equation \refeq{eq:SEC} and $R_w$~--- is the corresponding recovery ratio.
-Note that calculating the $W_{\mathrm{sim}}$ we accounted for only the work done on the gel during compression, whereas the work done by the gel itself during swelling was not taken into account.
+The estimated $W^{id}$ values are provided in the fifth column of the table, for five triplets of $\cs^f$, $\cs^p$,$\cs^b$ values .
+$W_{\mathrm{sim}}$ is the energy calculated by integration of $\Pgel(\Vgel)$ dependencies as the sum of corresponding compressions in \emph{closed} and \emph{open} systems, $W_{\mathrm{id}}$ is the estimation based on the equation \refeq{eq:SEC} and $R_w$ is the corresponding recovery ratio.
+Note that calculating the $W_{\mathrm{sim}}$ we accounted for only the work done on the gel during the compression, whereas the work done by the gel itself during swelling was not taken into account.
 The ratio between $W_{\mathrm{sim}}$ and $W_{\mathrm{id}}$ ranges from 3.26 to 5.43, which is comparable to that of RO.
 
 
