@@ -1,52 +1,205 @@
-%% LyX 2.3.4.2 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-%\documentclass{achemso}
-\documentclass[layout=twocolumns,manuscript=article]{achemso}
+%  LaTeX support: latex@mdpi.com 
+%  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
 
+%=================================================================
+\documentclass[journal,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
+\usepackage{subfig}
+\usepackage[textsize=small]{todonotes}
+\newcommand{\ie}{\textit{i.~e.} }
+\newcommand{\cref}{c^{\ominus}}
+%\newcommand{\cs}{c_{s}}
+\newcommand{\kT}{k_\mathrm{B}T}
+\newcommand{\kB}{k_\mathrm{B}}
+\newcommand{\lb}{l_\mathrm{B}}
+%\newcommand{\NA}{N_{\mathrm{A^-}}}
+\newcommand{\NA}{N_{\mathrm{A}}}
+\newcommand{\muna}{\mu_\mathrm{Na^+}}
 
-\makeatletter
+\newcommand{\mucl}{\mu_\mathrm{Cl^-}}
+\newcommand{\muca}{\mu_\mathrm{Ca^{2+}}}
+\newcommand{\muh}{\mu_\mathrm{H^+}}
+\newcommand{\mua}{\mu_\mathrm{A^-}}
+\newcommand{\muha}{\mu_\mathrm{HA}}
+\newcommand{\muoh}{\mu_\mathrm{OH}}
 
+\newcommand{\cna}{c_\mathrm{Na^+}}
+\newcommand{\ccl}{c_\mathrm{Cl^-}}
+\newcommand{\cca}{c_\mathrm{Ca^{2+}}}
+\newcommand{\ch}{c_\mathrm{H^+}}
+\newcommand{\cp}{c_\mathrm{p}}
+\newcommand{\nna}{n_\mathrm{Na^+}}
+\newcommand{\ncl}{n_\mathrm{Cl^-}}
+\newcommand{\Nna}{N_\mathrm{Na^+}}
+\newcommand{\Ncl}{N_\mathrm{Cl^-}}
+
+\newcommand{\ncleq}{\widetilde{N}_\mathrm{Cl^-}}
+\newcommand{\nca}{N_\mathrm{Ca^{2+}}}
+
+\newcommand{\superin}{^\mathrm{in}}
+\newcommand{\subin}{_\mathrm{in}}
+\newcommand{\subi}{_\mathrm{i}}
+
+\newcommand{\gel}{^\mathrm{gel}}
+\newcommand{\tot}{^\mathrm{tot}}
+\newcommand{\out}{^{\mathrm{out}}}
+\newcommand{\coh}{c_\mathrm{OH}}
+\newcommand{\bulk}{^{\mathrm{b}}}
+\renewcommand{\H}{\mathrm{H^+}}
+\newcommand{\A}{\mathrm{A^-}}
+\newcommand{\AH}{\mathrm{AH}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
 
+\newcommand{\cl}{\mathrm{Cl^-}}
+\newcommand{\br}{\mathrm{Br^-}}
+\newcommand{\na}{\mathrm{Na^+}}
+\newcommand{\h}{\mathrm{H^+}}
+\newcommand{\ka}{\mathrm{K^+}}
+\newcommand{\oh}{\mathrm{OH^-}}
+\newcommand{\ca}{\mathrm{Ca^{2+}}}
+\newcommand{\mg}{\mathrm{Mg^{2+}}}
 
-\title{Water desalination using polyelectrolyte hydrogel: Gibbs ensemble modeling}
+\newcommand{\Ka}{K_{\mathrm{A}}}
+\newcommand{\pKa}{\mathrm{p}\Ka}
+\newcommand{\pK}{\mathrm{p}K}
+\newcommand{\pH}{\mathrm{pH}}
+\newcommand{\mol}{\mathrm{mol}}
+\newcommand{\molperl}{\mathrm{mol/l}}
+\newcommand{\kg}{\mathrm{kg}}
+\newcommand{\res}{^{\mathrm{res}}}
+\newcommand{\pHres}{\pH\res}
+\newcommand{\pHgel}{\pH\gel}
+\newcommand{\cs}{c_{\mathrm{s}}}
+%\newcommand{\cs}{c_{\mathrm{salt}}}
+\newcommand{\csres}{\cs\res}
+%\newcommand{\Vgel}{V\gel}
+\newcommand{\Vgel}{V_\mathrm{gel}}
+%\newcommand{\Vgel}{V}
+\newcommand{\Ngel}{N_\mathrm{gel}}
+%\newcommand{\Vgeleq}{\widetilde{V}_\mathrm{gel}}}
+%\newcommand{\Pgel}{P_\mathrm{gel}}
+\newcommand{\Pgel}{\Pi}
+\newcommand{\Pres}{P_\mathrm{res}}
+\newcommand{\Pout}{P_\mathrm{out}}
+\newcommand{\Vout}{V_\mathrm{out}}
+%\newcommand{\Vbox}{V_\mathrm{box}}
+\newcommand{\Vbox}{V_0}
+\newcommand{\PE}{polyelectrolyte{}}
 
+\newcommand{\reffig}[1]{Figure~\ref{#1}}
+\newcommand{\refeq}[1]{Equation~\ref{#1}{}}
+\newcommand{\etal}{\textit{et al.}{}}
 
-\author{Mikhail Laktionov}
+% For posting an early version of this manuscript as a preprint, you may use "preprints" as the journal and change "submit" to "accept". The document class line would be, e.g., \documentclass[preprints,article,accept,moreauthors,pdftex]{mdpi}. This is especially recommended for submission to arXiv, where line numbers should be removed before posting. For preprints.org, the editorial staff will make this change immediately prior to posting.
 
-\affiliation[cuni]{Department of Physical and Macromolecular Chemistry, Faculty of Science,
-Charles University in Prague, Czech Republic}
+%--------------------
+% Class Options:
+%--------------------
+%----------
+% journal
+%----------
+% Choose between the following MDPI journals:
+% acoustics, actuators, addictions, admsci, adolescents, aerospace, agriculture, agriengineering, agronomy, ai, algorithms, allergies, alloys, analytica, animals, antibiotics, antibodies, antioxidants, applbiosci, appliedchem, appliedmath, applmech, applmicrobiol, applnano, applsci, aquacj, architecture, arts, asc, asi, astronomy, atmosphere, atoms, audiolres, automation, axioms, bacteria, batteries, bdcc, behavsci, beverages, biochem, bioengineering, biologics, biology, biomass, biomechanics, biomed, biomedicines, biomedinformatics, biomimetics, biomolecules, biophysica, biosensors, biotech, birds, bloods, blsf, brainsci, breath, buildings, businesses, cancers, carbon, cardiogenetics, catalysts, cells, ceramics, challenges, chemengineering, chemistry, chemosensors, chemproc, children, chips, cimb, civileng, cleantechnol, climate, clinpract, clockssleep, cmd, coasts, coatings, colloids, colorants, commodities, compounds, computation, computers, condensedmatter, conservation, constrmater, cosmetics, covid, crops, cryptography, crystals, csmf, ctn, curroncol, currophthalmol, cyber, dairy, data, dentistry, dermato, dermatopathology, designs, diabetology, diagnostics, dietetics, digital, disabilities, diseases, diversity, dna, drones, dynamics, earth, ebj, ecologies, econometrics, economies, education, ejihpe, electricity, electrochem, electronicmat, electronics, encyclopedia, endocrines, energies, eng, engproc, ent, entomology, entropy, environments, environsciproc, epidemiologia, epigenomes, est, fermentation, fibers, fintech, fire, fishes, fluids, foods, forecasting, forensicsci, forests, foundations, fractalfract, fuels, futureinternet, futureparasites, futurepharmacol, futurephys, futuretransp, galaxies, games, gases, gastroent, gastrointestdisord, gels, genealogy, genes, geographies, geohazards, geomatics, geosciences, geotechnics, geriatrics, hazardousmatters, healthcare, hearts, hemato, heritage, highthroughput, histories, horticulturae, humanities, humans, hydrobiology, hydrogen, hydrology, hygiene, idr, ijerph, ijfs, ijgi, ijms, ijns, ijtm, ijtpp, immuno, informatics, information, infrastructures, inorganics, insects, instruments, inventions, iot, j, jal, jcdd, jcm, jcp, jcs, jdb, jeta, jfb, jfmk, jimaging, jintelligence, jlpea, jmmp, jmp, jmse, jne, jnt, jof, joitmc, jor, journalmedia, jox, jpm, jrfm, jsan, jtaer, jzbg, kidney, kidneydial, knowledge, land, languages, laws, life, liquids, literature, livers, logics, logistics, lubricants, lymphatics, machines, macromol, magnetism, magnetochemistry, make, marinedrugs, materials, materproc, mathematics, mca, measurements, medicina, medicines, medsci, membranes, merits, metabolites, metals, meteorology, methane, metrology, micro, microarrays, microbiolres, micromachines, microorganisms, microplastics, minerals, mining, modelling, molbank, molecules, mps, msf, mti, muscles, nanoenergyadv, nanomanufacturing, nanomaterials, ncrna, network, neuroglia, neurolint, neurosci, nitrogen, notspecified, nri, nursrep, nutraceuticals, nutrients, obesities, oceans, ohbm, onco, oncopathology, optics, oral, organics, organoids, osteology, oxygen, parasites, parasitologia, particles, pathogens, pathophysiology, pediatrrep, pharmaceuticals, pharmaceutics, pharmacoepidemiology, pharmacy, philosophies, photochem, photonics, phycology, physchem, physics, physiologia, plants, plasma, pollutants, polymers, polysaccharides, poultry, powders, preprints, proceedings, processes, prosthesis, proteomes, psf, psych, psychiatryint, psychoactives, publications, quantumrep, quaternary, qubs, radiation, reactions, recycling, regeneration, religions, remotesensing, reports, reprodmed, resources, rheumato, risks, robotics, ruminants, safety, sci, scipharm, seeds, sensors, separations, sexes, signals, sinusitis, skins, smartcities, sna, societies, socsci, software, soilsystems, solar, solids, sports, standards, stats, stresses, surfaces, surgeries, suschem, sustainability, symmetry, synbio, systems, taxonomy, technologies, telecom, test, textiles, thalassrep, thermo, tomography, tourismhosp, toxics, toxins, transplantology, transportation, traumacare, traumas, tropicalmed, universe, urbansci, uro, vaccines, vehicles, venereology, vetsci, vibration, viruses, vision, waste, water, wem, wevj, wind, women, world, youth, zoonoticdis 
 
+%---------
+% article
+%---------
+% The default type of manuscript is "article", but can be replaced by: 
+% abstract, addendum, article, book, bookreview, briefreport, casereport, comment, commentary, communication, conferenceproceedings, correction, conferencereport, entry, expressionofconcern, extendedabstract, datadescriptor, editorial, essay, erratum, hypothesis, interestingimage, obituary, opinion, projectreport, reply, retraction, review, perspective, protocol, shortnote, studyprotocol, systematicreview, supfile, technicalnote, viewpoint, guidelines, registeredreport, tutorial
+% supfile = supplementary materials
 
-\alsoaffiliation[itmo]{St. Petersburg National Research University of Information Technologies,
-Mechanics and Optics, St. Petersburg, Russia.}
+%----------
+% submit
+%----------
+% The class option "submit" will be changed to "accept" by the Editorial Office when the paper is accepted. This will only make changes to the frontpage (e.g., the logo of the journal will get visible), the headings, and the copyright information. Also, line numbering will be removed. Journal info and pagination for accepted papers will also be assigned by the Editorial Office.
 
-\author{Lucie Nová}
-\author{Oleg V. Rud}
+%------------------
+% moreauthors
+%------------------
+% If there is only one author the class option oneauthor should be used. Otherwise use the class option moreauthors.
 
+%---------
+% pdftex
+%---------
+% The option pdftex is for use with pdfLaTeX. If eps figures are used, remove the option pdftex and use LaTeX and dvi2pdf.
 
-\affiliation{Department of Physical and Macromolecular Chemistry, Faculty of Science, Charles University in Prague, Czech Republic}
-\alsoaffiliation[imc]{Institute of Macromolecular Compounds of Russian Academy of Sciences, Saint-Petersburg, Russia}
-
-
-\email{oleg.rud@natur.cuni.cz}
-
-
-
-\abbreviations{MC, MD, RO, FO}
-
-
-\keywords{polyelectrolye hydrogel, simulation, desalination}
-
-%% Because html converters don't know tabularnewline
-\providecommand{\tabularnewline}{\\}
-
-\input{definitions.tex}
+%=================================================================
+% MDPI internal commands
+\firstpage{1} 
+\makeatletter 
+\setcounter{page}{\@firstpage} 
 \makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2022}
+\copyrightyear{2022}
+%\externaleditor{Academic Editor: Firstname Lastname}
+\datereceived{} 
+%\daterevised{} % Only for the journal Acoustics
+\dateaccepted{} 
+\datepublished{} 
+%\datecorrected{} % Corrected papers include a "Corrected: XXX" date in the original paper.
+%\dateretracted{} % Corrected papers include a "Retracted: XXX" date in the original paper.
+\hreflink{https://doi.org/} % If needed use \linebreak
+%\doinum{}
+%------------------------------------------------------------------
+% The following line should be uncommented if the LaTeX file is uploaded to arXiv.org
+%\pdfoutput=1
 
-\begin{document}
-\begin{abstract}
-Recently polyelectrolyte hydrogels have been proposed as draw agents for the forward osmosis desalination techniques. 
+%=================================================================
+% Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, soul, multirow, microtype, tikz, totcount, changepage, attrib, upgreek, cleveref, amsthm, hyphenat, natbib, hyperref, footmisc, url, geometry, newfloat, caption
+
+%=================================================================
+%% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Hypothesis, Remark, Definition, Notation, Assumption
+%% For proofs, please use the proof environment (the amsthm package is loaded by the MDPI class).
+
+%=================================================================
+% Full title of the paper (Capitalized)
+%\Title{Water desalination using polyelectrolyte hydrogel. Gibbs ensemble modeling}
+\Title{Water desalination using polyelectrolyte hydrogel: Gibbs ensemble modeling}
+
+% MDPI internal command: Title for citation in the left column
+\TitleCitation{Title}
+
+% Author Orchid ID: enter ID or remove command
+\newcommand{\orcidauthorA}{0000-0003-3412-7707} % Add \orcidA{} behind the author's name
+\newcommand{\orcidauthorB}{0000-0003-3616-3285} % Add \orcidB{} behind the author's name
+\newcommand{\orcidauthorC}{0000-0002-8501-0464} % Add \orcidB{} behind the author's name
+
+% Authors, for the paper (add full first names)
+\Author{Mikhail Laktionov $^{1, 2}$\orcidA{}, Lucie Nová $^{1}$\orcidB{} and Oleg V. Rud $^{1, 3}$*\orcidC{}}
+
+\keyword{polyelectrolye hydrogel; simulation; desalination} 
+%\longauthorlist{yes}
+
+% MDPI internal command: Authors, for metadata in PDF
+\AuthorNames{Mikhail Laktionov, Lucie Nová and Oleg V. Rud}
+
+% MDPI internal command: Authors, for citation in the left column
+\AuthorCitation{Lastname, F.; Lastname, F.; Lastname, F.}
+% If this is a Chicago style journal: Lastname, Firstname, Firstname Lastname, and Firstname Lastname.
+
+% Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
+\address{%
+$^{1}$ \quad Department of Physical and Macromolecular Chemistry, Faculty of Science, Charles University in Prague, Czech Republic; e-mail@e-mail.com\\
+$^{2}$ \quad St. Petersburg National Research University of Information Technologies, Mechanics and Optics, St. Petersburg, Russia; e-mail@e-mail.com\\
+$^{3}$ \quad Institute of Macromolecular Compounds of Russian Academy of Sciences, Saint-Petersburg, Russia; e-mail@e-mail.com}
+
+
+% Contact information of the corresponding author
+\corres{Correspondence: oleg.rud@natur.cuni.cz; }
+
+% Current address and/or shared authorship
+%\firstnote{Current address: Affiliation 3.} 
+%\secondnote{These authors contributed equally to this work.}
+% The commands \thirdnote{} till \eighthnote{} are available for further notes
+
+%\simplesumm{} % Simple summary
+
+%\conference{} % An extended version of a conference paper
+
+% Abstract (Do not insert blank lines, i.e. \\) 
+\abstract{Recently polyelectrolyte hydrogels have been proposed as draw agents for the forward osmosis desalination techniques. 
 Indeed, polyelectrolyte hydrogels have the ability to absorb a big amount of water across an osmosis membrane as a result of their swelling pressure. 
 On the other hand, the insoluble cross-linked network of the gel enables dewatering under the influence of a stimulus (thermal and/or mechanical).
 Moreover, from a thermodynamic perspective, the polyelectrolyte hydrogel is already an osmotic membrane rejecting ions between external and internal solutions.
@@ -55,13 +208,60 @@ In this article, we present our recent theoretical study of the use of polyelect
 We modeled the thermodynamic equilibrium between coexisting phases of the gel and supernate aqueous salt solution.
 We have shown that the salinity of the supernate phase decreases during compression of the gel due to the release of absorbed in gel solution of lower salinity. 
 Finally, we performed a set of simulations modeling the process of continuous decrease of solution salinity up to freshwater concentrations.
+}
 
-\end{abstract}
+% Keywords
+
+
+% The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
+%\PACS{J0101}
+%\MSC{}
+%\JEL{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Diversity
+%\LSID{\url{http://}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Applied Sciences
+%\featuredapplication{Authors are encouraged to provide a concise description of the specific application or a potential application of the work. This section is not mandatory.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Data
+%\dataset{DOI number or link to the deposited data set if the data set is published separately. If the data set shall be published as a supplement to this paper, this field will be filled by the journal editors. In this case, please submit the data set as a supplement.}
+%\datasetlicense{License under which the data set is made available (CC0, CC-BY, CC-BY-SA, CC-BY-NC, etc.)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Toxins
+%\keycontribution{The breakthroughs or highlights of the manuscript. Authors can write one or two sentences to describe the most important part of the paper.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Encyclopedia
+%\encyclopediadef{For entry manuscripts only: please provide a brief overview of the entry title instead of an abstract.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Advances in Respiratory Medicine
+%\addhighlights{yes}
+%\renewcommand{\addhighlights}{%
+%	\begin{itemize}[labelsep=2.5mm]
+%		\item This is an obligatory section in ``Advances in Respiratory Medicine'', whose goal is to increase the discoverability and readability of the article via search engines and other scholars.
+%		\item Highlights consist of a short collection of (3–6) bullet points that capture the gap in knowledge the manuscript is addressing, as well as breakthroughs and other important points.
+%		\item The Highlights section may also be used to showcase a new method used during the study (if any).
+%	\end{itemize}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{section}{-1} %% Remove this when starting to work on the template.
+
+
+
 
 \section{Introduction\label{sec: intro}}
-
-\paragraph{Water desalination technologies}
-
+\subsection{Water desalination technologies}
 Two basic approaches for separating water from salt are present in modern desalination technology \cite{Miller2003,Curto2021}.
 
 The first approach is distillation, which uses heat to cause a phase change of the water to vapor. The vapor phase is separated from the brine and condenses to liquid fresh water. 
@@ -87,7 +287,7 @@ The correct choice of the draw agents is a task of paramount importance.
 As an osmotically driven process, the draw solute is expected to significantly reduce the water chemical potential, and consequently generate a high osmotic pressure. 
 On the other hand, the draw solute is expected to be easily separated from water \cite{Cai2016}.
 
-\paragraph{Hydrogels for desalination}
+\subsection{Hydrogels for desalination}
 Hydrogels are three-dimensional networks of polymer chains that are crosslinked by either physical or chemical bonds. 
 They are able to entrap large volumes of water attracted by the high concentration of hydrophilic groups. 
 When a dehydrated or deswollen hydrogel uptakes water, its polymer chains extend, creating a swelling pressure. 
@@ -119,7 +319,7 @@ A similar approach was used by Ali \etal \cite{Ali2015}.
 In their study the thermosensitive gel was used (based on copolymers p-NIPAAm and p-AA), so instead of physical compression, the dewatering was done by an external heating stimulus (sunlight). 
 At night the gel was equilibrating with feed water and at daytime, under sunlight, the gel was shrinking and releasing the collected inside solution. 
 
-\paragraph{Physics behind the desalination process}
+\subsection{Physics behind the desalination process}
 %The maximum entropy principle requires the density of charges to be more-less the same throughout the system medium. 
 Since the polyelectrolyte gel has its own charges and its own neutralizing counterions, the density of mobile ions (which are able to freely enter and leave the gel) in gel appears to be smaller than their density outside the gel.
 Therefore the internal solution of the gel has a lower density of mobile ions than that in the solution outside. 
@@ -127,9 +327,9 @@ In that sense, the gel acts as an osmotic membrane separating solutions \cite{Ru
 The driving force of the separation is the Donnan potential originated from the charges of the hydrogel network. 
 The density of mobile ions difference between ions concentrations in the internal and external solutions
 is defined by Donnan law \cite{Rud2018}
-\begin{equation*}
+\begin{equation}
 \frac{\ccl\gel}{\cs}=\frac{\cs}{\cna\gel}=\sqrt{1+\left(\frac{\alpha}{2\cs\Vgel}\right)^{2}}\pm\frac{\alpha}{2\cs\Vgel}
-\end{equation*}
+\end{equation}
 where $\ccl\gel$ and $\cna\gel$ are the internal concentration of monovalent anions and cations, $\cs$ is the salinity of external solution,  $\Vgel$ is the gel molar volume (inverse density of gel segments) and $\alpha$ is ionization degree (in the case of our study $\alpha=1$). 
 The $\pm$ sign in the formula accounts for the change between the cases of gel made of polyanion or polycation.
 
@@ -146,10 +346,14 @@ We modelled also the desalination process, as a cascade of following one by each
 
 %The target of our study is to model the thermodynamic equilibrium between the two boxes and to show how the compression of the gel affects the ion density in the outside solution.
 
+
+
+
 \section{Theory behind the simulation\label{sec: theory}}
 
-\begin{figure*}[t]
-\centering \includegraphics[width=0.7\textwidth]{{figures/simgibbs}.pdf}\caption{Diamond-like network in the simulation box. Color code represents
+\begin{figure*}[h]
+\centering 
+\includegraphics[width=0.7\textwidth]{{figures/simgibbs}.pdf}\caption{Diamond-like network in the simulation box. Color code represents
 the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
 and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
 ($\A$)). \label{fig:diamond}.}
@@ -157,15 +361,20 @@ and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
 
 \subsection{Model}
 
-Our model of the gel is a network of 16 linear polymer chains, each consisting of 30 monomer units. 
+Our model of the gel is a network of 16 linear polymer chains, each consisting of 30 monomer 
+units. 
 These polymer chains are connected to a diamond-like network by 8 crosslinking units.
-This means, there are together $\Ngel=16\cdot30 + 8=488$ gel monomers in the simulation box (see \reffig{fig:diamond}).
-Each monomer unit of the network carries a negative elementary electric charge, thus simulating fully ionized polyacidic gel.
-Except the particles in the network, the monovalent co- and counter-ions ions, $\cl$ and $\na$, are present in simulation box. 
-The total electric charge of all the particles in the box is zero, therefore the amount of $\na$ ions is bigger than that of $\cl$ by the number of hydrogel units.
+This means, there are $\Ngel=16\cdot30 + 8=488$ gel monomers in the simulation box 
+(see \reffig{fig:diamond}).
+Each monomer unit of the network carries a negative elementary electric charge, thus 
+simulating fully ionized polyacidic gel.
+Except the particles in the network, the monovalent co- and counter-ions ions, 
+$\cl$ and $\na$, are present in simulation box. 
+The total electric charge of all the particles in the box is zero, therefore the amount 
+of $\na$ ions is bigger than that of $\cl$ by the number of hydrogel units.
 The entire simulation box setup employs periodic boundaries. 
 
-\begin{figure*}[t]
+\begin{figure*}[h]
 \centering 
 \subfloat[Open system \label{fig: open}]
 {\includegraphics[width=0.5\textwidth]{figures/gc.pdf}}
@@ -178,15 +387,18 @@ and the hydrogel (grey: neutral segment ($\AH$), cyan: charged segment
 \end{figure*}
 
 \subsection{Gibbs ensemble}
-\todoi{We have the "Gibbs ensemble" in the title, and this term is not used in the manuscript at all.}
+\todo{We have the "Gibbs ensemble" in the title, and this term is not used in the manuscript at all.}
 TODO concise description of Gibbs ensemble, solving the task to Reviewer 2, Q5 and Q7
 
 The simulation of the gel compression is performed in two ensembles:
 \begin{enumerate}
-\item \emph{open system}, when the simulation box with gel exchanges ions with an infinite reservoir containing aqueous solution of constant salinity, $\cs$. 
+\item \emph{open system}, when the simulation box with gel exchanges ions with an infinite 
+reservoir containing aqueous solution of constant salinity, $\cs$. 
 \item emph{closed system}, when the simulation box with the gel exchanges ions with a finite volume of aqueous solution.
 \end{enumerate}
-The compression of the gel in the \emph{open system} does not affect the salinity in the reservoir, thus the density of ions outside the gel remains constant $\cs =$ $\cna=$ $\ccl=$ $\text{Const}$ (\reffig{fig: open}). 
+The compression of the gel in the \emph{open system} does not affect the salinity in the 
+reservoir, thus the density of ions outside the gel remains constant 
+$\cs =$ $\cna=$ $\ccl=$ $\text{Const}$ (\reffig{fig: open}). 
 On the contrary, the compression of the gel in the \emph{closed system} changes the salinity in the reservoir, but the total number of $\na$ and $\cl$ ions in the gel and in the reservoir, \ie in the volume $\Vbox$ (\reffig{fig: closed}), remains constant.
 
 The amount of the individual ion types in gel, $N_i$, is given by
@@ -194,32 +406,34 @@ The amount of the individual ion types in gel, $N_i$, is given by
 N_i = N_i\gel + \cs\cdot(\Vbox - \Vgel)
 \end{equation}
 where $i \in \{\na, \cl\}$, $\Vgel$~--- volume of the gel, $\Vbox$~--- the volume in which the gel is compressed. 
-Vbox$ is the gel volume in the free swelling equilibrium state.
+$\Vbox$ is the gel volume in the free swelling equilibrium state.
 
 
-\paragraph{Open system}
+\subsection{Open system}
 We use the grand reaction method \cite{Landsgesel2020a,Rud2020} to simulate the open system.
+\todo{beter to say "method described in REF", to avoid the word 'grand reaction'}
 This method is a hybrid of Molecular dynamics (MD) and Monte Carlo (MC). 
 The whole simulation consists of MD and MC subsimulations, consecutively followed one by each other. 
 The MD simulation is a standard Langevin dynamics \cite{Grest1986}, which models the mechanical motion of all particles in the system. 
 MC simulates the thermodynamic equilibrium with reservoir and handles the ion exchange with the simulation box. 
 The insertion (and deletion) of ion pairs is considered as a reaction of creation (or annihilation) of an ion pair 
-\[
+\begin{equation}
 \varnothing\stackrel{K}{\leftrightarrows}\na+\cl
-\]
+\end{equation}
 with a reaction constant defined by the chemical potential of ions,
 $K=\exp\left(\muna+\mucl\right).$
-The simulation setup is sketched in \reffig{fig:open}.
+The simulation setup is sketched in \reffig{fig:open}\todo{it is not a 'simulation' setup}.
 
-\paragraph{Closed system}
+\subsection{Closed system}
 Analogical scheme is used for the simulation of the gel in the closed system. 
 The procedure  again consists of subsequent MD and MC subsimulation, but now the MD is running in two simulation boxes simultaneously.
 The first box of the volume $\Vgel$ contains the gel with ions and the second box of the volume $\Vout$ contains only ions. 
 The total volume of both boxes is constant, $\Vbox=V_{\mathrm{gel}}+V_{\mathrm{out}}$, so the gel compression implies the decrease of $\Vgel$ and increase of $\Vout$.
 The simulation setup is sketched in \reffig{fig:closed}. 
 
-\paragraph{Algorithm}
-The thermodynamic equilibrium between the two subvolumes implies the exchange of ion pairs between them.
+\subsection{Algorithm}
+The thermodynamic equilibrium between the two subvolumes implies the exchange of ion pairs 
+between them.
 This is performed by means of MC procedure in a way similar to described in \cite{Panagiotopoulos1988b}.
 
 As mentioned above, the simulation consists of MD and MC subsimulations. The algorithm is following:
@@ -233,24 +447,25 @@ and $\Ncl\out$ )
 \item Repeat the procedure until the desired length of sample arrays is reached.
 \end{enumerate}
 
-
 \section{Results and discussion}
 
-\paragraph{Compression in open system}
-\begin{figure*}[t]
-\subfloat[The gel partial pressure vs gel molar volume \label{fig: PV}]
-{\includegraphics[width=0.48\textwidth]{figures/fig_PV_pub.pdf}}
-\hspace{0.02\textwidth}
-\subfloat[Supernate salinity vs gel molar volume\label{fig: CV}]
-{\includegraphics[width=0.48\textwidth]{figures/fig_CV_pub.pdf}}
-\caption{
-The compression of the gel in the \emph{open system} (solid lines) and in the \emph{closed system} (dotted lines). 
-Each solid curve corresponds to different salinity of the reservoir $\cs$ (see legend).
-The shadowed areas limit the states with applied pressure below zero and above 5 bar.\label{fig: PV and CV}}
+\subsection{Compression in open system}
+\begin{figure*}[h]
+	\begin{adjustwidth}{-\extralength}{0cm}
+	\subfloat[The gel partial pressure vs gel molar volume \label{fig: PV}]
+		{\includegraphics[width=0.65\textwidth]{figures/fig_PV_pub.pdf}}
+	\hspace{0.02\textwidth}
+	\subfloat[Supernate salinity vs gel molar volume\label{fig: CV}]
+		{\includegraphics[width=0.65\textwidth]{figures/fig_CV_pub.pdf}}
+	\caption{
+	The compression of the gel in the \emph{open system} (solid lines) and in the \emph{closed system} (dotted lines). 
+	Each solid curve corresponds to different salinity of the reservoir $\cs$ (see legend).
+	The shadowed areas limit the states with applied pressure below zero and above 5 bar.\label{fig: PV and CV}}
+	\end{adjustwidth}
 \end{figure*}
-First, we ran a set of simulations modeling the gel compression in \emph{open system}, \ie in equilibrium with a big bath of certain salinity, $\cs$. 
+First, we run a set of simulations modeling the gel compression in \emph{open system}, \ie in equilibrium with a big bath of certain salinity, $\cs$. 
 The simulations were run for a set of different simulation box volumes. 
-Each simulation provided pressure, $P$, and the number of $\cl$ ions, which are present in the simulation box, $\ncl$. 
+Each simulation returned the averaged values of pressure, $P$, and the number of $\cl$ ions, present in the simulation box, $\ncl$. 
 
 In order to get the partial pressure of the gel, we subtracted from $P$ the osmotic pressure of ions in the reservoir: $\Pgel=P - \Pout$.
 $\Pout$, in turn, we obtained from a separate simulation of a reservoir, containing ionic gas in equilibrium with the bath of the same salinity $\cs$. 
@@ -268,20 +483,22 @@ This effect is well known and is typical for all branched \emph{strong} polyelec
 It is caused by the decrease of ions osmotic pressure and by a screening of electrostatic interactions \cite{Zhulina2000, Landsgesel2020a}.
 (The salinity dependence of the size of \emph{weak} polyelectrolyte gel is in general non-monotonic. We discuss this case in \cite{Rud2018}.)
 
-\begin{figure*}[t]
+\begin{figure*}[h]
+\begin{adjustwidth}{-\extralength}{0cm}
 \subfloat[Pressure vs gel molar volume \label{fig: NV}]
-{\includegraphics[width=0.49\textwidth]{figures/fig_NV_pub.pdf}}
+{\includegraphics[width=0.65\textwidth]{figures/fig_NV_pub.pdf}}
+\hspace{0.02\textwidth}
 \subfloat[Salinity vs gel molar volume\label{fig: CN}]
-{\includegraphics[width=0.495\textwidth]{figures/fig_NVbox_mu_pub.pdf}}
-\caption{The compression of the gel in the \emph{open system} (solid lines) and in the \emph{closed system} (dotted lines). 
-The shadowed areas limit the states with applied pressure below zero and above 5 bar.
+{\includegraphics[width=0.65\textwidth]{figures/fig_NVbox_mu_pub.pdf}}
+\caption{The compression of the gel in \emph{open system} (solid lines) and in \emph{closed system} (dotted lines). 
+Shadowed area limit the states with applied pressure below zero and above 5 bar.
 The values $N_\cl$ are the virtual numbers of present $\cl$ ions in \emph{closed system} simulation boxes.
 \label{fig: NV and CN}}
-
+\end{adjustwidth}
 %\todoi{Replace y-axis labels by $\ncl$}
 \end{figure*}
 
-\paragraph{Compression in closed system}
+\subsection{Compression in closed system}
 The simulations in \emph{closed systems} start from the $\Vgel^0$ and \{$\Nna^0$, $\Ncl^0$\} values
 obtained from the corresponding \emph{open system} simulations.
 The simulation of gel compression in a closed volume, $\Vbox$, starts at the point $\Vbox = \Vgel^0$,
@@ -318,7 +535,7 @@ All the corresponding dependencies are depicted in Figures~\ref{fig: PV and CV} 
 The states corresponding to $P^{gel}=0$, 5 and 10 bar pressure are marked by open circles, squares, and crosses respectively. 
 The non-shadowed areas in the Figures highlight the states in which the gel partial pressure ranges between the experimentally relevant values, 0 and 5 bar.
 
-\paragraph{Desalination scheme}
+\subsection{Desalination scheme}
 It follows that the compression of the gel in the \emph{closed system} affects the salinity, whereas the compression in the \emph{open system} affects the amount of ions in the gel subsystem. 
 Here we show how to employ these phenomena for water desalination. 
 The highlighted colored lines on plots of Figures \ref{fig: PV and CV} and \ref{fig: NV and CN} form a sequence gel swellings and compressions, following one by one, correspondingly in \emph{open} and \emph{closed} systems. 
@@ -360,7 +577,7 @@ where the \emph{open system} processes are horizontal lines and the \emph{closed
 %In this process the surrounding solution salinitiy changes from 0.064 to 0.045 mol/l.
 %Then the gel again swells in open system, but at new salinity. 
 
-\paragraph{The efficiency of desalination.}
+\subsection{The efficiency of desalination}
 The theoretical minimum specific energy for seawater desalination (
 %$\cs=35$ g/l, 
 $\cs\simeq0.6$ mol/l as for pure NaCl) is $\sim3.9$ kJ/l (1.1 kWh/m$^3$) for 50\% recovery \cite{Wang_2020}.
@@ -384,15 +601,24 @@ The first column of the table contains values $\cs^0$ and $\cs^5$, which stand f
 The second column contains values of $n^0$ and $n^5$, which stand for the number of $\cl$ ions in compression volume $\Vbox$, at 0 and 5 bar pressure (divided by $\Vbox$). 
 The number of ion does not change in closed system compression, thus $n^0$ and $n^5$ are the same in the corresponding rows.
 The third column shows the change of the gel volume in corresponding process, $\Delta v$. 
-The fourth column contains the work needed for the compression in the corresponding process per volume of extracted solution. 
-This value is an integral of corresponding $\Pgel(\Vgel)$ dependence
+The fourth column contains the work needed for the compression in the corresponding process 
+per volume of extracted solution. 
+This value is an integral of corresponding $\Pgel(\Vgel)$ dependence \citep{Atkins} 
 \begin{equation}
     W = \frac{\int_{v^0}^{v^5} \Pgel d\Vgel}{\Delta v}
 \end{equation}
-Table 1 presents the absolute values of the work. Note that the compression implies the work done by external force, but the swelling implies the work done by the gel.
+\todo{the equation must be supported by referrence}
+Here, in the table, we present the absolute values of the work, 
+whereas one should keep in mind that the compression implies the work 
+is done by external force and the swelling implies that the work is done by gel.
 
 \begin{table}
-\begin{tabular*}{1\textwidth}{@{\extracolsep{\fill}}ll|lc|c|l|ll}
+\caption{The estimates of the efficiency of the desalination process. All the units are calculated per one mol of gel segments. Values in brackets
+are the estimates corresponding to crossection of 'red' and 'orange' lines on the plots of Figures \ref{fig: PV and CV} and \ref{fig: NV and CN}
+\label{tab: table}}
+\begin{adjustwidth}{-0.0\extralength}{0cm}
+		\newcolumntype{C}{>{\centering\arraybackslash}X}
+\begin{tabularx}{1\textwidth}{@{\extracolsep{\fill}}ll|lc|c|l|ll}
 \multicolumn{1}{l|}{$c_{s}^{0}$, mM} & $c_{s}^{5}$, mM & \multicolumn{1}{l|}{$n_{\cl}^{0}$, mM} & $n_{\cl}^{5}$, mM & $\Delta \Vgel$, l & $|W$\textbar , J/l & \multicolumn{2}{c}{$W^{id}$, J/l}\tabularnewline
 \hline 
 \hline 
@@ -515,11 +741,8 @@ R_{w}= & 0.55
 \cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
 \multicolumn{2}{l|}{\textcolor{magenta}{\small{}$9.83\pm0.05\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}3.12}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{\small{}5.78}} & \multirow{2}{*}{\textcolor{magenta}{\small{}$119.4\pm1.0$}} &  & \tabularnewline
 \multicolumn{2}{r|}{\textcolor{magenta}{\small{}$3.862\pm0.001$}} &  &  &  &  &  & \tabularnewline
-\end{tabular*}
-
-\caption{The estimates of the efficiency of the desalination process. All the units are calculated per one mol of gel segments. Values in brackets
-are the estimates corresponding to crossection of 'red' and 'orange' lines on the plots of Figures \ref{fig: PV and CV} and \ref{fig: NV and CN}
-\label{tab: table}}
+\end{tabularx}
+\end{adjustwidth}
 \end{table}
 
 To give a clue of comparison with ideal desalination process efficiency, the fifth column provides the values of specific energy consumption, $W^\text{id}$, which are calculated by means of \refeq{eq:SEC}, using the following procedure:
@@ -537,7 +760,7 @@ Thus the recovery ratio $R_w = \Delta v^p / (\Delta v^p + \Delta v^b) \simeq $ 0
 
 The estimated $W^{id}$ values are provided in the fifth column of the table, for five triplets of $\cs^f$, $\cs^p$,$\cs^b$ values .
 $W_{\mathrm{sim}}$ is the energy calculated by integration of $\Pgel(\Vgel)$ dependencies as the sum of corresponding compressions in \emph{closed} and \emph{open} systems, $W_{\mathrm{id}}$ is the estimation based on the equation \refeq{eq:SEC} and $R_w$ is the corresponding recovery ratio.
-\todoi{how the integration was performed}
+\todo{how the integration was performed}
 Note that calculating the $W_{\mathrm{sim}}$ we accounted for only the work done on the gel during the compression, whereas the work done by the gel itself during swelling was not taken into account.
 The ratio between $W_{\mathrm{sim}}$ and $W_{\mathrm{id}}$ ranges from 3.26 to 5.43, which is comparable to that of RO.
 
@@ -549,7 +772,7 @@ We have modeled the process of water desalination by sequential combinations of 
 (1) swelling of the gel in \emph{open system}, exchanging ions with a big reservoir at constant salinity
 (2) compression of the gel in \emph{closed system}, when the gel affects the salinity in the surrounding solution
 We estimated the energy consumtion of this process for production of one liter potable water from brine as $W^{id} =$ 38.2 J/l.
-We have shown that this method may compete with the modern technologies used in modern industry. \todoi{energy costs of other desalination methods???}
+We have shown that this method may compete with the modern technologies used in modern industry. \todo{energy costs of other desalination methods???}
 
 \subsection{Study limitations}
 TODO
@@ -557,17 +780,69 @@ TODO
 \subsection{Implications and future perspectives}
 TODO
 
-\section*{Acknowledgments}
 
-This research was supported by the Czech Science Foundation (grant 19-17847Y)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{6pt} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% optional
+%\supplementary{The following supporting information can be downloaded at:  \linksupplementary{s1}, Figure S1: title; Table S1: title; Video S1: title.}
+
+% Only for the journal Methods and Protocols:
+% If you wish to submit a video article, please do so with any other supplementary material.
+% \supplementary{The following supporting information can be downloaded at: \linksupplementary{s1}, Figure S1: title; Table S1: title; Video S1: title. A supporting video article is available at doi: link.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\authorcontributions{Conceptualization, O.R. ; methodology, M.L.; software, M.L.; validation, M.L., L.N. and O.R.; formal analysis, L.N.; data curation, M.L.; writing---original draft preparation, O.R.; writing---review and editing, L.N. 
+%All authors have read and agreed to the published version of the manuscript.', please turn to the  \href{http://img.mdpi.org/data/contributor-role-instruction.pdf}{CRediT taxonomy} for the term explanation. Authorship must be limited to those who have contributed substantially to the work~reported.
+}
+
+\funding{``This research was funded by Czech Science Foundation grant number 19-17847Y'' and Government of Russian Federation  grant number 14.W03.31.0022. }
+
+\acknowledgments{This research was supported by the Czech Science Foundation (grant 19-17847Y)
 Government of Russian Federation, grant number 14.W03.31.0022. 
-Computational resources were supplied by the project ``e-Infrastruktura CZ'' (e-INFRA LM2018140) provided within the program Projects of Large Research, Development and Innovations Infrastructures.
+}
 
+\conflictsofinterest{The authors declare no conflict of interest.} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{adjustwidth}{-\extralength}{0cm}
+%\printendnotes[custom] % Un-comment to print a list of endnotes
+
+\reftitle{References}
+
+% Please provide either the correct journal abbreviation (e.g. according to the “List of Title Word Abbreviations” http://www.issn.org/services/online-services/access-to-the-ltwa/) or the full name of the journal.
+% Citations and References in Supplementary files are permitted provided that they also appear in the reference list here. 
+
+%=====================================
+% References, variant A: external bibliography
+%=====================================
+%\bibliography{your_external_BibTeX_file}
 \bibliography{lit/gibbs}
 
-\newpage
-%\listoftodos
 
+% If authors have biography, please use the format below
+%\section*{Short Biography of Authors}
+%\bio
+%{\raisebox{-0.35cm}{\includegraphics[width=3.5cm,height=5.3cm,clip,keepaspectratio]{Definitions/author1.pdf}}}
+%{\textbf{Firstname Lastname} Biography of first author}
+%
+%\bio
+%{\raisebox{-0.35cm}{\includegraphics[width=3.5cm,height=5.3cm,clip,keepaspectratio]{Definitions/author2.jpg}}}
+%{\textbf{Firstname Lastname} Biography of second author}
 
+% For the MDPI journals use author-date citation, please follow the formatting guidelines on http://www.mdpi.com/authors/references
+% To cite two works by the same author: \citeauthor{ref-journal-1a} (\citeyear{ref-journal-1a}, \citeyear{ref-journal-1b}). This produces: Whittaker (1967, 1975)
+% To cite two works by the same author with specific pages: \citeauthor{ref-journal-3a} (\citeyear{ref-journal-3a}, p. 328; \citeyear{ref-journal-3b}, p.475). This produces: Wong (1999, p. 328; 2000, p. 475)
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% for journal Sci
+%\reviewreports{\\
+%Reviewer 1 comments and authors’ response\\
+%Reviewer 2 comments and authors’ response\\
+%Reviewer 3 comments and authors’ response
+%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{adjustwidth}
 \end{document}
+
