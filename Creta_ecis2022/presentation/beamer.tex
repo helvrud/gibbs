@@ -67,7 +67,7 @@ Institute of Macromolecular Compounds of Russian Academy of Sciences, 199004, Bo
 %  \tableofcontents%[hideallsubsections]
 %\end{frame}
 
-\section[Intro]{Introduction}
+\section{Introduction}
 \begin{frame}[fragile]{Introduction. Desalination.}
 
 
@@ -110,8 +110,10 @@ Institute of Macromolecular Compounds of Russian Academy of Sciences, 199004, Bo
 		
 	\vspace{1cm}
 		
-	{\scriptsize Fengler, C., Arens, L., Horn, H., Wilhelm, M. (2020). {\bf Desalination of Seawater Using Cationic Poly(acrylamide) Hydrogels and Mechanical Forces for Separation.} Macromolecular Materials and Engineering\\
-	Yu, C., Wang, Y., Lang, X., Fan, S. (2016). {\bf A Method for Seawater Desalination via Squeezing Ionic Hydrogels.} Environmental Science and Technology}
+	{\scriptsize Fengler, C., Arens, L., Horn, H., Wilhelm, M. (2020). {\bf Desalination of Seawater Using Cationic Poly(acrylamide) Hydrogels and Mechanical Forces for Separation.} Macromolecular Materials and Engineering
+	
+	Yu, C., Wang, Y., Lang, X., Fan, S. (2016). {\bf A Method for Seawater Desalination via Squeezing Ionic Hydrogels.} Environmental Science and Technology
+	}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -167,39 +169,13 @@ $c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Carnot cycle for desalination}
-
-	\begin{columns}[T,onlytextwidth]% COLUMNS
-		\column{0.3	\textwidth}
-			\begin{figure}[t]
-				{\includegraphics[width=0.9\columnwidth]{{figures/carnot}.pdf}}
-			\end{figure}
-
-		\column{0.7\textwidth}
-		\begin{enumerate}
-			\item A fully reversible desalination cycle 
-			\item Analogy with Carnot cycle
-		\end{enumerate}
-		{\centering
-			\begin{figure}[t]
-				{\includegraphics[width=0.6\columnwidth]{{figures/cycles}.pdf}}
-			\end{figure}
-		}
-		\begin{flushright}
-		 Rud, et al. (2018). 
-		 \end{flushright}
-	\end{columns}% COLUMNS
-	
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 
 
 
-\subsection{Grand-cannonical ensemble.}
+\subsection{Model of the gel. Grand-cannonical ensemble.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -210,7 +186,7 @@ $c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
 			{\includegraphics[width=0.9\columnwidth]{{figures/simgc}.pdf}}
 		\end{figure}
 	\column{0.5\textwidth}
-	The free energy of the grand-canonical ensemble exchanging ion pair with the bath
+	The free energy of the grand-canonical ensemble exchanging particles with the bath
 	\begin{equation*}
 		\boxed{
 		\Omega=E-TS+\mu N}
@@ -220,7 +196,7 @@ $c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
 			S=k_{B}\ln\frac{V^{N}}{N!}\label{eq:entropy}
 		\end{equation*}
 	\end{columns}% COLUMNS		
-	The change of free energy associated with a single particle exchange is 
+	The change of free energy due to a single particle removal (inclusion) is 
 	\begin{equation*}
 		\boxed{
 		\Delta\Omega=k_BT\xi\ln V \left(N+\theta(\xi)\right)+\xi\mu+\Delta E\label{eq: DeltaG GC}}
@@ -301,15 +277,6 @@ $c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
 	\end{columns} % COLUMNS
 \end{frame}
 
-
-
-
-
-
-
-
-
-
 \begin{frame}{Simulation protocol.}
 \begin{enumerate}
 \item {\tt Choose randomly: LMD, or EX.}	\vspace{0.5cm}
@@ -357,9 +324,32 @@ $c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
 		{\includegraphics[width=\columnwidth]{{figures/results_2}.pdf}}
 	\end{figure}
 \end{frame}
+%{
+%\usebackgroundtemplate{\includegraphics[width=\paperwidth]{figures/results_5}.pdf}
+%\begin{frame}{Desalination in \{$\cs$, $N$\} coordinates.}
+%	\begin{equation*}
+%		W_{sim} = \int P^{gel} dV = 
+%	\end{equation*}
+%	\begin{equation*}
+%		= 222.3\pm 2.2 \ \mathrm{J/l}
+%	\end{equation*}	
+%	\begin{equation*}
+%		W_{id} = 43.8 \ \mathrm{J/l}
+%	\end{equation*}
+%	\begin{equation*}
+%		R_w = 52\ \%
+%	\end{equation*}
+%	
+%	\vspace{5.5cm}
+%	
+%\end{frame}
+%}
 
-
-
+\begin{frame}{Desalination in \{$\cs$, $N$\} coordinates.}
+	\begin{figure}[t]
+		{\includegraphics[width=\columnwidth]{{figures/results_W}.pdf}}
+	\end{figure}
+\end{frame}
 
 
 
@@ -367,22 +357,14 @@ $c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
 
 \begin{frame}{Summary}
 \begin{enumerate}
-\item monovalent ions
-	\begin{enumerate}
-		\item ionization of the hydrogel is suppressed as compared to predictions for monomeric acid, due 
-			\begin{itemize}
-				\item to the Donnan partitioning of H + ions; 
-				\item to the electrostatic repulsion between charges of the gel.
-			\end{itemize}
-		\item the decrease of ionisation degree is much less significant than previously estimated using mean-feld models.
-		\item decreasing the ionization of the gel upon compression may completely reverse the desalination effect forcing the gel to  release counterions upon compression instead of absorbing them.
-	\end{enumerate}
-\item with divalent ions
-	\begin{enumerate}
-		\item the electrostatics is almost completelly screened
-		\item alpha does not change versus compression
-		\item The compression of gel in presence of divalent ions works as ion exchanger of Ca ion by Na
-	\end{enumerate}
+\item We modeled the compression of the gel in thermodynamic equilibrium with finite and infinite reservoirs (\emph{open} and \emph{closed} systems).
+\item The compression of the gel in closed system decreases the surrounding salinity.
+\item We modeled the process of water desalination by combining two processes: 
+\begin{itemize}
+\item swelling in \emph{open} system (at constant salinity). 
+\item compression in \emph{closed} system (decreasing salinity).
+\end{itemize}
+%\item We estimated the energy needed to produce one liter of water and have shown that the method may compete with the modern technologies used in modern industry.
 \end{enumerate}
 \end{frame}
 
@@ -416,6 +398,32 @@ $c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
 
 \appendix
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Carnot cycle for desalination}
+
+	\begin{columns}[T,onlytextwidth]% COLUMNS
+		\column{0.3	\textwidth}
+			\begin{figure}[t]
+				{\includegraphics[width=0.9\columnwidth]{{figures/carnot}.pdf}}
+			\end{figure}
+
+		\column{0.7\textwidth}
+		\begin{enumerate}
+			\item A fully reversible desalination cycle 
+			\item Analogy with Carnot cycle
+		\end{enumerate}
+		{\centering
+			\begin{figure}[t]
+				{\includegraphics[width=0.6\columnwidth]{{figures/cycles}.pdf}}
+			\end{figure}
+		}
+		\begin{flushright}
+		 Rud, et al. (2018). 
+		 \end{flushright}
+	\end{columns}% COLUMNS
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
 \begin{frame}[fragile]{Typography}

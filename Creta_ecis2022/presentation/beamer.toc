@@ -1,7 +1,0 @@
-\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
-\beamer@sectionintoc {2}{The model of a polyelectrolyte gel.}{6}{0}{2}
-\beamer@subsectionintoc {2}{1}{Grand-cannonical ensemble.}{10}{0}{2}
-\beamer@subsectionintoc {2}{2}{Gibbs ensemble.}{11}{0}{2}
-\beamer@subsectionintoc {2}{3}{Langevin dynamics.}{12}{0}{2}
-\beamer@sectionintoc {3}{Results}{14}{0}{3}
-\beamer@sectionintoc {4}{Conclusion}{19}{0}{4}

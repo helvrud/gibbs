@@ -29,9 +29,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35355339"
-     inkscape:cx="536.2157"
-     inkscape:cy="-7.9595043"
+     inkscape:zoom="1.4423999"
+     inkscape:cx="832.59746"
+     inkscape:cy="258.4539"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -168,10 +168,194 @@
        orientation="0,1"
        id="guide59981"
        inkscape:locked="false" />
+    <sodipodi:guide
+       position="202.61703,80.635222"
+       orientation="0,1"
+       id="guide1173"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="153.50767,100.16586"
+       orientation="0,1"
+       id="guide1175"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="130.71174,88.784116"
+       orientation="1,0"
+       id="guide1181"
+       inkscape:locked="false" />
   </sodipodi:namedview>
   <defs
      id="defs2"
      style="white-space:pre;stroke-linecap:butt;stroke-linejoin:round">
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker3269"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#feffff;stroke-width:1pt;stroke-opacity:1;fill:#feffff;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path3267" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker2795"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path2793"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#feffff;stroke-width:1pt;stroke-opacity:1;fill:#feffff;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker2719"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path2717"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#feffff;stroke-width:1pt;stroke-opacity:1;fill:#feffff;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker2511"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path2509"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#feffff;stroke-width:1pt;stroke-opacity:1;fill:#feffff;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker2441"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path2439"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#feffff;stroke-width:1pt;stroke-opacity:1;fill:#feffff;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker1969"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1967"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#feffff;stroke-width:1pt;stroke-opacity:1;fill:#feffff;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker1911"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1909"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#feffff;stroke-width:1pt;stroke-opacity:1;fill:#feffff;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker1775"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1773"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#feffff;stroke-width:1pt;stroke-opacity:1;fill:#feffff;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker1663"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1661"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#feffff;stroke-width:1pt;stroke-opacity:1;fill:#feffff;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker1575"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1573"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#feffff;stroke-width:1pt;stroke-opacity:1;fill:#feffff;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker1511"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1509"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#feffff;stroke-width:1pt;stroke-opacity:1;fill:#feffff;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path1197"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#feffff;stroke-width:1pt;stroke-opacity:1;fill:#feffff;fill-opacity:1"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
     <linearGradient
        id="linearGradient76475"
        osb:paint="solid">
@@ -1858,7 +2042,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1871,46 +2055,46 @@
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_CV_pub.png"
        xlink:href="fig_CV_pub.png"
-       transform="matrix(0.90090085,0,0,0.90090085,41.393169,-25.118653)"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59248)"
-       width="97.895836"
-       height="60.228874"
-       preserveAspectRatio="none"
-       id="image27410"
+       y="-255.64441"
        x="315.34894"
-       y="-255.64441" />
+       id="image27410"
+       preserveAspectRatio="none"
+       height="60.228874"
+       width="97.895836"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59248)"
+       transform="matrix(0.90090085,0,0,0.90090085,41.393169,-25.118653)" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_Nmu_pub.png"
        xlink:href="fig_Nmu_pub.png"
-       transform="matrix(0.90090085,0,0,0.90090085,41.39319,-7.1918232)"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59258)"
-       width="97.895836"
-       height="60.228874"
-       preserveAspectRatio="none"
-       id="image27421"
+       y="-122.80445"
        x="315.34912"
-       y="-122.80445" />
+       id="image27421"
+       preserveAspectRatio="none"
+       height="60.228874"
+       width="97.895836"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59258)"
+       transform="matrix(0.90090085,0,0,0.90090085,41.39319,-7.1918232)" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_NV_pub.png"
        xlink:href="fig_NV_pub.png"
-       transform="matrix(0.90090085,0,0,0.90090085,10.75697,-7.1647802)"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59268)"
-       width="97.895836"
-       height="60.228874"
-       preserveAspectRatio="none"
-       id="image27432"
+       y="-122.50378"
        x="107.95373"
-       y="-122.50378" />
+       id="image27432"
+       preserveAspectRatio="none"
+       height="60.228874"
+       width="97.895836"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59268)"
+       transform="matrix(0.90090085,0,0,0.90090085,10.75697,-7.1647802)" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_PV_pub.png"
        xlink:href="fig_PV_pub.png"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round"
-       width="214.19762"
-       height="131.78174"
-       preserveAspectRatio="none"
-       id="image27443"
+       y="-256.82373"
        x="97.447197"
-       y="-256.82373" />
+       id="image27443"
+       preserveAspectRatio="none"
+       height="131.78174"
+       width="214.19762"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round" />
     <rect
        y="-263.91565"
        x="886.36475"
@@ -1921,46 +2105,46 @@
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_CV_pub.png"
        xlink:href="fig_CV_pub.png"
-       y="-256.32907"
-       x="988.13025"
-       id="image58936"
-       preserveAspectRatio="none"
-       height="131.68962"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round"
        width="214.04791"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round" />
+       height="131.68962"
+       preserveAspectRatio="none"
+       id="image58936"
+       x="988.13025"
+       y="-256.32907" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_Nmu_pub.png"
        xlink:href="fig_Nmu_pub.png"
-       transform="matrix(0.90090085,0,0,0.90090085,829.26822,-452.39536)"
-       y="371.43716"
-       x="315.34918"
-       id="image58938"
-       preserveAspectRatio="none"
-       height="60.228874"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59338)"
        width="97.895836"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59338)" />
+       height="60.228874"
+       preserveAspectRatio="none"
+       id="image58938"
+       x="315.34918"
+       y="371.43716"
+       transform="matrix(0.90090085,0,0,0.90090085,829.26822,-452.39536)" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_NV_pub.png"
        xlink:href="fig_NV_pub.png"
-       transform="matrix(0.90090085,0,0,0.90090085,799.13807,-451.88882)"
-       y="371.20874"
-       x="107.42456"
-       id="image58940"
-       preserveAspectRatio="none"
-       height="60.228874"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59348)"
        width="97.895836"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59348)" />
+       height="60.228874"
+       preserveAspectRatio="none"
+       id="image58940"
+       x="107.42456"
+       y="371.20874"
+       transform="matrix(0.90090085,0,0,0.90090085,799.13807,-451.88882)" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_PV_pub.png"
        xlink:href="fig_PV_pub.png"
-       transform="matrix(1.0857763,0,0,1.0857763,777.65631,-515.73182)"
-       y="239.44089"
-       x="108.74749"
-       id="image58942"
-       preserveAspectRatio="none"
-       height="49.973694"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59358)"
        width="81.227081"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59358)" />
+       height="49.973694"
+       preserveAspectRatio="none"
+       id="image58942"
+       x="108.74749"
+       y="239.44089"
+       transform="matrix(1.0857763,0,0,1.0857763,777.65631,-515.73182)" />
     <rect
        y="-263.47244"
        x="1321.9691"
@@ -1971,46 +2155,46 @@
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_CV_pub.png"
        xlink:href="fig_CV_pub.png"
-       transform="matrix(0.90090085,0,0,0.90090085,1265.1693,-700.602)"
-       y="494.11261"
-       x="315.60693"
-       id="image58948"
-       preserveAspectRatio="none"
-       height="60.228874"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59378)"
        width="97.895836"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59378)" />
+       height="60.228874"
+       preserveAspectRatio="none"
+       id="image58948"
+       x="315.60693"
+       y="494.11261"
+       transform="matrix(0.90090085,0,0,0.90090085,1265.1693,-700.602)" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_Nmu_pub.png"
        xlink:href="fig_Nmu_pub.png"
-       transform="matrix(0.90090085,0,0,0.90090085,1265.646,-682.14602)"
-       y="626.95215"
-       x="315.078"
-       id="image58950"
-       preserveAspectRatio="none"
-       height="60.228874"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59368)"
        width="97.895836"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59368)" />
+       height="60.228874"
+       preserveAspectRatio="none"
+       id="image58950"
+       x="315.078"
+       y="626.95215"
+       transform="matrix(0.90090085,0,0,0.90090085,1265.646,-682.14602)" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_NV_pub.png"
        xlink:href="fig_NV_pub.png"
-       y="-184.46628"
-       x="1321.9082"
-       id="image58952"
-       preserveAspectRatio="none"
-       height="131.68962"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round"
        width="214.04791"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round" />
+       height="131.68962"
+       preserveAspectRatio="none"
+       id="image58952"
+       x="1321.9082"
+       y="-184.46628" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_PV_pub.png"
        xlink:href="fig_PV_pub.png"
-       transform="matrix(0.90090085,0,0,0.90090085,1236.045,-701.09997)"
-       y="494.42691"
-       x="107.1535"
-       id="image58954"
-       preserveAspectRatio="none"
-       height="60.228882"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59388)"
        width="97.895836"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59388)" />
+       height="60.228882"
+       preserveAspectRatio="none"
+       id="image58954"
+       x="107.1535"
+       y="494.42691"
+       transform="matrix(0.90090085,0,0,0.90090085,1236.045,-701.09997)" />
     <rect
        y="-263.86102"
        x="454.00092"
@@ -2021,45 +2205,114 @@
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_CV_pub.png"
        xlink:href="fig_CV_pub.png"
-       transform="matrix(0.90090085,0,0,0.90090085,397.85772,-246.01231)"
-       y="-10.325792"
-       x="314.29065"
-       id="image58973"
-       preserveAspectRatio="none"
-       height="60.228874"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59318)"
        width="97.895836"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59318)" />
+       height="60.228874"
+       preserveAspectRatio="none"
+       id="image58973"
+       x="314.29065"
+       y="-10.325792"
+       transform="matrix(0.90090085,0,0,0.90090085,397.85772,-246.01231)" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_NV_pub.png"
        xlink:href="fig_NV_pub.png"
-       transform="matrix(0.90090085,0,0,0.90090085,366.77414,-232.34145)"
-       y="122.28581"
-       x="107.42464"
-       id="image58977"
-       preserveAspectRatio="none"
-       height="60.228874"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59308)"
        width="97.895836"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59308)" />
+       height="60.228874"
+       preserveAspectRatio="none"
+       id="image58977"
+       x="107.42464"
+       y="122.28581"
+       transform="matrix(0.90090085,0,0,0.90090085,366.77414,-232.34145)" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_PV_pub.png"
        xlink:href="fig_PV_pub.png"
-       transform="matrix(0.90090085,0,0,0.90090085,366.77414,-246.00595)"
-       y="-10.261461"
-       x="107.42464"
-       id="image58979"
-       preserveAspectRatio="none"
-       height="60.228882"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59328)"
        width="97.895836"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round;filter:url(#filter59328)" />
+       height="60.228882"
+       preserveAspectRatio="none"
+       id="image58979"
+       x="107.42464"
+       y="-10.261461"
+       transform="matrix(0.90090085,0,0,0.90090085,366.77414,-246.00595)" />
     <image
        sodipodi:absref="/home/kvint/gibbs/Creta_ecis2022/presentation/figures/fig_Nmu_pub.png"
        xlink:href="fig_Nmu_pub.png"
-       y="-190.14587"
-       x="556.06909"
-       id="image58975"
-       preserveAspectRatio="none"
-       height="131.68962"
+       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round"
        width="214.04791"
-       style="white-space:pre;stroke-width:1.28673589;stroke-linecap:butt;stroke-linejoin:round" />
+       height="131.68962"
+       preserveAspectRatio="none"
+       id="image58975"
+       x="556.06909"
+       y="-190.14587" />
+    <path
+       style="white-space:pre;fill:none;stroke:#ff7f0e;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 694.59695,-132.88924 -109.86812,0"
+       id="path1177"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path1179"
+       d="m 718.40904,-152.46832 -133.69638,0.0484"
+       style="white-space:pre;fill:none;stroke:#c0c133;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:serif;-inkscape-font-specification:serif;letter-spacing:0px;word-spacing:0px;white-space:pre;fill:#fbffff;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round"
+       x="589.85083"
+       y="-135.02805"
+       id="text1185"><tspan
+         sodipodi:role="line"
+         id="tspan1183"
+         style="white-space:pre;fill:#fbffff;fill-opacity:1;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round"
+         x="589.85083"
+         y="-135.02805">c<tspan
+   style="font-size:64.99999762%;baseline-shift:sub;white-space:pre;fill:#fbffff;fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round"
+   id="tspan1187">s</tspan> = 0.022 mol/l</tspan></text>
+    <text
+       id="text1193"
+       y="-154.60725"
+       x="589.85083"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:1.25;font-family:serif;-inkscape-font-specification:serif;letter-spacing:0px;word-spacing:0px;white-space:pre;fill:#fbffff;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round"
+       xml:space="preserve"><tspan
+         y="-154.60725"
+         x="589.85083"
+         style="white-space:pre;fill:#fbffff;fill-opacity:1;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round"
+         id="tspan1191"
+         sodipodi:role="line">c<tspan
+   id="tspan1189"
+   style="font-size:64.99999762%;baseline-shift:sub;white-space:pre;fill:#fbffff;fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round">s</tspan> = 0.045 mol/l</tspan></text>
+    <path
+       style="white-space:pre;fill:none;stroke:#feffff;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1Lstart)"
+       d="m 586.30016,-132.88924 10e-6,-19.53068"
+       id="path1195"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3265"
+       d="m 586.30016,-152.27862 10e-6,19.53068"
+       style="white-space:pre;fill:none;stroke:#feffff;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker3269)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.90333986px;line-height:1.25;font-family:serif;-inkscape-font-specification:serif;letter-spacing:0px;word-spacing:0px;white-space:pre;fill:#ffffe9;fill-opacity:1;stroke:none;stroke-width:0.40250042;stroke-linecap:butt;stroke-linejoin:round"
+       x="585.20697"
+       y="-176.26299"
+       id="text3417"><tspan
+         sodipodi:role="line"
+         id="tspan3415"
+         style="white-space:pre;fill:#ffffe9;fill-opacity:1;stroke-width:0.40250042;stroke-linecap:butt;stroke-linejoin:round"
+         x="585.20697"
+         y="-176.26299">W<tspan
+   style="font-size:3.83717084px;baseline-shift:sub;white-space:pre;fill:#ffffe9;fill-opacity:1;stroke-width:0.40250042;stroke-linecap:butt;stroke-linejoin:round"
+   id="tspan3421">sim</tspan>  = 222.3 ± 2.2 J/l</tspan><tspan
+         sodipodi:role="line"
+         style="white-space:pre;fill:#ffffe9;fill-opacity:1;stroke-width:0.40250042;stroke-linecap:butt;stroke-linejoin:round"
+         x="585.20697"
+         y="-168.8838"
+         id="tspan3419"
+         dx="0 0 0 0 0 0 1.3952457">W<tspan
+   style="font-size:3.83717084px;baseline-shift:sub;white-space:pre;fill:#ffffe9;fill-opacity:1;stroke-width:0.40250042;stroke-linecap:butt;stroke-linejoin:round"
+   id="tspan3423">id</tspan>   = 43.8 J/l</tspan></text>
   </g>
 </svg>
