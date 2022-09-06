@@ -70,4 +70,4 @@ def plotly_scatter3d(server, client):
     df.q = df.q.astype('category')
     df[['x', 'y', 'z']] = df.pos.apply(pd.Series).apply(lambda x: x%box_l)
     fig = px.scatter_3d(df, x='x', y='y', z='z', color ='q', symbol = 'type')
-    fig.show()
+    fig.show('browser')

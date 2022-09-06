@@ -22,12 +22,19 @@ gibbs.bib
 *.bak
 *.bbl
 *.synctex.gz
-
+scripts/data/*
+try/*
 *.aux
 *.blg
 *.fdb_latexmk
 *.fls
 *.synctex.gz
 *.tdo
+*.nav
+*.out
+*.snm
+*.toc
+*.eps
 
 #figures/*.vsz
+

@@ -16,6 +16,22 @@
 \newcommand{\pK}{\mathrm{p}K}
 \newcommand{\pH}{\mathrm{pH}}
 \newcommand{\cp}{c_\mathrm{p}}
+\newcommand{\muna}{\mu_\mathrm{Na^+}}
+\newcommand{\mucl}{\mu_\mathrm{Cl^-}}
+\newcommand{\muca}{\mu_\mathrm{Ca^{2+}}}
+\newcommand{\muh}{\mu_\mathrm{H^+}}
+\newcommand{\mua}{\mu_\mathrm{A^-}}
+\newcommand{\muha}{\mu_\mathrm{HA}}
+\newcommand{\muoh}{\mu_\mathrm{OH}}
+\newcommand{\cna}{c_\mathrm{Na^+}}
+\newcommand{\ccl}{c_\mathrm{Cl^-}}
+\newcommand{\cca}{c_\mathrm{Ca^{2+}}}
+\newcommand{\ch}{c_\mathrm{H^+}}
+
+\newcommand{\nna}{N_\mathrm{Na^+}}
+\newcommand{\ncl}{N_\mathrm{Cl^-}}
+\newcommand{\nca}{N_\mathrm{Ca^{2+}}}
+
 \newcommand{\kT}{kT}
 \usepackage{subfig}
 \usetheme[progressbar=frametitle]{metropolis}
@@ -30,8 +46,8 @@
 \usepackage{xspace}
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
-\title{Modeling of weak polyelectrolyte hydrogels under compression. }
-\subtitle{Implications for water desalination.}
+\title{Water desalination using polyelectrolyte hydrogel.  }
+\subtitle{Gibbs ensemble modelling.}
 % \date{\today}
 \author{Oleg V. Rud}
 \institute{Department of Physical and Macromolecular Chemistry, Faculty of Science, Charles University in Prague, Hlavova 8, Praha 2 128 00, Czech Republic
@@ -51,69 +67,177 @@ Institute of Macromolecular Compounds of Russian Academy of Sciences, 199004, Bo
 %  \tableofcontents%[hideallsubsections]
 %\end{frame}
 
-\section[Intro]{Introduction}
+\section{Introduction}
+\begin{frame}[fragile]{Introduction. Desalination.}
 
-\begin{frame}[fragile]{Introduction}
 
+			\begin{enumerate}
+			\item Distillation
+			\item Reverse osmosis
+			\item Forward osmosis
+			\end{enumerate}
+
+
+		\begin{figure}[t]
+			{\includegraphics[width=0.6\columnwidth]{{figures/RO}.pdf}}
+		\end{figure}
+\end{frame}
+\begin{frame}[fragile]{Introduction. Forward osmsis.}
+
+\begin{enumerate}
+	\item Hydrogels for desalination
+	\item Forward osmosis
+	\item Various stimuli: thermo-, pH-, electric-, magnetic-, light-indused gel shrinkage
+\end{enumerate}
+\begin{figure}[t]
+	{\includegraphics[width=\columnwidth]{{figures/FO}.png}}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Introduction. Manfred Wilhelm experiment}
 	\begin{columns}[T,onlytextwidth]% COLUMNS
 		\column{0.5\textwidth}
 			\begin{figure}[t]
-				{\includegraphics[width=\columnwidth]{{figures/gibbs_ca}.pdf}}
+				{\includegraphics[width=\columnwidth]{{figures/experiment}.pdf}}
 			\end{figure}
 
 		\column{0.5\textwidth}
-	\begin{itemize}
-		\item Desalination
-		\item Hydrogels for desalination 
-		\item Forward osmosis
-		\item Various stimuli: thermo-, pH-, electric-, magnetic-, light-indused gel collapse
-		\item Manfred Wilhelm and Yu Chi experiment
-	\end{itemize}
-
+			\begin{figure}[t]
+				{\includegraphics[width=0.9\columnwidth]{{figures/scheme}.png}}
+			\end{figure}
 	\end{columns}% COLUMNS
-	{\scriptsize 
-	Fengler, C., Arens, L., Horn, H., Wilhelm, M. (2020). {\bf Desalination of Seawater Using Cationic Poly(acrylamide) Hydrogels and Mechanical Forces for Separation.} Macromolecular Materials and Engineering\\
-	Yu, C., Wang, Y., Lang, X., Fan, S. (2016). {\bf A Method for Seawater Desalination via Squeezing Ionic Hydrogels.} Environmental Science and Technology}
+		
+	\vspace{1cm}
+		
+	{\scriptsize Fengler, C., Arens, L., Horn, H., Wilhelm, M. (2020). {\bf Desalination of Seawater Using Cationic Poly(acrylamide) Hydrogels and Mechanical Forces for Separation.} Macromolecular Materials and Engineering
+	
+	Yu, C., Wang, Y., Lang, X., Fan, S. (2016). {\bf A Method for Seawater Desalination via Squeezing Ionic Hydrogels.} Environmental Science and Technology
+	}
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-\begin{frame}[fragile]{Donnan prediction}
+\section{The model of a polyelectrolyte gel.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Model of the gel}
   \begin{columns}[T,onlytextwidth]% COLUMNS
     \column{0.35\textwidth}
 \begin{figure}
 \includegraphics[height=4.5cm]{figures/gel_donnan.png}
-\caption{The compression of hydrogel  affects the ionic composition of supernatant}
 \end{figure}   
   
   \column{0.55\textwidth}
   
 \begin{itemize}
-\item Donnan equilibrium
-$c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
-\item Electroneutrality
-$\alpha N$ of self charges\\
-$\alpha N$ of neutralizing counterions\\
-$c^{in}_{Cl}$ of free ion pairs
-\item
-By compression to the dry state 
-one can exclude brine of concentration
-\begin{equation*}
-N_{excl}/V=\begin{cases}
-c_s^{in}<c_s,\\
-\\
-c_s^{in}+\alpha N/V_{gel}>c_s,
-\end{cases}
-\end{equation*}
+\item The gel is a particle of mAcro size 
+\item In aqueous solution
+\item Infinite network of polymer chains
+\item Each bead is charged
 \end{itemize}
 
-  \end{columns}% COLUMNS
 
+  \end{columns}% COLUMNS
+\begin{itemize}
+\item The gel itself is a membrane
+\item Donnan equilibrium
+$c_s^2 = c^{in}_{Na}\cdot c^{in}_{Cl}$
+\item The compression of hydrogel  affects the ionic composition of supernatant
+\end{itemize}
   
 \end{frame}
 
-\section{The model of a polyelectrolyte gel.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Model of the gel. Two ensembles.}
+
+	\begin{columns}[T,onlytextwidth]% COLUMNS
+		\column{0.5\textwidth}
+			\begin{figure}[t]
+				{\includegraphics[width=0.9\columnwidth]{{figures/gc}.pdf}}
+			\end{figure}
+			\centering Open system \\(grand-cannonical ensemble)
+		\column{0.5\textwidth}
+			\begin{figure}[t]
+				{\includegraphics[width=0.9\columnwidth]{{figures/gibbs}.pdf}}
+			\end{figure}
+			\centering Closed system \\(Gibbs ensemble)
+	\end{columns}% COLUMNS
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+\subsection{Model of the gel. Grand-cannonical ensemble.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Grand-cannonical ensemble.}
+	\begin{columns}[T,onlytextwidth]% COLUMNS
+	\column{0.5\textwidth}
+		\begin{figure}[t]
+			{\includegraphics[width=0.9\columnwidth]{{figures/simgc}.pdf}}
+		\end{figure}
+	\column{0.5\textwidth}
+	The free energy of the grand-canonical ensemble exchanging particles with the bath
+	\begin{equation*}
+		\boxed{
+		\Omega=E-TS+\mu N}
+	\end{equation*}
+	The entropy $S$ expands via Boltzmann formula
+		\begin{equation*}
+			S=k_{B}\ln\frac{V^{N}}{N!}\label{eq:entropy}
+		\end{equation*}
+	\end{columns}% COLUMNS		
+	The change of free energy due to a single particle removal (inclusion) is 
+	\begin{equation*}
+		\boxed{
+		\Delta\Omega=k_BT\xi\ln V \left(N+\theta(\xi)\right)+\xi\mu+\Delta E\label{eq: DeltaG GC}}
+	\end{equation*}
+	{\tt accept if $\mathcal{R}^{\xi}<e^{\Delta\Omega/k_BT}$}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\subsection{Gibbs ensemble.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Gibbs ensemble.}
+	\begin{columns}[T,onlytextwidth]% COLUMNS
+		\column{0.5\textwidth}
+		\begin{figure}[t]
+			{\includegraphics[width=0.9\columnwidth]{{figures/simgibbs}.pdf}}
+		\end{figure}
+		\column{0.5\textwidth}
+			The free energy of the grand-canonical ensemble for single particle type
+	\begin{equation*}
+		\boxed{
+		\Omega=E_1+E_2-TS}
+	\end{equation*}
+	
+	\begin{equation}
+		S=k_B \ln \frac{V_1^{N_1}}{N_1!}\frac{V_2^{N_2}}{N_2!}
+	\end{equation}
+	\end{columns}% COLUMNS		
+	The change of free energy associated with a single particle exchange is 
+	\begin{equation*}
+		\boxed{
+		\Delta\Omega=k_BT\xi \ln\left(\frac{V_1}{V_2}\frac{N_2+\theta(-\xi)}{N_1+\theta(\xi)}\right)+\Delta E_1 +\Delta E_2\label{eq: DeltaG GC}}
+	\end{equation*}
+	{\tt accept if $\mathcal{R}^{\xi}<e^{\Delta\Omega/k_BT}$}
+			
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Langevin dynamics.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Langevin dynamics. }
 	\begin{columns}[T,onlytextwidth]% COLUMNS
 		\column{0.4\textwidth}
@@ -153,184 +277,18 @@ c_s^{in}+\alpha N/V_{gel}>c_s,
 	\end{columns} % COLUMNS
 \end{frame}
 
-\subsection{Grand-reaction ensemble.}
-
-{
-\usebackgroundtemplate{\includegraphics[width=\paperwidth]{figures/grand_reaction_model.png}}
-\begin{frame}{Grand-reaction ensemble.}
-\begin{columns}[T,onlytextwidth]% COLUMNS
-\column{0.3\textwidth}
-\vspace{4.5cm}
-Ionization equilibrium in \textbf{reaction} ensemble
-\begin{equation*}
-	\boxed{
-		\mathrm{pA^- + H_3O^+ \leftrightarrows pAH}
-	}
-\end{equation*}
-
-\column{0.4\textwidth}
-Constant salinity 
-\begin{equation*}
-\boxed{c_s = c_\mathrm{Cl}^- = c_\mathrm{Na}^+}
-\end{equation*}
-The simulation box freely 
-exchanges ions with reservoir as in \textbf{grand cannonical} ensemble
-\end{columns} % COLUMNS
-\vspace{0.5cm}
-{\scriptsize Landsgesell, J., Hebbeker, P., Rud, O., Lunkad, R., Košovan, P., \\ Holm, C. (2020). 
-{\bf Grand-Reaction Method for Simulations of Ionization \\
-Equilibria Coupled to Ion Partitioning. }
-Macromolecules, 53(8), 3007–3020. }
-\end{frame}
-}
-
-{
-\begin{frame}{Grand-reaction ensemble.}
-	\textbf{Grand canonical ensemble}\\ 
-	\vspace{1cm}
-	The free energy of the grand-canonical ensemble for single particle type
-	\begin{equation*}
-		\boxed{
-		\Omega=E-TS+\mu N\label{eq:Omega-GC}}
-	\end{equation*}
-	The entropy $S$ expands via Boltzmann formula
-	\begin{columns}[T,onlytextwidth]% COLUMNS
-		\column{0.5\textwidth}
-			\begin{equation*}
-				S=k_{B}\ln\frac{V^{N}}{N!}\label{eq:entropy}
-			\end{equation*}
-		\column{0.5\textwidth}
-			\begin{equation*}
-				\Omega=E-k_BT\ln\frac{V^N}{N!}+\mu N \label{eq: Omega_GC}
-			\end{equation*}
-	\end{columns} % COLUMNS
-	The change of free energy associated with a sngle particle exchange is 
-	\begin{equation*}
-		\boxed{
-		\Delta\Omega=k_BT\ln\left(V^{\xi}\frac{N!}{\left(N+\xi\right)!}\right)+\xi\mu+\Delta E\label{eq: DeltaG GC}}
-	\end{equation*}
-	{\tt accept if $\mathcal{R}^{\xi}<e^{\Delta\Omega/k_BT}$}
-\end{frame}
-}
-
-{
-
-\begin{frame}{Grand-reaction ensemble.}
-
-	\begin{columns}[T,onlytextwidth]% COLUMNS
-		\column{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[height=4.cm]{figures/standard_states.pdf}
-			\end{figure} 
-		\column{0.5\textwidth}	
-			\textbf{Reaction ensemble}\\ 
-			\vspace{1cm}
-			The reaction of an acidic unit 
-			\begin{equation*}
-				\mathrm{HA}\stackrel{K}{\leftrightarrows}\mathrm{A^-}+\mathrm{H^+}\label{eq: acid reaction}
-			\end{equation*}
-			\begin{equation*}
-				\Omega=E-TS+\sum_i\left(\mu_i-\mu^\ominus_i\right) N_i\label{eq:Omega-RE}
-			\end{equation*}
-	\end{columns} % COLUMNS
-	\vspace{1cm}
-	Then the change of system free energy during a single reaction step
-	\begin{equation*}
-		\Delta\Omega=k_BT\ln\left(\prod_i V^{\nu_i\xi}\frac{N_i!}{\left(N_i+\nu_i\xi\right)!}\right)+
-		\xi\left(\sum_i\nu_i\mu_i-\sum_i\nu_i\mu_i^\ominus\right)+\Delta E
-		\label{eq: DeltaG RE one}
-	\end{equation*}
-	{\tt accept if $\mathcal{R}^{\xi}<e^{\Delta\Omega/k_BT}$}
-\end{frame}
-}
-
-
-\begin{frame}{Grand-reaction ensemble.}
-\begin{columns}[T,onlytextwidth]% COLUMNS
-\column{0.7\textwidth}
-\begin{equation*}\boxed{
-\Delta\Omega=k_BT\ln\left(K^\xi\prod_i V^{\nu_i\xi}\frac{N_i!}{\left(N_i+\nu_i\xi\right)!}\right)+\Delta E}
-\end{equation*}
-\column{0.3\textwidth}
-\begin{equation*}\boxed{
-K = e^{-\sum_i\nu_i \mu_i^\ominus }} 
-\end{equation*}
-\end{columns} % COLUMNS
-
-\vspace{0.6cm}
-\begin{columns}[T,onlytextwidth]% COLUMNS
-\column{0.5\textwidth}
-	\begin{equation*}
-		\mathrm{HA}\stackrel{K}{\leftrightarrows}\mathrm{A^-}+\mathrm{H^+} 
-	\end{equation*}
-	\begin{equation*}
-		K= \mu_\h^\ominus+\mu_\mathrm{A^-}^\ominus - \mu_\mathrm{HA}^\ominus
-	\end{equation*}
-	\vspace{0.2cm}
-\begin{equation*}
-\emptyset \leftrightarrows  \na  +\cl
-\end{equation*}
-\begin{equation*}
-K= \mu_\na+\mu_\cl
-\end{equation*}
-\vspace{0.2cm}
-\begin{equation*}
-\emptyset \leftrightarrows \ca + 2\cl
-\end{equation*}
-\begin{equation*}
-K= 2\mu_\ca+\mu_\cl
-\end{equation*}
-\column{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[height=4.cm]{figures/standard_states.pdf}
-			\end{figure} 
-\end{columns} % COLUMNS
-
-\end{frame}
-
-
-
-\begin{frame}{Grand-reaction ensemble.}
-
-	\begin{columns}[T,onlytextwidth]% COLUMNS
-		\column{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[height=4.cm]{figures/standard_states.pdf}
-			\end{figure} 
-		\column{0.5\textwidth}	
-			\textbf{Moderate pH conditions}\\ 
-			\vspace{1cm}
-			The reaction of an acidic unit 
-			\begin{equation*}
-				\mathrm{HA}\stackrel{K}{\leftrightarrows}\mathrm{A^-}+\mathrm{H^+}\label{eq: acid reaction}
-			\end{equation*}
-	Is happening only simultaneously with one of these two
-	\begin{eqnarray*}
-		\h&\leftrightarrows&\na \label{eq:hna} \\
-		2\h&\leftrightarrows&\ca \label{eq:hca}
-	\end{eqnarray*}
-
-	\end{columns} % COLUMNS
-\begin{eqnarray*}
-\mathrm{HA}\stackrel{K'}{\leftrightarrows}\mathrm{A}^{-}+\na, &K' = K \exp(\mu_\h-\mu_\na) \\
-2\mathrm{HA}\stackrel{K''}{\leftrightarrows}2\mathrm{A}^{-}+\ca, &K'' = K \exp(2\mu_\h-\mu_\ca)
-\end{eqnarray*}
-\end{frame}
-
-
-
 \begin{frame}{Simulation protocol.}
 \begin{enumerate}
-\item {\tt Choose randomly: LMD, RE, or EX.}	\vspace{0.5cm}
+\item {\tt Choose randomly: LMD, or EX.}	\vspace{0.5cm}
 \item {\tt Simulate the chosen, collecting 50 samples of: }
 	\vspace{0.3cm}
 	\begin{columns}[T,onlytextwidth]% COLUMNS
+		\column{0.1\textwidth}
 		\column{0.3\textwidth}
 			\fbox{\parbox{\textwidth}{LMD: pressure, $P$, and $\{R_e\}$}}
-		\column{0.3\textwidth}
-	       		\fbox{\parbox{\textwidth}{RE: number of ionized segments, $\NA$}}
-      		\column{0.3\textwidth}
-        		\fbox{\parbox{\textwidth}{EX: number of salt ions, $N_\na$ and $N_\cl$}}
+   		\column{0.3\textwidth}
+      		\fbox{\parbox{\textwidth}{EX: number of salt ions, $N_\na$ and $N_\cl$}}
+		\column{0.1\textwidth}
 	\end{columns} % COLUMNS
 	\vspace{0.5cm}
     {\tt Check the autocorrelation of each samples array.\\
@@ -342,183 +300,131 @@ K= 2\mu_\ca+\mu_\cl
 
 \section{Results}
 
-\begin{frame}{Monovalent salt. Compression.}
+\begin{frame}{Desalination in \{$P$, $V$\} coordinates.}
 	\begin{figure}[t]
-		\subfloat[low salinity, $c_s = 0.007$ mol/l]
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_pressure_log_density_cs0.006_N_Samples200}.pdf}}
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_alpha_log_density_cs0.006_N_Samples200}.pdf}}
-		\subfloat[high salinity, $c_s = 0.209$ mol/l]
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_pressure_log_density_cs0.15_N_Samples200}.pdf}}
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_alpha_log_density_cs0.15_N_Samples200}.pdf}}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Monovalent salt. ``No electrostatics'' vs ``Mean field theory''.}
-	\begin{equation*}
-		\frac{\alpha}{1-\alpha}10^{\pK-\pH} =\sqrt{1+\left(\frac{\alpha\cp}{2\cs}\right)^{2}} - \frac{\alpha\cp}{2\cs}
-	\end{equation*}
-	Together with electroneutrality condition it translates to
-	\begin{equation*}
-		-\frac{{{\alpha}^{3}}{\cp}}{{\cs}}+
-		{\alpha}^{2}\left(\frac{{\cp}}{{\cs}}+\Theta-\frac{1}{\Theta}\right)+
-		\frac{2 \alpha}{\Theta}-\frac{1}{\Theta}=0
-	\end{equation*}
-	where $\Theta = 10^{\pK-\pH}$.
-	\begin{figure}
-		\subfloat[low salinity, $c_s = 0.007$ mol/l]
-			{\includegraphics[width=0.47\columnwidth]{{figures/gel_alpha_log_density_lB0.0_cs0.006_N_Samples200}.pdf}}
-\subfloat[high salinity, $c_s = 0.209$ mol/l]
-			{\includegraphics[width=0.47\columnwidth]{{figures/gel_alpha_log_density_lB0.0_cs0.15_N_Samples200}.pdf}}
+		{\includegraphics[width=\columnwidth]{{figures/results_1}.pdf}}
 	\end{figure}
 \end{frame}
 
 
-
-\begin{frame}{Monovalent salt. Desalination effect.}
-
+\begin{frame}{Desalination in \{$\cs$, $V$\} coordinates.}
 	\begin{figure}[t]
-		{\includegraphics[width=0.5\columnwidth]{{figures/gibbs3}.pdf}}
-		\caption{
-			Schematic illustration of the hydrogel being compressed isotropically by pressure $\Delta P$ 
-			from the initial volume at free swelling equilibrium, $V_0$ to a volume $\Vgel$. 
-			Simultaneously, the gel exchanges small ions with a reservoir solution of salinity $\cs$.}
+		{\includegraphics[width=\columnwidth]{{figures/results_3}.pdf}}
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Monovalent salt. Desalination effect.}
+\begin{frame}{Desalination in \{$N$, $V$\} coordinates.}
 	\begin{figure}[t]
-		\subfloat[low salinity, $c_s = 0.007$ mol/l]
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_Na_log_density_cs0.006_N_Samples200}.pdf}}
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_Cl_log_density_cs0.15_N_Samples200}.pdf}}
-		\subfloat[high salinity, $c_s = 0.209$ mol/l]
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_Na_log_density_cs0.15_N_Samples200}.pdf}}
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_Cl_log_density_cs0.15_N_Samples200}.pdf}}
+		{\includegraphics[width=\columnwidth]{{figures/results_4}.pdf}}
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Divalent salt. }
-	\begin{columns}[T,onlytextwidth]% COLUMNS
-		\column{0.55\textwidth}
-			\begin{figure}
-				\includegraphics[width=1\columnwidth]{figures/vmdscene.png}
-			\end{figure} 		
-		\column{0.4\textwidth}
-			{\Large Seawater model: }
-			\begin{eqnarray*}
-				c_\cl&=&0.54\text{ mol/l} \\
-				&&\text{of negative ions} 
-				%c_\so&=&0.028 \text{ mol/l of negative divalent ions} 
-			\end{eqnarray*}
-			\begin{eqnarray*}
-				c_\na&=&0.47\text{ mol/l} \\
-				&&\text{of positive ions} 
-			\end{eqnarray*}
-
-			\begin{eqnarray*}
-				c_\ca&=&0.063\text{ mol/l} \\
-				&&\text{of positive divalent ions}  \\
-			\end{eqnarray*}
-		
-	\end{columns}
-	\begin{columns}[T,onlytextwidth]% COLUMNS
-		\column{0.5\textwidth}
-			\begin{eqnarray*}
-				c_{\na}&\simeq0.87\cdot c_{\cl} \\
-				c_{\ca}&\simeq0.117\cdot c_{\cl} \\
-				%c_{\so}&\simeq&c_{\cl}\cdot0.0282/0.55=0.051c_{\cl} 
-			\end{eqnarray*}
-		\column{0.5\textwidth}
-			\begin{eqnarray*}
-				\mu_{\na}&=&\mu_{\cl} - 0.139\kT\\
-				\mu_{\ca}&=&\mu_{\cl} - 2.03\kT\\
-			\end{eqnarray*}	
-	\end{columns}		
-\end{frame}
-\begin{frame}{Divalent salt. Compression.}
-
-
-
+\begin{frame}{Desalination in \{$\cs$, $N$\} coordinates.}
 	\begin{figure}[t]
-		\subfloat[low salinity, $c_s = 0.007$ mol/l]
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_pressure_log_density_pCa3.16_cs0.006_N_Samples200}.pdf}}
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_alpha_log_density_pCa3.16_cs0.006_N_Samples200}.pdf}}			
-		\subfloat[high salinity, $c_s = 0.209$ mol/l]
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_pressure_log_density_pCa1.77_cs0.15_N_Samples200}.pdf}}
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_alpha_log_density_pCa1.77_cs0.15_N_Samples200}.pdf}}
+		{\includegraphics[width=\columnwidth]{{figures/results_2}.pdf}}
+	\end{figure}
+\end{frame}
+%{
+%\usebackgroundtemplate{\includegraphics[width=\paperwidth]{figures/results_5}.pdf}
+%\begin{frame}{Desalination in \{$\cs$, $N$\} coordinates.}
+%	\begin{equation*}
+%		W_{sim} = \int P^{gel} dV = 
+%	\end{equation*}
+%	\begin{equation*}
+%		= 222.3\pm 2.2 \ \mathrm{J/l}
+%	\end{equation*}	
+%	\begin{equation*}
+%		W_{id} = 43.8 \ \mathrm{J/l}
+%	\end{equation*}
+%	\begin{equation*}
+%		R_w = 52\ \%
+%	\end{equation*}
+%	
+%	\vspace{5.5cm}
+%	
+%\end{frame}
+%}
+
+\begin{frame}{Desalination in \{$\cs$, $N$\} coordinates.}
+	\begin{figure}[t]
+		{\includegraphics[width=\columnwidth]{{figures/results_W}.pdf}}
 	\end{figure}
 \end{frame}
 
-
-
-
-
-\begin{frame}{Divalent salt. Desalination or ion exchange.}
-Low salinity $c_\cl = 0.007$
-	\begin{figure}
-	\subfloat{\includegraphics[width=0.5\columnwidth]{{figures/gel_Cl_log_density_pCa3.16_cs0.006_N_Samples200}.pdf}}
-	\subfloat{\includegraphics[width=0.5\columnwidth]{{figures/gel_Na_log_density_pCa3.16_cs0.006_N_Samples200}.pdf}}
-	\vspace{0.3cm}
-	\\
-	\subfloat{\includegraphics[width=0.5\columnwidth]{{figures/gel_Ca_log_density_pCa3.16_cs0.006_N_Samples200}.pdf}}
-	\end{figure}
-
-\end{frame}
-
-\begin{frame}{Divalent salt. Desalination or ion exchange.}
-High salinity $c_\cl = 0.263$
-	\begin{figure}
-	\subfloat{\includegraphics[width=0.5\columnwidth]{{figures/gel_Cl_log_density_pCa1.77_cs0.15_N_Samples200}.pdf}}
-	\subfloat{\includegraphics[width=0.5\columnwidth]{{figures/gel_Na_log_density_pCa1.77_cs0.15_N_Samples200}.pdf}}
-	\vspace{0.3cm}	
-	\\
-	\subfloat{\includegraphics[width=0.5\columnwidth]{{figures/gel_Ca_log_density_pCa1.77_cs0.15_N_Samples200}.pdf}}
-	\end{figure}
-
-\end{frame}
 
 
 \section{Conclusion}
 
 \begin{frame}{Summary}
 \begin{enumerate}
-\item monovalent ions
-	\begin{enumerate}
-		\item ionization of the hydrogel is suppressed as compared to predictions for monomeric acid, due 
-			\begin{itemize}
-				\item to the Donnan partitioning of H + ions; 
-				\item to the electrostatic repulsion between charges of the gel.
-			\end{itemize}
-		\item the decrease of ionisation degree is much less significant than previously estimated using mean-feld models.
-		\item decreasing the ionization of the gel upon compression may completely reverse the desalination effect forcing the gel to  release counterions upon compression instead of absorbing them.
-	\end{enumerate}
-\item with divalent ions
-	\begin{enumerate}
-		\item the electrostatics is almost completelly screened
-		\item alpha does not change versus compression
-		\item The compression of gel in presence of divalent ions works as ion exchanger of Ca ion by Na
-	\end{enumerate}
+\item We modeled the compression of the gel in thermodynamic equilibrium with finite and infinite reservoirs (\emph{open} and \emph{closed} systems).
+\item The compression of the gel in closed system decreases the surrounding salinity.
+\item We modeled the process of water desalination by combining two processes: 
+\begin{itemize}
+\item swelling in \emph{open} system (at constant salinity). 
+\item compression in \emph{closed} system (decreasing salinity).
+\end{itemize}
+%\item We estimated the energy needed to produce one liter of water and have shown that the method may compete with the modern technologies used in modern industry.
 \end{enumerate}
 \end{frame}
 
 {\setbeamercolor{palette primary}{fg=black, bg=yellow}
 \begin{frame}[standout]
-  Questions?
+  Questions are welcome.
+ 
+  \vspace{2cm}
+{\small Many thanks to }
+	\begin{columns}[T,onlytextwidth]% COLUMNS
+		\column{0.33\textwidth}
+			\begin{figure}[t]
+				{\includegraphics[width=\columnwidth]{{figures/gacr}.pdf}}\\
+				\vspace{2mm}
+				{\includegraphics[width=\columnwidth]{{figures/megagrant}.pdf}}\\
+				\vspace{2mm}
+				{\includegraphics[width=\columnwidth]{{figures/metacentrum}.png}}
+			\end{figure}
+			\column{0.66\textwidth}
+			\centering
+			\vspace{5mm}
+			{\small
+			\begin{itemize}
+			\item Czech Science Foundation (grant 19-17847Y)			\vspace{3mm}
+			\item Russian Federation, grant number 14.W03.31.0022   \vspace{3mm}
+			\item “e-Infrastruktura CZ” (e-INFRA LM2018140)
+			\end{itemize}}
+	\end{columns}
 \end{frame}
 }
 
 \appendix
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Carnot cycle for desalination}
 
-\begin{frame}{Monovalent salt. ``No electrostatics'' vs ``Mean field theory''.}
-	\begin{figure}[t]
-		\subfloat[low salinity, $c_s = 0.007$ mol/l]
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_pressure_log_density_lB0.0_cs0.006_N_Samples200}.pdf}}
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_alpha_log_density_lB0.0_cs0.006_N_Samples200}.pdf}}
-		\subfloat[high salinity, $c_s = 0.209$ mol/l]
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_pressure_log_density_lB0.0_cs0.15_N_Samples200}.pdf}}
-			{\includegraphics[width=0.5\columnwidth]{{figures/gel_alpha_log_density_lB0.0_cs0.15_N_Samples200}.pdf}}
-	\end{figure}
+	\begin{columns}[T,onlytextwidth]% COLUMNS
+		\column{0.3	\textwidth}
+			\begin{figure}[t]
+				{\includegraphics[width=0.9\columnwidth]{{figures/carnot}.pdf}}
+			\end{figure}
+
+		\column{0.7\textwidth}
+		\begin{enumerate}
+			\item A fully reversible desalination cycle 
+			\item Analogy with Carnot cycle
+		\end{enumerate}
+		{\centering
+			\begin{figure}[t]
+				{\includegraphics[width=0.6\columnwidth]{{figures/cycles}.pdf}}
+			\end{figure}
+		}
+		\begin{flushright}
+		 Rud, et al. (2018). 
+		 \end{flushright}
+	\end{columns}% COLUMNS
+	
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \end{document}
 \begin{frame}[fragile]{Typography}
       \begin{verbatim}The theme provides sensible defaults to
