@@ -378,7 +378,29 @@ and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
 
 \subsection{Model}
 
-Our model of the gel is a network of 16 linear polymer chains, each consisting of 30 monomer 
+We propose a cascade desalination process to lower supernatant salinity, it is worth to note that we are not limited with this process only.
+For this process the gel must be commpressed/decompressed in an \emph{open} and \emph{closed} system.
+
+By the \emph{open system} we mean that the gel is equlibrated with an \textbf{infinite} reservoir outside, such that there are the same ions chemical potential, the same temperature and desired pressure difference between the gel and the reservoir. Number of  $\na$ and $\cl$ ions and gel volume $\Vgel$ are allowed to change.
+
+By the \emph{closed system} we mean that the gel is equlibrated with a \textbf{finite} reservoir, in this case after equilibration the gel and the reservoir again have the same ions chemical potential, the same temperature and desired pressure difference between the gel and the reservoir. 
+Although, the number of ions and volume of gel and reservoir may vary, the total number of ions and the total volume are constant.
+
+The compression of the gel in the \emph{open system} does not affect the salinity in the 
+reservoir, thus the density of ions and their chemical potential outside the gel remains constant 
+$\cs =$ $\cna=$ $\ccl=$ $\text{Const}$ (\reffig{fig: open}). 
+On the contrary, the compression of the gel in the \emph{closed system} changes the salinity in the reservoir, but the total number of $\na$ and $\cl$ ions in the gel and in the reservoir, \ie in the volume $\Vbox$ (\reffig{fig: closed}), remains constant.
+
+In the both cases there is two coexisting systems with constant $\mu P T$ allowed to exchange particles and change volume, which is represented as Gibbs ensemble.
+
+
+Unfortunately, there is no universal computationally effective technique to sample pressure difference, volume, and number of particles at the same. To equilibrate and sample pressure difference and volume we use molecular dynamics (MD) simulation, while equlibration and sampling of ions distribution between the gel and a reservoir is done via Monte-Carlo (MC) simulation. In this sence employed techniques is called MCMD. 
+
+To simulate processes in \emph{open system} and  \emph{closed system} two complementary models MC and MD were implemented.
+
+\subsubsection*{Molecular Dynamics}
+
+Our MD model of the gel is a network of 16 linear polymer chains, each consisting of 30 monomer 
 units. 
 These polymer chains are connected to a diamond-like network by 8 crosslinking units.
 This means, there are $\Ngel=16\cdot30 + 8=488$ gel monomers in the simulation box 
@@ -390,6 +412,14 @@ $\cl$ and $\na$, are present in simulation box.
 The total electric charge of all the particles in the box is zero, therefore the amount 
 of $\na$ ions is bigger than that of $\cl$ by the number of hydrogel units.
 The entire simulation box setup employs periodic boundaries. 
+This model is used in MD part of \emph{open system} and \emph{closed system} simulation.
+
+For the MD part of emph{closed system} simulation analougous simulation box is created without any polymer monomers.
+
+
+
+
+
 
 \begin{figure*}[h]
 \centering 
@@ -402,6 +432,8 @@ the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
 and the hydrogel (grey: neutral segment ($\AH$), cyan: charged segment
 ($\A$)). \label{fig:open and closed}.}
 \end{figure*}
+
+\subsection{}
 
 \subsection{Gibbs ensemble}
 \todo{We have the "Gibbs ensemble" in the title, and this term is not used in the manuscript at all.}
