@@ -398,7 +398,7 @@ Unfortunately, there is no universal computationally effective technique to samp
 
 To simulate processes in \emph{open system} and  \emph{closed system} two complementary models MC and MD were implemented.
 
-\subsubsection*{Molecular Dynamics}
+\subsubsection*{Molecular Dynamics model}
 
 Our MD model of the gel is a network of 16 linear polymer chains, each consisting of 30 monomer 
 units. 
@@ -411,14 +411,31 @@ Except the particles in the network, the monovalent co- and counter-ions ions,
 $\cl$ and $\na$, are present in simulation box. 
 The total electric charge of all the particles in the box is zero, therefore the amount 
 of $\na$ ions is bigger than that of $\cl$ by the number of hydrogel units.
-The entire simulation box setup employs periodic boundaries. 
+The entire simulation box setup employs periodic boundaries.
+Coloumb interaction computed by P3M method.
 This model is used in MD part of \emph{open system} and \emph{closed system} simulation.
 
-For the MD part of emph{closed system} simulation analougous simulation box is created without any polymer monomers.
+For the MD part of \emph{closed system} simulation analougous simulation box is created without any polymer monomers to model the finite reservoir. 
+The amount of $\na$ ions is equal to $\cl$.
+
+By integration Langevin motion equation by Verlet algorithm for each particles we sample 
+total energy of the system and pressure. 
+Kinetic energy, bonded, non-bonded and Coloumb interaction contribute to the total energy of a system.
+Pressure in the system calculated as in ref [Essmann et al., 1995, doi:10.1063/1.470117]
+\todo{I do not know if it is needed, ML}
+
+When computing MD the gel and reservoir box are essentially NVT-ensembles.
+
+\subsubsection*{Monte Carlo model}
+
+In the \emph{open system} system box with the gel and the monovalent co- and counter-ions ions, 
+$\cl$ and $\na$ is allowed to exchange particles with infinite reservoir with constant chemical potential.
 
 
+\dots
 
 
+In the \emph{closed system} system two boxes one with the gel and the other with ions pairs only iare allowed to exchange particles.
 
 
 \begin{figure*}[h]
@@ -449,6 +466,8 @@ The compression of the gel in the \emph{open system} does not affect the salinit
 reservoir, thus the density of ions outside the gel remains constant 
 $\cs =$ $\cna=$ $\ccl=$ $\text{Const}$ (\reffig{fig: open}). 
 On the contrary, the compression of the gel in the \emph{closed system} changes the salinity in the reservoir, but the total number of $\na$ and $\cl$ ions in the gel and in the reservoir, \ie in the volume $\Vbox$ (\reffig{fig: closed}), remains constant.
+
+
 
 The amount of the individual ion types in gel, $N_i$, is given by
 \begin{equation}
