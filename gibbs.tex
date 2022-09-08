@@ -366,7 +366,7 @@ We modelled also the desalination process, as a cascade of following one by each
 
 
 
-\section{Theory behind the simulation\label{sec: theory}}
+\section{Model and methods\label{sec: theory}}
 
 \begin{figure*}[h]
 \centering 
@@ -376,34 +376,41 @@ and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
 ($\A$)). \label{fig:diamond}.}
 \end{figure*}
 
-\subsection{Model}
+\subsection{Open and closed sytems}
 
 We propose a cascade desalination process to lower supernatant salinity.
 %it is worth to note that we are not limited with this process only.
-For this process the gel must be commpressed/decompressed in an \emph{open} and \emph{closed} system.
+For this process the gel must be compressed/decompressed in an \emph{open} and \emph{closed} system.
 By the \emph{open system} we mean that the gel is in thermodynamic equilibrium with huge, effectively \textbf{infinite}, reservoir of an aqueous solution. 
-The gel freely exchanges ions with the reservoir, while their concentration in reservoir (and chemical potential) remains constant.
+%The gel freely exchanges ions with the reservoir, while their concentration in reservoir (and chemical potential) remains constant.
 %, such that there are the same ion's chemical potential, the same temperature, and desired pressure difference between the gel and the reservoir. The number of  $\na$ and $\cl$ ions and gel volume $\Vgel$ are allowed to change.
 By the \emph{closed system} we mean that the gel is in equilibrium with a \textbf{finite} reservoir of an aqueous solution. 
-In this case the exchange of ions between the gel and the reservoir may affect their concentration in reservoir, whereas the  
+In this case the exchange of ions between the gel and the reservoir may affect their concentration in reservoir.%, whereas the  
 %again have the same ions chemical potential, the same temperature, and desired pressure difference between the gel and the reservoir. 
 %Although, the number of ions and volume of gel and reservoir may vary, 
-the total number of ions (in gel and in reservoir) is constant.
+%total number of $\na$ and $\cl$ ions in the gel and in the reservoir, \ie in the volume $\Vbox$ remains constant.
 
-Due to huge size of the reservoir, the compression of the gel in the \emph{open system} does not affect the reservoir salinity, $\cs =$ $\cna=$ $\ccl=$ $\text{Const}$ (\reffig{fig: open}), whereas the number of ions entrapped in the volume $\Vbox$ changes.
+Due to huge size of the reservoir, the compression of the gel in the \emph{open system} does not affect the reservoir salinity, $\cs =$ $\cna=$ $\ccl=$ $\text{Const}$ (\reffig{fig: open}), whereas the number of ions entrapped in the volume $\Vbox$ changes (\reffig{fig: closed}).
 On the contrary, the compression of the gel in the \emph{closed system} changes the salinity in the reservoir, but the total number of $\na$ and $\cl$ ions in the gel and in the reservoir, \ie in the volume $\Vbox$ (\reffig{fig: closed}), remains constant.
 
 %In both cases there are two coexisting systems with constant $\mu P T$ allowed to exchange particles and change volume, which is represented as Gibbs ensemble.
 
 
-Unfortunately, there is no universal computationally effective technique to sample pressure difference, volume, and number of particles at the same. To equilibrate and sample pressure difference and volume we use molecular dynamics (MD) simulation, while equlibration and sampling of ions distribution between the gel and a reservoir is done via Monte-Carlo (MC) simulation. In this sence employed techniques is called MCMD. 
+%Unfortunately, there is no universal computationally effective technique to sample pressure difference, volume, and number of particles at the same. 
+The mechanical movement and the exchange of ions occur simulataneously in real systems, however, we simulate them alternating each other in stop-run mode in a random order. 
+To sample mechanical properties of the gel and reservoir we use MD simulation, whereas to sample the ions distribution between the gel and a reservoir we use MC simulation.
+The details of this hybryd computational technique can be found in our previous studies of polyelectrolytes in open system \cite{Rud2020, Rud2022, Landsgesel2020a}. 
+ 
+%In this sense employed techniques is called MCMD. 
 
-To simulate processes in \emph{open system} and  \emph{closed system} two complementary models MC and MD were implemented.
 
-\subsubsection*{Molecular Dynamics model}
 
-Our MD model of the gel is a network of 16 linear polymer chains, each consisting of 30 monomer 
-units. 
+
+%To simulate processes in \emph{open system} and  \emph{closed system} two complementary models MC and MD were implemented.
+
+\subsection{Langevin Dynamics}
+
+We model the gel as a network of 16 linear polymer chains, each consisting of 30 monomer units. 
 These polymer chains are connected to a diamond-like network by 8 crosslinking units.
 This means, there are $\Ngel=16\cdot30 + 8=488$ gel monomers in the simulation box 
 (see \reffig{fig:diamond}).
@@ -412,25 +419,54 @@ simulating fully ionized polyacidic gel.
 Except the particles in the network, the monovalent co- and counter-ions ions, 
 $\cl$ and $\na$, are present in simulation box. 
 The total electric charge of all the particles in the box is zero, therefore the amount 
-of $\na$ ions is bigger than that of $\cl$ by the number of hydrogel units.
-The entire simulation box setup employs periodic boundaries.
-Coloumb interaction computed by P3M method.
-This model is used in MD part of \emph{open system} and \emph{closed system} simulation.
+of $\na$ ions is bigger than that of $\cl$ by the number of hydrogel units, $\Ngel$.
+The solvent assumed to be water, which is modeled implicitly via setting up dielectric permittivity $\epsilon=80$.
 
-For the MD part of \emph{closed system} simulation analougous simulation box is created without any polymer monomers to model the finite reservoir. 
-The amount of $\na$ ions is equal to $\cl$.
+We use three types of interactions, \ie bonded interactions, short-range non-bonded interactions and electrostatic interactions.
 
-By integration Langevin motion equation by Verlet algorithm for each particles we sample 
-total energy of the system and pressure. 
-Kinetic energy, bonded, non-bonded and Coloumb interaction contribute to the total energy of a system.
-Pressure in the system calculated as in ref [Essmann et al., 1995, doi:10.1063/1.470117]
-\todo{I do not know if it is needed, ML}
+We use Finite extension nonlinear elastic (FENE) potential~\refeq{eq:fene} to account for the bonding interactions.
+\begin{equation}\label{eq:fene}
+    V_\mathrm{FENE}(r) = -\frac{1}{2} K \Delta r_\mathrm{max}^2\ln \left[ 1 - \left(\frac{r-r_0}{\Delta r_\mathrm{max}} \right)^2 \right ],
+\end{equation}
+where $K$ is the magnitude of symmetric interaction between two segments,
+$\Delta r_{\mathrm{max}}$ is the maximal stretching length of the bond and $r_0$ is the equilibrium bond length.
+In our simulations we set $K = 10 \kT/\sigma^{2}$, $\Delta r_{\mathrm{max}} = 2 \sigma$ and $r_0 = 1.0\sigma$~\cite{Jin2007}.
 
-When computing MD the gel and reservoir box are essentially NVT-ensembles.
+The non-bonded interactions are modelled by the truncated Lennard-Jones interaction potential.
+This potential imposes strong repulsion between all particles at short distances:
+\begin{equation}
+    \begin{split}\label{eq:LJ}
+        V_\mathrm{LJ}(r) =
+        \begin{cases}
+            4 \varepsilon \left( \left(\cfrac{\sigma}{r}\right)^{12}
+            - \left(\cfrac{\sigma}{r}\right)^6\right)
+            & \mathrm{if~} r < r_\mathrm{cut}\\
+            0
+            & \mathrm{elsewhere}
+        \end{cases},
+    \end{split}
+\end{equation}
+where $r$ is the interparticle distance,
+$\sigma = 0.35 \mathrm{nm}$ is a chosen characteristic size of the particles,
+$\varepsilon$ is the depth of the potential well in $\kT$ units and $r_\mathrm{cut}$ is the cut-off distance beyond which the potential is set zero.
 
-\subsubsection*{Monte Carlo model}
+We model the long range electrostatic interactions by the Coulomb potential:
+\begin{equation}
+    V_{\mathrm{EL}}=\lb\kT \cfrac{q_{1}q_{2}}{r},
+\end{equation}
+where $\lb$ is Bjerrum length; $\lb = 2\sigma = 0.7 \mathrm{nm}$ which corresponds to water the Bjerrum length in water at $T=300 \mathrm{K}$.
 
-In the \emph{open system} system box with the gel and the monovalent co- and counter-ions ions, 
+We use Langevin thermostat, \ie we add two additional terms to force in equation of motion
+\begin{equation}
+f_i =  -\gamma v_i(t)+\sqrt{2\gamma \kT }\eta_i(t),
+\end{equation}
+where the first term correspond to constant friction with $\gamma$ being a friction coefficient, and the second one corresponds to random thermal force with $\eta_i$ being a normally distributed random number (see for details \cite{Grest1986}).
+
+Integrating the Langevin motion equation for all the particles we sample total energy of the system and pressure \cite{essmann1995}.
+ 
+\subsubsection{Monte Carlo sampling}
+
+General scheme of the Monte Carlo in the \emph{open system} system box with the gel and the monovalent co- and counter-ions ions, 
 $\cl$ and $\na$ is allowed to exchange particles with infinite reservoir with constant chemical potential.
 
 
