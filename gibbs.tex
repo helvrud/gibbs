@@ -464,9 +464,255 @@ where the first term correspond to constant friction with $\gamma$ being a frict
 
 Integrating the Langevin motion equation for all the particles we sample total energy of the system and pressure \cite{essmann1995}.
  
-\subsubsection{Monte Carlo sampling}
+\subsubsection{Monte Carlo sampling in open system}
 
-General scheme of the Monte Carlo in the \emph{open system} system box with the gel and the monovalent co- and counter-ions ions, 
+Monte Carlo scheme for sampling the exchange of ions in \emph{open system} is based on the formula for free energy of grand canonical ensemble.
+
+\begin{equation}
+    \Omega=E-TS+\sum_i\mu_i N_i\label{eq:Omega-GC}
+\end{equation}
+where $E$ is internal energy, $T$~--- temperature, $S$~--- entropy, $N_i$ is the number of ions of type $i\in\{\na,\ \cl\}$.
+
+%Our model system represents a finite volume $V$ which exchanges particles with the bath of infinite volume.
+%The infinity of the volume means, that the particle exchange between the system and the bath does not influence on the chemical potentials in the bath.
+%Such ensemble is called grand canonical ensemble; the free energy in this ensemble, the Landau potential, is
+The entropy $S$ is given by the Boltzmann formula~\cite{Nagle2004}:
+\begin{equation}
+    S=\kB\sum_i\ln\frac{V^{N_i}}{N_i!}\label{eq:entropy}
+\end{equation}
+%\todo{for partiles without interactions}
+It accounts for two contributions:
+\begin{enumerate}
+    \item the combinatorial entropy $S_{c}=-\sum_i\kB\ln N_i!$ which reflects the freedom of choice among $N$ particles
+    \item the mixing entropy $S_{m}=\kB \sum_i N_i\ln V$ which reflects the freedom to place the chosen particle randomly within the simulation box. 
+\end{enumerate}
+$V$ is the unitless volume, \ie the volume measured in units of $\sigma^3$. 
+Thus \refeq{eq:Omega-GC} turns to 
+%\todo{this is not reason, moreover A.10 is already wrong as for units}
+\begin{equation}
+    \Omega=E-\kT\ln\prod_i\frac{V^N_i}{N_i!}+\sum_i\mu_i N_i
+\label{eq: Omega_GC}
+\end{equation}
+The change of free energy associated with an exchange of ion pair is
+\begin{equation}
+    \Delta\Omega=\kT\ln\prod_i\left(V^{\xi}\frac{N_i!}{\left(N_i+\xi\right)!}\right)+\xi\mu_i+\Delta E
+\label{eq: DeltaG GC}
+\end{equation}
+where $\xi=+1$ stands for insertion of an ion pair and $\xi=-1$ for deletion.
+In general $\xi$ can be any number, but in case when  $\xi = \pm 1$ the previous equation gets simplified 
+\begin{equation}
+    \Delta\Omega=\kT\ln V^{2\xi} \prod_i \left(N_i+\theta(\xi)\right)^{-\xi}+\xi\mu_i+\Delta E
+\label{eq: DeltaG GC_simpl}
+\end{equation}
+where $\theta$ is the Heaviside function, $\theta(\xi) = 1, \mathtt{if}\  \xi>0$ , $\theta(\xi) = 0, \mathtt{if}\  \xi<0$
+
+The procedure of the Monte Carlo Sampling is the following \cite{Frenlkel2002_book}
+\begin{enumerate}
+	\item we propose the new configuration of the system by insertion (or deletion) of an ion pair, $\xi=\pm1$
+	\item we accept the new configuration if
+	\begin{equation}
+        \mathcal{R}^{\xi}<e^{\Delta\Omega/\kT}=V^{2\xi} \prod_i \left(N_i+\theta(\xi)\right)^{-\xi}e^{\left(\Delta E+\xi\mu\right)/\kT}\label{eq: GC acceptance}
+	\end{equation}
+\end{enumerate}
+where $\mathcal{R}$ is uniformly distributed random number in range between $0$ and $1$.
+
+\subsection{Monte Carlo sampling in closed system}
+In the same way we derive the acceptance criterion for sampling the closed system (Gibbs ensemble)
+
+
+
+
+
+
+
+
+
+
+
+
+
+The free energy of the Gibbs ensemble is a sum of free energies of the gel and the external volume.
+
+\begin{equation}
+    \Omega=E\gel-TS\gel + E\out-TS\out \label{eq:Omega-GC}
+\end{equation}
+
+The entropy $S$ is given by the Boltzmann formula~\cite{Nagle2004}:
+\begin{equation}
+    S=\kB\sum_i\ln\frac{V\gel^{N\gel_i}}{N_i!}\label{eq:entropy}
+\end{equation}
+%\todo{for partiles without interactions}
+It accounts for two contributions:
+\begin{enumerate}
+    \item the combinatorial entropy $S_{c}=-\sum_i\kB\ln N_i!$ which reflects the freedom of choice among $N$ particles
+    \item the mixing entropy $S_{m}=\kB \sum_i N_i\ln V$ which reflects the freedom to place the chosen particle randomly within the simulation box. 
+\end{enumerate}
+$V$ is the unitless volume, \ie the volume measured in units of $\sigma^3$. 
+Thus \refeq{eq:Omega-GC} turns to 
+%\todo{this is not reason, moreover A.10 is already wrong as for units}
+\begin{equation}
+    \Omega=E-\kT\ln\prod_i\frac{V^N_i}{N_i!}+\sum_i\mu_i N_i
+\label{eq: Omega_GC}
+\end{equation}
+The change of free energy associated with an exchange of ion pair is
+\begin{equation}
+    \Delta\Omega=\kT\ln\prod_i\left(V^{\xi}\frac{N_i!}{\left(N_i+\xi\right)!}\right)+\xi\mu_i+\Delta E
+\label{eq: DeltaG GC}
+\end{equation}
+where $\xi=+1$ stands for insertion of an ion pair and $\xi=-1$ for deletion.
+In general $\xi$ can be any number, but in case when  $\xi = \pm 1$ the previous equation gets simplified 
+\begin{equation}
+    \Delta\Omega=\kT\ln V^{2\xi} \prod_i \left(N_i+\theta(\xi)\right)^{-\xi}+\xi\mu_i+\Delta E
+\label{eq: DeltaG GC_simpl}
+\end{equation}
+where $\theta$ is the Heaviside function, $\theta(\xi) = 1, \mathtt{if}\  \xi>0$ , $\theta(\xi) = 0, \mathtt{if}\  \xi<0$
+
+The procedure of the Monte Carlo Sampling is the following \cite{Frenlkel2002_book}
+\begin{enumerate}
+	\item we propose the new configuration of the system by insertion (or deletion) of an ion pair, $\xi=\pm1$
+	\item we accept the new configuration if
+	\begin{equation}
+        \mathcal{R}^{\xi}<e^{\Delta\Omega/\kT}=V^{2\xi} \prod_i \left(N_i+\theta(\xi)\right)^{-\xi}e^{\left(\Delta E+\xi\mu\right)/\kT}\label{eq: GC acceptance}
+	\end{equation}
+\end{enumerate}
+where $\mathcal{R}$ is uniformly distributed random number in range between $0$ and $1$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+We model the ionization equilibrium by means of sampling the reaction ensemble~\cite{Smith1994, Turner2008a}.
+In the reaction ensemble we perform chemical reactions as simultaneous insertion, deletion or identity change of particles according to the reaction equation.
+For example we assume the ionization of an acidic unit which proceeds according to the reaction equation
+\begin{equation}
+    \mathrm{AH}\stackrel{K}{\leftrightarrows}\A+\h\label{eq: acid reaction}
+\end{equation}
+We perform the forward direction of this reaction
+by inserting a $\h$ particle and replacing $\AH$ by $\A$.
+We perform the reverse direction of this reaction
+by deleting a $\h$ particle and replacing $\A$ by $\AH$.
+
+In order to account for the particles creation and deletion
+we need to introduce standard states for individual reacting species.
+The creation of a particle then means that the particle is removed from the standard state
+and inserted into the studied system, and vice versa for deletion.
+Each species in its standard state has the \emph{standard} chemical potential, $\mu^\ominus_i$.
+The choice of standard state for each component is arbitrary
+and we usually define it as pure component at standard pressure $10^5$ Pa
+and concentration $1 \molperl$~\cite{IUPAC}.
+
+Thus we rewrite the formula for free energy \refeq{eq:Omega-GC}
+accounting for particles creation and deletion as
+\begin{equation}
+    \Omega=E-TS+\sum_i\left(\mu_i-\mu^\ominus_i\right) N_i\label{eq:Omega-RE}
+\end{equation}
+where the last term in \refeq{eq:Omega-RE} stands for the exchange of particles between the studied system and the standard states.
+
+Let's have the reaction extent $\xi = (N_i - N_{i,0})/\nu_i$
+where $N_i$, resp. $N_{i,0}$ is the actual, resp. initial number of the $i$-th particle species,
+$\nu_i$ is its stoichiometric coefficient.
+and $i$ runs over individual species involved
+in the chemical reaction \refeq{eq: acid reaction} $i \in (\h,\ \A,\ \AH)$. 
+The stoichiometric coefficients are positive for reaction products
+and negative for reactants: $\nu_\h=1$, $\nu_\A=1$, $\nu_\AH=-1$.
+Therefore we take $\xi = +1$ for the forward reaction direction
+and $\xi = -1$ for the reverse reaction direction.
+Then we can write the change of the free energy of the studied system during one reaction step as
+\begin{equation}
+\Delta\Omega_{\mathrm{re}}=\kT\ln\left(\prod_i V^{\nu_i\xi}\frac{N_i!}{\left(N_i+\nu_i\xi\right)!}\right)+
+\xi\left(\sum_i\nu_i\mu_i-\sum_i\nu_i\mu_i^\ominus\right)+\Delta E
+\label{eq: DeltaG RE one}
+\end{equation}
+%\begin{multline}
+%    \Delta\Omega_{\mathrm{re}}=\kT\ln\left(\prod_i V^{\nu_i\xi}\frac{N_i!}{\left(N_i+\nu_i\xi\right)!}\right)+\\
+%    \xi\left(\sum_i\nu_i\mu_i-\sum_i\nu_i\mu_i^\ominus\right)+\Delta E
+%\label{eq: DeltaG RE one}
+%\end{multline}
+
+We write $\sum_i\nu_i \mu_i = 0$
+for the chemical reaction in equilibrium.
+
+The term $\sum_i\nu_i\mu_i^\ominus$ is the standard Gibbs free energy change
+of the reaction \refeq{eq: acid reaction}.
+which defines the equilibrium reaction constant \cite{Atkins} as
+\begin{equation}
+    K = e^{-\sum_i\nu_i \mu_i^\ominus / \kT}
+\end{equation}
+
+Finally, the \refeq{eq: DeltaG RE one} translates to
+\begin{equation}
+    \Delta\Omega_{\mathrm{re}}=\kT\ln\left(K^\xi\prod_i V^{\nu_i\xi}\frac{N_i!}{\left(N_i+\nu_i\xi\right)!}\right)+\Delta E
+\label{eq: DeltaG RE two}
+\end{equation}
+
+\subsection{Ion pairs insertions\label{sec: ion insertions}}
+We treat the exchange of mobile ions with the reservoir as simultaneous insertion or deletion
+of ion pairs or sets in the simulation box.
+We insert/delete either $\na$ and $\cl$ ion pair or the two $\cl$ ions together with one $\ca$ ion.
+Thus we model the insertion as:
+\begin{eqnarray}
+    \na +  \cl &\leftrightarrows& \emptyset\label{eq:nacl} \\
+    \ca + 2\cl &\leftrightarrows& \emptyset \label{eq:cacl}
+\end{eqnarray}
+with the corresponding equilibrium reaction constants, reflecting the free energy change during the insertion
+\begin{eqnarray*}
+    K_\mathrm{NaCl}     = \exp\left(\left(\mu_\na+ \mu_\cl \right) /\kT\right), \\
+    K_{\mathrm{CaCl}_2} = \exp\left(\left(\mu_\ca+2\mu_\cl \right /\kT\right))
+\end{eqnarray*}
+%$K_\mathrm{NaCl}= \exp\left(\mu_\na+\mu_\cl \right)$, $K_{\mathrm{CaCl}_2} = \exp\left(\mu_\ca+2\mu_\cl \right)$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+the Monte Carlo in the \emph{open system} box with the gel and the monovalent co- and counter-ions ions, 
 $\cl$ and $\na$ is allowed to exchange particles with infinite reservoir with constant chemical potential.
 
 
