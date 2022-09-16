@@ -392,7 +392,7 @@ The mechanical movement and the exchange of ions occur simulataneously in realit
 To sample mechanical properties of the gel and reservoir we use MD simulation, whereas to sample the ions distribution between the gel and a reservoir we use MC simulation.
 The details of this hybrid MCMD computational technique can be found in our previous studies of polyelectrolytes in open system \cite{Rud2020, Rud2022, Landsgesel2020a}. 
  
-\subsection{Langevin Dynamics}
+\subsection{Molecular Dynamics}
 \begin{figure*}[h]
 \centering 
 \includegraphics[width=0.7\textwidth]{{figures/simgibbs}.pdf}\caption{Diamond-like network in the simulation box. Color code represents
@@ -455,8 +455,8 @@ We used Langevin thermostat, \ie the two additional terms to force in equation o
 where the first term correspond to constant friction with $\gamma$ being a friction coefficient,
  and the second one corresponds to random thermal force with $\boldsymbol{\eta}_i$ being a normally distributed random vector; $\mathbf{v}_i$~--- velocity of $i$-th particle (see for details \cite{Grest1986}).
 
-\subsubsection{Monte Carlo sampling in \emph{open system}}
-Monte Carlo scheme for sampling the exchange of ions in \emph{open system} is based on the formula for free energy of grand canonical ensemble.
+\subsection{Monte Carlo sampling in open system}
+Monte Carlo scheme for sampling the exchange of ions in \emph{open system} is based on the formula for free energy of grand canonical ensemble, $\Omega$
 \begin{equation}
     \Omega_{\mathrm{open}}=E-TS+\sum_i\mu_i N_i\label{eq:Omega-GC}
 \end{equation}
@@ -535,8 +535,8 @@ Using the data obtained from simulations we calculate
 $\cs$ --- the density of ions in  the outside volume;
 $\vgel$ --- molar volume of the gel, \ie the volume of the gel per one mol of gel segments, $\vgel = \Vgel / \Ngel$,
 $\ncl$ --- the total amount of the ions in both volumes divided by the total volume of both boxes, $\ncl = \Ncl/\Vbox$ and
-$\Pgel$ --- partial pressure of the gel, \ie the pressure that needs to be applied to the gel via a solvent permeable filter to compress the gel to a specific molar volume; This pressure is 
-We obtain the \emph{partial pressure} as a difference between the presure in gel and in the outer volume $\Pgel=P_\mathrm{gel} - \Pout$.
+$\Pgel$ --- \emph{partial pressure} of the gel, \ie the pressure that needs to be applied to the gel via a solvent permeable filter to compress the gel to a specific molar volume.
+We obtain the gel partial pressure as a difference between the presure in gel and in the outer volume $\Pgel=P_\mathrm{gel} - \Pout$.
 %$\Pout$, in turn, we obtained from a separate simulation of a reservoir, containing ionic gas in equilibrium with the bath of the same salinity $\cs$. 
 
 
@@ -674,38 +674,34 @@ where the \emph{open system} processes are horizontal lines and the \emph{closed
 %Then the gel again swells in open system, but at new salinity. 
 
 \subsection{The efficiency of desalination}
-The theoretical minimum specific energy for seawater desalination (
-%$\cs=35$ g/l, 
-$\cs\simeq0.6$ mol/l as for pure NaCl) is $\sim3.9$ kJ/l (1.1 kWh/m$^3$) for 50\% recovery \cite{Wang_2020}.
-This value is calculated as follows 
+The theoretical minimum specific energy for seawater desalination ($\cs\simeq0.6$ mol/l as for pure NaCl) is $\sim3.9$ kJ/l (1.1 kWh/m$^3$) for 50\% recovery \cite{Wang_2020}.
+This value is calculated as follows
 \begin{equation}
-W=2RT\left(\frac{c_{f}}{R_{w}}\ln\frac{c_{b}}{c_{f}}-c_{p}\ln\frac{c_{b}}{c_{p}}\right)
+W_{\mathrm{id}}=2RT\left(\frac{c_{f}}{R_{w}}\ln\frac{c_{b}}{c_{f}}-c_{p}\ln\frac{c_{b}}{c_{p}}\right)
 \label{eq:SEC}
 \end{equation}
-where $R$ is a universal gas constant, $c_{f}$ is the salinity of feed water, $c_p$ is the salinity of product water and $c_b$ is the salinity of the brine, which necessarily appears in any desalination process. 
-$R_{w}$ is a recovery ratio, \ie the ratio between volume of produced water and the volume of the feed water. 
+where $R$ is a universal gas constant, $c_{f}$ is the salinity of feed water, $c_p$ is the salinity of product water and $c_b$ is the salinity of the brine, which necessarily appears in any desalination process.
+$R_{w}$ is a recovery ratio, \ie the ratio between the volume of produced water and the volume of the feed water.
 50\% recovery ratio means that one part of feed water divides into two equal volume solutions of the product water and of the brine.
-Of course, a significant amount of additional energy is required to operate the system\cite{Kim_2019}. 
-It has been reported that the specific energy consumption (SEC) of reverse osmosis (RO) process is 2.5~-- 4.0 kWh/m3 (9~-- 14.4 kJ/l), which is significantly higher than its minimum specific energy.
-The SEC of a real-scale RO plant is even higher, approximately 3.5~-- 4.5 kWh/$m^{3}$ (12.6 - 16.2 kJ/L), including pre-treatment and post-treatment processes \cite{Kim_2018}. 
+Of course, a significant amount of additional energy is required to operate the system\cite{Kim_2019}.
+It has been reported that the specific energy consumption (SEC) of the reverse osmosis (RO) process is 2.5~-- 4.0 kWh/m3 (9.0~-- 14.4 kJ/l), which is significantly higher than its minimum specific energy.
+The SEC of a real-scale RO plant is even higher, approximately 3.5~-- 4.5 kWh/$m^{3}$ (12.6 - 16.2 kJ/l), including pre-treatment and post-treatment processes \cite{Kim_2018}.
 %Because of the inherent high energy requirement for RO desalination, seawater is not commonly utilized over traditional surface water.
 
-In order to compare the efficiency of the process presented in \ref{fig: PV and CV} and \ref{fig: NV and CN} with provided values, we collect the corresponding data to the Table~\ref{tab: table}.
-The presented desalination process is a cascade of six swellings in open system, at six different (constant) salinities $\cs$, each followed by six compressions in closed system, at six different (constant) $\ncl$.
+To compare the efficiency of the desalination process presented in \reffig{fig: PV and CV} and \reffig{fig: NV and CN} with provided values, we collect the corresponding data to Table~\ref{tab: table}.
+The presented desalination process is a cascade of six swellings in an open system, at six different (constant) salinities $\cs$, each followed by six compressions in a closed system, at six different (constant) $\ncl$.
 Each swelling and compression process is presented as a row of Table~\ref{tab: table}, which is colored by matching the lines in the Figures.
-The first column of the table contains values $\cs^0$ and $\cs^5$, which stand for the supernate salinity at 0 and 5 bar compression; in open system, supernate salinity does not change, so $\cs^0$ and $\cs^5$ are presented by a single number. 
-The second column contains values of $n^0$ and $n^5$, which stand for the number of $\cl$ ions in compression volume $\Vbox$, at 0 and 5 bar pressure (divided by $\Vbox$). 
-The number of ion does not change in closed system compression, thus $n^0$ and $n^5$ are the same in the corresponding rows.
-The third column shows the change of the gel volume in corresponding process, $\Delta v$. 
-The fourth column contains the work needed for the compression in the corresponding process 
-per volume of extracted solution. 
-This value is an integral of corresponding $\Pgel(\Vgel)$ dependence \citep{Atkins} 
+The first column of the table contains values $\cs^0$ and $\cs^5$, which stand for the supernate salinity at 0 and 5 bar compression; in an open system, supernate salinity does not change, so $\cs^0$ and $\cs^5$ are presented by a single number.
+The second column contains values of $n^0$ and $n^5$, which stand for the number of $\cl$ ions in compression volume $\Vbox$, at 0 and 5 bar pressure (divided by $\Vbox$).
+The number of ions does not change in closed system compression, thus $n^0$ and $n^5$ are the same in the corresponding rows.
+The third column shows the change of the gel volume in the corresponding process, $\Delta v$.
+The fourth column contains the work needed for the compression in the corresponding process per volume of extracted solution.
+This value is obtained as numerical integration of corresponding $\Pgel(\Vgel)$ dependence \citep{Atkins}
 \begin{equation}
-    W = \frac{\int_{v^0}^{v^5} \Pgel d\Vgel}{\Delta v}
+W = \frac{\int_{v^0}^{v^5} \Pgel d\Vgel}{\Delta v}
 \end{equation}
-Here, in the table, we present the absolute values of the work, 
-whereas one should keep in mind that the compression implies the work 
-is done by external force and the swelling implies that the work is done by gel.
+In this column, we presented the absolute values of the work,
+whereas one should keep in mind that compression implies, that the work is done by external force and swelling implies, that the work is done by gel.
 
 \begin{table}
 \caption{The estimates of the efficiency of the desalination process. All the units are calculated per one mol of gel segments. Values in brackets
@@ -728,8 +724,8 @@ are the estimates corresponding to crossection of 'red' and 'orange' lines on th
 \\
 \\
 \end{array}\right\rbrace $$\rotatebox{90}{\hspace{-5em}{\color{teal}\ensuremath{\begin{array}{cc}
-W^{\mathrm{sim}}= & 202.8\pm3.2\\
 W^{id}= & 52.9\\
+W^{\mathrm{sim}}= & 202.8\pm3.2\\
 R_{w}= & 0.54
 \end{array}}}}$}} & \tabularnewline
 \cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
@@ -747,8 +743,8 @@ R_{w}= & 0.54
 \\
 \\
 \end{array}\right\rbrace $$\rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
-W^{\mathrm{sim}}= & 207.3\pm2.2\\
 W^{id}= & 38.2\\
+W^{\mathrm{sim}}= & 207.3\pm2.2\\
 R_{w}= & 0.53
 \end{array}}}$}}\tabularnewline
 \cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
@@ -767,8 +763,8 @@ R_{w}= & 0.53
 \\
 \\
 \end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
-W^{\mathrm{sim}}= & 222.3\pm2.5\\
 W^{\mathrm{id}}= & 43.8\ {\color{red}{\scriptstyle (41.0)}}\\
+W^{\mathrm{sim}}= & 222.3\pm2.5\\
 R_{w}= & 0.52\ {\scriptstyle (0.46)}
 \end{array}}}$}} & \tabularnewline
 \cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
@@ -787,8 +783,8 @@ R_{w}= & 0.52\ {\scriptstyle (0.46)}
 \\
 \\
 \end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
-W^{\mathrm{sim}}= & 218.7\pm2.2\\
 W^{id}= & 66.6\ {\scriptstyle (22.0)}\\
+W^{\mathrm{sim}}= & 218.7\pm2.2\\
 R_{w}= & 0.53\ {\scriptstyle (0.49)}
 \end{array}}}$}}\tabularnewline
 \cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
@@ -823,8 +819,8 @@ R_{w}= & 0.53\ {\scriptstyle (0.49)}
 \\
 \\
 \end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
-W^{\mathrm{sim}}= & 227.5\pm2.3\\
 W^{id}= & 69.7\\
+W^{\mathrm{sim}}= & 227.5\pm2.3\\
 R_{w}= & 0.55
 \end{array}}}$}} & \tabularnewline
 \cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
@@ -840,28 +836,30 @@ R_{w}= & 0.55
 \end{adjustwidth}
 \end{table}
 
-To give a clue of comparison with ideal desalination process efficiency, the fifth column provides the values of specific energy consumption, $W^\text{id}$, which are calculated by means of \refeq{eq:SEC}, using the following procedure:
-Let§s assume the concentration of the feed solution to be $\cs^f=44.91$ mmol/l and the concentrations of product and brine solutions to be $\cs^p=31.93$ mmol/l and $\cs^b = 63.93$ mmol/l, respectively.
+To give a clue of comparison with ideal desalination process efficiency, the fifth column provides the values of ideal specific energy consumption, $W^\text{id}$, which are calculated employing \refeq{eq:SEC}, for concentrations of feed, product and brine solutions, $\cs^f$,  $\cs^p$, $\cs^b$, as indicated by curly brackets.
+For example, having $\cs^f=44.91$, $\cs^p=31.93$ and $\cs^b = 63.93$ mmol/l, (5th, 7th and 3rd rows of the table) one can imagine the following desalination process
 \begin{enumerate}
-    \item The gel, equilibrated with the feed solution, is compressed in the \emph{closed system}.
-    The gel volume decreases by $\Delta v^p = 3.69$ liters and the salinity of supernate decreases from $\cs^f$ to $\cs^p$.
-    The volume of the product solution is $\Delta v^p$
-    \item The squeezed gel is put back into the feed solution and is quilibrated there under pressure, so it does not swell. 
-    \item After the equilibration, the gel swells in the \emph{closed system} and the salinity of the external solution increases to the value $\cs^b$.
-    \item Finally, the gel is taken out and compressed by 5 bar in the \emph{open system} in equilibrium with the brine bath. 
-    The change of the gel volume in this process is $\Delta v^b = 3.26$ l/mol, which equals to the volume of the produced brine. 
+\item First, the gel equilibrated with the feed solution, is compressed in the \emph{closed system}.
+The gel volume decreases by $\Delta v^p = 3.69$ liters and the salinity of supernate decreases from $\cs^f$ to $\cs^p$.
+The volume of the product solution is $\Delta v^p$
+\item The squeezed gel is put back into the feed solution and is equilibrated there under pressure, so it does not swell.
+\item After the equilibration, the gel swells in the \emph{closed system}, so the salinity of the external solution increases to the value $\cs^b$.
+\item Finally, the gel is taken out and compressed by pressure 5bar in the \emph{open system} in equilibrium with the brine bath.
+The change of the gel volume in this process is $\Delta v^b = 3.26$ l/mol, which equals the volume of the produced brine.
 \end{enumerate}
 Thus the recovery ratio $R_w = \Delta v^p / (\Delta v^p + \Delta v^b) \simeq $ 0.53 and the theoretical minimum specific energy of the desalination process with corresponding $\cs^f$, $\cs^p$ and $\cs^b$ is $W^{id} =$ 38.2 J/l (\refeq{eq:SEC}).
 
-The estimated $W^{id}$ values are provided in the fifth column of the table, for five triplets of $\cs^f$, $\cs^p$,$\cs^b$ values .
-$W_{\mathrm{sim}}$ is the energy calculated by integration of $\Pgel(\Vgel)$ dependencies as the sum of corresponding compressions in \emph{closed} and \emph{open} systems, $W_{\mathrm{id}}$ is the estimation based on the equation \refeq{eq:SEC} and $R_w$ is the corresponding recovery ratio.
-\todo{how the integration was performed}
-Note that calculating the $W_{\mathrm{sim}}$ we accounted for only the work done on the gel during the compression, whereas the work done by the gel itself during swelling was not taken into account.
+The estimated $W^{id}$ values are provided in the fifth column of the table, for five triplets of $\cs^f$, $\cs^p$,$\cs^b$ values.
+In the same column we provide $W_{\mathrm{sim}}$ --- the specific energy consumptions calculated by a numerical integration of $\Pgel(\Vgel)$ dependencies. 
+The provided values  $W_{\mathrm{sim}}$ are the sum of energies needed for corresponding compression processes, \ie in \emph{closed} and \emph{open} systems.
+The values $R_w$, which are also provided in 5th colum are the corresponding recovery ratios.
+
 The ratio between $W_{\mathrm{sim}}$ and $W_{\mathrm{id}}$ ranges from 3.26 to 5.43, which is comparable to that of RO.
+Note, that calculating the $W_{\mathrm{sim}}$ we accounted for only the work done on the gel during the compression, whereas the work done by the gel itself during swelling was not taken into account. 
+The process, which accounts for the energy recovery was described in our previous studies \cite{Prokacheva2021, Rud2018} 
 
 \subsection{Study limitations}
-Like other simulation based studies, our research has a limited validity,
-primarily resulting from the simplifications applied in the used model.
+Like other simulation based studies, our research has a limited validity, primarily resulting from the simplifications applied in the used model.
 For example, our coarse-grained model cannot differentiate polystyrene sulphonate gel from other strong polyacidic gels.
 However, these limitations are also the advantage of our model because the results of our study
 can be applied to similar systems, including polybasic gels with all the charges reversed.
