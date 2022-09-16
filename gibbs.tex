@@ -211,19 +211,15 @@ $^{3}$ \quad Institute of Macromolecular Compounds of Russian Academy of Science
 
 % Abstract (Do not insert blank lines, i.e. \\) 
 \abstract{
-Recently, polyelectrolyte hydrogels have been proposed as draw agents for forward osmosis (FO) desalination techniques. 
-Indeed, polyelectrolyte hydrogels can absorb a big amount of water across an osmosis membrane as a result of their swelling pressure. 
+Polyelectrolyte hydrogels can absorb a big amount of water across an osmotic membrane as a result of their swelling pressure.
 On the other hand, the insoluble cross-linked hydrogel network enables dewatering under the influence of external (thermal and/or mechanical) stimuli.
 Moreover, from a thermodynamic perspective, the polyelectrolyte hydrogel is already an osmotic membrane.
-These above-mentioned hydrogel properties designate them as excellent candidates for desalination, and, at the same time, avoid the use of expensive membranes.
-In this article, we present our recent theoretical study of polyelectrolyte hydrogel usage for water desalination. 
+These above-mentioned properties designate hydrogels as excellent candidates for use in desalination, allowing, at the same time, to avoid the use of expensive membranes.
+In this article, we present our recent theoretical study of polyelectrolyte hydrogel usage for water desalination.
 Employing a coarse-grained model and the Gibbs ensemble, we modeled the thermodynamic equilibrium between coexisting gel phase and the supernate aqueous salt solution phase.
-We performed a sequence of step-by-step hydrogel compressions in \emph{open} and \emph{closed} systems.
-The compression in \emph{open system} causes the decrease of salt ions inside the hydrogel,
-while the compression in \emph{closed system} causes the decrease of the salt concentration in the supernatant solution.
-We modeled this stepwise process of continuous decrease of water salinity from seawater up to freshwater concentrations.
-We estimated the energy costs of the process to be comparable with reverse osmosis.
-%as 38.2 J per production of 1 liter of potable water, which is comparable with reverse osmosis.
+We performed a sequence of step-by-step hydrogel swellings and compressions in \emph{open} and \emph{closed} systems, \ie in equilibrium with a big and with a comparably small reservoir of aqueous solutions.
+The swelling in \emph{open system} causes the removal of ions from the big reservoir, whereas the compression in \emph{closed system} causes the decrease of the salt concentration in the small reservoir.
+We modeled this stepwise process of continuous decrease of water salinity from seawater up to freshwater concentrations and estimated the energy costs of the process to be comparable with reverse osmosis.%as 38.2 J per production of 1 liter of potable water, which is comparable with reverse osmosis.
 }
 
 % Keywords
@@ -277,20 +273,9 @@ We estimated the energy costs of the process to be comparable with reverse osmos
 
 
 \section{Introduction\label{sec: intro}}
-
-<<<<<<< HEAD
-\todo[inline]{
-The authors can follow the following references to generally highlight the global contamination and environmental pollution problems at the beginning of the introduction part
-https://doi.org/10.1016/j.jwpe.2022.102847 \cite{baaloudj2022_1}\\
-https://doi.org/10.1016/j.ceramint.2022.05.151 \cite{shahzad2022}\\
-https://doi.org/10.3390/catal12050500 \cite{baaloudj2022}\\
-https://doi.org/10.1007/s11356-022-21160-7 \cite{guesmi2022}\\
-https://doi.org/10.3390/ma15134547 \cite{kane2022}\\. 
-Then, highlight the water desalination technologies and Gibbs ensemble (https://doi.org/10.3390/nano10020293 \cite{erdos2020}).
-}
-Waste water treatment and technology is one of the greatest concerns of modern society. 
+Wastewater treatment and technology are one of the greatest concerns of modern society.
 The waste water has to be disposed of both biological \cite{guesmi2022} and chemical \cite{baaloudj2022_1,shahzad2022} pollutants.
-Most imporatntly, water treatment technologies are needed for the still increasing demand on production of potable water from the brine, \ie for desalination.
+Most importantly, water treatment technologies are needed for the still increasing demand on the production of potable water from the brine, \ie for desalination.
 
 \subsection{Water desalination technologies}
 Two basic approaches for separating water from salt are present in modern desalination technology \cite{Miller2003,Curto2021}.
@@ -318,58 +303,56 @@ As an osmotically driven process, the draw solute is expected to significantly r
 On the other hand, the draw solute is expected to be easily separated from water \cite{Cai2016}.
 
 \subsection{Hydrogels for desalination}
-Hydrogels are three-dimensional networks of polymer chains that are crosslinked by either physical or chemical bonds. 
-They are able to entrap large volumes of water attracted by the high concentration of hydrophilic groups. 
-When a dehydrated or deswollen hydrogel uptakes water, its polymer chains extend, creating a swelling pressure. 
+Hydrogels are three-dimensional networks of polymer chains that are crosslinked by either physical or chemical bonds.
+They can entrap large volumes of water attracted by the high concentration of hydrophilic groups.
+When a dehydrated or deswollen hydrogel uptakes water, its polymer chains extend, creating swelling pressure.
 For example, as reported in \cite{Wack_2009}, weakly crosslinked poly(acrylic acid) (PAA) copolymers with polymer volume fractions between 0.03 and 0.30 exhibit a swelling pressure ranging from 0.20--4.23 MPa.
-Polyelectrolyte hydrogels, which are carrying ionic groups on the comonomer units (like PAA), are able to reject salt ions from the solution, they absorb a solution of lower salinity than that they are equilibrated with. 
+\emph{Polyelectrolyte} hydrogels, which are carrying ionic groups on the comonomer units (like PAA), can reject salt ions from the solution, \ie they absorb a solution of lower salinity than that they are equilibrated with.
 
-An important, advantageous aspect of polymer hydrogels is that they can undergo reversible volume change, \ie solution --- gel phase transitions in response to external stimuli. 
-This aspect causes hydrogels to be labeled as ‘smart’ materials. 
-Many physical and chemical stimuli have been applied to induce various responses of such smart hydrogels, in particular, to change them from hydrophilic to hydrophobic, thereby releasing water. 
+An important advantageous aspect of polymer hydrogels is that they can undergo reversible volume change, \ie gel --- solution volume phase transitions in response to external stimuli.
+This aspect causes hydrogels to be labeled as ‘smart’ materials.
+Many physical and chemical stimuli have been applied to induce various responses of such smart hydrogels, in particular, to change them from hydrophilic to hydrophobic, thereby releasing water.
 The physical stimuli include: temperature, solvent composition, light, mechanical pressure, sound, electric and/or magnetic field, whilst the chemical (or biochemical) stimuli include pH, ionic strength, and specific molecular recognition \cite{Tanaka_1982,Serizawa_2001,Lietor_Santos_2009,Qiu_2001}.
 
-Li \etal \cite{Li2011} took advantage of the smart hydrogel properties for desalination purposes. In this work, the authors used hydrogels as draw agents for FO. 
+Li \etal \cite{Li2011} took advantage of the use of smart hydrogels for desalination purposes as draw agents for FO.
 They have demonstrated that the hydrogels are able to absorb water across the FO membrane due to their swelling and osmotic pressure and
 allow dewatering under the influence of stimuli (thermal and/or mechanical), due to their insoluble cross-linked polymer network.
-They have proposed the use of hydrogel based on thermoresponsive polyelectrolyte~--- copolymer of poly-N-isopropyl acrylamide (p-NIPAAm) and polyacrylic acid (p-AA).
-This gel network is either hydrophilic or hydrophobic, depending on the temperature.
-Such gel accumulates water inside the network in its hydrophilic state, but it releases the water out in its hydrophobic state.
+Li \etal have proposed the use of hydrogel based on thermoresponsive polyelectrolyte~--- copolymer of poly-N-isopropyl acrylamide (p-NIPAAm) and polyacrylic acid (p-AA). Depending on the temperature this gel network is either hydrophilic or hydrophobic, so it accumulates water inside the network in its hydrophilic state, but it releases the water out in its hydrophobic state.
 
-From a thermodynamics perspective, the polyelectrolyte hydrogel itself is an osmotic membrane generating Donnan potential, which rejects ions between outer and inner solutions \cite{Wang_2014}. 
-Such a view on hydrogels was employed in a series of works by the group of prof. Wilhelm (see for example \cite{Arens_2017,Fengler_2020}). 
-The authors of these works proposed to get rid of the osmotic membrane and simply use only micro filtration to compress the hydrogel squeezing out the accumulated inside the gel solution. 
-In their method, the deswollen hydrogel was first equilibrated with saline water feed. 
-During the equilibration, the gel was swelling, absorbing the water. 
-Then it was taken out from the feed solution and mechanically squeezed by means of a microfiltration membrane. 
-They have found that the brine, which was squeezed out, had lower salinity than the feed water. 
+From a thermodynamics perspective, the polyelectrolyte hydrogel itself is an osmotic membrane generating Donnan potential, which rejects ions between outer and inner solutions \cite{Wang_2014}.
+Such a view on hydrogels was employed in a series of works by the group of prof. Wilhelm (see for example \cite{Arens_2017,Fengler_2020}).
+The authors of these works proposed to get rid of the osmotic membrane and simply use only microfiltration to compress the hydrogel squeezing out the accumulated inside the gel solution.
+In their method, the deswollen hydrogel was first equilibrated with saline water feed.
+During the equilibration, the gel was swelling, absorbing the water.
+Then it was taken out from the feed solution and mechanically squeezed by means of a microfiltration membrane.
+The squeezed-out brine was found, to have lower salinity than the feed water.
 
-Similar approach was used by Ali \etal \cite{Ali2015}. 
-Here the authors used the thermosensitive gel (based on copolymers p-NIPAAm and p-AA), and instead of physical compression, the dewatering was done by an external heating stimulus (sunlight). 
-The gel was equilibrated with feed water during the night, and, at daytime, under sunlight, the gel was shrinking and releasing the solution. 
+A similar approach was used by Ali \etal \cite{Ali2015}.
+Here the authors used the thermosensitive gel (based on copolymers p-NIPAAm and p-AA), and instead of physical compression, the dewatering was done by an external heating stimulus (sunlight).
+The gel was equilibrated with feed water during the night, and, in the daytime, under sunlight, the gel was shrinking releasing the solution.
 
 \subsection{Physics behind the desalination process}
-Since the polyelectrolyte gel has its own charges and its own neutralizing counterions, the density of mobile ions (which are able to freely enter and leave the gel) inside the gel network appears to be smaller than their density outside the gel.
-Therefore the internal solution in the gel has lower density of mobile ions than the solution outside. 
-In that sense, the gel acts as an osmotic membrane separating solutions \cite{Rud2020}. 
-The driving force of the separation is the Donnan potential, which originates from the charges in the hydrogel network. 
+Since the polyelectrolyte gel has its charges and its neutralizing counterions, the density of mobile ions (which can freely enter and leave the gel) inside the gel network appears to be smaller than their density outside the gel.
+Therefore the internal solution in the gel has a lower density of mobile ions than the solution outside.
+In that sense, the gel acts as an osmotic membrane separating solutions \cite{Rud2020}.
+The driving force of the separation is the Donnan potential, which originates from the charges in the hydrogel network.
 The difference between the densities (concentrations) of the mobile ions in the internal and external solutions
 is defined by Donnan law \cite{Rud2018}
 \begin{equation}
-\frac{\ccl\gel}{\cs}=\frac{\cs}{\cna\gel}=\sqrt{1+\left(\frac{\alpha}{2\cs\Vgel}\right)^{2}}\pm\frac{\alpha}{2\cs\Vgel}
+\frac{\ccl\gel}{\cs}=\frac{\cs}{\cna\gel}=\sqrt{1+\left(\frac{\alpha}{2\cs\vgel}\right)^{2}}\pm\frac{\alpha}{2\cs\vgel}
 \end{equation}
 where $\ccl\gel$ and $\cna\gel$ are the concentrations of monovalent anions and cations in the internal solution,
-$\cs$ is the salinity of external solution,  $\Vgel$ is the gel molar volume (inverse density of gel segments)
-and $\alpha$ is ionization degree (in the case of our study $\alpha=1$). 
-The $\pm$ sign in the formula accounts for the sign change for the cases of polyanion or polycation gels.
+$\cs$ is the salinity of the external solution, $\vgel$ is the gel molar volume (inverse density of gel segments)
+and $\alpha$ is the ionization degree (in the case of our study $\alpha=1$).
+The ``$\pm$'' sign in the formula accounts for the sign change for the cases of polyanion or polycation gels.
 
-As shown in \cite{Li_2011,Ali_2015,Arens_2017,Fengler_2020}, the solution of lower salinity can be extracted from the gel by means of compression and/or other stimulus, provided that the charge in the gel remains constant.
-In the case of weak polyelectrolyte (pH-sensitive) gel, the compression discharges the gel and therefore the neutralizing counterions leave out the gel, diminishing the desalination effect \cite{Rud2018}. 
+As shown in \cite{Li2011, Ali2015, Arens_2017, Fengler_2020}, the solution of lower salinity can be extracted from the gel by means of compression and/or other stimuli, provided that the charge in the gel remains constant.
+In the case of weak polyelectrolyte (pH-sensitive) gel, the compression discharges the gel and therefore the neutralizing counterions leave out the gel, diminishing the desalination effect \cite{Rud2018}.
 
 One can argue that the sole Donnan effect is insufficient to achieve a high salt rejection \cite{Cai2016} and the salinity of the water squeezed from hydrogel under a very high hydraulic pressure (up to 100 bar \cite{Fengler_2020}) turns out to be not much different from the initial.
-Indeed, the use of high hydraulic pressure diminishes all the advantages of this method over RO, and the reversibility of hydrogel swelling after strong compression remains questionable. 
+Indeed, the use of high hydraulic pressure diminishes all the advantages of this method over RO, and the reversibility of hydrogel swelling after strong compression remains questionable.
 Nevertheless, in this study, we model the compression of the gel limiting ourselves to low compression rates, less than 5 bar, and studied how the compression of the gel affects the surrounding salinity.
-We modelled the desalination process, as a cascade of step-by-step gel swellings and compressions, driving the salinity of the supernate down to potable water. 
+We modeled the desalination process, as a cascade of step-by-step gel swellings and compressions, driving the salinity of the supernate down to potable water.
 
 \section{Model and methods\label{sec: theory}}
 
@@ -393,7 +376,11 @@ We propose the desalination process as a cascade of gel compressions and decompr
 %it is worth to note that we are not limited with this process only.
 In this process, the gel is supposed to be compressed/decompressed in an \emph{open system} and in a \emph{closed system}.
 The compression in \emph{open system} assumes that the gel is in thermodynamic equilibrium with a huge (effectively \textbf{infinite}) reservoir of an aqueous solution, whereas 
-the \emph{closed system} implies that the gel is in equilibrium with a \textbf{finite} reservoir of an aqueous solution. 
+the \emph{closed system} implies that the gel is in equilibrium with a \textbf{finite} reservoir of an aqueous solution.  
+
+By thermodynamic equilibrium, we assume that the gel freely exchanges ions with the reservoir.
+Thus, the \emph{open system} implies the grand canonical ensemble of mobile ions, in which the change of free energy due to ion exchange is accounted for by their chemical potential.
+The \emph{closed system} is the Gibbs ensemble of ions moving between two volumes of the gel phase and the supernatant.
 
 Due to huge size of the reservoir, the compression of the gel in \emph{open system} does not affect the reservoir salinity, $\cs =$ $\cna=$ $\ccl=$ $\text{Const}$, whereas the number of ions entrapped in the volume $\Vbox$ changes (\reffig{fig: open}).
 On the contrary, the compression of the gel in the \emph{closed system} changes the salinity in the reservoir, but the total number of $\na$ and $\cl$ ions in the gel and in the reservoir, \ie in the volume $\Vbox$ (\reffig{fig: closed}), remains constant.
@@ -515,8 +502,8 @@ The procedure of the Monte Carlo Sampling is the following \cite{Frenlkel2002_bo
 
 \subsection{Monte Carlo sampling in closed system}
 
-In the \emph{closed system} a the gel exchanges particles with explicit finite reservoir box. 
-The total number of ion species in both boxes is fixed, whereas the density of ions in extrernal reservoir is defined by thermodynamic equilibrium between the two subvolumes (see \reffig{fig: closed}. The Monte Carlo sampling of the distribution of ions between the subvolumes performed in a way similar to described in \cite{Panagiotopoulos1988b}. \todo{add here that citation about Gibbs ensemble}
+In the \emph{closed system} the gel exchanges particles with explicit finite reservoir box. 
+The total number of ion species in both boxes is fixed, whereas the density of ions in extrernal reservoir is defined by thermodynamic equilibrium between the two subvolumes (see \reffig{fig: closed}. The Monte Carlo sampling of the distribution of ions between the subvolumes performed in a way similar to described in \cite{Panagiotopoulos1988b, Erdos2020}. 
 
 The free energy of the Gibbs ensemble is a sum of the gel's free energy and that of the external volume.
 \begin{equation}
@@ -545,22 +532,19 @@ $\Ncl\gel$ and $\Ncl\out$;
 
 
 Using the data obtained from simulations we calculate  
-$\vgel$ --- molar volume of the gel, \ie the volume of the gel per one mol of gel segments, $\vgel = \Vgel / \Ngel$;
-$\Pgel$ --- partial pressure of the gel, \ie the pressure that needs to be applied to the gel via a solvent permeable filter to compress the gel to a specific molar volume;
 $\cs$ --- the density of ions in  the outside volume;
-and $\ncl$ --- the total amount of the ions in both volumes divided by the total volume of both boxes, $\ncl = \Ncl/\Vbox$
-
-$\Vbox$ was chosen to be close to the gel free swelling equilibrium, that to the the state when $\Pgel = 0$. 
-In order to obtain the value $\Vbox$ we perform the set of open system simulations for various $\Vgel$. That value of $\Vgel$, at which $\Pgel$ is closest to zero we choose as $\Vbox$.
-Then as soon as $\Vbox$ is defined we perform the compression of the gel in closed system decreasing the $\Vgel$ starting from $\Vbox$ and correspondingly increasing the outer volume $\Vout$.
-
-\todo{We have the "Gibbs ensemble" in the title, and this term is not used in the manuscript at all.
-TODO concise description of Gibbs ensemble, solving the task to Reviewer 2, Q5 and Q7}
+$\vgel$ --- molar volume of the gel, \ie the volume of the gel per one mol of gel segments, $\vgel = \Vgel / \Ngel$,
+$\ncl$ --- the total amount of the ions in both volumes divided by the total volume of both boxes, $\ncl = \Ncl/\Vbox$ and
+$\Pgel$ --- partial pressure of the gel, \ie the pressure that needs to be applied to the gel via a solvent permeable filter to compress the gel to a specific molar volume; This pressure is 
+We obtain the \emph{partial pressure} as a difference between the presure in gel and in the outer volume $\Pgel=P_\mathrm{gel} - \Pout$.
+%$\Pout$, in turn, we obtained from a separate simulation of a reservoir, containing ionic gas in equilibrium with the bath of the same salinity $\cs$. 
 
 
 
-
-
+The volume $\Vbox$ was chosen to be close to the gel free swelling equilibrium, that is to the state where $\Pgel = 0$.
+In order to obtain the value $\Vbox$ we perform the set of open system simulations for various $\Vgel$.
+That value of $\Vgel$, at which $\Pgel$ is closest to zero we choose as $\Vbox$.
+Then, as soon as $\Vbox$ is defined, we perform the compression of the gel in \emph{closed system} varying values of $\Vgel<\Vbox$ and $\Vout= \Vbox - \Vgel$.
 
 \section{Results and discussion}
 
@@ -581,10 +565,6 @@ TODO concise description of Gibbs ensemble, solving the task to Reviewer 2, Q5 a
 So, at the beginning, we run a set of simulations modeling the gel compression in \emph{open system}, \ie in equilibrium with a big bath of certain salinity, $\cs$. 
 The simulations were run for a set of different gel volumes, $\Vgel$. 
 Each simulation returned the averaged values of pressures, $P_\mathrm{gel}$, and the number of $\cl$ ions, present in the simulation box, $\Ncl\gel$. 
-
-In order to get the \emph{partial pressure} of the gel, we subtracted from $P_\mathrm{gel}$ the osmotic pressure of ions in the reservoir: $\Pgel=P_\mathrm{gel} - \Pout$.
-$\Pout$, in turn, we obtained from a separate simulation of a reservoir, containing ionic gas in equilibrium with the bath of the same salinity $\cs$. 
-
 
 The dependencies of $\Pgel$ on $\Vgel$ for \emph{open system} for a set of various salinities are presented
 in Figure \ref{fig: PV} by solid lines. 
@@ -723,7 +703,6 @@ This value is an integral of corresponding $\Pgel(\Vgel)$ dependence \citep{Atki
 \begin{equation}
     W = \frac{\int_{v^0}^{v^5} \Pgel d\Vgel}{\Delta v}
 \end{equation}
-\todo{the equation must be supported by referrence}
 Here, in the table, we present the absolute values of the work, 
 whereas one should keep in mind that the compression implies the work 
 is done by external force and the swelling implies that the work is done by gel.

@@ -1,5 +1,5 @@
 # Veusz saved document (version 3.4)
-# Saved at 2022-07-08T12:11:58.996892
+# Saved at 2022-09-16T10:55:48.512729
 
 SetCompatLevel(0)
 AddImportPath('/home/kvint/gibbs/figures')
@@ -9476,7 +9476,7 @@ Add('graph', name='graph1', autoadd=False)
 To('graph1')
 Add('axis', name='x', autoadd=False)
 To('x')
-Set('label', 'hydrogel volume, \\emph{V}_{gel}, [l/mol]')
+Set('label', 'hydrogel volume, \\emph{v}_{gel}, [l/mol]')
 Set('min', 0.7)
 Set('max', 11.79)
 Set('log', True)

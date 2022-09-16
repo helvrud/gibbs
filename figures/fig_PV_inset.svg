@@ -25,6 +25,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -43,9 +44,9 @@
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:zoom="0.50765788"
-     inkscape:cx="-413.94236"
-     inkscape:cy="120.59585"
+     inkscape:zoom="2.8717466"
+     inkscape:cx="432.89929"
+     inkscape:cy="26.704818"
      inkscape:window-x="72"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -550,9 +551,11 @@
          sodipodi:role="line"
          id="tspan5936"
          x="424.82855"
-         y="445.3797">V<tspan
-   style="font-size:65%;baseline-shift:sub"
-   id="tspan1244">gel</tspan></tspan></text>
+         y="445.3797"><tspan
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'DejaVu Serif';-inkscape-font-specification:'DejaVu Serif Italic'"
+           id="tspan1245">v</tspan><tspan
+           style="font-size:64.99999762%;baseline-shift:sub"
+           id="tspan1244">gel</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:29.33333397px;line-height:1.25;font-family:'DejaVu Serif';-inkscape-font-specification:'DejaVu Serif';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
