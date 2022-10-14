@@ -1,0 +1,184 @@
+\documentclass[12pt]{dinbrief}
+%\usepackage{english}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage[textsize=small]{todonotes}
+
+\usepackage[unicode=true, pdfusetitle, bookmarks=true, bookmarksnumbered=false, bookmarksopen=false, breaklinks=false, pdfborder={0 0 0}, pdfborderstyle={}, backref=false, colorlinks=true] {hyperref}
+
+%\usepackage[pdfborder={0 0 0}]{hyperref}
+
+
+\date{\today}
+
+\place{Prague}
+
+\nowindowtics
+\nowindowrules
+
+\newcommand{\theeditor}{Dr. David Díaz-Díaz}
+
+\newcommand{\thejournal}{\textit{Gels }}
+\newcommand{\cl}{\mathrm{Cl^-}}
+\newcommand{\na}{\mathrm{Na^+}}
+
+%\newcommand{\ie}{\textit{i.~e.} } 
+\enabledraftstandard
+\newcommand{\ie}{\textit{i.~e.} }
+\newcommand{\cref}{c^{\ominus}}
+%\newcommand{\cs}{c_{s}}
+\newcommand{\kT}{k_\mathrm{B}T}
+\newcommand{\kB}{k_\mathrm{B}}
+\newcommand{\lb}{l_\mathrm{B}}
+%\newcommand{\NA}{N_{\mathrm{A^-}}}
+\newcommand{\NA}{N_{\mathrm{A}}}
+\newcommand{\muna}{\mu_\mathrm{Na^+}}
+
+\newcommand{\mucl}{\mu_\mathrm{Cl^-}}
+\newcommand{\muca}{\mu_\mathrm{Ca^{2+}}}
+\newcommand{\muh}{\mu_\mathrm{H^+}}
+\newcommand{\mua}{\mu_\mathrm{A^-}}
+\newcommand{\muha}{\mu_\mathrm{HA}}
+\newcommand{\muoh}{\mu_\mathrm{OH}}
+
+\newcommand{\cna}{c_\mathrm{Na^+}}
+\newcommand{\ccl}{c_\mathrm{Cl^-}}
+\newcommand{\cca}{c_\mathrm{Ca^{2+}}}
+\newcommand{\ch}{c_\mathrm{H^+}}
+\newcommand{\cp}{c_\mathrm{p}}
+\newcommand{\nna}{n_\mathrm{Na^+}}
+\newcommand{\ncl}{n_\mathrm{Cl^-}}
+\newcommand{\Nna}{N_\mathrm{Na^+}}
+\newcommand{\Ncl}{N_\mathrm{Cl^-}}
+
+\newcommand{\ncleq}{\widetilde{N}_\mathrm{Cl^-}}
+\newcommand{\nca}{N_\mathrm{Ca^{2+}}}
+
+\newcommand{\superin}{^\mathrm{in}}
+\newcommand{\subin}{_\mathrm{in}}
+\newcommand{\subi}{_\mathrm{i}}
+
+\newcommand{\gel}{^\mathrm{gel}}
+\newcommand{\tot}{^\mathrm{tot}}
+\newcommand{\out}{^{\mathrm{out}}}
+\newcommand{\coh}{c_\mathrm{OH}}
+\newcommand{\bulk}{^{\mathrm{b}}}
+\renewcommand{\H}{\mathrm{H^+}}
+\newcommand{\A}{\mathrm{A^-}}
+\newcommand{\AH}{\mathrm{AH}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% A simple dot to overcome graphicx limitations
+\newcommand{\lyxdot}{.}
+\newcommand{\todoi}[1]{\todo[inline]{#1}}
+\newcommand{\br}{\mathrm{Br^-}}
+\newcommand{\h}{\mathrm{H^+}}
+\newcommand{\ka}{\mathrm{K^+}}
+\newcommand{\oh}{\mathrm{OH^-}}
+\newcommand{\ca}{\mathrm{Ca^{2+}}}
+\newcommand{\mg}{\mathrm{Mg^{2+}}}
+\newcommand{\so}{\mathrm{SO_4^{2-}}}
+
+\newcommand{\EI}{E_{\mathrm{I}}}
+\newcommand{\EII}{E_{\mathrm{II}}}
+\newcommand{\SI}{S_{\mathrm{I}}}
+\newcommand{\SII}{S_{\mathrm{II}}}
+\newcommand{\NI}{N_{\mathrm{I}}}
+\newcommand{\NII}{N_{\mathrm{II}}}
+\newcommand{\VI}{V_{\mathrm{I}}}
+\newcommand{\VII}{V_{\mathrm{II}}}
+\newcommand{\FI}{F_{\mathrm{I}}}
+\newcommand{\FII}{F_{\mathrm{II}}}
+\newcommand{\nnaI}{N^{\na}_{\mathrm{I}}}
+\newcommand{\nclI}{N^{\cl}_{\mathrm{I}}}
+\newcommand{\nnaII}{N^{\na}_{\mathrm{II}}}
+\newcommand{\nclII}{N^{\cl}_{\mathrm{II}}}
+
+\newcommand{\Ka}{K_{\mathrm{A}}}
+\newcommand{\pKa}{\mathrm{p}\Ka}
+\newcommand{\pK}{\mathrm{p}K}
+\newcommand{\pH}{\mathrm{pH}}
+\newcommand{\mol}{\mathrm{mol}}
+\newcommand{\molperl}{\mathrm{mol/l}}
+\newcommand{\kg}{\mathrm{kg}}
+\newcommand{\res}{^{\mathrm{res}}}
+\newcommand{\pHres}{\pH\res}
+\newcommand{\pHgel}{\pH\gel}
+\newcommand{\cs}{c_{\mathrm{s}}}
+\newcommand{\csres}{\cs\res}
+\newcommand{\Vgel}{V_\mathrm{gel}}
+\newcommand{\Ngel}{N_\mathrm{gel}}
+\newcommand{\Pgel}{\Pi}
+\newcommand{\Pres}{P_\mathrm{res}}
+\newcommand{\Pout}{P_\mathrm{out}}
+\newcommand{\Vout}{V_\mathrm{out}}
+\newcommand{\Vbox}{V_0}
+\newcommand{\PE}{polyelectrolyte{}}
+
+
+
+
+\begin{document}
+
+\textbf{Reviewer 3}
+
+\textit{}
+\begin{enumerate}
+\item \textit{The full stop in the title should be revised.}
+
+Noted. Revised.
+\item \textit{The abstract needs to be revised and be more attractive. The research gap, novelty and main findings should be concisely mentioned in the abstract.}
+
+We have rewritten the abstract. We believe that the abstract is much more attractive now.
+\item \textit{In this current shape, the manuscript looks like a report. The authors have to revise the flow of the context to attract the readers.}
+
+We have revised and changed the manuscript to be more attractive for the readers. 
+\item \textit{The manuscript must be improved by checking once again in English and technical writing. }
+
+We improved the writing style of the manuscript and corrected the grammatical errors.
+
+\item \textit{The whole manuscript must be supported by enough recent references. Revise the whole context.}
+
+We added more recent references.
+\item \textit{The beginning of the introduction part must be revised to be more attractive.}
+
+Corrected. We have rewritten the Introduction section.
+\item \textit{The authors can follow the following references to generally highlight the global contamination and environmental pollution problems at the beginning of the introduction part \\ \href{https://doi.org/10.1016/j.jwpe.2022.102847}{https://doi.org/10.1016/j.jwpe.2022.102847} ;\\
+\href{https://doi.org/10.1016/j.ceramint.2022.05.151}{https://doi.org/10.1016/j.ceramint.2022.05.151} ;\\
+\href{https://doi.org/10.3390/catal12050500}{https://doi.org/10.3390/catal12050500} ; \\
+\href{https://doi.org/10.1007/s11356-022-21160-7}{https://doi.org/10.1007/s11356-022-21160-7} ;\\
+\href{https://doi.org/10.3390/ma15134547}{https://doi.org/10.3390/ma15134547}. \\
+Then, highlight the water desalination technologies and Gibbs ensemble\\
+(\href{https://doi.org/10.3390/nano10020293}{https://doi.org/10.3390/nano10020293}).}
+
+Corrected. We added the citations, which are relevant to the studied problems, in their appropriate places.
+\item \textit{Authors should indicate a clear gap in knowledge which this study seeks to bridge, and potentially contribute to knowledge. }
+
+The purpose of our paper is to show that desalination using polyelectrolyte hydrogels is a cheap and therefore competitive alternative to reverse osmosis.
+We highlighted this idea in the Introduction and Conclusion sections.
+\item \textit{L 125-126, meaningless sentence. Revise the whole context.}
+
+Corrected.
+\item \textit{All sections/subsections titles must be revised to be expressive.}
+
+Corrected. We have rewritten and improved not only the Introduction, but the sections Model and Methods, Results, Conclusions as well.
+\item \textit{Statistical physics considerations including setup and calculations should be added.}
+
+We rewritten the section ``Model and methods'' and added there a detailed explanation of our methodology.
+\item \textit{The authors should identify the limitations of this study and the recommended future studies in the conclusion part.}
+
+We identified the study limitations and considered the implications and future perspectives of the study. We added the respective paragraphs.
+\end{enumerate}
+
+
+
+
+
+
+%~ \bibliographystyle{unsrt}
+%~ \bibliography{desalination}
+\bibliographystyle{unsrt}
+\bibliography{lit/gibbs}
+\end{document}
+
+
