@@ -1,7 +1,7 @@
 %  LaTeX support: latex@mdpi.com 
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL orig.tex   Wed Oct 12 13:47:58 2022
-%DIF ADD edit.tex   Wed Oct 12 13:47:58 2022
+%DIF DEL orig.tex   Fri Oct 14 18:25:30 2022
+%DIF ADD edit.tex   Fri Oct 14 19:54:30 2022
 %  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
 
 %=================================================================
@@ -147,7 +147,7 @@
 %DIF < \externaleditor{Academic Editor: \hl{Firstname Lastname} %MDPI: please add the Academic Editor
 %DIF < }
 %DIF -------
-\externaleditor{Academic Editor: \hl{Firstname Lastname}} %MDPI: please add the Academic Editor %DIF > 
+%\externaleditor{Academic Editor: \hl{Firstname Lastname}} %MDPI: please add the Academic Editor %DIF > 
 %DIF -------
 \datereceived{9 August 2022} 
 %\daterevised{} % Only for the journal Acoustics
@@ -426,10 +426,16 @@ Indeed, the use of high hydraulic pressure diminishes all the advantages of this
 Nevertheless, in this study, we limit ourselves to low compression rates, less than 5 bar, when modeling the compression of the gel, and we study how compression of the gel affects the surrounding salinity.
 We model the desalination process as a cascade of step-by-step gel swellings and compressions, driving the salinity of the supernate down to potable water.
 
-\section{\highlighting{Model and Methods} %MDPI: to AE: please note that the section title in Gels Template: 1. Introduction; 2. Results and Discussion; 3. Conclusions; 4. Materials and Methods
-\label{sec: theory}}
+%DIF > \section{\highlighting{Model and Methods} %MDPI: to AE: please note that the section title in Gels Template: 1. Introduction; 2. Results and Discussion; 3. Conclusions; 4. Materials and Methods
+%DIF > \label{sec: theory}}
+\section{\DIFdelbegin %DIFDELCMD < \highlighting{Model and Methods} %%%
+%DIF < MDPI: to AE: please note that the section title in Gels Template: 1. Introduction; 2. Results and Discussion; 3. Conclusions; 4. Materials and Methods
+%DIFDELCMD < \label{sec: theory}%%%
+\DIFdelend \DIFaddbegin \DIFadd{Results and Discussion}\label{sec: RD}\DIFaddend }
+\DIFdelbegin %DIFDELCMD < 
 
-% water desalination technologies and Gibbs ensemble (https://doi.org/10.3390/nano10020293 \cite{erdos2020}).
+%DIFDELCMD < %%%
+\DIFdelend % water desalination technologies and Gibbs ensemble (https://doi.org/10.3390/nano10020293 \cite{erdos2020}).
 
 
 \subsection{Open and Closed Systems}
@@ -468,36 +474,51 @@ On the contrary, compression of the gel in the \emph{closed system} changes the 
  \DIFdelendFL \DIFaddbeginFL \DIFaddFL{The hydrogel compressed }\DIFaddendFL in \DIFdelbeginFL \DIFdelFL{the simulation box}\DIFdelendFL \DIFaddbeginFL \emph{\DIFaddFL{open}} \DIFaddFL{and in }\emph{\DIFaddFL{closed}} \DIFaddFL{system}\DIFaddendFL .
 		\DIFdelbeginFL \DIFdelFL{Color code represents
 		the individual ion types (red: $\na$, }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Red and }\DIFaddendFL blue \DIFdelbeginFL \DIFdelFL{: $\cl$, yellow: $\ca$)
-		}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{circles represent $\na$ }\DIFaddendFL and\DIFaddbeginFL \DIFaddFL{$\cl$ ions. $V_0$ is }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{hydrogel (grey: neutral segment ($\AH$), cyan: charged segment
+		}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{circles represent $\na$ }\DIFaddendFL and \DIFaddbeginFL \DIFaddFL{$\cl$ ions. $V_0$ is }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{hydrogel (grey: neutral segment ($\AH$), cyan: charged segment
 		($\A$))}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{volume which gel has in free swelling equilibrium state}\DIFaddendFL .\label{fig:open and closed}}
 \end{figure}
 %In the case of \emph{open system} the gel is the grand canonical ensemle, as $\mu, V, T = \mbox{Const}$, while the case of \emph{closed system} the gel and the explicit reservoir are a variation of Gibbs ensemble \cite{Panagiotopoulos1988b} performed with constant volume for the both boxes, equal chemical potentials of ion species at constant temperature.
 
 %Unfortunately, there is no universal computationally effective technique to sample pressure difference, volume, and number of particles at the same. 
 Mechanical movement and the exchange of ions occur simultaneously in reality; however, we simulate them as alternating in a stop--run mode. 
-To sample mechanical properties of the gel and reservoir, we use MD simulation, whereas to sample the ion distribution between the gel and a reservoir, we use MC simulation.
-The details of this hybrid MCMD computational technique can be found in our previous studies of polyelectrolytes in open systems \cite{Rud2020, Rud2022, Landsgesel2020a}. 
+To sample mechanical properties of the gel and reservoir, we use \DIFdelbegin \DIFdel{MD }\DIFdelend \DIFaddbegin \DIFadd{Molecular Dynamics (MD) }\DIFaddend simulation, whereas to sample the ion distribution between the gel and a reservoir, we use \DIFdelbegin \DIFdel{MC }\DIFdelend \DIFaddbegin \DIFadd{Monte Carlo (MC) }\DIFaddend simulation.
+The details of this hybrid MCMD computational technique can be found in our previous studies of polyelectrolytes in open systems \cite{Rud2020, Rud2022, Landsgesel2020a} \DIFdelbegin \DIFdel{. 
+ }%DIFDELCMD < 
 
-\subsection{Molecular Dynamics}
+%DIFDELCMD < %%%
+\subsection{\DIFdel{Molecular Dynamics}}
+%DIFAUXCMD
+\addtocounter{subsection}{-1}%DIFAUXCMD
+%DIFDELCMD < 
 
-We model the gel as a network of 16 linear polymer chains, each consisting of 30~monomer units.
+%DIFDELCMD < %%%
+\DIFdel{We model the gel as a network of 16 linear polymer chains, each consisting of 30~monomer units.
 These polymer chains are connected to a diamond-like network by eight~crosslinking units.
 This means there are $\Ngel=16\cdot30 + 8=488$ gel monomers in the simulation box (see \reffig{fig:diamond}).
 The network is put in a simulated cubic box with volume $\Vgel$ with periodic boundary conditions, which virtually emulates an infinite polymer~network.
-\begin{figure}[H]
+}%DIFDELCMD < \begin{figure}[H]
+%DIFDELCMD <  
 
-\includegraphics[width=0.7\textwidth]{{figures/simgibbs}.pdf}\caption{Diamond-like network in the simulation box. Color code represents
-the individual ion types (red: $\na$, blue: $\cl$\DIFdelbeginFL \DIFdelFL{, yellow: $\ca$}\DIFdelendFL )
+%DIFDELCMD < \includegraphics[width=0.7\textwidth]{{figures/simgibbs}.pdf}%%%
+%DIFDELCMD < \caption{%
+{%DIFAUXCMD
+\DIFdelFL{Diamond-like network in the simulation box. Color code represents
+the individual ion types (red: $\na$, blue: $\cl$, yellow: $\ca$)
 and the hydrogel (gray: neutral segment ($\AH$), cyan: charged segment
-($\A$)). \label{fig:diamond}}
-\end{figure}
-Each monomer unit of the network carries a negative elementary electric charge.
+($\A$)). }%DIFDELCMD < \label{fig:diamond}%%%
+}
+%DIFAUXCMD
+%DIFDELCMD < \end{figure}
+%DIFDELCMD < %%%
+\DIFdel{Each monomer unit of the network carries a negative elementary electric charge.
 Except for the gel monomers, the monovalent co- and counter-ions, $\cl$ and $\na$, are present in the simulation box.
 The total electric charge of all the particles in the box is zero; therefore the number of $\na$ ions exceeds the number of $\cl$ ions by $\Ngel$.
+}%DIFDELCMD < 
 
-Each pair of particles interact via the truncated Lennard--Jones interaction potential, which imposes strong repulsion between all particles at short distances:
-\begin{equation}
-    \begin{split}\label{eq:LJ}
+%DIFDELCMD < %%%
+\DIFdel{Each pair of particles interact via the truncated Lennard--Jones interaction potential, which imposes strong repulsion between all particles at short distances:
+}\begin{displaymath}
+    \DIFdel{\begin{split}%DIFDELCMD < \label{eq:LJ}%%%
         V_\mathrm{LJ}(r) =
         \begin{cases}
             4 \varepsilon \left( \left(\cfrac{\sigma}{r}\right)^{12}
@@ -507,113 +528,179 @@ Each pair of particles interact via the truncated Lennard--Jones interaction pot
             & \mathrm{elsewhere}
         \end{cases},
     \end{split}
-\end{equation}
-where 
+}\end{displaymath}%DIFAUXCMD
+\DIFdel{where 
 $r$ is the interparticle distance, 
 $\sigma = 0.35~\mathrm{nm}$ is a chosen characteristic size of the particles, 
 $\varepsilon = \kT$ is the depth of the potential, and 
 $r_\mathrm{cut}$ is the cut-off distance beyond which the potential is set zero.
+}%DIFDELCMD < 
 
-The bonds connecting the gel to a network are modeled using finite extension nonlinear elastic potential (FENE)
-\begin{equation}\label{eq:fene}
+%DIFDELCMD < %%%
+\DIFdel{The bonds connecting the gel to a network are modeled using finite extension nonlinear elastic potential (FENE)
+}\begin{displaymath}\DIFdel{%DIFDELCMD < \label{eq:fene}%%%
 V_\mathrm{FENE}(r) = -\frac{1}{2} K \Delta r_\mathrm{max}^2\ln \left[ 1 - \left(\frac{r-r_0}{\Delta r_\mathrm{max}} \right)^2 \right ],
-\end{equation}
-where
+}\end{displaymath}%DIFAUXCMD
+\DIFdel{where
 $r$ is the distance between the bonded segments,
 $K$ is the magnitude of their interaction,
 $\Delta r_{\mathrm{max}}$ is the maximal stretching length of the bond, and
 $r_0$ is the equilibrium bond length.
-For our simulations, we chose $K = 10 \kT/\sigma^{2}$, $\Delta r_{\mathrm{max}} = 2 \sigma$, and $r_0 = 1.0\sigma$~\cite{Jin2007}.
+For our simulations, we chose $K = 10 \kT/\sigma^{2}$, $\Delta r_{\mathrm{max}} = 2 \sigma$, and $r_0 = 1.0\sigma$~\mbox{%DIFAUXCMD
+\cite{Jin2007}}\hspace{0pt}%DIFAUXCMD
+.
+}%DIFDELCMD < 
 
-
-
-All the charged particles interact via Coulomb electrostatic potential:
-\begin{equation}
-    V_{\mathrm{EL}}=\lb\kT \cfrac{q_{1}q_{2}}{r},
-\end{equation}
-where $\lb$ is Bjerrum length---$\lb = 2\sigma = 0.7~\mathrm{nm}$, which corresponds to the  Bjerrum length in water at temperature $T=300~\mathrm{K}$---and $\kB$ is the Botlzman constant.
+%DIFDELCMD < %%%
+\DIFdel{All the charged particles interact via Coulomb electrostatic potential:
+}\begin{displaymath}
+    \DIFdel{V_{\mathrm{EL}}=\lb\kT \cfrac{q_{1}q_{2}}{r},
+}\end{displaymath}%DIFAUXCMD
+\DIFdel{where $\lb$ is Bjerrum length---$\lb = 2\sigma = 0.7~\mathrm{nm}$, which corresponds to the  Bjerrum length in water at temperature $T=300~\mathrm{K}$---and $\kB$ is the Botlzman constant.
 In that sense, the solvent (water) is accounted for in the model implicitly via setting up dielectric permittivity $\epsilon=80$.
+}%DIFDELCMD < 
 
-We used the Langevin thermostat, \ie two additional terms for force in the equation of motion were added
-\begin{equation}
-\mathbf{f}_i =  -\gamma \mathbf{v}_i(t)+\sqrt{2\gamma \kT }\boldsymbol{\eta}_i(t),
-\end{equation}
-where the first term corresponds to constant friction, with $\gamma$ being a friction coefficient,
- and the second term corresponds to random thermal force, with $\boldsymbol{\eta}_i$ being a normally distributed random vector; $\mathbf{v}_i$ is the velocity of the $i$-th particle (for details see \cite{Grest1986}).
+%DIFDELCMD < %%%
+\DIFdel{We used the Langevin thermostat, \ie two additional terms for force in the equation of motion were added
+}\begin{displaymath}
+\DIFdel{\mathbf{f}_i =  -\gamma \mathbf{v}_i(t)+\sqrt{2\gamma \kT }\boldsymbol{\eta}_i(t),
+}\end{displaymath}%DIFAUXCMD
+\DIFdel{where the first term corresponds to constant friction, with $\gamma$ being a friction coefficient,
+ and the second term corresponds to random thermal force, with $\boldsymbol{\eta}_i$ being a normally distributed random vector; $\mathbf{v}_i$ is the velocity of the $i$-th particle (for details see \mbox{%DIFAUXCMD
+\cite{Grest1986}}\hspace{0pt}%DIFAUXCMD
+).
+}%DIFDELCMD < 
 
-\subsection{Monte Carlo Sampling in an Open System}
-The Monte Carlo scheme for sampling the exchange of ions in an \emph{open system} is based on the formula for free energy of grand canonical ensemble $\Omega$
-\begin{equation}
-    \Omega_{\mathrm{open}}=E-TS+\sum_i\mu_i N_i\label{eq:Omega-GC}
-\end{equation}
-where $E$ is internal energy, $T$ is temperature, $S$ is entropy, $N_i$ is the number of ions of type $i\in\{\na,\ \cl\}$, and $\mu_i$ is the corresponding chemical potential.
+%DIFDELCMD < %%%
+\subsection{\DIFdel{Monte Carlo Sampling in an Open System}}
+%DIFAUXCMD
+\addtocounter{subsection}{-1}%DIFAUXCMD
+\DIFdel{The Monte Carlo scheme for sampling the exchange of ions in an }\emph{\DIFdel{open system}} %DIFAUXCMD
+\DIFdel{is based on the formula for free energy of grand canonical ensemble $\Omega$
+}\begin{displaymath}
+    \DIFdel{\Omega_{\mathrm{open}}=E-TS+\sum_i\mu_i N_i%DIFDELCMD < \label{eq:Omega-GC}%%%
+}\end{displaymath}%DIFAUXCMD
+\DIFdel{where $E$ is internal energy, $T$ is temperature, $S$ is entropy, $N_i$ is the number of ions of type $i\in\{\na,\ \cl\}$, and $\mu_i$ is the corresponding chemical potential.
+}%DIFDELCMD < 
 
-%Our model system represents a finite volume $V$ which exchanges particles with the bath of infinite volume.
-%The infinity of the volume means, that the particle exchange between the system and the bath does not influence on the chemical potentials in the bath.
-%Such ensemble is called grand canonical ensemble; the free energy in this ensemble, the Landau potential, is
-The entropy $S$ is given by the Boltzmann formula~\cite{Nagle2004}
-\begin{equation}
-    S=\kB\sum_i\ln\frac{\Vgel^{N_i}}{N_i!}\label{eq:entropy}
-\end{equation}
-%\todo{for partiles without interactions}
-which accounts for two contributions:
-\begin{enumerate}
-    \item The combinatorial entropy $S_{c}=-\kB\sum_i\ln N_i!$, which reflects the freedom of choice among the particles;
-    \item The mixing entropy $S_{m}=\kB \sum_i N_i\ln \Vgel$, which reflects the freedom to place the chosen particle randomly within the simulation box. 
-\end{enumerate}
+%DIFDELCMD < %%%
+%DIF < Our model system represents a finite volume $V$ which exchanges particles with the bath of infinite volume.
+%DIF < The infinity of the volume means, that the particle exchange between the system and the bath does not influence on the chemical potentials in the bath.
+%DIF < Such ensemble is called grand canonical ensemble; the free energy in this ensemble, the Landau potential, is
+\DIFdel{The entropy $S$ is given by the Boltzmann formula~\mbox{%DIFAUXCMD
+\cite{Nagle2004}
+}\hspace{0pt}%DIFAUXCMD
+}\begin{displaymath}
+    \DIFdel{S=\kB\sum_i\ln\frac{\Vgel^{N_i}}{N_i!}%DIFDELCMD < \label{eq:entropy}%%%
+}\end{displaymath}%DIFAUXCMD
+%DIF < \todo{for partiles without interactions}
+\DIFdel{which accounts for two contributions:
+}%DIFDELCMD < \begin{enumerate}
+\begin{enumerate}%DIFAUXCMD
+%DIFDELCMD <     \item %%%
+\item%DIFAUXCMD
+\DIFdel{The combinatorial entropy $S_{c}=-\kB\sum_i\ln N_i!$, which reflects the freedom of choice among the particles;
+    }%DIFDELCMD < \item %%%
+\item%DIFAUXCMD
+\DIFdel{The mixing entropy $S_{m}=\kB \sum_i N_i\ln \Vgel$, which reflects the freedom to place the chosen particle randomly within the simulation box. 
+}
+\end{enumerate}%DIFAUXCMD
+%DIFDELCMD < \end{enumerate}
+%DIFDELCMD < 
 
-$\Vgel$ is the unitless volume, \ie the volume measured in units of $\sigma^3$. 
+%DIFDELCMD < %%%
+\DIFdel{$\Vgel$ is the unitless volume, \ie the volume measured in units of $\sigma^3$. 
 Thus, the change of free energy associated with an exchange of ion pairs is
-\begin{equation}
-\Delta\Omega_\mathrm{open}=\kT\ln\prod_i\left(\Vgel^{\xi}\frac{N_i!}{\left(N_i+\xi\right)!}\right)+\xi\sum_i\mu_i+\Delta E
-\label{eq: DeltaG GC}
-\end{equation}
-where $\xi$ is an algebraic number of inserted (or removed) ion pairs; in general, $\xi$ can be any number, but when $\xi = \pm 1$, which corresponds to addition or removal of only one ion pair,  \refeq{eq: DeltaG GC} gets simplified
-\begin{equation}
-    \Delta\Omega_\mathrm{open}=\kT\ln \Vgel^{2\xi} \prod_i \left(N_i+\theta(\xi)\right)^{-\xi}+\xi\sum_i\mu_i+\Delta E
+}\begin{displaymath}
+\DIFdel{\Delta\Omega_\mathrm{open}=\kT\ln\prod_i\left(\Vgel^{\xi}\frac{N_i!}{\left(N_i+\xi\right)!}\right)+\xi\sum_i\mu_i+\Delta E
+%DIFDELCMD < \label{eq: DeltaG GC}%%%
+}\end{displaymath}%DIFAUXCMD
+\DIFdel{where $\xi$ is an algebraic number of inserted (or removed) ion pairs; in general, $\xi$ can be any number, but when $\xi = \pm 1$, which corresponds to addition or removal of only one ion pair,  \refeq{eq: DeltaG GC} gets simplified
+}\begin{displaymath}
+    \DIFdel{\Delta\Omega_\mathrm{open}=\kT\ln \Vgel^{2\xi} \prod_i \left(N_i+\theta(\xi)\right)^{-\xi}+\xi\sum_i\mu_i+\Delta E
 \label{eq: DeltaG GC_simpl}
-\end{equation}
-where $\theta$ is the Heaviside function; $\theta(\xi) = 1$ if $\xi=+1$; $\theta(\xi) = 0$ if $\xi=-1$.
+}\end{displaymath}%DIFAUXCMD
+\DIFdel{where $\theta$ is the Heaviside function; $\theta(\xi) = 1$ if $\xi=+1$; $\theta(\xi) = 0$ if $\xi=-1$.
+}%DIFDELCMD < 
 
-The procedure for Monte Carlo sampling is as follows: \cite{Frenlkel2002_book}
-\begin{enumerate}
-	\item Propose the new configuration of the system by insertion (or deletion) of an ion pair, $\xi=\pm1$;
-	\item Accept the new configuration if
-	\begin{equation}
-        \mathcal{R}^{\xi}<e^{\Delta\Omega_\mathrm{open}/\kT}=\Vgel^{2\xi} \prod_i \left(N_i+\theta(\xi)\right)^{-\xi}e^{\left(\Delta E+\xi\mu\right)/\kT}\label{eq: GC acceptance}
-	\end{equation}
-	where $\mathcal{R}$ is a uniformly distributed random number in the range between $0$ and $1$;
-	\item Then, collect the number of ions, $\Nna$ and $\Ncl$, to the samples array.
-\end{enumerate}
+%DIFDELCMD < %%%
+\DIFdel{The procedure for Monte Carlo sampling is as follows: \mbox{%DIFAUXCMD
+\cite{Frenlkel2002_book}
+}\hspace{0pt}%DIFAUXCMD
+}%DIFDELCMD < \begin{enumerate}
+\begin{enumerate}%DIFAUXCMD
+%DIFDELCMD < 	\item %%%
+\item%DIFAUXCMD
+\DIFdel{Propose the new configuration of the system by insertion (or deletion) of an ion pair, $\xi=\pm1$;
+	}%DIFDELCMD < \item %%%
+\item%DIFAUXCMD
+\DIFdel{Accept the new configuration if
+	}\begin{displaymath}
+        \DIFdel{\mathcal{R}^{\xi}<e^{\Delta\Omega_\mathrm{open}/\kT}=\Vgel^{2\xi} \prod_i \left(N_i+\theta(\xi)\right)^{-\xi}e^{\left(\Delta E+\xi\mu\right)/\kT}%DIFDELCMD < \label{eq: GC acceptance}%%%
+	}\end{displaymath}%DIFAUXCMD
+%DIFDELCMD < 	%%%
+\DIFdel{where $\mathcal{R}$ is a uniformly distributed random number in the range between $0$ and $1$;
+	}%DIFDELCMD < \item %%%
+\item%DIFAUXCMD
+\DIFdel{Then, collect the number of ions, $\Nna$ and $\Ncl$, to the samples array.
+}
+\end{enumerate}%DIFAUXCMD
+%DIFDELCMD < \end{enumerate}
+%DIFDELCMD < 
 
+%DIFDELCMD < %%%
+\subsection{\DIFdel{Monte Carlo Sampling in Closed System}}
+%DIFAUXCMD
+\addtocounter{subsection}{-1}%DIFAUXCMD
+%DIFDELCMD < 
 
-\subsection{Monte Carlo Sampling in Closed System}
+%DIFDELCMD < %%%
+\DIFdel{In the }\emph{\DIFdel{closed system}}%DIFAUXCMD
+\DIFdel{, the gel exchanges particles with the explicit finite reservoir box. 
+The total number of ion species in both boxes is fixed, whereas the density of ions in the external reservoir is defined by thermodynamic equilibrium between the two subvolumes (see \reffig{fig:open and closed}b. Monte Carlo sampling of the distribution of ions between the subvolumes is performed in a way similar to that described in \mbox{%DIFAUXCMD
+\cite{Panagiotopoulos1988b, Erdos2020}}\hspace{0pt}%DIFAUXCMD
+. 
+}%DIFDELCMD < 
 
-In the \emph{closed system}, the gel exchanges particles with the explicit finite reservoir box. 
-The total number of ion species in both boxes is fixed, whereas the density of ions in the external reservoir is defined by thermodynamic equilibrium between the two subvolumes (see \reffig{fig:open and closed}b. Monte Carlo sampling of the distribution of ions between the subvolumes is performed in a way similar to that described in \cite{Panagiotopoulos1988b, Erdos2020}. 
+%DIFDELCMD < %%%
+\DIFdel{The free energy of the Gibbs ensemble is a sum of the gel's free energy and that of the external volume.
+}\begin{displaymath}
+    \DIFdel{\Omega_{\mathrm{closed}}=\Egel-T\Sgel + \Eout-T\Sout %DIFDELCMD < \label{eq:Omega-GC}%%%
+}\end{displaymath}%DIFAUXCMD
+\DIFdel{Using reasoning similar to that of the }\emph{\DIFdel{open system}}%DIFAUXCMD
+\DIFdel{, one can derive the change of free energy associated with ion-pair exchange 
+}\begin{displaymath}
+\DIFdel{\Delta \Omega_{\mathrm{closed}} =2 k_B T \ln \left(\frac{\Vgel}{\Vout} \right) \SUPERSCRIPT }{\DIFdel{\xi}}\DIFdel{\prod_i \left(\frac{N_{i}\gel+\theta(\xi)}{N_{i}\out+\theta(-\xi)}\right)^{-\xi} + \Delta \Egel + \Delta \Eout
+}\end{displaymath}%DIFAUXCMD
+\DIFdel{where $\xi$ defines the direction of the trial move, so that $\xi = -1$ when an ion pair moves from the gel to the outside volume, and  $\xi = +1$ otherwise; $\Delta \Egel$ and $\Delta \Eout$ are corresponding changes of the potential energy of the gel and the outside volumes, respectively.
+}%DIFDELCMD < 
 
-The free energy of the Gibbs ensemble is a sum of the gel's free energy and that of the external volume.
-\begin{equation}
-    \Omega_{\mathrm{closed}}=\Egel-T\Sgel + \Eout-T\Sout \label{eq:Omega-GC}
-\end{equation}
-Using reasoning similar to that of the \emph{open system}, one can derive the change of free energy associated with ion-pair exchange 
-\begin{equation}
-\Delta \Omega_{\mathrm{closed}} =2 k_B T \ln \left(\frac{\Vgel}{\Vout} \right) ^ {\xi}\prod_i \left(\frac{N_{i}\gel+\theta(\xi)}{N_{i}\out+\theta(-\xi)}\right)^{-\xi} + \Delta \Egel + \Delta \Eout
-\end{equation}
-where $\xi$ defines the direction of the trial move, so that $\xi = -1$ when an ion pair moves from the gel to the outside volume, and  $\xi = +1$ otherwise; $\Delta \Egel$ and $\Delta \Eout$ are corresponding changes of the potential energy of the gel and the outside volumes, respectively.
+%DIFDELCMD < %%%
+\DIFdel{Then, the procedure for sampling is the same as that of the }\emph{\DIFdel{open system}}%DIFAUXCMD
+\DIFdel{: (1) propose the move of an ion pair; (2) accept a new state if $\mathcal{R}^{\xi}<\exp({\Delta\Omega_\mathrm{closed}/\kT}$); and (3) repeat the procedure until the desired number of samples is reached.
+}%DIFDELCMD < 
 
-Then, the procedure for sampling is the same as that of the \emph{open system}: (1) propose the move of an ion pair; (2) accept a new state if $\mathcal{R}^{\xi}<\exp({\Delta\Omega_\mathrm{closed}/\kT}$); and (3) repeat the procedure until the desired number of samples is reached.
-
-\subsection{Algorithm}
-As mentioned above, the whole simulation run consists of MD and MC subsimulations of mechanical movement of the particles and ion exchange. The algorithm follows:
-\begin{enumerate}
-\item Initiate the systems to simulate: the gel of volume $\Vgel$ and the external solution of volume $\Vout$;
-\item Equilibrate the system, interspersing the MD and MC stages;
-\item Run the MD subsimulation and collect the observables: pressure in both volumes, $P_\mathrm{gel}$, $P_\mathrm{out}$, and distances between the nodes of the gel network. The latter is needed to estimate the autocorrelation of the MD simulation;
-\item Run the MC procedure, simulating ion exchange, and collect the number of ions in both boxes, 
-$\Ncl\gel$ and $\Ncl\out$; 
-\item Repeat the MD and MC subsimulations until the desired length of sample arrays is reached.
-\end{enumerate}
+%DIFDELCMD < %%%
+\subsection{\DIFdel{Algorithm}}
+%DIFAUXCMD
+\addtocounter{subsection}{-1}%DIFAUXCMD
+\DIFdel{As mentioned above, the whole simulation run consists of MD and MC subsimulations of mechanical movement of the particles and ion exchange. The algorithm follows:
+}%DIFDELCMD < \begin{enumerate}
+%DIFDELCMD < \item %%%
+\DIFdel{Initiate the systems to simulate: the gel of volume $\Vgel$ and the external solution of volume $\Vout$;
+}%DIFDELCMD < \item %%%
+\DIFdel{Equilibrate the system, interspersing the MD and MC stages;
+}%DIFDELCMD < \item %%%
+\DIFdel{Run the MD subsimulation and collect the observables: pressure in both volumes, $P_\mathrm{gel}$, $P_\mathrm{out}$, and distances between the nodes of the gel network. The latter is needed to estimate the autocorrelation of the MD simulation;
+}%DIFDELCMD < \item %%%
+\DIFdel{Run the MC procedure, simulating ion exchange, and collect the number of ions in both boxes, 
+$\Ncl\gel$ }\DIFdelend and \DIFdelbegin \DIFdel{$\Ncl\out$; 
+}%DIFDELCMD < \item %%%
+\DIFdel{Repeat the MD and MC subsimulations until the desired length of sample arrays is reached. 
+ }%DIFDELCMD < \end{enumerate}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{in Section~\ref{sec: MM}. 
+ }\DIFaddend 
 
 
 Using the data obtained from simulations, we calculate  
@@ -631,9 +718,15 @@ In order to obtain the value $\Vbox$, we perform a set of open system simulation
 The value of $\Vgel$ at which $\Pgel$ is closest to zero is chosen as $\Vbox$.
 Then, as soon as $\Vbox$ is defined, we compress the gel in the \emph{closed system} with varying values of $\Vgel<\Vbox$ and $\Vout= \Vbox - \Vgel$.
 
-\section{Results and Discussion}
 
-\subsection{Compression in Open System}
+
+\DIFdelbegin \section{\DIFdel{Results and Discussion}}
+%DIFAUXCMD
+\addtocounter{section}{-1}%DIFAUXCMD
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \subsection{Compression in Open System}
 
 Initially, we run a set of simulations modeling the gel compression in an \emph{open system}, \ie in equilibrium with a big bath of certain salinity, $\cs$. 
 The simulations are run for a set of different gel volumes, $\Vgel$. 
@@ -805,145 +898,9 @@ The change of the gel volume in this process is $\Delta v^b = 3.26$ L/mol, which
 \end{enumerate}
 
 
-\begin{table}[H]
-\caption{Estimates of  %MDPI: Please confirm if the format of the table should be retained, e.g., the color of the font, the text direction, vertical line
-% Oleg Rud: Confirm the colors and the directions of the table must retain
-desalination efficiency. All units are calculated per one mol of gel segments. Values in brackets correspond to crossection of `red' and `orange' lines on the plots in Figures \ref{fig: PV and CV} and \ref{fig: NV and CN}.
-\label{tab: table}}
 
-\begin{adjustwidth}{-\extralength}{0cm}
-
-		\newcolumntype{C}{>{\centering\arraybackslash}X}
-\begin{tabularx}{1\fulllength}{@{\extracolsep{\fill}}ll|lc|c|l|ll}
-\noalign{\hrule height 1pt}
-\multicolumn{1}{l|}{\textbf{\boldmath{$c_{s}^{0}$}, mM}} & \textbf{\boldmath{$c_{s}^{5}$}, mM} & \multicolumn{1}{l|}{\textbf{\boldmath{$n_{\cl}^{0}$}, mM}} & \textbf{\boldmath{$n_{\cl}^{5}$}, mM} & \textbf{\boldmath{$\Delta \Vgel$}, L} & \textbf{\boldmath{$|W$}\textbar , J/L} & \multicolumn{2}{c}{\textbf{\boldmath{$W^{id}$}, J/L}}\tabularnewline
- 
-\noalign{\hrule height 0.5pt} 
-\multirow{2}{*}{{\small{}$91.47$}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{{\small{}$57.08\pm0.122\enskip\longrightarrow$}} & \multirow{2}{*}{{\small{}2.74}} & \multirow{2}{*}{{\small{}$95.4\pm1.9$}} &  & \multirow{2}{*}{}\tabularnewline
- &  & \multicolumn{2}{r|}{{\small{}$71.75\pm0.024$}} &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{teal}{\small{}$\left.\begin{array}{l}
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\end{array}\right\rbrace $$\rotatebox{90}{\hspace{-5em}{\color{teal}\ensuremath{\begin{array}{cc}
-W^{id}= & 52.9\\
-W^{\mathrm{sim}}= & 202.8\pm3.2\\
-R_{w}= & 0.54
-\end{array}}}}$}} & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multicolumn{2}{l|}{{\small{}$89.41\pm0.23\enskip\longrightarrow$}} & \multirow{2}{*}{{\small{}56.90}} & \multirow{2}{*}{} & \multirow{2}{*}{{\small{}2.72}} & \multirow{2}{*}{{\small{}$109.1\pm1.7$}} &  & \multirow{2}{*}{}\tabularnewline
-\multicolumn{2}{r|}{{\small{}$73.63\pm0.03$}} &  &  &  &  &  & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{teal}{\small{}63.93}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{teal}{\small{}$37.28\pm0.08\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{teal}{\small{}3.26}} & \multirow{2}{*}{\textcolor{teal}{\small{}$100.9\pm1.7$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{teal}{\small{}$50.579\pm0.013$}} &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{olive}{\small{}$\left.\begin{array}{l}
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\end{array}\right\rbrace $$\rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
-W^{id}= & 38.2\\
-W^{\mathrm{sim}}= & 207.3\pm2.2\\
-R_{w}= & 0.53
-\end{array}}}$}}\tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multicolumn{2}{l|}{\textcolor{teal}{\small{}$62.05\pm0.15\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{teal}{\small{}37.17}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{teal}{\small{}3.18}} & \multirow{2}{*}{\textcolor{teal}{\small{}$107.4\pm1.4$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{teal}{\small{}$48.21\pm0.02$}} &  &  &  &  &  & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{olive}{\small{}44.91}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{olive}{\small{}$23.75\pm0.06\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{olive}{\small{}3.82}} & \multirow{2}{*}{\textcolor{olive}{\small{}$106.7\pm1.5$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{olive}{\small{}$35.911\pm0.010$}} &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{red}{\small{}$\left.\begin{array}{l}
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
-W^{\mathrm{id}}= & 43.8\ {\color{red}{\scriptstyle (41.0)}}\\
-W^{\mathrm{sim}}= & 222.3\pm2.5\\
-R_{w}= & 0.52\ {\scriptstyle (0.46)}
-\end{array}}}$}} & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multicolumn{2}{l|}{\textcolor{olive}{\small{}$43.46\pm0.12\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{olive}{\small{}24.27}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{olive}{\small{}3.91}} & \multirow{2}{*}{\textcolor{olive}{\small{}$106.4\pm1.1$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{olive}{\small{}$30.795\pm0.008$}} &  &  &  &  &  & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{red}{\small{}31.93}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{red}{\small{}$14.66\pm0.04\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{red}{\small{}4.20}} & \multirow{2}{*}{\textcolor{red}{\small{}$107.9\pm1.4$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{red}{\small{}$25.297\pm0.006$}} &  &  &  & \multirow{8}{*}{{\small{}\hspace{-1em}}\textcolor{orange}{\small{}$\left.\begin{array}{l}
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
-W^{id}= & 66.6\ {\scriptstyle (22.0)}\\
-W^{\mathrm{sim}}= & 218.7\pm2.2\\
-R_{w}= & 0.53\ {\scriptstyle (0.49)}
-\end{array}}}$}}\tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multicolumn{2}{l|}{\textcolor{red}{\small{}$30.03\pm0.08\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{red}{\small{}14.55}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{red}{\small{}$\begin{array}{c}
-4.17\\
-{\scriptstyle (3.22)}
-\end{array}$}} & \multirow{2}{*}{\textcolor{red}{\small{}$\begin{array}{c}
-115.6\pm0.9\\
-{\scriptstyle (57.3)}
-\end{array}$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{red}{\small{}$\begin{array}{c}
-18.585\pm0.004\,\\
-{\scriptstyle (22.32)}
-\end{array}$}} &  &  &  &  &  & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{orange}{\small{}22.30}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{orange}{\small{}$8.84\pm0.03\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{orange}{\small{}$\begin{array}{c}
-4.75\\
-{\scriptstyle (3.76)}
-\end{array}$}} & \multirow{2}{*}{\textcolor{orange}{\small{}$\begin{array}{c}
-108.1\pm1.3\\
-{\scriptstyle (68.3)}
-\end{array}$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{orange}{\small{}$\begin{array}{c}
-\text{17.945}\pm\text{0.004}\\
-{\scriptstyle (14.56)}
-\end{array}$}} &  &  & \multirow{7}{*}{{\small{}\hspace{-1em}}\textcolor{magenta}{\small{}$\left.\begin{array}{l}
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\end{array}\right\rbrace \rotatebox{90}{\hspace{-5em}\ensuremath{\begin{array}{cc}
-W^{id}= & 69.7\\
-W^{\mathrm{sim}}= & 227.5\pm2.3\\
-R_{w}= & 0.55
-\end{array}}}$}} & \\[1ex]
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multicolumn{2}{l|}{\textcolor{orange}{\small{}$20.74\pm0.06\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{orange}{\small{}8.83}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{orange}{\small{}$4.71$}} & \multirow{2}{*}{\textcolor{orange}{\small{}$110.8\pm0.8$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{orange}{\small{}$11.082\pm0.002$}} &  &  &  &  &  & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multirow{2}{*}{\textcolor{magenta}{\small{}10.90}} & \multirow{2}{*}{} & \multicolumn{2}{l|}{\textcolor{magenta}{\small{}$3.00\pm0.01\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}6.08}} & \multirow{2}{*}{\textcolor{magenta}{\small{}$106.9\pm1.1$}} &  & \tabularnewline
- &  & \multicolumn{2}{r|}{\textcolor{magenta}{\small{}9.011$\pm$0.002}} &  &  &  & \tabularnewline
-\cline{1-6} \cline{2-6} \cline{3-6} \cline{4-6} \cline{5-6} \cline{6-6} 
-\multicolumn{2}{l|}{\textcolor{magenta}{\small{}$9.83\pm0.05\enskip\longrightarrow$}} & \multirow{2}{*}{\textcolor{magenta}{\small{}3.12}} & \multirow{2}{*}{} & \multirow{2}{*}{\textcolor{magenta}{\small{}5.78}} & \multirow{2}{*}{\textcolor{magenta}{\small{}$119.4\pm1.0$}} &  & \tabularnewline
-\multicolumn{2}{r|}{\textcolor{magenta}{\small{}$3.862\pm0.001$}} &  &  &  &  &  & \\[2ex]
-\noalign{\hrule height 1pt}
-\end{tabularx}
-\end{adjustwidth}
-\end{table}
-
-Thus, the recovery ratio $R_w = \Delta v^p / (\Delta v^p + \Delta v^b) \simeq $ 0.53 and the theoretical minimum specific energy of the desalination process with corresponding $\cs^f$, $\cs^p,$ and $\cs^b$ is $W^{id} =$ 38.2~J/L (\refeq{eq:SEC}).
+%DIFDELCMD < %%%
+\DIFdelend Thus, the recovery ratio $R_w = \Delta v^p / (\Delta v^p + \Delta v^b) \simeq $ 0.53 and the theoretical minimum specific energy of the desalination process with corresponding $\cs^f$, $\cs^p,$ and $\cs^b$ is $W^{id} =$ 38.2~J/L (\refeq{eq:SEC}).
 
 The estimated $W^{id}$ values are provided in the fifth column of the table for five triplets of $\cs^f$, $\cs^p$,$\cs^b$ values.
 In the same column, we provide $W_{\mathrm{sim}}$---the specific energy consumption calculated by a numerical integration of $\Pgel(\Vgel)$ dependencies. 
@@ -978,7 +935,165 @@ We estimated the energy consumption needed for producing one liter of potable wa
 %DIFDELCMD < %%%
 \DIFdelend %DIF >  Oleg Rud: There is no need of supplementary materials anymore, since we added the method description into the main text.
 }
+\DIFaddbegin \section{\DIFadd{Materials and Methods}\label{sec: MM}}
 
+\subsection{\DIFadd{Molecular Dynamics}}
+
+\DIFadd{We model the gel as a network of 16 linear polymer chains, each consisting of 30~monomer units.
+These polymer chains are connected to a diamond-like network by eight~crosslinking units.
+This means there are $\Ngel=16\cdot30 + 8=488$ gel monomers in the simulation box (see \reffig{fig:diamond}).
+The network is put in a simulated cubic box with volume $\Vgel$ with periodic boundary conditions, which virtually emulates an infinite polymer~network.
+}\begin{figure}[H]
+
+\includegraphics[width=0.7\textwidth]{{figures/simgibbs}.pdf}
+\caption{
+\DIFaddFL{Diamond-like network in the simulation box. 
+Red and blue particles are the ions $\na$ and $\cl$. }\label{fig:diamond}}
+\end{figure}
+\DIFadd{Each monomer unit of the network carries a negative elementary electric charge.
+Except for the gel monomers, the monovalent co- and counter-ions, $\cl$ and $\na$, are present in the simulation box.
+The total electric charge of all the particles in the box is zero; therefore the number of $\na$ ions exceeds the number of $\cl$ ions by $\Ngel$.
+}
+
+\DIFadd{Each pair of particles interact via the truncated Lennard--Jones interaction potential, which imposes strong repulsion between all particles at short distances:
+}\begin{equation}
+    \DIFadd{\begin{split}\label{eq:LJ}
+        V_\mathrm{LJ}(r) =
+        \begin{cases}
+            4 \varepsilon \left( \left(\cfrac{\sigma}{r}\right)^{12}
+            - \left(\cfrac{\sigma}{r}\right)^6\right)
+            & \mathrm{if~} r < r_\mathrm{cut}\\
+            0
+            & \mathrm{elsewhere}
+        \end{cases},
+    \end{split}
+}\end{equation}
+\DIFadd{where 
+$r$ is the interparticle distance, 
+$\sigma = 0.35~\mathrm{nm}$ is a chosen characteristic size of the particles, 
+$\varepsilon = \kT$ is the depth of the potential, and 
+$r_\mathrm{cut}$ is the cut-off distance beyond which the potential is set zero.
+}
+
+\DIFadd{The bonds connecting the gel to a network are modeled using finite extension nonlinear elastic potential (FENE)
+}\begin{equation}\DIFadd{\label{eq:fene}
+V_\mathrm{FENE}(r) = -\frac{1}{2} K \Delta r_\mathrm{max}^2\ln \left[ 1 - \left(\frac{r-r_0}{\Delta r_\mathrm{max}} \right)^2 \right ],
+}\end{equation}
+\DIFadd{where
+$r$ is the distance between the bonded segments,
+$K$ is the magnitude of their interaction,
+$\Delta r_{\mathrm{max}}$ is the maximal stretching length of the bond, and
+$r_0$ is the equilibrium bond length.
+For our simulations, we chose $K = 10 \kT/\sigma^{2}$, $\Delta r_{\mathrm{max}} = 2 \sigma$, and $r_0 = 1.0\sigma$~\mbox{%DIFAUXCMD
+\cite{Jin2007}}\hspace{0pt}%DIFAUXCMD
+.
+}
+
+
+
+\DIFadd{All the charged particles interact via Coulomb electrostatic potential:
+}\begin{equation}
+    \DIFadd{V_{\mathrm{EL}}=\lb\kT \cfrac{q_{1}q_{2}}{r},
+}\end{equation}
+\DIFadd{where $\lb$ is Bjerrum length---$\lb = 2\sigma = 0.7~\mathrm{nm}$, which corresponds to the  Bjerrum length in water at temperature $T=300~\mathrm{K}$---and $\kB$ is the Botlzman constant.
+In that sense, the solvent (water) is accounted for in the model implicitly via setting up dielectric permittivity $\epsilon=80$.
+}
+
+\DIFadd{We used the Langevin thermostat, \ie two additional terms for force in the equation of motion were added
+}\begin{equation}
+\DIFadd{\mathbf{f}_i =  -\gamma \mathbf{v}_i(t)+\sqrt{2\gamma \kT }\boldsymbol{\eta}_i(t),
+}\end{equation}
+\DIFadd{where the first term corresponds to constant friction, with $\gamma$ being a friction coefficient,
+ and the second term corresponds to random thermal force, with $\boldsymbol{\eta}_i$ being a normally distributed random vector; $\mathbf{v}_i$ is the velocity of the $i$-th particle (for details see \mbox{%DIFAUXCMD
+\cite{Grest1986}}\hspace{0pt}%DIFAUXCMD
+).
+}
+
+\subsection{\DIFadd{Monte Carlo Sampling in an Open System}}
+\DIFadd{The Monte Carlo scheme for sampling the exchange of ions in an }\emph{\DIFadd{open system}} \DIFadd{is based on the formula for free energy of grand canonical ensemble $\Omega$
+}\begin{equation}
+    \DIFadd{\Omega_{\mathrm{open}}=E-TS+\sum_i\mu_i N_i\label{eq:Omega-GC}
+}\end{equation}
+\DIFadd{where $E$ is internal energy, $T$ is temperature, $S$ is entropy, $N_i$ is the number of ions of type $i\in\{\na,\ \cl\}$, and $\mu_i$ is the corresponding chemical potential.
+}
+
+%DIF > Our model system represents a finite volume $V$ which exchanges particles with the bath of infinite volume.
+%DIF > The infinity of the volume means, that the particle exchange between the system and the bath does not influence on the chemical potentials in the bath.
+%DIF > Such ensemble is called grand canonical ensemble; the free energy in this ensemble, the Landau potential, is
+\DIFadd{The entropy $S$ is given by the Boltzmann formula~\mbox{%DIFAUXCMD
+\cite{Nagle2004}
+}\hspace{0pt}%DIFAUXCMD
+}\begin{equation}
+    \DIFadd{S=\kB\sum_i\ln\frac{\Vgel^{N_i}}{N_i!}\label{eq:entropy}
+}\end{equation}
+%DIF > \todo{for partiles without interactions}
+\DIFadd{which accounts for two contributions:
+}\begin{enumerate}
+    \item \DIFadd{The combinatorial entropy $S_{c}=-\kB\sum_i\ln N_i!$, which reflects the freedom of choice among the particles;
+    }\item \DIFadd{The mixing entropy $S_{m}=\kB \sum_i N_i\ln \Vgel$, which reflects the freedom to place the chosen particle randomly within the simulation box. 
+}\end{enumerate}
+
+\DIFadd{$\Vgel$ is the unitless volume, \ie the volume measured in units of $\sigma^3$. 
+Thus, the change of free energy associated with an exchange of ion pairs is
+}\begin{equation}
+\DIFadd{\Delta\Omega_\mathrm{open}=\kT\ln\prod_i\left(\Vgel^{\xi}\frac{N_i!}{\left(N_i+\xi\right)!}\right)+\xi\sum_i\mu_i+\Delta E
+\label{eq: DeltaG GC}
+}\end{equation}
+\DIFadd{where $\xi$ is an algebraic number of inserted (or removed) ion pairs; in general, $\xi$ can be any number, but when $\xi = \pm 1$, which corresponds to addition or removal of only one ion pair,  \refeq{eq: DeltaG GC} gets simplified
+}\begin{equation}
+    \DIFadd{\Delta\Omega_\mathrm{open}=\kT\ln \Vgel^{2\xi} \prod_i \left(N_i+\theta(\xi)\right)^{-\xi}+\xi\sum_i\mu_i+\Delta E
+\label{eq: DeltaG GC_simpl}
+}\end{equation}
+\DIFadd{where $\theta$ is the Heaviside function; $\theta(\xi) = 1$ if $\xi=+1$; $\theta(\xi) = 0$ if $\xi=-1$.
+}
+
+\DIFadd{The procedure for Monte Carlo sampling is as follows: \mbox{%DIFAUXCMD
+\cite{Frenlkel2002_book}
+}\hspace{0pt}%DIFAUXCMD
+}\begin{enumerate}
+	\item \DIFadd{Propose the new configuration of the system by insertion (or deletion) of an ion pair, $\xi=\pm1$;
+	}\item \DIFadd{Accept the new configuration if
+	}\begin{equation}
+        \DIFadd{\mathcal{R}^{\xi}<e^{\Delta\Omega_\mathrm{open}/\kT}=\Vgel^{2\xi} \prod_i \left(N_i+\theta(\xi)\right)^{-\xi}e^{\left(\Delta E+\xi\mu\right)/\kT}\label{eq: GC acceptance}
+	}\end{equation}
+	\DIFadd{where $\mathcal{R}$ is a uniformly distributed random number in the range between $0$ and $1$;
+	}\item \DIFadd{Then, collect the number of ions, $\Nna$ and $\Ncl$, to the samples array.
+}\end{enumerate}
+
+
+\subsection{\DIFadd{Monte Carlo Sampling in Closed System}}
+
+\DIFadd{In the }\emph{\DIFadd{closed system}}\DIFadd{, the gel exchanges particles with the explicit finite reservoir box. 
+The total number of ion species in both boxes is fixed, whereas the density of ions in the external reservoir is defined by thermodynamic equilibrium between the two subvolumes (see \reffig{fig:open and closed}b. Monte Carlo sampling of the distribution of ions between the subvolumes is performed in a way similar to that described in \mbox{%DIFAUXCMD
+\cite{Panagiotopoulos1988b, Erdos2020}}\hspace{0pt}%DIFAUXCMD
+. 
+}
+
+\DIFadd{The free energy of the Gibbs ensemble is a sum of the gel's free energy and that of the external volume.
+}\begin{equation}
+    \DIFadd{\Omega_{\mathrm{closed}}=\Egel-T\Sgel + \Eout-T\Sout \label{eq:Omega-GC}
+}\end{equation}
+\DIFadd{Using reasoning similar to that of the }\emph{\DIFadd{open system}}\DIFadd{, one can derive the change of free energy associated with ion-pair exchange 
+}\begin{equation}
+\DIFadd{\Delta \Omega_{\mathrm{closed}} =2 k_B T \ln \left(\frac{\Vgel}{\Vout} \right) \SUPERSCRIPT }{\DIFadd{\xi}}\DIFadd{\prod_i \left(\frac{N_{i}\gel+\theta(\xi)}{N_{i}\out+\theta(-\xi)}\right)^{-\xi} + \Delta \Egel + \Delta \Eout
+}\end{equation}
+\DIFadd{where $\xi$ defines the direction of the trial move, so that $\xi = -1$ when an ion pair moves from the gel to the outside volume, and  $\xi = +1$ otherwise; $\Delta \Egel$ and $\Delta \Eout$ are corresponding changes of the potential energy of the gel and the outside volumes, respectively.
+}
+
+\DIFadd{Then, the procedure for sampling is the same as that of the }\emph{\DIFadd{open system}}\DIFadd{: (1) propose the move of an ion pair; (2) accept a new state if $\mathcal{R}^{\xi}<\exp({\Delta\Omega_\mathrm{closed}/\kT}$); and (3) repeat the procedure until the desired number of samples is reached.
+}
+
+\subsection{\DIFadd{Algorithm}}
+\DIFadd{As mentioned above, the whole simulation run consists of MD and MC sub-simulations of the mechanical movement of the particles and ion exchange. The algorithm is the following:
+}\begin{enumerate}
+\item \DIFadd{Initiate the systems to simulate: the gel of volume $\Vgel$ and the external solution of volume $\Vout$;
+}\item \DIFadd{Equilibrate the system, interspersing the MD and MC stages;
+}\item \DIFadd{Run the MD subsimulation and collect the observables: pressure in both volumes, $P_\mathrm{gel}$, $P_\mathrm{out}$, and distances between the nodes of the gel network. The latter is needed to estimate the autocorrelation of the MD simulation;
+}\item \DIFadd{Run the MC procedure, simulating ion exchange, and collect the number of ions in both boxes, 
+$\Ncl\gel$ and $\Ncl\out$; 
+}\item \DIFadd{Repeat the MD and MC subsimulations until the desired length of sample arrays is reached.
+}\end{enumerate}
+\DIFaddend 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{6pt} 
